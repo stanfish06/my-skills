@@ -2,7 +2,7 @@
 name: scikit-image
 description: A collection of algorithms for image processing in Python. Built on NumPy, SciPy, and Cython. It focuses on scientific image analysis including segmentation, geometric transformations, color space manipulation, analysis, and filtering.
 author: tondevrel
-version: 0.22
+version: 0.26
 license: BSD-3-Clause
 ---
 
@@ -59,6 +59,7 @@ from skimage import io, filters, segmentation, feature, measure, morphology, col
 ### Basic Pattern - Load and Filter
 
 ```python
+import matplotlib.pyplot as plt
 from skimage import io, filters, color
 
 # Load image
@@ -71,8 +72,8 @@ gray_image = color.rgb2gray(image)
 blurred = filters.gaussian(gray_image, sigma=2.0)
 
 # Display
-io.imshow(blurred)
-io.show()
+plt.imshow(blurred, cmap='gray')
+plt.show()
 ```
 
 ## Critical Rules

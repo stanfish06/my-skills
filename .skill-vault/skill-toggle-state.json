@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "saved_at": "2026-08-10T05:09:22.168653+00:00",
+  "saved_at": "2026-08-10T05:14:24.845464+00:00",
   "root": "/home/stan/.agents",
   "skills": {
     "academic-paper": {
@@ -1200,7 +1200,7 @@
       "codex_enabled": true
     },
     "code-testing-extensions": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "codebase-design": {
@@ -1517,7 +1517,7 @@
     },
     "d3-data-visualization": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "dairy-scientist": {
       "claude_enabled": false,
@@ -1588,7 +1588,7 @@
       "codex_enabled": true
     },
     "decision-mapping": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "deep-learning-scientist": {
@@ -1824,7 +1824,7 @@
       "codex_enabled": false
     },
     "dspy": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "duckdb-docs": {
@@ -1896,7 +1896,7 @@
       "codex_enabled": false
     },
     "edit-article": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "efo-ontology-skill": {
@@ -2232,7 +2232,7 @@
       "codex_enabled": true
     },
     "filter-syntax": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "find-skills": {
@@ -2240,7 +2240,7 @@
       "codex_enabled": true
     },
     "find-untested-sources": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "finding-discovery": {
@@ -2429,7 +2429,7 @@
     },
     "gantt-chart-visualization": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "gap-analysis": {
       "claude_enabled": true,
@@ -2549,7 +2549,7 @@
     },
     "geospatial-and-cartographic-visualization": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "geotechnical-engineer": {
       "claude_enabled": false,
@@ -2705,7 +2705,7 @@
     },
     "grammar-of-graphics-and-declarative-visualization": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "gravitational-physicist": {
       "claude_enabled": false,
@@ -2780,7 +2780,7 @@
       "codex_enabled": true
     },
     "handoff": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "harmonypy": {
@@ -3020,11 +3020,11 @@
       "codex_enabled": false
     },
     "implement": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "improve-codebase-architecture": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "improve-skill": {
@@ -4269,7 +4269,7 @@
     },
     "node-link-and-diagram-layout": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "nonlinear-dynamics-chaos-scientist": {
       "claude_enabled": false,
@@ -4832,7 +4832,7 @@
       "codex_enabled": false
     },
     "platform-detection": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "playwright-best-practices": {
@@ -4945,7 +4945,7 @@
     },
     "probe-sdk": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "process-chemist": {
       "claude_enabled": false,
@@ -5269,7 +5269,7 @@
     },
     "react-and-nextjs-data-visualization": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "react-best-practices": {
       "claude_enabled": true,
@@ -5433,7 +5433,7 @@
     },
     "reports-pdfs-and-slide-automation": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "repro-enforcer": {
       "claude_enabled": true,
@@ -5505,7 +5505,7 @@
     },
     "rivet-sdk": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "rna-biologist": {
       "claude_enabled": false,
@@ -5629,7 +5629,7 @@
     },
     "scribe": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "scrna-embedding": {
       "claude_enabled": true,
@@ -5649,7 +5649,7 @@
     },
     "scrollytelling-and-parallax-data-visualization": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "scvelo": {
       "claude_enabled": true,
@@ -5748,7 +5748,7 @@
       "codex_enabled": true
     },
     "setup-matt-pocock-skills": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "setup-pre-commit": {
@@ -6041,7 +6041,7 @@
     },
     "statistical-and-uncertainty-visualization": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "statistical-physicist": {
       "claude_enabled": false,
@@ -6236,7 +6236,7 @@
       "codex_enabled": true
     },
     "teach": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "teams": {
@@ -6324,7 +6324,7 @@
       "codex_enabled": true
     },
     "test-analysis-extensions": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "test-anti-patterns": {
@@ -6353,7 +6353,7 @@
     },
     "testing-data-visualizations": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "theme-factory": {
       "claude_enabled": true,
@@ -6393,7 +6393,7 @@
     },
     "threejs-data-visualization": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "tiledbvcf": {
       "claude_enabled": true,
@@ -6408,7 +6408,7 @@
       "codex_enabled": false
     },
     "to-issues": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "to-prd": {
@@ -6468,7 +6468,7 @@
       "codex_enabled": true
     },
     "triage": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "triage-finding": {
@@ -6729,10 +6729,10 @@
     },
     "typescript-data-visualization-engineering": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "ubiquitous-language": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "ucp": {
@@ -6765,7 +6765,7 @@
     },
     "uml-and-software-architecture-visualization": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "uniprot-skill": {
       "claude_enabled": true,
@@ -6949,7 +6949,7 @@
     },
     "visualization-strategy-and-critique": {
       "claude_enabled": true,
-      "codex_enabled": false
+      "codex_enabled": true
     },
     "vitest": {
       "claude_enabled": true,
@@ -7104,7 +7104,7 @@
       "codex_enabled": true
     },
     "writing-great-skills": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": true
     },
     "writing-mstest-tests": {

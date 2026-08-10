@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "saved_at": "2026-08-10T01:22:20.791837+00:00",
-  "root": "/Users/stan/.agents/skills",
+  "saved_at": "2026-08-10T05:09:22.168653+00:00",
+  "root": "/home/stan/.agents",
   "skills": {
     "academic-paper": {
       "claude_enabled": false,
@@ -2740,10 +2740,6 @@
       "codex_enabled": true
     },
     "gsap": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
-    "gstack": {
       "claude_enabled": true,
       "codex_enabled": true
     },

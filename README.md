@@ -119,8 +119,8 @@ The table shows four combined states:
 - `mixed` — the Claude Code and Codex fields disagree; toggling makes both enabled.
 - `error` — malformed metadata must be repaired before the tool will change it.
 
-Save writes `.skill-vault/skill-toggle-state.json` . Reload reapplies both
-products from that snapshot. **Activate all** requires a second click or Ctrl-P within five
+Save writes `.skill-vault/skill-toggle-state.json` . Reload reapplies both products
+from that snapshot. **Activate all** requires a second click or Ctrl-P within five
 seconds: it saves the current state, then activates every skill for both products by
 dropping the two invocation fields, so what gets committed is the shared default — all
 skills on — rather than your personal opt-outs. Only those fields change; unrelated working
@@ -128,9 +128,9 @@ edits are left untouched. Reload the snapshot after committing to restore your p
 settings.
 
 The tool writes `disable-model-invocation` in `SKILL.md` for Claude Code and
-`policy.allow_implicit_invocation` in `agents/openai.yaml` for Codex. This prevents
-skills from loading into agent's context window automatically, but you can still 
-invoke them manually if needed.
+`policy.allow_implicit_invocation` in `agents/openai.yaml` for Codex. 
+This prevents skills from loading into agent's context window automatically, 
+but you can still invoke them manually if needed.
 
 Scriptable commands use the same safe backend:
 
@@ -153,7 +153,8 @@ Navigation generation never modifies the original `*/SKILL.md` folders, so the s
 can manage them remotely. `skill-toggle` is the deliberate exception: it changes only the
 two product invocation fields described above. 
 
-As of 2026-08-09, claude code and pi can reliably toggle skills and reduce context usage, codex is not working well.
+As of 2026-08-09, claude code and pi can reliably toggle skills and 
+reduce context usage, codex is not working well. 
 As a workaround, one can use pi as the harness for gpt models.
 
 ## Regenerating the navigation layer

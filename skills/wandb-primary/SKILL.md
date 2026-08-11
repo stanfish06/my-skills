@@ -945,7 +945,7 @@ else:
 ### Inspect recent traces
 
 ```python
-import weave, os, logging
+import weave, os, logging, sys
 logging.getLogger("weave").setLevel(logging.ERROR)
 sys.path.insert(0, "skills/wandb-primary/scripts")
 from weave_helpers import unwrap, get_token_usage

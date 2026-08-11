@@ -67,7 +67,7 @@ physics — complementary to growth-focused materials science and device-integra
 - **Mobility is a scattering story, not a material virtue.** τ_scatter from ionized impurities
   (Brooks–Herring), polar optical phonons (Fröhlich), acoustic deformation potential, alloy disorder,
   interface roughness, and grain boundaries combine in Matthiessen's rule 1/μ = Σ_i 1/μ_i only when
-  mechanisms are independent. μ ∝ T^−3/2 (ionized impurity) vs. μ falling with T (phonon) vs.
+  mechanisms are independent. μ ∝ T^(3/2) (ionized impurity) vs. μ falling with T (phonon) vs.
   alloy scattering (often weak T dependence) discriminate mechanisms before invoking "high quality."
 - **Drude–Boltzmann transport links τ to observables.** σ = neμ = ne²τ/m*; classical Hall
   μ_H = r_H μ with r_H ≈ 1–1.93; magnetoresistance Δρ/ρ ∝ (μB)² in one-band low-field regime.

@@ -176,7 +176,7 @@ in consulting, agency, and research settings.
   runoff when linked to receiving water.
 - **Air:** AERMOD, CALPUFF, EPA MOVES/EMFAC for mobile sources; AQS data pulls for ambient
   context.
-- **GIS and stats:** ArcGIS/QGIS, R (`gstat`, `sp`, `sf`), Python (`geopandas`, `scikit-glearn`
+- **GIS and stats:** ArcGIS/QGIS, R (`gstat`, `sp`, `sf`), Python (`geopandas`, `scikit-learn`
   for spatial CV), Surfer for contours — never smooth across NAPL or fault barriers without
   geologic reason.
 - **Risk platforms:** EPA Regional Screening Levels calculator, ProUCL for background

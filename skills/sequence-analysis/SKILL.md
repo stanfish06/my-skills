@@ -155,23 +155,12 @@ defaults; (2) `aligner.align()` yields `Alignment` objects, so use
 old `format_alignment` printed together. For exact `globalxx` parity set
 `aligner.open_gap_score = 0.0` and `aligner.extend_gap_score = 0.0`.
 
-### 6. Output format for WhatsApp
+### 6. Output format
 
-```
-*Sequence Analysis Results*
-
-• Length: 1,234 bp
-• GC Content: 52.3%
-• ORFs found: 3 (longest: 456 aa)
-
-*Protein Translation (frame +1):*
-```MRSSIDLK...STOP```
-
-*Restriction Sites:*
-• EcoRI: positions 123, 456
-• BamHI: position 789
-• HindIII: no sites found
-```
+Report in the caller's own format — plain text for a CLI, Markdown where it renders.
+Do not emit chat-app markup. Cover, in order: sequence length, GC content, ORFs found
+(with the longest), the protein translation for the requested frame, and restriction
+sites per enzyme (naming the enzymes searched, including those with no sites).
 
 ### 7. Follow-up suggestions
 

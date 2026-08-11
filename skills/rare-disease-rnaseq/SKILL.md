@@ -73,7 +73,7 @@ This implements the **diagnostic principle** of OUTRIDER (per-gene outlier vs co
 - Counts matrix (`.csv` or `.tsv`): rows = genes (HGNC symbol), columns = sample IDs
 - Cases file (`.txt`): one case sample ID per line
 - Controls file (`.txt`): one control sample ID per line (typically n ≥ 50)
-- Disease panel (optional, `.csv` with `gene` and `mechanism` columns): defaults to a built-in 50-gene haploinsufficient panel
+- Disease panel (optional, `.csv` with `gene`, `mechanism` and `phenotype` columns): defaults to a built-in 50-gene haploinsufficient panel
 
 ## Output Structure
 

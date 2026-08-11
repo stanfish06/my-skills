@@ -22,7 +22,7 @@ obsidian create name="My Note" content="Hello world"
 **Flags** are boolean switches with no value:
 
 ```bash
-obsidian create name="My Note" silent overwrite
+obsidian create name="My Note" overwrite
 ```
 
 For multiline content use `\n` for newline and `\t` for tab.
@@ -46,7 +46,7 @@ obsidian vault="My Vault" search query="test"
 
 ```bash
 obsidian read file="My Note"
-obsidian create name="New Note" content="# Hello" template="Template" silent
+obsidian create name="New Note" content="# Hello" template="Template"
 obsidian append file="My Note" content="New line"
 obsidian search query="search term" limit=10
 obsidian daily:read
@@ -57,7 +57,7 @@ obsidian tags sort=count counts
 obsidian backlinks file="My Note"
 ```
 
-Use `--copy` on any command to copy output to clipboard. Use `silent` to prevent files from opening. Use `total` on list commands to get a count.
+Use `--copy` on any command to copy output to clipboard. Use `total` on list commands to get a count. Commands that write files (`create`, `append`, `prepend`, `daily:append`) do not open them — pass `open` (optionally with `newtab`) if you want the file opened.
 
 ## Plugin development
 
@@ -65,23 +65,29 @@ Use `--copy` on any command to copy output to clipboard. Use `silent` to prevent
 
 After making code changes to a plugin or theme, follow this workflow:
 
-1. **Reload** the plugin to pick up changes:
+1. **Attach the debugger** once per session, so console messages are captured (`dev:console` throws `Debugger not attached` otherwise, and only messages logged after attaching are recorded):
+   ```bash
+   obsidian dev:debug on
+   ```
+2. **Reload** the plugin to pick up changes:
    ```bash
    obsidian plugin:reload id=my-plugin
    ```
-2. **Check for errors** — if errors appear, fix and repeat from step 1:
+3. **Check for errors** — if errors appear, fix and repeat from step 2:
    ```bash
    obsidian dev:errors
    ```
-3. **Verify visually** with a screenshot or DOM inspection:
+4. **Verify visually** with a screenshot or DOM inspection:
    ```bash
    obsidian dev:screenshot path=screenshot.png
    obsidian dev:dom selector=".workspace-leaf" text
    ```
-4. **Check console output** for warnings or unexpected logs:
+5. **Check console output** for warnings or unexpected logs:
    ```bash
    obsidian dev:console level=error
    ```
+
+Detach with `obsidian dev:debug off` when finished (this also clears the captured console buffer).
 
 ### Additional developer commands
 

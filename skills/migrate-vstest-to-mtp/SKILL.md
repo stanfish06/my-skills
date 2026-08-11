@@ -268,16 +268,16 @@ If CI scripts use TRX reporting, crash dumps, or hang dumps, add the correspondi
 
 ```xml
 <!-- TRX report generation (replaces --logger trx) -->
-<PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="1.6.2" />
+<PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="2.3.3" />
 
 <!-- Crash dump collection (replaces --blame-crash) -->
-<PackageReference Include="Microsoft.Testing.Extensions.CrashDump" Version="1.6.2" />
+<PackageReference Include="Microsoft.Testing.Extensions.CrashDump" Version="2.3.3" />
 
 <!-- Hang dump collection (replaces --blame-hang) -->
-<PackageReference Include="Microsoft.Testing.Extensions.HangDump" Version="1.6.2" />
+<PackageReference Include="Microsoft.Testing.Extensions.HangDump" Version="2.3.3" />
 
 <!-- Code coverage (replaces --collect "Code Coverage") -->
-<PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.13.0" />
+<PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.9.0" />
 ```
 
 ### Step 7: Update CI/CD pipelines

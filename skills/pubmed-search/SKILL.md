@@ -22,8 +22,12 @@ Search NCBI PubMed for scientific literature using BioPython's Entrez module.
 ### 1. Set up Entrez
 
 ```python
+import os
 from Bio import Entrez
-Entrez.email = "bioclaw@example.com"
+Entrez.email = os.environ["NCBI_EMAIL"]   # REQUIRED: your own working address.
+# NCBI policy requires a real, reachable contact address — it emails heavy users
+# before blocking their IP. Never ship a placeholder: any value silences
+# Biopython's "Email address is not specified" warning, so a bad address fails silently.
 ```
 
 ### 2. Search PubMed
@@ -73,22 +77,13 @@ for article in records['PubmedArticle']:
     print()
 ```
 
-### 4. Output format for WhatsApp
+### 4. Output format
 
-```
-*PubMed Search: "CRISPR delivery methods"*
-_Found 1,234 results. Top 5:_
-
-*1.* Lipid nanoparticle-mediated CRISPR delivery...
-   _Smith J et al. — Nature (2026)_
-   PMID: 12345678
-   pubmed.ncbi.nlm.nih.gov/12345678
-
-*2.* AAV-based CRISPR therapeutics: advances and challenges
-   _Chen L et al. — Cell (2026)_
-   PMID: 12345679
-   pubmed.ncbi.nlm.nih.gov/12345679
-```
+Report in the caller's own format — plain text for a CLI, Markdown where it renders.
+Do not emit chat-app markup. Per result: title, first author *et al.*, journal, year,
+PMID, and the canonical `https://pubmed.ncbi.nlm.nih.gov/<PMID>/` link. Lead with the
+total hit count and how many you are showing. Use the PMIDs actually returned by the
+search — never invent one.
 
 ### 5. Advanced searches
 

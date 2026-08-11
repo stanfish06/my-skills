@@ -44,7 +44,7 @@ slither . --exclude-dependencies
 
 For Rust:
 ```bash
-dylint --all
+cargo dylint --all
 ```
 
 For Go:

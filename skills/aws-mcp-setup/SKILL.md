@@ -81,20 +81,10 @@ aws sts get-caller-identity || echo "AWS credentials not configured"
 - AWS credentials configured (via profile, environment variables, or IAM role)
 
 **Required IAM Permissions**:
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Effect": "Allow",
-    "Action": [
-      "aws-mcp:InvokeMCP",
-      "aws-mcp:CallReadOnlyTool",
-      "aws-mcp:CallReadWriteTool"
-    ],
-    "Resource": "*"
-  }]
-}
-```
+
+Grant the same downstream AWS service permissions required for direct API calls. The legacy
+`aws-mcp:InvokeMcp`, `aws-mcp:CallReadOnlyTool`, and `aws-mcp:CallReadWriteTool` actions no longer
+have any effect and are not required for AWS MCP Server access.
 
 **Configuration** (add to your MCP settings):
 ```json
@@ -176,6 +166,6 @@ After configuration, verify tools are available:
 | Issue | Cause | Solution |
 |-------|-------|----------|
 | `uvx: command not found` | uv not installed | Install with `pip install uv` or use Option B |
-| `AccessDenied` error | Missing IAM permissions | Add aws-mcp:* permissions to IAM policy |
+| `AccessDenied` error | Missing downstream service permissions or an SCP/permission-boundary deny | Grant the target AWS service action and review `aws:ViaAWSMCPService` / `aws:CalledViaAWSMCP` conditions |
 | `InvalidSignatureException` | Credential issue | Check `aws sts get-caller-identity` |
 | Tools not appearing | MCP not started | Restart your agent after config change |

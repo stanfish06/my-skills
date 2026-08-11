@@ -17,10 +17,14 @@ Query Gene Expression Omnibus for public expression datasets.
 ## How to Execute
 
 ```python
+import os
 from Bio import Entrez
 import json
 
-Entrez.email = "bioclaw@example.com"
+Entrez.email = os.environ["NCBI_EMAIL"]   # REQUIRED: your own working address.
+# NCBI policy requires a real, reachable contact address — it emails heavy users
+# before blocking their IP. Never ship a placeholder: any value silences
+# Biopython's "Email address is not specified" warning, so a bad address fails silently.
 
 # 1. Search GEO datasets
 def search_geo(query, max_results=10, db="gds"):

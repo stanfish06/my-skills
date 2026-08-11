@@ -135,9 +135,9 @@ jobs:
     steps:
       - name: Install Render CLI
         run: |
-          curl -L https://github.com/render-oss/cli/releases/download/v1.1.0/cli_1.1.0_linux_amd64.zip -o render.zip
+          curl -L https://github.com/render-oss/cli/releases/download/v2.22.0/cli_2.22.0_linux_amd64.zip -o render.zip
           unzip render.zip
-          sudo mv cli_v1.1.0 /usr/local/bin/render
+          sudo mv cli_v2.22.0 /usr/local/bin/render
       - name: Deploy
         env:
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}

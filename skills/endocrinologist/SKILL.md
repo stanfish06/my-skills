@@ -152,7 +152,7 @@ uncertainty expected of a senior clinical endocrinologist and translational rese
   - Overnight and low-dose/high-dose dexamethasone suppression (Cushing screening and
     ACTH-dependent vs independent differentiation).
   - ACTH stimulation (cosyntropin) for adrenal insufficiency; insulin tolerance test or
-    metyrapone/macimorelin when central ACTH reserve is the question.
+    metyrapone when central ACTH reserve is the question.
   - TRH stimulation (where available) for subtle TSH defects; less common now.
   - GnRH (or GnRH agonist) stimulation for puberty disorders; hCG stimulation for
     testicular function/Leydig reserve.
@@ -183,7 +183,8 @@ uncertainty expected of a senior clinical endocrinologist and translational rese
 - Endocrine-specific diagnostics:
   - Dexamethasone suppression tests (overnight 1 mg; classic 2-day low/high dose).
   - Cosyntropin (ACTH 1–24) stimulation; ITT for GH/ACTH reserve in experienced settings.
-  - Metyrapone and macimorelin tests for central adrenal/GH assessment where indicated.
+  - Metyrapone testing for central adrenal assessment and macimorelin testing for adult
+    GH assessment where indicated.
   - Mixed-meal or oral glucose tolerance test with GH sampling for acromegaly.
   - 24-hour urine free cortisol, late-night salivary cortisol, and dexamethasone-CRH
     where available for Cushing.

@@ -7,7 +7,7 @@ allowed-tools:
   - Write
   - Edit
   - Bash
-compatibility: Requires Python 3.9+ and pyBigWig 0.3.x (current 0.3.25). This is a C extension over libBigWig — pip/conda-forge/bioconda ship prebuilt wheels on Linux/macOS (including Apple Silicon) with no setup required; building from source needs libcurl and zlib headers (`curl-config` on PATH).
+compatibility: Requires Python 3.9+ and pyBigWig 0.3.x (current 0.3.25). This is a C extension over libBigWig — bioconda ships prebuilt packages for linux-64, linux-aarch64, osx-64 and osx-arm64, while PyPI ships manylinux x86_64 wheels only, so `pip install pyBigWig` builds from source on macOS; that build needs libcurl and zlib headers (`curl-config` on PATH), which macOS supplies in the SDK.
 metadata: {"version": "1.0", "skill-author": "community"}
 ---
 
@@ -47,7 +47,7 @@ bw_remote = pyBigWig.open("https://.../track.bw")   # remote access works transp
 bwrite = pyBigWig.open("output.bw", "w")   # write mode — can ONLY be written to, not queried
 ```
 
-`pyBigWig.open()` returns `None` (not an exception) if the file doesn't exist or isn't a valid BigWig/BigBed — always check for `None` before using the handle.
+`pyBigWig.open()` raises `RuntimeError: Received an error during file opening!` if the file doesn't exist, isn't a valid BigWig/BigBed, or is an unreachable URL — it never returns `None`, so wrap it in `try`/`except RuntimeError` rather than testing the handle.
 
 ## Reading: Header and Chromosomes
 
@@ -141,7 +141,7 @@ bw.addEntries(
 bw.close()   # required — data isn't flushed to disk until close()
 ```
 
-`addEntries` also accepts a single-chromosome + span/step form (`bw.addEntries("chr1", 0, values=[...], span=10, step=10)`) for fixed-interval tracks. With `numpy=True` passed at construction/entry time, `values`/`starts`/`ends` can be numpy arrays directly for a large speedup over Python lists.
+`addEntries` also accepts a single-chromosome + span/step form (`bw.addEntries("chr1", 0, values=[...], span=10, step=10)`) for fixed-interval tracks. `addEntries` accepts numpy arrays for `chroms`/`starts`/`ends`/`values` directly — no flag is needed — provided pyBigWig was compiled with numpy available; check with `pyBigWig.numpy == 1`. (There is no `numpy` keyword on `open()` or `addEntries()`. The `numpy=True` keyword is real but belongs to the read side, on `values()` and `stats()`, where it returns a numpy array instead of a Python list.)
 
 ## Common Pitfalls
 

@@ -18,9 +18,6 @@ export CPLUS_INCLUDE_PATH=/usr/include/gdal
 export C_INCLUDE_PATH=/usr/include/gdal
 pip install rasterio
 
-# Solution 3: Wheel files
-pip install rasterio --find-links=https://gis.wheelwrights.com/
-
 # Verify installation
 python -c "from osgeo import gdal; print(gdal.__version__)"
 python -c "import rasterio; print(rasterio.__version__)"

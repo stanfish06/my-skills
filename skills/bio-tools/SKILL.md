@@ -70,8 +70,12 @@ for record in SeqIO.parse("input.fa", "fasta"):
     print(record.id, len(record.seq))
 
 # Fetch from NCBI
+import os
 from Bio import Entrez
-Entrez.email = "bioclaw@example.com"
+Entrez.email = os.environ["NCBI_EMAIL"]   # REQUIRED: your own working address.
+# NCBI policy requires a real, reachable contact address — it emails heavy users
+# before blocking their IP. Never ship a placeholder: any value silences
+# Biopython's "Email address is not specified" warning, so a bad address fails silently.
 handle = Entrez.efetch(db="nucleotide", id="NM_000546", rettype="fasta")
 record = SeqIO.read(handle, "fasta")
 

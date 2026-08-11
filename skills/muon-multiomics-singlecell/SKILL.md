@@ -29,7 +29,7 @@ muon is a Python framework for multi-modal single-cell data analysis that extend
 - **Environment**: Python 3.9+; 16 GB+ RAM for datasets >50k cells; optional `mofapy2` for MOFA factor analysis
 
 ```bash
-pip install "muon[all]" "scanpy[leiden]" anndata
+pip install "muon[atac]" "scanpy[leiden]" anndata
 # Optional: for MOFA+ integration
 pip install mofapy2
 ```
@@ -70,9 +70,12 @@ mu.atac.pp.tfidf(mdata["atac"])
 mu.atac.tl.lsi(mdata["atac"])
 
 # WNN joint embedding
-mu.pp.neighbors(mdata, key_added="wnn",
-                use_rep={"rna": "X_pca", "atac": "X_lsi"})
-sc.tl.umap(mdata, neighbors_key="wnn")
+# Per-modality graphs are REQUIRED first: mu.pp.neighbors reads each modality's
+# .uns["neighbors"]["params"] to learn which embedding to use.
+sc.pp.neighbors(mdata["rna"],  use_rep="X_pca")
+sc.pp.neighbors(mdata["atac"], use_rep="X_lsi")
+mu.pp.neighbors(mdata, key_added="wnn")
+mu.tl.umap(mdata, neighbors_key="wnn")
 sc.tl.leiden(mdata, neighbors_key="wnn", key_added="leiden_wnn")
 print(f"Clusters: {mdata.obs['leiden_wnn'].nunique()}")
 ```
@@ -186,9 +189,10 @@ print("TF-IDF normalization complete")
 print(f"ATAC data range: [{atac.X.min():.2f}, {atac.X.max():.2f}]")
 
 # LSI dimensionality reduction (truncated SVD on TF-IDF matrix)
-mu.atac.tl.lsi(atac, n_comps=50, use_highly_variable=False)
-# LSI component 1 correlates with sequencing depth — exclude it
-# mu.atac.tl.lsi sets X_lsi starting from component 2 by default
+mu.atac.tl.lsi(atac, n_comps=50)
+# LSI component 1 correlates with sequencing depth — exclude it yourself.
+# mu.atac.tl.lsi stores ALL n_comps components in X_lsi; component 1 is NOT
+# dropped. See Best Practices #2 before feeding X_lsi into WNN.
 print(f"LSI embedding shape: {atac.obsm['X_lsi'].shape}")
 
 # Update modality in MuData
@@ -200,23 +204,25 @@ mdata.mod["atac"] = atac
 Weighted Nearest Neighbor (WNN) integrates multiple modality embeddings by learning per-cell, per-modality weights. Cells with high-quality RNA signal receive higher RNA weight; cells with cleaner ATAC signal receive higher ATAC weight. The resulting WNN graph is used for UMAP layout and Leiden clustering.
 
 ```python
-# Compute per-modality neighbor graphs first (optional but enables modality-specific UMAPs)
-mu.pp.neighbors(mdata["rna"],  use_rep="X_pca",  n_neighbors=30, key_added="neighbors")
-mu.pp.neighbors(mdata["atac"], use_rep="X_lsi",  n_neighbors=30, key_added="neighbors")
+# Compute per-modality neighbor graphs first — REQUIRED, not optional.
+# mu.pp.neighbors reads use_rep / n_pcs / n_neighbors out of each modality's
+# .uns["neighbors"]["params"]; without this it raises
+# ValueError: Did not find .uns["neighbors"] for modality "rna".
+sc.pp.neighbors(mdata["rna"],  use_rep="X_pca", n_neighbors=30)
+sc.pp.neighbors(mdata["atac"], use_rep="X_lsi", n_neighbors=30)
 
 # WNN joint neighbor graph across modalities
 mu.pp.neighbors(
     mdata,
     key_added="wnn",
-    use_rep={"rna": "X_pca", "atac": "X_lsi"},
     n_neighbors=30,
     random_state=42,
 )
 print("WNN graph built. Keys:", list(mdata.obsp.keys()))
 # Expected: ['wnn_connectivities', 'wnn_distances']
 
-# UMAP from WNN graph
-sc.tl.umap(mdata, neighbors_key="wnn", random_state=42)
+# UMAP from WNN graph — use mu.tl.umap, not sc.tl.umap (see Best Practices #3)
+mu.tl.umap(mdata, neighbors_key="wnn", random_state=42)
 print(f"UMAP embedding shape: {mdata.obsm['X_umap'].shape}")
 
 # Leiden clustering from WNN graph
@@ -227,20 +233,20 @@ print(f"Leiden WNN clustering: {n_clusters} clusters at resolution 0.5")
 
 ### Module 5: Visualization
 
-muon extends scanpy's plotting interface with modality-aware functions. `mu.pl.embedding()` colors joint UMAP embeddings by features from any modality; `sc.pl.umap()` with `color` pointing to modality-prefixed feature names (e.g., `"rna:CD3E"`) is also supported.
+muon extends scanpy's plotting interface with modality-aware functions. `mu.pl.embedding()` and `mu.pl.umap()` color joint UMAP embeddings by features from any modality, including modality-prefixed feature names (e.g. `"rna:CD3E"`). Plain `sc.pl.umap()` cannot resolve those prefixed names and cannot index a `MuData` object — always use the `mu.pl.*` equivalents on `mdata`.
 
 ```python
 import matplotlib.pyplot as plt
 
 # Joint UMAP colored by cluster assignment
-sc.pl.umap(mdata, color="leiden_wnn", title="WNN Leiden clusters",
+mu.pl.umap(mdata, color="leiden_wnn", title="WNN Leiden clusters",
            legend_loc="on data", show=False)
 plt.savefig("wnn_umap_clusters.png", dpi=150, bbox_inches="tight")
 plt.close()
 print("Saved wnn_umap_clusters.png")
 
 # Color by RNA gene expression on joint UMAP
-sc.pl.umap(mdata, color=["rna:CD3E", "rna:CD19", "rna:CD14"],
+mu.pl.umap(mdata, color=["rna:CD3E", "rna:CD19", "rna:CD14"],
            use_raw=False, vmax="p99", show=False, ncols=3)
 plt.savefig("wnn_umap_markers.png", dpi=150, bbox_inches="tight")
 plt.close()
@@ -353,18 +359,17 @@ mu.atac.pp.tfidf(mdata["atac"])
 mu.atac.tl.lsi(mdata["atac"], n_comps=30)
 print(f"ATAC LSI: {mdata['atac'].obsm['X_lsi'].shape}")
 
-# --- 4. Per-modality neighbors (optional for modality-specific plots) ---
-mu.pp.neighbors(mdata["rna"],  use_rep="X_pca", n_neighbors=15, key_added="neighbors")
-mu.pp.neighbors(mdata["atac"], use_rep="X_lsi",  n_neighbors=15, key_added="neighbors")
+# --- 4. Per-modality neighbors (REQUIRED before WNN) ---
+sc.pp.neighbors(mdata["rna"],  use_rep="X_pca", n_neighbors=15)
+sc.pp.neighbors(mdata["atac"], use_rep="X_lsi", n_neighbors=15)
 
 # --- 5. WNN joint neighbor graph ---
 mu.pp.intersect_obs(mdata)   # align obs after per-modality filtering
 mu.pp.neighbors(mdata, key_added="wnn",
-                use_rep={"rna": "X_pca", "atac": "X_lsi"},
                 n_neighbors=15, random_state=42)
 
 # --- 6. UMAP + Leiden clustering ---
-sc.tl.umap(mdata, neighbors_key="wnn", random_state=42)
+mu.tl.umap(mdata, neighbors_key="wnn", random_state=42)
 sc.tl.leiden(mdata, neighbors_key="wnn", resolution=0.5, key_added="leiden_wnn")
 print(f"Clusters: {mdata.obs['leiden_wnn'].value_counts().to_dict()}")
 
@@ -378,8 +383,8 @@ print(top_markers[["names", "logfoldchanges", "pvals_adj"]])
 
 # --- 8. Visualization ---
 fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-sc.pl.umap(mdata, color="leiden_wnn", ax=axes[0], show=False, title="WNN clusters")
-sc.pl.umap(mdata, color="rna:gene_0",  ax=axes[1], show=False, title="gene_0 expression",
+mu.pl.umap(mdata, color="leiden_wnn", ax=axes[0], show=False, title="WNN clusters")
+mu.pl.umap(mdata, color="rna:gene_0",  ax=axes[1], show=False, title="gene_0 expression",
            use_raw=False, vmax="p99")
 plt.tight_layout()
 plt.savefig("multiome_wnn_pipeline.png", dpi=150, bbox_inches="tight")
@@ -451,10 +456,11 @@ print(f"Protein data range: [{mdata['protein'].X.min():.2f}, {mdata['protein'].X
 sc.pp.pca(mdata["protein"], n_comps=min(15, prot.n_vars - 1))
 
 # --- WNN joint embedding ---
-mu.pp.neighbors(mdata, key_added="wnn",
-                use_rep={"rna": "X_pca", "protein": "X_pca"},
-                n_neighbors=20, random_state=0)
-sc.tl.umap(mdata, neighbors_key="wnn", random_state=0)
+# Per-modality graphs first (REQUIRED — mu.pp.neighbors reads their .uns params)
+sc.pp.neighbors(mdata["rna"],     use_rep="X_pca", n_neighbors=20)
+sc.pp.neighbors(mdata["protein"], use_rep="X_pca", n_neighbors=20)
+mu.pp.neighbors(mdata, key_added="wnn", n_neighbors=20, random_state=0)
+mu.tl.umap(mdata, neighbors_key="wnn", random_state=0)
 sc.tl.leiden(mdata, neighbors_key="wnn", resolution=0.4, key_added="leiden_wnn")
 
 # --- Protein-based cell type annotation ---
@@ -471,10 +477,10 @@ print(cluster_means[["CD3", "CD4", "CD19", "CD14"]].round(2))
 
 # --- Visualization ---
 fig, axes = plt.subplots(1, 3, figsize=(15, 4))
-sc.pl.umap(mdata, color="leiden_wnn",   ax=axes[0], show=False, title="WNN Leiden")
-sc.pl.umap(mdata, color="protein:CD3",  ax=axes[1], show=False, title="CD3 (CLR)",
+mu.pl.umap(mdata, color="leiden_wnn",   ax=axes[0], show=False, title="WNN Leiden")
+mu.pl.umap(mdata, color="protein:CD3",  ax=axes[1], show=False, title="CD3 (CLR)",
            use_raw=False, vmax="p99")
-sc.pl.umap(mdata, color="protein:CD19", ax=axes[2], show=False, title="CD19 (CLR)",
+mu.pl.umap(mdata, color="protein:CD19", ax=axes[2], show=False, title="CD19 (CLR)",
            use_raw=False, vmax="p99")
 plt.tight_layout()
 plt.savefig("citeseq_joint_umap.png", dpi=150, bbox_inches="tight")
@@ -496,7 +502,7 @@ print("Saved citeseq_protein_dotplot.png")
 | Parameter | Module / Function | Default | Range / Options | Effect |
 |-----------|-------------------|---------|-----------------|--------|
 | `n_neighbors` | `mu.pp.neighbors()` | `30` | `10`–`100` | Neighborhood size for graph; lower = finer local structure |
-| `use_rep` | `mu.pp.neighbors()` | `None` (auto) | dict of `{modality: embedding_key}` | Which embedding per modality to use for WNN |
+| `use_rep` | `sc.pp.neighbors()` on each modality | `None` (auto) | embedding key, e.g. `"X_pca"` / `"X_lsi"` | Set per modality *before* WNN; `mu.pp.neighbors()` has no `use_rep` parameter and reads it from each modality's `.uns["neighbors"]["params"]` |
 | `key_added` | `mu.pp.neighbors()` | `"neighbors"` | any string | Key under which graph is stored; use `"wnn"` for joint graphs |
 | `n_comps` | `sc.pp.pca()`, `mu.atac.tl.lsi()` | `50` | `10`–`100` | Number of reduced dimensions; 30–50 typical |
 | `resolution` | `sc.tl.leiden()` | `1.0` | `0.1`–`2.0` | Clustering granularity; lower = fewer, larger clusters |
@@ -524,7 +530,7 @@ print("Saved citeseq_protein_dotplot.png")
    # atac.obsm["X_lsi"] = atac.obsm["X_lsi"][:, 1:]
    ```
 
-3. **Use `key_added="wnn"` consistently**: Always name the joint graph `"wnn"` and pass `neighbors_key="wnn"` to all downstream `sc.tl.umap()`, `sc.tl.leiden()`, and `sc.tl.paga()` calls. Mixing `neighbors_key` values silently uses the wrong graph.
+3. **Use `key_added="wnn"` consistently, and `mu.tl.umap()` for the joint graph**: Always name the joint graph `"wnn"` and pass `neighbors_key="wnn"` downstream. Use `mu.tl.umap()` — not `sc.tl.umap()` — on a `MuData`: muon stores a per-modality `use_rep` dict in `mdata.uns["wnn"]["params"]`, which scanpy cannot read (`TypeError: unhashable type: 'dict'`). `sc.tl.leiden(mdata, neighbors_key="wnn")` does work. Mixing `neighbors_key` values silently uses the wrong graph.
 
 4. **CLR normalization for proteins, not log-normalization**: Antibody-derived tag (ADT) counts from CITE-seq have a different noise model than RNA. Use `mu.prot.pp.clr()` for per-protein CLR normalization. Do NOT apply `sc.pp.normalize_total()` + `sc.pp.log1p()` to the protein modality.
 
@@ -615,7 +621,10 @@ print(combined.var["modality"].value_counts())
 |---------|-------|----------|
 | `KeyError: 'rna'` when building MuData | Modality key not set or loaded from file without expected names | Check `mdata.mod.keys()`. When loading 10x h5 files, use `mu.read_10x_h5()` which auto-names modalities `"rna"` and `"atac"` |
 | `ValueError: obs_names mismatch` during WNN | Cells filtered differently per modality leaving mismatched obs | Call `mu.pp.intersect_obs(mdata)` after per-modality QC to harmonize cell sets |
-| UMAP/Leiden uses wrong graph | Multiple neighbor graphs exist; function uses default key `"neighbors"` | Always pass `neighbors_key="wnn"` explicitly to `sc.tl.umap()` and `sc.tl.leiden()` |
+| UMAP/Leiden uses wrong graph | Multiple neighbor graphs exist; function uses default key `"neighbors"` | Always pass `neighbors_key="wnn"` explicitly to `mu.tl.umap()` and `sc.tl.leiden()` |
+| `TypeError: unhashable type: 'dict'` from `sc.tl.umap` | `sc.tl.umap()` cannot read muon's per-modality `use_rep` dict in `mdata.uns["wnn"]["params"]` | Use `mu.tl.umap(mdata, neighbors_key="wnn")` instead |
+| `TypeError: neighbors() got an unexpected keyword argument 'use_rep'` | `mu.pp.neighbors()` has no `use_rep` parameter | Set `use_rep` per modality via `sc.pp.neighbors(mdata["rna"], use_rep="X_pca")` first, then call `mu.pp.neighbors(mdata, key_added="wnn")` |
+| `ValueError: Did not find .uns["neighbors"] for modality ...` | Per-modality neighbor graphs not computed | Run `sc.pp.neighbors()` on every modality before `mu.pp.neighbors()` — it is required, not optional |
 | LSI component 1 dominates ATAC embedding | First component captures sequencing depth, not biology | Compute correlation of `X_lsi[:, 0]` with `log_total_counts`; if |r| > 0.9, use `X_lsi[:, 1:]` |
 | `mu.atac.pp.tfidf` raises sparse matrix error | Input matrix is dense or wrong dtype | Convert first: `mdata["atac"].X = scipy.sparse.csr_matrix(mdata["atac"].X.astype(float))` |
 | CLR normalization produces NaN for proteins | Zero counts in a cell for all proteins | Filter cells with `sc.pp.filter_cells(mdata["protein"], min_genes=1)` before CLR |

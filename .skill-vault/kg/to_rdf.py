@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export vault/graph/graph.json to RDF (TriG + Turtle).
+"""Export vault/graph/graph.json to RDF (sorted N-Quads + Turtle).
 
 Optional layer. The zero-dependency JSON graph stays the runtime store that
 `query.py` reads; this adds standards interop, real SHACL validation, and
@@ -23,8 +23,8 @@ Modelling choices worth defending:
     what the extraction rule already says, at four times the file size.
 
 Usage:
-  python3 .skill-vault/kg/to_rdf.py                    # -> vault/graph/graph.trig + retrievable.ttl
-  python3 .skill-vault/kg/to_rdf.py --out /tmp/g.trig
+  python3 .skill-vault/kg/to_rdf.py           # -> vault/graph/graph.nq + retrievable.ttl
+  python3 .skill-vault/kg/to_rdf.py --trig    # also emit readable TriG
 """
 from __future__ import annotations
 
@@ -46,7 +46,7 @@ except ImportError:
 
 ROOT = Path(os.environ.get("SKILL_VAULT_ROOT") or Path(__file__).resolve().parents[2])
 GRAPH_JSON = ROOT / "vault" / "graph" / "graph.json"
-OUT_TRIG = ROOT / "vault" / "graph" / "graph.trig"
+OUT_NQ = ROOT / "vault" / "graph" / "graph.nq"
 OUT_TTL = ROOT / "vault" / "graph" / "retrievable.ttl"
 
 VS = Namespace("https://skillquarium.dev/ontology/")
@@ -145,7 +145,9 @@ def flatten_retrievable(ds: Dataset) -> Graph:
 def main():
     ap = argparse.ArgumentParser(description=(__doc__ or "").split("\n")[0])
     ap.add_argument("--graph", default=str(GRAPH_JSON))
-    ap.add_argument("--out", default=str(OUT_TRIG))
+    ap.add_argument("--out", default=str(OUT_NQ))
+    ap.add_argument("--trig", action="store_true",
+                    help="also write human-readable TriG (not committed: non-deterministic order)")
     ap.add_argument("--ttl", default=str(OUT_TTL))
     args = ap.parse_args()
 
@@ -157,9 +159,18 @@ def main():
     ds, reified = build(data)
     total = sum(len(g) for g in ds.graphs())
 
+    # Sorted N-Quads, not TriG, for the committed artifact.
+    #
+    # rdflib emits named graphs in a non-deterministic order, so TriG rewrites
+    # all 2.5 MB on every run even when nothing changed — which a daily cron
+    # would commit as pure churn. N-Quads is one statement per line, so sorting
+    # makes the output byte-identical for identical input and git only stores
+    # the lines that actually moved. It costs ~2x on disk and wins by far more
+    # than that on repository growth.
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    ds.serialize(destination=str(out), format="trig")
+    lines = sorted(line for line in ds.serialize(format="nquads").splitlines() if line.strip())
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     flat = flatten_retrievable(ds)
     ttl = Path(args.ttl)
@@ -168,8 +179,13 @@ def main():
     named = sorted(str(g.identifier).rsplit(":", 1)[-1] for g in ds.graphs() if len(g))
     print(f"triples          {total} ({reified} reified assertions)")
     print(f"named graphs     {', '.join(named)}")
-    print(f"wrote            {out.relative_to(ROOT)} ({out.stat().st_size/1e6:.1f} MB)")
+    print(f"wrote            {out.relative_to(ROOT)} ({out.stat().st_size/1e6:.1f} MB, sorted/deterministic)")
     print(f"wrote            {ttl.relative_to(ROOT)} ({len(flat)} retrievable triples)")
+
+    if args.trig:
+        trig = out.with_suffix(".trig")
+        ds.serialize(destination=str(trig), format="trig")
+        print(f"wrote            {trig.relative_to(ROOT)} (human-readable, not committed)")
     return 0
 
 

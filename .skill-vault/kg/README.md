@@ -61,12 +61,12 @@ dependencies, and that property is deliberate. On top of it:
 
 ```bash
 uv pip install -r .skill-vault/kg/requirements-rdf.txt
-python3 .skill-vault/kg/to_rdf.py            # -> vault/graph/graph.trig (+ retrievable.ttl)
+python3 .skill-vault/kg/to_rdf.py            # -> vault/graph/graph.nq (+ retrievable.ttl)
 python3 .skill-vault/kg/validate.py --shacl  # real pySHACL against ontology/shapes.ttl
 ```
 
-Measured on the real graph: **29,952 triples, 2.5 MB TriG** (smaller than the
-5.2 MB JSON), 0.7 s to export, **8 s** to validate with pySHACL. Without the
+Measured on the real graph: **29,952 triples**, 0.7 s to export, **8 s** to
+validate with pySHACL. Without the
 packages installed, `--shacl` reports `NOT_YET` and everything else still runs.
 
 ### What RDF buys that the stdlib validator cannot do
@@ -93,9 +93,15 @@ cross-validate at the same number, and a test asserts they agree.
 
 ### Interop
 
-`vault/graph/graph.trig` is committed, so it loads into GraphDB, Protégé,
-Stardog, or Neo4j n10s without installing the exporter. `retrievable.ttl` is
-gitignored — it is a validation intermediate regenerated in about a second.
+`vault/graph/graph.nq` is committed, so it loads into GraphDB, Protégé, Stardog,
+or Neo4j n10s without installing the exporter.
+
+It is **sorted N-Quads rather than TriG on purpose.** TriG is prettier and half
+the size, but rdflib emits its named graphs in non-deterministic order, so every
+rebuild rewrote all 2.5 MB — which the daily cron would commit as pure churn.
+Sorted N-Quads is byte-identical for identical input, so git stores only the
+statements that actually changed. Run `to_rdf.py --trig` for a readable copy
+locally; it is gitignored, as is the `retrievable.ttl` validation intermediate.
 
 ### Still not doing OWL 2 DL
 

@@ -28,6 +28,8 @@ ROOT = Path(os.environ.get("SKILL_VAULT_ROOT") or Path(__file__).resolve().paren
 GRAPH_PATH = ROOT / "vault" / "graph" / "graph.json"
 SCHEMA_PATH = ROOT / ".skill-vault" / "ontology" / "schema.json"
 
+SKILL_TYPES = ("Skill", "ExpertProfile")   # ExpertProfile is a subclass of Skill
+
 ORPHAN_BASELINE = 0.481   # measured on the description-only graph this replaces
 ORPHAN_GATE = 0.05        # design target
 
@@ -77,7 +79,7 @@ def index(graph):
 
 # ------------------------------------------------------------------- shapes
 def check_shapes(graph, schema, nodes, out, rep):
-    skills = [n for n in graph["nodes"] if n.get("type") in ("Skill", "ExpertProfile")]
+    skills = [n for n in graph["nodes"] if n.get("type") in SKILL_TYPES]
     provs = set(schema["provenance_levels"])
 
     missing_domain = [n["id"] for n in skills if not out[n["id"]].get("in_domain")]
@@ -142,7 +144,7 @@ def check_cqs(graph, nodes, out, inn, rep):
         r = set()
         for rel in rels:
             r |= out[sid].get(rel, set()) | inn[sid].get(rel, set())
-        return {x for x in r if x in nodes and nodes[x].get("type") in ("Skill", "ExpertProfile")}
+        return {x for x in r if x in nodes and nodes[x].get("type") in SKILL_TYPES}
 
     # CQ1 — can we walk a chain from FASTQ-touching skills toward pathway analysis?
     fastq = {e["src"] for e in graph["edges"]

@@ -53,7 +53,9 @@ VS = Namespace("https://skillquarium.dev/ontology/")
 VID = Namespace("https://skillquarium.dev/id/")
 
 PROVENANCE_LEVELS = ("ASSERTED", "OBSERVED", "EXTRACTED", "INFERRED", "PROPOSED")
-NOT_RETRIEVABLE = {"PROPOSED"}
+CORE_GRAPH = URIRef("urn:vault:core")
+LEVEL_GRAPH = {level: URIRef(f"urn:vault:{level}") for level in PROVENANCE_LEVELS}
+NOT_RETRIEVABLE = frozenset({LEVEL_GRAPH["PROPOSED"]})
 
 TYPE_MAP = {
     "Skill": [VS.Skill],
@@ -73,8 +75,8 @@ def uri(node_id: str) -> URIRef:
 
 def build(data) -> tuple[Dataset, int]:
     ds = Dataset()
-    core = ds.graph(URIRef("urn:vault:core"))
-    graphs = {p: ds.graph(URIRef(f"urn:vault:{p}")) for p in PROVENANCE_LEVELS}
+    core = ds.graph(CORE_GRAPH)
+    graphs = {level: ds.graph(g_uri) for level, g_uri in LEVEL_GRAPH.items()}
 
     scheme = VID["domain-scheme"]
     core.add((scheme, RDF.type, SKOS.ConceptScheme))
@@ -134,8 +136,7 @@ def flatten_retrievable(ds: Dataset) -> Graph:
     """
     flat = Graph()
     for g in ds.graphs():
-        name = str(g.identifier).rsplit(":", 1)[-1]
-        if name in NOT_RETRIEVABLE:
+        if g.identifier in NOT_RETRIEVABLE:
             continue
         for triple in g:
             flat.add(triple)
@@ -144,17 +145,13 @@ def flatten_retrievable(ds: Dataset) -> Graph:
 
 def main():
     ap = argparse.ArgumentParser(description=(__doc__ or "").split("\n")[0])
-    ap.add_argument("--graph", default=str(GRAPH_JSON))
-    ap.add_argument("--out", default=str(OUT_NQ))
     ap.add_argument("--trig", action="store_true",
                     help="also write human-readable TriG (not committed: non-deterministic order)")
-    ap.add_argument("--ttl", default=str(OUT_TTL))
     args = ap.parse_args()
 
-    src = Path(args.graph)
-    if not src.is_file():
-        sys.exit(f"no graph at {src} — run build_kg.py first")
-    data = json.loads(src.read_text(encoding="utf-8"))
+    if not GRAPH_JSON.is_file():
+        sys.exit(f"no graph at {GRAPH_JSON} — run build_kg.py first")
+    data = json.loads(GRAPH_JSON.read_text(encoding="utf-8"))
 
     ds, reified = build(data)
     total = sum(len(g) for g in ds.graphs())
@@ -167,23 +164,22 @@ def main():
     # makes the output byte-identical for identical input and git only stores
     # the lines that actually moved. It costs ~2x on disk and wins by far more
     # than that on repository growth.
-    out = Path(args.out)
-    out.parent.mkdir(parents=True, exist_ok=True)
+    OUT_NQ.parent.mkdir(parents=True, exist_ok=True)
     lines = sorted(line for line in ds.serialize(format="nquads").splitlines() if line.strip())
-    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    OUT_NQ.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     flat = flatten_retrievable(ds)
-    ttl = Path(args.ttl)
-    flat.serialize(destination=str(ttl), format="turtle")
+    flat.serialize(destination=str(OUT_TTL), format="turtle")
 
     named = sorted(str(g.identifier).rsplit(":", 1)[-1] for g in ds.graphs() if len(g))
     print(f"triples          {total} ({reified} reified assertions)")
     print(f"named graphs     {', '.join(named)}")
-    print(f"wrote            {out.relative_to(ROOT)} ({out.stat().st_size/1e6:.1f} MB, sorted/deterministic)")
-    print(f"wrote            {ttl.relative_to(ROOT)} ({len(flat)} retrievable triples)")
+    print(f"wrote            {OUT_NQ.relative_to(ROOT)} "
+          f"({OUT_NQ.stat().st_size/1e6:.1f} MB, sorted/deterministic)")
+    print(f"wrote            {OUT_TTL.relative_to(ROOT)} ({len(flat)} retrievable triples)")
 
     if args.trig:
-        trig = out.with_suffix(".trig")
+        trig = OUT_NQ.with_suffix(".trig")
         ds.serialize(destination=str(trig), format="trig")
         print(f"wrote            {trig.relative_to(ROOT)} (human-readable, not committed)")
     return 0

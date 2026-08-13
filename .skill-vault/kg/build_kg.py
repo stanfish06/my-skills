@@ -42,6 +42,9 @@ TODAY = date.today().isoformat()
 WORD = re.compile(r"[a-z0-9]+")
 MAX_NGRAM = 5  # longest skill id is 7 words; 5 covers all but a long tail cheaply
 
+SOURCE_RE = re.compile(r"^source:\s*skills/(.+?)/SKILL\.md\s*$", re.MULTILINE)
+ALIASES_RE = re.compile(r"^aliases:\s*\n((?:\s*-\s*.+\n)+)", re.MULTILINE)
+
 
 # --------------------------------------------------------------------------- io
 def load_json(path):
@@ -78,38 +81,77 @@ def read_frontmatter_description(text):
     return " ".join((dm.group(1) if dm else "").split()).strip().strip("'\"")
 
 
-def load_domains():
-    """Domain per skill, read from the notes layer build.py already generates."""
-    dom = defaultdict(set)
+def load_notes_layer():
+    """One pass over vault/notes/<domain>/<id>.md for everything that layer carries.
+
+    Two things live in the same frontmatter, so they are read together:
+
+      * domain assignment, which build.py already generates;
+      * curated human synonyms (1572 of 1818 notes carry them) — 'DESeq2' for
+        pydeseq2, 'single cell' for scanpy. These are the vault's real controlled
+        vocabulary and catch references that never spell the skill id. An alias
+        claimed by more than one skill is ambiguous and is dropped rather than
+        arbitrarily resolved.
+    """
+    domains, by_alias = defaultdict(set), defaultdict(set)
     if not NOTES_DIR.is_dir():
-        return dom
-    for domain_dir in sorted(NOTES_DIR.iterdir()):
-        if not domain_dir.is_dir():
+        return domains, {}, {}
+    for note in sorted(NOTES_DIR.glob("*/*.md")):
+        text = note.read_text(encoding="utf-8", errors="replace")[:2000]
+        sm = SOURCE_RE.search(text)
+        if not sm:
             continue
-        for note in domain_dir.glob("*.md"):
-            text = note.read_text(encoding="utf-8", errors="replace")[:2000]
-            sm = re.search(r"^source:\s*skills/(.+?)/SKILL\.md\s*$", text, re.MULTILINE)
-            if sm:
-                dom[sm.group(1)].add(f"domain:{domain_dir.name}")
-    return dom
+        sid = sm.group(1)
+        domains[sid].add(f"domain:{note.parent.name}")
+        am = ALIASES_RE.search(text)
+        if not am:
+            continue
+        for line in am.group(1).splitlines():
+            alias = line.strip().lstrip("-").strip().strip("'\"").lower()
+            if len(alias) >= 4:  # 3-char aliases are almost all ambiguous acronyms
+                by_alias[alias].add(sid)
+    resolved = {a: next(iter(s)) for a, s in by_alias.items() if len(s) == 1}
+    ambiguous = {a: sorted(s) for a, s in by_alias.items() if len(s) > 1}
+    return domains, resolved, ambiguous
 
 
 # ------------------------------------------------------------------- extraction
-def mentions_in(text, nameset):
-    """All skill ids named anywhere in `text`, via an n-gram index pass.
+def ngram_hits(text, index):
+    """Targets named anywhere in `text`, by sweeping its word n-grams against
+    `index` (a word-tuple -> target map built by `ngram_index`).
 
-    Inverted so this is O(len(text)) per skill rather than O(n_skills) regex
-    scans — the naive form does not finish on 1818 skills.
+    Inverted so this is O(len(text)) per document rather than O(n_terms) regex
+    scans — the naive form does not finish on 1818 skills. Skill ids and curated
+    aliases are both matched this way; only the index differs.
     """
     words = WORD.findall(text.lower())
     hits = set()
-    n = len(words)
     for k in range(1, MAX_NGRAM + 1):
-        for i in range(n - k + 1):
-            cand = "-".join(words[i:i + k])
-            if cand in nameset:
-                hits.add(cand)
+        for i in range(len(words) - k + 1):
+            target = index.get(tuple(words[i:i + k]))
+            if target is not None:
+                hits.add(target)
     return hits
+
+
+def ngram_index(pairs, exact=False):
+    """Build a word-tuple -> target index from (term, target) pairs.
+
+    Terms of more than MAX_NGRAM words are dropped: no n-gram can reach them.
+    `exact` additionally drops any term that is not exactly its own words joined
+    by '-', which is how a skill id must be spelled to be a legitimate hit —
+    without it, an id like `gstack/foo` would start matching the bare prose
+    "gstack foo".
+    """
+    index = {}
+    for term, target in pairs:
+        toks = tuple(WORD.findall(term))
+        if not toks or len(toks) > MAX_NGRAM:
+            continue
+        if exact and "-".join(toks) != term:
+            continue
+        index[toks] = target
+    return index
 
 
 def high_precision_mentions(text, nameset):
@@ -169,35 +211,6 @@ def parse_recipes(nameset):
     return recipes
 
 
-def load_aliases():
-    """Curated human synonyms from the wrapper notes (1572 of 1818 carry them).
-
-    These are the vault's real controlled vocabulary — 'DESeq2' for pydeseq2,
-    'single cell' for scanpy — and they catch references that never spell the
-    skill id. An alias claimed by more than one skill is ambiguous and is
-    dropped rather than arbitrarily resolved.
-    """
-    by_alias = defaultdict(set)
-    if not NOTES_DIR.is_dir():
-        return {}, {}
-    for note in NOTES_DIR.glob("*/*.md"):
-        text = note.read_text(encoding="utf-8", errors="replace")[:2000]
-        sm = re.search(r"^source:\s*skills/(.+?)/SKILL\.md\s*$", text, re.MULTILINE)
-        if not sm:
-            continue
-        sid = sm.group(1)
-        am = re.search(r"^aliases:\s*\n((?:\s*-\s*.+\n)+)", text, re.MULTILINE)
-        if not am:
-            continue
-        for line in am.group(1).splitlines():
-            alias = line.strip().lstrip("-").strip().strip("'\"").lower()
-            if len(alias) >= 4:  # 3-char aliases are almost all ambiguous acronyms
-                by_alias[alias].add(sid)
-    resolved = {a: next(iter(s)) for a, s in by_alias.items() if len(s) == 1}
-    ambiguous = {a: sorted(s) for a, s in by_alias.items() if len(s) > 1}
-    return resolved, ambiguous
-
-
 def load_disciplines():
     """Discipline assignment for the 503 expert profiles, from the taxonomy that
     already ships in this repo but was not previously part of any graph."""
@@ -228,7 +241,8 @@ def load_observations():
 
 # ------------------------------------------------------------------------ build
 class Graph:
-    def __init__(self):
+    def __init__(self, prov_rank):
+        self.prov_rank = prov_rank   # provenance level -> rank, from the TBox
         self.nodes = {}
         self._edges = {}
 
@@ -242,11 +256,10 @@ class Graph:
         prior = self._edges.get(key)
         if prior:
             # Keep the strongest provenance; accumulate weight.
-            if PROV_RANK[provenance] > PROV_RANK[prior["provenance"]]:
+            if self.prov_rank[provenance] > self.prov_rank[prior["provenance"]]:
                 prior["provenance"] = provenance
                 prior["justification"] = justification
             prior["weight"] = round(min(1.0, prior["weight"] + 0.05 * weight), 4)
-            prior["last_seen"] = TODAY
         else:
             self._edges[key] = {
                 "src": src, "rel": rel, "dst": dst,
@@ -254,7 +267,6 @@ class Graph:
                 "provenance": provenance,
                 "justification": justification,
                 "status": "accepted" if provenance != "PROPOSED" else "proposed",
-                "first_seen": TODAY, "last_seen": TODAY,
             }
         if symmetric:
             self.edge(dst, rel, src, provenance, justification, weight, symmetric=False)
@@ -264,10 +276,7 @@ class Graph:
         return list(self._edges.values())
 
 
-PROV_RANK = {"PROPOSED": 1, "INFERRED": 2, "EXTRACTED": 3, "OBSERVED": 4, "ASSERTED": 5}
-
-
-def build(verbose=True):
+def build():
     schema = load_json(ONTOLOGY_DIR / "schema.json")
     lexicon = load_json(ONTOLOGY_DIR / "lexicon.json")
     policy = schema["extraction_policy"]
@@ -286,10 +295,11 @@ def build(verbose=True):
         text = path.read_text(encoding="utf-8", errors="replace")
         bodies[sid] = text[:window]
         descs[sid] = read_frontmatter_description(text)
-        is_profile[sid] = "expert-thinking profile" in text[:window].lower()
+        is_profile[sid] = "expert-thinking profile" in bodies[sid].lower()
 
     # Pass 1 — who names whom, plus document frequency for the IDF split.
-    raw_mentions = {sid: mentions_in(bodies[sid], nameset) for sid in skills}
+    name_index = ngram_index(((sid, sid) for sid in nameset), exact=True)
+    raw_mentions = {sid: ngram_hits(bodies[sid], name_index) for sid in skills}
     df = Counter()
     for hits in raw_mentions.values():
         for t in hits:
@@ -298,8 +308,8 @@ def build(verbose=True):
     generic = {t for t in nameset if df[t] > threshold}
     distinctive = nameset - generic
 
-    g = Graph()
-    domains = load_domains()
+    g = Graph({k: v["rank"] for k, v in schema["provenance_levels"].items()})
+    domains, alias_map, alias_ambiguous = load_notes_layer()
 
     for sid in skills:
         g.node(
@@ -331,22 +341,11 @@ def build(verbose=True):
                 tier2 += 1
 
     # references via curated aliases — the vault's own controlled vocabulary
-    alias_map, alias_ambiguous = load_aliases()
-    alias_index = {}
-    for alias, sid in alias_map.items():
-        toks = tuple(WORD.findall(alias))
-        if toks and len(toks) <= MAX_NGRAM:
-            alias_index[toks] = sid
+    alias_index = ngram_index(alias_map.items())
     alias_df = Counter()
     alias_hits = {}
     for sid in skills:
-        words = WORD.findall(bodies[sid].lower())
-        found = set()
-        for k in range(1, MAX_NGRAM + 1):
-            for i in range(len(words) - k + 1):
-                target = alias_index.get(tuple(words[i:i + k]))
-                if target and target != sid:
-                    found.add(target)
+        found = ngram_hits(bodies[sid], alias_index) - {sid}
         alias_hits[sid] = found
         for t in found:
             alias_df[t] += 1
@@ -375,21 +374,19 @@ def build(verbose=True):
 
     # touches — artifact vocabulary, identified rather than string-matched
     excluded = set(lexicon["excluded_terms"]["terms"])
-    art_pats = {
-        aid: re.compile(spec["pattern"], re.IGNORECASE)
-        for aid, spec in lexicon["artifacts"].items()
-        if aid.split(":", 1)[1] not in excluded
-    }
+    art_pats = []
     for aid, spec in lexicon["artifacts"].items():
         g.node(aid, type="Artifact", label=spec["label"])
+        if aid.split(":", 1)[1] not in excluded:
+            art_pats.append((aid, spec["label"], re.compile(spec["pattern"], re.IGNORECASE)))
     touch_count = 0
     for sid in skills:
         if is_profile[sid]:
             continue  # profiles wrap no tool and exchange no data
-        for aid, pat in art_pats.items():
+        for aid, label, pat in art_pats:
             if pat.search(bodies[sid]):
                 g.edge(sid, "touches", aid, "EXTRACTED",
-                       f"{lexicon['artifacts'][aid]['label']} named in {sid}/SKILL.md")
+                       f"{label} named in {sid}/SKILL.md")
                 touch_count += 1
 
     # recipes — hyperedges (ASSERTED) and step order (INFERRED direction, rules R2/R3)
@@ -441,9 +438,14 @@ def build(verbose=True):
             n["deprecated"] = True
 
     # --- metrics
+    # "Orphan" means no skill-to-skill relation. `touches` is deliberately not
+    # one: the artifact a skill mentions does not connect it to anything usable.
+    # (It used to be listed here, but the `d in nameset` filter below already
+    # dropped every artifact, so it never counted — the same drift that CQ6
+    # exposed between the metric and its prose.)
     adjacency = defaultdict(set)
     for e in g.edges:
-        if e["rel"] in ("references", "co_occurs_with", "chains_to", "touches") \
+        if e["rel"] in ("references", "co_occurs_with", "chains_to") \
                 and e["provenance"] != "PROPOSED":
             adjacency[e["src"]].add(e["dst"])
             adjacency[e["dst"]].add(e["src"])
@@ -477,21 +479,20 @@ def build(verbose=True):
         "by_relation": dict(rel_counts),
     }
 
-    if verbose:
-        print(f"skills            {total} ({metrics['expert_profiles']} expert profiles)")
-        print(f"generic blocked   {len(generic)} names with df > {df_max:.0%} "
-              f"({', '.join(sorted(generic)[:8])}...)")
-        print(f"nodes / edges     {len(g.nodes)} / {len(g.edges)}")
-        print(f"  references      tier1={tier1} tier2={tier2} alias={alias_edges}")
-        print(f"  in_discipline   {disc_edges}  ({len(alias_ambiguous)} ambiguous aliases parked)")
-        print(f"  touches         {touch_count}")
-        print(f"  recipes         {len(recipes)} hyperedges, {asserted} curated assertions")
-        print(f"  observations    {len(episodes)} episodes")
-        print(f"degree            mean={metrics['mean_skill_degree']} "
-              f"median={metrics['median_skill_degree']}")
-        print(f"ORPHAN RATE       {metrics['orphan_rate']:.1%} "
-              f"({len(orphans)}/{total})   [baseline 48.1%, gate <5%]")
-        print(f"by provenance     {dict(prov_counts)}")
+    print(f"skills            {total} ({metrics['expert_profiles']} expert profiles)")
+    print(f"generic blocked   {len(generic)} names with df > {df_max:.0%} "
+          f"({', '.join(sorted(generic)[:8])}...)")
+    print(f"nodes / edges     {len(g.nodes)} / {len(g.edges)}")
+    print(f"  references      tier1={tier1} tier2={tier2} alias={alias_edges}")
+    print(f"  in_discipline   {disc_edges}  ({len(alias_ambiguous)} ambiguous aliases parked)")
+    print(f"  touches         {touch_count}")
+    print(f"  recipes         {len(recipes)} hyperedges, {asserted} curated assertions")
+    print(f"  observations    {len(episodes)} episodes")
+    print(f"degree            mean={metrics['mean_skill_degree']} "
+          f"median={metrics['median_skill_degree']}")
+    print(f"ORPHAN RATE       {metrics['orphan_rate']:.1%} "
+          f"({len(orphans)}/{total})   [baseline 48.1%, gate <5%]")
+    print(f"by provenance     {dict(prov_counts)}")
 
     return {
         "schema_version": schema["schema_version"],
@@ -505,7 +506,7 @@ def build(verbose=True):
 
 
 def main():
-    graph = build(verbose=True)
+    graph = build()
     if graph is None:
         return 1
     if "--stats" in sys.argv:

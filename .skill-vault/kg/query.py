@@ -27,7 +27,7 @@ import json
 import math
 import os
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(os.environ.get("SKILL_VAULT_ROOT") or Path(__file__).resolve().parents[2])
@@ -47,9 +47,9 @@ class VaultGraph:
     def __init__(self, path=GRAPH_PATH):
         with open(path, encoding="utf-8") as fh:
             data = json.load(fh)
-        self.data = data
         self.nodes = {n["id"]: n for n in data["nodes"]}
         self.recipes = data.get("recipes", [])
+        self.edge_count = len(data["edges"])
         self.out = defaultdict(lambda: defaultdict(set))
         self.inn = defaultdict(lambda: defaultdict(set))
         for e in data["edges"]:
@@ -59,33 +59,34 @@ class VaultGraph:
             self.inn[e["dst"]][e["rel"]].add(e["src"])
         self.skills = [n["id"] for n in data["nodes"] if n.get("type") in SKILL_TYPES]
 
-        # BM25 index over name + description + domain labels
-        self.docs, df = {}, defaultdict(int)
+        # BM25 index over name + description + domain labels. Term frequencies are
+        # counted once here, not per query: bm25() is called for every skill on
+        # every query, and recounting each document there was the whole cost.
+        self.tf, self.dl, df = {}, {}, defaultdict(int)
         for sid in self.skills:
             n = self.nodes[sid]
             doms = " ".join(d.split(":", 1)[1].replace("-", " ")
                             for d in self.out[sid].get("in_domain", ()))
             words = tok(sid.replace("-", " ")) * 3 + tok(n.get("description", "")) + tok(doms)
-            self.docs[sid] = words
-            for w in set(words):
+            self.tf[sid] = Counter(words)
+            self.dl[sid] = len(words)
+            for w in self.tf[sid]:
                 df[w] += 1
         self.df = df
         self.N = len(self.skills)
-        self.avglen = sum(len(d) for d in self.docs.values()) / max(1, self.N)
+        self.avglen = sum(self.dl.values()) / max(1, self.N)
 
     def bm25(self, qwords, sid, k1=1.5, b=0.75):
-        doc = self.docs[sid]
-        if not doc:
+        tf, dl = self.tf[sid], self.dl[sid]
+        if not dl:
             return 0.0
-        tf = defaultdict(int)
-        for w in doc:
-            tf[w] += 1
-        score, dl = 0.0, len(doc)
+        score = 0.0
         for w in qwords:
-            if w not in tf:
+            f = tf.get(w)
+            if not f:
                 continue
             idf = math.log(1 + (self.N - self.df[w] + 0.5) / (self.df[w] + 0.5))
-            score += idf * (tf[w] * (k1 + 1)) / (tf[w] + k1 * (1 - b + b * dl / self.avglen))
+            score += idf * (f * (k1 + 1)) / (f + k1 * (1 - b + b * dl / self.avglen))
         return score
 
     def neighbours(self, sid, rels):
@@ -109,21 +110,26 @@ def retrieve(g: VaultGraph, query: str, k: int = 8):
 
     # --- A/B route + seed -------------------------------------------------
     scored = sorted(((g.bm25(qwords, s), s) for s in g.skills), reverse=True)
-    seeds = [s for sc, s in scored[:k] if sc > 0]
+    seeds = []
     for sc, s in scored[:k]:
         if sc > 0:
+            seeds.append(s)
             prior = 1.0 + (g.nodes[s].get("success_rate") or 0) * 0.5
             offer(s, sc * prior, "matched the query directly")
 
     # --- C expand ---------------------------------------------------------
+    # Every traversal is sorted. The adjacency is sets, and derived picks all
+    # share a handful of scores, so ties fall back to insertion order — leaving
+    # these unsorted made the answer depend on set iteration order, i.e. on
+    # PYTHONHASHSEED. Same query, same graph, different skills per process.
     for s in seeds:
-        for p in g.inn[s].get("chains_to", set()) | g.inn[s].get("prerequisite_of", set()):
+        for p in sorted(g.inn[s].get("chains_to", set()) | g.inn[s].get("prerequisite_of", set())):
             offer(p, 0.6, f"produces input for {s}")
-        for nxt in g.out[s].get("chains_to", set()):
+        for nxt in sorted(g.out[s].get("chains_to", set())):
             offer(nxt, 0.6, f"consumes what {s} produces")
-        for alt in g.neighbours(s, ["alternative_to"]):
+        for alt in sorted(g.neighbours(s, ["alternative_to"])):
             offer(alt, 0.4, f"alternative to {s}")
-        for co in list(g.neighbours(s, ["co_occurs_with"]))[:4]:
+        for co in sorted(g.neighbours(s, ["co_occurs_with"]))[:4]:
             offer(co, 0.5, f"usually used together with {s}")
 
     # --- D set-complete: the COMP fix ------------------------------------
@@ -147,15 +153,14 @@ def retrieve(g: VaultGraph, query: str, k: int = 8):
                     key=lambda kv: -kv[1][0])
     derived = sorted(((s, v) for s, v in picks.items() if v[1] != "matched the query directly"),
                      key=lambda kv: -kv[1][0])
-    quota = math.ceil(k * 0.7)
-    ranked = direct[:quota] + derived[:k - min(len(direct), quota)]
-    ranked = ranked[:k]
+    ranked = direct[:math.ceil(k * 0.7)]
+    ranked += derived[:k - len(ranked)]
 
     order = {sid: i for i, (sid, _) in enumerate(ranked)}
     # topological nudge: a skill that feeds another in the set comes first
     for _ in range(3):
         for sid, _ in ranked:
-            for nxt in g.out[sid].get("chains_to", set()):
+            for nxt in sorted(g.out[sid].get("chains_to", set())):
                 if nxt in order and order[nxt] < order[sid]:
                     order[sid], order[nxt] = order[nxt], order[sid]
     ranked.sort(key=lambda kv: order[kv[0]])
@@ -190,7 +195,7 @@ def main():
         print(json.dumps({"query": query, "results": results}, indent=1))
         return 0
 
-    print(f'query: "{query}"   ({len(g.skills)} skills, {len(g.data["edges"])} edges)\n')
+    print(f'query: "{query}"   ({len(g.skills)} skills, {g.edge_count} edges)\n')
     for i, r in enumerate(results, 1):
         print(f"{i}. {r['skill']}   [{', '.join(r['domains']) or 'no domain'}]")
         print(f"   why:  {r['why']}")

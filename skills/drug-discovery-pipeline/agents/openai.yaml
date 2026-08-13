@@ -1,4 +1,0 @@
-interface:
-  display_name: "Drug Discovery Pipeline"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $drug-discovery-pipeline for this task."

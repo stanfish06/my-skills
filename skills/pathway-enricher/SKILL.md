@@ -61,12 +61,12 @@ This skill is strictly limited to querying Enrichr databases for gene-set enrich
 
 | Database | Enrichr Library Name | Coverage |
 |----------|---------------------|----------|
-| KEGG 2021 Human | `KEGG_2021_Human` | 340 pathways |
-| GO Biological Process | `GO_Biological_Process_2023` | 7,658 terms |
-| GO Molecular Function | `GO_Molecular_Function_2023` | 1,936 terms |
-| GO Cellular Component | `GO_Cellular_Component_2023` | 1,000 terms |
-| Reactome 2022 | `Reactome_2022` | 2,372 pathways |
-| WikiPathways 2023 | `WikiPathways_2023_Human` | 881 pathways |
+| KEGG 2021 Human | `KEGG_2021_Human` | 320 pathways |
+| GO Biological Process | `GO_Biological_Process_2023` | 5,407 terms |
+| GO Molecular Function | `GO_Molecular_Function_2023` | 1,147 terms |
+| GO Cellular Component | `GO_Cellular_Component_2023` | 474 terms |
+| Reactome 2022 | `Reactome_2022` | 1,818 pathways |
+| WikiPathways 2024 | `WikiPathways_2024_Human` | 829 pathways |
 
 ## Workflow
 

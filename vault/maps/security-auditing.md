@@ -52,11 +52,11 @@ created: 2026-06-13
 - [security-and-hardening](../notes/security-auditing/security-and-hardening.md) — Hardens code against vulnerabilities. Use when handling user input, authentication, data storage, or external integrations
 - [security-diff-scan](../notes/security-auditing/security-diff-scan.md) — Use when the user asks for a security review of a pull request, commit, branch diff, working-tree patch, or other Git-backed change set
 - [security-scan](../notes/security-auditing/security-scan.md) — Use for a standard, single-pass security audit of an entire repository or a scoped path, package folder, or submodule with no diff to review
-- [semgrep](../notes/security-auditing/semgrep.md) — Run Semgrep static analysis scan on a codebase using parallel subagents
+- [semgrep](../notes/security-auditing/semgrep.md) — Runs a Semgrep security scan over a codebase: detects languages, selects rulesets, presents the plan for explicit approval, then runs every approved ruleset through...
 - [semgrep-rule-creator](../notes/security-auditing/semgrep-rule-creator.md) — Creates custom Semgrep rules for detecting security vulnerabilities, bug patterns, and code patterns
 - [sharp-edges](../notes/security-auditing/sharp-edges.md) — Identifies error-prone APIs, dangerous configurations, and footgun designs that enable security mistakes
 - [spec-to-code-compliance](../notes/security-auditing/spec-to-code-compliance.md) — Check code against the documentation that specifies it - which requirements hold, which the code contradicts, which are absent, and what the code does that no document mentions
-- [supply-chain-risk-auditor](../notes/security-auditing/supply-chain-risk-auditor.md) — Identifies dependencies at heightened risk of exploitation or takeover
+- [supply-chain-risk-auditor](../notes/security-auditing/supply-chain-risk-auditor.md) — Audits a project's dependencies for supply-chain risk: version-matched advisories for direct dependencies and the full lockfile tree, abandoned or archived upstreams, npm publisher...
 - [threat-model](../notes/security-auditing/threat-model.md) — Use when Codex is already in the threat-modeling phase of a security scan, the user explicitly invokes $threat-model, or the user explicitly asks to create, update, or persist a...
 - [token-integration-analyzer](../notes/security-auditing/token-integration-analyzer.md) — Token integration and implementation analyzer based on Trail of Bits' token integration checklist
 - [track-findings](../notes/security-auditing/track-findings.md) — Track validated Codex Security findings in Linear, Jira, GitHub issues, or draft GitHub security advisories

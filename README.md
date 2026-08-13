@@ -44,18 +44,33 @@ Default install:
 1. Symlinks every vault skill into each agent's skills folder (`npx skills add . -s '*' -g`)
 2. Installs / registers [`graphify`](https://github.com/safishamsi/graphify)
 
-**gstack** and **career-ops are optional** and are **skipped by default**. Opt in with `--extras`:
+**gstack**, **career-ops**, and **UI/UX Pro Max** are optional and are
+**skipped by default**. Opt in with `--extras`:
 
 ```bash
 ./install-skills.sh --extras gstack          # Garry Tan's gstack workflow
 ./install-skills.sh --extras career          # career-ops workspace
-./install-skills.sh --extras gstack career   # both
-./install-skills.sh --extras all             # both
-./install-skills.sh --extras=gstack,career   # comma form also works
+./install-skills.sh --extras ui-ux           # UI/UX Pro Max seven-skill bundle
+./install-skills.sh --extras gstack career ui-ux
+./install-skills.sh --extras all             # all optional extras
+./install-skills.sh --extras=gstack,ui-ux    # comma form also works
 ./install-skills.sh --help                   # full flag list
 ```
 
 ### Optional extras
+
+#### ui-ux (`--extras ui-ux`)
+
+Runs the pinned [`ui-ux-pro-max-cli`](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)
+installer in global universal mode. It generates `ui-ux-pro-max` plus six
+companion skills in the vault's canonical `~/.agents/skills` store before the
+normal skills CLI propagates them to supported agents. The aliases
+`ui-ux-pro-max` and `uipro` are also accepted.
+
+| Env | Effect |
+|-----|--------|
+| `UI_UX_PRO_MAX_SKIP=1` | Force-skip even with `--extras ui-ux` |
+| `UI_UX_PRO_MAX_CLI_VERSION=<version>` | Override the pinned CLI version (`2.14.1`) |
 
 #### career (`--extras career`)
 
@@ -82,7 +97,7 @@ skill names (`/gstack-qa`, `/gstack-ship`, …) so it does not clobber this vaul
 
 ## Navigation
 
-- **[vault/index.md](vault/index.md)** — start here: all skills grouped into 25 domains, plus an A–Z list.
+- **[vault/index.md](vault/index.md)** — start here: all skills grouped by domain, plus an A–Z list.
 - **[vault/skills.base](vault/skills.base)** — filterable / sortable table (by domain, status, rating).
 - **[vault/recipes/](vault/recipes/index.md)** — goal-oriented workflows that chain skills together.
 - **[vault/maps/](vault/maps)** — one map note per domain, with cross-links between domains.

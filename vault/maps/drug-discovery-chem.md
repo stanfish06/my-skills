@@ -44,7 +44,7 @@ created: 2026-06-13
 - [depmap](../notes/drug-discovery-chem/depmap.md) — Query the Cancer Dependency Map (DepMap) for cancer cell line gene dependency scores (CRISPR Chronos), drug sensitivity data, and gene effect profiles
 - [diffdock](../notes/drug-discovery-chem/diffdock.md) — DiffDock and DiffDock-L molecular docking
 - [diffdock-nim](../notes/drug-discovery-chem/diffdock-nim.md) — Run DiffDock molecular docking via NVIDIA NIM to predict small-molecule binding poses against protein targets
-- [drug-discovery-pipeline](../notes/drug-discovery-chem/drug-discovery-pipeline.md) — Run a complete computational drug discovery pipeline using NVIDIA BioNeMo NIMs: generate drug-like molecules with GenMol, dock them to a protein target with DiffDock, then predict...
+- [drug-discovery-pipeline](../notes/drug-discovery-chem/drug-discovery-pipeline.md) — NOTE: molecule and target inputs and your NGC_API_KEY are transmitted to external NVIDIA-hosted API endpoints on every call
 - [drug-repurposing-screen](../notes/drug-discovery-chem/drug-repurposing-screen.md) — Objective-driven pooled viability screen analysis: QC, hit calling, context-selectivity, biomarker sweep, and ranked repurposing candidates
 - [esm](../notes/drug-discovery-chem/esm.md) — Use when working directly with the `esm` Python SDK, ESM3 or ESMC model IDs, Forge/Biohub inference clients, or ESMFold2 folding workflows
 - [genmol-nim](../notes/drug-discovery-chem/genmol-nim.md) — Generate novel drug-like molecules using the GenMol NIM microservice

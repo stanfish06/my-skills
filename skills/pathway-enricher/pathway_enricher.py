@@ -91,7 +91,7 @@ LIBRARIES: dict[str, str] = {
     "go_mf": ("GO_Molecular_Function_2023", "GO Molecular Function 2023"),
     "go_cc": ("GO_Cellular_Component_2023", "GO Cellular Component 2023"),
     "reactome": ("Reactome_2022", "Reactome 2022"),
-    "wikipathways": ("WikiPathways_2023_Human", "WikiPathways 2023"),
+    "wikipathways": ("WikiPathways_2024_Human", "WikiPathways 2024"),
 }
 
 # Demo gene list — Alzheimer's Disease hallmark genes

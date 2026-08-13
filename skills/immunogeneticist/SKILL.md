@@ -299,7 +299,7 @@ fine-mapping.
 
 - **Resolution shorthand:** 2-field (e.g. A*02:01), 4-field (eight-digit), G-group
   (synonymous coding sets), P-group (protein-level sets)—do not mix in one table.
-- **Match metrics:** 10/10 (A,B,C,DRB1,DQB1); 8/8 older DR+DQ; haploidentical;
+- **Match metrics:** 10/10 (A,B,C,DRB1,DQB1); 8/8 (A,B,C,DRB1); haploidentical;
   permissive vs nonpermissive DPB1 TCE; EpMM vs AgMM.
 - **Antibody units:** MFI (Luminex), PRA %, DSA mean MFI, C1q MFI—never compare
   across platforms without cross-walk.

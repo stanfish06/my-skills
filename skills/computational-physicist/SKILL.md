@@ -196,8 +196,8 @@ practitioner in scientific computing and computational materials, fluids, and qu
   simulation is primary evidence.
 - Use community forums with version tags: VASP Forum, LAMMPS matsci.org, COMSOL Knowledge Base,
   CECAM and Psi-k tutorials for QE workflows.
-- Follow reporting norms where they exist: MDAR for materials simulations, reproducibility
-  checklists in JCP/CPC, and ASME V&V 10/20/40 language when publishing verification studies.
+- Follow reporting norms where they exist: reproducibility checklists in JCP/CPC, and ASME
+  V&V 10/20/40 language when publishing verification studies.
 - For method comparison papers: match cost at fixed error, or error at fixed cost — not cherry-picked
   wall times on mismatched hardware.
 - Deposit inputs/outputs where expected: Zenodo/Figshare for decks and scripts; NOMAD, Materials

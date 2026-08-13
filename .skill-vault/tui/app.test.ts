@@ -343,6 +343,155 @@ describe("OpenTUI interaction", () => {
     ])
   })
 
+  test("clicking a row does not let the scrollbox swallow movement keys", async () => {
+    const catalog: Catalog = {
+      skills: Array.from({ length: 80 }, (_, index) => makeSkill(`skill-${String(index).padStart(2, "0")}`)),
+      categories: ["software-dev"],
+    }
+    const backend = new FakeBackend(catalog)
+    setup = await createTestRenderer({ width: 140, height: 24 })
+    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    await setup.renderOnce()
+
+    const list = setup.renderer.root.findDescendantById("skill-list") as ScrollBoxRenderable
+    const firstRow = setup.renderer.root.findDescendantById("skill-skill-00") as BoxRenderable
+    await setup.mockMouse.click(firstRow.screenX + 8, firstRow.screenY)
+    await setup.renderOnce()
+
+    // A focused scrollbox would consume ↓ and scroll on its own; the second
+    // row is already visible, so selecting it must not scroll at all.
+    setup.mockInput.pressArrow("down")
+    await setup.renderOnce()
+    expect(list.scrollTop).toBe(0)
+  })
+
+  test("page down moves the selection and keeps it visible", async () => {
+    const catalog: Catalog = {
+      skills: Array.from({ length: 80 }, (_, index) => makeSkill(`skill-${String(index).padStart(2, "0")}`)),
+      categories: ["software-dev"],
+    }
+    const backend = new FakeBackend(catalog)
+    setup = await createTestRenderer({ width: 140, height: 24 })
+    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    await setup.renderOnce()
+
+    const list = setup.renderer.root.findDescendantById("skill-list") as ScrollBoxRenderable
+    const firstRow = setup.renderer.root.findDescendantById("skill-skill-00") as BoxRenderable
+    await setup.mockMouse.click(firstRow.screenX + 8, firstRow.screenY)
+    await setup.renderOnce()
+
+    setup.mockInput.pressKey("\u001b[6~")
+    await setup.renderOnce()
+    setup.mockInput.pressKey("\u001b[6~")
+    await setup.renderOnce()
+
+    const detail = setup.renderer.root.findDescendantById("detail-text") as TextRenderable
+    expect(detail.content.chunks.map((chunk) => chunk.text).join("")).toStartWith("skill-20")
+
+    const selected = setup.renderer.root.findDescendantById("skill-skill-20") as BoxRenderable
+    const viewport = list.viewport
+    expect(selected.y).toBeGreaterThanOrEqual(viewport.y)
+    expect(selected.y).toBeLessThan(viewport.y + viewport.height)
+  })
+
+  test("marking with M keeps the scroll position stable", async () => {
+    const catalog: Catalog = {
+      skills: Array.from({ length: 80 }, (_, index) => makeSkill(`skill-${String(index).padStart(2, "0")}`)),
+      categories: ["software-dev"],
+    }
+    const backend = new FakeBackend(catalog)
+    setup = await createTestRenderer({ width: 140, height: 24 })
+    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    await setup.renderOnce()
+
+    const list = setup.renderer.root.findDescendantById("skill-list") as ScrollBoxRenderable
+    const firstRow = setup.renderer.root.findDescendantById("skill-skill-00") as BoxRenderable
+    setup.mockInput.pressEnter()
+    for (let index = 0; index < 30; index++) {
+      await setup.mockMouse.scroll(firstRow.screenX + 5, firstRow.screenY + 3, "down")
+    }
+    await setup.renderOnce()
+    const before = list.scrollTop
+    expect(before).toBeGreaterThan(0)
+
+    setup.mockInput.pressKey("m")
+    await setup.renderOnce()
+    expect(list.scrollTop).toBe(before)
+    expect(setup.captureCharFrame()).toContain("[x]")
+  })
+
+  test("toggling a product keeps the scroll position stable", async () => {
+    const catalog: Catalog = {
+      skills: Array.from({ length: 80 }, (_, index) => makeSkill(`skill-${String(index).padStart(2, "0")}`)),
+      categories: ["software-dev"],
+    }
+    const backend = new FakeBackend(catalog)
+    setup = await createTestRenderer({ width: 140, height: 24 })
+    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    await setup.renderOnce()
+
+    const list = setup.renderer.root.findDescendantById("skill-list") as ScrollBoxRenderable
+    const firstRow = setup.renderer.root.findDescendantById("skill-skill-00") as BoxRenderable
+    setup.mockInput.pressEnter()
+    for (let index = 0; index < 30; index++) {
+      await setup.mockMouse.scroll(firstRow.screenX + 5, firstRow.screenY + 3, "down")
+    }
+    await setup.renderOnce()
+    const before = list.scrollTop
+    expect(before).toBeGreaterThan(0)
+
+    setup.mockInput.pressKey("c")
+    await setup.waitFor(() => backend.calls.length === 1)
+    await setup.renderOnce()
+    expect(list.scrollTop).toBe(before)
+  })
+
+  test("drags the scrollbar thumb with the mouse", async () => {
+    const catalog: Catalog = {
+      skills: Array.from({ length: 80 }, (_, index) => makeSkill(`skill-${String(index).padStart(2, "0")}`)),
+      categories: ["software-dev"],
+    }
+    const backend = new FakeBackend(catalog)
+    setup = await createTestRenderer({ width: 140, height: 24 })
+    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    await setup.renderOnce()
+
+    const list = setup.renderer.root.findDescendantById("skill-list") as ScrollBoxRenderable
+    const slider = list.verticalScrollBar.slider
+    const thumb = (slider as unknown as { getThumbRect(): { x: number; y: number } }).getThumbRect()
+    expect(list.scrollTop).toBe(0)
+
+    await setup.mockMouse.pressDown(thumb.x, thumb.y)
+    await setup.mockMouse.emitMouseEvent("drag", thumb.x, thumb.y + 2)
+    await setup.mockMouse.release(thumb.x, thumb.y + 2)
+    await setup.renderOnce()
+    expect(list.scrollTop).toBeGreaterThan(0)
+  })
+
+  test("scrollbar drag keeps following when the pointer drifts off the column", async () => {
+    const catalog: Catalog = {
+      skills: Array.from({ length: 80 }, (_, index) => makeSkill(`skill-${String(index).padStart(2, "0")}`)),
+      categories: ["software-dev"],
+    }
+    const backend = new FakeBackend(catalog)
+    setup = await createTestRenderer({ width: 140, height: 24 })
+    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    await setup.renderOnce()
+
+    const list = setup.renderer.root.findDescendantById("skill-list") as ScrollBoxRenderable
+    const slider = list.verticalScrollBar.slider
+    const thumb = (slider as unknown as { getThumbRect(): { x: number; y: number } }).getThumbRect()
+
+    await setup.mockMouse.pressDown(thumb.x, thumb.y)
+    // pointer immediately drifts off the 1-cell scrollbar column, as real
+    // mice do; the drag must keep driving the thumb anyway
+    await setup.mockMouse.emitMouseEvent("drag", thumb.x - 4, thumb.y + 2)
+    await setup.mockMouse.emitMouseEvent("drag", thumb.x - 4, thumb.y + 4)
+    await setup.mockMouse.release(thumb.x - 4, thumb.y + 4)
+    await setup.renderOnce()
+    expect(list.scrollTop).toBeGreaterThan(0)
+  })
+
   test("does not mark skills with catalog errors", async () => {
     const broken = makeSkill("broken")
     broken.claude_enabled = null

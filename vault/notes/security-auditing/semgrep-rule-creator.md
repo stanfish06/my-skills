@@ -20,7 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [semgrep](../../notes/security-auditing/semgrep.md) — Run Semgrep static analysis scan on a codebase using parallel subagents
+- [semgrep](../../notes/security-auditing/semgrep.md) — Runs a Semgrep security scan over a codebase: detects languages, selects rulesets, presents the plan for explicit approval, then runs every approved ruleset through...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

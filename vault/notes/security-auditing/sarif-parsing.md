@@ -22,7 +22,7 @@ created: 2026-06-09
 
 - [codeql](../../notes/security-auditing/codeql.md) — Scans a codebase for security vulnerabilities using CodeQL's interprocedural data flow and taint tracking analysis
 - [llm-agent-security-redteam](../../notes/security-auditing/llm-agent-security-redteam.md) — LLM and agent security red teaming with agentic-actions-auditor, supply-chain-risk-auditor, semgrep, codeql, and sarif-parsing
-- [semgrep](../../notes/security-auditing/semgrep.md) — Run Semgrep static analysis scan on a codebase using parallel subagents
+- [semgrep](../../notes/security-auditing/semgrep.md) — Runs a Semgrep security scan over a codebase: detects languages, selects rulesets, presents the plan for explicit approval, then runs every approved ruleset through...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

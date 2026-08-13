@@ -616,7 +616,7 @@ lm = dspy.LM(
 dspy.configure(lm=lm)
 
 # Claude Opus for complex reasoning
-lm_opus = dspy.LM('anthropic/claude-3-opus-20240229', api_key=key)
+lm_opus = dspy.LM('anthropic/claude-opus-5', api_key=key)
 ```
 
 **Local Models (Ollama)**:
@@ -666,8 +666,8 @@ def select_model(task_complexity, budget):
             ("anthropic/claude-3-5-sonnet-20241022", 3.00),
         ],
         "complex": [
-            ("anthropic/claude-3-opus-20240229", 15.00),
-            ("openai/o1-preview", 15.00),
+            ("anthropic/claude-opus-5", 15.00),
+            ("openai/gpt-5.5", 15.00),
         ]
     }
 

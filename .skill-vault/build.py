@@ -178,6 +178,7 @@ SYNONYMS = {
     "conda-bioconda": ["conda", "mamba", "micromamba", "Bioconda"],
     "github-actions-ci": ["GitHub Actions", "CI/CD", "workflows"],
     "test-driven-development": ["TDD"], "using-git-worktrees": ["git worktree"],
+    "worktrunk": ["git worktree", "worktree manager", "parallel agents"],
     "caveman": ["plain language", "ELI5", "dumb it down", "no jargon"],
     "fitness-nutrition": ["meal planning", "workout planner", "calorie counter", "TDEE", "one-rep max"],
     "web-artifacts-builder": ["artifacts", "shadcn"],
@@ -361,7 +362,7 @@ CATEGORIES = [
      ["test-driven-development", "systematic-debugging", "verification-before-completion",
       "requesting-code-review", "receiving-code-review", "brainstorming", "writing-plans",
       "executing-plans", "subagent-driven-development", "dispatching-parallel-agents",
-      "finishing-a-development-branch", "using-git-worktrees", "using-superpowers",
+      "finishing-a-development-branch", "using-git-worktrees", "worktrunk", "using-superpowers",
       "using-agent-skills", "writing-skills", "api-and-interface-design",
       "code-review-and-quality", "code-simplification", "context-engineering",
       "debugging-and-error-recovery", "deprecation-and-migration", "documentation-and-adrs",
@@ -774,6 +775,24 @@ def is_gstack_subskill(skill):
         or skill.startswith("gstack-")
         or skill.startswith("_gstack")
     )
+
+
+UI_UX_PRO_MAX_SKILLS = frozenset({
+    "ui-ux-pro-max",
+    "banner-design",
+    "brand",
+    "design-system",
+    "design",
+    "slides",
+    "ui-styling",
+})
+
+
+def is_ui_ux_pro_max_skill(skill):
+    """Transient folders generated only when the optional UI/UX extra is
+    installed. Keep them out of committed navigation so build output is a
+    fixed point whether or not a machine has opted into the bundle."""
+    return skill in UI_UX_PRO_MAX_SKILLS
 
 
 def is_scientific_agents_profile(skill):
@@ -1416,6 +1435,10 @@ EXTRA_ASSIGNMENTS = {
     "grill-with-docs": "reasoning-ideation", "grilling": "reasoning-ideation",
     # Web Automation, Frontend & Design
     "design-an-interface": "web-automation-frontend",
+    "ui-ux-pro-max": "web-automation-frontend",
+    "banner-design": "web-automation-frontend", "brand": "web-automation-frontend",
+    "design-system": "web-automation-frontend", "design": "web-automation-frontend",
+    "slides": "web-automation-frontend", "ui-styling": "web-automation-frontend",
     # .NET & C# Development
     "migrate-dotnetfx-to-net": "dotnet-development",
 }
@@ -1507,8 +1530,8 @@ def main():
 
     skills_by_key = {key: [] for key, *_ in CATEGORIES}
     for s in on_disk:
-        if is_gstack_subskill(s):
-            continue  # transient gstack sub-skills: keep out of cards/maps/subtotals (SCALE-3)
+        if is_gstack_subskill(s) or is_ui_ux_pro_max_skill(s):
+            continue  # transient optional extras: keep out of committed navigation
         skills_by_key.setdefault(key_by_skill.get(s, "uncategorized"), []).append(s)
 
     skills_sorted = sorted(on_disk)
@@ -1523,7 +1546,10 @@ def main():
     related = build_related_excluding(
         skills_sorted,
         full_desc,
-        set(expert_skills) | {s for s in skills_sorted if is_gstack_subskill(s)},
+        set(expert_skills) | {
+            s for s in skills_sorted
+            if is_gstack_subskill(s) or is_ui_ux_pro_max_skill(s)
+        },
     )
     discipline_titles = {
         discipline.id: discipline.title for discipline in taxonomy.disciplines
@@ -1531,6 +1557,8 @@ def main():
 
     # ---- wrapper notes -----------------------------------------------------
     for s in skills_sorted:
+        if is_ui_ux_pro_max_skill(s):
+            continue
         key = key_by_skill.get(s, "uncategorized")
         dtitle = title_by_key.get(key, "Uncategorized")
         ex = parse_existing(s, key)
@@ -1610,8 +1638,11 @@ def main():
             f.write("\n".join(L))
 
     # ---- index -------------------------------------------------------------
-    # Count excludes transient gstack bundle sub-skills (SCALE-3 / MNT-12).
-    total = sum(1 for s in on_disk if not is_gstack_subskill(s))
+    # Count excludes transient optional-extra install state.
+    total = sum(
+        1 for s in on_disk
+        if not is_gstack_subskill(s) and not is_ui_ux_pro_max_skill(s)
+    )
     index_path = os.path.join(human_root(), "index.md")
     index_created = existing_created(index_path)
     I = ["---", "title: Skills Index", "tags:", "  - moc", "  - skill-index",
@@ -1644,6 +1675,7 @@ def main():
         if key_by_skill.get(s) != EXPERT_DOMAIN
         and "/" not in s
         and not is_gstack_subskill(s)
+        and not is_ui_ux_pro_max_skill(s)
     ]
     persona_count = len(skills_by_key.get(EXPERT_DOMAIN, []))
     I += ["## All skills (A–Z)", "",
@@ -1661,7 +1693,10 @@ def main():
             flush(); bucket = []; cur = letter; I.append(f"**{letter}**")
         bucket.append(f"[{s}]({note_link(s, key_by_skill)})")
     flush()
-    unsorted_display = [s for s in unsorted if not is_gstack_subskill(s)]
+    unsorted_display = [
+        s for s in unsorted
+        if not is_gstack_subskill(s) and not is_ui_ux_pro_max_skill(s)
+    ]
     if unsorted_display:
         I += ["## Uncategorized", ""]
         I += [
@@ -1703,7 +1738,10 @@ def main():
                   file=sys.stderr)
 
     edge_count = sum(len(v) for v in related.values()) // 2
-    print(f"OK: {len(on_disk)} wrappers ({total} indexed skills), {len(CATEGORIES)} maps, "
+    generated_wrapper_count = sum(
+        1 for s in on_disk if not is_ui_ux_pro_max_skill(s)
+    )
+    print(f"OK: {generated_wrapper_count} wrappers ({total} indexed skills), {len(CATEGORIES)} maps, "
           f"{edge_count} related-links, unsorted={len(unsorted_display)} "
           f"(+{len(unsorted) - len(unsorted_display)} gstack), pruned={len(pruned)}")
     return 0

@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [.NET & C# Development](dotnet-development.md) | [MATLAB Development](matlab-development.md)
 
-## Skills (84)
+## Skills (85)
 
 - [api-and-interface-design](../notes/software-dev/api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
 - [brainstorming](../notes/software-dev/brainstorming.md) — You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior
@@ -98,5 +98,6 @@ created: 2026-06-13
 - [view-refactor](../notes/software-dev/view-refactor.md) — Refactor macOS SwiftUI views and scenes into stable structure
 - [vitest](../notes/software-dev/vitest.md) — JavaScript/TypeScript unit testing with Vitest — fast Vite-native test runner with Jest-compatible API
 - [workflow](../notes/software-dev/workflow.md) — Vercel Workflow DevKit (WDK) expert guidance
+- [worktrunk](../notes/software-dev/worktrunk.md) — Guidance for Worktrunk (the `wt` CLI) — git worktree management, hooks, and config
 - [writing-plans](../notes/software-dev/writing-plans.md) — Use when you have a spec or requirements for a multi-step task, before touching code
-- [writing-skills](../notes/software-dev/writing-skills.md) — Use when creating new skills, editing existing skills, or verifying skills work before deployment
+- [writing-skills](../notes/software-dev/writing-skills.md) — Provides a test-driven method for creating and validating agent skills

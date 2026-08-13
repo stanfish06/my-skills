@@ -15,10 +15,12 @@ cd "$VAULT_DIR"
 # Optional extras are OFF by default. Enable with:
 #   ./install-skills.sh --extras gstack
 #   ./install-skills.sh --extras career
-#   ./install-skills.sh --extras gstack career
+#   ./install-skills.sh --extras ui-ux
+#   ./install-skills.sh --extras gstack career ui-ux
 #   ./install-skills.sh --extras all
 EXTRA_GSTACK=0
 EXTRA_CAREER=0
+EXTRA_UI_UX=0
 
 usage() {
   cat <<'EOF'
@@ -29,15 +31,17 @@ install heavier extras that are skipped by default.
 
 Options:
   --extras <name>...   Install optional extras (default: none).
-                       Names: gstack, career (alias: career-ops), all
-  --extras=<csv>       Comma-separated form (e.g. --extras=gstack,career)
+                       Names: gstack, career, ui-ux, all
+                       Aliases: career-ops, ui-ux-pro-max, uipro
+  --extras=<csv>       Comma-separated form (e.g. --extras=gstack,ui-ux)
   -h, --help           Show this help
 
 Examples:
   ./install-skills.sh
   ./install-skills.sh --extras gstack
   ./install-skills.sh --extras career
-  ./install-skills.sh --extras gstack career
+  ./install-skills.sh --extras ui-ux
+  ./install-skills.sh --extras gstack career ui-ux
   ./install-skills.sh --extras all
 
 Environment:
@@ -49,7 +53,10 @@ Environment (honored when the matching extra is enabled):
   GSTACK_REF=<ref>           pin gstack to a git ref
   CAREER_OPS_SKIP=1          force-skip career-ops even with --extras career
   CAREER_OPS_DIR=<path>      career-ops workspace location (default: ~/career-ops)
-  CAREER_OPS_AUTO_UPDATE=0     freeze an existing career-ops checkout
+  CAREER_OPS_AUTO_UPDATE=0   freeze an existing career-ops checkout
+  UI_UX_PRO_MAX_SKIP=1       force-skip UI/UX Pro Max even with --extras ui-ux
+  UI_UX_PRO_MAX_CLI_VERSION=<ver>
+                             pin its CLI version (default: 2.14.1)
 EOF
 }
 
@@ -65,12 +72,16 @@ enable_extra() {
     career|career-ops)
       EXTRA_CAREER=1
       ;;
+    ui-ux|ui-ux-pro-max|uipro)
+      EXTRA_UI_UX=1
+      ;;
     all)
       EXTRA_GSTACK=1
       EXTRA_CAREER=1
+      EXTRA_UI_UX=1
       ;;
     *)
-      echo "ERROR: unknown extra '$name' (expected: gstack, career, all)" >&2
+      echo "ERROR: unknown extra '$name' (expected: gstack, career, ui-ux, all)" >&2
       exit 1
       ;;
   esac
@@ -96,7 +107,7 @@ while [ $# -gt 0 ]; do
     --extras)
       shift
       if [ $# -eq 0 ] || [[ "$1" == -* ]]; then
-        echo "ERROR: --extras requires at least one name (gstack, career, all)" >&2
+        echo "ERROR: --extras requires at least one name (gstack, career, ui-ux, all)" >&2
         exit 1
       fi
       while [ $# -gt 0 ] && [[ "$1" != -* ]]; do
@@ -107,7 +118,7 @@ while [ $# -gt 0 ]; do
     --extras=*)
       value="${1#--extras=}"
       if [ -z "$value" ]; then
-        echo "ERROR: --extras= requires at least one name (gstack, career, all)" >&2
+        echo "ERROR: --extras= requires at least one name (gstack, career, ui-ux, all)" >&2
         exit 1
       fi
       enable_extras_csv "$value"
@@ -122,6 +133,7 @@ while [ $# -gt 0 ]; do
 done
 
 source "$VAULT_DIR/.skill-vault/install-career-ops.sh"
+source "$VAULT_DIR/.skill-vault/install-ui-ux-pro-max.sh"
 
 # Temporarily move gstack/ out of the vault so `npx skills add` doesn't
 # scan it and leak per-skill symlinks to the vault root. gstack is a
@@ -165,6 +177,12 @@ trap 'exit 143' HUP TERM
 if [ -d "$GSTACK_DIR/.git" ]; then
   GSTACK_STASH="$(mktemp -d -t gstack-stash.XXXXXX)"
   mv "$GSTACK_DIR" "$GSTACK_STASH/gstack"
+fi
+
+if [ "$EXTRA_UI_UX" -eq 1 ]; then
+  install_ui_ux_pro_max
+else
+  echo "ui-ux-pro-max: skipped (pass --extras ui-ux to install)"
 fi
 
 # `npx -y` is required: bare `npx` blocks on npm's "Ok to proceed? (y)" prompt

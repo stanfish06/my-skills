@@ -14,7 +14,7 @@ created: 2026-06-10
 # writing-skills
 
 > [!info] What it does
-> Use when creating new skills, editing existing skills, or verifying skills work before deployment
+> Provides a test-driven method for creating and validating agent skills. Use when creating new skills, editing existing skills, or verifying skills before deployment.
 
 **Source:** [skills/writing-skills/SKILL.md](../../../skills/writing-skills/SKILL.md)  ·  **Domain:** [Software Development & Engineering](../../maps/software-dev.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

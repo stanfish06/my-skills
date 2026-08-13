@@ -83,6 +83,7 @@ created: 2026-06-20
 - [sharepoint](../../notes/comms-productivity/sharepoint.md) — Inspect Microsoft SharePoint context, discover the right site or library, and prepare safe changes
 - [sharepoint-powerpoint](../../notes/comms-productivity/sharepoint-powerpoint.md) — Create, edit, restyle, and review PowerPoint `.pptx` files fetched from SharePoint, with emphasis on style preservation, slide cloning, theme-aware updates, and rendered visual QA
 - [shopify-app-store-review](../../notes/saas-platforms/shopify-app-store-review.md) — Run a pre-submission compliance check against your Shopify app's codebase
+- [supply-chain-risk-auditor](../../notes/security-auditing/supply-chain-risk-auditor.md) — Audits a project's dependencies for supply-chain risk: version-matched advisories for direct dependencies and the full lockfile tree, abandoned or archived upstreams, npm publisher...
 - [swiftui-liquid-glass](../../notes/mobile-native-dev/swiftui-liquid-glass.md) — Implement and review iOS 26+ SwiftUI Liquid Glass UI
 - [teams-planner-task-management](../../notes/comms-productivity/teams-planner-task-management.md) — Review and manage Microsoft Planner tasks from Teams workflows
 - [test-anti-patterns](../../notes/dotnet-development/test-anti-patterns.md) — Audits an existing test file or suite in any language for anti-patterns and quality issues — produces a severity-ranked report (Critical/Warning/Info)

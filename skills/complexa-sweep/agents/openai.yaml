@@ -1,4 +1,0 @@
-interface:
-  display_name: "Complexa Sweep"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $complexa-sweep for this task."

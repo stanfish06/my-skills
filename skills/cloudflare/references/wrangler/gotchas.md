@@ -145,7 +145,7 @@ wrangler whoami
 
 ### Configuration Errors
 ```bash
-wrangler check  # Validate config
+wrangler deploy --dry-run  # Validate config without uploading
 ```
 Use wrangler.jsonc with `$schema` for validation.
 

@@ -14,13 +14,15 @@ created: 2026-06-09
 # supply-chain-risk-auditor
 
 > [!info] What it does
-> Identifies dependencies at heightened risk of exploitation or takeover. Use when assessing supply chain attack surface, evaluating dependency health, or scoping security engagements.
+> Audits a project's dependencies for supply-chain risk: version-matched advisories for direct dependencies and the full lockfile tree, abandoned or archived upstreams, npm publisher concentration, and install-time script execution. Use when asked to audit dependencies, assess supply-chain or third-party package risk, or review a dependency tree before an engagement.
 
 **Source:** [skills/supply-chain-risk-auditor/SKILL.md](../../../skills/supply-chain-risk-auditor/SKILL.md)  ·  **Domain:** [Security & Auditing](../../maps/security-auditing.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
 - [llm-agent-security-redteam](../../notes/security-auditing/llm-agent-security-redteam.md) — LLM and agent security red teaming with agentic-actions-auditor, supply-chain-risk-auditor, semgrep, codeql, and sarif-parsing
+- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
+- [supply-chain](../../notes/finance-investment/supply-chain.md) — Interactive supply chain dashboard mapping suppliers, customers, and financial interdependencies
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -163,6 +163,7 @@ export class SkillToggleApp {
   private readonly message: TextRenderable
   private rows: BoxRenderable[] = []
   private rowByKey = new Map<string, BoxRenderable>()
+  private markCellByKey = new Map<string, TextRenderable>()
 
   constructor(
     private readonly renderer: CliRenderer,
@@ -317,7 +318,10 @@ export class SkillToggleApp {
       titleColor: COLORS.accent,
       backgroundColor: COLORS.panel,
       flexDirection: "column",
-      overflow: "hidden",
+      // No overflow: "hidden" here: OpenTUI 0.5.1 offsets the hit-grid
+      // scissor of a bordered box by its border, which makes the last inner
+      // column (the scrollbar) unreachable by the mouse. The scrollbox below
+      // clips its own content, so nothing can overflow this panel anyway.
     })
     const columns = new BoxRenderable(renderer, {
       id: "columns",
@@ -384,6 +388,11 @@ export class SkillToggleApp {
         flexDirection: "column",
       },
     })
+    // A focused scrollbox consumes ↑↓/j/k/PgUp/PgDn itself, fighting the
+    // app-level selection movement. All list scrolling goes through
+    // moveSelection, so keep keyboard focus away from it.
+    this.list.focusable = false
+    this.installScrollbarDrag()
     listPanel.add(this.list)
     content.add(listPanel)
 
@@ -526,7 +535,41 @@ export class SkillToggleApp {
     return { box, label }
   }
 
-  private applyFilters(): void {
+  private installScrollbarDrag(): void {
+    // The renderer only captures the drag target once the pointer has
+    // produced a drag event while still over the 1-cell scrollbar column.
+    // A press on the thumb followed by a diagonal move captures a list row
+    // instead and the thumb never follows. Track thumb presses ourselves and
+    // forward every bubbled drag/up back to the slider's own handlers.
+    const slider = this.list.verticalScrollBar.slider
+    const listeners = (slider as unknown as {
+      _mouseListeners: Record<string, (event: MouseEvent) => void>
+    })._mouseListeners
+    const sliderDown = listeners["down"]
+    const sliderDrag = listeners["drag"]
+    const sliderUp = listeners["up"]
+    if (!sliderDown || !sliderDrag || !sliderUp) return
+    let dragging = false
+    slider.onMouseDown = (event: MouseEvent) => {
+      dragging = true
+      sliderDown.call(slider, event)
+    }
+    this.list.onMouse = (event: MouseEvent) => {
+      if (!dragging) return
+      if (event.type === "drag") {
+        sliderDrag.call(slider, event)
+      } else if (event.type === "up") {
+        dragging = false
+        sliderUp.call(slider, event)
+      } else if (event.type === "down" && event.target !== slider) {
+        // The release happened outside the list (never bubbled here); a new
+        // press ends the stale drag without moving the thumb.
+        dragging = false
+      }
+    }
+  }
+
+  private applyFilters(preserveScroll = false): void {
     this.filtered = filterSkills(
       this.catalogData.skills,
       this.query,
@@ -537,7 +580,7 @@ export class SkillToggleApp {
     if (!this.selectedKey || !this.filtered.some((skill) => skill.key === this.selectedKey)) {
       this.selectedKey = this.filtered[0]?.key ?? null
     }
-    this.rebuildRows()
+    this.rebuildRows(preserveScroll)
     this.updateFilterLabels()
     this.updateSummary()
     this.updateDetail()
@@ -550,10 +593,12 @@ export class SkillToggleApp {
     }
   }
 
-  private rebuildRows(): void {
+  private rebuildRows(preserveScroll = false): void {
+    const previousScrollTop = this.list.scrollTop
     for (const row of this.rows) row.destroyRecursively()
     this.rows = []
     this.rowByKey.clear()
+    this.markCellByKey.clear()
 
     for (const skill of this.filtered) {
       const row = new BoxRenderable(this.renderer, {
@@ -581,16 +626,17 @@ export class SkillToggleApp {
           this.moveSelection(direction === "down" ? distance : -distance)
         },
       })
-      row.add(
-        this.tableCell(
-          `mark-${skill.key}`,
-          this.markedKeys.has(skill.key) ? "[x]" : "[ ]",
-          this.markedKeys.has(skill.key) ? COLORS.accent : COLORS.muted,
-          undefined,
-          undefined,
-          MARK_COLUMN_WIDTH,
-        ),
+      const markCell = this.tableCell(
+        `mark-${skill.key}`,
+        this.markedKeys.has(skill.key) ? "[x]" : "[ ]",
+        this.markedKeys.has(skill.key) ? COLORS.accent : COLORS.muted,
+        undefined,
+        undefined,
+        MARK_COLUMN_WIDTH,
       )
+      row.add(markCell)
+      const markLabel = markCell.findDescendantById(`mark-${skill.key}-label`)
+      if (markLabel) this.markCellByKey.set(skill.key, markLabel as TextRenderable)
       row.add(
         this.tableCell(
           `name-${skill.key}`,
@@ -617,7 +663,7 @@ export class SkillToggleApp {
       this.rows.push(row)
       this.rowByKey.set(skill.key, row)
     }
-    this.list.scrollTo(0)
+    this.list.scrollTo(preserveScroll ? previousScrollTop : 0)
   }
 
   private productCell(skill: SkillRecord, product: Exclude<Product, "both">, width: number): BoxRenderable {
@@ -735,9 +781,15 @@ export class SkillToggleApp {
     }
     if (this.markedKeys.has(skill.key)) this.markedKeys.delete(skill.key)
     else this.markedKeys.add(skill.key)
-    this.rebuildRows()
+    // Update the mark cell in place: rebuilding the rows here would reset
+    // the scroll position and make the viewport jump on every keystroke.
+    const markLabel = this.markCellByKey.get(skill.key)
+    if (markLabel) {
+      const marked = this.markedKeys.has(skill.key)
+      markLabel.content = marked ? "[x]" : "[ ]"
+      markLabel.fg = marked ? COLORS.accent : COLORS.muted
+    }
     this.updateSummary()
-    this.list.scrollChildIntoView(`skill-${skill.key}`)
   }
 
   private toggleTargets(): SkillRecord[] {
@@ -787,7 +839,8 @@ export class SkillToggleApp {
     this.catalogData = await this.backend.catalog()
     this.categories = ["all", ...this.catalogData.categories]
     if (!this.categories.includes(this.categoryFilter)) this.categoryFilter = "all"
-    this.applyFilters()
+    // Toggling a skill refreshes the catalog; keep the viewport where it was.
+    this.applyFilters(true)
   }
 
   private async saveSnapshot(): Promise<void> {

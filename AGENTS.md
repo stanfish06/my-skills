@@ -1,6 +1,6 @@
 # AGENTS.md — operating guide for agents
 
-You have access to a curated library of **1240 agent skills** at `~/.agents/skills/`
+You have access to a curated library of **1,800+ agent skills** at `~/.agents/skills/`
 (the `skills/` subtree of this repo, which is rooted at `~/.agents`). A *skill* is a folder with a `SKILL.md` holding battle-tested instructions for
 a specific tool, library, or workflow. **Using a relevant skill is faster and more reliable
 than improvising.** This file tells you how to find and use them.
@@ -60,8 +60,8 @@ Try these in order; stop when you have a match.
    The `*.md` files under `vault/notes/<domain>/` are one-line "wrapper" notes (description + domain +
    aliases) — the fast index. Read the underlying `<name>/SKILL.md` once you've picked one.
 
-3. **Browse by domain.** [`vault/index.md`](vault/index.md) groups all skills into 25
-   domains; [`vault/maps/`](vault/maps) has one note per domain and
+3. **Browse by domain.** [`vault/index.md`](vault/index.md) groups all skills into
+   30-odd domains; [`vault/maps/`](vault/maps) has one note per domain and
    [`vault/notes/<domain>/`](vault/notes) holds the wrapper notes themselves;
    [`vault/skills.base`](vault/skills.base) is a filterable table. Coding work lives
    mostly in [`vault/maps/software-dev.md`](vault/maps/software-dev.md),
@@ -168,9 +168,9 @@ Know these by name so you reach for them automatically.
 - Skills are managed by the Vercel `skills` CLI; folders live in `skills/` and are never
   hand-edited by the navigation layer.
 - Run [`install-skills.sh`](install-skills.sh) to symlink every skill here into each agent's
-  skills folder so their native loaders pick them up. gstack and career-ops are optional
-  extras: pass `--extras gstack`, `--extras career`, or `--extras all` to install them
-  (skipped by default).
+  skills folder so their native loaders pick them up. gstack, career-ops, and UI/UX Pro Max
+  are optional extras: pass `--extras gstack`, `--extras career`, `--extras ui-ux`, or
+  `--extras all` to install them (skipped by default).
 - After adding/removing a skill, regenerate wrappers/maps/index:
   `python3 .skill-vault/build.py` (see [`README.md`](README.md)).
 - To refresh the optional local graphify graph for vault queries, run

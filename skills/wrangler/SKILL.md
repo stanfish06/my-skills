@@ -34,7 +34,7 @@ npm install -D wrangler@latest
 - **Set `compatibility_date`**: Use a recent date (within 30 days). Check https://developers.cloudflare.com/workers/configuration/compatibility-dates/
 - **Generate types after config changes**: Run `wrangler types` to update TypeScript bindings.
 - **Local dev defaults to local storage**: Bindings use local simulation unless `remote: true`.
-- **Validate config before deploy**: Run `wrangler check` to catch errors early.
+- **Validate config before deploy**: Run `wrangler deploy --dry-run` to catch errors early without uploading.
 - **Use environments for staging/prod**: Define `env.staging` and `env.production` in config.
 
 ## Quick Start: New Worker
@@ -55,7 +55,7 @@ npx create-cloudflare@latest my-app
 | Deploy to Cloudflare | `wrangler deploy` |
 | Deploy dry run | `wrangler deploy --dry-run` |
 | Generate TypeScript types | `wrangler types` |
-| Validate configuration | `wrangler check` |
+| Validate configuration | `wrangler deploy --dry-run` |
 | View live logs | `wrangler tail` |
 | Delete Worker | `wrangler delete` |
 | Auth status | `wrangler whoami` |
@@ -865,7 +865,7 @@ curl http://localhost:8787/__scheduled
 |-------|----------|
 | `command not found: wrangler` | Install: `npm install -D wrangler` |
 | Auth errors | Run `wrangler login` |
-| Config validation errors | Run `wrangler check` |
+| Config validation errors | Run `wrangler deploy --dry-run` |
 | Type errors after config change | Run `wrangler types` |
 | Local storage not persisting | Check `.wrangler/state` directory |
 | Binding undefined in Worker | Verify binding name matches config exactly |
@@ -876,8 +876,8 @@ curl http://localhost:8787/__scheduled
 # Check auth status
 wrangler whoami
 
-# Validate config
-wrangler check
+# Validate config without uploading
+wrangler deploy --dry-run
 
 # View config schema
 wrangler docs configuration

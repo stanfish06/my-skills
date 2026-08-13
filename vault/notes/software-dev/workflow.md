@@ -49,6 +49,7 @@ created: 2026-08-07
 - [investigation-mode](../../notes/software-dev/investigation-mode.md) — Orchestrated debugging coordinator. Triggers on frustration signals (stuck, hung, broken, waiting) and systematically triages: runtime logs → workflow status → browser verify →...
 - [jest](../../notes/software-dev/jest.md) — JavaScript testing with Jest — unit tests, mocks, spies, snapshot testing, code coverage, and configuration
 - [lamindb](../../notes/bio-databases-platforms/lamindb.md) — Use when working with LaminDB, the open-source lineage-native lakehouse for biological datasets and models
+- [langgraph](../../notes/uncategorized/langgraph.md) — LangGraph is a low-level orchestration framework for building stateful LLM agents and workflows as explicit graphs — typed state with reducers, nodes/edges/conditional routing...
 - [latchbio-integration](../../notes/bio-databases-platforms/latchbio-integration.md) — Latch platform for bioinformatics workflows
 - [matlab-install-products](../../notes/matlab-development/matlab-install-products.md) — Deterministic workflow to download MATLAB Package Manager (mpm) and install MathWorks products from the OS command line with consistent, repeatable behavior
 - [matlab-optimize-memory](../../notes/matlab-development/matlab-optimize-memory.md) — Guides the 7-step MATLAB memory optimization workflow: baseline, profile, identify, optimize, measure, verify, report
@@ -69,6 +70,7 @@ created: 2026-08-07
 - [rowan](../../notes/drug-discovery-chem/rowan.md) — Rowan is a cloud-native molecular modeling and medicinal-chemistry workflow platform with a Python API
 - [scikit-survival](../../notes/data-science-compute/scikit-survival.md) — Comprehensive toolkit for survival analysis and time-to-event modeling in Python using scikit-survival
 - [secure-workflow-guide](../../notes/security-auditing/secure-workflow-guide.md) — Guides through Trail of Bits' 5-step secure development workflow
+- [semgrep](../../notes/security-auditing/semgrep.md) — Runs a Semgrep security scan over a codebase: detects languages, selects rulesets, presents the plan for explicit approval, then runs every approved ruleset through...
 - [slack](../../notes/web-automation-frontend/slack.md) — Read Slack context, route to the right Slack workflow, and prepare or perform Slack writes that match the user's intent
 - [snakemake-workflow-engine](../../notes/cloud-devops/snakemake-workflow-engine.md) — Python-based workflow manager for reproducible, scalable pipelines
 - [twilio-debugging-observability](../../notes/saas-platforms/twilio-debugging-observability.md) — Debug Twilio integrations and set up production observability

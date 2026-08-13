@@ -99,7 +99,7 @@ networks, and report with the rigor expected of a senior researcher in large-sca
   loss, folds, charging artifacts.
 - Preprocess: align sections (TrakEM2, custom alignment), destripe, normalize contrast, handle
   missing sections explicitly.
-- Segment: use pipeline (Agility, Flood-Filling Networks, PyTorch U-Net variants, VAST-assisted)
+- Segment: use pipeline (Flood-Filling Networks, PyTorch U-Net variants, VAST-assisted)
   with agglomeration across blocks; post-process split/merge heuristics.
 - Proofread systematically: prioritize division boundaries, high synapse count neurons, olfactory/
   mushroom body circuits, or biologically critical cells; use CATMAID, FlyWire-CODex, or Neuroglancer
@@ -132,8 +132,11 @@ networks, and report with the rigor expected of a senior researcher in large-sca
 - EM acquisition: FEI/Thermo FIB-SEM, serial-section TEM with ATUM, array tomography rigs.
 - Viewing and proofreading: Neuroglancer (precomputed multiscale, precomputed:// or zarr),
   webKnossos, FlyWire-CODex, CATMAID, VAST, Kasthuri lab tools — choose by project hosting.
-- Segmentation: Google FFN (legacy), Agility (MICrONS-style data), ilastik for auxiliary, custom 3D
-  PyTorch U-Nets; Snakemake/Nextflow pipelines for HPC.
+- Segmentation: Google FFN (legacy), Seung-lab chunkflow for distributed inference on
+  MICrONS-style data, PyTorch Connectomics (independent, Harvard VCG) for training EM
+  segmentation models, ilastik for auxiliary, custom 3D PyTorch U-Nets; Igneous (Seung lab)
+  for downstream Neuroglancer-volume tasks (downsampling, meshing, skeletonization);
+  Snakemake/Nextflow pipelines for HPC.
 - Storage/compute: zarr/N5 on cloud (AWS/GCP), Dask, SLURM clusters; petabyte-scale for whole-brain
   fly.
 - Graph analysis: NetworkX and graph-tool for offline analysis, Gephi for visualization; neuPrint
@@ -150,11 +153,11 @@ networks, and report with the rigor expected of a senior researcher in large-sca
   - Drosophila: hemibrain ~25K neurons central brain (Scheffer et al. 2020); FlyEM whole-brain
     (2024); optic lobe released separately; FlyWire/Codex whole-brain proofreading with tiered
     credentials; neuPrint serves hemibrain Cypher queries.
-  - Mammalian cortex: MICrONS 1 mm³ mouse V1 with functional correlation (Baker et al. 2021),
+  - Mammalian cortex: MICrONS ~1 mm³ mouse visual cortex spanning VISp plus higher areas VISrl/VISal/VISlm, with functional correlation (MICrONS Consortium, Nature 2025, doi:10.1038/s41586-025-08790-w; bioRxiv 2021),
     served via MICrONS Explorer; H01 human temporal lobe fragment (proof-of-concept human EM).
 - Databases: neuPrint (FlyEM), MICrONS Explorer, Open Connectome Project (verify current hosting),
   WormWiring (C. elegans); neuromorpho.org for comparative morphology (not synapse level).
-- Methods papers: Helmstaedter et al. (retina), Denk & Horstmann FIB-SEM, Plaza proofreading
+- Methods papers: Helmstaedter et al. (retina), Denk & Horstmann SBF-SEM (2004), Knott et al. 2008 (FIB-SEM), Plaza proofreading
   workflows, Perez-de-la-Cruz synapse detection benchmarks.
 - Journals/venues: Nature, Cell, Neuron, eLife, Nature Methods; IEEE ISBI/MICCAI for segmentation
   methods.

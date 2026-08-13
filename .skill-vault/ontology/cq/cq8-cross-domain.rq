@@ -1,0 +1,10 @@
+# CQ8: which domains are most cross-linked? Aggregation over the graph that the
+# imperative validator had no way to express.
+PREFIX vs: <https://skillquarium.dev/ontology/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?domain (COUNT(*) AS ?crossings) WHERE {
+  ?a vs:references ?b .
+  ?a vs:in_domain ?domain .
+  ?b vs:in_domain ?other .
+  FILTER(?domain != ?other)
+} GROUP BY ?domain ORDER BY DESC(?crossings)

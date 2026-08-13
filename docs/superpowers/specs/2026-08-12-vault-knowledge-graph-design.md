@@ -374,3 +374,48 @@ be built.
 - [Tool-to-Agent Retrieval: Bridging Tools and Agents for Scalable LLM Multi-Agent Systems](https://arxiv.org/abs/2511.01854)
 - [A Survey of Graph Retrieval-Augmented Generation for Customized Large Language Models](https://arxiv.org/pdf/2501.13958)
 - [Awesome-GraphRAG](https://github.com/DEEP-PolyU/Awesome-GraphRAG)
+
+---
+
+## Addendum (2026-08-12): the RDF layer, and a correction
+
+Section 3 rejected "OWL 2 DL with Protégé and HermiT" and then treated that as
+settling RDF altogether. Those are two different questions and bundling them was
+wrong. `rdflib` and `pyshacl` are pure-Python pip installs, not a Java stack, and
+hand-writing a SHACL-*shaped* validator in Python bought nothing that the real
+thing does not do better.
+
+Measured on the real graph before deciding:
+
+| | |
+|---|---|
+| RDF export | 29,952 triples, **2.5 MB** TriG — smaller than the 5.2 MB JSON |
+| export time | 0.7 s |
+| pySHACL validation | **8.0 s**, conforms |
+| SPARQL competency questions | 1–270 ms |
+| injected violations caught | 5/5 classes (missing domain, cycle, asymmetry, leaked PROPOSED, out-of-range rate) |
+
+**What changed.** Added `to_rdf.py`, `ontology/shapes.ttl`, `ontology/cq/*.rq`,
+and a `--shacl` mode on `validate.py`. Provenance now uses PROV-O with edges
+partitioned into named graphs per level, so excluding `PROPOSED` is structural
+rather than a convention every caller must honour. Domains are `skos:Concept`.
+
+**What did not change.** The JSON graph remains the runtime store and `query.py`
+remains dependency-free — that is the property the vault prizes and the one
+agents rely on. The RDF layer is additive and degrades to `NOT_YET`.
+
+**Two bugs the RDF layer surfaced that the Python validator hid.**
+
+1. `ExpertProfile` was not a subclass of `Skill`, so every shape and query
+   targeting `Skill` silently skipped 504 of 1818 nodes. Instances are now typed
+   as both.
+2. "Orphan" meant two different things in two places — the metric excluded
+   `touches` while the prose implied otherwise. The SPARQL and Python paths now
+   cross-validate at 133, with a test asserting they agree.
+
+Writing constraints declaratively is what made both visible. That is the
+argument for this layer, more than interop is.
+
+**Still rejected:** OWL 2 DL, Protégé, HermiT, tableaux reasoning. The required
+expressivity is unchanged — RL-shaped forward chaining plus constraint checking —
+and pySHACL covers it without a Java toolchain.

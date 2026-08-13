@@ -1,0 +1,4 @@
+# Optional RDF layer. The JSON graph and query.py work without any of this —
+# install only to export RDF, run real SHACL validation, or query with SPARQL.
+rdflib>=7.0
+pyshacl>=0.26

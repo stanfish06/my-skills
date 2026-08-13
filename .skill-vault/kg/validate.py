@@ -211,12 +211,52 @@ def check_cqs(graph, nodes, out, inn, rep):
             f"needs observation ingestion (Phase 3)")
 
 
+def check_shacl(rep):
+    """Real SHACL validation via pySHACL, when the optional RDF layer is present.
+
+    The stdlib checks above stay the always-on floor so validation never depends
+    on a package being installed. This adds what they cannot express: cycle
+    detection by property path, closed-vocabulary checks that catch an invented
+    predicate, and shapes that live as reviewable data rather than as code.
+    """
+    try:
+        from pyshacl import validate as shacl_validate   # noqa: PLC0415
+        from rdflib import Graph as RDFGraph             # noqa: PLC0415
+    except ImportError:
+        rep.add("SHACL", "pyshacl", "NOT_YET",
+                "optional RDF layer not installed — "
+                "uv pip install -r .skill-vault/kg/requirements-rdf.txt")
+        return
+
+    ttl = ROOT / "vault" / "graph" / "retrievable.ttl"
+    shapes = ROOT / ".skill-vault" / "ontology" / "shapes.ttl"
+    if not ttl.is_file():
+        rep.add("SHACL", "rdf export", "NOT_YET",
+                "no retrievable.ttl — run to_rdf.py first")
+        return
+
+    data_g = RDFGraph().parse(str(ttl), format="turtle")
+    shapes_g = RDFGraph().parse(str(shapes), format="turtle")
+    conforms, _, text = shacl_validate(
+        data_g, shacl_graph=shapes_g, advanced=True, inference="none")
+    n = text.count("Constraint Violation")
+    rep.add("SHACL", "shapes.ttl", "PASS" if conforms else "FAIL",
+            f"{len(data_g)} triples against {shapes.name}: "
+            + ("conforms" if conforms else f"{n} violation(s)"))
+    if not conforms:
+        for line in text.splitlines():
+            if "Message:" in line:
+                rep.add("SHACL", "violation", "FAIL", line.strip()[:100])
+
+
 def main():
     graph, schema = load()
     nodes, out, inn = index(graph)
     rep = Report()
     check_shapes(graph, schema, nodes, out, rep)
     check_cqs(graph, nodes, out, inn, rep)
+    if "--shacl" in sys.argv:
+        check_shacl(rep)
 
     if "--json" in sys.argv:
         print(json.dumps(rep.rows, indent=1))

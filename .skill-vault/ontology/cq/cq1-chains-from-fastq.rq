@@ -1,0 +1,8 @@
+# CQ1: starting from any skill that touches FASTQ, what can it chain into?
+# The + property path does arbitrary-depth transitive traversal; the imperative
+# version was a hand-written bounded BFS with an explicit frontier.
+PREFIX vs: <https://skillquarium.dev/ontology/>
+SELECT DISTINCT ?from ?to WHERE {
+  ?from vs:touches <https://skillquarium.dev/id/artifact_fastq> .
+  ?from vs:chains_to+ ?to .
+}

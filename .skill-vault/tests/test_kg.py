@@ -168,5 +168,75 @@ class TestCommittedGraph(unittest.TestCase):
                 self.assertIn(step, ids, f"{r['id']} references missing skill {step}")
 
 
+class TestRDFLayer(unittest.TestCase):
+    """The optional RDF/SHACL layer. Skipped entirely when rdflib is absent, so
+    the zero-dependency path stays the one that must always work."""
+
+    @classmethod
+    def setUpClass(cls):
+        try:
+            import rdflib  # noqa: F401
+            import pyshacl  # noqa: F401
+        except ImportError:
+            raise unittest.SkipTest("optional RDF layer not installed")
+        cls.ttl = REPO / "vault/graph/retrievable.ttl"
+        if not cls.ttl.is_file():
+            raise unittest.SkipTest("retrievable.ttl not exported")
+        from rdflib import Graph
+        cls.g = Graph().parse(str(cls.ttl), format="turtle")
+
+    def test_expert_profiles_are_also_skills(self):
+        """504 of 1818 skills are expert profiles. If they are not typed as
+        vs:Skill, every shape and query targeting Skill silently skips them."""
+        rows = list(self.g.query(
+            "PREFIX vs: <https://skillquarium.dev/ontology/> "
+            "SELECT (COUNT(DISTINCT ?s) AS ?n) WHERE { ?s a vs:ExpertProfile . ?s a vs:Skill }"))
+        self.assertGreater(int(rows[0][0]), 400, "expert profiles are not typed as Skill")
+
+    def test_no_proposed_edges_in_retrievable_graph(self):
+        """PROPOSED is excluded by construction, not by a filter callers must remember."""
+        rows = list(self.g.query(
+            'PREFIX prov: <http://www.w3.org/ns/prov#> '
+            'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> '
+            'SELECT ?s WHERE { ?s prov:wasGeneratedBy ?a . ?a rdfs:label "PROPOSED" }'))
+        self.assertEqual(len(rows), 0, "unreviewed edge reachable in the retrievable graph")
+
+    def test_sparql_orphan_count_matches_json_metrics(self):
+        """Cross-validation: two independent implementations of the same metric."""
+        cq = (REPO / ".skill-vault/ontology/cq/cq6-gaps.rq").read_text(encoding="utf-8")
+        rows = [r for r in self.g.query(cq) if str(r[0]) == "orphan-skill"]
+        metrics = json.loads((REPO / "vault/graph/graph.json").read_text(encoding="utf-8"))["metrics"]
+        self.assertEqual(len(rows), metrics["orphan_count"],
+                         "SPARQL and Python disagree on the orphan definition")
+
+    def test_shacl_shapes_conform(self):
+        from pyshacl import validate
+        from rdflib import Graph
+        shapes = Graph().parse(str(REPO / ".skill-vault/ontology/shapes.ttl"), format="turtle")
+        conforms, _, text = validate(self.g, shacl_graph=shapes, advanced=True, inference="none")
+        self.assertTrue(conforms, f"SHACL violations:\n{text[:2000]}")
+
+    def test_shacl_detects_an_injected_cycle(self):
+        """A validator that only ever passes is worthless — prove it can fail."""
+        from pyshacl import validate
+        from rdflib import Graph, Namespace, Literal, URIRef
+        from rdflib.namespace import RDF, RDFS
+        VS = Namespace("https://skillquarium.dev/ontology/")
+        VID = Namespace("https://skillquarium.dev/id/")
+        g = Graph()
+        for t in self.g:
+            g.add(t)
+        dom = URIRef("https://skillquarium.dev/id/domain_software-dev")
+        for a, b in (("cyc_a", "cyc_b"), ("cyc_b", "cyc_a")):
+            g.add((VID[a], RDF.type, VS.Skill))
+            g.add((VID[a], RDFS.label, Literal(a)))
+            g.add((VID[a], VS.in_domain, dom))
+            g.add((VID[a], VS.chains_to, VID[b]))
+        shapes = Graph().parse(str(REPO / ".skill-vault/ontology/shapes.ttl"), format="turtle")
+        conforms, _, text = validate(g, shacl_graph=shapes, advanced=True, inference="none")
+        self.assertFalse(conforms, "SHACL failed to detect a chains_to cycle")
+        self.assertIn("cycle", text.lower())
+
+
 if __name__ == "__main__":
     unittest.main()

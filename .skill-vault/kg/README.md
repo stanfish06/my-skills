@@ -53,3 +53,53 @@ reports these as `NOT_YET`, not `FAIL`, so the roadmap stays visible instead of 
 behind a red build. Direction (`consumes`/`produces`) comes only from human-authored
 recipe order today; regex direction extraction was measured at 4% coverage with
 substantially wrong hits, and was rejected.
+
+## Optional RDF / SHACL layer
+
+The JSON graph stays the runtime store — `query.py` reads it with zero
+dependencies, and that property is deliberate. On top of it:
+
+```bash
+uv pip install -r .skill-vault/kg/requirements-rdf.txt
+python3 .skill-vault/kg/to_rdf.py            # -> vault/graph/graph.trig (+ retrievable.ttl)
+python3 .skill-vault/kg/validate.py --shacl  # real pySHACL against ontology/shapes.ttl
+```
+
+Measured on the real graph: **29,952 triples, 2.5 MB TriG** (smaller than the
+5.2 MB JSON), 0.7 s to export, **8 s** to validate with pySHACL. Without the
+packages installed, `--shacl` reports `NOT_YET` and everything else still runs.
+
+### What RDF buys that the stdlib validator cannot do
+
+| | stdlib validator | SHACL |
+|---|---|---|
+| `chains_to` cycles | hand-rolled DFS with a colour map | `?x vs:chains_to+ ?x` |
+| `alternative_to` symmetry | manual pair bookkeeping | `FILTER NOT EXISTS` |
+| typo'd / invented predicate | **cannot detect** — only checks fields it knows | `sh:closed` |
+| shapes | imperative Python | reviewable data in `shapes.ttl` |
+| provenance | a string field | PROV-O activities + named graphs |
+
+The provenance modelling is the substantive win. Edges are partitioned into
+named graphs by level, so "PROPOSED must never be retrievable" becomes a
+property of the data — you exclude a graph — instead of a filter every caller
+has to remember. In the JSON path that rule was only ever a convention.
+
+### Competency questions as SPARQL
+
+`.skill-vault/ontology/cq/*.rq` — declarative, portable, reviewable, and they
+run in 1–270 ms. Writing CQ6 this way is what exposed that "orphan" meant two
+different things in two places; the SPARQL and Python implementations now
+cross-validate at the same number, and a test asserts they agree.
+
+### Interop
+
+`vault/graph/graph.trig` is committed, so it loads into GraphDB, Protégé,
+Stardog, or Neo4j n10s without installing the exporter. `retrievable.ttl` is
+gitignored — it is a validation intermediate regenerated in about a second.
+
+### Still not doing OWL 2 DL
+
+No Protégé, HermiT, or tableaux reasoning. The needed expressivity remains
+RL-shaped forward chaining plus constraint checking, and pySHACL covers it in
+pure Python. That part of the original call stands; ruling out **rdflib** along
+with it did not.

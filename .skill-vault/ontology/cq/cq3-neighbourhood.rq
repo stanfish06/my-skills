@@ -1,0 +1,7 @@
+# CQ3: what should I know before using a given skill?
+PREFIX vs: <https://skillquarium.dev/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?related ?label WHERE {
+  <https://skillquarium.dev/id/scvi-tools> vs:references|vs:co_occurs_with ?related .
+  ?related rdfs:label ?label .
+}

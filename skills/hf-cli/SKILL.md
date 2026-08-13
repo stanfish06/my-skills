@@ -15,7 +15,7 @@ Use `hf --help` to view available functions. Note that auth commands are now all
 - `hf env` — Print information about the environment.
 - `hf sync` — Sync files between local directory and a bucket. `[--delete --ignore-times --ignore-sizes --plan TEXT --apply TEXT --dry-run --include TEXT --exclude TEXT --filter-from TEXT --existing --ignore-existing --verbose --quiet]`
 - `hf upload REPO_ID` — Upload a file or a folder to the Hub. Recommended for single-commit uploads. `[--type CHOICE --revision TEXT --private --include TEXT --exclude TEXT --delete TEXT --commit-message TEXT --commit-description TEXT --create-pr --every FLOAT --quiet]`
-- `hf upload-large-folder REPO_ID LOCAL_PATH` — Upload a large folder to the Hub. Recommended for resumable uploads. `[--type CHOICE --revision TEXT --private --include TEXT --exclude TEXT --num-workers INTEGER --no-report --no-bars]`
+- `hf upload-large-folder REPO_ID LOCAL_PATH` — [Deprecated] Upload a large folder to the Hub. Use `hf upload` instead. `[--type CHOICE --revision TEXT --private --include TEXT --exclude TEXT --num-workers INTEGER --no-report --no-bars]`
 - `hf version` — Print information about the hf version.
 
 ### `hf auth` — Manage authentication (login, logout, etc.).

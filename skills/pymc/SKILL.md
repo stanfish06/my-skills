@@ -2,7 +2,7 @@
 name: pymc
 description: Bayesian modeling with PyMC. Build hierarchical models, MCMC (NUTS), variational inference, LOO/WAIC comparison, posterior checks, for probabilistic programming and inference.
 allowed-tools: Read Write Edit Bash
-compatibility: Requires Python 3.12+ and PyMC 6.1.0-compatible dependencies. Install reproducible environments with `uv pip install "pymc[nutpie]==6.1.0"`; optional NumPyro or BlackJAX samplers require separately pinned JAX-compatible dependencies.
+compatibility: Requires Python 3.12+ and PyMC 6.3.0-compatible dependencies. Install reproducible environments with `uv pip install "pymc[nutpie]==6.3.0"`; optional NumPyro or BlackJAX samplers require separately pinned JAX-compatible dependencies.
 license: Apache License, Version 2.0
 metadata: {"version": "1.2", "skill-author": "K-Dense Inc."}
 ---
@@ -15,10 +15,10 @@ PyMC is a Python library for Bayesian modeling and probabilistic programming. Bu
 
 ## Current Version and Setup
 
-PyMC 6.1.0 is the current stable release (released July 2024). It requires Python 3.12+, uses PyTensor 3 as the computational graph backend (with PyTensor 3.1 compatibility), and defaults to compiled backends such as Numba. For reproducible local environments, pin the version:
+PyMC 6.3.0 is the current stable release (released August 2026). It requires Python 3.12+, uses PyTensor 3 as the computational graph backend (with PyTensor 3.1 compatibility), and defaults to compiled backends such as Numba. For reproducible local environments, pin the version:
 
 ```bash
-uv pip install "pymc[nutpie]==6.1.0"
+uv pip install "pymc[nutpie]==6.3.0"
 ```
 
 The `nutpie` extra enables the faster Rust/Numba NUTS implementation. If using NumPyro or BlackJAX, install those optional sampler dependencies in the same environment and pin them in the project lockfile.
@@ -585,4 +585,3 @@ with model:
 - Save results with `idata.to_netcdf('results.nc')`
 - Load with `az.from_netcdf('results.nc')`
 - For very large models, consider minibatch ADVI or data subsampling
-

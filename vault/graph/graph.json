@@ -2,32 +2,32 @@
  "schema_version": 1,
  "metrics": {
   "built": "2026-08-12",
-  "skills": 1818,
+  "skills": 1823,
   "expert_profiles": 504,
-  "nodes": 1891,
-  "edges": 13007,
+  "nodes": 1897,
+  "edges": 13074,
   "generic_names_blocked": 33,
-  "tier1_edges": 3526,
+  "tier1_edges": 3555,
   "tier2_edges": 678,
-  "alias_edges": 3367,
+  "alias_edges": 3377,
   "discipline_edges": 599,
   "ambiguous_aliases": 29,
   "artifact_edges": 513,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.42,
+  "mean_skill_degree": 5.44,
   "median_skill_degree": 3,
-  "orphan_count": 133,
-  "orphan_rate": 0.0732,
+  "orphan_count": 132,
+  "orphan_rate": 0.0724,
   "by_provenance": {
-   "EXTRACTED": 11967,
+   "EXTRACTED": 12034,
    "ASSERTED": 998,
    "INFERRED": 42
   },
   "by_relation": {
-   "in_domain": 1818,
-   "references": 9636,
+   "in_domain": 1823,
+   "references": 9698,
    "in_discipline": 599,
    "touches": 513,
    "has_step": 69,
@@ -5673,6 +5673,11 @@
    "label": "software-dev"
   },
   {
+   "id": "domain:uncategorized",
+   "type": "Domain",
+   "label": "uncategorized"
+  },
+  {
    "id": "domain:vault-meta",
    "type": "Domain",
    "label": "vault-meta"
@@ -8467,6 +8472,18 @@
    "deprecated": false
   },
   {
+   "id": "gradio",
+   "type": "Skill",
+   "label": "gradio",
+   "description": "Building ML demos and web UIs in Python with Gradio 6 \u2014 gr.Interface for wrapping a function, gr.Blocks for custom layouts with event listeners, gr.ChatInterface for LLM chat, streaming generator outputs, gr.State, image/audio components, queueing and concurrency, launch()/share links, and mounting into FastAPI with gr.mount_gradio_app. Use when demoing a model (image, audio, text, LLM), building a quick UI around a Python function, sharing a prototype via a public link, or hosting on Hugging Face Spaces.",
+   "source": "skills/gradio/SKILL.md",
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "grammar-of-graphics-and-declarative-visualization",
    "type": "Skill",
    "label": "grammar-of-graphics-and-declarative-visualization",
@@ -10075,6 +10092,18 @@
    "deprecated": false
   },
   {
+   "id": "langgraph",
+   "type": "Skill",
+   "label": "langgraph",
+   "description": "LangGraph is a low-level orchestration framework for building stateful LLM agents and workflows as explicit graphs \u2014 typed state with reducers, nodes/edges/conditional routing, checkpointer-backed persistence and thread memory, human-in-the-loop interrupts, and streaming. Use when building an agent or multi-step LLM workflow that needs explicit control flow (branching, loops, parallel fan-out), durable/resumable execution, approval gates, or multi-agent handoffs \u2014 or when debugging StateGraph, checkpointer, interrupt, or create_react_agent-deprecation issues. Targets LangGraph 1.x.",
+   "source": "skills/langgraph/SKILL.md",
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "laser-physicist",
    "type": "ExpertProfile",
    "label": "laser-physicist",
@@ -10428,6 +10457,18 @@
    "label": "manufacturing-engineer",
    "description": "> Expert-thinking profile for Manufacturing Engineer (process planning / CNC-CAM / GD&T / quality launch (APQP/PPAP, MSA/SPC) / multi-process (machining, welding, casting)): Reasons from process physics, capability, and cost through Shercliff-Lovatt process selection, ASME Y14.5 GD&T, CAM simulation, and AIAG APQP/PPAP with MSA-gated SPC capability, treating high %GRR masquerading as variation, false Cpk on unstable or short runs, datum-scheme mismatch, and uncontrolled ECN tweaks as...",
    "source": "skills/manufacturing-engineer/SKILL.md",
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "marimo",
+   "type": "Skill",
+   "label": "marimo",
+   "description": "Reactive Python notebooks stored as pure .py files \u2014 cells form a dependency DAG, so changing one cell automatically reruns its dependents (or marks them stale under the lazy runtime) and hidden state cannot exist. Covers the notebook file format, marimo edit/run/export CLI, mo.ui interactive elements, SQL cells, running notebooks as apps or scripts, and sandboxed notebooks with PEP 723 inline dependencies. Use when creating or editing marimo notebooks, building interactive data apps or dashboards in pure Python, converting Jupyter notebooks, or when reproducibility/git-friendliness rules out .ipynb.",
+   "source": "skills/marimo/SKILL.md",
    "uses": 0,
    "successes": 0,
    "success_rate": null,
@@ -18544,6 +18585,18 @@
    "deprecated": false
   },
   {
+   "id": "sqlalchemy",
+   "type": "Skill",
+   "label": "sqlalchemy",
+   "description": "The standard Python SQL toolkit and ORM \u2014 2.x style only. Covers declarative models with DeclarativeBase/Mapped/mapped_column, engine and session lifecycle, CRUD with select() and Session.scalars(), relationships and eager loading (selectinload vs joinedload), transactions, async engines, and Alembic migrations. Use when defining database models in Python, querying relational databases (PostgreSQL, SQLite, MySQL) from application code, wiring a database into FastAPI, fixing N+1 or DetachedInstanceError problems, or migrating legacy Query-API code to 2.x.",
+   "source": "skills/sqlalchemy/SKILL.md",
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "stable-baselines3",
    "type": "Skill",
    "label": "stable-baselines3",
@@ -18669,6 +18722,18 @@
    "label": "stratigrapher",
    "description": "> Expert-thinking profile for Stratigrapher (outcrop + subsurface / sequence stratigraphy / well & seismic correlation / biostratigraphy / basin analysis (ICS, NACS)): Reasons from the material-strata-versus-conceptual-time distinction, accommodation-and-supply systems tracts, and confidence-tiered correlation through ICS/NACS codes, sequence surfaces (SB, MFS, TS), wireline and seismic well ties, and biostratigraphic FAD/LAD plus U-Pb and chemostratigraphic tie points, while...",
    "source": "skills/stratigrapher/SKILL.md",
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "streamlit",
+   "type": "Skill",
+   "label": "streamlit",
+   "description": "Building data apps and dashboards in Python with Streamlit \u2014 the top-to-bottom rerun model, st.session_state, caching with st.cache_data/st.cache_resource, forms and st.fragment to limit reruns, multipage apps via st.Page/st.navigation, chat UIs (st.chat_message/st.chat_input), dataframe/plot display, and deployment with streamlit run. Use when building an interactive dashboard, internal data tool, model demo, or chat frontend in pure Python, or when debugging unexpected reruns, lost widget state, or slow Streamlit apps.",
+   "source": "skills/streamlit/SKILL.md",
    "uses": 0,
    "successes": 0,
    "success_rate": null,
@@ -21823,7 +21888,7 @@
    "id": "writing-skills",
    "type": "Skill",
    "label": "writing-skills",
-   "description": "Use when creating new skills, editing existing skills, or verifying skills work before deployment",
+   "description": "Provides a test-driven method for creating and validating agent skills. Use when creating new skills, editing existing skills, or verifying skills before deployment.",
    "source": "skills/writing-skills/SKILL.md",
    "uses": 0,
    "successes": 0,
@@ -36977,6 +37042,17 @@
   {
    "src": "building-pydantic-ai-agents",
    "rel": "references",
+   "dst": "langgraph",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "building-pydantic-ai-agents named in langgraph/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "building-pydantic-ai-agents",
+   "rel": "references",
    "dst": "pydantic-ai-harness",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -40959,6 +41035,17 @@
   {
    "src": "chunk",
    "rel": "references",
+   "dst": "langgraph",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "chunk named in langgraph/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "chunk",
+   "rel": "references",
    "dst": "llamaindex-development",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -43306,6 +43393,17 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "curated alias of cloudflare appears in geotechnical-scientist/SKILL.md",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "cloudflare",
+   "rel": "references",
+   "dst": "gradio",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of cloudflare appears in gradio/SKILL.md",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -48989,6 +49087,17 @@
   {
    "src": "crewai",
    "rel": "references",
+   "dst": "langgraph",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "langgraph named in crewai/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "crewai",
+   "rel": "references",
    "dst": "literature-review",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -52227,6 +52336,17 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "deepnote-links named in deepnote-notebook-editing/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "deepnote-links",
+   "rel": "references",
+   "dst": "streamlit",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "streamlit named in deepnote-links/SKILL.md body",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -55996,6 +56116,17 @@
   {
    "src": "dspy",
    "rel": "references",
+   "dst": "langgraph",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "dspy named in langgraph/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "dspy",
+   "rel": "references",
    "dst": "logfire-instrumentation",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -56044,6 +56175,17 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "install-duckdb named in duckdb-docs/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "duckdb-docs",
+   "rel": "references",
+   "dst": "marimo",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "duckdb-docs named in marimo/SKILL.md body",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -60726,6 +60868,17 @@
   {
    "src": "fastapi",
    "rel": "references",
+   "dst": "gradio",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "fastapi named in gradio/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "fastapi",
+   "rel": "references",
    "dst": "logfire-instrumentation",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -60785,6 +60938,28 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "query referenced in code/link context in fastapi/SKILL.md",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "fastapi",
+   "rel": "references",
+   "dst": "sqlalchemy",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "fastapi named in sqlalchemy/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "fastapi",
+   "rel": "references",
+   "dst": "streamlit",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "fastapi named in streamlit/SKILL.md body",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -69920,6 +70095,105 @@
    "last_seen": "2026-08-12"
   },
   {
+   "src": "gradio",
+   "rel": "in_domain",
+   "dst": "domain:uncategorized",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "gradio",
+   "rel": "references",
+   "dst": "cloudflare",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of cloudflare appears in gradio/SKILL.md",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "gradio",
+   "rel": "references",
+   "dst": "fastapi",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "fastapi named in gradio/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "gradio",
+   "rel": "references",
+   "dst": "hf-cli",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "hf-cli named in gradio/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "gradio",
+   "rel": "references",
+   "dst": "hugging-science",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "gradio named in hugging-science/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "gradio",
+   "rel": "references",
+   "dst": "huggingface-gradio",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "gradio named in huggingface-gradio/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "gradio",
+   "rel": "references",
+   "dst": "prototype",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "prototype named in gradio/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "gradio",
+   "rel": "references",
+   "dst": "streamlit",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "streamlit named in gradio/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "gradio",
+   "rel": "references",
+   "dst": "transformers",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "transformers named in gradio/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
    "src": "grammar-of-graphics-and-declarative-visualization",
    "rel": "in_domain",
    "dst": "domain:data-visualization",
@@ -72551,6 +72825,17 @@
   {
    "src": "hf-cli",
    "rel": "references",
+   "dst": "gradio",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "hf-cli named in gradio/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "hf-cli",
+   "rel": "references",
    "dst": "hugging-science",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -72709,6 +72994,17 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "curated alias of hf-cli appears in ray/SKILL.md",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "hf-cli",
+   "rel": "references",
+   "dst": "streamlit",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of hf-cli appears in streamlit/SKILL.md",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -73464,6 +73760,17 @@
   {
    "src": "hugging-science",
    "rel": "references",
+   "dst": "gradio",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "gradio named in hugging-science/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "hugging-science",
+   "rel": "references",
    "dst": "hf-cli",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -73622,6 +73929,17 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "huggingface-gradio",
+   "rel": "references",
+   "dst": "gradio",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "gradio named in huggingface-gradio/SKILL.md body",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -78678,6 +78996,17 @@
   {
    "src": "langfuse",
    "rel": "references",
+   "dst": "langgraph",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "langgraph named in langfuse/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "langfuse",
+   "rel": "references",
    "dst": "llm-observability-evals",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -78693,6 +79022,105 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "query referenced in code/link context in langfuse/SKILL.md",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "langgraph",
+   "rel": "in_domain",
+   "dst": "domain:uncategorized",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "langgraph",
+   "rel": "references",
+   "dst": "building-pydantic-ai-agents",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "building-pydantic-ai-agents named in langgraph/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "langgraph",
+   "rel": "references",
+   "dst": "chunk",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "chunk named in langgraph/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "langgraph",
+   "rel": "references",
+   "dst": "crewai",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "langgraph named in crewai/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "langgraph",
+   "rel": "references",
+   "dst": "dspy",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "dspy named in langgraph/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "langgraph",
+   "rel": "references",
+   "dst": "langfuse",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "langgraph named in langfuse/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "langgraph",
+   "rel": "references",
+   "dst": "llm-observability-evals",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "llm-observability-evals named in langgraph/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "langgraph",
+   "rel": "references",
+   "dst": "mlflow-onboarding",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "langgraph named in mlflow-onboarding/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "langgraph",
+   "rel": "references",
+   "dst": "neuroscientist",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in langgraph/SKILL.md",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -80372,6 +80800,17 @@
   {
    "src": "llm-observability-evals",
    "rel": "references",
+   "dst": "langgraph",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "llm-observability-evals named in langgraph/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "llm-observability-evals",
+   "rel": "references",
    "dst": "pharmacokineticist",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -80739,6 +81178,17 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "logfire-instrumentation named in observability-and-instrumentation/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "logfire-instrumentation",
+   "rel": "references",
+   "dst": "sqlalchemy",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "sqlalchemy named in logfire-instrumentation/SKILL.md body",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -81278,6 +81728,94 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in manufacturing-engineer/SKILL.md",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "marimo",
+   "rel": "in_domain",
+   "dst": "domain:uncategorized",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "marimo",
+   "rel": "references",
+   "dst": "duckdb-docs",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "duckdb-docs named in marimo/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "marimo",
+   "rel": "references",
+   "dst": "modern-python",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "modern-python named in marimo/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "marimo",
+   "rel": "references",
+   "dst": "ngs-bulk-rnaseq-differential-expression",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "marimo named in ngs-bulk-rnaseq-differential-expression/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "marimo",
+   "rel": "references",
+   "dst": "ngs-shotgun-metagenomics",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "marimo named in ngs-shotgun-metagenomics/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "marimo",
+   "rel": "references",
+   "dst": "polars",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "polars named in marimo/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "marimo",
+   "rel": "references",
+   "dst": "scrna-seq-qc",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "marimo named in scrna-seq-qc/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "marimo",
+   "rel": "references",
+   "dst": "xarray-pandera-duckdb",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of xarray-pandera-duckdb appears in marimo/SKILL.md",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -88028,6 +88566,17 @@
   {
    "src": "mlflow-onboarding",
    "rel": "references",
+   "dst": "langgraph",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "langgraph named in mlflow-onboarding/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "mlflow-onboarding",
+   "rel": "references",
    "dst": "optuna",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -88230,6 +88779,17 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "modern-python named in github-actions-ci/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "modern-python",
+   "rel": "references",
+   "dst": "marimo",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "modern-python named in marimo/SKILL.md body",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -94793,6 +95353,17 @@
   {
    "src": "neuroscientist",
    "rel": "references",
+   "dst": "langgraph",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in langgraph/SKILL.md",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "neuroscientist",
+   "rel": "references",
    "dst": "mammalogist",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -94896,6 +95467,17 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "curated alias of neuroscientist appears in seismologist/SKILL.md",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "neuroscientist",
+   "rel": "references",
+   "dst": "streamlit",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in streamlit/SKILL.md",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -97312,6 +97894,17 @@
   {
    "src": "ngs-bulk-rnaseq-differential-expression",
    "rel": "references",
+   "dst": "marimo",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "marimo named in ngs-bulk-rnaseq-differential-expression/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "ngs-bulk-rnaseq-differential-expression",
+   "rel": "references",
    "dst": "ngs-analysis-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -98812,6 +99405,17 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "ngs-shotgun-metagenomics",
+   "rel": "references",
+   "dst": "marimo",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "marimo named in ngs-shotgun-metagenomics/SKILL.md body",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -110490,6 +111094,17 @@
   {
    "src": "plotly",
    "rel": "references",
+   "dst": "streamlit",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "plotly named in streamlit/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "plotly",
+   "rel": "references",
    "dst": "threejs-data-visualization",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -110681,6 +111296,17 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "polars named in fragpipe-pyteomics-proteomics/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "polars",
+   "rel": "references",
+   "dst": "marimo",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "polars named in marimo/SKILL.md body",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -114014,6 +114640,17 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "prototype named in game-studio/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "prototype",
+   "rel": "references",
+   "dst": "gradio",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "prototype named in gradio/SKILL.md body",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -134151,6 +134788,17 @@
   {
    "src": "scrna-seq-qc",
    "rel": "references",
+   "dst": "marimo",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "marimo named in scrna-seq-qc/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "scrna-seq-qc",
+   "rel": "references",
    "dst": "ngs-analysis-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -135189,6 +135837,17 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "statsmodels named in seaborn/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "seaborn",
+   "rel": "references",
+   "dst": "streamlit",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "seaborn named in streamlit/SKILL.md body",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -141046,6 +141705,39 @@
    "last_seen": "2026-08-12"
   },
   {
+   "src": "sqlalchemy",
+   "rel": "in_domain",
+   "dst": "domain:uncategorized",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "sqlalchemy",
+   "rel": "references",
+   "dst": "fastapi",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "fastapi named in sqlalchemy/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "sqlalchemy",
+   "rel": "references",
+   "dst": "logfire-instrumentation",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "sqlalchemy named in logfire-instrumentation/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
    "src": "stable-baselines3",
    "rel": "in_domain",
    "dst": "domain:ml-ai",
@@ -142108,6 +142800,94 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "sequence-analysis named in stratigrapher/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "streamlit",
+   "rel": "in_domain",
+   "dst": "domain:uncategorized",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "streamlit",
+   "rel": "references",
+   "dst": "deepnote-links",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "streamlit named in deepnote-links/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "streamlit",
+   "rel": "references",
+   "dst": "fastapi",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "fastapi named in streamlit/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "streamlit",
+   "rel": "references",
+   "dst": "gradio",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "streamlit named in gradio/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "streamlit",
+   "rel": "references",
+   "dst": "hf-cli",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of hf-cli appears in streamlit/SKILL.md",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "streamlit",
+   "rel": "references",
+   "dst": "neuroscientist",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in streamlit/SKILL.md",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "streamlit",
+   "rel": "references",
+   "dst": "plotly",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "plotly named in streamlit/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "streamlit",
+   "rel": "references",
+   "dst": "seaborn",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "seaborn named in streamlit/SKILL.md body",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -149346,6 +150126,17 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "transformers named in deepchem/SKILL.md body",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "transformers",
+   "rel": "references",
+   "dst": "gradio",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "transformers named in gradio/SKILL.md body",
    "status": "accepted",
    "first_seen": "2026-08-12",
    "last_seen": "2026-08-12"
@@ -163356,6 +164147,17 @@
   {
    "src": "xarray-pandera-duckdb",
    "rel": "references",
+   "dst": "marimo",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of xarray-pandera-duckdb appears in marimo/SKILL.md",
+   "status": "accepted",
+   "first_seen": "2026-08-12",
+   "last_seen": "2026-08-12"
+  },
+  {
+   "src": "xarray-pandera-duckdb",
+   "rel": "references",
    "dst": "matlab-choose-bigdata-solution",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -165613,7 +166415,6 @@
   "git-guardrails-claude-code",
   "grammar-of-graphics-and-declarative-visualization",
   "handoff",
-  "huggingface-gradio",
   "including-generated-files",
   "internal-comms",
   "ios-app-intents",

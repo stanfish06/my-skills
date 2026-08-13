@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "saved_at": "2026-08-13T01:46:21.588031+00:00",
-  "root": "/home/stan/.agents",
+  "saved_at": "2026-08-13T14:04:50.715207+00:00",
+  "root": "/Users/stan/.agents",
   "skills": {
     "academic-paper": {
       "claude_enabled": false,
@@ -176,8 +176,8 @@
       "codex_enabled": false
     },
     "alphafold-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "alterlab-qiime2-amplicon": {
       "claude_enabled": true,
@@ -268,12 +268,12 @@
       "codex_enabled": true
     },
     "archaic-introgression": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "article-data-fetcher": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ask-matt": {
       "claude_enabled": false,
@@ -316,8 +316,8 @@
       "codex_enabled": false
     },
     "astropy": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "astrostatistician": {
       "claude_enabled": false,
@@ -411,6 +411,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "banner-design": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "base44-cli": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -444,8 +448,8 @@
       "codex_enabled": false
     },
     "benchling-integration": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "benchmark-paper-template": {
       "claude_enabled": true,
@@ -460,16 +464,16 @@
       "codex_enabled": true
     },
     "bids": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "bigquery-public": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "bindingdb-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "binlog-failure-analysis": {
       "claude_enabled": true,
@@ -532,8 +536,8 @@
       "codex_enabled": false
     },
     "biobankjapan-phewas-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "biochemist": {
       "claude_enabled": false,
@@ -612,8 +616,8 @@
       "codex_enabled": false
     },
     "biostudies-arrayexpress-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "biosystems-agricultural-process-engineer": {
       "claude_enabled": false,
@@ -624,40 +628,40 @@
       "codex_enabled": true
     },
     "boltz-check-status": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "boltz-cli-setup": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "boltz-protein-design": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "boltz-protein-screen": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "boltz-small-molecule-adme": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "boltz-small-molecule-design": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "boltz-small-molecule-screen": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "boltz-structure-and-binding": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "boltz2-nim": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "bootstrap": {
       "claude_enabled": true,
@@ -676,6 +680,10 @@
       "codex_enabled": false
     },
     "brainstorming": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "brand": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -908,8 +916,8 @@
       "codex_enabled": true
     },
     "cbioportal-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "cell-annotation": {
       "claude_enabled": true,
@@ -924,20 +932,20 @@
       "codex_enabled": true
     },
     "cell-detection": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "cell-signaling-biologist": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "cellpose-cell-segmentation": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "cellpose-stardist-bioimage": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "cellular-neuroscientist": {
       "claude_enabled": false,
@@ -948,8 +956,8 @@
       "codex_enabled": true
     },
     "cellxgene-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ceramics-engineer": {
       "claude_enabled": false,
@@ -968,8 +976,8 @@
       "codex_enabled": true
     },
     "chebi-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "check-bin-obj-clash": {
       "claude_enabled": true,
@@ -980,8 +988,8 @@
       "codex_enabled": true
     },
     "chembl-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "chemical-biologist": {
       "claude_enabled": false,
@@ -1016,16 +1024,16 @@
       "codex_enabled": false
     },
     "chronograph-cashflow-forecast": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "chronograph-gp-meeting-prep": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "chronograph-portfolio-company-one-pager": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "chunk": {
       "claude_enabled": true,
@@ -1064,8 +1072,8 @@
       "codex_enabled": true
     },
     "civic-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "civil-engineer": {
       "claude_enabled": false,
@@ -1148,12 +1156,12 @@
       "codex_enabled": false
     },
     "clinpgx": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "clinvar-variation-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "cloudflare": {
       "claude_enabled": true,
@@ -1176,8 +1184,8 @@
       "codex_enabled": false
     },
     "cobrapy": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "code-maturity-assessor": {
       "claude_enabled": true,
@@ -1224,8 +1232,8 @@
       "codex_enabled": false
     },
     "colabfold": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "collect-user-input": {
       "claude_enabled": true,
@@ -1252,8 +1260,8 @@
       "codex_enabled": false
     },
     "comp-sheet": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "comparative-medicine-researcher": {
       "claude_enabled": false,
@@ -1268,8 +1276,8 @@
       "codex_enabled": false
     },
     "complexa-evaluate-pdbs": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "complexa-setup": {
       "claude_enabled": false,
@@ -1292,8 +1300,8 @@
       "codex_enabled": false
     },
     "comps": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "computational-chemist": {
       "claude_enabled": false,
@@ -1456,8 +1464,8 @@
       "codex_enabled": true
     },
     "crispr-screen-triage": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "critical-care-researcher": {
       "claude_enabled": false,
@@ -1552,28 +1560,28 @@
       "codex_enabled": true
     },
     "database-lookup": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "database-systems-researcher": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "datamol": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "dcf": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "de-summary": {
       "claude_enabled": true,
       "codex_enabled": true
     },
     "deal-tracker": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "debug-zoom": {
       "claude_enabled": false,
@@ -1604,8 +1612,8 @@
       "codex_enabled": true
     },
     "deepchem": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "deepnote": {
       "claude_enabled": true,
@@ -1644,8 +1652,8 @@
       "codex_enabled": true
     },
     "depmap": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "deprecation-and-migration": {
       "claude_enabled": true,
@@ -1655,11 +1663,19 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "design": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "design-an-interface": {
       "claude_enabled": true,
       "codex_enabled": true
     },
     "design-md-library": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "design-system": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -1700,12 +1716,12 @@
       "codex_enabled": true
     },
     "diffdock": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "diffdock-nim": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "differential-expression": {
       "claude_enabled": true,
@@ -1736,12 +1752,12 @@
       "codex_enabled": false
     },
     "dnanexus-integration": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "dnasp": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "doc-coauthoring": {
       "claude_enabled": true,
@@ -1804,12 +1820,12 @@
       "codex_enabled": true
     },
     "draft-brief": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "draft-long-form-memo": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "drug-discovery-pipeline": {
       "claude_enabled": false,
@@ -1860,16 +1876,16 @@
       "codex_enabled": true
     },
     "earnings-flash": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "earnings-prep": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "earnings-review": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "earthquake-engineer": {
       "claude_enabled": false,
@@ -1900,8 +1916,8 @@
       "codex_enabled": true
     },
     "efo-ontology-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "electric-machines-engineer": {
       "claude_enabled": false,
@@ -1964,8 +1980,8 @@
       "codex_enabled": false
     },
     "ensembl-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "entomologist": {
       "claude_enabled": false,
@@ -2020,24 +2036,24 @@
       "codex_enabled": false
     },
     "epigraphdb-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "eqtl-catalogue-region-fetch": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "eqtl-catalogue-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "equity-scorer": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "esm": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "etetoolkit": {
       "claude_enabled": true,
@@ -2048,8 +2064,8 @@
       "codex_enabled": false
     },
     "eva-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "eval-performance": {
       "claude_enabled": true,
@@ -2148,8 +2164,8 @@
       "codex_enabled": false
     },
     "fa-jobs-to-be-done": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "fastapi": {
       "claude_enabled": true,
@@ -2160,8 +2176,8 @@
       "codex_enabled": true
     },
     "fastreer": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "fermentation-scientist": {
       "claude_enabled": false,
@@ -2248,8 +2264,8 @@
       "codex_enabled": true
     },
     "fine-mapping": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "finishing-a-development-branch": {
       "claude_enabled": true,
@@ -2260,8 +2276,8 @@
       "codex_enabled": false
     },
     "finngen-phewas-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "fire-protection-engineer": {
       "claude_enabled": false,
@@ -2272,8 +2288,8 @@
       "codex_enabled": false
     },
     "fitness-nutrition": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "fix-finding": {
       "claude_enabled": true,
@@ -2296,12 +2312,12 @@
       "codex_enabled": false
     },
     "flow-bio": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "flowio": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "fluid-dynamicist": {
       "claude_enabled": false,
@@ -2312,8 +2328,8 @@
       "codex_enabled": false
     },
     "fluidsim": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "food-chemist": {
       "claude_enabled": false,
@@ -2356,8 +2372,8 @@
       "codex_enabled": false
     },
     "fragpipe-pyteomics-proteomics": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "frontend-app-builder": {
       "claude_enabled": true,
@@ -2384,16 +2400,16 @@
       "codex_enabled": false
     },
     "fund-comparison": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "fund-screener": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "fund-summarizer": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "fusion-scientist": {
       "claude_enabled": false,
@@ -2412,20 +2428,20 @@
       "codex_enabled": false
     },
     "galaxy-bridge": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "game-playtest": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "game-studio": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "game-ui-frontend": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "gantt-chart-visualization": {
       "claude_enabled": true,
@@ -2448,8 +2464,8 @@
       "codex_enabled": false
     },
     "genebass-gene-burden-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "generate-image": {
       "claude_enabled": true,
@@ -2472,32 +2488,32 @@
       "codex_enabled": false
     },
     "geniml": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "genmol-nim": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "genome-compare": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "genome-engineering-crispr-scientist": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "genome-match": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "genomicist": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "genomics-workflow-acceleration": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "geobiologist": {
       "claude_enabled": false,
@@ -2608,8 +2624,8 @@
       "codex_enabled": true
     },
     "ginkgo-cloud-lab": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "git-guardrails-claude-code": {
       "claude_enabled": true,
@@ -2640,8 +2656,8 @@
       "codex_enabled": false
     },
     "glycoengineering": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "gmail": {
       "claude_enabled": true,
@@ -2652,8 +2668,8 @@
       "codex_enabled": true
     },
     "gnomad-graphql-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "google-calendar": {
       "claude_enabled": true,
@@ -2703,6 +2719,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "gradio": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "grammar-of-graphics-and-declarative-visualization": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -2743,41 +2763,45 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
-    "gtars": {
+    "gstack": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "gtars": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "gtex-eqtl-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "guidance-tracker": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "guidelines-advisor": {
       "claude_enabled": true,
       "codex_enabled": true
     },
     "gwas-catalog-region-fetch": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "gwas-catalog-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "gwas-lookup": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "gwas-pipeline": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "gwas-prs": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "handoff": {
       "claude_enabled": true,
@@ -2848,20 +2872,20 @@
       "codex_enabled": false
     },
     "histolab": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "histologist": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "hla-typing": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "hmdb-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "horticulturist": {
       "claude_enabled": false,
@@ -2928,8 +2952,8 @@
       "codex_enabled": false
     },
     "human-protein-atlas-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "hunk-review": {
       "claude_enabled": true,
@@ -2972,8 +2996,8 @@
       "codex_enabled": true
     },
     "ib-deck": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ichthyologist": {
       "claude_enabled": false,
@@ -2988,8 +3012,8 @@
       "codex_enabled": true
     },
     "illumina-bridge": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "image-to-code": {
       "claude_enabled": true,
@@ -3004,8 +3028,8 @@
       "codex_enabled": true
     },
     "imaging-data-commons": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "immunogeneticist": {
       "claude_enabled": false,
@@ -3064,8 +3088,8 @@
       "codex_enabled": false
     },
     "industry": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "infectious-disease-specialist": {
       "claude_enabled": false,
@@ -3144,16 +3168,16 @@
       "codex_enabled": true
     },
     "ipd-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "irl-tracker": {
       "claude_enabled": true,
       "codex_enabled": true
     },
     "iso-13485-certification": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "isotope-geochemist": {
       "claude_enabled": false,
@@ -3180,36 +3204,36 @@
       "codex_enabled": true
     },
     "kermt-add-cmim-pretrain": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "kermt-continue-pretrain": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "kermt-embed": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "kermt-finetune": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "kermt-infer": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "kermt-monitor": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "kermt-pretrain-scratch": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "kermt-setup": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "knowledge-representation-researcher": {
       "claude_enabled": false,
@@ -3220,16 +3244,16 @@
       "codex_enabled": true
     },
     "labarchive-integration": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "labstep": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "lamindb": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "landscape-ecologist": {
       "claude_enabled": false,
@@ -3239,13 +3263,17 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "langgraph": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "laser-physicist": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "latchbio-integration": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "latex-posters": {
       "claude_enabled": true,
@@ -3256,8 +3284,8 @@
       "codex_enabled": true
     },
     "ld-1000g-region-compute": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "libfuzzer": {
       "claude_enabled": true,
@@ -3296,8 +3324,8 @@
       "codex_enabled": true
     },
     "litigation-update-post": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "llamaindex-development": {
       "claude_enabled": true,
@@ -3312,12 +3340,12 @@
       "codex_enabled": true
     },
     "locus-to-gene-mapper-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "locuscompare-region-render": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "logfire-instrumentation": {
       "claude_enabled": true,
@@ -3359,6 +3387,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "marimo": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "marine-biologist": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -3376,8 +3408,8 @@
       "codex_enabled": true
     },
     "marker-dominance-mapper": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "market-research-reports": {
       "claude_enabled": true,
@@ -3396,8 +3428,8 @@
       "codex_enabled": false
     },
     "matchms": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "materials-chemist": {
       "claude_enabled": false,
@@ -3616,8 +3648,8 @@
       "codex_enabled": false
     },
     "medchem": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "medical-geneticist": {
       "claude_enabled": false,
@@ -3652,12 +3684,12 @@
       "codex_enabled": false
     },
     "mendelian-randomisation": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "metabolights-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "metabolomics-scientist": {
       "claude_enabled": false,
@@ -3676,20 +3708,20 @@
       "codex_enabled": false
     },
     "methylation-clock": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "metric-pack-designer": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "metrology-scientist": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "mgnify-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "micro": {
       "claude_enabled": true,
@@ -3836,12 +3868,12 @@
       "codex_enabled": false
     },
     "molecular-docking": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "molecular-dynamics": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "molecular-ecologist": {
       "claude_enabled": false,
@@ -3864,44 +3896,44 @@
       "codex_enabled": false
     },
     "molfeat": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "molmim-nim": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "monai-medical-imaging-ai": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "moody-s-company-analysis": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "moody-s-earnings-brief": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "moody-s-explore-mcp": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "moody-s-issuer-brief": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "moody-s-peer-analysis": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "moody-s-rating-analysis": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "moody-s-sector-brief": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "morning-briefing": {
       "claude_enabled": true,
@@ -3968,8 +4000,8 @@
       "codex_enabled": false
     },
     "napari-viz": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "native-data-fetching": {
       "claude_enabled": true,
@@ -3988,40 +4020,40 @@
       "codex_enabled": true
     },
     "nature-citation": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "nature-data": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "nature-figure": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "nature-paper2ppt": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "nature-polishing": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "nature-reader": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "nature-response": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "nature-reviewer": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "nature-writing": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "naval-architect": {
       "claude_enabled": false,
@@ -4032,20 +4064,20 @@
       "codex_enabled": true
     },
     "ncbi-clinicaltables-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ncbi-datasets": {
       "claude_enabled": true,
       "codex_enabled": true
     },
     "ncbi-datasets-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ncbi-entrez-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ncbi-pmc-skill": {
       "claude_enabled": true,
@@ -4148,8 +4180,8 @@
       "codex_enabled": false
     },
     "neurokit2": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "neurologist": {
       "claude_enabled": false,
@@ -4164,8 +4196,8 @@
       "codex_enabled": false
     },
     "neuropixels-analysis": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "neuroscientist": {
       "claude_enabled": false,
@@ -4188,8 +4220,8 @@
       "codex_enabled": true
     },
     "nfcore-sarek-wrapper": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "nfcore-scrnaseq-wrapper": {
       "claude_enabled": true,
@@ -4200,8 +4232,8 @@
       "codex_enabled": true
     },
     "ngs-analysis-router": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ngs-atacseq-peaks-qc": {
       "claude_enabled": true,
@@ -4232,20 +4264,20 @@
       "codex_enabled": true
     },
     "ngs-dna-germline-variants": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ngs-dna-somatic-variants": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ngs-dna-umi-panel-variants": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ngs-dna-variant-calling": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ngs-epigenomics-peaks": {
       "claude_enabled": true,
@@ -4324,16 +4356,16 @@
       "codex_enabled": false
     },
     "nutrigx-advisor": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "nutrition-scientist": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "nvmolkit-usage": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "observability": {
       "claude_enabled": true,
@@ -4408,24 +4440,24 @@
       "codex_enabled": true
     },
     "omero-integration": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "omics-target-evidence-mapper": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "omniverse-cad-to-simready": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "omniverse-realtime-viewer": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "omniverse-usd-performance-tuning": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "oncologist": {
       "claude_enabled": false,
@@ -4448,24 +4480,24 @@
       "codex_enabled": true
     },
     "openfold2-nim": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "openfold3-nim": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "opensrc": {
       "claude_enabled": true,
       "codex_enabled": true
     },
     "opentargets-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "opentrons-integration": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "operations-researcher": {
       "claude_enabled": false,
@@ -4580,8 +4612,8 @@
       "codex_enabled": true
     },
     "pacsomatic": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "paleobotanist": {
       "claude_enabled": false,
@@ -4624,8 +4656,8 @@
       "codex_enabled": true
     },
     "parabricks": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "parallel-web": {
       "claude_enabled": true,
@@ -4644,8 +4676,8 @@
       "codex_enabled": false
     },
     "pathml": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "pathologist": {
       "claude_enabled": false,
@@ -4680,8 +4712,8 @@
       "codex_enabled": true
     },
     "pennylane": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "performance-optimization": {
       "claude_enabled": true,
@@ -4724,16 +4756,16 @@
       "codex_enabled": false
     },
     "pharmgkb-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "pharmgx-reporter": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "phaser-2d-game": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "phoenix-cli": {
       "claude_enabled": true,
@@ -4772,12 +4804,12 @@
       "codex_enabled": true
     },
     "physical-ai-infrastructure-setup-and-resilient-scaling": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "physical-ai-neural-reconstruction": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "physical-chemist": {
       "claude_enabled": false,
@@ -4860,8 +4892,8 @@
       "codex_enabled": true
     },
     "polars-bio": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "pollution-control-engineer": {
       "claude_enabled": false,
@@ -4912,8 +4944,8 @@
       "codex_enabled": true
     },
     "precedent-transactions": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "precision-agriculture-specialist": {
       "claude_enabled": false,
@@ -4928,16 +4960,16 @@
       "codex_enabled": false
     },
     "pride-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "primatologist": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "primekg": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "probabilist": {
       "claude_enabled": false,
@@ -4984,24 +5016,24 @@
       "codex_enabled": false
     },
     "proteinmpnn-nim": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "proteomexchange-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "proteomics": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "proteomics-clock": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "proteomics-de": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "proteomics-scientist": {
       "claude_enabled": false,
@@ -5012,12 +5044,12 @@
       "codex_enabled": false
     },
     "protocols-io": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "protocolsio-integration": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "prototype": {
       "claude_enabled": true,
@@ -5036,8 +5068,8 @@
       "codex_enabled": false
     },
     "pubchem-pug-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "public-health-scientist": {
       "claude_enabled": false,
@@ -5068,8 +5100,8 @@
       "codex_enabled": false
     },
     "pybedtools": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "pybigwig": {
       "claude_enabled": true,
@@ -5084,44 +5116,44 @@
       "codex_enabled": true
     },
     "pydicom": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "pyhealth": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "pylabrobot": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "pymatgen": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "pymc": {
       "claude_enabled": true,
       "codex_enabled": true
     },
     "pymol": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "pymoo": {
       "claude_enabled": true,
       "codex_enabled": true
     },
     "pyopenms": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "pysam": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "pytdc": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "pytest": {
       "claude_enabled": true,
@@ -5144,8 +5176,8 @@
       "codex_enabled": true
     },
     "qiskit": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "quality-six-sigma-engineer": {
       "claude_enabled": false,
@@ -5184,56 +5216,56 @@
       "codex_enabled": true
     },
     "query-alphafold": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "query-clinvar": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "query-ensembl": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "query-geo": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "query-interpro": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "query-kegg": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "query-opentarget": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "query-pdb": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "query-reactome": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "query-stringdb": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "query-uniprot": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "quickgo-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "qutip": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "radiation-oncology-physicist": {
       "claude_enabled": false,
@@ -5260,12 +5292,12 @@
       "codex_enabled": true
     },
     "rcsb-pdb-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "rdkit": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "react-and-nextjs-data-visualization": {
       "claude_enabled": true,
@@ -5276,16 +5308,16 @@
       "codex_enabled": true
     },
     "react-three-fiber-game": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "reaction-engineering-specialist": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "reactome-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "read-file": {
       "claude_enabled": true,
@@ -5296,8 +5328,8 @@
       "codex_enabled": true
     },
     "recombinator": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "redesign-existing-projects": {
       "claude_enabled": true,
@@ -5464,8 +5496,8 @@
       "codex_enabled": true
     },
     "research-router-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "research-software-engineer": {
       "claude_enabled": false,
@@ -5492,16 +5524,16 @@
       "codex_enabled": false
     },
     "rfdiffusion-nim": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "rhea-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "risk-analysis-audit": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "rivet-sdk": {
       "claude_enabled": true,
@@ -5532,8 +5564,8 @@
       "codex_enabled": true
     },
     "rowan": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "run-tests": {
       "claude_enabled": true,
@@ -5548,8 +5580,8 @@
       "codex_enabled": true
     },
     "sample-qc-triage": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "sandbox-sdk": {
       "claude_enabled": true,
@@ -5660,8 +5692,8 @@
       "codex_enabled": true
     },
     "sds-gel-review": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "seaborn": {
       "claude_enabled": true,
@@ -5672,8 +5704,8 @@
       "codex_enabled": true
     },
     "sec-report": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "secure-workflow-guide": {
       "claude_enabled": true,
@@ -5947,6 +5979,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "slides": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "smart-file-renaming": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -5976,8 +6012,8 @@
       "codex_enabled": false
     },
     "soul2dna": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "source-driven-development": {
       "claude_enabled": true,
@@ -6024,6 +6060,10 @@
       "codex_enabled": false
     },
     "sprite-pipeline": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "sqlalchemy": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -6071,9 +6111,13 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
-    "string-skill": {
+    "streamlit": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "string-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "string-theorist": {
       "claude_enabled": false,
@@ -6084,16 +6128,16 @@
       "codex_enabled": true
     },
     "struct-predictor": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "structural-biologist": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "structural-biology": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "structural-engineer": {
       "claude_enabled": false,
@@ -6124,8 +6168,8 @@
       "codex_enabled": true
     },
     "supply-chain": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "supply-chain-risk-auditor": {
       "claude_enabled": true,
@@ -6224,8 +6268,8 @@
       "codex_enabled": true
     },
     "target-validation-scorer": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "taxonomist-systematist": {
       "claude_enabled": false,
@@ -6268,8 +6312,8 @@
       "codex_enabled": true
     },
     "tearsheet": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "tech-paper-template": {
       "claude_enabled": true,
@@ -6388,16 +6432,16 @@
       "codex_enabled": true
     },
     "three-webgl-game": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "threejs-data-visualization": {
       "claude_enabled": true,
       "codex_enabled": true
     },
     "tiledbvcf": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "timesfm-forecasting": {
       "claude_enabled": true,
@@ -6428,16 +6472,16 @@
       "codex_enabled": true
     },
     "torchdrug": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "toxicologist": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "tpmi-phewas-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "track-findings": {
       "claude_enabled": true,
@@ -6464,8 +6508,8 @@
       "codex_enabled": false
     },
     "treatment-plans": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "triage": {
       "claude_enabled": true,
@@ -6508,8 +6552,8 @@
       "codex_enabled": true
     },
     "turingdb-graph": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-account-setup": {
       "claude_enabled": true,
@@ -6743,21 +6787,29 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "ui-styling": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "ui-toolkit": {
       "claude_enabled": true,
       "codex_enabled": true
     },
-    "ukb-navigator": {
+    "ui-ux-pro-max": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "ukb-navigator": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ukb-ppp-region-fetch": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ukb-topmed-phewas-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "umap-learn": {
       "claude_enabled": true,
@@ -6768,12 +6820,12 @@
       "codex_enabled": true
     },
     "uniprot-skill": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "unit-economics": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "upgrade-stripe": {
       "claude_enabled": true,
@@ -6840,16 +6892,16 @@
       "codex_enabled": true
     },
     "variant-annotation": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "vcf-annotator": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "vdr-index-setup": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "venue-templates": {
       "claude_enabled": true,
@@ -6968,8 +7020,8 @@
       "codex_enabled": false
     },
     "vmd-mdanalysis-viz": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "volcanologist": {
       "claude_enabled": false,
@@ -6992,8 +7044,8 @@
       "codex_enabled": false
     },
     "web-3d-asset-pipeline": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "web-artifacts-builder": {
       "claude_enabled": true,
@@ -7004,8 +7056,8 @@
       "codex_enabled": true
     },
     "web-game-foundations": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "web-perf": {
       "claude_enabled": true,
@@ -7028,20 +7080,20 @@
       "codex_enabled": false
     },
     "wes-clinical-report-en": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "wes-clinical-report-es": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "wetland-scientist": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "wgs-prs": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "what-if-oracle": {
       "claude_enabled": true,
@@ -7084,10 +7136,14 @@
       "codex_enabled": true
     },
     "working-capital": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "working-with-dbt-mesh": {
       "claude_enabled": true,
       "codex_enabled": true
     },
-    "working-with-dbt-mesh": {
+    "worktrunk": {
       "claude_enabled": true,
       "codex_enabled": true
     },

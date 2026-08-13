@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "note": "Artifact vocabulary. Terms are identifiers, not strings — measured ambiguity (the token 'rds' matched Amazon RDS in airtable-cli and R serialized data in bioinformatics skills) is what motivated identified artifacts in the first place. Patterns are case-insensitive Python regex, matched against the first 8KB of SKILL.md.",
+
+  "artifacts": {
+    "artifact:fastq":        {"label": "FASTQ reads",            "pattern": "\\bfastqs?\\b|\\.fq\\b",                      "domain_hint": "sequencing"},
+    "artifact:bam":          {"label": "BAM/SAM alignments",     "pattern": "\\bbam\\b|\\bcram\\b",                        "domain_hint": "sequencing"},
+    "artifact:vcf":          {"label": "VCF variants",           "pattern": "\\bvcfs?\\b|\\bbcf\\b",                       "domain_hint": "variants"},
+    "artifact:bed":          {"label": "BED intervals",          "pattern": "\\bbed\\b(?!\\s*rock)",                       "domain_hint": "genomics"},
+    "artifact:gtf":          {"label": "GTF/GFF annotation",     "pattern": "\\bgtf\\b|\\bgff3?\\b",                       "domain_hint": "genomics"},
+    "artifact:h5ad":         {"label": "AnnData / .h5ad",        "pattern": "\\bh5ad\\b|\\banndata\\b",                    "domain_hint": "single-cell"},
+    "artifact:seurat-object":{"label": "Seurat object",          "pattern": "\\bseurat object\\b|\\bsingle ?cell ?experiment\\b", "domain_hint": "single-cell"},
+    "artifact:count-matrix": {"label": "Count matrix",           "pattern": "\\bcounts? matrix\\b|\\bmatrix market\\b|\\bmtx\\b", "domain_hint": "expression"},
+    "artifact:ranked-genes": {"label": "Ranked gene list",       "pattern": "\\branked gene list\\b|\\bgene list\\b|\\bdeg list\\b", "domain_hint": "expression"},
+    "artifact:sumstats":     {"label": "GWAS summary statistics","pattern": "\\bsummary statistics\\b|\\bsumstats\\b",     "domain_hint": "gwas"},
+    "artifact:fasta":        {"label": "FASTA sequences",        "pattern": "\\bfastas?\\b",                               "domain_hint": "sequence"},
+    "artifact:msa":          {"label": "Multiple sequence alignment", "pattern": "\\bmultiple sequence alignment\\b|\\bmsa\\b", "domain_hint": "sequence"},
+    "artifact:newick":       {"label": "Phylogenetic tree",      "pattern": "\\bnewick\\b|\\bphylogenetic trees?\\b",      "domain_hint": "phylogenetics"},
+    "artifact:pdb-structure":{"label": "Protein structure",      "pattern": "\\bpdb (?:file|id|entry|structure)\\b|\\bmmcif\\b|\\bprotein structure\\b|\\bcrystal structure\\b|\\bcryo-?em\\b", "domain_hint": "structure"},
+    "artifact:ehr":          {"label": "Electronic health record","pattern": "\\behr\\b|\\bmimic-?(?:iii|iv)\\b|\\bomop\\b|\\bclaims data\\b|\\bicd-?\\d",  "domain_hint": "clinical"},
+    "artifact:genotypes":    {"label": "Genotype calls",         "pattern": "\\bplink\\b|\\bgenotypes?\\b|\\bbgen\\b|\\bbiobank\\b",  "domain_hint": "gwas"},
+    "artifact:smiles":       {"label": "Small-molecule structure","pattern": "\\bsmiles\\b|\\bsdf\\b|\\bmol2\\b|\\bselfies\\b", "domain_hint": "chemistry"},
+    "artifact:mzml":         {"label": "Mass-spec spectra",      "pattern": "\\bmzml\\b|\\bmzxml\\b",                      "domain_hint": "proteomics"},
+    "artifact:nifti":        {"label": "Medical image volume",   "pattern": "\\bnifti\\b|\\bdicom\\b|\\bnii\\.gz\\b",      "domain_hint": "imaging"},
+    "artifact:ome-tiff":     {"label": "Microscopy image",       "pattern": "\\bome-tiff\\b|\\bmicroscopy image\\b",       "domain_hint": "imaging"},
+    "artifact:parquet":      {"label": "Columnar table",         "pattern": "\\bparquet\\b|\\barrow table\\b",             "domain_hint": "data"},
+    "artifact:manuscript":   {"label": "Manuscript",             "pattern": "\\bmanuscripts?\\b",                          "domain_hint": "writing"},
+    "artifact:figure":       {"label": "Publication figure",     "pattern": "\\bpublication[- ]ready figure|\\bfigure panel\\b", "domain_hint": "writing"},
+    "artifact:bibliography": {"label": "Bibliography",           "pattern": "\\bbibtex\\b|\\bbibliograph|\\bcitation list\\b", "domain_hint": "writing"}
+  },
+
+  "ambiguous_terms": {
+    "rds": {
+      "senses": ["artifact:r-serialized-data", "service:aws-rds"],
+      "resolution": "unresolved — do not extract from the bare token",
+      "evidence": "airtable-cli matched 'rds' meaning Amazon RDS; single-cell skills mean R .rds objects"
+    },
+    "alignment": {
+      "senses": ["artifact:bam", "artifact:msa", "concept:text-alignment"],
+      "resolution": "unresolved — require a qualifier (sequence alignment / read alignment)"
+    },
+    "matrix": {
+      "senses": ["artifact:count-matrix", "concept:linear-algebra"],
+      "resolution": "unresolved — require a qualifier"
+    },
+    "tree": {
+      "senses": ["artifact:newick", "concept:data-structure", "concept:decision-tree"],
+      "resolution": "unresolved — require a qualifier"
+    }
+  },
+
+  "excluded_terms": {
+    "note": "Too generic to be informative — these appear across most of the corpus and would produce a hairball rather than knowledge.",
+    "terms": ["md", "json", "csv", "tsv", "png", "svg", "yaml", "html", "pdf", "txt", "dataframe", "docx", "pptx", "xlsx"]
+  }
+}

@@ -105,15 +105,21 @@
     "body_window_bytes": 8000
   },
 
-  "shapes": [
-    {"id": "S1", "target": "Skill", "constraint": "in_domain minCount 1", "severity": "Violation"},
-    {"id": "S2", "target": "Skill", "constraint": "degree(references|touches|co_occurs_with) minCount 1", "severity": "Warning",
-     "gate": "orphan_rate must not regress; baseline 48.1%, target < 5%"},
-    {"id": "S3", "target": "Edge", "constraint": "provenance in provenance_levels AND justification minCount 1", "severity": "Violation"},
-    {"id": "S4", "target": "Edge", "constraint": "provenance == PROPOSED implies not retrievable", "severity": "Violation"},
-    {"id": "S5", "target": "chains_to", "constraint": "acyclic", "severity": "Warning"},
-    {"id": "S6", "target": "alternative_to", "constraint": "symmetric", "severity": "Violation"},
-    {"id": "S7", "target": "Artifact", "constraint": "every lexicon term maps to exactly one id, or is flagged ambiguous", "severity": "Violation"},
-    {"id": "S8", "target": "Recipe", "constraint": "has_step targets resolve to existing Skills", "severity": "Violation"}
-  ]
+  "python_checks": {
+    "note": "These document the stdlib checks in kg/validate.py, which run with no dependencies installed. They are NOT the SHACL shapes — ontology/shapes.ttl is authoritative for constraint validation and is what CI enforces. Ids are deliberately P-prefixed: an earlier version numbered both catalogues S1..Sn, and they drifted into meaning different things under the same id.",
+    "authoritative_shapes": ".skill-vault/ontology/shapes.ttl",
+    "checks": [
+      {"id": "P1", "target": "Skill", "constraint": "in_domain minCount 1", "severity": "Violation", "shacl_equivalent": "S1"},
+      {"id": "P2", "target": "Skill", "constraint": "degree(references|co_occurs_with|chains_to) minCount 1", "severity": "Warning",
+       "gate": "orphan_rate must not regress; baseline 48.1%, target < 5%",
+       "shacl_equivalent": null,
+       "note": "no SHACL equivalent: this is a corpus health metric, not a per-node constraint"},
+      {"id": "P3", "target": "Edge", "constraint": "provenance in provenance_levels AND justification minCount 1", "severity": "Violation", "shacl_equivalent": "S3"},
+      {"id": "P4", "target": "Edge", "constraint": "provenance == PROPOSED implies not retrievable", "severity": "Violation", "shacl_equivalent": "S4"},
+      {"id": "P5", "target": "chains_to", "constraint": "acyclic", "severity": "Warning", "shacl_equivalent": "S5"},
+      {"id": "P6", "target": "alternative_to", "constraint": "symmetric", "severity": "Violation", "shacl_equivalent": "S6"},
+      {"id": "P7", "target": "Artifact", "constraint": "every lexicon term maps to exactly one id, or is flagged ambiguous", "severity": "Violation", "shacl_equivalent": "S7"},
+      {"id": "P8", "target": "Recipe", "constraint": "has_step targets resolve to existing Skills", "severity": "Violation", "shacl_equivalent": null}
+    ]
+  }
 }

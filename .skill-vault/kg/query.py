@@ -35,8 +35,12 @@ GRAPH_PATH = ROOT / "vault" / "graph" / "graph.json"
 WORD = re.compile(r"[a-z0-9]+")
 SKILL_TYPES = ("Skill", "ExpertProfile")
 
-# Retrieval reads only these; PROPOSED never reaches an agent (shape S4).
-RETRIEVABLE = {"ASSERTED", "OBSERVED", "EXTRACTED", "INFERRED"}
+# Which provenance levels an agent may act on. Read from the graph's own
+# metrics, which build_kg stamps from schema.json, so the vocabulary lives in
+# the TBox alone rather than in a third hardcoded copy here. The fallback keeps
+# query.py working against a graph built before the field existed; PROPOSED is
+# excluded either way (shape P4/S4).
+RETRIEVABLE_FALLBACK = frozenset({"ASSERTED", "OBSERVED", "EXTRACTED", "INFERRED"})
 
 
 def tok(text):
@@ -49,11 +53,13 @@ class VaultGraph:
             data = json.load(fh)
         self.nodes = {n["id"]: n for n in data["nodes"]}
         self.recipes = data.get("recipes", [])
+        retrievable = frozenset(
+            data.get("metrics", {}).get("retrievable_provenance") or RETRIEVABLE_FALLBACK)
         self.edge_count = len(data["edges"])
         self.out = defaultdict(lambda: defaultdict(set))
         self.inn = defaultdict(lambda: defaultdict(set))
         for e in data["edges"]:
-            if e.get("provenance") not in RETRIEVABLE:
+            if e.get("provenance") not in retrievable:
                 continue
             self.out[e["src"]][e["rel"]].add(e["dst"])
             self.inn[e["dst"]][e["rel"]].add(e["src"])

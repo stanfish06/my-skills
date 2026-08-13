@@ -4,7 +4,10 @@
 Two independent checks, deliberately kept apart (KR practice: a logical
 inconsistency and a data-quality violation have different repair paths):
 
-  SHAPES  structural constraints on the graph itself (SHACL-shaped).
+  SHAPES  structural constraints, P-prefixed. These are the stdlib checks that
+          run with no dependencies; ontology/shapes.ttl (S-prefixed) is
+          authoritative and runs under --shacl. The two catalogues are
+          deliberately numbered apart -- they previously collided.
   CQ      competency questions — the ontology's real test suite. A CQ that the
           current TBox cannot yet answer reports NOT_YET rather than FAIL, so
           the roadmap stays visible instead of being hidden behind a red build.
@@ -81,29 +84,30 @@ def index(graph):
 def check_shapes(graph, schema, nodes, out, rep):
     skills = [n for n in graph["nodes"] if n.get("type") in SKILL_TYPES]
     provs = set(schema["provenance_levels"])
+    del schema  # nothing below reads the TBox again
 
     missing_domain = [n["id"] for n in skills if not out[n["id"]].get("in_domain")]
-    rep.add("SHAPES", "S1 in_domain>=1", "FAIL" if missing_domain else "PASS",
+    rep.add("SHAPES", "P1 in_domain>=1", "FAIL" if missing_domain else "PASS",
             f"{len(missing_domain)} skills without a domain"
             + (f" e.g. {missing_domain[:3]}" if missing_domain else ""))
 
     rate = graph["metrics"]["orphan_rate"]
     status = "PASS" if rate < ORPHAN_GATE else ("WARN" if rate < ORPHAN_BASELINE else "FAIL")
-    rep.add("SHAPES", "S2 orphan rate", status,
+    rep.add("SHAPES", "P2 orphan rate", status,
             f"{rate:.1%} vs baseline {ORPHAN_BASELINE:.1%}, gate {ORPHAN_GATE:.0%} "
             f"({graph['metrics']['orphan_count']} skills)")
 
     bad = [e for e in graph["edges"]
            if e.get("provenance") not in provs or not e.get("justification")]
-    rep.add("SHAPES", "S3 provenance", "FAIL" if bad else "PASS",
+    rep.add("SHAPES", "P3 provenance", "FAIL" if bad else "PASS",
             f"{len(bad)} edges missing provenance or justification")
 
     leaked = [e for e in graph["edges"]
               if e.get("provenance") == "PROPOSED" and e.get("status") != "proposed"]
-    rep.add("SHAPES", "S4 PROPOSED gate", "FAIL" if leaked else "PASS",
+    rep.add("SHAPES", "P4 PROPOSED gate", "FAIL" if leaked else "PASS",
             f"{len(leaked)} unreviewed edges marked retrievable")
 
-    # S5 chains_to acyclicity
+    # P5 chains_to acyclicity
     adj = {s: set(rels.get("chains_to", ())) for s, rels in out.items()}
     colour, cycles = {}, []
 
@@ -119,22 +123,22 @@ def check_shapes(graph, schema, nodes, out, rep):
     for s in list(adj):
         if not colour.get(s):
             walk(s)
-    rep.add("SHAPES", "S5 chains acyclic", "WARN" if cycles else "PASS",
+    rep.add("SHAPES", "P5 chains acyclic", "WARN" if cycles else "PASS",
             f"{len(cycles)} back-edges" + (f" e.g. {cycles[:2]}" if cycles else ""))
 
     pairs = {(e["src"], e["dst"]) for e in graph["edges"] if e["rel"] == "alternative_to"}
     asym = [p for p in pairs if (p[1], p[0]) not in pairs]
-    rep.add("SHAPES", "S6 alt symmetric", "FAIL" if asym else "PASS",
+    rep.add("SHAPES", "P6 alt symmetric", "FAIL" if asym else "PASS",
             f"{len(asym)} asymmetric alternative_to edges")
 
     amb = graph.get("ambiguous_aliases", {})
-    rep.add("SHAPES", "S7 term ambiguity", "PASS",
+    rep.add("SHAPES", "P7 term ambiguity", "PASS",
             f"{len(amb)} ambiguous aliases parked, not silently resolved")
 
     dangling = []
     for r in graph.get("recipes", []):
         dangling += [s for s in r["members"] if s not in nodes]
-    rep.add("SHAPES", "S8 recipe steps", "FAIL" if dangling else "PASS",
+    rep.add("SHAPES", "P8 recipe steps", "FAIL" if dangling else "PASS",
             f"{len(dangling)} recipe steps do not resolve to a skill")
 
 

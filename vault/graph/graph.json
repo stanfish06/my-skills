@@ -22,8 +22,8 @@
   "orphan_rate": 0.0724,
   "by_provenance": {
    "EXTRACTED": 12034,
-   "ASSERTED": 998,
-   "INFERRED": 42
+   "ASSERTED": 668,
+   "INFERRED": 372
   },
   "by_relation": {
    "in_domain": 1823,
@@ -33,7 +33,13 @@
    "has_step": 69,
    "co_occurs_with": 330,
    "chains_to": 42
-  }
+  },
+  "retrievable_provenance": [
+   "ASSERTED",
+   "EXTRACTED",
+   "INFERRED",
+   "OBSERVED"
+  ]
  },
  "nodes": [
   {
@@ -22368,8 +22374,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22377,8 +22383,8 @@
    "rel": "co_occurs_with",
    "dst": "deep-research",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22386,8 +22392,8 @@
    "rel": "co_occurs_with",
    "dst": "idea-evaluator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22395,8 +22401,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22404,8 +22410,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-figure",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22413,8 +22419,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-response",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22422,8 +22428,8 @@
    "rel": "co_occurs_with",
    "dst": "peer-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22431,8 +22437,8 @@
    "rel": "co_occurs_with",
    "dst": "pre-submission-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22440,8 +22446,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22449,8 +22455,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22458,8 +22464,8 @@
    "rel": "co_occurs_with",
    "dst": "venue-templates",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22629,8 +22635,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22638,8 +22644,8 @@
    "rel": "co_occurs_with",
    "dst": "deep-research",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22647,8 +22653,8 @@
    "rel": "co_occurs_with",
    "dst": "idea-evaluator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22656,8 +22662,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22665,8 +22671,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-figure",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22674,8 +22680,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-response",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22683,8 +22689,8 @@
    "rel": "co_occurs_with",
    "dst": "peer-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22692,8 +22698,8 @@
    "rel": "co_occurs_with",
    "dst": "pre-submission-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22701,8 +22707,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22710,8 +22716,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -22719,8 +22725,8 @@
    "rel": "co_occurs_with",
    "dst": "venue-templates",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -34473,8 +34479,8 @@
    "rel": "co_occurs_with",
    "dst": "diff-visualizer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -34482,8 +34488,8 @@
    "rel": "co_occurs_with",
    "dst": "nfcore-rnaseq-wrapper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -34491,8 +34497,8 @@
    "rel": "co_occurs_with",
    "dst": "pathway-enricher",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -34500,8 +34506,8 @@
    "rel": "co_occurs_with",
    "dst": "pathway-enrichment",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -34509,8 +34515,8 @@
    "rel": "co_occurs_with",
    "dst": "pydeseq2",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -34518,8 +34524,8 @@
    "rel": "co_occurs_with",
    "dst": "rnaseq-de",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -34527,8 +34533,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -36318,8 +36324,8 @@
    "rel": "co_occurs_with",
    "dst": "scanpy",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -36327,8 +36333,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -36336,8 +36342,8 @@
    "rel": "co_occurs_with",
    "dst": "scrna-embedding",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -36345,8 +36351,8 @@
    "rel": "co_occurs_with",
    "dst": "scrna-orchestrator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -36354,8 +36360,8 @@
    "rel": "co_occurs_with",
    "dst": "scvi-tools",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -37929,8 +37935,8 @@
    "rel": "co_occurs_with",
    "dst": "lit-synthesizer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -37938,8 +37944,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -37947,8 +37953,8 @@
    "rel": "co_occurs_with",
    "dst": "paper-lookup",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -37956,8 +37962,8 @@
    "rel": "co_occurs_with",
    "dst": "pyzotero",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -37965,8 +37971,8 @@
    "rel": "co_occurs_with",
    "dst": "research-lookup",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -37974,8 +37980,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -39180,8 +39186,8 @@
    "rel": "co_occurs_with",
    "dst": "sample-qc-triage",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -39189,8 +39195,8 @@
    "rel": "co_occurs_with",
    "dst": "variant-annotation",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -39198,8 +39204,8 @@
    "rel": "co_occurs_with",
    "dst": "vcf-annotator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -39207,8 +39213,8 @@
    "rel": "co_occurs_with",
    "dst": "wes-clinical-report-en",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -39216,8 +39222,8 @@
    "rel": "co_occurs_with",
    "dst": "wes-clinical-report-es",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -45777,8 +45783,8 @@
    "rel": "co_occurs_with",
    "dst": "diffdock",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -45786,8 +45792,8 @@
    "rel": "co_occurs_with",
    "dst": "esm",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -45795,8 +45801,8 @@
    "rel": "co_occurs_with",
    "dst": "medchem",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -45804,8 +45810,8 @@
    "rel": "co_occurs_with",
    "dst": "rdkit",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -45813,8 +45819,8 @@
    "rel": "co_occurs_with",
    "dst": "struct-predictor",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -46416,8 +46422,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -46425,8 +46431,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -46434,8 +46440,8 @@
    "rel": "co_occurs_with",
    "dst": "idea-evaluator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -46443,8 +46449,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -46452,8 +46458,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-figure",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -46461,8 +46467,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-response",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -46470,8 +46476,8 @@
    "rel": "co_occurs_with",
    "dst": "peer-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -46479,8 +46485,8 @@
    "rel": "co_occurs_with",
    "dst": "pre-submission-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -46488,8 +46494,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -46497,8 +46503,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -46506,8 +46512,8 @@
    "rel": "co_occurs_with",
    "dst": "venue-templates",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -48063,8 +48069,8 @@
    "rel": "co_occurs_with",
    "dst": "bulk-rnaseq",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -48072,8 +48078,8 @@
    "rel": "co_occurs_with",
    "dst": "nfcore-rnaseq-wrapper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -48081,8 +48087,8 @@
    "rel": "co_occurs_with",
    "dst": "pathway-enricher",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -48090,8 +48096,8 @@
    "rel": "co_occurs_with",
    "dst": "pathway-enrichment",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -48099,8 +48105,8 @@
    "rel": "co_occurs_with",
    "dst": "pydeseq2",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -48108,8 +48114,8 @@
    "rel": "co_occurs_with",
    "dst": "rnaseq-de",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -48117,8 +48123,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -48243,8 +48249,8 @@
    "rel": "co_occurs_with",
    "dst": "datamol",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -48252,8 +48258,8 @@
    "rel": "co_occurs_with",
    "dst": "esm",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -48261,8 +48267,8 @@
    "rel": "co_occurs_with",
    "dst": "medchem",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -48270,8 +48276,8 @@
    "rel": "co_occurs_with",
    "dst": "rdkit",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -48279,8 +48285,8 @@
    "rel": "co_occurs_with",
    "dst": "struct-predictor",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -52644,8 +52650,8 @@
    "rel": "co_occurs_with",
    "dst": "datamol",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -52653,8 +52659,8 @@
    "rel": "co_occurs_with",
    "dst": "diffdock",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -52662,8 +52668,8 @@
    "rel": "co_occurs_with",
    "dst": "medchem",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -52671,8 +52677,8 @@
    "rel": "co_occurs_with",
    "dst": "rdkit",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -52680,8 +52686,8 @@
    "rel": "co_occurs_with",
    "dst": "struct-predictor",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -55209,8 +55215,8 @@
    "rel": "co_occurs_with",
    "dst": "gwas-pipeline",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in GWAS \u2192 polygenic risk",
+   "provenance": "INFERRED",
+   "justification": "co-listed in GWAS \u2192 polygenic risk (rule R2)",
    "status": "accepted"
   },
   {
@@ -55218,8 +55224,8 @@
    "rel": "co_occurs_with",
    "dst": "gwas-prs",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in GWAS \u2192 polygenic risk",
+   "provenance": "INFERRED",
+   "justification": "co-listed in GWAS \u2192 polygenic risk (rule R2)",
    "status": "accepted"
   },
   {
@@ -55227,8 +55233,8 @@
    "rel": "co_occurs_with",
    "dst": "wgs-prs",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in GWAS \u2192 polygenic risk",
+   "provenance": "INFERRED",
+   "justification": "co-listed in GWAS \u2192 polygenic risk (rule R2)",
    "status": "accepted"
   },
   {
@@ -62400,8 +62406,8 @@
    "rel": "co_occurs_with",
    "dst": "fine-mapping",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in GWAS \u2192 polygenic risk",
+   "provenance": "INFERRED",
+   "justification": "co-listed in GWAS \u2192 polygenic risk (rule R2)",
    "status": "accepted"
   },
   {
@@ -62409,8 +62415,8 @@
    "rel": "co_occurs_with",
    "dst": "gwas-prs",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in GWAS \u2192 polygenic risk",
+   "provenance": "INFERRED",
+   "justification": "co-listed in GWAS \u2192 polygenic risk (rule R2)",
    "status": "accepted"
   },
   {
@@ -62418,8 +62424,8 @@
    "rel": "co_occurs_with",
    "dst": "wgs-prs",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in GWAS \u2192 polygenic risk",
+   "provenance": "INFERRED",
+   "justification": "co-listed in GWAS \u2192 polygenic risk (rule R2)",
    "status": "accepted"
   },
   {
@@ -62661,8 +62667,8 @@
    "rel": "co_occurs_with",
    "dst": "fine-mapping",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in GWAS \u2192 polygenic risk",
+   "provenance": "INFERRED",
+   "justification": "co-listed in GWAS \u2192 polygenic risk (rule R2)",
    "status": "accepted"
   },
   {
@@ -62670,8 +62676,8 @@
    "rel": "co_occurs_with",
    "dst": "gwas-pipeline",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in GWAS \u2192 polygenic risk",
+   "provenance": "INFERRED",
+   "justification": "co-listed in GWAS \u2192 polygenic risk (rule R2)",
    "status": "accepted"
   },
   {
@@ -62679,8 +62685,8 @@
    "rel": "co_occurs_with",
    "dst": "wgs-prs",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in GWAS \u2192 polygenic risk",
+   "provenance": "INFERRED",
+   "justification": "co-listed in GWAS \u2192 polygenic risk (rule R2)",
    "status": "accepted"
   },
   {
@@ -65397,8 +65403,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -65406,8 +65412,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -65415,8 +65421,8 @@
    "rel": "co_occurs_with",
    "dst": "deep-research",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -65424,8 +65430,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -65433,8 +65439,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-figure",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -65442,8 +65448,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-response",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -65451,8 +65457,8 @@
    "rel": "co_occurs_with",
    "dst": "peer-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -65460,8 +65466,8 @@
    "rel": "co_occurs_with",
    "dst": "pre-submission-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -65469,8 +65475,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -65478,8 +65484,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -65487,8 +65493,8 @@
    "rel": "co_occurs_with",
    "dst": "venue-templates",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -69348,8 +69354,8 @@
    "rel": "co_occurs_with",
    "dst": "citation-management",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -69357,8 +69363,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -69366,8 +69372,8 @@
    "rel": "co_occurs_with",
    "dst": "paper-lookup",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -69375,8 +69381,8 @@
    "rel": "co_occurs_with",
    "dst": "pyzotero",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -69384,8 +69390,8 @@
    "rel": "co_occurs_with",
    "dst": "research-lookup",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -69393,8 +69399,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -69654,8 +69660,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -69663,8 +69669,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -69672,8 +69678,8 @@
    "rel": "co_occurs_with",
    "dst": "citation-management",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -69681,8 +69687,8 @@
    "rel": "co_occurs_with",
    "dst": "deep-research",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -69690,8 +69696,8 @@
    "rel": "co_occurs_with",
    "dst": "idea-evaluator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -69699,8 +69705,8 @@
    "rel": "co_occurs_with",
    "dst": "lit-synthesizer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -69708,8 +69714,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-figure",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -69717,8 +69723,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-response",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -69726,8 +69732,8 @@
    "rel": "co_occurs_with",
    "dst": "paper-lookup",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -69735,8 +69741,8 @@
    "rel": "co_occurs_with",
    "dst": "peer-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -69744,8 +69750,8 @@
    "rel": "co_occurs_with",
    "dst": "pre-submission-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -69753,8 +69759,8 @@
    "rel": "co_occurs_with",
    "dst": "pyzotero",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -69762,8 +69768,8 @@
    "rel": "co_occurs_with",
    "dst": "research-lookup",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -69771,8 +69777,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -69780,8 +69786,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -69789,8 +69795,8 @@
    "rel": "co_occurs_with",
    "dst": "venue-templates",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -74064,8 +74070,8 @@
    "rel": "co_occurs_with",
    "dst": "datamol",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -74073,8 +74079,8 @@
    "rel": "co_occurs_with",
    "dst": "diffdock",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -74082,8 +74088,8 @@
    "rel": "co_occurs_with",
    "dst": "esm",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -74091,8 +74097,8 @@
    "rel": "co_occurs_with",
    "dst": "rdkit",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -74100,8 +74106,8 @@
    "rel": "co_occurs_with",
    "dst": "struct-predictor",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -79419,8 +79425,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79428,8 +79434,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79437,8 +79443,8 @@
    "rel": "co_occurs_with",
    "dst": "deep-research",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79446,8 +79452,8 @@
    "rel": "co_occurs_with",
    "dst": "idea-evaluator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79455,8 +79461,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79464,8 +79470,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-response",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79473,8 +79479,8 @@
    "rel": "co_occurs_with",
    "dst": "peer-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79482,8 +79488,8 @@
    "rel": "co_occurs_with",
    "dst": "pre-submission-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79491,8 +79497,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79500,8 +79506,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79509,8 +79515,8 @@
    "rel": "co_occurs_with",
    "dst": "venue-templates",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79959,8 +79965,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79968,8 +79974,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79977,8 +79983,8 @@
    "rel": "co_occurs_with",
    "dst": "deep-research",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79986,8 +79992,8 @@
    "rel": "co_occurs_with",
    "dst": "idea-evaluator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -79995,8 +80001,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -80004,8 +80010,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-figure",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -80013,8 +80019,8 @@
    "rel": "co_occurs_with",
    "dst": "peer-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -80022,8 +80028,8 @@
    "rel": "co_occurs_with",
    "dst": "pre-submission-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -80031,8 +80037,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -80040,8 +80046,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -80049,8 +80055,8 @@
    "rel": "co_occurs_with",
    "dst": "venue-templates",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -82974,8 +82980,8 @@
    "rel": "co_occurs_with",
    "dst": "bulk-rnaseq",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -82983,8 +82989,8 @@
    "rel": "co_occurs_with",
    "dst": "diff-visualizer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -82992,8 +82998,8 @@
    "rel": "co_occurs_with",
    "dst": "pathway-enricher",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -83001,8 +83007,8 @@
    "rel": "co_occurs_with",
    "dst": "pathway-enrichment",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -83010,8 +83016,8 @@
    "rel": "co_occurs_with",
    "dst": "pydeseq2",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -83019,8 +83025,8 @@
    "rel": "co_occurs_with",
    "dst": "rnaseq-de",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -83028,8 +83034,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -89940,8 +89946,8 @@
    "rel": "co_occurs_with",
    "dst": "citation-management",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -89949,8 +89955,8 @@
    "rel": "co_occurs_with",
    "dst": "lit-synthesizer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -89958,8 +89964,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -89967,8 +89973,8 @@
    "rel": "co_occurs_with",
    "dst": "pyzotero",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -89976,8 +89982,8 @@
    "rel": "co_occurs_with",
    "dst": "research-lookup",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -89985,8 +89991,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -90732,8 +90738,8 @@
    "rel": "co_occurs_with",
    "dst": "bulk-rnaseq",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -90741,8 +90747,8 @@
    "rel": "co_occurs_with",
    "dst": "diff-visualizer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -90750,8 +90756,8 @@
    "rel": "co_occurs_with",
    "dst": "nfcore-rnaseq-wrapper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -90759,8 +90765,8 @@
    "rel": "co_occurs_with",
    "dst": "pathway-enrichment",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -90768,8 +90774,8 @@
    "rel": "co_occurs_with",
    "dst": "pydeseq2",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -90777,8 +90783,8 @@
    "rel": "co_occurs_with",
    "dst": "rnaseq-de",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -90786,8 +90792,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -90903,8 +90909,8 @@
    "rel": "co_occurs_with",
    "dst": "bulk-rnaseq",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -90912,8 +90918,8 @@
    "rel": "co_occurs_with",
    "dst": "diff-visualizer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -90921,8 +90927,8 @@
    "rel": "co_occurs_with",
    "dst": "nfcore-rnaseq-wrapper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -90930,8 +90936,8 @@
    "rel": "co_occurs_with",
    "dst": "pathway-enricher",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -90939,8 +90945,8 @@
    "rel": "co_occurs_with",
    "dst": "pydeseq2",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -90948,8 +90954,8 @@
    "rel": "co_occurs_with",
    "dst": "rnaseq-de",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -90957,8 +90963,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -91452,8 +91458,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -91461,8 +91467,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -91470,8 +91476,8 @@
    "rel": "co_occurs_with",
    "dst": "deep-research",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -91479,8 +91485,8 @@
    "rel": "co_occurs_with",
    "dst": "idea-evaluator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -91488,8 +91494,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -91497,8 +91503,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-figure",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -91506,8 +91512,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-response",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -91515,8 +91521,8 @@
    "rel": "co_occurs_with",
    "dst": "pre-submission-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -91524,8 +91530,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -91533,8 +91539,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -91542,8 +91548,8 @@
    "rel": "co_occurs_with",
    "dst": "venue-templates",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -96024,8 +96030,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -96033,8 +96039,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -96042,8 +96048,8 @@
    "rel": "co_occurs_with",
    "dst": "deep-research",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -96051,8 +96057,8 @@
    "rel": "co_occurs_with",
    "dst": "idea-evaluator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -96060,8 +96066,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -96069,8 +96075,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-figure",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -96078,8 +96084,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-response",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -96087,8 +96093,8 @@
    "rel": "co_occurs_with",
    "dst": "peer-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -96096,8 +96102,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -96105,8 +96111,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -96114,8 +96120,8 @@
    "rel": "co_occurs_with",
    "dst": "venue-templates",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -98787,8 +98793,8 @@
    "rel": "co_occurs_with",
    "dst": "bulk-rnaseq",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -98796,8 +98802,8 @@
    "rel": "co_occurs_with",
    "dst": "diff-visualizer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -98805,8 +98811,8 @@
    "rel": "co_occurs_with",
    "dst": "nfcore-rnaseq-wrapper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -98814,8 +98820,8 @@
    "rel": "co_occurs_with",
    "dst": "pathway-enricher",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -98823,8 +98829,8 @@
    "rel": "co_occurs_with",
    "dst": "pathway-enrichment",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -98832,8 +98838,8 @@
    "rel": "co_occurs_with",
    "dst": "rnaseq-de",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -98841,8 +98847,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -99948,8 +99954,8 @@
    "rel": "co_occurs_with",
    "dst": "citation-management",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -99957,8 +99963,8 @@
    "rel": "co_occurs_with",
    "dst": "lit-synthesizer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -99966,8 +99972,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -99975,8 +99981,8 @@
    "rel": "co_occurs_with",
    "dst": "paper-lookup",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -99984,8 +99990,8 @@
    "rel": "co_occurs_with",
    "dst": "research-lookup",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -99993,8 +99999,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -101532,8 +101538,8 @@
    "rel": "co_occurs_with",
    "dst": "datamol",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -101541,8 +101547,8 @@
    "rel": "co_occurs_with",
    "dst": "diffdock",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -101550,8 +101556,8 @@
    "rel": "co_occurs_with",
    "dst": "esm",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -101559,8 +101565,8 @@
    "rel": "co_occurs_with",
    "dst": "medchem",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -101568,8 +101574,8 @@
    "rel": "co_occurs_with",
    "dst": "struct-predictor",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -105150,8 +105156,8 @@
    "rel": "co_occurs_with",
    "dst": "citation-management",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -105159,8 +105165,8 @@
    "rel": "co_occurs_with",
    "dst": "lit-synthesizer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -105168,8 +105174,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -105177,8 +105183,8 @@
    "rel": "co_occurs_with",
    "dst": "paper-lookup",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -105186,8 +105192,8 @@
    "rel": "co_occurs_with",
    "dst": "pyzotero",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -105195,8 +105201,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -106194,8 +106200,8 @@
    "rel": "co_occurs_with",
    "dst": "bulk-rnaseq",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -106203,8 +106209,8 @@
    "rel": "co_occurs_with",
    "dst": "diff-visualizer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -106212,8 +106218,8 @@
    "rel": "co_occurs_with",
    "dst": "nfcore-rnaseq-wrapper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -106221,8 +106227,8 @@
    "rel": "co_occurs_with",
    "dst": "pathway-enricher",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -106230,8 +106236,8 @@
    "rel": "co_occurs_with",
    "dst": "pathway-enrichment",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -106239,8 +106245,8 @@
    "rel": "co_occurs_with",
    "dst": "pydeseq2",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -106248,8 +106254,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -106995,8 +107001,8 @@
    "rel": "co_occurs_with",
    "dst": "clinical-variant-reporter",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -107004,8 +107010,8 @@
    "rel": "co_occurs_with",
    "dst": "variant-annotation",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -107013,8 +107019,8 @@
    "rel": "co_occurs_with",
    "dst": "vcf-annotator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -107022,8 +107028,8 @@
    "rel": "co_occurs_with",
    "dst": "wes-clinical-report-en",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -107031,8 +107037,8 @@
    "rel": "co_occurs_with",
    "dst": "wes-clinical-report-es",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -107265,8 +107271,8 @@
    "rel": "co_occurs_with",
    "dst": "cellxgene-census",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -107274,8 +107280,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -107283,8 +107289,8 @@
    "rel": "co_occurs_with",
    "dst": "scrna-embedding",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -107292,8 +107298,8 @@
    "rel": "co_occurs_with",
    "dst": "scrna-orchestrator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -107301,8 +107307,8 @@
    "rel": "co_occurs_with",
    "dst": "scvi-tools",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -112602,8 +112608,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112611,8 +112617,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112620,8 +112626,8 @@
    "rel": "co_occurs_with",
    "dst": "bulk-rnaseq",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -112629,8 +112635,8 @@
    "rel": "co_occurs_with",
    "dst": "cellxgene-census",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -112638,8 +112644,8 @@
    "rel": "co_occurs_with",
    "dst": "deep-research",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112647,8 +112653,8 @@
    "rel": "co_occurs_with",
    "dst": "diff-visualizer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -112656,8 +112662,8 @@
    "rel": "co_occurs_with",
    "dst": "idea-evaluator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112665,8 +112671,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112674,8 +112680,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-figure",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112683,8 +112689,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-response",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112692,8 +112698,8 @@
    "rel": "co_occurs_with",
    "dst": "nfcore-rnaseq-wrapper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -112701,8 +112707,8 @@
    "rel": "co_occurs_with",
    "dst": "pathway-enricher",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -112710,8 +112716,8 @@
    "rel": "co_occurs_with",
    "dst": "pathway-enrichment",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -112719,8 +112725,8 @@
    "rel": "co_occurs_with",
    "dst": "peer-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112728,8 +112734,8 @@
    "rel": "co_occurs_with",
    "dst": "pre-submission-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112737,8 +112743,8 @@
    "rel": "co_occurs_with",
    "dst": "pydeseq2",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -112746,8 +112752,8 @@
    "rel": "co_occurs_with",
    "dst": "rnaseq-de",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Bulk RNA-seq \u2192 pathways",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Bulk RNA-seq \u2192 pathways (rule R2)",
    "status": "accepted"
   },
   {
@@ -112755,8 +112761,8 @@
    "rel": "co_occurs_with",
    "dst": "scanpy",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -112764,8 +112770,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112773,8 +112779,8 @@
    "rel": "co_occurs_with",
    "dst": "scrna-embedding",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -112782,8 +112788,8 @@
    "rel": "co_occurs_with",
    "dst": "scrna-orchestrator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -112791,8 +112797,8 @@
    "rel": "co_occurs_with",
    "dst": "scvi-tools",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -112800,8 +112806,8 @@
    "rel": "co_occurs_with",
    "dst": "venue-templates",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112935,8 +112941,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112944,8 +112950,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112953,8 +112959,8 @@
    "rel": "co_occurs_with",
    "dst": "citation-management",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -112962,8 +112968,8 @@
    "rel": "co_occurs_with",
    "dst": "deep-research",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112971,8 +112977,8 @@
    "rel": "co_occurs_with",
    "dst": "idea-evaluator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -112980,8 +112986,8 @@
    "rel": "co_occurs_with",
    "dst": "lit-synthesizer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -112989,8 +112995,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -112998,8 +113004,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-figure",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -113007,8 +113013,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-response",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -113016,8 +113022,8 @@
    "rel": "co_occurs_with",
    "dst": "paper-lookup",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -113025,8 +113031,8 @@
    "rel": "co_occurs_with",
    "dst": "peer-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -113034,8 +113040,8 @@
    "rel": "co_occurs_with",
    "dst": "pre-submission-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -113043,8 +113049,8 @@
    "rel": "co_occurs_with",
    "dst": "pyzotero",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -113052,8 +113058,8 @@
    "rel": "co_occurs_with",
    "dst": "research-lookup",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Systematic literature review",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Systematic literature review (rule R2)",
    "status": "accepted"
   },
   {
@@ -113061,8 +113067,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -113070,8 +113076,8 @@
    "rel": "co_occurs_with",
    "dst": "venue-templates",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -113817,8 +113823,8 @@
    "rel": "co_occurs_with",
    "dst": "cellxgene-census",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -113826,8 +113832,8 @@
    "rel": "co_occurs_with",
    "dst": "scanpy",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -113835,8 +113841,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -113844,8 +113850,8 @@
    "rel": "co_occurs_with",
    "dst": "scrna-orchestrator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -113853,8 +113859,8 @@
    "rel": "co_occurs_with",
    "dst": "scvi-tools",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -113979,8 +113985,8 @@
    "rel": "co_occurs_with",
    "dst": "cellxgene-census",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -113988,8 +113994,8 @@
    "rel": "co_occurs_with",
    "dst": "scanpy",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -113997,8 +114003,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -114006,8 +114012,8 @@
    "rel": "co_occurs_with",
    "dst": "scrna-embedding",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -114015,8 +114021,8 @@
    "rel": "co_occurs_with",
    "dst": "scvi-tools",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -114636,8 +114642,8 @@
    "rel": "co_occurs_with",
    "dst": "cellxgene-census",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -114645,8 +114651,8 @@
    "rel": "co_occurs_with",
    "dst": "scanpy",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -114654,8 +114660,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -114663,8 +114669,8 @@
    "rel": "co_occurs_with",
    "dst": "scrna-embedding",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -114672,8 +114678,8 @@
    "rel": "co_occurs_with",
    "dst": "scrna-orchestrator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Single-cell RNA-seq",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Single-cell RNA-seq (rule R2)",
    "status": "accepted"
   },
   {
@@ -121062,8 +121068,8 @@
    "rel": "co_occurs_with",
    "dst": "datamol",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -121071,8 +121077,8 @@
    "rel": "co_occurs_with",
    "dst": "diffdock",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -121080,8 +121086,8 @@
    "rel": "co_occurs_with",
    "dst": "esm",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -121089,8 +121095,8 @@
    "rel": "co_occurs_with",
    "dst": "medchem",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -121098,8 +121104,8 @@
    "rel": "co_occurs_with",
    "dst": "rdkit",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Protein target \u2192 docking",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Protein target \u2192 docking (rule R2)",
    "status": "accepted"
   },
   {
@@ -134067,8 +134073,8 @@
    "rel": "co_occurs_with",
    "dst": "clinical-variant-reporter",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -134076,8 +134082,8 @@
    "rel": "co_occurs_with",
    "dst": "sample-qc-triage",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -134085,8 +134091,8 @@
    "rel": "co_occurs_with",
    "dst": "vcf-annotator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -134094,8 +134100,8 @@
    "rel": "co_occurs_with",
    "dst": "wes-clinical-report-en",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -134103,8 +134109,8 @@
    "rel": "co_occurs_with",
    "dst": "wes-clinical-report-es",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -134355,8 +134361,8 @@
    "rel": "co_occurs_with",
    "dst": "clinical-variant-reporter",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -134364,8 +134370,8 @@
    "rel": "co_occurs_with",
    "dst": "sample-qc-triage",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -134373,8 +134379,8 @@
    "rel": "co_occurs_with",
    "dst": "variant-annotation",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -134382,8 +134388,8 @@
    "rel": "co_occurs_with",
    "dst": "wes-clinical-report-en",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -134391,8 +134397,8 @@
    "rel": "co_occurs_with",
    "dst": "wes-clinical-report-es",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -134580,8 +134586,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -134589,8 +134595,8 @@
    "rel": "co_occurs_with",
    "dst": "academic-paper-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -134598,8 +134604,8 @@
    "rel": "co_occurs_with",
    "dst": "deep-research",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -134607,8 +134613,8 @@
    "rel": "co_occurs_with",
    "dst": "idea-evaluator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -134616,8 +134622,8 @@
    "rel": "co_occurs_with",
    "dst": "literature-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -134625,8 +134631,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-figure",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -134634,8 +134640,8 @@
    "rel": "co_occurs_with",
    "dst": "nature-response",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -134643,8 +134649,8 @@
    "rel": "co_occurs_with",
    "dst": "peer-review",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -134652,8 +134658,8 @@
    "rel": "co_occurs_with",
    "dst": "pre-submission-reviewer",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -134661,8 +134667,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-visualization",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -134670,8 +134676,8 @@
    "rel": "co_occurs_with",
    "dst": "scientific-writing",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Paper from scratch",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Paper from scratch (rule R2)",
    "status": "accepted"
   },
   {
@@ -136758,8 +136764,8 @@
    "rel": "co_occurs_with",
    "dst": "clinical-variant-reporter",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -136767,8 +136773,8 @@
    "rel": "co_occurs_with",
    "dst": "sample-qc-triage",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -136776,8 +136782,8 @@
    "rel": "co_occurs_with",
    "dst": "variant-annotation",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -136785,8 +136791,8 @@
    "rel": "co_occurs_with",
    "dst": "vcf-annotator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -136794,8 +136800,8 @@
    "rel": "co_occurs_with",
    "dst": "wes-clinical-report-es",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -136893,8 +136899,8 @@
    "rel": "co_occurs_with",
    "dst": "clinical-variant-reporter",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -136902,8 +136908,8 @@
    "rel": "co_occurs_with",
    "dst": "sample-qc-triage",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -136911,8 +136917,8 @@
    "rel": "co_occurs_with",
    "dst": "variant-annotation",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -136920,8 +136926,8 @@
    "rel": "co_occurs_with",
    "dst": "vcf-annotator",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -136929,8 +136935,8 @@
    "rel": "co_occurs_with",
    "dst": "wes-clinical-report-en",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in Germline variant interpretation",
+   "provenance": "INFERRED",
+   "justification": "co-listed in Germline variant interpretation (rule R2)",
    "status": "accepted"
   },
   {
@@ -137055,8 +137061,8 @@
    "rel": "co_occurs_with",
    "dst": "fine-mapping",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in GWAS \u2192 polygenic risk",
+   "provenance": "INFERRED",
+   "justification": "co-listed in GWAS \u2192 polygenic risk (rule R2)",
    "status": "accepted"
   },
   {
@@ -137064,8 +137070,8 @@
    "rel": "co_occurs_with",
    "dst": "gwas-pipeline",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in GWAS \u2192 polygenic risk",
+   "provenance": "INFERRED",
+   "justification": "co-listed in GWAS \u2192 polygenic risk (rule R2)",
    "status": "accepted"
   },
   {
@@ -137073,8 +137079,8 @@
    "rel": "co_occurs_with",
    "dst": "gwas-prs",
    "weight": 1.0,
-   "provenance": "ASSERTED",
-   "justification": "co-listed in GWAS \u2192 polygenic risk",
+   "provenance": "INFERRED",
+   "justification": "co-listed in GWAS \u2192 polygenic risk (rule R2)",
    "status": "accepted"
   },
   {

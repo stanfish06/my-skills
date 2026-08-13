@@ -17,6 +17,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from collections import defaultdict
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
@@ -140,9 +141,62 @@ class TestCommittedGraph(unittest.TestCase):
                            "edge count fell back toward the 1277-edge string-match graph")
 
     def test_cq5_set_completion(self):
-        """Recipes must be recoverable from a partial hit — the COMP fix."""
-        edges = [e for e in self.graph["edges"] if e["rel"] == "co_occurs_with"]
-        self.assertGreater(len(edges), 0, "no hyperedge-derived co-occurrence")
+        """Every recipe must be recoverable from its first step alone.
+
+        The previous version of this test only asserted that co_occurs_with
+        edges existed at all, so it would have passed on a graph where no
+        recipe was actually recoverable — it did not test the thing it is
+        named for. This walks each recipe the way retrieval does.
+        """
+        adj = defaultdict(set)
+        for e in self.graph["edges"]:
+            if e["rel"] in ("co_occurs_with", "chains_to"):
+                adj[e["src"]].add(e["dst"])
+                adj[e["dst"]].add(e["src"])
+        checked = 0
+        for r in self.graph.get("recipes", []):
+            steps = r["steps"]
+            if len(steps) < 2:
+                continue
+            checked += 1
+            recovered = adj[steps[0]] & set(steps[1:])
+            self.assertTrue(recovered,
+                            f"{r['id']}: nothing of {steps[1:]} reachable from {steps[0]} — "
+                            f"set-completion cannot rebuild this workflow")
+        self.assertGreater(checked, 0, "no multi-step recipes to check")
+
+    def test_retrieval_is_deterministic_across_hash_seeds(self):
+        """Adjacency is stored in sets and graph-derived picks share a handful of
+        constant scores, so any unsorted traversal leaks PYTHONHASHSEED into the
+        result order. That shipped once: `raw fastq to enriched pathways` returned
+        two different result sets across seeds 0-5."""
+        outs = set()
+        for seed in ("0", "1", "7"):
+            env = dict(os.environ, PYTHONHASHSEED=seed)
+            proc = subprocess.run(
+                [sys.executable, str(KG / "query.py"),
+                 "raw fastq to enriched pathways", "--k", "8", "--json"],
+                env=env, capture_output=True, text=True, check=True)
+            outs.add(tuple(r["skill"] for r in json.loads(proc.stdout)["results"]))
+        self.assertEqual(len(outs), 1,
+                         f"retrieval varies with PYTHONHASHSEED: {outs}")
+
+    def test_retrieval_knobs_are_pinned(self):
+        """The scores, quota, nudge passes and neighbour cap in query.py are
+        unmeasured magic numbers. Nothing else would notice if they got worse,
+        so pin the observable contract they produce: a stable, mixed result set
+        that is not pure lexical ranking."""
+        from query import VaultGraph, retrieve  # noqa: PLC0415
+        g = VaultGraph(REPO / "vault/graph/graph.json")
+        results, _ = retrieve(g, "batch correct single cell data and find marker genes", k=8)
+        self.assertEqual(len(results), 8, "result set is not filled to k")
+        derived = [r for r in results if r["why"] != "matched the query directly"]
+        self.assertGreaterEqual(len(derived), 1, "graph expansion contributed nothing")
+        self.assertLessEqual(len(derived), 4, "graph expansion crowded out lexical matches")
+        self.assertTrue(all(r["why"] for r in results),
+                        "every result must explain why it was included")
+        self.assertIn("scanpy", {r["skill"] for r in results},
+                      "scanpy is reachable only through the graph for this query")
 
     def test_cq1_fastq_reaches_pathway_analysis(self):
         from query import VaultGraph, retrieve  # noqa: E402
@@ -208,6 +262,18 @@ class TestRDFLayer(unittest.TestCase):
         metrics = json.loads((REPO / "vault/graph/graph.json").read_text(encoding="utf-8"))["metrics"]
         self.assertEqual(len(rows), metrics["orphan_count"],
                          "SPARQL and Python disagree on the orphan definition")
+
+    def test_every_committed_sparql_query_parses_and_runs(self):
+        """Only cq6 had a caller, so a typo in cq1/cq3/cq8 was invisible.
+        Executing each file is what makes a committed query a live artifact."""
+        cq_dir = REPO / ".skill-vault/ontology/cq"
+        files = sorted(cq_dir.glob("*.rq"))
+        self.assertTrue(files, "no committed competency questions")
+        for path in files:
+            with self.subTest(cq=path.name):
+                rows = list(self.g.query(path.read_text(encoding="utf-8")))
+                self.assertTrue(rows, f"{path.name} returned no rows — "
+                                      f"the graph or the query has drifted")
 
     def test_shacl_shapes_conform(self):
         from pyshacl import validate

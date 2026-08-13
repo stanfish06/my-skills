@@ -397,8 +397,15 @@ def build():
             g.edge(rid, "has_step", sid, "ASSERTED", f"listed in {r['source']}")
         for i, a in enumerate(r["steps"]):
             for b in r["steps"][i + 1:]:
-                g.edge(a, "co_occurs_with", b, "ASSERTED",
-                       f"co-listed in {r['label']}", symmetric=True)
+                # INFERRED, not ASSERTED: this is rule R2 deriving co-occurrence
+                # from has_step, exactly as R3 derives chains_to. What the human
+                # authored is the recipe's step list (has_step, ASSERTED); the
+                # pairwise co-occurrence is machinery on top of it. Marking it
+                # ASSERTED inflated that level to essentially every reified
+                # statement in graph.nq and gave derived edges top merge
+                # precedence over real curation.
+                g.edge(a, "co_occurs_with", b, "INFERRED",
+                       f"co-listed in {r['label']} (rule R2)", symmetric=True)
             if i + 1 < len(r["steps"]):
                 nxt = r["steps"][i + 1]
                 g.edge(a, "chains_to", nxt, "INFERRED",
@@ -477,6 +484,10 @@ def build():
         "orphan_rate": round(len(orphans) / total, 4),
         "by_provenance": dict(prov_counts),
         "by_relation": dict(rel_counts),
+        # Stamped from the TBox so query.py does not need a second copy of the
+        # vocabulary, and does not need to open schema.json to learn it.
+        "retrievable_provenance": sorted(
+            k for k, v in schema["provenance_levels"].items() if v.get("retrievable")),
     }
 
     print(f"skills            {total} ({metrics['expert_profiles']} expert profiles)")

@@ -24,11 +24,14 @@ assignments from the notes layer.
 
 ## Why it beats description matching
 
+Counts below are from the last rebuild and shift as upstream skills land;
+the ratios are the point. `build_kg.py` prints current figures.
+
 | | description-only (`build_related`) | knowledge graph |
 |---|---:|---:|
-| edges | 1,277 | 13,007 |
-| mean degree | 1.40 | 5.42 |
-| skills with **no** relations | **875 (48.1%)** | **133 (7.3%)** |
+| edges | 1,277 | 13,074 |
+| mean degree | 1.40 | 5.44 |
+| skills with **no** relations | **875 (48.1%)** | **132 (7.2%)** |
 
 Two measured facts drive the whole design:
 
@@ -65,7 +68,7 @@ python3 .skill-vault/kg/to_rdf.py            # -> vault/graph/graph.nq (+ retrie
 python3 .skill-vault/kg/validate.py --shacl  # real pySHACL against ontology/shapes.ttl
 ```
 
-Measured on the real graph: **29,952 triples**, 0.7 s to export, **8 s** to
+Measured on the real graph: **~28k triples**, 0.7 s to export, **8 s** to
 validate with pySHACL. Without the
 packages installed, `--shacl` reports `NOT_YET` and everything else still runs.
 

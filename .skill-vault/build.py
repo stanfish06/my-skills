@@ -185,6 +185,8 @@ SYNONYMS = {
     "opensrc": ["source code", "package source", "dependency source", "read library source"],
     "greploop": ["Greptile", "PR review loop"], "check-pr": ["PR review", "merge request", "Greptile"],
     "hunk-review": ["Hunk", "interactive diff review"],
+    "ast-grep": ["structural code search", "AST search"],
+    "ast-grep-outline": ["code outline", "source structure map"],
     "design-md-library": ["DESIGN.md", "design tokens", "brand style", "look like Stripe", "Stitch"],
     "chaos-engineering": ["resilience testing", "fault injection", "LitmusChaos", "Chaos Mesh"],
 }
@@ -370,7 +372,7 @@ CATEGORIES = [
       "planning-and-task-breakdown", "source-driven-development", "spec-driven-development",
       "spec-kit",
       "pytest", "jest", "vitest", "docker", "fastapi", "github-actions-ci", "opensrc", "check-pr", "greploop",
-      "hunk-review",
+      "hunk-review", "ast-grep", "ast-grep-outline",
       "linear", "cavekit-methodology", "cavekit-validation-first", "cavekit-revision",
       "cavekit-design-system", "gstack"]),
 

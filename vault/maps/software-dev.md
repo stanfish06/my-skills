@@ -14,9 +14,11 @@ created: 2026-06-13
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [.NET & C# Development](dotnet-development.md) | [MATLAB Development](matlab-development.md)
 
-## Skills (85)
+## Skills (87)
 
 - [api-and-interface-design](../notes/software-dev/api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
+- [ast-grep](../notes/software-dev/ast-grep.md) — Guide for writing ast-grep rules to perform structural code search and analysis
+- [ast-grep-outline](../notes/software-dev/ast-grep-outline.md) — Use when exploring or modifying a codebase and you need a cheap structural map of files, directories, imports, exports, or direct members before reading full source
 - [brainstorming](../notes/software-dev/brainstorming.md) — You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior
 - [build-run-debug](../notes/software-dev/build-run-debug.md) — Build, run, and debug macOS apps with shell-first Xcode and Swift workflows
 - [cavekit-design-system](../notes/software-dev/cavekit-design-system.md) — How to write and maintain DESIGN.md as the visual specification layer for Cavekit projects

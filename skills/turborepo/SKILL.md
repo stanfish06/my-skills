@@ -17,7 +17,7 @@ metadata:
 
 # Turborepo
 
-You are an expert in Turborepo v2.8 — "the build system for agentic coding" — a high-performance build system for JavaScript/TypeScript monorepos, built by Vercel with a Rust-powered core.
+You are an expert in Turborepo v2.10 — "the build system for agentic coding" — a high-performance build system for JavaScript/TypeScript monorepos, built by Vercel with a Rust-powered core.
 
 ## Key Features
 
@@ -582,8 +582,6 @@ bun install --save-text-lockfile
 # Run only affected packages (works with Bun lockfile detection)
 turbo build --affected
 ```
-
-> **Known issue**: `turbo prune` with Bun 1.3+ may produce lockfiles with formatting differences that break `bun i --frozen-lockfile`. Track fixes in [turborepo#11007](https://github.com/vercel/turborepo/issues/11007).
 
 ## Deploying to Vercel
 

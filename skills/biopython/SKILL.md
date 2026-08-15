@@ -12,7 +12,7 @@ metadata: {"version": "1.2", "skill-author": "K-Dense Inc.", "openclaw": {"envVa
 
 ## Overview
 
-Biopython is a comprehensive set of freely available Python tools for biological computation. It provides functionality for sequence manipulation, file I/O, database access, structural bioinformatics, phylogenetics, and many other bioinformatics tasks. The current version is **Biopython 1.87** (released 30 March 2026). It supports **Python 3.10-3.14** and PyPy3.10, and requires NumPy. Biopython 1.87 also addresses **CVE-2025-68463** in `Bio.Entrez.Parser` when parsing untrusted files, so prefer 1.87+ for workflows that parse externally supplied Entrez XML.
+Biopython is a comprehensive set of freely available Python tools for biological computation. It provides functionality for sequence manipulation, file I/O, database access, structural bioinformatics, phylogenetics, and many other bioinformatics tasks. The current version is **Biopython 1.88** (released 6 August 2026). It supports **Python 3.10-3.14** and PyPy3.10, and requires NumPy. Biopython 1.87 addressed **CVE-2025-68463** in `Bio.Entrez.Parser` when parsing untrusted files, so prefer 1.87+ for workflows that parse externally supplied Entrez XML.
 
 ## When to Use This Skill
 
@@ -48,7 +48,7 @@ Biopython is organized into modular sub-packages, each addressing specific bioin
 Install the current stable Biopython release with an explicit version pin for reproducibility:
 
 ```bash
-uv pip install "biopython==1.87"
+uv pip install "biopython==1.88"
 ```
 
 For NCBI database access, always set your email address (required by NCBI). For reusable software, set a stable `Entrez.tool` value and register the tool/email with NCBI. For higher rate limits (10 req/s instead of 3 req/s), read only `NCBI_API_KEY` from the environment — do not hardcode keys or load unrelated environment variables:

@@ -285,7 +285,7 @@ Settings.llm = Anthropic(
 ### Building Agents
 
 ```python
-from llama_index.core.agent import ReActAgent
+from llama_index.core.agent.workflow import ReActAgent
 from llama_index.core.tools import QueryEngineTool, ToolMetadata
 
 # Create tools from query engines
@@ -306,14 +306,13 @@ tools = [
     )
 ]
 
-# Create agent
-agent = ReActAgent.from_tools(
-    tools,
+# Create agent (llama-index >= 0.13: ReActAgent.from_tools/AgentRunner were removed)
+agent = ReActAgent(
+    tools=tools,
     llm=llm,
-    verbose=True
 )
 
-response = agent.chat("Find information about X")
+response = await agent.run("Find information about X")
 ```
 
 ## Performance Optimization

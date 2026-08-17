@@ -43,8 +43,8 @@ def get_pathway(pathway_id):
     return r.text
 
 # 3. Get genes in a pathway
-def get_pathway_genes(pathway_id):
-    url = f"{BASE_URL}/link/genes/{pathway_id}"
+def get_pathway_genes(pathway_id, organism="hsa"):
+    url = f"{BASE_URL}/link/{organism}/{pathway_id}"
     r = requests.get(url, timeout=30)
     r.raise_for_status()
     genes = []
@@ -91,7 +91,7 @@ for p in pathways[:5]:
 | `list` | `/list/pathway/hsa` | List all human pathways |
 | `find` | `/find/pathway/cancer` | Search by keyword |
 | `get` | `/get/hsa:672` | Get BRCA1 gene info |
-| `link` | `/link/genes/hsa00010` | Get genes in pathway |
+| `link` | `/link/hsa/hsa00010` | Get genes in pathway |
 | `conv` | `/conv/genes/ncbi-geneid:672` | Convert IDs |
 
 ## Organism Codes

@@ -17,7 +17,7 @@ metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 
 RDKit is a comprehensive cheminformatics library providing Python APIs for molecular analysis and manipulation. This skill provides guidance for reading/writing molecular structures, calculating descriptors, fingerprinting, substructure searching, chemical reactions, 2D/3D coordinate generation, and molecular visualization. Use this skill for drug discovery, computational chemistry, and cheminformatics research tasks.
 
-**Current baseline (checked 2026-06-07):** RDKit **2026.03.3** is the latest GitHub/PyPI release (`rdkit` 2026.3.3 on PyPI). Official installation docs continue to recommend conda-forge for most users, while cross-platform PyPI wheels are published under the `rdkit` package name. `rdkit-pypi` is the old PyPI package name and should only appear when maintaining legacy environments.
+**Current baseline (checked 2026-08-13):** RDKit **2026.3.5** is the latest GitHub/PyPI release (`rdkit` 2026.3.5 on PyPI). Official installation docs continue to recommend conda-forge for most users, while cross-platform PyPI wheels are published under the `rdkit` package name. `rdkit-pypi` is the old PyPI package name and should only appear when maintaining legacy environments.
 
 ## Installation and Setup
 
@@ -829,4 +829,3 @@ Example scripts for common RDKit workflows:
 - `substructure_filter.py` - Filter molecules by substructure patterns
 
 These scripts can be executed directly or used as templates for custom workflows.
-

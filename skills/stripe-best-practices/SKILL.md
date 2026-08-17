@@ -3,7 +3,7 @@ name: stripe-best-practices
 description: Guides Stripe integration decisions — API selection (Checkout Sessions vs PaymentIntents), Connect platform setup (Accounts v2, controller properties), billing/subscriptions, Treasury financial accounts, integration surfaces (Checkout, Payment Element), and migrating from deprecated Stripe APIs. Use when building, modifying, or reviewing any Stripe integration — including accepting payments, building marketplaces, integrating Stripe, processing payments, setting up subscriptions, or creating connected accounts.
 ---
 
-Latest Stripe API version: **2026-02-25.clover**. Always use the latest API version and SDK unless the user specifies otherwise.
+Latest Stripe API version: **2026-07-29.dahlia** (verify against https://docs.stripe.com/api/versioning before relying on this — Stripe ships new named versions roughly twice a year). Always use the latest API version and SDK unless the user specifies otherwise.
 
 ## Integration routing
 

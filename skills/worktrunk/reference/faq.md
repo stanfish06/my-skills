@@ -130,6 +130,8 @@ Created by `wt config shell install`:
   - `Documents/PowerShell/Microsoft.PowerShell_profile.ps1` (PowerShell 7+)
   - `Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1` (Windows PowerShell 5.1)
 
+Fish and Nushell wrappers live at a path named after the command, so install writes that file whole, replacing an existing `functions/wt.fish`, `completions/wt.fish`, or `wt.nu`. Bash, zsh, and PowerShell rc files hold the rest of a shell's setup, so install only appends a line to those.
+
 **PowerShell detection on Windows:** When running from cmd.exe or PowerShell, both PowerShell profile files are created automatically. When running from Git Bash or MSYS2, PowerShell is skipped (use `wt config shell install powershell` to create the profiles explicitly).
 
 **To remove:** `wt config shell uninstall`.
@@ -170,7 +172,7 @@ Worktrunk can delete **worktrees** and **branches**. Both have safeguards.
 
 `wt remove` mirrors `git worktree remove`: it refuses to remove worktrees with uncommitted changes (staged, modified, or untracked files). The `--force` flag removes the worktree anyway, discarding all of those changes.
 
-Removal also refuses, `--force` included, when the directory at a registered path has come to hold a *different* repository — a clone made there after the worktree was deleted, say. `--force` waives uncommitted changes, not the check for whose directory it is, and `git worktree remove` refuses the same case.
+Removal also refuses, `--force` included, when the directory at a registered path no longer holds the worktree registered there — a clone made there after the worktree was deleted, say, or another worktree of the same repository moved onto the path. `--force` waives uncommitted changes, not the check for what the directory holds, and `git worktree remove` refuses the same cases.
 
 To protect a worktree from removal entirely (say it holds a local database), lock it:
 

@@ -7,7 +7,7 @@ allowed-tools:
   - Write
   - Edit
   - Bash
-compatibility: Requires Python >=3.10,<3.14 and crewai 1.x (current 1.15.4). Routes most LLM providers through LiteLLM by default, so provider extras (crewai[anthropic], crewai[aws]/[bedrock], crewai[azure-ai-inference], crewai[google-genai]) are usually optional; install crewai[tools] to pull in the separate crewai-tools package of prebuilt tools (web search, file readers, code execution, etc.).
+compatibility: Requires Python >=3.10,<3.14 and crewai 1.x. Routes most LLM providers through LiteLLM by default, so provider extras (crewai[anthropic], crewai[aws]/[bedrock], crewai[azure-ai-inference], crewai[google-genai]) are usually optional; install crewai[tools] to pull in the separate crewai-tools package of prebuilt tools (web search, file readers, code execution, etc.).
 metadata: {"version": "1.0", "skill-author": "community"}
 ---
 
@@ -143,7 +143,11 @@ cd my_project
 crewai run
 ```
 
-This generates a standard layout (`agents.yaml`, `tasks.yaml`, `crew.py`, `main.py`) that separates agent/task *definitions* (YAML, easy to iterate on without touching code) from orchestration *logic* (Python) — prefer this structure over inlining everything in one script once a project grows past a couple of agents.
+This generates the JSON-first layout: agent definitions live in `agents/*.jsonc`, while tasks, process, and input defaults live in `crew.jsonc`. If you need the older Python/YAML layout with `crew.py`, `config/agents.yaml`, and `config/tasks.yaml`, create it explicitly:
+
+```bash
+crewai create crew my_project --classic
+```
 
 ## Observability
 

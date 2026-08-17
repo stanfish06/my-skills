@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "saved_at": "2026-08-17T02:25:05.703688+00:00",
+  "saved_at": "2026-08-17T02:30:08.517954+00:00",
   "root": "/Users/stan/.agents",
   "skills": {
     "academic-paper": {
-      "claude_enabled": true,
+      "claude_enabled": false,
       "codex_enabled": false
     },
     "academic-paper-reviewer": {

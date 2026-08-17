@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "saved_at": "2026-08-14T04:31:31.060041+00:00",
+  "saved_at": "2026-08-17T01:05:18.452858+00:00",
   "root": "/Users/stan/.agents",
   "skills": {
     "academic-paper": {
@@ -280,6 +280,14 @@
       "codex_enabled": false
     },
     "assertion-quality": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "ast-grep": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "ast-grep-outline": {
       "claude_enabled": true,
       "codex_enabled": true
     },

@@ -217,11 +217,11 @@ class TestWriteReport:
         text = (tmp_path / "report.md").read_text()
         assert "SD=N/A" in text
 
-    def test_report_diameter_auto(self, tmp_path):
-        """None diameter renders as auto-estimated."""
+    def test_report_diameter_unspecified(self, tmp_path):
+        """None diameter reports native-scale inference without rescaling."""
         cell_detection.write_report(self._sample_metrics(), {"diameter": None}, tmp_path)
         text = (tmp_path / "report.md").read_text()
-        assert "auto-estimated" in text
+        assert "not specified (no rescaling; native model scale)" in text
 
     def test_report_diameter_explicit(self, tmp_path):
         """Explicit diameter value is shown in report."""

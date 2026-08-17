@@ -147,7 +147,7 @@ Expected output: report.md with ~67 cells detected from a synthetic 512×512 blo
 - Channels:
   - 2D: channel-order invariant; first 3 channels are used when input has >3 channels
   - 3D with `--z_projection none`: multichannel 4D stacks are kept as `Z×C×Y×X`
-- Diameter: `None` triggers Cellpose auto-estimation
+- Diameter: `None` leaves the image at native scale; a positive value rescales objects toward Cellpose's 30-pixel training diameter
 - 4D stack policy:
   - `--z_projection max` (default): max-project over Z while preserving channels for 2D segmentation (`H×W×C`)
   - `--z_projection none`: preserve Z; 4D stacks remain volumetric (`Z×C×Y×X`) for 3D segmentation

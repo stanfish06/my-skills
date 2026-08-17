@@ -5,3 +5,5 @@
 # .skill-vault/README.md -> "Vendored bundles".
 *.p   binary
 *.mat binary
+
+.github/workflows/*.lock.yml linguist-generated=true

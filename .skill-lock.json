@@ -8832,6 +8832,15 @@
       "skillFolderHash": "86dfd5539de37734e98187c80cdb4b7081ee10bb",
       "installedAt": "2026-08-14T05:36:42.463Z",
       "updatedAt": "2026-08-14T05:36:42.463Z"
+    },
+    "agentic-workflows": {
+      "source": "github/gh-aw",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/github/gh-aw.git",
+      "skillPath": ".github/skills/agentic-workflows/SKILL.md",
+      "skillFolderHash": "6361535bc621b6b6421c2fbc46c4417a73bab53a",
+      "installedAt": "2026-08-17T03:21:27.911Z",
+      "updatedAt": "2026-08-17T03:21:27.911Z"
     }
   },
   "dismissed": {

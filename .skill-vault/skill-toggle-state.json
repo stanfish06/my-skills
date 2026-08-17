@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "saved_at": "2026-08-17T01:05:18.452858+00:00",
+  "saved_at": "2026-08-17T02:25:05.703688+00:00",
   "root": "/Users/stan/.agents",
   "skills": {
     "academic-paper": {
-      "claude_enabled": false,
+      "claude_enabled": true,
       "codex_enabled": false
     },
     "academic-paper-reviewer": {
@@ -152,16 +152,16 @@
       "codex_enabled": true
     },
     "airtable-cli": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "airtable-filters": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "airtable-overview": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "algebraist": {
       "claude_enabled": false,
@@ -192,24 +192,24 @@
       "codex_enabled": true
     },
     "analyzing-dotnet-performance": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "anatomist": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "android-emulator-qa": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "android-performance": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "android-tombstone-symbolication": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "anesthesiologist": {
       "claude_enabled": false,
@@ -424,16 +424,16 @@
       "codex_enabled": true
     },
     "base44-cli": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "base44-sdk": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "base44-troubleshooter": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "baseline-ui": {
       "claude_enabled": true,
@@ -484,12 +484,12 @@
       "codex_enabled": false
     },
     "binlog-failure-analysis": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "binlog-generation": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "bio-analysis-system": {
       "claude_enabled": false,
@@ -708,8 +708,8 @@
       "codex_enabled": false
     },
     "brighthire": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "browser-testing-with-devtools": {
       "claude_enabled": true,
@@ -728,16 +728,16 @@
       "codex_enabled": true
     },
     "build-parallelism": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "build-perf-baseline": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "build-perf-diagnostics": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "build-run-debug": {
       "claude_enabled": true,
@@ -900,28 +900,28 @@
       "codex_enabled": true
     },
     "caveman": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "caveman-commit": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "caveman-compress": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "caveman-help": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "caveman-review": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "caveman-stats": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "cbioportal-skill": {
       "claude_enabled": false,
@@ -988,8 +988,8 @@
       "codex_enabled": false
     },
     "check-bin-obj-clash": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "check-pr": {
       "claude_enabled": true,
@@ -1176,8 +1176,8 @@
       "codex_enabled": true
     },
     "clr-activation-debugging": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "cms": {
       "claude_enabled": true,
@@ -1228,8 +1228,8 @@
       "codex_enabled": true
     },
     "codex-expo-run-actions": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "cognitive-neuroscientist": {
       "claude_enabled": false,
@@ -1376,16 +1376,16 @@
       "codex_enabled": true
     },
     "configuring-opentelemetry-dotnet": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "connectomics-scientist": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "consciousness-council": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "conservation-biologist": {
       "claude_enabled": false,
@@ -1420,20 +1420,20 @@
       "codex_enabled": true
     },
     "convert-blazor-server-to-webapp": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "convert-to-cpm": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "coordinate-components": {
       "claude_enabled": true,
       "codex_enabled": true
     },
     "copy-to-output-directory": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "core": {
       "claude_enabled": true,
@@ -1460,8 +1460,8 @@
       "codex_enabled": true
     },
     "create-blazor-project": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "creating-mermaid-dbt-dag": {
       "claude_enabled": true,
@@ -1512,8 +1512,8 @@
       "codex_enabled": false
     },
     "csharp-scripts": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "cuequivariance": {
       "claude_enabled": true,
@@ -1692,12 +1692,12 @@
       "codex_enabled": true
     },
     "design-taste-frontend-v1": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "detect-static-dependencies": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "devcontainer-setup": {
       "claude_enabled": true,
@@ -1748,8 +1748,8 @@
       "codex_enabled": false
     },
     "directory-build-organization": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "dispatching-parallel-agents": {
       "claude_enabled": true,
@@ -1800,28 +1800,28 @@
       "codex_enabled": true
     },
     "dotnet-aot-compat": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "dotnet-coverage-analysis": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "dotnet-maui-doctor": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "dotnet-pinvoke": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "dotnet-trace-collect": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "dotnet-webapi": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "doubt-driven-development": {
       "claude_enabled": true,
@@ -1856,8 +1856,8 @@
       "codex_enabled": true
     },
     "dump-collect": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "durable-objects": {
       "claude_enabled": true,
@@ -2112,16 +2112,16 @@
       "codex_enabled": false
     },
     "exp-mock-usage-analysis": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "exp-simd-vectorization": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "exp-test-maintainability": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "experimental-physicist": {
       "claude_enabled": false,
@@ -2132,36 +2132,36 @@
       "codex_enabled": true
     },
     "expo-api-routes": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "expo-cicd-workflows": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "expo-deployment": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "expo-dev-client": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "expo-module": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "expo-tailwind-setup": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "expo-ui-jetpack-compose": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "expo-ui-swift-ui": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "extension-points": {
       "claude_enabled": true,
@@ -2484,8 +2484,8 @@
       "codex_enabled": true
     },
     "generate-testability-wrappers": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "genetic-counselor": {
       "claude_enabled": false,
@@ -2720,8 +2720,8 @@
       "codex_enabled": true
     },
     "gpt-taste": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "grade-tests": {
       "claude_enabled": true,
@@ -2756,8 +2756,8 @@
       "codex_enabled": true
     },
     "grill-me": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "grill-with-docs": {
       "claude_enabled": true,
@@ -2856,12 +2856,12 @@
       "codex_enabled": true
     },
     "heygen-avatar": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "heygen-video": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "hf-cli": {
       "claude_enabled": true,
@@ -2900,20 +2900,20 @@
       "codex_enabled": false
     },
     "hubspot": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "hubspot-crm-data-hygiene": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "hubspot-customer-prep": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "hubspot-pipeline-health": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "hugging-science": {
       "claude_enabled": true,
@@ -2984,16 +2984,16 @@
       "codex_enabled": false
     },
     "hyperframes": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "hyperframes-cli": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "hyperframes-registry": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "hypogenic": {
       "claude_enabled": true,
@@ -3068,12 +3068,12 @@
       "codex_enabled": true
     },
     "including-generated-files": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "incremental-build": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "incremental-implementation": {
       "claude_enabled": true,
@@ -3156,24 +3156,24 @@
       "codex_enabled": true
     },
     "ios-app-intents": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ios-debugger-agent": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ios-ettrace-performance": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ios-memgraph-leaks": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ios-simulator-browser": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ipd-skill": {
       "claude_enabled": false,
@@ -3468,180 +3468,180 @@
       "codex_enabled": false
     },
     "matlab": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-analyze-data": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-analyze-dependencies": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-assess-toolbox": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-build-app": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-build-chart": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-build-toolbox": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-call-python": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-choose-bigdata-solution": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-create-buildfile": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-create-live-script": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-create-project": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-debugging": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-define-toolbox-api": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-document-toolbox": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-exclude-files": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-install-products": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-instrument-opentelemetry-tracing": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-list-products": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-modernize-code": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-optimize-memory": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-optimize-performance": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-publish-toolbox": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-read-doc": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-review-code": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-testing": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-theming": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-upgrade-mex-ic": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-validate-function-arguments": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-write-help": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matlab-write-performance-tests": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "matplotlib": {
       "claude_enabled": true,
       "codex_enabled": true
     },
     "maui-app-lifecycle": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "maui-collectionview": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "maui-data-binding": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "maui-dependency-injection": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "maui-safe-area": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "maui-shell-navigation": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "maui-theming": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "mcp-builder": {
       "claude_enabled": true,
       "codex_enabled": true
     },
     "mcp-csharp-create": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "mcp-csharp-debug": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "mcp-csharp-publish": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "mcp-csharp-test": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "mechanical-design-engineer": {
       "claude_enabled": false,
@@ -3760,52 +3760,52 @@
       "codex_enabled": false
     },
     "migrate-dotnet10-to-dotnet11": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "migrate-dotnet8-to-dotnet9": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "migrate-dotnet9-to-dotnet10": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "migrate-dotnetfx-to-net": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "migrate-mstest-v1v2-to-v3": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "migrate-mstest-v3-to-v4": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "migrate-nullable-references": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "migrate-static-to-wrapper": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "migrate-to-shoehorn": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "migrate-vstest-to-mtp": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "migrate-xunit-to-mstest": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "migrate-xunit-to-xunit-v3": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "migrating-dbt-core-to-fusion": {
       "claude_enabled": true,
@@ -3820,8 +3820,8 @@
       "codex_enabled": false
     },
     "minimal-api-file-upload": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "minimal-skill": {
       "claude_enabled": true,
@@ -3836,16 +3836,16 @@
       "codex_enabled": false
     },
     "mixpanel-auth": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "mixpanel-headless-setup": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "mixpanelyst": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "mlflow-onboarding": {
       "claude_enabled": true,
@@ -3964,20 +3964,20 @@
       "codex_enabled": true
     },
     "msbuild-antipatterns": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "msbuild-modernization": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "msbuild-server": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "mtp-hot-reload": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "multiqc-reporter": {
       "claude_enabled": true,
@@ -4100,60 +4100,60 @@
       "codex_enabled": true
     },
     "neon-postgres": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "neon-postgres-egress-optimizer": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "netlify-ai-gateway": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "netlify-blobs": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "netlify-caching": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "netlify-cli-and-deploy": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "netlify-config": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "netlify-deploy": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "netlify-edge-functions": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "netlify-forms": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "netlify-frameworks": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "netlify-functions": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "netlify-identity": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "netlify-image-cdn": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "network-engineer": {
       "claude_enabled": false,
@@ -4528,8 +4528,8 @@
       "codex_enabled": true
     },
     "optimizing-ef-core-queries": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "optoelectronics-engineer": {
       "claude_enabled": false,
@@ -4568,52 +4568,52 @@
       "codex_enabled": true
     },
     "outlook-calendar": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "outlook-calendar-daily-brief": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "outlook-calendar-free-up-time": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "outlook-calendar-group-scheduler": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "outlook-calendar-meeting-prep": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "outlook-calendar-shared-calendars": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "outlook-email": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "outlook-email-inbox-triage": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "outlook-email-reply-drafting": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "outlook-email-shared-mailboxes": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "outlook-email-subscription-cleanup": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "outlook-email-task-extraction": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "packaging-notarization": {
       "claude_enabled": true,
@@ -5064,8 +5064,8 @@
       "codex_enabled": true
     },
     "provision-droplet": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "psycholinguist": {
       "claude_enabled": false,
@@ -5092,12 +5092,12 @@
       "codex_enabled": true
     },
     "pufferlib": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "pufferlib-v2": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "pufferlib-v3": {
       "claude_enabled": true,
@@ -5372,88 +5372,88 @@
       "codex_enabled": true
     },
     "render-background-workers": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-blueprints": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-cli": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-cron-jobs": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-debug": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-deploy": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-disks": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-docker": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-domains": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-env-vars": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-keyvalue": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-mcp": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-migrate-from-heroku": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-monitor": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-networking": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-postgres": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-private-services": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-scaling": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-static-sites": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-web-services": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "render-workflows": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "renewable-energy-scientist": {
       "claude_enabled": false,
@@ -5512,8 +5512,8 @@
       "codex_enabled": false
     },
     "resolve-project-references": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "resolving-merge-conflicts": {
       "claude_enabled": true,
@@ -5820,32 +5820,32 @@
       "codex_enabled": true
     },
     "sharepoint": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "sharepoint-powerpoint": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "sharepoint-shared-doc-maintenance": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "sharepoint-site-discovery": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "sharepoint-spreadsheet-formula-builder": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "sharepoint-spreadsheets": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "sharepoint-word-docs": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "sharp-edges": {
       "claude_enabled": true,
@@ -5856,80 +5856,80 @@
       "codex_enabled": true
     },
     "shopify-admin": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-app-store-review": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-custom-data": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-customer": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-dev": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-functions": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-hydrogen": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-liquid": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-onboarding-dev": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-onboarding-merchant": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-partner": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-payments-apps": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-polaris-admin-extensions": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-polaris-app-home": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-polaris-checkout-extensions": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-polaris-customer-account-extensions": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-pos-ui": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-storefront-graphql": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "shopify-use-shopify-cli": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "sign-in-with-vercel": {
       "claude_enabled": true,
@@ -6184,8 +6184,8 @@
       "codex_enabled": true
     },
     "support-prerendering": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "supramolecular-chemist": {
       "claude_enabled": false,
@@ -6252,8 +6252,8 @@
       "codex_enabled": false
     },
     "system-text-json-net11": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "systematic-debugging": {
       "claude_enabled": true,
@@ -6292,32 +6292,32 @@
       "codex_enabled": true
     },
     "teams": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "teams-channel-summarization": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "teams-daily-digest": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "teams-messages": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "teams-notification-triage": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "teams-planner-task-management": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "teams-reply-drafting": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "tearsheet": {
       "claude_enabled": false,
@@ -6368,8 +6368,8 @@
       "codex_enabled": true
     },
     "temporal-developer": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "terraform": {
       "claude_enabled": true,
@@ -6432,8 +6432,8 @@
       "codex_enabled": false
     },
     "thread-abort-migration": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "threat-model": {
       "claude_enabled": true,
@@ -6564,220 +6564,220 @@
       "codex_enabled": false
     },
     "twilio-account-setup": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-agent-augmentation-architect": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-agent-connect": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-ai-agent-architect": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-call-recordings": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-cli-reference": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-compliance-onboarding": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-compliance-traffic": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-conference-calls": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-content-template-builder": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-conversation-orchestrator": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-conversations-classic-api": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-customer-memory": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-customer-support-architect": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-debugging-observability": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-email-deliverability-advisor": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-email-send": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-enterprise-knowledge": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-iam-auth-setup": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-identity-verification-advisor": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-isv-sms-best-practices": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-lookup-phone-intelligence": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-marketing-promotions-advisor": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-messaging-channel-advisor": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-messaging-overview": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-messaging-services": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-messaging-webhooks": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-notifications-alerts-advisor": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-numbers-senders": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-organizations-setup": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-rcs-messaging": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-regulatory-compliance-bundles": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-reliability-patterns": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-security-api-auth": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-security-compliance-hipaa": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-security-hardening": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-send-message": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-sendgrid-account-setup": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-sendgrid-deliverability-advisor": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-sendgrid-email-send": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-sendgrid-email-settings": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-sendgrid-engagement-quality": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-sendgrid-inbound-parse": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-sendgrid-suppressions": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-sendgrid-webhooks": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-sms-send-message": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-taskrouter-routing": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-verify-send-otp": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-voice-conversation-relay": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-voice-outbound-calls": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-voice-twiml": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-webhook-architecture": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-whatsapp-manage-senders": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "twilio-whatsapp-send-message": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "typescript-data-visualization-engineering": {
       "claude_enabled": true,
@@ -6840,8 +6840,8 @@
       "codex_enabled": true
     },
     "upgrading-expo": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "urban-infrastructure-planner": {
       "claude_enabled": false,
@@ -6852,12 +6852,12 @@
       "codex_enabled": true
     },
     "use-js-interop": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "usfiscaldata": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "using-agent-skills": {
       "claude_enabled": true,
@@ -7076,8 +7076,8 @@
       "codex_enabled": true
     },
     "website-to-hyperframes": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "weed-scientist": {
       "claude_enabled": false,
@@ -7104,8 +7104,8 @@
       "codex_enabled": false
     },
     "what-if-oracle": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "wildlife-biologist": {
       "claude_enabled": false,
@@ -7120,20 +7120,20 @@
       "codex_enabled": true
     },
     "wix-app": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "wix-design-system": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "wix-headless": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "wix-manage": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "workers-best-practices": {
       "claude_enabled": true,
@@ -7172,8 +7172,8 @@
       "codex_enabled": true
     },
     "writing-mstest-tests": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "writing-plans": {
       "claude_enabled": true,
@@ -7204,8 +7204,8 @@
       "codex_enabled": true
     },
     "yeet": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "zarr-python": {
       "claude_enabled": true,

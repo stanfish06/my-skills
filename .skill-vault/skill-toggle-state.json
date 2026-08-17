@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "saved_at": "2026-08-17T02:30:08.517954+00:00",
+  "saved_at": "2026-08-17T07:57:39.444874+00:00",
   "root": "/Users/stan/.agents",
   "skills": {
     "academic-paper": {
@@ -92,6 +92,10 @@
       "codex_enabled": true
     },
     "agentic-actions-auditor": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "agentic-workflows": {
       "claude_enabled": true,
       "codex_enabled": true
     },

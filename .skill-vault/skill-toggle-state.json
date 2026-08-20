@@ -5527,10 +5527,6 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
-    "review": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
     "rf-microwave-engineer": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -6462,14 +6458,6 @@
     "tissue-engineer": {
       "claude_enabled": false,
       "codex_enabled": false
-    },
-    "to-issues": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
-    "to-prd": {
-      "claude_enabled": true,
-      "codex_enabled": true
     },
     "token-integration-analyzer": {
       "claude_enabled": true,

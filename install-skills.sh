@@ -46,6 +46,7 @@ Examples:
 
 Environment:
   SKILLS_CLI_VERSION=<ver>   pin the skills CLI version (default: 1.5.20)
+  CLAUDE_SKILLS_DIR=<path>   Claude Code skills dir (default: ~/.claude/skills)
 
 Environment (honored when the matching extra is enabled):
   GSTACK_SKIP=1              force-skip gstack even with --extras gstack
@@ -185,6 +186,60 @@ else
   echo "ui-ux-pro-max: skipped (pass --extras ui-ux to install)"
 fi
 
+# skills-cli >= 1.5.19 refuses to link a skill whose source already sits in the
+# global store, and this vault *is* that store: its `pathsOverlap(skill.path,
+# canonicalDir)` check returns `skipped: true` before createSymlink runs, so
+# `skills add . -g` prints ✓ for every vault-resident skill while leaving
+# ~/.claude/skills untouched. Link them here instead.
+CLAUDE_SKILLS_DIR="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
+
+link_claude_skills() {
+  local linked=0 current=0 kept=0 pruned=0
+  local link target skill_md name dest src resolved
+
+  mkdir -p "$CLAUDE_SKILLS_DIR"
+
+  # Drop links whose vault skill is gone, so removed skills stop showing up.
+  for link in "$CLAUDE_SKILLS_DIR"/*; do
+    if [ ! -L "$link" ] || [ -e "$link" ]; then
+      continue
+    fi
+    target=$(readlink "$link")
+    case "$target" in
+      "$VAULT_DIR"/skills/*|*/.agents/skills/*)
+        rm -f -- "$link"
+        pruned=$((pruned + 1))
+        ;;
+    esac
+  done
+
+  for skill_md in "$VAULT_DIR"/skills/*/SKILL.md; do
+    [ -f "$skill_md" ] || continue
+    name=$(basename -- "$(dirname -- "$skill_md")")
+    src="$VAULT_DIR/skills/$name"
+    dest="$CLAUDE_SKILLS_DIR/$name"
+
+    if [ -L "$dest" ]; then
+      resolved=$(CDPATH='' cd -P -- "$dest" 2>/dev/null && pwd -P) || resolved=""
+      if [ "$resolved" = "$src" ]; then
+        current=$((current + 1))
+        continue
+      fi
+      ln -snf -- "$src" "$dest"
+      linked=$((linked + 1))
+    elif [ -e "$dest" ]; then
+      # A real directory: a copy-mode install or a separately managed skill
+      # (e.g. graphify). `ln -f` cannot replace it, so leave it alone.
+      kept=$((kept + 1))
+    else
+      ln -s -- "$src" "$dest"
+      linked=$((linked + 1))
+    fi
+  done
+
+  echo "claude-code: $linked linked, $current already current, $kept left as directories, $pruned stale links pruned"
+}
+
 # `npx -y` is required: bare `npx` blocks on npm's "Ok to proceed? (y)" prompt
 # whenever this version isn't already in the npx cache (fresh machine, cleaned
 # cache, or a newly published release). Pinned so an upstream publish can't
@@ -213,6 +268,10 @@ find skills -maxdepth 2 -name SKILL.md -type l -lname '*gstack*' -exec sh -c '
 ' _ {} \; 2>/dev/null || true
 # 2. Remove gstack-prefixed directories created by gstack ./setup --prefix
 find skills -maxdepth 1 -name 'gstack-*' -not -name 'gstack-*.md' -exec rm -rf {} \; 2>/dev/null || true
+
+# Runs after restore_gstack and the artifact purges so the vault holds exactly
+# the skills that should be linked.
+link_claude_skills
 
 if [ "$EXTRA_CAREER" -eq 1 ]; then
   install_career_ops

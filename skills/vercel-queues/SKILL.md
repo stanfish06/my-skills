@@ -62,7 +62,7 @@ Queues is a **durable, append-only event streaming system**. You publish message
 
 ## Key APIs
 
-Package: `@vercel/queue@^0.1.3` (Node.js 22+)
+Package: `@vercel/queue@^0.5.0` (Node.js 20+; this is an actively-changing public beta — verify the current version at https://www.npmjs.com/package/@vercel/queue)
 
 ### Publishing Messages
 

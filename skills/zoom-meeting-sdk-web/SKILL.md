@@ -180,7 +180,7 @@ npm install @zoom/meetingsdk --save
 <script src="https://source.zoom.us/zoom-meeting-embedded-{VERSION}.min.js"></script>
 ```
 
-Replace `{VERSION}` with the [latest version](https://www.npmjs.com/package/@zoom/meetingsdk) (e.g., `3.11.0`).
+Replace `{VERSION}` with the [latest version](https://www.npmjs.com/package/@zoom/meetingsdk) (e.g., `6.2.0`).
 
 ## Quick Start (Client View)
 
@@ -1009,7 +1009,7 @@ if (!requirements.browserInfo.isChrome && !requirements.browserInfo.isFirefox) {
 
 ---
 
-**Documentation Version**: Based on Zoom Web Meeting SDK v3.11+
+**Documentation Version**: Based on Zoom Web Meeting SDK v6.2+ (check https://www.npmjs.com/package/@zoom/meetingsdk for the current version)
 
 **Need help?** Start with [SKILL.md](SKILL.md) for complete navigation.
 

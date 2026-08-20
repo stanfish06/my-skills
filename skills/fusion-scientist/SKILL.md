@@ -82,7 +82,8 @@ experimentalist, modeler, or fusion-energy systems analyst.
   ⁶Li(n,α)T and ⁷Li(n,nα)T reactions with **tritium breeding ratio (TBR) > 1** accounting for
   losses, decay, and hold-up in systems.
 - **Plasma-facing components (PFCs)** must survive steady and transient heat/particle loads;
-  ITER uses **beryllium** first wall and **tungsten** divertor; carbon is largely retired for
+  ITER's 2024 baseline specifies **tungsten** armour for the first wall and divertor;
+  carbon is largely retired for
   reactors because of tritium co-deposition and chemical erosion concerns.
 - Integrated prediction requires coupling **core transport** (TRANSP, TGYRO/GX), **MHD
   equilibrium** (EFIT, CHEASE, VMEC), and **edge/SOL/divertor** (SOLPS-ITER, UEDGE) — a good

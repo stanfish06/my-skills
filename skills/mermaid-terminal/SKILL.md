@@ -1,6 +1,7 @@
 ---
 name: mermaid-terminal
 description: Render Mermaid source locally and preview it in Ghostty, Kitty, or another Kitty-graphics-compatible terminal. Use when a user wants to see a Mermaid diagram without opening a browser; do not use for general image viewing or non-Mermaid diagrams.
+disable-model-invocation: true
 ---
 
 # Mermaid Terminal

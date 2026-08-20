@@ -53,7 +53,7 @@ Help document critical security properties:
 
 Then set up testing:
 - **Echidna**: Property-based fuzzing with invariants
-- **Manticore**: Formal verification with symbolic execution
+- **Halmos**: Formal verification with symbolic execution (Trail of Bits archived Manticore in June 2026; Halmos is the current tool for this)
 - **Custom Slither checks**: Project-specific business logic
 
 **Note**: Most important activity for security
@@ -112,7 +112,7 @@ When I complete the workflow, you'll get a comprehensive security report coverin
 - **Step 1**: Slither findings with severity, file references, and fix recommendations
 - **Step 2**: Special feature validation results (upgradeability, ERC conformance, etc.)
 - **Step 3**: Visual diagrams analyzing inheritance, functions, and state variable authorization
-- **Step 4**: Documented security properties and testing setup (Echidna/Manticore)
+- **Step 4**: Documented security properties and testing setup (Echidna/Halmos)
 - **Step 5**: Manual review findings (privacy, front-running, cryptography, DeFi risks)
 - **Action plan**: Critical/high/medium priority tasks with effort estimates
 - **Workflow checklist**: Progress on all 5 steps
@@ -132,7 +132,7 @@ For a complete example workflow report, see [EXAMPLE_REPORT.md](resources/EXAMPL
 **Action Plan**:
 - [ ] Critical issues to fix immediately
 - [ ] Security properties to document
-- [ ] Testing to set up (Echidna/Manticore)
+- [ ] Testing to set up (Echidna/Halmos)
 - [ ] Manual areas to review
 
 **Workflow Checklist**:

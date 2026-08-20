@@ -28,6 +28,21 @@ DISCLAIMER = (
 )
 
 
+def _positive_float(text: str) -> float:
+    """argparse type: accept only finite, strictly positive floats."""
+    import math
+
+    try:
+        value = float(text)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"not a number: {text!r}")
+    if not math.isfinite(value) or value <= 0:
+        raise argparse.ArgumentTypeError(
+            f"diameter must be a finite, positive number (got {text!r})"
+        )
+    return value
+
+
 def make_demo_image(seed: int = 42) -> np.ndarray:
     """Generate a synthetic fluorescence nuclei image (no network required).
 
@@ -313,7 +328,12 @@ def write_report(metrics: list[dict], meta: dict, output_dir: Path | str, outlin
             f"SD={statistics.stdev(vals):.1f}"
         )
 
-    diameter_used = meta.get("diameter") or "auto-estimated"
+    diameter = meta.get("diameter")
+    diameter_used = (
+        f"{diameter} px"
+        if diameter is not None
+        else "not specified (no rescaling; native model scale)"
+    )
     device = "GPU" if meta.get("use_gpu") else "CPU"
     edge_excluded = "yes" if meta.get("exclude_on_edges") else "no"
     flow_threshold = meta.get("flow_threshold", 0.4)
@@ -326,7 +346,7 @@ def write_report(metrics: list[dict], meta: dict, output_dir: Path | str, outlin
         f"**Image:** {meta.get('image_path', 'demo')}",
         "**Backend:** cpsam (Cellpose 4.0)",
         f"**Device:** {device}",
-        f"**Diameter used:** {diameter_used} px",
+        f"**Diameter used:** {diameter_used}",
         f"**Exclude edge cells:** {edge_excluded}",
         f"**Flow threshold:** {flow_threshold}",
         f"**Cellprob threshold:** {cellprob_threshold}",
@@ -546,7 +566,12 @@ def main() -> None:
         description="cell-detection — cell segmentation using cpsam (Cellpose 4.0)"
     )
     parser.add_argument("--input", help="Input image (TIFF, CZI, ND2, PNG, JPG)")
-    parser.add_argument("--diameter", type=float, default=None, help="Cell diameter in pixels (default: auto)")
+    parser.add_argument(
+        "--diameter",
+        type=_positive_float,
+        default=None,
+        help="Cell diameter in pixels (default: no rescaling)",
+    )
     parser.add_argument(
         "--use_gpu",
         dest="gpu",

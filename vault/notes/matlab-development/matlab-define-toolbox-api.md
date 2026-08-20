@@ -21,7 +21,7 @@ created: 2026-07-26
 ## Related skills
 
 - [matlab-analyze-dependencies](../../notes/matlab-development/matlab-analyze-dependencies.md) — Analyze the effective toolbox file set to produce a Dependency Manifest — classify all transitive dependencies as included, product, add-on, or external-unresolved, then present...
-- [triage](../../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs
+- [triage](../../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

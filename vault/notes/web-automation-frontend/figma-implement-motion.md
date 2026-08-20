@@ -20,7 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
-- [implement](../../notes/software-dev/implement.md) — Implement a piece of work based on a PRD or set of issues
+- [implement](../../notes/software-dev/implement.md) — Implement a piece of work based on a spec or set of tickets
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

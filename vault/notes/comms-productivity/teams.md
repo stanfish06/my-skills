@@ -27,7 +27,7 @@ created: 2026-08-07
 - [teams-notification-triage](../../notes/comms-productivity/teams-notification-triage.md) — Triage recent Microsoft Teams activity into a priority queue or task list for the user
 - [teams-planner-task-management](../../notes/comms-productivity/teams-planner-task-management.md) — Review and manage Microsoft Planner tasks from Teams workflows
 - [teams-reply-drafting](../../notes/comms-productivity/teams-reply-drafting.md) — Draft Microsoft Teams replies from available context
-- [triage](../../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs
+- [triage](../../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs
 - [twilio-organizations-setup](../../notes/saas-platforms/twilio-organizations-setup.md) — Set up and manage Twilio Organizations for centralized account and user governance
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

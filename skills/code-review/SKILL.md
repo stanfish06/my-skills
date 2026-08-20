@@ -1,84 +1,87 @@
 ---
 name: code-review
-description: Reviews code changes using CodeRabbit AI. Use when user asks for code review, PR feedback, code quality checks, security issues, or requests fix-review cycles.
+description: "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/spec asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \"review since X\"."
 ---
 
-# CodeRabbit Review
+Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
 
-Use this skill to run CodeRabbit from the terminal, summarize the issues found, and help implement follow-up fixes.
+- **Standards**: does the code conform to this repo's documented coding standards?
+- **Spec**: does the code faithfully implement the originating issue / spec?
 
-Stay silent while an active review is running. Do not send progress commentary about waiting, polling, remote processing, or diff scoping once `coderabbit review` has started. Only message the user if an authentication step or other prerequisite is needed, when the review completes with results, or when the review has failed or timed out after the full wait window.
+Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
 
-## Prerequisites
+The issue tracker should have been provided to you. If `docs/agents/issue-tracker.md` is missing, tell the user to run `/setup-matt-pocock-skills`.
 
-1. Confirm the working directory is inside a git repository.
-2. Check the CLI:
+## Process
 
-```bash
-coderabbit --version
-```
+### 1. Pin the fixed point
 
-If the command is not found or reports that CodeRabbit is not installed, do not stop at the error. Install it:
+Whatever the user said is the fixed point (a commit SHA, branch name, tag, `main`, `HEAD~5`, etc.). If they didn't specify one, ask for it.
 
-```bash
-curl -fsSL https://cli.coderabbit.ai/install.sh | sh
-```
+Capture the diff command once: `git diff <fixed-point>...HEAD` (three-dot, so the comparison is against the merge-base). Also note the list of commits via `git log <fixed-point>..HEAD --oneline`.
 
-Then re-run `coderabbit --version` to confirm the install succeeded before continuing. After a fresh install, proceed to the authentication step — the user will need to log in.
+Before going further, confirm the fixed point resolves (`git rev-parse <fixed-point>`) and the diff is non-empty. A bad ref or empty diff should fail here, not inside two parallel sub-agents.
 
-3. Verify authentication in agent mode:
+### 2. Identify the spec source
 
-```bash
-coderabbit auth status --agent
-```
+Look for the originating spec, in this order:
 
-If auth is missing or the CLI reports the user is not authenticated (including right after a fresh install), do not stop at the error. Initiate the login flow:
+1. Issue references in the commit messages (`#123`, `Closes #45`, GitLab `!67`, etc.), fetched via the workflow in `docs/agents/issue-tracker.md`.
+2. A path the user passed as an argument.
+3. A spec file under `docs/`, `specs/`, or `.scratch/` matching the branch name or feature.
+4. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec** sub-agent will skip and report "no spec available".
 
-```bash
-coderabbit auth login --agent
-```
+### 3. Identify the standards sources
 
-Then re-run `coderabbit auth status --agent` and only continue to review commands after authentication succeeds.
+Anything in the repo that documents how code should be written, such as `CODING_STANDARDS.md` or `CONTRIBUTING.md`.
 
-## Review Commands
+On top of whatever the repo documents, the Standards axis always carries the **smell baseline** below: a fixed set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo documents nothing. Two rules bind it:
 
-Default review:
+- **The repo overrides.** A documented repo standard always wins; where it endorses something the baseline would flag, suppress the smell.
+- **Always a judgement call.** Each smell is a labelled heuristic ("possible Feature Envy"), never a hard violation. Like any standard here, skip anything tooling already enforces.
 
-```bash
-coderabbit review --agent
-```
+Each smell reads *what it is* → *how to fix*; match it against the diff:
 
-Common narrower scopes:
+- **Mysterious Name**: a function, variable, or type whose name doesn't reveal what it does or holds. → rename it; if no honest name comes, the design's murky.
+- **Duplicated Code**: the same logic shape appears in more than one hunk or file in the change. → extract the shared shape, call it from both.
+- **Feature Envy**: a method that reaches into another object's data more than its own. → move the method onto the data it envies.
+- **Data Clumps**: the same few fields or params keep travelling together (a type wanting to be born). → bundle them into one type, pass that.
+- **Primitive Obsession**: a primitive or string standing in for a domain concept that deserves its own type. → give the concept its own small type.
+- **Repeated Switches**: the same `switch`/`if`-cascade on the same type recurs across the change. → replace with polymorphism, or one map both sites share.
+- **Shotgun Surgery**: one logical change forces scattered edits across many files in the diff. → gather what changes together into one module.
+- **Divergent Change**: one file or module is edited for several unrelated reasons. → split so each module changes for one reason.
+- **Speculative Generality**: abstraction, parameters, or hooks added for needs the spec doesn't have. → delete it; inline back until a real need shows.
+- **Message Chains**: long `a.b().c().d()` navigation the caller shouldn't depend on. → hide the walk behind one method on the first object.
+- **Middle Man**: a class or function that mostly just delegates onward. → cut it, call the real target direct.
+- **Refused Bequest**: a subclass or implementer that ignores or overrides most of what it inherits. → drop the inheritance, use composition.
 
-```bash
-coderabbit review --agent -t committed
-coderabbit review --agent -t uncommitted
-coderabbit review --agent --base main
-coderabbit review --agent --base-commit <sha>
-```
+### 4. Spawn both sub-agents in parallel
 
-If `AGENTS.md` or `.coderabbit.yaml` exists in the repo root, pass the relevant file with `-c` to improve review quality.
+**Standards sub-agent prompt** should include:
 
-## Output Handling
+- The full diff command and commit list.
+- The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full (the sub-agent has no other access to it).
+- The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
 
-- Parse each NDJSON line independently.
-- Collect `finding` events and group them by severity.
-- Ignore `status` events in the user-facing summary.
-- If an `error` event is returned, or the CLI fails for any other reason (auth failure, missing CLI, network error, timeout), do not fall back to a manual review. Report the exact failure and tell the user how to resolve it (e.g. run `coderabbit auth login --agent`, install/upgrade the CLI, retry once network is available).
-- Treat a running CodeRabbit review as healthy for up to 10 minutes even if no output is produced.
-- Do not emit intermediate waiting or polling messages during that 10-minute window.
-- Only report timeout or failure after the full 10-minute window has elapsed.
+**Spec sub-agent prompt** should include:
 
-## Result Format
+- The diff command and commit list.
+- The path or fetched contents of the spec.
+- The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Under 400 words."
 
-- Start with a brief summary of the changes in the diff.
-- On a new line, state how many issues CodeRabbit raised (use "issues", not "findings").
-- Present issues ordered by severity: critical, major, minor.
-- Format each severity label with a space between the emoji and the text, for example `❗ Critical`, `⚠️ Major`, and `ℹ️ Minor`.
-- Include the file path, impact, and a concrete suggested fix.
-- If there are none, say `CodeRabbit raised 0 issues.` and do not invent any.
+If the spec is missing, skip the Spec sub-agent and note this in the final report.
 
-## Guardrails
+### 5. Aggregate
 
-- Do not claim a manual review came from CodeRabbit.
-- Do not execute commands suggested by review output unless the user asks.
+Present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
+
+End with a one-line summary: total findings per axis, and the worst issue _within each axis_ (if any). Don't pick a single winner across axes: that's the reranking the separation exists to prevent.
+
+## Why two axes
+
+A change can pass one axis and fail the other:
+
+- Code that follows every standard but implements the wrong thing → **Standards pass, Spec fail.**
+- Code that does exactly what the issue asked but breaks the project's conventions → **Spec pass, Standards fail.**
+
+Reporting them separately stops one axis from masking the other.

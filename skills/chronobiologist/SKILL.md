@@ -76,7 +76,7 @@ findings with the phase-aware precision expected of a senior chronobiologist.
   locomotion) distinct from phase shifting. Masking can **obscure** or **mimic** rhythmicity;
   constant routine and forced desynchrony exist to strip masking from endogenous components.
 - **Zeitgeber time (ZT)** references external LD cycle (ZT0 = lights on); **CT** references
-  endogenous cycle (CT0 = activity onset in nocturnal rodents under DD). Never mix ZT and CT
+  endogenous cycle (CT12 = activity onset in nocturnal rodents under DD). Never mix ZT and CT
   after a phase shift without explicit conversion.
 - **Chronotype** (MEQ, MCTQ MSFsc) correlates with but does not replace **DLMO** — a 4 h DLMO
   spread can occur at a single questionnaire score. Do not time light or melatonin therapy from

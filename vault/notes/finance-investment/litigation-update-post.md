@@ -14,7 +14,7 @@ created: 2026-08-07
 # litigation-update-post
 
 > [!info] What it does
-> Writes public-facing litigation updates — blog posts, client alerts, LinkedIn/X posts — on a federal case or legal development. Use to \"write a blog post about…,\" \"draft a client alert on…\
+> Writes public-facing litigation updates — blog posts, client alerts, LinkedIn/X posts — on a federal case or legal development. Use to "write a blog post about…," "draft a client alert on…"
 
 **Source:** [skills/litigation-update-post/SKILL.md](../../../skills/litigation-update-post/SKILL.md)  ·  **Domain:** [Finance, Investment & Business Analysis](../../maps/finance-investment.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

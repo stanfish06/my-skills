@@ -21,7 +21,6 @@ created: 2026-06-09
 ## Related skills
 
 - [llm-agent-security-redteam](../../notes/security-auditing/llm-agent-security-redteam.md) — LLM and agent security red teaming with agentic-actions-auditor, supply-chain-risk-auditor, semgrep, codeql, and sarif-parsing
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 - [supply-chain](../../notes/finance-investment/supply-chain.md) — Interactive supply chain dashboard mapping suppliers, customers, and financial interdependencies
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

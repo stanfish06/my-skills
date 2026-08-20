@@ -21,7 +21,6 @@ created: 2026-06-09
 ## Related skills
 
 - [academic-pipeline](../../notes/academic-pipelines/academic-pipeline.md) — Orchestrator for the full academic research pipeline: research -> write -> integrity check -> review -> revise -> re-review -> re-revise -> final integrity check -> finalize
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 - [verification](../../notes/software-dev/verification.md) — Full-story verification — infers what the user is building, then verifies the complete flow end-to-end: browser → API → data → response
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

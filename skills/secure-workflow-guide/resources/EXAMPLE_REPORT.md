@@ -166,7 +166,7 @@ contract StakingInvariants {
 ✓ No violations found
 ✓ Coverage: 94% of contract code
 
-**Next Step:** Run Manticore for formal verification (optional, 2-3 days)
+**Next Step:** Run Halmos for formal verification (optional, 2-3 days)
 
 ---
 
@@ -247,7 +247,7 @@ N/A - Contract doesn't use cryptographic operations
 
 ### Medium Priority (Nice to Have)
 
-6. **Add Manticore formal verification**
+6. **Add Halmos formal verification**
    - Verify critical properties formally
    - Estimated effort: 1 week
    - Impact: High confidence

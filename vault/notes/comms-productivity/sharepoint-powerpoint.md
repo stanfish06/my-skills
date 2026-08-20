@@ -22,7 +22,6 @@ created: 2026-08-07
 
 - [pptx](../../notes/documents-office/pptx.md) — Presentation toolkit (.pptx). Create/edit slides, layouts, content, speaker notes, comments, for programmatic presentation creation and modification
 - [qa](../../notes/software-dev/qa.md) — Interactive QA session where user reports bugs or issues conversationally, and the agent files GitHub issues
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 - [sharepoint](../../notes/comms-productivity/sharepoint.md) — Inspect Microsoft SharePoint context, discover the right site or library, and prepare safe changes
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

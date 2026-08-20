@@ -1,4 +1,5 @@
 interface:
   display_name: "Ask Matt"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $ask-matt for this task."
+  short_description: "Find the right skill or workflow"
+policy:
+  allow_implicit_invocation: false

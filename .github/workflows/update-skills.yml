@@ -72,6 +72,11 @@ jobs:
           # touches github-sourced global skills; `-y` makes it non-interactive.
           npx -y skills@1.5.10 update -g -y
 
+      - name: Soften coercive skill descriptions
+        # Upstream SKILL.md files ship MUST / ALWAYS catalog copy that hijacks
+        # matching. Re-apply after each pull; the next rebuild picks it up.
+        run: ./soften_skill_description.sh
+
       - name: Rebuild navigation layer
         # --prune drops wrapper notes for skills removed upstream (and their
         # personal notes). Safe here because this job is the upstream-sync path.

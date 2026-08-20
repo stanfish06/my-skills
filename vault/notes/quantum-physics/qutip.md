@@ -21,6 +21,7 @@ created: 2026-06-09
 - [cirq](../../notes/quantum-physics/cirq.md) — Google quantum computing framework. Use when targeting Google Quantum AI hardware, designing noise-aware circuits, or running quantum characterization experiments
 - [pennylane](../../notes/quantum-physics/pennylane.md) — Hardware-agnostic quantum ML framework with automatic differentiation
 - [qiskit](../../notes/quantum-physics/qiskit.md) — IBM quantum computing framework. Use when targeting IBM Quantum hardware, working with Qiskit Runtime for production workloads, or needing IBM optimization tools
+- [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

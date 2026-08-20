@@ -10,7 +10,7 @@ description: Diagnose and fix failing CircleCI builds quickly and safely. Use wh
 Use this skill to turn failing CircleCI pipelines into actionable fixes with clear evidence. Prioritize fast root-cause isolation, minimal safe patches, and explicit validation criteria.
 
 Read `references/transient-vs-deterministic.md` when deciding whether a failure should be fixed in code/config, retried, mitigated with rerun behavior, or reported as external/transient.
-Read `../config/references/test-results-and-splitting.md` when the failure involves missing test metadata, flaky test reruns, test splitting, or JUnit XML setup.
+Read `../circleci-config/references/test-results-and-splitting.md` when the failure involves missing test metadata, flaky test reruns, test splitting, or JUnit XML setup.
 
 ## Inputs To Gather
 

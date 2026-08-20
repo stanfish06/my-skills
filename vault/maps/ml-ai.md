@@ -16,7 +16,7 @@ created: 2026-06-13
 
 ## Skills (48)
 
-- [aeon](../notes/ml-ai/aeon.md) — This skill should be used for time series machine learning tasks including classification, regression, clustering, forecasting, anomaly detection, segmentation, and similarity search
+- [aeon](../notes/ml-ai/aeon.md) — Use for time series machine learning tasks including classification, regression, clustering, forecasting, anomaly detection, segmentation, and similarity search
 - [agents-sdk](../notes/ml-ai/agents-sdk.md) — Build AI agents on Cloudflare Workers using the Agents SDK
 - [ai-elements](../notes/ml-ai/ai-elements.md) — AI Elements component library guidance — pre-built React components for AI interfaces built on shadcn/ui
 - [ai-gateway](../notes/ml-ai/ai-gateway.md) — Vercel AI Gateway expert guidance. Use when configuring model routing, provider failover, cost tracking, or managing multiple AI providers through a unified API
@@ -37,8 +37,8 @@ created: 2026-06-13
 - [huggingface-community-evals](../notes/ml-ai/huggingface-community-evals.md) — Run evaluations for Hugging Face Hub models using inspect-ai and lighteval on local hardware
 - [huggingface-datasets](../notes/ml-ai/huggingface-datasets.md) — Use this skill for Hugging Face Dataset Viewer API workflows that fetch subset/split metadata, paginate rows, search text, apply filters, download parquet URLs, and read size or...
 - [huggingface-gradio](../notes/ml-ai/huggingface-gradio.md) — Build Gradio web UIs and demos in Python
-- [huggingface-jobs](../notes/ml-ai/huggingface-jobs.md) — This skill should be used when users want to run any workload on Hugging Face Jobs infrastructure
-- [huggingface-llm-trainer](../notes/ml-ai/huggingface-llm-trainer.md) — This skill should be used when users want to train or fine-tune language models using TRL (Transformer Reinforcement Learning) on Hugging Face Jobs infrastructure
+- [huggingface-jobs](../notes/ml-ai/huggingface-jobs.md) — Use when users want to run any workload on Hugging Face Jobs infrastructure
+- [huggingface-llm-trainer](../notes/ml-ai/huggingface-llm-trainer.md) — Use when users want to train or fine-tune language models using TRL (Transformer Reinforcement Learning) on Hugging Face Jobs infrastructure
 - [huggingface-paper-publisher](../notes/ml-ai/huggingface-paper-publisher.md) — Publish and manage research papers on Hugging Face Hub
 - [huggingface-papers](../notes/ml-ai/huggingface-papers.md) — Look up and read Hugging Face paper pages in markdown, and use the papers API for structured metadata such as authors, linked models/datasets/spaces, Github repo and project page
 - [huggingface-trackio](../notes/ml-ai/huggingface-trackio.md) — Track and visualize ML training experiments with Trackio

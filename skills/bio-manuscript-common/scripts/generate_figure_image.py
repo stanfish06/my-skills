@@ -97,7 +97,9 @@ Panel 类型：{panel_descriptions.get(panel_type, panel_type)}
             # 实际调用 Gemini API
             # import google.generativeai as genai
             # genai.configure(api_key=self.api_key)
-            # model = genai.GenerativeModel('gemini-pro-vision')
+            # 'gemini-pro-vision' was retired; use the current image-capable
+            # model id from https://ai.google.dev/gemini-api/docs/models
+            # model = genai.GenerativeModel(GEMINI_IMAGE_MODEL)
             # response = model.generate_content(prompt)
             # ... 保存图片
             

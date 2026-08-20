@@ -1,4 +1,0 @@
-interface:
-  display_name: "To Prd"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $to-prd for this task."

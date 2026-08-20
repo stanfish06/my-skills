@@ -1,17 +1,16 @@
 ---
 name: vdr-index-setup
 description: >
-  VDR Index Setup skill for Datasite deal rooms. Use this skill whenever
-  a user wants to create, propose, design, or set up a Virtual Data Room (VDR) index
-  or folder structure for a deal. Triggers include: "set up a data room", "create a
-  VDR index", "build a deal room structure", "prepare the index", "set up the fileroom",
-  "I need a data room for [deal/company]", or any request to organise or structure
-  documents for due diligence. Also triggers when a user wants to replicate an existing
-  deal room structure or import an index from a spreadsheet or reference deal. This skill
-  MUST be used whenever the user is starting a new deal room or wants to customise the
-  folder hierarchy before documents are uploaded.
-  Do not use to audit or review an existing data room — use gap-analysis,
-  document-quality-check, or risk-analysis-audit for that.
+  VDR Index Setup skill for Datasite deal rooms. Use this skill whenever a user wants to
+  create, propose, design, or set up a Virtual Data Room (VDR) index or folder structure
+  for a deal. Triggers include: "set up a data room", "create a VDR index", "build a deal
+  room structure", "prepare the index", "set up the fileroom", "I need a data room for
+  [deal/company]", or any request to organise or structure documents for due diligence.
+  Also triggers when a user wants to replicate an existing deal room structure or import
+  an index from a spreadsheet or reference deal. Use when the user is starting a new deal
+  room or wants to customise the folder hierarchy before documents are uploaded. Do not
+  use to audit or review an existing data room — use gap-analysis, document-quality-check,
+  or risk-analysis-audit for that.
 metadata:
   author: Blueflame AI
   version: 1.0.0

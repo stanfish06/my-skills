@@ -1,12 +1,12 @@
 ---
 name: twilio-compliance-traffic
 description: >
-  Rules you must follow for Twilio messaging and voice traffic. Covers
-  TCPA (consent tiers, quiet hours, DNC), GDPR (EU consent, right to
-  deletion), PCI DSS (payment recording, Pay verb), HIPAA (BAA, PHI),
-  FDCPA (debt collection limits), CAN-SPAM, WhatsApp policies,
-  SHAKEN/STIR, and consent management patterns. Use this skill proactively
-  when developers have working traffic to ensure they follow the rules.
+  Rules for Twilio messaging and voice traffic. Covers TCPA (consent tiers, quiet hours,
+  DNC), GDPR (EU consent, right to deletion), PCI DSS (payment recording, Pay verb), HIPAA
+  (BAA, PHI), FDCPA (debt collection limits), CAN-SPAM, WhatsApp policies, SHAKEN/STIR,
+  and consent management patterns. Use when developers have working traffic to ensure they
+  follow the rules.
+
 ---
 
 ## Overview

@@ -1745,9 +1745,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/property-based-testing/skills/property-based-testing/SKILL.md",
-      "skillFolderHash": "9e6ee140fdea2875e06a05f5fe90559163e9207a",
+      "skillFolderHash": "cba63e1f5f8ed793b6c682a7e3075e1ef1b4ad63",
       "installedAt": "2026-06-09T19:28:14.017Z",
-      "updatedAt": "2026-06-09T19:28:14.017Z"
+      "updatedAt": "2026-08-18T07:02:21.878Z"
     },
     "semgrep-rule-creator": {
       "source": "trailofbits/skills",
@@ -2033,27 +2033,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman/SKILL.md",
-      "skillFolderHash": "3e4386ca694c65a65ba84024f0fe2646a8c9076a",
+      "skillFolderHash": "bdf0c87a2bdd47fc7fe9008c40cc6491ee801b81",
       "installedAt": "2026-06-13T13:23:12.859Z",
-      "updatedAt": "2026-08-10T04:45:28.653Z"
+      "updatedAt": "2026-08-17T07:14:08.978Z"
     },
     "caveman-compress": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-compress/SKILL.md",
-      "skillFolderHash": "b251ec60119a86c4d0da6651b0d2b0cbe06d3c97",
+      "skillFolderHash": "19b670a696e5a91aba40758b1a97f0ca4783caee",
       "installedAt": "2026-06-13T13:27:36.566Z",
-      "updatedAt": "2026-08-12T07:49:41.804Z"
+      "updatedAt": "2026-08-19T07:03:12.211Z"
     },
     "cavecrew": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/cavecrew/SKILL.md",
-      "skillFolderHash": "326ab384eb445cc0a74608d6f0c0abe6558bb44a",
+      "skillFolderHash": "9633b42303f12d321c80c9578b23c0f439667af5",
       "installedAt": "2026-06-13T13:42:44.373Z",
-      "updatedAt": "2026-08-10T04:45:31.534Z"
+      "updatedAt": "2026-08-17T07:14:11.802Z"
     },
     "caveman-commit": {
       "source": "juliusbrussee/caveman",
@@ -2456,9 +2456,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/proteinmpnn-nim/SKILL.md",
-      "skillFolderHash": "e2d9391db085954b112e2a580f0e0edb0315f136",
+      "skillFolderHash": "113ea119cccf20774d7b4c9a5bc4c808352ca361",
       "installedAt": "2026-06-28T21:15:35.327Z",
-      "updatedAt": "2026-08-13T07:51:28.045Z"
+      "updatedAt": "2026-08-18T07:02:23.249Z"
     },
     "rfdiffusion-nim": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
@@ -4251,15 +4251,6 @@
       "skillFolderHash": "be98ba7cd0ca428307906a3b1760077343881e06",
       "installedAt": "2026-08-07T16:12:47.217Z",
       "updatedAt": "2026-08-07T16:12:47.217Z"
-    },
-    "code-review": {
-      "source": "openai/plugins",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/openai/plugins.git",
-      "skillPath": "plugins/coderabbit/skills/coderabbit-review/SKILL.md",
-      "skillFolderHash": "8873102384a592da3e4e3dbe1120e829c352ce55",
-      "installedAt": "2026-08-07T16:12:47.219Z",
-      "updatedAt": "2026-08-07T16:12:47.219Z"
     },
     "attack-path-analysis": {
       "source": "openai/plugins",
@@ -8811,9 +8802,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "64f71b070d90ccebd7bfa66142b7a1a0832ca595",
+      "skillFolderHash": "f6e64d8b5232cf4b14ff9b3c0f56667269e00f84",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-08-16T06:57:23.762Z"
+      "updatedAt": "2026-08-19T07:03:18.849Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8841,6 +8832,715 @@
       "skillFolderHash": "6361535bc621b6b6421c2fbc46c4417a73bab53a",
       "installedAt": "2026-08-17T03:21:27.911Z",
       "updatedAt": "2026-08-17T03:21:27.911Z"
+    },
+    "reverse-skill-router": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/SKILL.md",
+      "skillFolderHash": "4d1bfece7a9531eff86a193650286b23bc459691",
+      "installedAt": "2026-08-20T02:13:18.927Z",
+      "updatedAt": "2026-08-20T02:19:55.488Z"
+    },
+    "api-security": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/api-security/SKILL.md",
+      "skillFolderHash": "06a3c1308aa641ece27bc18137af37d70e35eee6",
+      "installedAt": "2026-08-20T02:13:18.942Z",
+      "updatedAt": "2026-08-20T02:19:55.492Z"
+    },
+    "apk-reverse": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/apk-reverse/SKILL.md",
+      "skillFolderHash": "66b1c7ad94730144fb8b04fb844bf269e759c472",
+      "installedAt": "2026-08-20T02:13:18.950Z",
+      "updatedAt": "2026-08-20T02:19:55.494Z"
+    },
+    "attack-chain": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/attack-chain/SKILL.md",
+      "skillFolderHash": "9ab52f56ac66c1a1665b7754676a159cf836bfab",
+      "installedAt": "2026-08-20T02:13:18.959Z",
+      "updatedAt": "2026-08-20T02:19:55.496Z"
+    },
+    "binary-diff": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/binary-diff/SKILL.md",
+      "skillFolderHash": "69110d3508bd930168d1ced1a5a5b1374d9f6c8c",
+      "installedAt": "2026-08-20T02:13:18.964Z",
+      "updatedAt": "2026-08-20T02:19:55.498Z"
+    },
+    "browser-automation": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/browser-automation/SKILL.md",
+      "skillFolderHash": "08d56fd96ab1236a1e0ecfed06161c109b08ea6e",
+      "installedAt": "2026-08-20T02:13:18.974Z",
+      "updatedAt": "2026-08-20T02:19:55.500Z"
+    },
+    "browser-extension-reverse": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/browser-extension-reverse/SKILL.md",
+      "skillFolderHash": "69fdb21ea6d56479d1f6251de13c4efa91c88269",
+      "installedAt": "2026-08-20T02:13:18.995Z",
+      "updatedAt": "2026-08-20T02:19:55.504Z"
+    },
+    "case-review": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/case-review/SKILL.md",
+      "skillFolderHash": "00e475b394511da1b437ece5a17431e5473487b0",
+      "installedAt": "2026-08-20T02:13:19.004Z",
+      "updatedAt": "2026-08-20T02:19:55.506Z"
+    },
+    "cloud-k8s": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/cloud-k8s/SKILL.md",
+      "skillFolderHash": "9918b25c0c1d5cf507d636e0f64bc596e8900879",
+      "installedAt": "2026-08-20T02:13:19.234Z",
+      "updatedAt": "2026-08-20T02:19:55.509Z"
+    },
+    "code-audit": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/code-audit/SKILL.md",
+      "skillFolderHash": "48fedbc98b5eb34529bc73b80e154913dc872dd4",
+      "installedAt": "2026-08-20T02:13:19.261Z",
+      "updatedAt": "2026-08-20T02:19:55.516Z"
+    },
+    "database-security": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/database-security/SKILL.md",
+      "skillFolderHash": "8a83c677a20b9a63d523fb927a3b7e1ecf2415ec",
+      "installedAt": "2026-08-20T02:13:19.322Z",
+      "updatedAt": "2026-08-20T02:19:55.520Z"
+    },
+    "diagram-generator": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/diagram-generator/SKILL.md",
+      "skillFolderHash": "f4a3160a5262a1a956b3234b5f03b604a19dfc20",
+      "installedAt": "2026-08-20T02:13:19.332Z",
+      "updatedAt": "2026-08-20T02:19:55.524Z"
+    },
+    "digital-forensics": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/digital-forensics/SKILL.md",
+      "skillFolderHash": "b9257f39ccb2dab3eeda0d97ccfa97946a7c81dc",
+      "installedAt": "2026-08-20T02:13:19.474Z",
+      "updatedAt": "2026-08-20T02:19:55.526Z"
+    },
+    "docs-generator": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/docs-generator/SKILL.md",
+      "skillFolderHash": "9e0c8b411d03b6c7b4bf965c8c6bb8b1c3cd2f22",
+      "installedAt": "2026-08-20T02:13:19.507Z",
+      "updatedAt": "2026-08-20T02:19:55.528Z"
+    },
+    "dotnet-reverse": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/dotnet-reverse/SKILL.md",
+      "skillFolderHash": "ae66fc41e9df6f88e42f901c4404f81cdee61c8f",
+      "installedAt": "2026-08-20T02:13:19.549Z",
+      "updatedAt": "2026-08-20T02:19:55.530Z"
+    },
+    "edr-bypass-re": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/edr-bypass-re/SKILL.md",
+      "skillFolderHash": "87ca6bf2f1ef81e851b951dc467a018f57a3f0e6",
+      "installedAt": "2026-08-20T02:13:19.580Z",
+      "updatedAt": "2026-08-20T02:19:55.534Z"
+    },
+    "email-security": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/email-security/SKILL.md",
+      "skillFolderHash": "1645b7ddafbe0e7eafe7cad1a057eb4a3cf79d86",
+      "installedAt": "2026-08-20T02:13:19.589Z",
+      "updatedAt": "2026-08-20T02:19:55.536Z"
+    },
+    "firmware-pentest": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/firmware-pentest/SKILL.md",
+      "skillFolderHash": "558d942dcdb98a3a48e3663c1173dbef4aea7758",
+      "installedAt": "2026-08-20T02:13:19.605Z",
+      "updatedAt": "2026-08-20T02:19:55.538Z"
+    },
+    "ghidra-reverse": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/ghidra-reverse/SKILL.md",
+      "skillFolderHash": "2fc960c518888770dda777ed05701b662174792b",
+      "installedAt": "2026-08-20T02:13:19.614Z",
+      "updatedAt": "2026-08-20T02:19:55.542Z"
+    },
+    "go-rust-reverse": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/go-rust-reverse/SKILL.md",
+      "skillFolderHash": "9982f05d383e388c769597e3abd874575a42f725",
+      "installedAt": "2026-08-20T02:13:19.619Z",
+      "updatedAt": "2026-08-20T02:19:55.544Z"
+    },
+    "hardware-security": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/hardware-security/SKILL.md",
+      "skillFolderHash": "e869f77f214a9a422077b8ec04c0e4bbf8079e11",
+      "installedAt": "2026-08-20T02:13:19.623Z",
+      "updatedAt": "2026-08-20T02:19:55.547Z"
+    },
+    "ida-reverse": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/ida-reverse/SKILL.md",
+      "skillFolderHash": "b31ce80bc8945210718ff386df67e5bc25498bff",
+      "installedAt": "2026-08-20T02:13:19.667Z",
+      "updatedAt": "2026-08-20T02:20:39.759Z"
+    },
+    "identity-federation": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/identity-federation/SKILL.md",
+      "skillFolderHash": "cee27c9e8eb68d5ebc0a1ca24617b0920bc6b8cb",
+      "installedAt": "2026-08-20T02:13:19.672Z",
+      "updatedAt": "2026-08-20T02:19:55.554Z"
+    },
+    "js-reverse": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/js-reverse/SKILL.md",
+      "skillFolderHash": "58ce528df9609e5edb617249951d77ca227ef34e",
+      "installedAt": "2026-08-20T02:13:19.683Z",
+      "updatedAt": "2026-08-20T02:19:55.559Z"
+    },
+    "llm-security": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/llm-security/SKILL.md",
+      "skillFolderHash": "23fbb1b8b84b275e56baad01f757ea5180aaa277",
+      "installedAt": "2026-08-20T02:13:19.688Z",
+      "updatedAt": "2026-08-20T02:19:55.561Z"
+    },
+    "macos-reverse": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/macos-reverse/SKILL.md",
+      "skillFolderHash": "6bb3de99931e8ae3c41099ebd652bd9244bf2923",
+      "installedAt": "2026-08-20T02:13:19.692Z",
+      "updatedAt": "2026-08-20T02:19:55.563Z"
+    },
+    "malware-analysis": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/malware-analysis/SKILL.md",
+      "skillFolderHash": "9e870e0494a7501ac88b5ea81e9211dfc0082e70",
+      "installedAt": "2026-08-20T02:13:19.696Z",
+      "updatedAt": "2026-08-20T02:19:55.565Z"
+    },
+    "mobile-reverse": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/mobile-reverse/SKILL.md",
+      "skillFolderHash": "20cfcd98640acf7aeea60d0d4f1531a32223e568",
+      "installedAt": "2026-08-20T02:13:19.701Z",
+      "updatedAt": "2026-08-20T02:19:55.570Z"
+    },
+    "ot-ics": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/ot-ics/SKILL.md",
+      "skillFolderHash": "d1a5d2f0e262d23ed62e172f226a8ff9cdb2d022",
+      "installedAt": "2026-08-20T02:13:19.704Z",
+      "updatedAt": "2026-08-20T02:19:55.573Z"
+    },
+    "patch-diff-exploit": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/patch-diff-exploit/SKILL.md",
+      "skillFolderHash": "cd82ccb8b371989dcf3ab6c24a828eb53a567ca4",
+      "installedAt": "2026-08-20T02:13:19.707Z",
+      "updatedAt": "2026-08-20T02:19:55.577Z"
+    },
+    "pentest-tools": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/pentest-tools/SKILL.md",
+      "skillFolderHash": "69b4f212e1ebdd445a51463ecbcf58e1efaf9ebe",
+      "installedAt": "2026-08-20T02:13:19.709Z",
+      "updatedAt": "2026-08-20T02:19:55.581Z"
+    },
+    "protocol-reverse": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/protocol-reverse/SKILL.md",
+      "skillFolderHash": "a68172ca067ecfc00194ef9d28b50617190379ce",
+      "installedAt": "2026-08-20T02:13:19.714Z",
+      "updatedAt": "2026-08-20T02:19:55.583Z"
+    },
+    "pwn-chain": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/pwn-chain/SKILL.md",
+      "skillFolderHash": "e9d945e841fdf06b3bc9c8a18de0eb3f544cf7ff",
+      "installedAt": "2026-08-20T02:13:19.720Z",
+      "updatedAt": "2026-08-20T02:19:55.586Z"
+    },
+    "radare2": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/radare2/SKILL.md",
+      "skillFolderHash": "aa7a391f9e49759b32ec5a67d2ff2c08e8674531",
+      "installedAt": "2026-08-20T02:13:19.737Z",
+      "updatedAt": "2026-08-20T02:19:55.589Z"
+    },
+    "radio-sdr": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/radio-sdr/SKILL.md",
+      "skillFolderHash": "604ae1788aa0792497139fb579fc117603e4b20b",
+      "installedAt": "2026-08-20T02:13:19.739Z",
+      "updatedAt": "2026-08-20T02:19:55.595Z"
+    },
+    "reverse-engineering": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/reverse-engineering/SKILL.md",
+      "skillFolderHash": "07476066b1642e91c000aef71ceb0443139809d8",
+      "installedAt": "2026-08-20T02:13:19.746Z",
+      "updatedAt": "2026-08-20T02:19:55.597Z"
+    },
+    "supply-chain-security": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/supply-chain-security/SKILL.md",
+      "skillFolderHash": "344f4ef688723e09dee1bfac129ba68e108111e1",
+      "installedAt": "2026-08-20T02:13:19.757Z",
+      "updatedAt": "2026-08-20T02:19:55.600Z"
+    },
+    "thick-client": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/thick-client/SKILL.md",
+      "skillFolderHash": "08a6c727e960b2262ebec5c0dae8141298761cdc",
+      "installedAt": "2026-08-20T02:13:19.766Z",
+      "updatedAt": "2026-08-20T02:19:55.601Z"
+    },
+    "threat-hunting": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/threat-hunting/SKILL.md",
+      "skillFolderHash": "106547b8564bc34329e0e11ba8a039ae5a297aa7",
+      "installedAt": "2026-08-20T02:13:19.772Z",
+      "updatedAt": "2026-08-20T02:19:55.603Z"
+    },
+    "wifi-wireless": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/wifi-wireless/SKILL.md",
+      "skillFolderHash": "cb82c1a3ecc235b8665d2f5aec7713cba9121977",
+      "installedAt": "2026-08-20T02:13:19.779Z",
+      "updatedAt": "2026-08-20T02:19:55.605Z"
+    },
+    "windows-ad": {
+      "source": "zhaoxuya520/reverse-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
+      "skillPath": "skills/windows-ad/SKILL.md",
+      "skillFolderHash": "ad25e21e81fa2c2deb66d794481b2d7f6b117221",
+      "installedAt": "2026-08-20T02:13:19.784Z",
+      "updatedAt": "2026-08-20T02:19:55.607Z"
+    },
+    "wayfinder": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/wayfinder/SKILL.md",
+      "skillFolderHash": "8ec0462658381bd1606d3f9db14ffc67df6a2a43",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:51:51.559Z",
+      "updatedAt": "2026-08-20T03:51:51.559Z"
+    },
+    "research": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/research/SKILL.md",
+      "skillFolderHash": "0a6796c5667e95ed2301ba7381c123b4acb2ae1a",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:01.617Z",
+      "updatedAt": "2026-08-20T03:52:01.617Z"
+    },
+    "wizard": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/wizard/SKILL.md",
+      "skillFolderHash": "0a163daf092c6f361158ca9627e81f2cb5230574",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:01.621Z",
+      "updatedAt": "2026-08-20T03:52:01.621Z"
+    },
+    "ask-matt": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/ask-matt/SKILL.md",
+      "skillFolderHash": "85f3ba59f22c16de988e36b781ae46d0d9098f94",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.190Z",
+      "updatedAt": "2026-08-20T03:52:19.190Z"
+    },
+    "codebase-design": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/codebase-design/SKILL.md",
+      "skillFolderHash": "344e3efc88ee60663b2e989555c2efdb548fbd42",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.194Z",
+      "updatedAt": "2026-08-20T03:52:19.194Z"
+    },
+    "diagnosing-bugs": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/diagnosing-bugs/SKILL.md",
+      "skillFolderHash": "99bd56983e42bc752c52da67f1112e4121781cd1",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.198Z",
+      "updatedAt": "2026-08-20T03:52:19.198Z"
+    },
+    "domain-modeling": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/domain-modeling/SKILL.md",
+      "skillFolderHash": "388c9822641805ca2dcd5038e68a1d5282437ee5",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.201Z",
+      "updatedAt": "2026-08-20T03:52:19.201Z"
+    },
+    "grill-with-docs": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/grill-with-docs/SKILL.md",
+      "skillFolderHash": "eedaf2562c83155115e9c649fa3ecaac2e10e81d",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.203Z",
+      "updatedAt": "2026-08-20T03:52:19.203Z"
+    },
+    "implement": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/implement/SKILL.md",
+      "skillFolderHash": "f07d230f645fc9ac390cf13a450bbff12ad791a3",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.206Z",
+      "updatedAt": "2026-08-20T03:52:19.206Z"
+    },
+    "improve-codebase-architecture": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/improve-codebase-architecture/SKILL.md",
+      "skillFolderHash": "3d35cd438f4067b03c8b3792e038960e4ac11526",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.210Z",
+      "updatedAt": "2026-08-20T03:52:19.210Z"
+    },
+    "prototype": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/prototype/SKILL.md",
+      "skillFolderHash": "e41d92e171f074a2b6887d8f6faca4a15c83d1ca",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.217Z",
+      "updatedAt": "2026-08-20T03:52:19.217Z"
+    },
+    "resolving-merge-conflicts": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/resolving-merge-conflicts/SKILL.md",
+      "skillFolderHash": "77f0d7de3143abbf03e55a63522d30bff31ae908",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.222Z",
+      "updatedAt": "2026-08-20T03:52:19.222Z"
+    },
+    "setup-matt-pocock-skills": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/setup-matt-pocock-skills/SKILL.md",
+      "skillFolderHash": "ec07f82df54064d01aa1648670e81da41e2cbdc2",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.225Z",
+      "updatedAt": "2026-08-20T03:52:19.225Z"
+    },
+    "tdd": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/tdd/SKILL.md",
+      "skillFolderHash": "79288be15c67b849f22b6572056601090fd20913",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.227Z",
+      "updatedAt": "2026-08-20T03:52:19.227Z"
+    },
+    "to-spec": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/to-spec/SKILL.md",
+      "skillFolderHash": "136b9651747cfccbfbb7c50a6b0dfb757e7547d2",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.229Z",
+      "updatedAt": "2026-08-20T03:52:19.229Z"
+    },
+    "to-tickets": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/to-tickets/SKILL.md",
+      "skillFolderHash": "b32c94e5a51c24ee9c41fcb7fe9ea9fff9af6369",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.232Z",
+      "updatedAt": "2026-08-20T03:52:19.232Z"
+    },
+    "triage": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/triage/SKILL.md",
+      "skillFolderHash": "95fa21bf236993cd9af25bd3670476c17fdb95a4",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.234Z",
+      "updatedAt": "2026-08-20T03:52:19.234Z"
+    },
+    "claude-handoff": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/in-progress/claude-handoff/SKILL.md",
+      "skillFolderHash": "6845c30e62e1c0c2c0fbdea8307379197f0b4dc4",
+      "installedAt": "2026-08-20T03:52:19.238Z",
+      "updatedAt": "2026-08-20T03:52:19.238Z"
+    },
+    "loop-me": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/in-progress/loop-me/SKILL.md",
+      "skillFolderHash": "a0dfdc3562686d920900973b50289b36e2f7eafe",
+      "installedAt": "2026-08-20T03:52:19.241Z",
+      "updatedAt": "2026-08-20T03:52:19.241Z"
+    },
+    "setup-ts-deep-modules": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/in-progress/setup-ts-deep-modules/SKILL.md",
+      "skillFolderHash": "b32508a8a7d62c07d32d7c5cff84d357719def7f",
+      "installedAt": "2026-08-20T03:52:19.244Z",
+      "updatedAt": "2026-08-20T03:52:19.244Z"
+    },
+    "writing-beats": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/in-progress/writing-beats/SKILL.md",
+      "skillFolderHash": "3a28fb076fdaaec0927080718abb98fc0f340011",
+      "installedAt": "2026-08-20T03:52:19.246Z",
+      "updatedAt": "2026-08-20T03:52:19.246Z"
+    },
+    "writing-fragments": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/in-progress/writing-fragments/SKILL.md",
+      "skillFolderHash": "98e500e0097ec80f52f6a024c5a2ff6d15235bdb",
+      "installedAt": "2026-08-20T03:52:19.249Z",
+      "updatedAt": "2026-08-20T03:52:19.249Z"
+    },
+    "writing-shape": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/in-progress/writing-shape/SKILL.md",
+      "skillFolderHash": "ac92229646fccf7315ae139c37b479b3790617f2",
+      "installedAt": "2026-08-20T03:52:19.252Z",
+      "updatedAt": "2026-08-20T03:52:19.252Z"
+    },
+    "git-guardrails-claude-code": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/misc/git-guardrails-claude-code/SKILL.md",
+      "skillFolderHash": "ceed97af09633b300826d0ca0b1464c527ec9a35",
+      "installedAt": "2026-08-20T03:52:19.254Z",
+      "updatedAt": "2026-08-20T03:52:19.254Z"
+    },
+    "migrate-to-shoehorn": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/misc/migrate-to-shoehorn/SKILL.md",
+      "skillFolderHash": "0aea91a3599a4bf7aeec17e3262d4cbcfcbeec23",
+      "installedAt": "2026-08-20T03:52:19.256Z",
+      "updatedAt": "2026-08-20T03:52:19.256Z"
+    },
+    "scaffold-exercises": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/misc/scaffold-exercises/SKILL.md",
+      "skillFolderHash": "44a0ee332b9d67ebbd59389c7eb4e5aff1ce845c",
+      "installedAt": "2026-08-20T03:52:19.258Z",
+      "updatedAt": "2026-08-20T03:52:19.258Z"
+    },
+    "setup-pre-commit": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/misc/setup-pre-commit/SKILL.md",
+      "skillFolderHash": "5b63f9f665bacc9be04cae51982e9ef1469d6699",
+      "installedAt": "2026-08-20T03:52:19.261Z",
+      "updatedAt": "2026-08-20T03:52:19.261Z"
+    },
+    "grill-me": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/grill-me/SKILL.md",
+      "skillFolderHash": "3df14e2d3a89459bf300614be9247e3ce74798f8",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.265Z",
+      "updatedAt": "2026-08-20T03:52:19.265Z"
+    },
+    "grilling": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/grilling/SKILL.md",
+      "skillFolderHash": "0d40d978f1a588971a11ea7ae85b208e78102dc3",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.267Z",
+      "updatedAt": "2026-08-20T03:52:19.267Z"
+    },
+    "handoff": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/handoff/SKILL.md",
+      "skillFolderHash": "2242e8f05424b8c2ae94194a90d97b88d16108ec",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.270Z",
+      "updatedAt": "2026-08-20T03:52:19.270Z"
+    },
+    "teach": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/teach/SKILL.md",
+      "skillFolderHash": "2ab11f2f51f3c29771edb5d4258d807a49462491",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.272Z",
+      "updatedAt": "2026-08-20T03:52:19.272Z"
+    },
+    "to-questionnaire": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/to-questionnaire/SKILL.md",
+      "skillFolderHash": "46dfbeeba12a9e52eef446676f42e7551023d9a9",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.275Z",
+      "updatedAt": "2026-08-20T03:52:19.275Z"
+    },
+    "wait-what": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/wait-what/SKILL.md",
+      "skillFolderHash": "c119d66111cc1bac94cbc51322cd34ed21aa0446",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.285Z",
+      "updatedAt": "2026-08-20T03:52:19.285Z"
+    },
+    "writing-for-agents": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/productivity/writing-for-agents/SKILL.md",
+      "skillFolderHash": "ad2925850efb8973a72d2e666f7a975f9a2d4a9b",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T03:52:19.289Z",
+      "updatedAt": "2026-08-20T03:52:19.289Z"
+    },
+    "code-review": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "skillPath": "skills/engineering/code-review/SKILL.md",
+      "skillFolderHash": "d8e341cee7980127dddda05159bedf25dc853615",
+      "pluginName": "mattpocock-skills",
+      "installedAt": "2026-08-20T04:01:21.086Z",
+      "updatedAt": "2026-08-20T04:01:21.086Z"
     }
   },
   "dismissed": {

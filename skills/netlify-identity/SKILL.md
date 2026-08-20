@@ -1,6 +1,7 @@
 ---
 name: netlify-identity
-description: Use when the task involves authentication, user signups, logins, password recovery, OAuth providers, role-based access control, or protecting routes and functions. Always use `@netlify/identity`. Never use `netlify-identity-widget` or `gotrue-js` — they are deprecated.
+description: Use when the task involves authentication, user signups, logins, password recovery, OAuth providers, role-based access control, or protecting routes and functions. Use `@netlify/identity`. Never use `netlify-identity-widget` or `gotrue-js` — they are deprecated.
+
 ---
 
 # Netlify Identity

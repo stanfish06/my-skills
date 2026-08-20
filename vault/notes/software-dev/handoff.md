@@ -18,6 +18,7 @@ created: 2026-06-20
 
 ## Related skills
 
+- [case-review](../../notes/security-auditing/case-review.md) — Reviews a reverse-skill case package for scope readiness, Evidence to Finding to Path traceability, work item coverage, timeline references, and optional artifact hash integrity before...
 - [improve-ui](../../notes/web-automation-frontend/improve-ui.md) — Audit an existing product surface against its own design evidence, identify verified UI problems, and write self-contained implementation plans for another agent
 - [matlab-review-code](../../notes/matlab-development/matlab-review-code.md) — Review MATLAB code for quality, performance, maintainability, and adherence to MathWorks coding standards
 - [nfcore-rnaseq-wrapper](../../notes/single-cell-rnaseq/nfcore-rnaseq-wrapper.md) — Wrapper skill for running nf-core/rnaseq bulk RNA-seq preprocessing from FASTQ or BAM inputs with strict preflight, reproducibility outputs, and downstream handoff to ClawBio bulk...

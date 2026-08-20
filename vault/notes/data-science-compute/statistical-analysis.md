@@ -21,6 +21,7 @@ created: 2026-06-09
 ## Related skills
 
 - [pymc](../../notes/data-science-compute/pymc.md) — Bayesian modeling with PyMC. Build hierarchical models, MCMC (NUTS), variational inference, LOO/WAIC comparison, posterior checks, for probabilistic programming and inference
+- [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
 - [statsmodels](../../notes/data-science-compute/statsmodels.md) — Statistical models library for Python. Use when you need specific model classes (OLS, GLM, mixed models, ARIMA) with detailed diagnostics, residuals, and inference
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

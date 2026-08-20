@@ -20,6 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
+- [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
 - [validation](../../notes/software-dev/validation.md) — Use when Codex is already in the validation phase of a security scan or the user explicitly asks to determine whether one or more candidate security findings are valid
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

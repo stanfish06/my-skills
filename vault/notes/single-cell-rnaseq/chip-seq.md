@@ -25,7 +25,6 @@ created: 2026-06-17
 - [ngs-chip-cutrun-peaks-qc](../../notes/single-cell-rnaseq/ngs-chip-cutrun-peaks-qc.md) — Run or plan ChIP-seq, CUT&RUN, or CUT&Tag QC, control handling, spike-in, peak calling, broad-vs-narrow target selection, replicate, bigWig, and differential binding workflows
 - [ngs-epigenomics-peaks](../../notes/single-cell-rnaseq/ngs-epigenomics-peaks.md) — Dispatch ATAC-seq, ChIP-seq, CUT&RUN, or CUT&Tag requests to assay-specific QC, alignment, signal-track, peak-calling, consensus, and differential peak workflows
 - [pybigwig](../../notes/single-cell-rnaseq/pybigwig.md) — Fast Python I/O for BigWig (continuous genome signal) and BigBed (interval annotation) files via libBigWig
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -21,6 +21,7 @@ created: 2026-06-09
 ## Related skills
 
 - [pptx-posters](../../notes/research-writing/pptx-posters.md) — Create research posters using HTML/CSS that can be exported to PDF or PPTX
+- [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

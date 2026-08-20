@@ -14,7 +14,7 @@ created: 2026-06-10
 # using-superpowers
 
 > [!info] What it does
-> Use when starting any conversation - establishes how to find and use skills, requiring Skill tool invocation before ANY response including clarifying questions
+> Use when discovering which skill applies — establishes how to find and use skills
 
 **Source:** [skills/using-superpowers/SKILL.md](../../../skills/using-superpowers/SKILL.md)  ·  **Domain:** [Software Development & Engineering](../../maps/software-dev.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

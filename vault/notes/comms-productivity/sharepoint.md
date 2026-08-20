@@ -18,7 +18,6 @@ created: 2026-08-07
 
 ## Related skills
 
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 - [sharepoint-powerpoint](../../notes/comms-productivity/sharepoint-powerpoint.md) — Create, edit, restyle, and review PowerPoint `.pptx` files fetched from SharePoint, with emphasis on style preservation, slide cloning, theme-aware updates, and rendered visual QA
 - [sharepoint-shared-doc-maintenance](../../notes/comms-productivity/sharepoint-shared-doc-maintenance.md) — Maintain shared SharePoint strategy, roadmap, planning, or status documents from changing source documents
 - [sharepoint-site-discovery](../../notes/comms-productivity/sharepoint-site-discovery.md) — Resolve the right SharePoint site, library, and folder before file work

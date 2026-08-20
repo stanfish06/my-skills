@@ -21,6 +21,7 @@ created: 2026-08-07
 - [academic-paper-reviewer](../../notes/academic-pipelines/academic-paper-reviewer.md) — Multi-perspective academic paper review with dynamic reviewer personas
 - [academic-pipeline](../../notes/academic-pipelines/academic-pipeline.md) — Orchestrator for the full academic research pipeline: research -> write -> integrity check -> review -> revise -> re-review -> re-revise -> final integrity check -> finalize
 - [agent-browser-verify](../../notes/web-automation-frontend/agent-browser-verify.md) — Automated browser verification for dev servers
+- [code-audit](../../notes/security-auditing/code-audit.md) — Use for authorized source-code security review and SAST workflows including Semgrep, CodeQL patterns, dangerous API hunting, and fix verification
 - [deep-research](../../notes/academic-pipelines/deep-research.md) — Universal deep research agent team. 13-agent pipeline for rigorous academic research on any topic
 - [dotnet-maui-doctor](../../notes/dotnet-development/dotnet-maui-doctor.md) — Diagnoses and fixes .NET MAUI development environment issues
 - [email](../../notes/comms-productivity/email.md) — Email sending integration guidance — Resend (native Vercel Marketplace) with React Email templates

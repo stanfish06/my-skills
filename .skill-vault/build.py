@@ -188,6 +188,7 @@ SYNONYMS = {
     "hunk-review": ["Hunk", "interactive diff review"],
     "ast-grep": ["structural code search", "AST search"],
     "ast-grep-outline": ["code outline", "source structure map"],
+    "mermaid-terminal": ["Mermaid preview", "terminal diagrams", "Ghostty Mermaid", "Kitty graphics"],
     "design-md-library": ["DESIGN.md", "design tokens", "brand style", "look like Stripe", "Stitch"],
     "chaos-engineering": ["resilience testing", "fault injection", "LitmusChaos", "Chaos Mesh"],
 }
@@ -599,6 +600,7 @@ CATEGORIES = [
       "dashboards-and-real-time-visualization", "data-visualization",
       "gantt-chart-visualization", "geospatial-and-cartographic-visualization",
       "grammar-of-graphics-and-declarative-visualization", "json-render",
+      "mermaid-terminal",
       "node-link-and-diagram-layout", "react-and-nextjs-data-visualization", "satori",
       "scrollytelling-and-parallax-data-visualization",
       "statistical-and-uncertainty-visualization", "testing-data-visualizations",

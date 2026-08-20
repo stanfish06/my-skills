@@ -9541,6 +9541,15 @@
       "pluginName": "mattpocock-skills",
       "installedAt": "2026-08-20T04:01:21.086Z",
       "updatedAt": "2026-08-20T04:01:21.086Z"
+    },
+    "mermaid-terminal": {
+      "source": "stanfish06/mermaid-terminal",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/stanfish06/mermaid-terminal.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "ba3f4d9874d4d928cd3ba9a71075f38b763a8867",
+      "installedAt": "2026-08-20T05:20:54.521Z",
+      "updatedAt": "2026-08-20T05:20:54.521Z"
     }
   },
   "dismissed": {

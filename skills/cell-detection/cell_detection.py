@@ -28,6 +28,21 @@ DISCLAIMER = (
 )
 
 
+def _positive_float(text: str) -> float:
+    """argparse type: accept only finite, strictly positive floats."""
+    import math
+
+    try:
+        value = float(text)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"not a number: {text!r}")
+    if not math.isfinite(value) or value <= 0:
+        raise argparse.ArgumentTypeError(
+            f"diameter must be a finite, positive number (got {text!r})"
+        )
+    return value
+
+
 def make_demo_image(seed: int = 42) -> np.ndarray:
     """Generate a synthetic fluorescence nuclei image (no network required).
 
@@ -553,7 +568,7 @@ def main() -> None:
     parser.add_argument("--input", help="Input image (TIFF, CZI, ND2, PNG, JPG)")
     parser.add_argument(
         "--diameter",
-        type=float,
+        type=_positive_float,
         default=None,
         help="Cell diameter in pixels (default: no rescaling)",
     )

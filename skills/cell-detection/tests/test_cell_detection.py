@@ -1,4 +1,5 @@
 """Tests for the CellposeSAM cell segmentation skill."""
+import argparse
 import sys
 from pathlib import Path
 from unittest.mock import patch
@@ -998,6 +999,41 @@ class TestCliGuardrails:
                 with pytest.raises(SystemExit) as exc:
                     cell_detection.main()
         assert exc.value.code == 2
+
+# ---------------------------------------------------------------------------
+# TestDiameterValidation
+# ---------------------------------------------------------------------------
+
+
+class TestDiameterValidation:
+    """--diameter must be finite and strictly positive (Cellpose rescales only when diameter > 0)."""
+
+    @pytest.mark.parametrize("text", ["0", "-1", "nan", "inf", "-inf"])
+    def test_cli_rejects_nonpositive_or_nonfinite(self, tmp_path, text):
+        with patch(
+            "sys.argv",
+            [
+                "cell_detection.py",
+                "--input",
+                str(tmp_path / "img.tif"),
+                "--diameter",
+                text,
+                "--output",
+                str(tmp_path / "out"),
+            ],
+        ):
+            with pytest.raises(SystemExit) as exc:
+                cell_detection.main()
+        assert exc.value.code == 2
+
+    @pytest.mark.parametrize("text", ["0", "-1", "nan", "inf", "-inf", "abc"])
+    def test_type_rejects_invalid(self, text):
+        with pytest.raises(argparse.ArgumentTypeError):
+            cell_detection._positive_float(text)
+
+    @pytest.mark.parametrize("text,expected", [("30", 30.0), ("12.5", 12.5), ("1e2", 100.0)])
+    def test_type_accepts_positive_finite(self, text, expected):
+        assert cell_detection._positive_float(text) == expected
 
 
 # ---------------------------------------------------------------------------

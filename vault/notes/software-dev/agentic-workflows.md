@@ -17,7 +17,7 @@ created: 2026-08-16
 # agentic-workflows
 
 > [!info] What it does
-> Route gh-aw workflow design/create/debug/upgrade requests and find Agentics starter workflows.
+> Route gh-aw workflow design/create/debug/upgrade requests to the right prompts.
 
 **Source:** [skills/agentic-workflows/SKILL.md](../../../skills/agentic-workflows/SKILL.md)  ·  **Domain:** [Software Development & Engineering](../../maps/software-dev.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

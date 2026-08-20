@@ -632,8 +632,31 @@ function Set-CodexMcpServer {
     }
 
     $lines = @()
+    $writeUtf8Bom = $false
+    $newline = [Environment]::NewLine
     if (Test-Path -LiteralPath $path) {
-        $rawLines = @(Get-Content -LiteralPath $path)
+        $bytes = [System.IO.File]::ReadAllBytes($path)
+        $offset = 0
+        if ($bytes.Length -ge 3 -and $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF) {
+            $writeUtf8Bom = $true
+            $offset = 3
+        }
+
+        # TOML is UTF-8. Decode strictly so an unexpected legacy encoding stops
+        # the update instead of being silently converted into mojibake.
+        $strictUtf8 = [System.Text.UTF8Encoding]::new($false, $true)
+        $text = $strictUtf8.GetString($bytes, $offset, $bytes.Length - $offset)
+        $newlineMatch = [regex]::Match($text, "\r\n|\n|\r")
+        if ($newlineMatch.Success) {
+            $newline = $newlineMatch.Value
+        }
+
+        $rawLines = if ([string]::IsNullOrEmpty($text)) {
+            @()
+        }
+        else {
+            @([regex]::Split($text, "\r\n|\n|\r"))
+        }
         if ($rawLines.Count -eq 1 -and [string]::IsNullOrEmpty($rawLines[0])) {
             $lines = @()
         }
@@ -668,7 +691,12 @@ function Set-CodexMcpServer {
         }
     }
 
-    Set-Content -LiteralPath $path -Value $lines -Encoding utf8
+    $content = $lines -join $newline
+    if ($lines.Count -gt 0) {
+        $content += $newline
+    }
+    $utf8 = [System.Text.UTF8Encoding]::new($writeUtf8Bom)
+    [System.IO.File]::WriteAllText($path, $content, $utf8)
 }
 
 function Ensure-McpServer {

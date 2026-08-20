@@ -23,7 +23,7 @@ created: 2026-08-07
 - [academic-pipeline](../../notes/academic-pipelines/academic-pipeline.md) — Orchestrator for the full academic research pipeline: research -> write -> integrity check -> review -> revise -> re-review -> re-revise -> final integrity check -> finalize
 - [accessibility-and-inclusive-visualization](../../notes/web-automation-frontend/accessibility-and-inclusive-visualization.md) — Make data visualizations accessible and inclusive
 - [agentic-actions-auditor](../../notes/security-auditing/agentic-actions-auditor.md) — Audits GitHub Actions workflows for security vulnerabilities in AI agent integrations including Claude Code Action, Gemini CLI, OpenAI Codex, and GitHub AI Inference
-- [agentic-workflows](../../notes/software-dev/agentic-workflows.md) — Route gh-aw workflow design/create/debug/upgrade requests and find Agentics starter workflows
+- [agentic-workflows](../../notes/software-dev/agentic-workflows.md) — Route gh-aw workflow design/create/debug/upgrade requests to the right prompts
 - [authoring-github-workflows](../../notes/dotnet-development/authoring-github-workflows.md) — Author and review GitHub Actions workflow YAML safely so syntactically-valid YAML can't ship a workflow that GitHub Actions refuses to run
 - [bio-human-feedback](../../notes/research-writing/bio-human-feedback.md) — Phase 2.6 of the bio-manuscript pipeline: human review checkpoint
 - [bio-manuscript-pipeline](../../notes/research-writing/bio-manuscript-pipeline.md) — End-to-end bio-manuscript planning pipeline orchestrator: turn structured research input into a full manuscript plan

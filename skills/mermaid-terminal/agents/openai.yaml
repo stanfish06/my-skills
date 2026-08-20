@@ -2,6 +2,3 @@ interface:
   display_name: "Mermaid Terminal"
   short_description: "Preview Mermaid diagrams inside terminal panes"
   default_prompt: "Use $mermaid-terminal to render and preview this Mermaid diagram in my terminal."
-
-policy:
-  allow_implicit_invocation: false

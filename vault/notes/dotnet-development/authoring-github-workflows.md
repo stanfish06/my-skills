@@ -20,7 +20,7 @@ created: 2026-07-21
 
 ## Related skills
 
-- [agentic-workflows](../../notes/software-dev/agentic-workflows.md) — Route gh-aw workflow design/create/debug/upgrade requests and find Agentics starter workflows
+- [agentic-workflows](../../notes/software-dev/agentic-workflows.md) — Route gh-aw workflow design/create/debug/upgrade requests to the right prompts
 - [github](../../notes/software-dev/github.md) — Triage and orient GitHub repository, pull request, and issue work through the connected GitHub app
 - [workflow](../../notes/software-dev/workflow.md) — Vercel Workflow DevKit (WDK) expert guidance
 

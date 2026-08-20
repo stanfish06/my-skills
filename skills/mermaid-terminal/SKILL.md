@@ -1,7 +1,6 @@
 ---
 name: mermaid-terminal
 description: Render Mermaid source locally and preview it in Ghostty, Kitty, or another Kitty-graphics-compatible terminal. Use when a user wants to see a Mermaid diagram without opening a browser; do not use for general image viewing or non-Mermaid diagrams.
-disable-model-invocation: true
 ---
 
 # Mermaid Terminal
@@ -36,10 +35,15 @@ needs a persistent file instead of an inline terminal preview.
    pinned Mermaid CLI through Bun or npm. The fallback downloads into the
    package-manager cache on first use but never sends diagram source to a
    rendering service.
-   When an agent shell captures stdout, the script writes the Kitty graphics
-   stream to its controlling terminal or the nearest parent terminal instead.
-   It opens an isolated, viewport-sized preview in that case; press any key to
-   close the preview and restore the agent screen.
+   When an agent shell captures stdout, the script finds the nearest parent
+   terminal device, reads geometry with an ioctl (never a terminal query — the
+   agent host owns the terminal's input and would swallow the reply), and shows
+   the diagram on the alternate screen. By default it holds until interrupted:
+   the user dismisses it with Esc or Ctrl-C (which makes the host kill the
+   command; SIGTERM/SIGINT handlers restore the screen), and the Bash timeout
+   is the backstop. Tell the user how to dismiss it. Pass `--hold-seconds N`
+   for a timed preview that restores by itself when you need the shell back
+   without user action.
 4. Report Mermaid syntax errors with the source path and keep the editable
    source available for correction.
 5. If inline display is unavailable, rerun with `--output` and return the PNG
@@ -64,5 +68,8 @@ configuration and uses the same Kitty graphics capability exposed by Ghostty.
   service without explicit permission.
 - Display through `kitten icat` using streamed image data so the terminal does
   not need to read the renderer's temporary file.
+- In a captured shell, never let `kitten icat` query the terminal or wait for a
+  keypress: pass `--use-window-size` from the ioctl geometry and use the timed
+  hold. Both reads race against the agent host's own terminal reader.
 - Treat Mermaid source as untrusted input to the renderer. Do not interpolate it
   into a shell command.

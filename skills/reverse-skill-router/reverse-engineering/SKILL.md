@@ -89,6 +89,7 @@ r2pm -ci r2ghidra   # Native Ghidra decompiler for radare2
 - Deleted files / PCAP / disk artifacts → `digital-forensics/`
 - Web app with a small client helper → `js-reverse/`
 - Real malware / C2 / packing → `malware-analysis/`
+- Multi-type CTF contest packaging → `ctf-sandbox/` (sidecar orchestrator)
 
 ## Problem-Solving Workflow
 

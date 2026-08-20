@@ -118,9 +118,16 @@ python3 skills/case-review/scripts/review_case.py work/<case> --verify-hashes --
 | **R40** | Case / Evidence 图审查 | `case-review/` |
 | **R20** | 报告 / writeup | `docs-generator/` |
 | **R39** | 图表 / Mermaid / Graphviz / PlantUML / 架构图 | `diagram-generator/` |
+| **R41** | CTF / AWD / 靶场（单入口，不展开 40 个子技能） | `ctf-sandbox/` |
 | **R0** | 通用逆向 / 反调试 / OLLVM / 未知二进制 | `reverse-engineering/` |
 
 未命中强关键词 → PRIMARY=`R0`，并提示打开 `routing.md`（歧义附录，不是第二套路由器）。
+
+## 边界
+
+| 任务 | 处理 |
+|------|------|
+| 纯 CTF 多类型编排 | PRIMARY `ctf-sandbox/` → sidecar `../CTF-Sandbox-Orchestrator/` |
 
 ## 读序
 

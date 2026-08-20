@@ -16,7 +16,7 @@ created: 2026-06-13
 
 ## Skills (92)
 
-- [agentic-workflows](../notes/software-dev/agentic-workflows.md) — Route gh-aw workflow design/create/debug/upgrade requests and find Agentics starter workflows
+- [agentic-workflows](../notes/software-dev/agentic-workflows.md) — Route gh-aw workflow design/create/debug/upgrade requests to the right prompts
 - [api-and-interface-design](../notes/software-dev/api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
 - [ast-grep](../notes/software-dev/ast-grep.md) — Guide for writing ast-grep rules to perform structural code search and analysis
 - [ast-grep-outline](../notes/software-dev/ast-grep-outline.md) — Use when exploring or modifying a codebase and you need a cheap structural map of files, directories, imports, exports, or direct members before reading full source

@@ -79,7 +79,7 @@ class DisplayTests(unittest.TestCase):
             patch.object(MODULE.sys.stdout, "isatty", return_value=True),
             patch.object(MODULE.subprocess, "run", return_value=completed) as run,
         ):
-            MODULE.display(Path("diagram.png"))
+            MODULE.display(Path("diagram.png"), hold_seconds=8.0)
 
         command = run.call_args.args[0]
         self.assertEqual(command[:2], ["/usr/bin/kitten", "icat"])
@@ -98,25 +98,56 @@ class DisplayTests(unittest.TestCase):
             patch.object(MODULE.sys.stdout, "isatty", return_value=False),
             patch.object(MODULE, "terminal_device_paths", return_value=["/dev/tty"]),
             patch.object(
-                MODULE.os,
-                "get_terminal_size",
-                return_value=os.terminal_size((120, 40)),
+                MODULE, "terminal_geometry", return_value=(40, 120, 1080, 720)
             ),
+            patch.object(MODULE.time, "sleep") as sleep,
             patch("builtins.open", return_value=terminal) as open_terminal,
             patch.object(MODULE.subprocess, "run", return_value=completed) as run,
         ):
-            MODULE.display(Path("diagram.png"))
+            MODULE.display(Path("diagram.png"), hold_seconds=5.0)
 
         open_terminal.assert_called_once_with("/dev/tty", "r+b", buffering=0)
         command = run.call_args.args[0]
-        self.assertIn("--place=120x39@0x0", command)
-        self.assertIn("--hold", command)
-        self.assertIs(run.call_args.kwargs["stdin"], terminal)
+        self.assertIn("--use-window-size=120,40,1080,720", command)
+        self.assertIn("--place=116x37@2x1", command)
+        self.assertNotIn("--hold", command)
+        self.assertIs(run.call_args.kwargs["stdin"], subprocess.DEVNULL)
         self.assertIs(run.call_args.kwargs["stdout"], terminal)
+        sleep.assert_called_once_with(5.0)
         writes = [call.args[0] for call in terminal.write.call_args_list]
         self.assertTrue(writes[0].startswith(b"\x1b[?1049h"))
-        self.assertIn(b"Mermaid preview - press any key to return", writes[0])
+        self.assertIn(b"Mermaid preview - closing in 5s", writes[1])
         self.assertEqual(writes[-1], b"\x1b[?1049l")
+
+    def test_infinite_hold_restores_screen_on_interrupt(self) -> None:
+        completed = subprocess.CompletedProcess([], 0)
+        terminal = MagicMock()
+        terminal.isatty.return_value = True
+        terminal.fileno.return_value = 9
+        terminal.__enter__.return_value = terminal
+        with (
+            patch.object(MODULE.shutil, "which", return_value="/usr/bin/kitten"),
+            patch.object(MODULE.sys.stdout, "isatty", return_value=False),
+            patch.object(MODULE, "terminal_device_paths", return_value=["/dev/tty"]),
+            patch.object(
+                MODULE, "terminal_geometry", return_value=(40, 120, 1080, 720)
+            ),
+            patch.object(MODULE.time, "sleep", side_effect=KeyboardInterrupt) as sleep,
+            patch("builtins.open", return_value=terminal),
+            patch.object(MODULE.subprocess, "run", return_value=completed),
+            self.assertRaises(KeyboardInterrupt),
+        ):
+            MODULE.display(Path("diagram.png"), hold_seconds=0.0)
+
+        sleep.assert_called_once_with(3600)
+        writes = [call.args[0] for call in terminal.write.call_args_list]
+        self.assertIn(b"interrupt (Esc or Ctrl-C) to close", writes[1])
+        self.assertEqual(writes[-1], b"\x1b[?1049l")
+
+    def test_geometry_estimates_missing_pixel_size(self) -> None:
+        packed = MODULE.struct.pack("HHHH", 24, 80, 0, 0)
+        with patch.object(MODULE.fcntl, "ioctl", return_value=packed):
+            self.assertEqual(MODULE.terminal_geometry(9), (24, 80, 720, 432))
 
     def test_rejects_captured_output_without_controlling_terminal(self) -> None:
         with (
@@ -126,7 +157,7 @@ class DisplayTests(unittest.TestCase):
             patch("builtins.open", side_effect=OSError),
             self.assertRaisesRegex(MODULE.PreviewError, "controlling terminal"),
         ):
-            MODULE.display(Path("diagram.png"))
+            MODULE.display(Path("diagram.png"), hold_seconds=8.0)
 
 
 if __name__ == "__main__":

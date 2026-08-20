@@ -5,12 +5,17 @@ from __future__ import annotations
 
 import argparse
 import contextlib
+import fcntl
 import os
 import re
 import shutil
+import signal
+import struct
 import subprocess
 import sys
 import tempfile
+import termios
+import time
 from collections.abc import Iterator
 from pathlib import Path
 from typing import BinaryIO
@@ -170,7 +175,46 @@ def terminal_output() -> Iterator[BinaryIO | None]:
     )
 
 
-def display(output: Path) -> None:
+def terminal_geometry(fd: int) -> tuple[int, int, int, int]:
+    """Return (rows, cols, xpix, ypix) without querying the terminal."""
+
+    rows = cols = xpix = ypix = 0
+    with contextlib.suppress(OSError):
+        packed = fcntl.ioctl(fd, termios.TIOCGWINSZ, struct.pack("HHHH", 0, 0, 0, 0))
+        rows, cols, xpix, ypix = struct.unpack("HHHH", packed)
+    if rows <= 0 or cols <= 0:
+        cols, rows = 80, 24
+    # estimate pixels when the terminal leaves winsize pixel fields at zero
+    if xpix <= 0 or ypix <= 0:
+        xpix, ypix = cols * 9, rows * 18
+    return rows, cols, xpix, ypix
+
+
+def run_icat(
+    command: list[str],
+    stdin: int | BinaryIO | None = None,
+    stdout: int | BinaryIO | None = None,
+) -> None:
+    try:
+        completed = subprocess.run(
+            command,
+            stdin=stdin,
+            stdout=stdout,
+            stderr=subprocess.PIPE,
+            timeout=30,
+            check=False,
+        )
+    except subprocess.TimeoutExpired as error:
+        raise PreviewError("kitten icat did not finish within 30s") from error
+    if completed.returncode != 0:
+        detail = (completed.stderr or b"").decode(errors="replace").strip()
+        raise PreviewError(
+            "terminal image display failed; verify Ghostty/Kitty graphics support "
+            f"or use --no-display\n{detail}".rstrip()
+        )
+
+
+def display(output: Path, hold_seconds: float) -> None:
     kitten = shutil.which("kitten")
     if not kitten:
         raise PreviewError("inline display requires the kitten executable")
@@ -183,36 +227,40 @@ def display(output: Path) -> None:
     ]
     with terminal_output() as terminal:
         if terminal is None:
-            command.append("--fit=both")
-        else:
-            try:
-                size = os.get_terminal_size(terminal.fileno())
-            except OSError:
-                size = os.terminal_size((80, 24))
-            preview_rows = max(size.lines - 1, 1)
-            command.extend([f"--place={size.columns}x{preview_rows}@0x0", "--hold"])
-            prompt = b"Mermaid preview - press any key to return"[: size.columns]
-            terminal.write(
-                ALTERNATE_SCREEN_ENTER
-                + f"\x1b[{size.lines};1H".encode()
-                + prompt
-                + b"\x1b[H"
-            )
-        command.append(str(output))
-        try:
-            completed = subprocess.run(
-                command,
-                stdin=terminal,
-                stdout=terminal,
-                check=False,
-            )
-        finally:
-            if terminal is not None:
-                terminal.write(ALTERNATE_SCREEN_EXIT)
-    if completed.returncode != 0:
-        raise PreviewError(
-            "terminal image display failed; verify Ghostty/Kitty graphics support or use --no-display"
+            # attached to a real terminal: icat may query it directly
+            command.extend(["--fit=both", str(output)])
+            run_icat(command)
+            return
+
+        # Captured shell (agent host owns the terminal): icat must not query the
+        # terminal or read keys - the host's input reader swallows the replies.
+        # Supply geometry from ioctl and hold the preview for a fixed time.
+        rows, cols, xpix, ypix = terminal_geometry(terminal.fileno())
+        place_cols = max(cols - 4, 10)
+        place_rows = max(rows - 3, 5)
+        command.extend(
+            [
+                f"--use-window-size={cols},{rows},{xpix},{ypix}",
+                f"--place={place_cols}x{place_rows}@2x1",
+                str(output),
+            ]
         )
+        terminal.write(ALTERNATE_SCREEN_ENTER)
+        try:
+            run_icat(command, stdin=subprocess.DEVNULL, stdout=terminal)
+            footer = (
+                "Mermaid preview - interrupt (Esc or Ctrl-C) to close"
+                if hold_seconds == 0
+                else f"Mermaid preview - closing in {hold_seconds:g}s"
+            )[:cols]
+            terminal.write(f"\x1b[{rows};1H".encode() + footer.encode())
+            if hold_seconds == 0:
+                while True:
+                    time.sleep(3600)
+            time.sleep(hold_seconds)
+        finally:
+            terminal.write(ALTERNATE_SCREEN_EXIT)
+        print(f"preview shown on the session terminal for {hold_seconds:g}s")
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -244,16 +292,32 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="require mmdc on PATH instead of using Bun or npm",
     )
+    parser.add_argument(
+        "--hold-seconds",
+        type=float,
+        default=0.0,
+        help="captured-shell preview duration; 0 holds until interrupted (default)",
+    )
     args = parser.parse_args(argv)
     if args.scale <= 0:
         parser.error("--scale must be greater than zero")
+    if args.hold_seconds < 0:
+        parser.error("--hold-seconds must be zero or greater")
     if args.no_display and args.output is None:
         parser.error("--no-display requires --output so the result is not discarded")
     return args
 
 
+def terminate(signum: int, _frame: object) -> None:
+    raise SystemExit(128 + signum)
+
+
 def run(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
+    # restore the screen (display's finally) when the agent host or Bash
+    # timeout tears the preview down
+    signal.signal(signal.SIGTERM, terminate)
+    signal.signal(signal.SIGHUP, terminate)
     try:
         if args.input == "-":
             text = sys.stdin.read()
@@ -284,10 +348,12 @@ def run(argv: list[str] | None = None) -> int:
                 args.no_bootstrap,
             )
             if not args.no_display:
-                display(output)
+                display(output, args.hold_seconds)
             if args.output is not None:
                 print(output)
         return 0
+    except KeyboardInterrupt:
+        return 130
     except (OSError, PreviewError) as error:
         print(f"mermaid-terminal: {error}", file=sys.stderr)
         return 1

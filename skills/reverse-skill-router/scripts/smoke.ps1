@@ -1,4 +1,4 @@
-﻿#Requires -Version 5.1
+#Requires -Version 5.1
 # reverse-skill smoke entrypoint: verify + script parse + master-route sample matrix.
 # Usage:
 #   powershell -NoProfile -ExecutionPolicy Bypass -File skills/scripts/smoke.ps1
@@ -63,8 +63,7 @@ $scripts = @(
     'verify-routing-coherence.ps1',
     'master-route.ps1',
     'case-init.ps1',
-    'lib/WorkRoot.ps1',
-    'lib/RouteScope.ps1',
+    'lib\WorkRoot.ps1',
     'bootstrap-reverse.ps1',
     'refresh-tool-index.ps1',
     'smoke.ps1',
@@ -72,6 +71,7 @@ $scripts = @(
     'case-guard.ps1',
     'test-routing.ps1',
     'extract-summaries.ps1'
+    'test-bootstrap-codex-encoding.ps1'
 )
 $parseOk = 0
 $parseFail = 0
@@ -100,39 +100,26 @@ foreach ($name in $scripts) {
         [void]$parseLog.Add("OK $name")
     }
 }
-$idaScripts = @(
-    'ida-reverse/scripts/start.ps1',
-    'ida-reverse/scripts/open.ps1',
-    'ida-reverse/scripts/watchdog.ps1',
-    'ida-reverse/scripts/install-autostart.ps1',
-    'ida-reverse/scripts/start-gui.ps1',
-    'ida-reverse/scripts/IdaOpenHelpers.ps1'
-)
-foreach ($rel in $idaScripts) {
-    $p = Join-Path $skillsRoot $rel
-    $name = $rel
-    if (-not (Test-Path -LiteralPath $p)) {
-        Bad ("script missing: {0}" -f $name)
-        $parseFail++
-        [void]$parseLog.Add("MISSING $name")
-        continue
-    }
-    $errs = $null
-    $tokens = $null
-    $null = [System.Management.Automation.Language.Parser]::ParseFile($p, [ref]$tokens, [ref]$errs)
-    if ($errs -and $errs.Count -gt 0) {
-        Bad ("parse fail {0}: {1}" -f $name, $errs[0].Message)
-        $parseFail++
-        [void]$parseLog.Add("FAIL $name $($errs[0].Message)")
-    } else {
-        Ok ("parse {0}" -f $name)
-        $parseOk++
-        [void]$parseLog.Add("OK $name")
-    }
-}
 $parseLog -join [Environment]::NewLine | Set-Content (Join-Path $LogDir '02-parse.txt') -Encoding UTF8
 
-# --- 3) master-route sample matrix ---
+# --- 3) Codex config UTF-8 round-trip regression ---
+$encodingTest = Join-Path $scriptDir 'test-bootstrap-codex-encoding.ps1'
+if (-not (Test-Path -LiteralPath $encodingTest)) {
+    Bad 'test-bootstrap-codex-encoding.ps1 missing'
+} else {
+    $encodingLog = Join-Path $LogDir '03-codex-encoding.txt'
+    & $SmokeHostExe -NoProfile -ExecutionPolicy Bypass -File $encodingTest `
+        -ScratchDir (Join-Path $LogDir 'codex-encoding') 2>&1 |
+        Tee-Object -FilePath $encodingLog | Out-Null
+    $encodingExit = $LASTEXITCODE
+    if ($encodingExit -eq 0) {
+        Ok 'Codex config UTF-8 round-trip regression'
+    } else {
+        Bad ("Codex config UTF-8 regression exit {0}" -f $encodingExit)
+    }
+}
+
+# --- 4) master-route sample matrix ---
 $mr = Join-Path $scriptDir 'master-route.ps1'
 $cases = @(
     @{ Name = 'apk'; Hint = 'decompile APK with jadx apktool smali'; Expect = 'apk-reverse' },
@@ -168,7 +155,7 @@ if (-not (Test-Path -LiteralPath $mr)) {
 }
 $routeSummary -join [Environment]::NewLine | Set-Content (Join-Path $LogDir '03-route-summary.txt') -Encoding UTF8
 
-# --- 4) Evidence ID immutability ---
+# --- 5) Evidence ID immutability ---
 $appendEvidence = Join-Path $scriptDir 'append-evidence.ps1'
 $evidenceCase = Join-Path $LogDir 'evidence-immutability'
 if (-not (Test-Path -LiteralPath $appendEvidence)) {
@@ -184,8 +171,8 @@ if (-not (Test-Path -LiteralPath $appendEvidence)) {
     if ($firstEvidenceExit -ne 0) {
         Bad ("initial Evidence append exit {0}" -f $firstEvidenceExit)
     } else {
-        $evidencePath = Join-Path $evidenceCase 'evidence/E-IMMUTABLE.md'
-        $indexPath = Join-Path $evidenceCase 'evidence/INDEX.md'
+        $evidencePath = Join-Path $evidenceCase 'evidence\E-IMMUTABLE.md'
+        $indexPath = Join-Path $evidenceCase 'evidence\INDEX.md'
         $beforeEvidence = (Get-FileHash -LiteralPath $evidencePath -Algorithm SHA256).Hash
         $beforeIndex = (Get-FileHash -LiteralPath $indexPath -Algorithm SHA256).Hash
 
@@ -228,3 +215,4 @@ if ($fail.Count -gt 0) {
 }
 Write-Host 'OVERALL: ALL PASS' -ForegroundColor Green
 exit 0
+

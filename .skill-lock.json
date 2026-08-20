@@ -1529,9 +1529,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/arize-ai/phoenix.git",
       "skillPath": ".agents/skills/phoenix-cli/SKILL.md",
-      "skillFolderHash": "9168609f14b3743d4121d31ea838f583174a30f5",
+      "skillFolderHash": "0395e2564a7cd358a02b3aa66e94369cef2ddb18",
       "installedAt": "2026-06-09T19:26:52.824Z",
-      "updatedAt": "2026-08-13T07:50:55.076Z"
+      "updatedAt": "2026-08-20T07:04:18.162Z"
     },
     "phoenix-evals": {
       "source": "arize-ai/phoenix",
@@ -1772,27 +1772,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/static-analysis/skills/codeql/SKILL.md",
-      "skillFolderHash": "133904ce64269ea30c935b45f649f5490dcf3e47",
+      "skillFolderHash": "4396400639261e5c30e3a57382de7eadd3697a9d",
       "installedAt": "2026-06-09T19:28:14.018Z",
-      "updatedAt": "2026-08-12T07:49:40.412Z"
+      "updatedAt": "2026-08-20T07:04:20.136Z"
     },
     "sarif-parsing": {
       "source": "trailofbits/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/static-analysis/skills/sarif-parsing/SKILL.md",
-      "skillFolderHash": "1a1e81517893e317da12f5e1430e6a9dde6681af",
+      "skillFolderHash": "c6f2785d98fa5a97b1ecce3892a0f1b72da402bd",
       "installedAt": "2026-06-09T19:28:14.019Z",
-      "updatedAt": "2026-06-09T19:28:14.019Z"
+      "updatedAt": "2026-08-20T07:04:21.536Z"
     },
     "semgrep": {
       "source": "trailofbits/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/static-analysis/skills/semgrep/SKILL.md",
-      "skillFolderHash": "4bab3a7eb469ce14316042c5dafc0cfae2853081",
+      "skillFolderHash": "48c4ec2b6272f6214355fb878f434713f094a329",
       "installedAt": "2026-06-09T19:28:14.020Z",
-      "updatedAt": "2026-08-11T07:34:19.179Z"
+      "updatedAt": "2026-08-20T07:04:23.438Z"
     },
     "spec-to-code-compliance": {
       "source": "trailofbits/skills",
@@ -1817,9 +1817,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/testing-handbook-skills/skills/atheris/SKILL.md",
-      "skillFolderHash": "6963a66b299bfd7ab7c240eeffc5cba009fba15e",
+      "skillFolderHash": "8fd33c56cf659fb29d74eefbeef537817d3636a9",
       "installedAt": "2026-06-09T19:28:14.022Z",
-      "updatedAt": "2026-06-09T19:28:14.022Z"
+      "updatedAt": "2026-08-20T07:04:25.433Z"
     },
     "cargo-fuzz": {
       "source": "trailofbits/skills",
@@ -1844,9 +1844,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/testing-handbook-skills/skills/coverage-analysis/SKILL.md",
-      "skillFolderHash": "cd8402b353da75cdea427c407581ed60b31c3cab",
+      "skillFolderHash": "6e8e2860c799693436c5132eb75380535249eaa6",
       "installedAt": "2026-06-09T19:28:14.024Z",
-      "updatedAt": "2026-06-09T19:28:14.024Z"
+      "updatedAt": "2026-08-20T07:04:27.506Z"
     },
     "fuzzing-dictionary": {
       "source": "trailofbits/skills",
@@ -1889,9 +1889,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/testing-handbook-skills/skills/ossfuzz/SKILL.md",
-      "skillFolderHash": "450493fe7c92962d65d83a1c91d230340b1e8b2e",
+      "skillFolderHash": "6d7c3b0c855e3a5f86e4d76c55e888481671d9dc",
       "installedAt": "2026-06-09T19:28:14.028Z",
-      "updatedAt": "2026-06-09T19:28:14.028Z"
+      "updatedAt": "2026-08-20T07:04:29.811Z"
     },
     "variant-analysis": {
       "source": "trailofbits/skills",
@@ -1907,9 +1907,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/c-review/skills/c-review/SKILL.md",
-      "skillFolderHash": "235dcf0c8695d86bd41f37feee50661701d64b78",
+      "skillFolderHash": "d69b4ae0897bd25564cac3ec22cc5a1e3204f332",
       "installedAt": "2026-06-09T19:28:14.031Z",
-      "updatedAt": "2026-08-10T04:45:24.484Z"
+      "updatedAt": "2026-08-20T07:04:31.766Z"
     },
     "modern-python": {
       "source": "trailofbits/skills",
@@ -1943,9 +1943,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/zeroize-audit/skills/zeroize-audit/SKILL.md",
-      "skillFolderHash": "6bad9539fbb4fbddb6907cb2735fb90691c131a3",
+      "skillFolderHash": "f5bd3388f5de4d1ace1877e72cb6d10bbddcab52",
       "installedAt": "2026-06-09T19:28:14.034Z",
-      "updatedAt": "2026-06-09T19:28:14.034Z"
+      "updatedAt": "2026-08-20T07:04:34.785Z"
     },
     "agentic-actions-auditor": {
       "source": "trailofbits/skills",
@@ -2042,9 +2042,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-compress/SKILL.md",
-      "skillFolderHash": "19b670a696e5a91aba40758b1a97f0ca4783caee",
+      "skillFolderHash": "93f72d3b21f227a8cc9d851325d474886e16dc0b",
       "installedAt": "2026-06-13T13:27:36.566Z",
-      "updatedAt": "2026-08-19T07:03:12.211Z"
+      "updatedAt": "2026-08-20T07:04:36.444Z"
     },
     "cavecrew": {
       "source": "juliusbrussee/caveman",
@@ -8829,18 +8829,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "6361535bc621b6b6421c2fbc46c4417a73bab53a",
+      "skillFolderHash": "becb262a6efdc35f4d30112ed5bc017b5f8f2d59",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-08-17T03:21:27.911Z"
+      "updatedAt": "2026-08-20T07:04:47.142Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/SKILL.md",
-      "skillFolderHash": "4d1bfece7a9531eff86a193650286b23bc459691",
+      "skillFolderHash": "a5aca10622348b8aea3fb365a2ab7f282098ad03",
       "installedAt": "2026-08-20T02:13:18.927Z",
-      "updatedAt": "2026-08-20T02:19:55.488Z"
+      "updatedAt": "2026-08-20T07:04:55.958Z"
     },
     "api-security": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9547,9 +9547,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/stanfish06/mermaid-terminal.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "fddc63c69e920b6f52d71ab4aa29608c26678f0a",
+      "skillFolderHash": "4eb02b63add314a7e55e2806edefb8a4652e7143",
       "installedAt": "2026-08-20T05:20:54.521Z",
-      "updatedAt": "2026-08-20T06:14:44.124Z"
+      "updatedAt": "2026-08-20T07:04:56.946Z"
     }
   },
   "dismissed": {

@@ -25,7 +25,7 @@ created: 2026-08-09
 - [geospatial-and-cartographic-visualization](../notes/data-visualization/geospatial-and-cartographic-visualization.md) — Design geospatial and cartographic visualizations
 - [grammar-of-graphics-and-declarative-visualization](../notes/data-visualization/grammar-of-graphics-and-declarative-visualization.md) — Build data visualizations with declarative grammars
 - [json-render](../notes/data-visualization/json-render.md) — AI chat response rendering guidance — handling UIMessage parts, tool call displays, streaming states, and structured data presentation
-- [mermaid-terminal](../notes/data-visualization/mermaid-terminal.md) — Render Mermaid source locally and preview it inline in Ghostty, Kitty, or another Kitty-graphics-compatible terminal
+- [mermaid-terminal](../notes/data-visualization/mermaid-terminal.md) — Render Mermaid source locally and preview it in Ghostty, Kitty, or another Kitty-graphics-compatible terminal
 - [node-link-and-diagram-layout](../notes/data-visualization/node-link-and-diagram-layout.md) — Choose and apply automatic layout strategies for node-link diagrams and connected-node visuals
 - [react-and-nextjs-data-visualization](../notes/data-visualization/react-and-nextjs-data-visualization.md) — Integrate data visualizations into React and Next.js applications
 - [satori](../notes/data-visualization/satori.md) — Expert guidance for Satori — Vercel's library that converts HTML and CSS to SVG, commonly used to generate dynamic OG images for Next.js and other frameworks

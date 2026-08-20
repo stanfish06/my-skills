@@ -18,7 +18,7 @@ created: 2026-08-20
 # mermaid-terminal
 
 > [!info] What it does
-> Render Mermaid source locally and preview it inline in Ghostty, Kitty, or another Kitty-graphics-compatible terminal. Use when a user wants to see a Mermaid diagram without opening a browser; do not use for general image viewing or non-Mermaid diagrams.
+> Render Mermaid source locally and preview it in Ghostty, Kitty, or another Kitty-graphics-compatible terminal. Use when a user wants to see a Mermaid diagram without opening a browser; do not use for general image viewing or non-Mermaid diagrams.
 
 **Source:** [skills/mermaid-terminal/SKILL.md](../../../skills/mermaid-terminal/SKILL.md)  ·  **Domain:** [Data Visualization & Charting](../../maps/data-visualization.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

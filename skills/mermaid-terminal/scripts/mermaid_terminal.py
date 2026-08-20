@@ -18,6 +18,8 @@ from typing import BinaryIO
 MERMAID_CLI_VERSION = "11.16.0"
 MARKDOWN_SUFFIXES = {".md", ".mdown", ".markdown", ".mdx"}
 FENCE_START = re.compile(r"^\s*(`{3,}|~{3,})\s*mermaid(?:\s+.*)?$", re.IGNORECASE)
+ALTERNATE_SCREEN_ENTER = b"\x1b[?1049h\x1b[2J\x1b[H"
+ALTERNATE_SCREEN_EXIT = b"\x1b[?1049l"
 
 
 class PreviewError(RuntimeError):
@@ -178,15 +180,35 @@ def display(output: Path) -> None:
         "--align=left",
         "--transfer-mode=stream",
         "--stdin=no",
-        str(output),
     ]
     with terminal_output() as terminal:
-        completed = subprocess.run(
-            command,
-            stdin=terminal,
-            stdout=terminal,
-            check=False,
-        )
+        if terminal is None:
+            command.append("--fit=both")
+        else:
+            try:
+                size = os.get_terminal_size(terminal.fileno())
+            except OSError:
+                size = os.terminal_size((80, 24))
+            preview_rows = max(size.lines - 1, 1)
+            command.extend([f"--place={size.columns}x{preview_rows}@0x0", "--hold"])
+            prompt = b"Mermaid preview - press any key to return"[: size.columns]
+            terminal.write(
+                ALTERNATE_SCREEN_ENTER
+                + f"\x1b[{size.lines};1H".encode()
+                + prompt
+                + b"\x1b[H"
+            )
+        command.append(str(output))
+        try:
+            completed = subprocess.run(
+                command,
+                stdin=terminal,
+                stdout=terminal,
+                check=False,
+            )
+        finally:
+            if terminal is not None:
+                terminal.write(ALTERNATE_SCREEN_EXIT)
     if completed.returncode != 0:
         raise PreviewError(
             "terminal image display failed; verify Ghostty/Kitty graphics support or use --no-display"

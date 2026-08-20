@@ -84,25 +84,39 @@ class DisplayTests(unittest.TestCase):
         command = run.call_args.args[0]
         self.assertEqual(command[:2], ["/usr/bin/kitten", "icat"])
         self.assertIn("--transfer-mode=stream", command)
+        self.assertIn("--fit=both", command)
         self.assertEqual(command[-1], "diagram.png")
 
     def test_uses_controlling_terminal_when_stdout_is_captured(self) -> None:
         completed = subprocess.CompletedProcess([], 0)
         terminal = MagicMock()
         terminal.isatty.return_value = True
+        terminal.fileno.return_value = 9
         terminal.__enter__.return_value = terminal
         with (
             patch.object(MODULE.shutil, "which", return_value="/usr/bin/kitten"),
             patch.object(MODULE.sys.stdout, "isatty", return_value=False),
             patch.object(MODULE, "terminal_device_paths", return_value=["/dev/tty"]),
+            patch.object(
+                MODULE.os,
+                "get_terminal_size",
+                return_value=os.terminal_size((120, 40)),
+            ),
             patch("builtins.open", return_value=terminal) as open_terminal,
             patch.object(MODULE.subprocess, "run", return_value=completed) as run,
         ):
             MODULE.display(Path("diagram.png"))
 
         open_terminal.assert_called_once_with("/dev/tty", "r+b", buffering=0)
+        command = run.call_args.args[0]
+        self.assertIn("--place=120x39@0x0", command)
+        self.assertIn("--hold", command)
         self.assertIs(run.call_args.kwargs["stdin"], terminal)
         self.assertIs(run.call_args.kwargs["stdout"], terminal)
+        writes = [call.args[0] for call in terminal.write.call_args_list]
+        self.assertTrue(writes[0].startswith(b"\x1b[?1049h"))
+        self.assertIn(b"Mermaid preview - press any key to return", writes[0])
+        self.assertEqual(writes[-1], b"\x1b[?1049l")
 
     def test_rejects_captured_output_without_controlling_terminal(self) -> None:
         with (

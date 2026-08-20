@@ -1,6 +1,6 @@
 ---
 name: mermaid-terminal
-description: Render Mermaid source locally and preview it inline in Ghostty, Kitty, or another Kitty-graphics-compatible terminal. Use when a user wants to see a Mermaid diagram without opening a browser; do not use for general image viewing or non-Mermaid diagrams.
+description: Render Mermaid source locally and preview it in Ghostty, Kitty, or another Kitty-graphics-compatible terminal. Use when a user wants to see a Mermaid diagram without opening a browser; do not use for general image viewing or non-Mermaid diagrams.
 ---
 
 # Mermaid Terminal
@@ -37,6 +37,8 @@ needs a persistent file instead of an inline terminal preview.
    rendering service.
    When an agent shell captures stdout, the script writes the Kitty graphics
    stream to its controlling terminal or the nearest parent terminal instead.
+   It opens an isolated, viewport-sized preview in that case; press any key to
+   close the preview and restore the agent screen.
 4. Report Mermaid syntax errors with the source path and keep the editable
    source available for correction.
 5. If inline display is unavailable, rerun with `--output` and return the PNG

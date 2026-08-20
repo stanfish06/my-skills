@@ -5,7 +5,7 @@ import os
 import subprocess
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 SCRIPT = Path(__file__).parents[1] / "scripts" / "mermaid_terminal.py"
 SPEC = importlib.util.spec_from_file_location("mermaid_terminal", SCRIPT)
@@ -86,11 +86,31 @@ class DisplayTests(unittest.TestCase):
         self.assertIn("--transfer-mode=stream", command)
         self.assertEqual(command[-1], "diagram.png")
 
-    def test_rejects_captured_output(self) -> None:
+    def test_uses_controlling_terminal_when_stdout_is_captured(self) -> None:
+        completed = subprocess.CompletedProcess([], 0)
+        terminal = MagicMock()
+        terminal.isatty.return_value = True
+        terminal.__enter__.return_value = terminal
         with (
             patch.object(MODULE.shutil, "which", return_value="/usr/bin/kitten"),
             patch.object(MODULE.sys.stdout, "isatty", return_value=False),
-            self.assertRaisesRegex(MODULE.PreviewError, "interactive terminal"),
+            patch.object(MODULE, "terminal_device_paths", return_value=["/dev/tty"]),
+            patch("builtins.open", return_value=terminal) as open_terminal,
+            patch.object(MODULE.subprocess, "run", return_value=completed) as run,
+        ):
+            MODULE.display(Path("diagram.png"))
+
+        open_terminal.assert_called_once_with("/dev/tty", "r+b", buffering=0)
+        self.assertIs(run.call_args.kwargs["stdin"], terminal)
+        self.assertIs(run.call_args.kwargs["stdout"], terminal)
+
+    def test_rejects_captured_output_without_controlling_terminal(self) -> None:
+        with (
+            patch.object(MODULE.shutil, "which", return_value="/usr/bin/kitten"),
+            patch.object(MODULE.sys.stdout, "isatty", return_value=False),
+            patch.object(MODULE, "terminal_device_paths", return_value=["/dev/tty"]),
+            patch("builtins.open", side_effect=OSError),
+            self.assertRaisesRegex(MODULE.PreviewError, "controlling terminal"),
         ):
             MODULE.display(Path("diagram.png"))
 

@@ -35,6 +35,8 @@ needs a persistent file instead of an inline terminal preview.
    pinned Mermaid CLI through Bun or npm. The fallback downloads into the
    package-manager cache on first use but never sends diagram source to a
    rendering service.
+   When an agent shell captures stdout, the script writes the Kitty graphics
+   stream to its controlling terminal or the nearest parent terminal instead.
 4. Report Mermaid syntax errors with the source path and keep the editable
    source available for correction.
 5. If inline display is unavailable, rerun with `--output` and return the PNG

@@ -4,13 +4,16 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
 import os
 import re
 import shutil
 import subprocess
 import sys
 import tempfile
+from collections.abc import Iterator
 from pathlib import Path
+from typing import BinaryIO
 
 MERMAID_CLI_VERSION = "11.16.0"
 MARKDOWN_SUFFIXES = {".md", ".mdown", ".markdown", ".mdx"}
@@ -110,14 +113,65 @@ def render(
         raise PreviewError(f"renderer produced no PNG at {output}")
 
 
+def terminal_device_paths() -> Iterator[str]:
+    seen: set[str] = set()
+    controlling_terminal = os.ctermid()
+    if controlling_terminal:
+        seen.add(controlling_terminal)
+        yield controlling_terminal
+
+    ps = shutil.which("ps")
+    if not ps:
+        return
+    pid = os.getppid()
+    for _ in range(12):
+        completed = subprocess.run(
+            [ps, "-o", "ppid=,tty=", "-p", str(pid)],
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        fields = completed.stdout.split()
+        if completed.returncode != 0 or len(fields) < 2:
+            return
+        parent_pid, tty = fields[:2]
+        if tty not in {"?", "??", "-"}:
+            path = tty if tty.startswith("/dev/") else f"/dev/{tty}"
+            if path not in seen:
+                seen.add(path)
+                yield path
+        try:
+            next_pid = int(parent_pid)
+        except ValueError:
+            return
+        if next_pid <= 1 or next_pid == pid:
+            return
+        pid = next_pid
+
+
+@contextlib.contextmanager
+def terminal_output() -> Iterator[BinaryIO | None]:
+    if sys.stdout.isatty():
+        yield None
+        return
+
+    for path in terminal_device_paths():
+        try:
+            with open(path, "r+b", buffering=0) as terminal:
+                if terminal.isatty():
+                    yield terminal
+                    return
+        except OSError:
+            continue
+    raise PreviewError(
+        "inline display requires a controlling terminal; no terminal device was found"
+    )
+
+
 def display(output: Path) -> None:
     kitten = shutil.which("kitten")
     if not kitten:
         raise PreviewError("inline display requires the kitten executable")
-    if not sys.stdout.isatty():
-        raise PreviewError(
-            "inline display requires an interactive terminal; use --no-display --output FILE"
-        )
     command = [
         kitten,
         "icat",
@@ -126,7 +180,13 @@ def display(output: Path) -> None:
         "--stdin=no",
         str(output),
     ]
-    completed = subprocess.run(command, check=False)
+    with terminal_output() as terminal:
+        completed = subprocess.run(
+            command,
+            stdin=terminal,
+            stdout=terminal,
+            check=False,
+        )
     if completed.returncode != 0:
         raise PreviewError(
             "terminal image display failed; verify Ghostty/Kitty graphics support or use --no-display"

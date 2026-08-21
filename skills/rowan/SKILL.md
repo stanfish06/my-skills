@@ -395,7 +395,8 @@ Two methods are available:
 |--------|-------|-------|--------|----------|
 | `chemprop_nevolianis2025` | SMILES string | Fast | Deprotonation only (anionic conjugate bases) | Acidic groups only; quick screening |
 | `starling` | SMILES string | Fast | Acid + base (full protonation/deprotonation) | Most drug-like molecules; preferred SMILES method |
-| `aimnet2_wagen2024` (default) | 3D molecule object | Slower, higher accuracy | Acid + base | You already have a 3D structure (e.g. from conformer search) |
+| `aimnet2_wagen2024` | 3D molecule object | Slower, higher accuracy | Acid + base | You already have a 3D structure (e.g. from conformer search) |
+| `gxtb_wagen2026` (default) | 3D molecule object | Slower, higher accuracy | Acid + base | Default when `method` is omitted |
 
 ```python
 # Fast path: SMILES input with full acid+base coverage (use starling method when available)
@@ -441,7 +442,8 @@ For 3D ensemble generation when ensemble quality matters.
 ```python
 wf = rowan.submit_conformer_search_workflow(
     initial_molecule="CCOC(=O)N1CCC(CC1)Oc1ncnc2ccccc12",
-    num_conformers=50,  # Optional: override default
+    # there is no num_conformers kwarg; configure generation via
+    # conf_gen_settings= / multistage_opt_settings= instead
     name="conformer search",
 )
 
@@ -490,7 +492,7 @@ wf = rowan.submit_docking_workflow(
     pocket=pocket,
     initial_molecule="CCNc1ncc(c(Nc2ccc(F)cc2)n1)-c1cccnc1",
     do_pose_refinement=True,
-    do_conformer_search=True,
+    do_csearch=True,  # was do_conformer_search in older rowan-python releases
     name="lead docking",
 )
 

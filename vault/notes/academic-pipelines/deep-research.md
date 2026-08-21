@@ -27,3 +27,4 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+github: [academic-research-skills](https://github.com/Imbad0202/academic-research-skills.git)

@@ -9550,6 +9550,46 @@
       "skillFolderHash": "4eb02b63add314a7e55e2806edefb8a4652e7143",
       "installedAt": "2026-08-20T05:20:54.521Z",
       "updatedAt": "2026-08-20T07:04:56.946Z"
+    },
+    "academic-paper": {
+      "source": "Imbad0202/academic-research-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
+      "skillPath": "academic-paper/SKILL.md",
+      "skillFolderHash": "99e7fa64b302180951bb9266bbad256aae31ae8d",
+      "pluginName": "academic-research-skills",
+      "installedAt": "2026-08-21T01:50:31.544Z",
+      "updatedAt": "2026-08-21T01:50:31.544Z"
+    },
+    "academic-paper-reviewer": {
+      "source": "Imbad0202/academic-research-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
+      "skillPath": "academic-paper-reviewer/SKILL.md",
+      "skillFolderHash": "b003b9ac0caf892964cc0dbeca37bcadfc8862f7",
+      "pluginName": "academic-research-skills",
+      "installedAt": "2026-08-21T01:50:31.549Z",
+      "updatedAt": "2026-08-21T01:50:31.549Z"
+    },
+    "academic-pipeline": {
+      "source": "Imbad0202/academic-research-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
+      "skillPath": "academic-pipeline/SKILL.md",
+      "skillFolderHash": "73fdb96cb646b41b902132cbccca3d9f2219f556",
+      "pluginName": "academic-research-skills",
+      "installedAt": "2026-08-21T01:50:31.552Z",
+      "updatedAt": "2026-08-21T01:50:31.552Z"
+    },
+    "deep-research": {
+      "source": "Imbad0202/academic-research-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
+      "skillPath": "deep-research/SKILL.md",
+      "skillFolderHash": "b0a3ea23a1a07bbde8391748167af8debc44a510",
+      "pluginName": "academic-research-skills",
+      "installedAt": "2026-08-21T01:50:31.555Z",
+      "updatedAt": "2026-08-21T01:50:31.555Z"
     }
   },
   "dismissed": {

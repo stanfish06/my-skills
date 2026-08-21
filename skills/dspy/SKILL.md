@@ -609,7 +609,7 @@ lm = dspy.LM(
 **Anthropic Claude**:
 ```python
 lm = dspy.LM(
-    'anthropic/claude-3-5-sonnet-20241022',
+    'anthropic/claude-sonnet-5',
     api_key='YOUR_ANTHROPIC_KEY',
     max_tokens=4096
 )
@@ -659,11 +659,11 @@ def select_model(task_complexity, budget):
     models = {
         "simple": [
             ("openai/gpt-4o-mini", 0.15),  # (model, cost per 1M tokens)
-            ("anthropic/claude-3-haiku-20240307", 0.25),
+            ("anthropic/claude-haiku-4-5-20251001", 0.25),
         ],
         "medium": [
             ("openai/gpt-4o", 2.50),
-            ("anthropic/claude-3-5-sonnet-20241022", 3.00),
+            ("anthropic/claude-sonnet-5", 3.00),
         ],
         "complex": [
             ("anthropic/claude-opus-5", 15.00),

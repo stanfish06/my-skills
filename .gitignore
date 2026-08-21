@@ -111,3 +111,12 @@ skills-lock.json
 
 # Local OpenTUI dependencies and the user's invocation-state snapshot.
 /.skill-vault/tui/node_modules/
+
+# gh-aw run logs (tens of MB per run).
+/.github/aw/logs/
+
+# Editor state.
+/.vscode/
+
+# githubnext/agentics clone the agentic-workflows skill reads templates from.
+/skills/agentic-workflows/templates/

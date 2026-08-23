@@ -40,16 +40,16 @@ These SDKs offer flexible version control:
 **Global Configuration:**
 ```python
 import stripe
-stripe.api_version = '2026-02-25.clover'
+stripe.api_version = '2026-07-29.dahlia'
 ```
 
 ```ruby
-Stripe.api_version = '2026-02-25.clover'
+Stripe.api_version = '2026-07-29.dahlia'
 ```
 
 ```javascript
 const stripe = require('stripe')('sk_test_xxx', {
-  apiVersion: '2026-02-25.clover'
+  apiVersion: '2026-07-29.dahlia'
 });
 ```
 
@@ -57,7 +57,7 @@ const stripe = require('stripe')('sk_test_xxx', {
 ```python
 stripe.Customer.create(
   email="customer@example.com",
-  stripe_version='2026-02-25.clover'
+  stripe_version='2026-07-29.dahlia'
 )
 ```
 
@@ -72,7 +72,7 @@ Always specify the API version you're integrating against in your code instead o
 ```javascript
 // Good: Explicit version
 const stripe = require('stripe')('sk_test_xxx', {
-  apiVersion: '2026-02-25.clover'
+  apiVersion: '2026-07-29.dahlia'
 });
 
 // Avoid: Relying on account default
@@ -156,14 +156,14 @@ Use the `Stripe-Version` header to test your code against a new version without 
 ```bash
 curl https://api.stripe.com/v1/customers \
   -u sk_test_xxx: \
-  -H "Stripe-Version: 2026-02-25.clover"
+  -H "Stripe-Version: 2026-07-29.dahlia"
 ```
 
 Or in code:
 
 ```javascript
 const stripe = require('stripe')('sk_test_xxx', {
-  apiVersion: '2026-02-25.clover'  // Test with new version
+  apiVersion: '2026-07-29.dahlia'  // Test with new version
 });
 ```
 

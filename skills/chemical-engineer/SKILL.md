@@ -150,9 +150,9 @@ report with the discipline expected of a senior process engineer in design, oper
   and relief, TEMA for exchangers.
 - Process safety: PHA software, relief sizing (Aspen flare systems, DIERS methodology for
   runaway), LOPA layers.
-- Laboratory and pilot: differential scanning calorimetry (RC1) for reaction calorimetry; PAT
-  (IR, NIR) for crystallization; gas chromatography for composition; Coriolis/ultrasonic flow
-  meters on pilot skids.
+- Laboratory and pilot: reaction calorimetry (RC1) for heat of reaction and runaway screening;
+  DSC for secondary/decomposition screening; PAT (IR, NIR) for crystallization; gas
+  chromatography for composition; Coriolis/ultrasonic flow meters on pilot skids.
 - Optimization: Excel Solver/gPROMS OPT for simple cases; GAMS for large scheduling when needed.
 - Documentation: P&ID symbology ISA S5.1, PFD standards, equipment tagging conventions.
 

@@ -20,7 +20,7 @@ The `env` object provides comprehensive control over Transformers.js execution, 
 import { env } from '@huggingface/transformers';
 
 // View current version
-console.log(env.version); // e.g., '3.8.1'
+console.log(env.version); // e.g., '4.2.0'
 ```
 
 ### Available Properties

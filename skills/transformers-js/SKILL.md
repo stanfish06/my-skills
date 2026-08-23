@@ -375,7 +375,7 @@ The `env` object provides comprehensive control over Transformers.js execution, 
 import { env } from '@huggingface/transformers';
 
 // View version
-console.log(env.version); // e.g., '3.8.1'
+console.log(env.version); // e.g., '4.2.0'
 
 // Common settings
 env.allowRemoteModels = true;  // Load from Hugging Face Hub

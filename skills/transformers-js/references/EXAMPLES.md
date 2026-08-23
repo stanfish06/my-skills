@@ -30,7 +30,7 @@ All examples use the same task and model for consistency:
   <div id="loading" style="display:none;">Loading model...</div>
 
   <script type="module">
-    import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1';
+    import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.2.0';
     
     let extractor;
     
@@ -104,7 +104,7 @@ All examples use the same task and model for consistency:
   </div>
 
   <script type="module">
-    import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1';
+    import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.2.0';
     
     let extractor;
     const fileProgressBars = {};

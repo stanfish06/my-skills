@@ -14,10 +14,12 @@ created: 2026-08-09
 
 **Related maps:** [Web Automation, Frontend & Design](web-automation-frontend.md) | [Software Development & Engineering](software-dev.md) | [Game Development & Interactive 3D](game-development.md)
 
-## Skills (29)
+## Skills (31)
 
 - [android-emulator-qa](../notes/mobile-native-dev/android-emulator-qa.md) — Use when validating Android feature flows in an emulator with adb-driven launch, input, UI-tree inspection, screenshots, and logcat capture
 - [android-performance](../notes/mobile-native-dev/android-performance.md) — Gather and interpret Android performance evidence on an adb target using Simpleperf CPU profiles, Perfetto or Compose traces, gfxinfo frame data, dumpsys meminfo snapshots, Java heap...
+- [apollo-ios](../notes/mobile-native-dev/apollo-ios.md) — Guide for building Apple-platform applications with Apollo iOS, the strongly-typed GraphQL client for Swift
+- [apollo-kotlin](../notes/mobile-native-dev/apollo-kotlin.md) — Guide for building applications with Apollo Kotlin, the GraphQL client library for Android and Kotlin
 - [appkit-interop](../notes/mobile-native-dev/appkit-interop.md) — Bridge macOS SwiftUI into AppKit narrowly
 - [building-native-ui](../notes/mobile-native-dev/building-native-ui.md) — Complete guide for building beautiful apps with Expo Router
 - [codex-expo-run-actions](../notes/mobile-native-dev/codex-expo-run-actions.md) — Wire Expo projects into the Codex app with project-local run scripts and .codex/environments/environment.toml actions

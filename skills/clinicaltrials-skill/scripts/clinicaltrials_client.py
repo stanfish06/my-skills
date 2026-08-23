@@ -203,6 +203,12 @@ def execute(payload: Any) -> dict[str, Any]:
         return output
     except ValueError as exc:
         return error("invalid_response", str(exc))
+    except requests.HTTPError as exc:
+        response = exc.response
+        if response is None:
+            return error("http_error", f"Request failed: {exc}")
+        # response body names the rejected parameter or field
+        return error("http_error", f"HTTP {response.status_code}: {response.text.strip()[:500]}")
     except requests.RequestException as exc:
         return error("network_error", f"Request failed: {exc}")
     finally:

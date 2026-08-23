@@ -18,6 +18,7 @@ created: 2026-06-20
 
 ## Related skills
 
+- [admission-control](../../notes/web-automation-frontend/admission-control.md) — Use when the user asks to "write a validator", "add validation", "implement admission control", "write a mutating webhook", "add a mutation handler", "validate incoming resources"...
 - [circleci-builds](../../notes/hosting-edge-platforms/circleci-builds.md) — Diagnose and fix failing CircleCI builds quickly and safely
 - [figma-design-to-code](../../notes/web-automation-frontend/figma-design-to-code.md) — Use this skill when implementing a Figma design as code (design → code) — the read-FROM-Figma direction
 - [figma-implement-design](../../notes/web-automation-frontend/figma-implement-design.md) — Translates Figma designs into production-ready application code with 1:1 visual fidelity
@@ -28,7 +29,9 @@ created: 2026-06-20
 - [image-to-code](../../notes/web-automation-frontend/image-to-code.md) — Elite website image-to-code skill for Codex
 - [liquid-glass](../../notes/mobile-native-dev/liquid-glass.md) — Implement and review macOS SwiftUI Liquid Glass UI
 - [phaser-2d-game](../../notes/game-development/phaser-2d-game.md) — Implement 2D browser games with Phaser. Use when the user wants a Phaser, TypeScript, and Vite stack for scenes, gameplay systems, cameras, sprite animation, and DOM-overlay HUD...
+- [plugin-bundle-size](../../notes/web-automation-frontend/plugin-bundle-size.md) — Optimise Grafana app plugin bundle size using React.lazy, Suspense, and webpack code splitting
 - [pytorch-lightning](../../notes/ml-ai/pytorch-lightning.md) — Deep learning framework (PyTorch Lightning / lightning package)
+- [reconciler-logic](../../notes/web-automation-frontend/reconciler-logic.md) — Implement reconcilers and watchers for grafana-app-sdk apps — write `TypedReconciler[*MyKind]` reconcile functions, apply generation-based skip patterns, do conflict-safe status...
 - [scrollytelling-and-parallax-data-visualization](../../notes/data-visualization/scrollytelling-and-parallax-data-visualization.md) — Design and implement parallax scrolling and scrollytelling data visualizations
 - [spec-kit](../../notes/software-dev/spec-kit.md) — Runs the Spec-Kit (GitHub SDD) artifact pipeline — constitution, spec, clarify, plan, tasks, analyze, implement — using its templates
 - [swiftui-liquid-glass](../../notes/mobile-native-dev/swiftui-liquid-glass.md) — Implement and review iOS 26+ SwiftUI Liquid Glass UI

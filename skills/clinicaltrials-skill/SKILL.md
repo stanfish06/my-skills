@@ -23,7 +23,7 @@ description: Submit compact ClinicalTrials.gov API v2 requests for study search,
 - Common ClinicalTrials.gov patterns:
   - `{"action":"studies","params":{"query.cond":"prostate cancer","filter.overallStatus":"RECRUITING","pageSize":10},"max_items":10,"max_pages":1}`
   - `{"action":"metadata"}`
-  - `{"action":"field_values","params":{"field":"protocolSection.identificationModule.organization.fullName"}}`
+  - `{"action":"field_values","params":{"fields":"protocolSection.identificationModule.organization.fullName"}}`
 
 ## Output
 - `action=studies` returns `pages_fetched`, `next_page_token`, count metadata, and compact `records`.

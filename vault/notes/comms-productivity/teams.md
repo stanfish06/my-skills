@@ -19,6 +19,8 @@ created: 2026-08-07
 ## Related skills
 
 - [chat-sdk](../../notes/saas-platforms/chat-sdk.md) — Vercel Chat SDK expert guidance. Use when building multi-platform chat bots — Slack, Telegram, Microsoft Teams, Discord, Google Chat, GitHub, Linear — with a single codebase
+- [cost-management](../../notes/cloud-devops/cost-management.md) — Cut your Grafana Cloud bill by attributing spend to teams and reducing telemetry volume
+- [databricks-metric-views](../../notes/analytics-engineering/databricks-metric-views.md) — Unity Catalog metric views: define, create, query, and manage governed business metrics in YAML
 - [dogfood](../../notes/web-automation-frontend/dogfood.md) — Systematically explore and test a web application to find bugs, UX issues, and other problems
 - [metric-pack-designer](../../notes/finance-investment/metric-pack-designer.md) — Design custom metric packs for plugin-eval so teams can add local evaluation rubrics that emit schema-compatible checks and metrics
 - [teams-channel-summarization](../../notes/comms-productivity/teams-channel-summarization.md) — Summarize activity from one Microsoft Teams channel or one scoped Teams conversation and return a concise recap or post-ready follow-up

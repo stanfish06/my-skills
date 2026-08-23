@@ -18,6 +18,7 @@ created: 2026-08-07
 
 ## Related skills
 
+- [databricks-lakeflow-connect](../../notes/analytics-engineering/databricks-lakeflow-connect.md) — Build managed ingestion pipelines into Databricks using Lakeflow Connect
 - [hubspot-crm-data-hygiene](../../notes/saas-platforms/hubspot-crm-data-hygiene.md) — Use when auditing HubSpot data quality for missing fields, stale records, duplicates, associations, owners, or cleanup tasks
 - [hubspot-customer-prep](../../notes/saas-platforms/hubspot-customer-prep.md) — Use when preparing HubSpot customer briefs for meetings, renewals, QBRs, sales calls, escalations, handoffs, or follow-ups
 - [hubspot-pipeline-health](../../notes/saas-platforms/hubspot-pipeline-health.md) — Use when reviewing HubSpot pipeline health, forecasts, stale deals, slipping close dates, or open deal risks

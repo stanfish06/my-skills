@@ -148,58 +148,53 @@ def detect_amd_gpus() -> List[Dict[str, Any]]:
 
 
 def detect_apple_silicon_gpu() -> Optional[Dict[str, Any]]:
-    """Detect Apple Silicon GPU (M1/M2/M3/etc.)."""
-    if platform.system() != "Darwin":
+    """Detect the integrated Metal GPU on Apple Silicon."""
+    # gate on architecture, not chip generation
+    if platform.system() != "Darwin" or platform.machine().lower() not in ("arm64", "aarch64"):
         return None
 
+    cpu_brand = ""
     try:
-        # Check if running on Apple Silicon
         result = subprocess.run(
             ["sysctl", "-n", "machdep.cpu.brand_string"],
             capture_output=True,
             text=True,
             timeout=5
         )
-
         cpu_brand = result.stdout.strip()
-
-        # Check for Apple Silicon (M1, M2, M3, etc.)
-        if "Apple" in cpu_brand and any(chip in cpu_brand for chip in ["M1", "M2", "M3", "M4"]):
-            # Get GPU core count if possible
-            gpu_info = {
-                "name": cpu_brand,
-                "type": "Apple Silicon",
-                "backend": "Metal",
-                "unified_memory": True,  # Apple Silicon uses unified memory
-            }
-
-            # Try to get GPU core information
-            try:
-                result = subprocess.run(
-                    ["system_profiler", "SPDisplaysDataType"],
-                    capture_output=True,
-                    text=True,
-                    timeout=10
-                )
-
-                # Parse GPU core info from system_profiler
-                for line in result.stdout.split('\n'):
-                    if 'Chipset Model' in line:
-                        gpu_info["chipset"] = line.split(':')[1].strip()
-                    elif 'Total Number of Cores' in line:
-                        try:
-                            cores = line.split(':')[1].strip()
-                            gpu_info["gpu_cores"] = cores
-                        except:
-                            pass
-            except Exception:
-                pass
-
-            return gpu_info
     except Exception:
         pass
 
-    return None
+    gpu_info = {
+        "name": cpu_brand or f"Apple Silicon ({platform.machine()})",
+        "type": "Apple Silicon",
+        "backend": "Metal",
+        "unified_memory": True,  # Apple Silicon uses unified memory
+    }
+
+    # Try to get GPU core information
+    try:
+        result = subprocess.run(
+            ["system_profiler", "SPDisplaysDataType"],
+            capture_output=True,
+            text=True,
+            timeout=10
+        )
+
+        # Parse GPU core info from system_profiler
+        for line in result.stdout.split('\n'):
+            if 'Chipset Model' in line:
+                gpu_info["chipset"] = line.split(':')[1].strip()
+            elif 'Total Number of Cores' in line:
+                try:
+                    cores = line.split(':')[1].strip()
+                    gpu_info["gpu_cores"] = cores
+                except:
+                    pass
+    except Exception:
+        pass
+
+    return gpu_info
 
 
 def get_gpu_info() -> Dict[str, Any]:

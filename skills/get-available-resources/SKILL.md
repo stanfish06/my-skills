@@ -42,7 +42,7 @@ The skill runs `scripts/detect_resources.py` to automatically detect:
 2. **GPU Information**
    - NVIDIA GPUs: Detects via nvidia-smi, reports VRAM, driver version, compute capability
    - AMD GPUs: Detects via rocm-smi
-   - Apple Silicon: Detects M1/M2/M3/M4 chips with Metal support and unified memory
+   - Apple Silicon: Detects any arm64 Mac (M-series and later) with Metal support and unified memory
 
 3. **Memory Information**
    - Total and available RAM
@@ -244,7 +244,7 @@ All other functionality uses Python standard library modules (json, os, platform
 
 ## Platform Support
 
-- **macOS**: Full support including Apple Silicon (M1/M2/M3/M4) GPU detection
+- **macOS**: Full support including Apple Silicon (any arm64 Mac) GPU detection
 - **Linux**: Full support including NVIDIA (nvidia-smi) and AMD (rocm-smi) GPU detection
 - **Windows**: Full support including NVIDIA GPU detection
 

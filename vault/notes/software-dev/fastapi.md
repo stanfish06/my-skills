@@ -18,6 +18,7 @@ created: 2026-06-10
 
 ## Related skills
 
+- [databricks-apps-python](../../notes/analytics-engineering/databricks-apps-python.md) — Python backend for Databricks Apps — FastAPI (default), Flask, Dash, Streamlit, Gradio, Reflex
 - [docker](../../notes/software-dev/docker.md) — Containerizing and shipping applications with Docker — writing efficient Dockerfiles (multi-stage builds, layer caching, small/secure images), docker compose for multi-service local...
 - [gradio](../../notes/uncategorized/gradio.md) — Building ML demos and web UIs in Python with Gradio 6 — gr.Interface for wrapping a function, gr.Blocks for custom layouts with event listeners, gr.ChatInterface for LLM chat...
 - [sqlalchemy](../../notes/uncategorized/sqlalchemy.md) — The standard Python SQL toolkit and ORM — 2.x style only

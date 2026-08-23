@@ -18,6 +18,8 @@ created: 2026-08-07
 
 ## Related skills
 
+- [admission-control](../../notes/web-automation-frontend/admission-control.md) — Use when the user asks to "write a validator", "add validation", "implement admission control", "write a mutating webhook", "add a mutation handler", "validate incoming resources"...
+- [apollo-router](../../notes/web-automation-frontend/apollo-router.md) — Version-aware guide for configuring and running Apollo Router for federated GraphQL supergraphs
 - [author-component](../../notes/dotnet-development/author-component.md) — Create or review Blazor components (.razor files) with correct architecture
 - [bio-ppt-generate](../../notes/research-writing/bio-ppt-generate.md) — Generate a presentation package from a finalized bio-manuscript proposal
 - [building-dbt-semantic-layer](../../notes/analytics-engineering/building-dbt-semantic-layer.md) — Use when creating or modifying dbt Semantic Layer components — semantic models, metrics, dimensions, entities, measures, or time spines
@@ -32,10 +34,14 @@ created: 2026-08-07
 - [fa-jobs-to-be-done](../../notes/finance-investment/fa-jobs-to-be-done.md) — Use when the user asks for D&B Finance Analytics workflows such as customer onboarding, credit decisioning, credit limit validation, portfolio risk management, company reports...
 - [fastapi](../../notes/software-dev/fastapi.md) — Building HTTP/JSON APIs in Python with FastAPI — path/query/body params, Pydantic v2 models, async endpoints, dependency injection, the lifespan startup/shutdown pattern, error...
 - [fetch-and-send-data](../../notes/dotnet-development/fetch-and-send-data.md) — Call APIs, load data into components, and handle the async lifecycle in Blazor
+- [fleet-management](../../notes/cloud-devops/fleet-management.md) — Manage a fleet of Grafana Alloy collectors with Fleet Management — author Alloy pipelines once, target them via attribute matchers (`env="production"`, regex `region=~"us-.*"`), push...
 - [great-expectations](../../notes/data-science-compute/great-expectations.md) — Data validation using Great Expectations
 - [huggingface-llm-trainer](../../notes/ml-ai/huggingface-llm-trainer.md) — Use when users want to train or fine-tune language models using TRL (Transformer Reinforcement Learning) on Hugging Face Jobs infrastructure
 - [lamindb](../../notes/bio-databases-platforms/lamindb.md) — Use when working with LaminDB, the open-source lineage-native lakehouse for biological datasets and models
+- [langgraph-human-in-the-loop](../../notes/ml-ai/langgraph-human-in-the-loop.md) — INVOKE THIS SKILL when implementing human-in-the-loop patterns, pausing for approval, or handling errors in LangGraph
 - [matlab-validate-function-arguments](../../notes/matlab-development/matlab-validate-function-arguments.md) — Use when writing MATLAB functions with arguments blocks — repeating arguments (arguments (Repeating)), .?ClassName property import in constructors, name-value forwarding with...
+- [neo4j-import-skill](../../notes/analytics-engineering/neo4j-import-skill.md) — Import structured data into Neo4j — LOAD CSV, CALL IN TRANSACTIONS, neo4j-admin database import full (offline bulk), apoc.load.csv/json, apoc.periodic.iterate, driver batch writes
+- [next-cache-components-adoption](../../notes/web-automation-frontend/next-cache-components-adoption.md) — Turn on Cache Components in a Next.js app and resolve the blocking routes it surfaces
 - [omniverse-cad-to-simready](../../notes/game-development/omniverse-cad-to-simready.md) — Coordinate the end-to-end CAD/source-asset to SimReady workflow
 - [outlook-calendar](../../notes/comms-productivity/outlook-calendar.md) — Handle Outlook Calendar workflows, including delegated/shared calendar writes
 - [pandera-validation](../../notes/data-science-compute/pandera-validation.md) — DataFrame schema validation using pandera
@@ -46,6 +52,7 @@ created: 2026-08-07
 - [sharepoint-spreadsheet-formula-builder](../../notes/comms-productivity/sharepoint-spreadsheet-formula-builder.md) — Design, repair, and roll out formulas in SharePoint-hosted workbooks with connector-aware retrieval, validation, and upload discipline
 - [shopify-admin](../../notes/saas-platforms/shopify-admin.md) — Write or explain **Admin GraphQL** queries and mutations for apps and integrations that extend the Shopify admin
 - [shopify-functions](../../notes/saas-platforms/shopify-functions.md) — Shopify Functions allow developers to customize the backend logic that powers parts of Shopify
+- [synthetic-monitoring-checks](../../notes/cloud-devops/synthetic-monitoring-checks.md) — Author Grafana Cloud Synthetic Monitoring checks, with deep coverage of k6 scripted and browser checks: SM's single-VU/single-iteration execution model, assertions that actually fail...
 - [target-validation-scorer](../../notes/drug-discovery-chem/target-validation-scorer.md) — Evidence-grounded target validation scoring with GO/NO-GO decisions for drug discovery campaigns
 - [template-authoring](../../notes/dotnet-development/template-authoring.md) — Guides creation and validation of custom dotnet new templates from existing projects
 - [threat-hunting](../../notes/security-auditing/threat-hunting.md) — Use for blue-team threat hunting, detection engineering with Sigma/YARA, SIEM query design, and incident detection validation

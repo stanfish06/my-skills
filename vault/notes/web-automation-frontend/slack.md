@@ -18,8 +18,10 @@ created: 2026-06-09
 
 ## Related skills
 
+- [alerting-irm](../../notes/cloud-devops/alerting-irm.md) — Configure Grafana Alerting, Incident Response Management (IRM), and SLOs end-to-end — provisions Grafana-managed and data-source-managed alert rules, contact points...
 - [chat-sdk](../../notes/saas-platforms/chat-sdk.md) — Vercel Chat SDK expert guidance. Use when building multi-platform chat bots — Slack, Telegram, Microsoft Teams, Discord, Google Chat, GitHub, Linear — with a single codebase
 - [electron](../../notes/web-automation-frontend/electron.md) — Automate Electron desktop apps (VS Code, Slack, Discord, Figma, Notion, Spotify, etc.) using agent-browser via Chrome DevTools Protocol
+- [oncall-irm](../../notes/cloud-devops/oncall-irm.md) — Route alerts, run on-call rotations, and drive incidents in Grafana IRM / OnCall — integrations (Alertmanager / Grafana Alerting / generic webhook / PagerDuty), Jinja2 routing +...
 - [slack-channel-summarization](../../notes/comms-productivity/slack-channel-summarization.md) — Summarize activity from one Slack channel and return a concise recap, post-ready update, or summary doc
 - [slack-daily-digest](../../notes/comms-productivity/slack-daily-digest.md) — Create a daily Slack digest from selected channels or topics
 - [slack-notification-triage](../../notes/comms-productivity/slack-notification-triage.md) — Triage recent Slack activity into a priority queue or task list for the user

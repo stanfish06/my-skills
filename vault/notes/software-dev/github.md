@@ -19,10 +19,12 @@ created: 2026-08-07
 ## Related skills
 
 - [agentic-actions-auditor](../../notes/security-auditing/agentic-actions-auditor.md) — Audits GitHub Actions workflows for security vulnerabilities in AI agent integrations including Claude Code Action, Gemini CLI, OpenAI Codex, and GitHub AI Inference
+- [audit-and-reduce-dependencies](../../notes/security-auditing/audit-and-reduce-dependencies.md) — Reduces JavaScript dependency footprint with pnpm while preserving lockfile, workspace layout, and dependency range style
 - [authoring-github-workflows](../../notes/dotnet-development/authoring-github-workflows.md) — Author and review GitHub Actions workflow YAML safely so syntactically-valid YAML can't ship a workflow that GitHub Actions refuses to run
 - [autoskill](../../notes/vault-meta/autoskill.md) — Observe the user's screen via screenpipe, detect repeated research workflows, match them against existing scientific-agent-skills, and draft new skills (or composition recipes that...
 - [chat-sdk](../../notes/saas-platforms/chat-sdk.md) — Vercel Chat SDK expert guidance. Use when building multi-platform chat bots — Slack, Telegram, Microsoft Teams, Discord, Google Chat, GitHub, Linear — with a single codebase
 - [check-pr](../../notes/software-dev/check-pr.md) — Checks a GitHub, GitLab, or Perforce (p4) pull request (or merge request, or shelved changelist) for unresolved review comments, failing status checks, and incomplete PR descriptions
+- [datasources-provisioning](../../notes/cloud-devops/datasources-provisioning.md) — Generate a copy-paste Grafana data source provisioning file (YAML or Terraform) for any plugin from its standardized settings schema on the plugins CDN
 - [gantt-chart-visualization](../../notes/data-visualization/gantt-chart-visualization.md) — Design, critique, route, and implement Gantt charts and schedule visualizations
 - [gh-address-comments](../../notes/software-dev/gh-address-comments.md) — Address actionable GitHub pull request review feedback
 - [gh-cli](../../notes/security-auditing/gh-cli.md) — Enforces authenticated gh CLI workflows over unauthenticated curl/WebFetch patterns

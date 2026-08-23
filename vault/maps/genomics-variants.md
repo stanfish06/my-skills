@@ -14,8 +14,9 @@ created: 2026-06-13
 
 **Related maps:** [Single-Cell, RNA-seq & Functional Genomics](single-cell-rnaseq.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Clinical, Medical & Pharmacogenomics](clinical-medical.md)
 
-## Skills (54)
+## Skills (55)
 
+- [alphagenome-single-variant-analysis](../notes/genomics-variants/alphagenome-single-variant-analysis.md) — Analyzes genetic variant effects on gene expression (RNA-seq), chromatin accessibility (DNASE), histone marks (ChIP), and transcription factors using the AlphaGenome API
 - [archaic-introgression](../notes/genomics-variants/archaic-introgression.md) — Detect Neanderthal and Denisovan introgression segments from modern human genomes
 - [biobankjapan-phewas-skill](../notes/genomics-variants/biobankjapan-phewas-skill.md) — Fetch compact BioBank Japan PheWAS summaries for single variants by accepting rsID, GRCh38, or GRCh37 input and resolving to the required GRCh37 query
 - [civic-skill](../notes/genomics-variants/civic-skill.md) — Submit compact CIViC GraphQL requests for cancer variant interpretation schema inspection and targeted evidence retrieval

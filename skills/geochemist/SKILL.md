@@ -141,8 +141,9 @@ instrument artifacts, and report source, process, and age claims with calibrated
     is an analyte; sieving for soil/sediment size fractions.
   - Mineral separates: heavy liquids, magnetic separation, hand picking under binocular;
     check purity by XRD or SEM before isotope work.
-  - Water: filtered (0.45 µm) and unfiltered splits; acidification for cations; HgCl₂ or
-    equivalent preservation per lab SOP for δ¹⁸O/δ²H; headspace for dissolved gases if needed.
+  - Water: filtered (0.45 µm) and unfiltered splits; acidification for cations; untreated
+    δ²H/δ¹⁸O split in a clean vial filled to the rim with no headspace, tightly sealed per the
+    receiving lab's container requirements; headspace for dissolved gases if needed.
   - Ion exchange / chromatography for Sr, Nd, Pb, U, Re, Os per established procedures
     (e.g., AGU/Wiley *Methods in Geochemistry and Geophysics* volumes).
 - **Analytical hierarchy**:

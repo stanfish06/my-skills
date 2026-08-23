@@ -19,6 +19,7 @@ created: 2026-07-20
 ## Related skills
 
 - [langgraph](../../notes/uncategorized/langgraph.md) — LangGraph is a low-level orchestration framework for building stateful LLM agents and workflows as explicit graphs — typed state with reducers, nodes/edges/conditional routing...
+- [neo4j-agent-memory-skill](../../notes/analytics-engineering/neo4j-agent-memory-skill.md) — Authoritative reference for the neo4j-agent-memory Python package — a graph-native memory system for AI agents built on Neo4j — and for the hosted service (NAMS) at memory.neo4jlabs.com
 - [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

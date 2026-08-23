@@ -6,6 +6,8 @@ This document describes the tools available through the ParaView MCP Server for 
 
 The ParaView MCP Server enables natural language control of ParaView visualizations. It connects to a running pvserver and exposes ParaView functionality through the Model Context Protocol.
 
+> **Known limitation:** this connects the client GUI to pvserver via a synchronization mechanism that upstream (`llnl/paraview_mcp`) documents as deprecated in recent ParaView versions, which "may not display content from the pvserver instance correctly, and overall stability issues may occur." Prefer the headless `pvpython` scripting workflow when interactive GUI feedback isn't required.
+
 ## Setup
 
 ### Prerequisites

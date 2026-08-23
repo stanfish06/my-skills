@@ -14,7 +14,7 @@ created: 2026-08-07
 # shopify-custom-data
 
 > [!info] What it does
-> MUST be used first when prompts mention Metafields or Metaobjects. Use Metafields and Metaobjects to model and store custom data for your app. Metafields extend built-in Shopify data types like products or customers, Metaobjects are custom data types that can be used to store bespoke data structures. Metafield and Metaobject definitions provide a schema and configuration for values to follow.
+> Use first when prompts mention Metafields or Metaobjects. Use Metafields and Metaobjects to model and store custom data for your app. Metafields extend built-in Shopify data types like products or customers, Metaobjects are custom data types that can be used to store bespoke data structures. Metafield and Metaobject definitions provide a schema and configuration for values to follow.
 
 **Source:** [skills/shopify-custom-data/SKILL.md](../../../skills/shopify-custom-data/SKILL.md)  ·  **Domain:** [SaaS & Vendor Platform Integrations](../../maps/saas-platforms.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

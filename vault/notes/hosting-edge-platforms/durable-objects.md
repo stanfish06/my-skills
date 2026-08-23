@@ -21,7 +21,6 @@ created: 2026-08-07
 ## Related skills
 
 - [cloudflare](../../notes/hosting-edge-platforms/cloudflare.md) — Comprehensive Cloudflare platform skill covering Workers, Pages, storage (KV, D1, R2), AI (Workers AI, Vectorize, Agents SDK), networking (Tunnel, Spectrum), security (WAF, DDoS), and...
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 - [vitest](../../notes/software-dev/vitest.md) — JavaScript/TypeScript unit testing with Vitest — fast Vite-native test runner with Jest-compatible API
 - [wrangler](../../notes/hosting-edge-platforms/wrangler.md) — Cloudflare Workers CLI for deploying, developing, and managing Workers, KV, R2, D1, Vectorize, Hyperdrive, Workers AI, Containers, Queues, Workflows, Pipelines, and Secrets Store
 

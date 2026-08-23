@@ -22,7 +22,6 @@ created: 2026-07-26
 
 - [handoff](../../notes/software-dev/handoff.md) — Compact the current conversation into a handoff document for another agent to pick up
 - [matlab](../../notes/matlab-development/matlab.md) — MATLAB and GNU Octave numerical computing for matrix operations, data analysis, visualization, and scientific computing
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

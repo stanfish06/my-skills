@@ -1,0 +1,9 @@
+{
+  "fusion-scientist": [
+    {
+      "id": "iter-2024-tungsten-first-wall",
+      "find": "ITER uses **beryllium** first wall and **tungsten** divertor",
+      "replace": "ITER's 2024 baseline specifies **tungsten** armour for the first wall and divertor"
+    }
+  ]
+}

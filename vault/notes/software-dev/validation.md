@@ -33,14 +33,13 @@ created: 2026-08-07
 - [fastapi](../../notes/software-dev/fastapi.md) — Building HTTP/JSON APIs in Python with FastAPI — path/query/body params, Pydantic v2 models, async endpoints, dependency injection, the lifespan startup/shutdown pattern, error...
 - [fetch-and-send-data](../../notes/dotnet-development/fetch-and-send-data.md) — Call APIs, load data into components, and handle the async lifecycle in Blazor
 - [great-expectations](../../notes/data-science-compute/great-expectations.md) — Data validation using Great Expectations
-- [huggingface-llm-trainer](../../notes/ml-ai/huggingface-llm-trainer.md) — This skill should be used when users want to train or fine-tune language models using TRL (Transformer Reinforcement Learning) on Hugging Face Jobs infrastructure
+- [huggingface-llm-trainer](../../notes/ml-ai/huggingface-llm-trainer.md) — Use when users want to train or fine-tune language models using TRL (Transformer Reinforcement Learning) on Hugging Face Jobs infrastructure
 - [lamindb](../../notes/bio-databases-platforms/lamindb.md) — Use when working with LaminDB, the open-source lineage-native lakehouse for biological datasets and models
 - [matlab-validate-function-arguments](../../notes/matlab-development/matlab-validate-function-arguments.md) — Use when writing MATLAB functions with arguments blocks — repeating arguments (arguments (Repeating)), .?ClassName property import in constructors, name-value forwarding with...
 - [omniverse-cad-to-simready](../../notes/game-development/omniverse-cad-to-simready.md) — Coordinate the end-to-end CAD/source-asset to SimReady workflow
 - [outlook-calendar](../../notes/comms-productivity/outlook-calendar.md) — Handle Outlook Calendar workflows, including delegated/shared calendar writes
 - [pandera-validation](../../notes/data-science-compute/pandera-validation.md) — DataFrame schema validation using pandera
 - [physical-ai-infrastructure-setup-and-resilient-scaling](../../notes/game-development/physical-ai-infrastructure-setup-and-resilient-scaling.md) — Use when the user wants to set up, scale, validate, or harden NVIDIA physical AI infrastructure for synthetic data generation workflows across local MicroK8s or Azure AKS, including...
-- [property-based-testing](../../notes/security-auditing/property-based-testing.md) — Provides guidance for property-based testing across multiple languages and smart contracts
 - [query-opentarget](../../notes/bio-databases-platforms/query-opentarget.md) — Query OpenTargets for drug targets, disease associations, and therapeutic evidence
 - [render-cli](../../notes/hosting-edge-platforms/render-cli.md) — Installs and uses the Render CLI for deploys, logs, SSH, psql, Blueprint validation, and automation
 - [scientific-slides](../../notes/research-writing/scientific-slides.md) — Build slide decks and presentations for research talks
@@ -49,6 +48,7 @@ created: 2026-08-07
 - [shopify-functions](../../notes/saas-platforms/shopify-functions.md) — Shopify Functions allow developers to customize the backend logic that powers parts of Shopify
 - [target-validation-scorer](../../notes/drug-discovery-chem/target-validation-scorer.md) — Evidence-grounded target validation scoring with GO/NO-GO decisions for drug discovery campaigns
 - [template-authoring](../../notes/dotnet-development/template-authoring.md) — Guides creation and validation of custom dotnet new templates from existing projects
+- [threat-hunting](../../notes/security-auditing/threat-hunting.md) — Use for blue-team threat hunting, detection engineering with Sigma/YARA, SIEM query design, and incident detection validation
 - [triage-finding](../../notes/security-auditing/triage-finding.md) — Use when the user supplies or imports existing security findings, vulnerability reports, or security/vulnerability Jira/Linear tickets from scanners, advisories, GitHub, Atlassian...
 - [twilio-lookup-phone-intelligence](../../notes/saas-platforms/twilio-lookup-phone-intelligence.md) — Look up phone number intelligence via Twilio Lookup v2 API
 - [twilio-security-hardening](../../notes/saas-platforms/twilio-security-hardening.md) — Secure Twilio applications against common attacks

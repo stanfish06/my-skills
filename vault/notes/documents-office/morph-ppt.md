@@ -24,7 +24,6 @@ created: 2026-07-11
 - [officecli-pitch-deck](../../notes/documents-office/officecli-pitch-deck.md) — Use this skill when the user is building a fundraising / investor pitch deck — seed, Series A / B / C, convertible note, SAFE round, strategic raise
 - [officecli-pptx](../../notes/documents-office/officecli-pptx.md) — Use this skill any time a .pptx file is involved -- as input, output, or both
 - [pptx](../../notes/documents-office/pptx.md) — Presentation toolkit (.pptx). Create/edit slides, layouts, content, speaker notes, comments, for programmatic presentation creation and modification
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

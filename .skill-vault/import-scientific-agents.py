@@ -8,7 +8,9 @@ compatibility fallback.
 
 This vault and the skills CLI discover folders that contain SKILL.md, so this
 script converts the upstream profiles into first-class skills while preserving
-the original profile body and source provenance.
+the original profile body and source provenance. Vault-specific factual
+corrections live in `scientific-agent-patches.json` and are reapplied after
+each import so they survive catalog refreshes.
 """
 from __future__ import annotations
 
@@ -23,6 +25,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_REPO = "K-Dense-AI/scientific-agents"
 SOURCE_URL = "https://github.com/K-Dense-AI/scientific-agents"
+PATCHES_PATH = Path(__file__).resolve().parent / "scientific-agent-patches.json"
+LOCAL_PATCH_NOTE = (
+    "Local corrections listed in `metadata.local-patches` are vault overlays, "
+    "not upstream text."
+)
 
 
 def folded(text: str, *, width: int = 88, indent: str = "  ") -> str:
@@ -67,6 +74,49 @@ def catalog_profile_path(agent: dict) -> Path:
     if profile_path.is_absolute() or ".." in profile_path.parts:
         raise ValueError(f"Unsafe catalog path for {agent['slug']}: {profile_path}")
     return profile_path
+
+
+def load_local_patches(path: Path | None = None) -> dict:
+    path = path or PATCHES_PATH
+    if not path.is_file():
+        return {}
+    with path.open(encoding="utf-8") as f:
+        data = json.load(f)
+    if not isinstance(data, dict):
+        raise ValueError("local patches file must be an object keyed by skill slug")
+    return data
+
+
+def apply_local_patches(text: str, slug: str, patches: dict) -> tuple[str, list[str]]:
+    applied: list[str] = []
+    for entry in patches.get(slug) or []:
+        find = entry["find"]
+        if find not in text:
+            continue
+        text = text.replace(find, entry["replace"])
+        applied.append(entry["id"])
+    if applied:
+        text = _stamp_local_patches(text, applied)
+    return text, applied
+
+
+def _stamp_local_patches(text: str, applied: list[str]) -> str:
+    stamp = "  local-patches:\n" + "".join(f"    - {pid}\n" for pid in applied)
+    marker = "  scientific-agents-profile: true\n"
+    if marker in text:
+        text = text.replace(marker, marker + stamp, 1)
+    else:
+        text = text.replace("---\n\n", "---\n" + stamp + "\n", 1)
+
+    if LOCAL_PATCH_NOTE not in text:
+        imported = None
+        for line in text.splitlines():
+            if line.startswith("Imported from "):
+                imported = line
+                break
+        if imported:
+            text = text.replace(imported, imported + "\n\n" + LOCAL_PATCH_NOTE, 1)
+    return text
 
 
 def resolve_profile_path(source: Path, agent: dict) -> Path:
@@ -224,6 +274,8 @@ def main() -> None:
     dest = args.dest.resolve()
     agents = load_agents(source)
     commit = source_commit(source)
+    patches = load_local_patches()
+    patched: list[str] = []
 
     for agent in agents:
         slug = agent["slug"]
@@ -231,6 +283,9 @@ def main() -> None:
         skill_dir = dest / slug
         skill_dir.mkdir(parents=True, exist_ok=True)
         skill_text = render_skill(agent, profile_path.read_text(encoding="utf-8"), commit)
+        skill_text, applied = apply_local_patches(skill_text, slug, patches)
+        if applied:
+            patched.append(f"{slug} ({', '.join(applied)})")
         (skill_dir / "SKILL.md").write_text(skill_text, encoding="utf-8")
 
     dispatcher_dir = dest / "scientific-agents"
@@ -243,6 +298,8 @@ def main() -> None:
 
     print(f"Imported {len(agents)} profiles plus dispatcher into {dest}")
     print(f"Source commit: {commit}")
+    if patched:
+        print("Local patches applied: " + "; ".join(patched))
 
 
 if __name__ == "__main__":

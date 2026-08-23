@@ -24,6 +24,7 @@ created: 2026-06-09
 ## Related skills
 
 - [generate-image](../../notes/documents-office/generate-image.md) — Generate or edit images using AI models (FLUX, Gemini)
+- [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
 - [research-lookup](../../notes/literature-discovery/research-lookup.md) — Look up current research information using parallel-cli search (primary, fast web search) or the Parallel Chat API (deep research)
 - [scientific-schematics](../../notes/research-writing/scientific-schematics.md) — Create publication-quality scientific diagrams using Nano Banana 2 AI with smart iterative refinement
 

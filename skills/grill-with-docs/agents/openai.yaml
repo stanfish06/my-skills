@@ -1,4 +1,5 @@
 interface:
-  display_name: "Grill With Docs"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $grill-with-docs for this task."
+  display_name: "Grill with Docs"
+  short_description: "Grill a design and write its docs"
+policy:
+  allow_implicit_invocation: false

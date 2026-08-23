@@ -14,13 +14,13 @@ created: 2026-06-20
 # writing-fragments
 
 > [!info] What it does
-> Grilling session that mines the user for fragments — heterogeneous nuggets of writing (claims, vignettes, sharp sentences, half-thoughts) — and appends them to a single document as raw material for a future article. Use when the user wants to develop ideas before imposing structure, or mentions "fragments", "ideate", or "raw material" for writing.
+> Writing, explore: mine raw fragments, no structure yet.
 
 **Source:** [skills/writing-fragments/SKILL.md](../../../skills/writing-fragments/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](../../maps/research-writing.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [grilling](../../notes/reasoning-ideation/grilling.md) — Interview the user relentlessly about a plan or design
+_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

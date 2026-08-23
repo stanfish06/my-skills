@@ -1,4 +1,5 @@
 interface:
   display_name: "Grill Me"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $grill-me for this task."
+  short_description: "Sharpen a plan through interview"
+policy:
+  allow_implicit_invocation: false

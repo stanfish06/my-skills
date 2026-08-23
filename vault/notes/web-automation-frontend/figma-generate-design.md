@@ -21,7 +21,7 @@ created: 2026-06-09
 ## Related skills
 
 - [figma-design-to-code](../../notes/web-automation-frontend/figma-design-to-code.md) — Use this skill when implementing a Figma design as code (design → code) — the read-FROM-Figma direction
-- [figma-use](../../notes/web-automation-frontend/figma-use.md) — **MANDATORY prerequisite** — you MUST invoke this skill BEFORE every `use_figma` tool call
+- [figma-use](../../notes/web-automation-frontend/figma-use.md) — Load this skill before every `use_figma` tool call
 - [modal](../../notes/cloud-devops/modal.md) — Modal is a serverless cloud platform for running Python on demand, including on-demand GPUs
 - [workflow](../../notes/software-dev/workflow.md) — Vercel Workflow DevKit (WDK) expert guidance
 

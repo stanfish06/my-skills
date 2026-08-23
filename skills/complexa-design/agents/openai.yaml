@@ -1,4 +1,0 @@
-interface:
-  display_name: "Complexa Design"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $complexa-design for this task."

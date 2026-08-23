@@ -13,7 +13,8 @@ skills-lock.json
 # Patterns cover both the skill folders and the generated `<name>.md` wrapper
 # notes. `/gstack-*` already catches `gstack-qa/` and `gstack-qa.md`; the
 # underscore-prefixed install artifacts need their own pattern because the
-# leading `_` puts them outside it.
+# leading `_` puts them outside it, and the bare `gstack.md` wrapper needs one
+# because it has no hyphen to match.
 #
 # The skill folders live under `/skills/`; the generated wrapper notes live in
 # the human layer under `/vault/notes/<domain>/`. Both roots need the patterns.
@@ -25,6 +26,7 @@ skills-lock.json
 /skills/gstack/
 /skills/gstack-*
 /skills/_gstack*
+/vault/notes/*/gstack.md
 /vault/notes/*/gstack-*.md
 /vault/notes/*/_gstack*.md
 
@@ -118,3 +120,12 @@ skills-lock.json
 # read it. retrievable.ttl is a validation intermediate rebuilt in ~1s.
 vault/graph/retrievable.ttl
 vault/graph/graph.trig
+
+# gh-aw run logs (tens of MB per run).
+/.github/aw/logs/
+
+# Editor state.
+/.vscode/
+
+# githubnext/agentics clone the agentic-workflows skill reads templates from.
+/skills/agentic-workflows/templates/

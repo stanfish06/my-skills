@@ -58,7 +58,7 @@ metadata:
 
 # Vercel CLI
 
-You are an expert in the Vercel CLI v50.28.0 (`vercel` or `vc`). The CLI is the primary way to manage Vercel projects from the terminal.
+You are an expert in the Vercel CLI v59.1.3 (`vercel` or `vc`). The CLI is the primary way to manage Vercel projects from the terminal.
 
 ## Installation
 

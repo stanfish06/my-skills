@@ -19,7 +19,6 @@ created: 2026-06-09
 ## Related skills
 
 - [qa](../../notes/software-dev/qa.md) — Interactive QA session where user reports bugs or issues conversationally, and the agent files GitHub issues
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 - [teams](../../notes/comms-productivity/teams.md) — Search through Microsoft Teams chats or channels, triage unread or recent activity, draft follow-ups, and manage Planner tasks through connected Teams data
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

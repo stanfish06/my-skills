@@ -25,6 +25,8 @@ User Input →
 │       └── No ──────────────────────────→ full mode (Phase 0 will conduct an interview)
 │
 ├── Have an existing paper to revise? ──────────────────────→ revision mode
+├── Have comments explicitly identified as coming from a real committee or institutional review office?
+│   └── Need tracking / response preparation ───────────────→ revision-coach committee-correspondence variant
 ├── Have reviewer comments to handle?
 │   ├── Comments only, no response written yet ──────────→ revision-coach mode
 │   └── Comments + an existing rebuttal/response draft ──→ rebuttal-audit mode
@@ -198,22 +200,29 @@ User Input →
 **Expected Duration**: Short-Medium
 **Agents Used**: revision_coach_agent used standalone (no prior pipeline execution required)
 
+**Committee-correspondence variant**: when the user explicitly identifies comments
+from a real committee or institutional review office, this same entrypoint loads
+`committee_correspondence_protocol.md` and emits the separate #668 byte-accounted
+concern tracker plus placeholder response skeleton. It does not emit the reviewer
+Roadmap, Schema 11, priority/severity, a determination, or a resolution claim. Formal
+tone alone never activates the variant.
+
 ---
 
-### disclosure mode — AI-Usage Disclosure Statement
+### disclosure mode — AI-Usage Disclosure Outcome
 
 **Applicable Scenarios**:
-- Paper is drafted and you need a venue-specific AI-usage disclosure paragraph
-- Submitting to a venue with a defined AI-disclosure policy (ICLR, NeurIPS, Nature, Science, ACL, EMNLP)
-- Need placement guidance for where the statement goes in the manuscript
+- Paper is drafted and you need venue-specific disclosure text or a policy action checklist
+- Submitting under a covered policy target (ICLR, NeurIPS, Nature, Science, ACL, EMNLP, or a covered medical-publishing target: ICMJE, NEJM, The Lancet, JAMA, BMJ, PLOS, Frontiers, publisher-wide 中华护理杂志社, journal-level 国际眼科杂志)
+- Need placement/action guidance for every required manuscript or submission channel
 
 **Not Applicable When**:
 - No paper drafted yet — disclosure is a finishing step (→ full mode first)
 - The venue is not in the policy database (confirm the venue's current policy manually)
 
-**Expected Output**: Venue-specific AI-usage disclosure paragraph(s) + placement instructions
+**Expected Output**: Default venue path — `REQUIRED` / `ACTION_ONLY` / `NOT_REQUIRED` / `UNKNOWN` applicability plus typed halt status; policy-anchor path — anchor-specific render
 **Expected Duration**: Short
-**Agents Used**: disclosure protocol used standalone (venue policy database lookup)
+**Agents Used**: formatter agent's standalone disclosure branch, which loads the disclosure protocol before the venue policy database or policy-anchor lookup; it does not run normal Phase 7 formatting
 
 ---
 
@@ -309,8 +318,9 @@ academic-paper completed
 | Completed paper | Format conversion | format-convert mode |
 | Completed paper | Citation check | citation-check mode |
 | Reviewer comments (no response yet) | Parse + roadmap + reply skeleton | revision-coach mode |
+| Real-committee comments (explicitly identified; no response yet) | Preserve source + concern tracker + placeholder response skeleton | revision-coach committee-correspondence variant |
 | Reviewer comments + a written rebuttal draft | QA the draft before sending | rebuttal-audit mode |
-| Drafted paper + target venue | AI-usage disclosure statement | disclosure mode |
+| Drafted paper + target venue | AI-usage disclosure bundle or policy action checklist | disclosure mode |
 
 ---
 
@@ -360,6 +370,7 @@ Before conversion, ALL of the following must be true:
 "help me with my revision"              -> revision-coach
 "should we push back on reviewer 2"     -> revision-coach
 "conference rebuttal" / "grant response" -> revision-coach
+"track these committee comments"          -> revision-coach committee-correspondence variant (only with explicit real-source identity)
 "audit my rebuttal draft"               -> rebuttal-audit (needs comments + an existing draft)
 "did I miss any reviewer comment"       -> rebuttal-audit
 "AI disclosure for Nature"              -> disclosure

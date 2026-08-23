@@ -18,7 +18,7 @@ created: 2026-08-13
 
 - [fastapi](../../notes/software-dev/fastapi.md) — Building HTTP/JSON APIs in Python with FastAPI — path/query/body params, Pydantic v2 models, async endpoints, dependency injection, the lifespan startup/shutdown pattern, error...
 - [huggingface-gradio](../../notes/ml-ai/huggingface-gradio.md) — Build Gradio web UIs and demos in Python
-- [prototype](../../notes/software-dev/prototype.md) — Build a throwaway prototype to flesh out a design — a runnable terminal app for state/business-logic questions, or several radically different UI variations toggleable from one route
+- [prototype](../../notes/software-dev/prototype.md) — Build a throwaway prototype to answer a design question
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

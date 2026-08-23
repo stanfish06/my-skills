@@ -25,7 +25,7 @@ created: 2026-08-07
 - [chunk](../../notes/ml-ai/chunk.md) — Use CircleCI Chunk for AI-assisted CI/CD work through either the Chunk web UI or the chunk-cli
 - [configure-auth](../../notes/dotnet-development/configure-auth.md) — Add authentication and authorization to a Blazor Web App, accounting for the app's render mode
 - [core](../../notes/web-automation-frontend/core.md) — Core agent-browser usage guide. Read this before running any agent-browser commands
-- [figma-generate-diagram](../../notes/web-automation-frontend/figma-generate-diagram.md) — MANDATORY prerequisite — load this skill BEFORE every `generate_diagram` tool call
+- [figma-generate-diagram](../../notes/web-automation-frontend/figma-generate-diagram.md) — Load this skill BEFORE every `generate_diagram` tool call
 - [insecure-defaults](../../notes/security-auditing/insecure-defaults.md) — Detects fail-open insecure defaults (hardcoded secrets, weak auth, permissive security) that allow apps to run insecurely in production
 - [marketplace](../../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and building integrations, auto-provisioned environment variables, unified billing, and the vercel integration CLI
 - [neon-postgres](../../notes/hosting-edge-platforms/neon-postgres.md) — Guides and best practices for working with Neon Serverless Postgres

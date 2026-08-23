@@ -1,4 +1,5 @@
 """Tests for the CellposeSAM cell segmentation skill."""
+import argparse
 import sys
 from pathlib import Path
 from unittest.mock import patch
@@ -217,11 +218,11 @@ class TestWriteReport:
         text = (tmp_path / "report.md").read_text()
         assert "SD=N/A" in text
 
-    def test_report_diameter_auto(self, tmp_path):
-        """None diameter renders as auto-estimated."""
+    def test_report_diameter_unspecified(self, tmp_path):
+        """None diameter reports native-scale inference without rescaling."""
         cell_detection.write_report(self._sample_metrics(), {"diameter": None}, tmp_path)
         text = (tmp_path / "report.md").read_text()
-        assert "auto-estimated" in text
+        assert "not specified (no rescaling; native model scale)" in text
 
     def test_report_diameter_explicit(self, tmp_path):
         """Explicit diameter value is shown in report."""
@@ -998,6 +999,41 @@ class TestCliGuardrails:
                 with pytest.raises(SystemExit) as exc:
                     cell_detection.main()
         assert exc.value.code == 2
+
+# ---------------------------------------------------------------------------
+# TestDiameterValidation
+# ---------------------------------------------------------------------------
+
+
+class TestDiameterValidation:
+    """--diameter must be finite and strictly positive (Cellpose rescales only when diameter > 0)."""
+
+    @pytest.mark.parametrize("text", ["0", "-1", "nan", "inf", "-inf"])
+    def test_cli_rejects_nonpositive_or_nonfinite(self, tmp_path, text):
+        with patch(
+            "sys.argv",
+            [
+                "cell_detection.py",
+                "--input",
+                str(tmp_path / "img.tif"),
+                "--diameter",
+                text,
+                "--output",
+                str(tmp_path / "out"),
+            ],
+        ):
+            with pytest.raises(SystemExit) as exc:
+                cell_detection.main()
+        assert exc.value.code == 2
+
+    @pytest.mark.parametrize("text", ["0", "-1", "nan", "inf", "-inf", "abc"])
+    def test_type_rejects_invalid(self, text):
+        with pytest.raises(argparse.ArgumentTypeError):
+            cell_detection._positive_float(text)
+
+    @pytest.mark.parametrize("text,expected", [("30", 30.0), ("12.5", 12.5), ("1e2", 100.0)])
+    def test_type_accepts_positive_finite(self, text, expected):
+        assert cell_detection._positive_float(text) == expected
 
 
 # ---------------------------------------------------------------------------

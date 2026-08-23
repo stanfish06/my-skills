@@ -20,6 +20,7 @@ created: 2026-08-07
 
 - [batch-draft-writer](../../notes/comms-productivity/batch-draft-writer.md) — Drafts multiple email replies or follow-ups in batch using the Superhuman Mail MCP server — processing your inbox in bulk rather than one email at a time
 - [deal-tracker](../../notes/finance-investment/deal-tracker.md) — Builds a relationship or deal summary using the Superhuman Mail MCP server — pulling together all email history, read receipts, and calendar interactions with a specific person or...
+- [email-security](../../notes/security-auditing/email-security.md) — Use for authorized email security review including phishing analysis, header authentication (SPF/DKIM/DMARC), BEC patterns, and mailbox token abuse research
 - [eod-wrapup](../../notes/comms-productivity/eod-wrapup.md) — Generates an end-of-day wrap-up using the Superhuman Mail MCP server — identifies open loops, unanswered emails, and action items from your day so you can leave work with a clear head
 - [gmail](../../notes/comms-productivity/gmail.md) — Manage Gmail inbox triage, mailbox search, thread summaries, action extraction, reply drafting, and email forwarding through connected Gmail data
 - [marketplace](../../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and building integrations, auto-provisioned environment variables, unified billing, and the vercel integration CLI

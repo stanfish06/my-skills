@@ -12,7 +12,7 @@ created: 2026-06-20
 # prototype
 
 > [!info] What it does
-> Build a throwaway prototype to flesh out a design — a runnable terminal app for state/business-logic questions, or several radically different UI variations toggleable from one route.
+> Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like.
 
 **Source:** [skills/prototype/SKILL.md](../../../skills/prototype/SKILL.md)  ·  **Domain:** [Software Development & Engineering](../../maps/software-dev.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

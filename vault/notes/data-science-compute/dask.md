@@ -18,7 +18,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [get-available-resources](../../notes/vault-meta/get-available-resources.md) — This skill should be used at the start of any computationally intensive scientific task to detect and report available system resources (CPU cores, GPUs, memory, disk space)
+- [get-available-resources](../../notes/vault-meta/get-available-resources.md) — Use at the start of computationally intensive scientific task to detect and report available system resources (CPU cores, GPUs, memory, disk space)
 - [pandas](../../notes/data-science-compute/pandas.md) — The workhorse library for in-memory tabular data in Python
 - [polars](../../notes/data-science-compute/polars.md) — High-performance DataFrame library for Python ETL, analytics, and pandas migration
 - [vaex](../../notes/data-science-compute/vaex.md) — Use this skill for processing and analyzing large tabular datasets (billions of rows) that exceed available RAM

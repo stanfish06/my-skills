@@ -14,7 +14,7 @@ created: 2026-06-20
 # writing-beats
 
 > [!info] What it does
-> Shape an article as a journey of beats, choose-your-own-adventure style. The user picks a starting beat from the raw material, you write only that beat, then offer options for where to pivot next, beat by beat, until the article reaches a natural end. Use when the user has raw material and wants to assemble it as a narrative rather than an argument.
+> Writing, exploit; assemble raw material into a journey of beats, grounding each term before a beat leans on it.
 
 **Source:** [skills/writing-beats/SKILL.md](../../../skills/writing-beats/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](../../maps/research-writing.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

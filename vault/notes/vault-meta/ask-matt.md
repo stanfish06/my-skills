@@ -14,7 +14,7 @@ created: 2026-06-20
 # ask-matt
 
 > [!info] What it does
-> Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.
+> Ask which skill or flow fits your situation. A router over the skills in this repo.
 
 **Source:** [skills/ask-matt/SKILL.md](../../../skills/ask-matt/SKILL.md)  ·  **Domain:** [Vault, Skills & Workflow Meta](../../maps/vault-meta.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

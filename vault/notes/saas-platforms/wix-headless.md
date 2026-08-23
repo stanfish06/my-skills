@@ -20,7 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
-- [implement](../../notes/software-dev/implement.md) — Implement a piece of work based on a PRD or set of issues
+- [implement](../../notes/software-dev/implement.md) — Implement a piece of work based on a spec or set of tickets
 - [start](../../notes/vault-meta/start.md) — Use when starting Zoom work
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

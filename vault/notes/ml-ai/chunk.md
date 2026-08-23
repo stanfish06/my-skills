@@ -19,6 +19,7 @@ created: 2026-08-07
 ## Related skills
 
 - [auth](../../notes/security-auditing/auth.md) — Authentication integration guidance — Clerk (native Vercel Marketplace), Descope, and Auth0 setup for Next.js applications
+- [wayfinder](../../notes/reasoning-ideation/wayfinder.md) — Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

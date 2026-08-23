@@ -20,7 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
-- [figma-use](../../notes/web-automation-frontend/figma-use.md) — **MANDATORY prerequisite** — you MUST invoke this skill BEFORE every `use_figma` tool call
+- [figma-use](../../notes/web-automation-frontend/figma-use.md) — Load this skill before every `use_figma` tool call
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -18,7 +18,7 @@ created: 2026-08-07
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [radare2](../../notes/security-auditing/radare2.md) — Use this skill whenever the user wants to analyze binaries with radare2/r2 from the command line, including reverse engineering, disassembly, function analysis, strings/import...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

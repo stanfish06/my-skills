@@ -21,6 +21,7 @@ created: 2026-07-26
 ## Related skills
 
 - [matlab](../../notes/matlab-development/matlab.md) — MATLAB and GNU Octave numerical computing for matrix operations, data analysis, visualization, and scientific computing
+- [wizard](../../notes/cloud-devops/wizard.md) — Generate an interactive bash wizard that walks a human through steps only they can perform
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

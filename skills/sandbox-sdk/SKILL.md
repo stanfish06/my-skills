@@ -113,12 +113,12 @@ const files = await sandbox.listFiles('/workspace/project');
 
 ## Extending the Dockerfile
 
-Base image (`docker.io/cloudflare/sandbox:0.7.0`) includes Python 3.11, Node.js 20, and common tools.
+Base image includes Python 3.11, Node.js, and common tools. **The Dockerfile's base image tag must exactly match the installed `@cloudflare/sandbox` npm package version** — a mismatch fails the container at startup. Check the installed version (`npm list @cloudflare/sandbox` or the `package.json` dependency) and use that exact version as the tag; do not hardcode a version number here.
 
 Add dependencies by extending the Dockerfile:
 
 ```dockerfile
-FROM docker.io/cloudflare/sandbox:0.7.0
+FROM docker.io/cloudflare/sandbox:<version-matching-installed-@cloudflare/sandbox-package>
 
 # Python packages
 RUN pip install requests beautifulsoup4

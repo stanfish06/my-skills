@@ -30,7 +30,7 @@ created: 2026-06-13
 - [fine-mapping](../notes/genomics-variants/fine-mapping.md) — Statistical fine-mapping of GWAS loci using SuSiE, SuSiE-inf, and Approximate Bayes Factors to identify credible sets and posterior inclusion probabilities (PIPs) for causal variant...
 - [finngen-phewas-skill](../notes/genomics-variants/finngen-phewas-skill.md) — Fetch compact FinnGen PheWAS summaries for single variants by accepting rsID, GRCh37, or GRCh38 input and resolving to the required GRCh38 query
 - [genebass-gene-burden-skill](../notes/genomics-variants/genebass-gene-burden-skill.md) — Submit compact Genebass gene burden requests for one Ensembl gene ID and one burden set
-- [geniml](../notes/genomics-variants/geniml.md) — This skill should be used when working with genomic interval data (BED files) for machine learning tasks
+- [geniml](../notes/genomics-variants/geniml.md) — Use when working with genomic interval data (BED files) for machine learning tasks
 - [genome-compare](../notes/genomics-variants/genome-compare.md) — Compare your genome to George Church (PGP-1) and estimate ancestry composition via IBS and EM admixture
 - [genome-match](../notes/genomics-variants/genome-match.md) — Score genetic compatibility across all male-female pairings in a Genomebook generation
 - [genomics-workflow-acceleration](../notes/genomics-variants/genomics-workflow-acceleration.md) — Use when accelerating existing genomics workflows with NVIDIA Parabricks, improving runtime or price/performance, converting pipeline steps to GPUs, or comparing CPU and GPU workflow...

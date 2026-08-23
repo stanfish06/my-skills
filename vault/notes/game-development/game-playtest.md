@@ -21,7 +21,6 @@ created: 2026-08-07
 ## Related skills
 
 - [qa](../../notes/software-dev/qa.md) — Interactive QA session where user reports bugs or issues conversationally, and the agent files GitHub issues
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 - [verification](../../notes/software-dev/verification.md) — Full-story verification — infers what the user is building, then verifies the complete flow end-to-end: browser → API → data → response
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

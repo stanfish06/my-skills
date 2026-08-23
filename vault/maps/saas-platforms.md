@@ -19,7 +19,7 @@ created: 2026-08-09
 - [airtable-cli](../notes/saas-platforms/airtable-cli.md) — Lists bases, reads and writes records, manages tables and fields, filters and searches data in Airtable via the `airtable-mcp` CLI
 - [airtable-filters](../notes/saas-platforms/airtable-filters.md) — Use this skill when the user wants to find, filter, or narrow down Airtable records by field values, even when they don't explicitly say "filter
 - [airtable-overview](../notes/saas-platforms/airtable-overview.md) — Explains what Airtable is and how data is structured — bases, tables, fields, records, views, automations, and interfaces
-- [base44-cli](../notes/saas-platforms/base44-cli.md) — The base44 CLI is used for EVERYTHING related to base44 projects: resource configuration (entities, backend functions, ai agents), initialization and actions (resource creation...
+- [base44-cli](../notes/saas-platforms/base44-cli.md) — The base44 CLI covers base44 projects: resource configuration (entities, backend functions, ai agents), initialization and actions (resource creation, deployment)
 - [base44-sdk](../notes/saas-platforms/base44-sdk.md) — The base44 SDK is the library to communicate with base44 services
 - [base44-troubleshooter](../notes/saas-platforms/base44-troubleshooter.md) — Troubleshoot production issues using backend function logs
 - [box-content-api](../notes/saas-platforms/box-content-api.md) — Build and troubleshoot Box integrations for uploads, folders, folder listings, downloads and previews, shared links, collaborations, search, metadata, event-driven automations, and Box...
@@ -57,7 +57,7 @@ created: 2026-08-09
 - [marketplace](../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and building integrations, auto-provisioned environment variables, unified billing, and the vercel integration CLI
 - [mixpanel-auth](../notes/saas-platforms/mixpanel-auth.md) — Manage Mixpanel Headless authentication: check session state, list/add/use accounts, run OAuth login, switch projects/workspaces, manage targets, and check bridge credentials
 - [mixpanel-headless-setup](../notes/saas-platforms/mixpanel-headless-setup.md) — This skill installs mixpanel_headless, pandas, numpy, matplotlib, seaborn, networkx, anytree, scipy (and pyarrow on Python 3.11+), then verifies Mixpanel credentials
-- [mixpanelyst](../notes/saas-platforms/mixpanelyst.md) — This skill should be used when the user asks about Mixpanel product analytics, event data, funnel analysis, retention curves, cohort analysis, segmentation queries, user behavior...
+- [mixpanelyst](../notes/saas-platforms/mixpanelyst.md) — Use when the user asks about Mixpanel product analytics, event data, funnel analysis, retention curves, cohort analysis, segmentation queries, user behavior, conversion rates, churn...
 - [payments](../notes/saas-platforms/payments.md) — Stripe payments integration guidance — native Vercel Marketplace setup, checkout sessions, webhook handling, subscription billing, and the Stripe SDK
 - [plan-zoom-integration](../notes/saas-platforms/plan-zoom-integration.md) — Use when planning Zoom integrations
 - [plan-zoom-product](../notes/saas-platforms/plan-zoom-product.md) — Use when choosing products
@@ -73,7 +73,7 @@ created: 2026-08-09
 - [setup-zoom-websockets](../notes/saas-platforms/setup-zoom-websockets.md) — Use when building Zoom WebSockets
 - [shopify-admin](../notes/saas-platforms/shopify-admin.md) — Write or explain **Admin GraphQL** queries and mutations for apps and integrations that extend the Shopify admin
 - [shopify-app-store-review](../notes/saas-platforms/shopify-app-store-review.md) — Run a pre-submission compliance check against your Shopify app's codebase
-- [shopify-custom-data](../notes/saas-platforms/shopify-custom-data.md) — MUST be used first when prompts mention Metafields or Metaobjects
+- [shopify-custom-data](../notes/saas-platforms/shopify-custom-data.md) — Use first when prompts mention Metafields or Metaobjects
 - [shopify-customer](../notes/saas-platforms/shopify-customer.md) — The Customer Account API allows customers to access their own data including orders, payment methods, and addresses
 - [shopify-dev](../notes/saas-platforms/shopify-dev.md) — Search Shopify developer documentation across all APIs
 - [shopify-functions](../notes/saas-platforms/shopify-functions.md) — Shopify Functions allow developers to customize the backend logic that powers parts of Shopify
@@ -99,7 +99,7 @@ created: 2026-08-09
 - [twilio-call-recordings](../notes/saas-platforms/twilio-call-recordings.md) — Record Twilio voice calls correctly. Covers the critical distinction between Record verb (voicemail) and Dial record (call recording), dual-channel for QA, mid-call pause for PCI...
 - [twilio-cli-reference](../notes/saas-platforms/twilio-cli-reference.md) — Twilio CLI reference for managing Twilio resources from the terminal
 - [twilio-compliance-onboarding](../notes/saas-platforms/twilio-compliance-onboarding.md) — Registrations required BEFORE Twilio traffic works
-- [twilio-compliance-traffic](../notes/saas-platforms/twilio-compliance-traffic.md) — Rules you must follow for Twilio messaging and voice traffic
+- [twilio-compliance-traffic](../notes/saas-platforms/twilio-compliance-traffic.md) — Rules for Twilio messaging and voice traffic
 - [twilio-conference-calls](../notes/saas-platforms/twilio-conference-calls.md) — Build multi-party calls using Twilio Conference
 - [twilio-content-template-builder](../notes/saas-platforms/twilio-content-template-builder.md) — Create, manage, and send message templates using Twilio's Content API
 - [twilio-conversation-orchestrator](../notes/saas-platforms/twilio-conversation-orchestrator.md) — Configure automatic conversation capture and routing with Twilio Conversation Orchestrator

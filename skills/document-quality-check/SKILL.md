@@ -1,16 +1,15 @@
 ---
 name: document-quality-check
 description: >
-  Document Quality Check skill for Datasite deal rooms. Use this skill whenever a
-  deal team wants to audit document quality before going live to buyers. Triggers
-  include: "check document quality", "flag bad documents", "find password protected
-  files", "check for blank documents", "PII check", "redaction review", "find
-  corrupted files", "document audit", "quality check the data room", "are there
-  any blank or broken files", "check for unredacted personal data", or any request
-  to verify that documents in the data room are complete, accessible, and safe to
-  share. Use this skill proactively before a data room goes live.
-  Do not use for renaming files (use smart-file-renaming) or for identifying
-  missing sections (use gap-analysis).
+  Document Quality Check skill for Datasite deal rooms. Use this skill whenever a deal
+  team wants to audit document quality before going live to buyers. Triggers include:
+  "check document quality", "flag bad documents", "find password protected files", "check
+  for blank documents", "PII check", "redaction review", "find corrupted files", "document
+  audit", "quality check the data room", "are there any blank or broken files", "check for
+  unredacted personal data", or any request to verify that documents in the data room are
+  complete, accessible, and safe to share. Use when relevant before a data room goes live.
+  Do not use for renaming files (use smart-file-renaming) or for identifying missing
+  sections (use gap-analysis).
 metadata:
   author: Blueflame AI
   version: 1.0.0

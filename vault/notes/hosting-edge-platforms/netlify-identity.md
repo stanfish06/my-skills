@@ -14,7 +14,7 @@ created: 2026-08-07
 # netlify-identity
 
 > [!info] What it does
-> Use when the task involves authentication, user signups, logins, password recovery, OAuth providers, role-based access control, or protecting routes and functions. Always use `@netlify/identity`. Never use `netlify-identity-widget` or `gotrue-js` — they are deprecated.
+> Use when the task involves authentication, user signups, logins, password recovery, OAuth providers, role-based access control, or protecting routes and functions. Use `@netlify/identity`. Never use `netlify-identity-widget` or `gotrue-js` — they are deprecated.
 
 **Source:** [skills/netlify-identity/SKILL.md](../../../skills/netlify-identity/SKILL.md)  ·  **Domain:** [Hosting, Edge & Deployment Platforms](../../maps/hosting-edge-platforms.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

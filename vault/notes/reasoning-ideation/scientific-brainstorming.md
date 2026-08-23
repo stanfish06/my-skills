@@ -20,9 +20,10 @@ created: 2026-06-09
 
 ## Related skills
 
-- [brainstorming](../../notes/software-dev/brainstorming.md) — You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior
+- [brainstorming](../../notes/software-dev/brainstorming.md) — Use before creative work - creating features, building components, adding functionality, or modifying behavior
 - [hypogenic](../../notes/reasoning-ideation/hypogenic.md) — Automated LLM-driven hypothesis generation and testing on tabular datasets
 - [hypothesis-generation](../../notes/reasoning-ideation/hypothesis-generation.md) — Generate testable hypotheses. Formulate from observations, design experiments, explore competing explanations, develop predictions, propose mechanisms, for scientific inquiry across...
+- [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

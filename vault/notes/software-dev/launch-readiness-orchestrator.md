@@ -22,7 +22,6 @@ created: 2026-08-07
 
 - [document-quality-check](../../notes/software-dev/document-quality-check.md) — Document Quality Check skill for Datasite deal rooms
 - [gap-analysis](../../notes/software-dev/gap-analysis.md) — Data Room Gap Analysis skill for Datasite deal rooms
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 - [risk-analysis-audit](../../notes/finance-investment/risk-analysis-audit.md) — Risk Analysis Audit skill for Datasite deal rooms
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

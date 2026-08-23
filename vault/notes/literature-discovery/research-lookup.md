@@ -22,6 +22,7 @@ created: 2026-06-09
 
 - [infographics](../../notes/documents-office/infographics.md) — Create professional infographics using Nano Banana Pro AI with smart iterative refinement
 - [market-research-reports](../../notes/documents-office/market-research-reports.md) — Generate comprehensive market research reports (50+ pages) in the style of top consulting firms (McKinsey, BCG, Gartner)
+- [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
 - [scientific-writing](../../notes/research-writing/scientific-writing.md) — Core skill for the deep research and writing tool
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

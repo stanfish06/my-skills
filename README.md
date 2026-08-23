@@ -1,9 +1,12 @@
+# Skillquarium
+
 A collection of AI agent skills, organized as an Obsidian vault for easier human navigation.
 
 - managed by vercel's skills
-- place at `~/.agents` (the repo root *is* the skills CLI's home; skill folders live in `skills/`)
+- place at `~/.agents` (the repo root _is_ the skills CLI's home; skill folders live in `skills/`)
 
 ## Screenshot
+
 <table width="100%">
   <tr>
     <th>Obsidian graph</th>
@@ -12,13 +15,13 @@ A collection of AI agent skills, organized as an Obsidian vault for easier human
   </tr>
   <tr>
      <td width="33%">
-       <img src="./screenshot.png" width="300" />
+       <img src="./screenshot.png" width="300" alt="Obsidian graph view of the skill vault" />
      </td>
      <td width="33%">
-       <img src="./graphifyy.png" width="300" />
+       <img src="./graphifyy.png" width="300" alt="Graphifyy graph view of skill relationships" />
      </td>
      <td width="33%">
-       <img src="./skill-toggle.png" width="300" />
+       <img src="./skill-toggle.png" width="300" alt="Skill toggle TUI for enabling and disabling skills" />
      </td>
   </tr>
 </table>
@@ -67,9 +70,9 @@ companion skills in the vault's canonical `~/.agents/skills` store before the
 normal skills CLI propagates them to supported agents. The aliases
 `ui-ux-pro-max` and `uipro` are also accepted.
 
-| Env | Effect |
-|-----|--------|
-| `UI_UX_PRO_MAX_SKIP=1` | Force-skip even with `--extras ui-ux` |
+| Env                                   | Effect                                     |
+| ------------------------------------- | ------------------------------------------ |
+| `UI_UX_PRO_MAX_SKIP=1`                | Force-skip even with `--extras ui-ux`      |
 | `UI_UX_PRO_MAX_CLI_VERSION=<version>` | Override the pinned CLI version (`2.14.1`) |
 
 #### career (`--extras career`)
@@ -77,11 +80,11 @@ normal skills CLI propagates them to supported agents. The aliases
 Initializes the complete [`santifer/career-ops`](https://github.com/santifer/career-ops)
 workspace at `$HOME/career-ops` and uses its native updater on later runs.
 
-| Env | Effect |
-|-----|--------|
-| `CAREER_OPS_DIR=/path/to/workspace` | Change workspace location |
-| `CAREER_OPS_SKIP=1` | Force-skip even with `--extras career` |
-| `CAREER_OPS_AUTO_UPDATE=0` | Freeze an existing checkout (no auto-update) |
+| Env                                 | Effect                                       |
+| ----------------------------------- | -------------------------------------------- |
+| `CAREER_OPS_DIR=/path/to/workspace` | Change workspace location                    |
+| `CAREER_OPS_SKIP=1`                 | Force-skip even with `--extras career`       |
+| `CAREER_OPS_AUTO_UPDATE=0`          | Freeze an existing checkout (no auto-update) |
 
 #### gstack (`--extras gstack`)
 
@@ -89,11 +92,11 @@ Pins and runs [garrytan/gstack](https://github.com/garrytan/gstack) with `--pref
 skill names (`/gstack-qa`, `/gstack-ship`, …) so it does not clobber this vault's
 `/qa`, `/review`, `/ship`, etc.
 
-| Env | Effect |
-|-----|--------|
-| `GSTACK_SKIP=1` | Force-skip even with `--extras gstack` |
+| Env                 | Effect                                                                    |
+| ------------------- | ------------------------------------------------------------------------- |
+| `GSTACK_SKIP=1`     | Force-skip even with `--extras gstack`                                    |
 | `GSTACK_SKIP_BUN=1` | Skip bun install (browser skills disabled; methodology skills still work) |
-| `GSTACK_REF=<ref>` | Pin to a git ref (default is a known-good commit) |
+| `GSTACK_REF=<ref>`  | Pin to a git ref (default is a known-good commit)                         |
 
 ## Navigation
 
@@ -143,8 +146,8 @@ edits are left untouched. Reload the snapshot after committing to restore your p
 settings.
 
 The tool writes `disable-model-invocation` in `SKILL.md` for Claude Code and
-`policy.allow_implicit_invocation` in `agents/openai.yaml` for Codex. 
-This prevents skills from loading into agent's context window automatically, 
+`policy.allow_implicit_invocation` in `agents/openai.yaml` for Codex.
+This prevents skills from loading into agent's context window automatically,
 but you can still invoke them manually if needed.
 
 Scriptable commands use the same safe backend:
@@ -166,10 +169,10 @@ Each skill has a wrapper note (e.g. `scanpy.md`) at the vault root that links to
 source `SKILL.md`, lists related skills, and holds your personal notes / status / aliases.
 Navigation generation never modifies the original `*/SKILL.md` folders, so the skills CLI
 can manage them remotely. `skill-toggle` is the deliberate exception: it changes only the
-two product invocation fields described above. 
+two product invocation fields described above.
 
-As of 2026-08-09, claude code and pi can reliably toggle skills and 
-reduce context usage, codex is not working well. 
+As of 2026-08-09, claude code and pi can reliably toggle skills and
+reduce context usage, codex is not working well.
 As a workaround, one can use pi as the harness for gpt models.
 
 ## Regenerating the navigation layer

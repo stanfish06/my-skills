@@ -21,7 +21,7 @@ created: 2026-08-07
 ## Related skills
 
 - [teams](../../notes/comms-productivity/teams.md) — Search through Microsoft Teams chats or channels, triage unread or recent activity, draft follow-ups, and manage Planner tasks through connected Teams data
-- [triage](../../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs
+- [triage](../../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

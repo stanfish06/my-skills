@@ -1,4 +1,0 @@
-interface:
-  display_name: "Complexa Setup"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $complexa-setup for this task."

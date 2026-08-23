@@ -23,8 +23,9 @@ created: 2026-08-07
 - [design-md-library](../../notes/web-automation-frontend/design-md-library.md) — Library of 74 ready-to-use DESIGN.md files — complete design systems (color tokens, type scale, components, layout, motion, do's/don'ts) reverse-engineered from real product and brand...
 - [dynamo-router-starter](../../notes/software-dev/dynamo-router-starter.md) — Start or patch Dynamo router modes and run router endpoint smoke checks
 - [eqtl-catalogue-region-fetch](../../notes/genomics-variants/eqtl-catalogue-region-fetch.md) — Fetch a region of cis-eQTL summary statistics from EBI eQTL Catalogue v7+ via tabix-on-FTP
-- [get-available-resources](../../notes/vault-meta/get-available-resources.md) — This skill should be used at the start of any computationally intensive scientific task to detect and report available system resources (CPU cores, GPUs, memory, disk space)
+- [get-available-resources](../../notes/vault-meta/get-available-resources.md) — Use at the start of computationally intensive scientific task to detect and report available system resources (CPU cores, GPUs, memory, disk space)
 - [gwas-catalog-region-fetch](../../notes/genomics-variants/gwas-catalog-region-fetch.md) — Fetch a region of GWAS summary statistics from the NHGRI-EBI GWAS Catalog harmonised collection via tabix-on-FTP
+- [ida-reverse](../../notes/security-auditing/ida-reverse.md) — IDA Pro 逆向分析辅助技能。当用户提到逆向、反编译、分析二进制/PE/ELF/APK/DLL/SO、破解、找密码、漏洞分析、病毒分析、firmware 固件分析，或需要分析 exe/dll/so/elf/macho/sys 等文件时，务必使用此技能。 Ensure to use this skill when the user wants to analyze...
 - [morning-briefing](../../notes/comms-productivity/morning-briefing.md) — Generates a morning briefing that triages your inbox and previews your day using the Superhuman Mail MCP server — acting as an AI chief of staff
 - [netlify-frameworks](../../notes/hosting-edge-platforms/netlify-frameworks.md) — Guide for deploying web frameworks on Netlify
 - [planning-and-task-breakdown](../../notes/software-dev/planning-and-task-breakdown.md) — Breaks work into ordered tasks. Use when you have a spec or clear requirements and need to break work into implementable tasks

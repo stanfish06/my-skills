@@ -20,8 +20,8 @@ created: 2026-06-09
 
 ## Related skills
 
+- [academic-paper-reviewer](../../notes/academic-pipelines/academic-paper-reviewer.md) — Multi-perspective academic paper review with dynamic reviewer personas
 - [nature-reviewer](../../notes/academic-pipelines/nature-reviewer.md) — Simulate a Nature-style reviewer assessment from the referee perspective rather than an author rebuttal
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

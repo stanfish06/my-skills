@@ -49,26 +49,24 @@ if __name__ == "__main__":
 
 Run:
 ```bash
-python fuzz.py
+uv run python fuzz.py
 ```
 
 ## Installation
 
 Atheris supports 32-bit and 64-bit Linux, and macOS. We recommend fuzzing on Linux because it's simpler to manage and often faster.
 
-> [!WARNING]
-> **atheris 3.1.0 (Jun 2026) requires Python 3.11–3.14.** Python 3.10 and below are explicitly not supported in the current PyPI release. If you need Python 3.8–3.10 support, pin `atheris<=2.3.0`. See [skill-health issue #378](https://github.com/stanfish06/skillquarium/issues/378).
-
 ### Prerequisites
 
-- Python 3.11–3.14 (atheris 3.1.x; use `atheris<=2.3.0` for Python 3.8–3.10)
+- Python 3.7 or later
 - Recent version of clang (preferably [latest release](https://github.com/llvm/llvm-project/releases))
 - For Docker users: [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ### Linux/macOS
 
 ```bash
-uv pip install atheris
+uv init --bare   # once, if the harness directory is not yet a uv project
+uv add atheris
 ```
 
 ### Docker Environment (Recommended)
@@ -235,10 +233,13 @@ export LDSHARED="clang -shared"
 
 Install the extension from source:
 ```bash
-CBOR2_BUILD_C_EXTENSION=1 python -m pip install --no-binary cbor2 cbor2==5.6.4
+CBOR2_BUILD_C_EXTENSION=1 uv add --no-binary-package cbor2 'cbor2==5.6.4'
 ```
 
-The `--no-binary` flag ensures the C extension is compiled locally with instrumentation.
+The `--no-binary-package` flag ensures the C extension is compiled locally with
+instrumentation rather than pulled as a prebuilt wheel. Persist that choice with
+`no-binary-package = ["cbor2"]` under `[tool.uv]` in `pyproject.toml`, or a later
+`uv sync` can silently swap in an uninstrumented wheel.
 
 Create `cbor2-fuzz.py`:
 ```python
@@ -265,7 +266,7 @@ if __name__ == "__main__":
 
 Run:
 ```bash
-python cbor2-fuzz.py
+uv run python cbor2-fuzz.py
 ```
 
 > **Important:** When running locally (not in Docker), you must [set `LD_PRELOAD` manually](https://github.com/google/atheris/blob/master/native_extension_fuzzing.md#option-a-sanitizerlibfuzzer-preloads).
@@ -283,14 +284,14 @@ echo '{"key": "value"}' > corpus/seed2
 
 Run with corpus:
 ```bash
-python fuzz.py corpus/
+uv run python fuzz.py corpus/
 ```
 
 ### Corpus Minimization
 
 Atheris inherits corpus minimization from libFuzzer:
 ```bash
-python fuzz.py -merge=1 new_corpus/ old_corpus/
+uv run python fuzz.py -merge=1 new_corpus/ old_corpus/
 ```
 
 > **See Also:** For corpus creation strategies, dictionaries, and seed selection,
@@ -301,26 +302,26 @@ python fuzz.py -merge=1 new_corpus/ old_corpus/
 ### Basic Run
 
 ```bash
-python fuzz.py
+uv run python fuzz.py
 ```
 
 ### With Corpus Directory
 
 ```bash
-python fuzz.py corpus/
+uv run python fuzz.py corpus/
 ```
 
 ### Common Options
 
 ```bash
 # Run for 10 minutes
-python fuzz.py -max_total_time=600
+uv run python fuzz.py -max_total_time=600
 
 # Limit input size
-python fuzz.py -max_len=1024
+uv run python fuzz.py -max_len=1024
 
 # Run with multiple workers
-python fuzz.py -workers=4 -jobs=4
+uv run python fuzz.py -workers=4 -jobs=4
 ```
 
 ### Interpreting Output

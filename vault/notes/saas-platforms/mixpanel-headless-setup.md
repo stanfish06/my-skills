@@ -14,7 +14,7 @@ created: 2026-08-07
 # mixpanel-headless-setup
 
 > [!info] What it does
-> This skill installs mixpanel_headless, pandas, numpy, matplotlib, seaborn, networkx, anytree, scipy (and pyarrow on Python 3.11+), then verifies Mixpanel credentials. It should be invoked when setting up a new environment for Mixpanel data analysis, when dependencies are missing, or when configuring service account or OAuth credentials for the first time.
+> This skill installs mixpanel_headless, pandas, numpy, matplotlib, seaborn, networkx, anytree, scipy (and pyarrow on Python 3.11+), then verifies Mixpanel credentials. Use when setting up a new environment for Mixpanel data analysis, when dependencies are missing, or when configuring service account or OAuth credentials for the first time.
 
 **Source:** [skills/mixpanel-headless-setup/SKILL.md](../../../skills/mixpanel-headless-setup/SKILL.md)  ·  **Domain:** [SaaS & Vendor Platform Integrations](../../maps/saas-platforms.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

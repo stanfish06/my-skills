@@ -14,7 +14,7 @@ created: 2026-08-09
 
 **Related maps:** [Documents, Office & Media](documents-office.md) | [SaaS & Vendor Platform Integrations](saas-platforms.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md)
 
-## Skills (59)
+## Skills (61)
 
 - [batch-draft-writer](../notes/comms-productivity/batch-draft-writer.md) — Drafts multiple email replies or follow-ups in batch using the Superhuman Mail MCP server — processing your inbox in bulk rather than one email at a time
 - [bulk-qa-answers](../notes/comms-productivity/bulk-qa-answers.md) — Bulk Q&A Answers skill for Datasite deal rooms
@@ -74,4 +74,6 @@ created: 2026-08-09
 - [teams-notification-triage](../notes/comms-productivity/teams-notification-triage.md) — Triage recent Microsoft Teams activity into a priority queue or task list for the user
 - [teams-planner-task-management](../notes/comms-productivity/teams-planner-task-management.md) — Review and manage Microsoft Planner tasks from Teams workflows
 - [teams-reply-drafting](../notes/comms-productivity/teams-reply-drafting.md) — Draft Microsoft Teams replies from available context
+- [to-questionnaire](../notes/comms-productivity/to-questionnaire.md) — Turn a decision you can't fully answer into a questionnaire for someone else to fill in
+- [wait-what](../notes/comms-productivity/wait-what.md) — Stop. That last message did not land: re-pitch it
 - [window-management](../notes/comms-productivity/window-management.md) — Customize macOS SwiftUI windows and scene behavior

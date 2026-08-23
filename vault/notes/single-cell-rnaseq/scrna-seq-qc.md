@@ -21,7 +21,6 @@ created: 2026-08-07
 ## Related skills
 
 - [ngs-scrna-seq](../../notes/single-cell-rnaseq/ngs-scrna-seq.md) — Route single-cell or single-nucleus RNA-seq FASTQs to public count-generation workflows and defer post-count matrix QC, annotation, clustering, and UMAP analysis to the embedded...
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

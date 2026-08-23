@@ -12,13 +12,13 @@ created: 2026-06-20
 # grilling
 
 > [!info] What it does
-> Interview the user relentlessly about a plan or design. Use when the user wants to stress-test a plan before building, or uses any 'grill' trigger phrases.
+> Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.
 
 **Source:** [skills/grilling/SKILL.md](../../../skills/grilling/SKILL.md)  ·  **Domain:** [Reasoning, Ideation & Decision](../../maps/reasoning-ideation.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [writing-fragments](../../notes/research-writing/writing-fragments.md) — Grilling session that mines the user for fragments — heterogeneous nuggets of writing (claims, vignettes, sharp sentences, half-thoughts) — and appends them to a single document as raw...
+_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

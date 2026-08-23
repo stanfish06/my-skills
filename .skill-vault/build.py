@@ -177,13 +177,18 @@ SYNONYMS = {
     "adjusttext": ["adjustText", "ggrepel", "label placement", "text labels"],
     "conda-bioconda": ["conda", "mamba", "micromamba", "Bioconda"],
     "github-actions-ci": ["GitHub Actions", "CI/CD", "workflows"],
+    "agentic-workflows": ["gh-aw", "GitHub Agentic Workflows", "Agentics templates", "agentic Actions"],
     "test-driven-development": ["TDD"], "using-git-worktrees": ["git worktree"],
+    "worktrunk": ["git worktree", "worktree manager", "parallel agents"],
     "caveman": ["plain language", "ELI5", "dumb it down", "no jargon"],
     "fitness-nutrition": ["meal planning", "workout planner", "calorie counter", "TDEE", "one-rep max"],
     "web-artifacts-builder": ["artifacts", "shadcn"],
     "opensrc": ["source code", "package source", "dependency source", "read library source"],
     "greploop": ["Greptile", "PR review loop"], "check-pr": ["PR review", "merge request", "Greptile"],
     "hunk-review": ["Hunk", "interactive diff review"],
+    "ast-grep": ["structural code search", "AST search"],
+    "ast-grep-outline": ["code outline", "source structure map"],
+    "mermaid-terminal": ["Mermaid preview", "terminal diagrams", "Ghostty Mermaid", "Kitty graphics"],
     "design-md-library": ["DESIGN.md", "design tokens", "brand style", "look like Stripe", "Stitch"],
     "chaos-engineering": ["resilience testing", "fault injection", "LitmusChaos", "Chaos Mesh"],
 }
@@ -361,17 +366,18 @@ CATEGORIES = [
      ["test-driven-development", "systematic-debugging", "verification-before-completion",
       "requesting-code-review", "receiving-code-review", "brainstorming", "writing-plans",
       "executing-plans", "subagent-driven-development", "dispatching-parallel-agents",
-      "finishing-a-development-branch", "using-git-worktrees", "using-superpowers",
+      "finishing-a-development-branch", "using-git-worktrees", "worktrunk", "using-superpowers",
       "using-agent-skills", "writing-skills", "api-and-interface-design",
       "code-review-and-quality", "code-simplification", "context-engineering",
       "debugging-and-error-recovery", "deprecation-and-migration", "documentation-and-adrs",
       "doubt-driven-development", "git-workflow-and-versioning", "incremental-implementation",
       "planning-and-task-breakdown", "source-driven-development", "spec-driven-development",
       "spec-kit",
-      "pytest", "jest", "vitest", "docker", "fastapi", "github-actions-ci", "opensrc", "check-pr", "greploop",
-      "hunk-review",
+      "pytest", "jest", "vitest", "docker", "fastapi", "github-actions-ci", "agentic-workflows",
+      "opensrc", "check-pr", "greploop",
+      "hunk-review", "ast-grep", "ast-grep-outline",
       "linear", "cavekit-methodology", "cavekit-validation-first", "cavekit-revision",
-      "cavekit-design-system", "gstack"]),
+      "cavekit-design-system"]),
 
     ("vault-meta", "Vault, Skills & Workflow Meta",
      "Obsidian authoring, skill building/discovery, reproducibility, orchestration, and resource detection.",
@@ -594,6 +600,7 @@ CATEGORIES = [
       "dashboards-and-real-time-visualization", "data-visualization",
       "gantt-chart-visualization", "geospatial-and-cartographic-visualization",
       "grammar-of-graphics-and-declarative-visualization", "json-render",
+      "mermaid-terminal",
       "node-link-and-diagram-layout", "react-and-nextjs-data-visualization", "satori",
       "scrollytelling-and-parallax-data-visualization",
       "statistical-and-uncertainty-visualization", "testing-data-visualizations",
@@ -685,7 +692,13 @@ def read_description(skill):
             if re.match(r"^[A-Za-z0-9_-]+:(\s|$)", line) or line.strip() == "---":
                 break
             desc_lines.append(line.strip())
-    desc = " ".join(p for p in desc_lines if p).strip().strip("'\"").strip()
+    raw = " ".join(p for p in desc_lines if p).strip()
+    if len(raw) >= 2 and raw[0] == '"' == raw[-1]:
+        # double-quoted scalars carry \" and \\ escapes; unescape in one pass
+        raw = re.sub(r'\\(["\\])', r"\1", raw[1:-1])
+    else:
+        raw = raw.strip("'\"")
+    desc = raw.strip()
     return " ".join(desc.split()) or None
 
 
@@ -768,9 +781,11 @@ def is_gstack_subskill(skill):
     wrappers are gitignored and come/go with the install. They are excluded from
     the index count, the flat A–Z list, and the Uncategorized section so the
     committed navigation does not churn with install state. The bare ``gstack``
-    entry point is kept. See VAULT-AUDIT SCALE-3 / MNT-12."""
+    entry point is excluded too: its folder is gitignored, so CI cannot
+    reproduce any navigation derived from it. See VAULT-AUDIT SCALE-3 / MNT-12."""
     return (
-        skill.startswith("gstack/")
+        skill == "gstack"
+        or skill.startswith("gstack/")
         or skill.startswith("gstack-")
         or skill.startswith("_gstack")
     )
@@ -1340,6 +1355,29 @@ EXTRA_ASSIGNMENTS = {
     "security-diff-scan": "security-auditing", "security-scan": "security-auditing",
     "threat-model": "security-auditing", "track-findings": "security-auditing",
     "triage-finding": "security-auditing", "vulnerability-writeup": "security-auditing",
+    # reverse-skill pack (zhaoxuya520/reverse-skill): reversing, pentest,
+    # offensive-security and defensive tooling all land in security-auditing
+    "api-security": "security-auditing", "apk-reverse": "security-auditing",
+    "attack-chain": "security-auditing", "binary-diff": "security-auditing",
+    "browser-automation": "security-auditing", "browser-extension-reverse": "security-auditing",
+    "case-review": "security-auditing", "cloud-k8s": "security-auditing",
+    "code-audit": "security-auditing",
+    "database-security": "security-auditing", "diagram-generator": "software-dev",
+    "digital-forensics": "security-auditing", "docs-generator": "software-dev",
+    "dotnet-reverse": "security-auditing", "edr-bypass-re": "security-auditing",
+    "email-security": "security-auditing", "firmware-pentest": "security-auditing",
+    "ghidra-reverse": "security-auditing", "go-rust-reverse": "security-auditing",
+    "hardware-security": "security-auditing", "ida-reverse": "security-auditing",
+    "identity-federation": "security-auditing", "js-reverse": "security-auditing",
+    "llm-security": "security-auditing", "macos-reverse": "security-auditing",
+    "malware-analysis": "security-auditing", "mobile-reverse": "security-auditing",
+    "ot-ics": "security-auditing", "patch-diff-exploit": "security-auditing",
+    "pentest-tools": "security-auditing", "protocol-reverse": "security-auditing",
+    "pwn-chain": "security-auditing", "radare2": "security-auditing",
+    "radio-sdr": "security-auditing", "reverse-engineering": "security-auditing",
+    "reverse-skill-router": "security-auditing", "supply-chain-security": "security-auditing",
+    "thick-client": "security-auditing", "threat-hunting": "security-auditing",
+    "wifi-wireless": "security-auditing", "windows-ad": "security-auditing",
     # -> sequence-phylogenetics
     "ncbi-blast-skill": "sequence-phylogenetics",
     "ngs-amplicon-microbiome": "sequence-phylogenetics",
@@ -1394,7 +1432,7 @@ EXTRA_ASSIGNMENTS = {
     # Cloud, Infra & MLOps
     "airflow": "cloud-devops", "mlflow-onboarding": "cloud-devops",
     "vllm-deploy-simple": "cloud-devops", "wandb-primary": "cloud-devops",
-    "terraform": "cloud-devops",
+    "terraform": "cloud-devops", "wizard": "cloud-devops",
     # Data Science, Stats & Scientific Computing
     "numba": "data-science-compute", "lifelines": "data-science-compute",
     "great-expectations": "data-science-compute", "scikit-image": "data-science-compute",
@@ -1422,16 +1460,22 @@ EXTRA_ASSIGNMENTS = {
     "improve-codebase-architecture": "software-dev", "migrate-to-shoehorn": "software-dev",
     "prototype": "software-dev", "qa": "software-dev",
     "request-refactor-plan": "software-dev", "resolving-merge-conflicts": "software-dev",
-    "review": "software-dev", "setup-pre-commit": "software-dev", "tdd": "software-dev",
-    "to-issues": "software-dev", "to-prd": "software-dev", "triage": "software-dev",
+    "setup-pre-commit": "software-dev", "tdd": "software-dev",
+    "to-tickets": "software-dev", "to-spec": "software-dev", "triage": "software-dev",
     "ubiquitous-language": "software-dev", "teach": "software-dev",
     "scaffold-exercises": "software-dev", "modern-typescript": "software-dev",
+    "research": "software-dev", "claude-handoff": "software-dev",
+    "setup-ts-deep-modules": "software-dev",
     # Vault, Skills & Workflow Meta
     "ask-matt": "vault-meta", "obsidian-vault": "vault-meta",
     "setup-matt-pocock-skills": "vault-meta", "writing-great-skills": "vault-meta",
+    "writing-for-agents": "vault-meta",
     # Reasoning, Ideation & Decision
     "decision-mapping": "reasoning-ideation", "grill-me": "reasoning-ideation",
     "grill-with-docs": "reasoning-ideation", "grilling": "reasoning-ideation",
+    "wayfinder": "reasoning-ideation", "loop-me": "reasoning-ideation",
+    # Communication & Productivity Suites
+    "to-questionnaire": "comms-productivity", "wait-what": "comms-productivity",
     # Web Automation, Frontend & Design
     "design-an-interface": "web-automation-frontend",
     "ui-ux-pro-max": "web-automation-frontend",

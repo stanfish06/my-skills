@@ -20,12 +20,15 @@ first-pass hosted/local usage; load supplemental files only when needed:
 
 ## Choose Mode
 
-Ask only when context is unclear:
+Honor an explicitly configured runtime before asking. `NIM_API_MODE=local` selects
+the local service at `PROTEINMPNN_NIM_URL`; the URL defaults to
+`http://localhost:8000` for a NIM running in the same host or container. Ask only
+when neither the environment nor the user's request makes the mode clear:
 
 > Hosted NVIDIA API or local Docker NIM?
 
 - Hosted: `https://health.api.nvidia.com/v1/biology/ipd/proteinmpnn/predict`
-- Local: `http://localhost:8000/biology/ipd/proteinmpnn/predict`
+- Local: `${PROTEINMPNN_NIM_URL:-http://localhost:8000}/biology/ipd/proteinmpnn/predict`
 
 Local inference paths do not include `/v1/`. Hosted requests use `Authorization: Bearer $NGC_API_KEY`. Supported local Docker
 startup uses `NGC_API_KEY` (or `NVIDIA_API_KEY` via the preflight) for
@@ -36,41 +39,21 @@ image/version and should not be assumed.
 
 ## Local Docker
 
-For local setup answers, copy the preflight below exactly before `docker login`,
-`docker run`, readiness, and the no-auth local request. Do not answer with only
-a localhost Python request. This NIM's cache mount is unique:
-`/home/nvs/.cache/nim`, not `/opt/nim/.cache`.
-
-```bash
-set -a
-[ -f .env ] && . ./.env
-set +a
-
-if [ -z "${NGC_API_KEY:-}" ] && [ -n "${NVIDIA_API_KEY:-}" ]; then
-  export NGC_API_KEY="$NVIDIA_API_KEY"
-fi
-: "${NGC_API_KEY:?Set NGC_API_KEY or NVIDIA_API_KEY}"
-: "${LOCAL_NIM_CACHE:?Set LOCAL_NIM_CACHE}"
-
-echo "$NGC_API_KEY" | docker login nvcr.io --username '$oauthtoken' --password-stdin
-
-export NIM_TEST_GPU="${NIM_TEST_GPU:-0}"
-mkdir -p "${LOCAL_NIM_CACHE}"
-chmod 777 "${LOCAL_NIM_CACHE}"
-
-docker run -it \
-  --runtime=nvidia \
-  --gpus "device=${NIM_TEST_GPU}" \
-  -e NGC_API_KEY \
-  -v "${LOCAL_NIM_CACHE}:/home/nvs/.cache/nim" \
-  -p 8000:8000 \
-  nvcr.io/nim/ipd/proteinmpnn:latest
-```
+For local setup, run the full sequence — env preflight, `docker login`,
+`docker run`, readiness loop, then the no-auth localhost request; do not answer
+with only a localhost Python request. For the exact preflight (`.env` sourcing,
+`NGC_API_KEY`/`NVIDIA_API_KEY` handling, and the `docker run` for
+`nvcr.io/nim/ipd/proteinmpnn:latest`), copy the command block in
+[`references/api.md`](references/api.md) under **Docker Reference** verbatim.
+This NIM's cache mount is `/home/nvs/.cache/nim`, not `/opt/nim/.cache`.
+When `PROTEINMPNN_NIM_URL` is supplied, the service is already managed elsewhere;
+use that URL and do not start another Docker container.
 
 Readiness:
 
 ```bash
-until curl -sf http://localhost:8000/v1/health/ready; do sleep 5; done
+proteinmpnn_nim_url="${PROTEINMPNN_NIM_URL:-http://localhost:8000}"
+until curl -sf "${proteinmpnn_nim_url%/}/v1/health/ready"; do sleep 5; done
 ```
 
 ## Request Pattern
@@ -82,11 +65,12 @@ import os
 from pathlib import Path
 import requests
 
-HOSTED = True
+HOSTED = os.getenv("NIM_API_MODE", "hosted").strip().lower() != "local"
 pdb_content = Path("1R42.pdb").read_text()
+nim_url = os.getenv("PROTEINMPNN_NIM_URL", "http://localhost:8000").rstrip("/")
 url = (
     "https://health.api.nvidia.com/v1/biology/ipd/proteinmpnn/predict"
-    if HOSTED else "http://localhost:8000/biology/ipd/proteinmpnn/predict"
+    if HOSTED else f"{nim_url}/biology/ipd/proteinmpnn/predict"
 )
 headers = {"Content-Type": "application/json"}
 if HOSTED:
@@ -114,23 +98,11 @@ Common controls:
 
 ## Save And Report Output
 
-```python
-mfasta = result["mfasta"]
-Path("designed_sequences.fa").write_text(mfasta)
-
-# Scores correspond to designed sequences. The mfasta may include a native/WT
-# row; do not pair that row with generated-sequence scores.
-headers = [line for line in mfasta.splitlines() if line.startswith(">")]
-designed_headers = [
-    h for h in headers if "native" not in h.lower() and "wt" not in h.lower()
-]
-for header, score in zip(designed_headers, result.get("scores", [])):
-    print(f"{header} score: {score:.4f}")
-```
-
-Validate promising designs by predicting structures with Boltz2 or OpenFold3
-and comparing them to the target backbone. For FASTA/score sanity checks, read
-`references/validation.md`.
+Save the returned `mfasta` and pair scores only with designed (non-native/WT)
+rows, using the snippet in [`references/examples.md`](references/examples.md)
+under **Save Multi-FASTA**. Validate promising designs by predicting structures
+with Boltz2 or OpenFold3 and comparing them to the target backbone. For
+FASTA/score sanity checks, read `references/validation.md`.
 
 ## Limits And Troubleshooting
 

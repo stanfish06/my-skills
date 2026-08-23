@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Scientific Writing, Figures & Publishing](research-writing.md) | [Academic Paper & Nature Pipelines](academic-pipelines.md) | [Vault, Skills & Workflow Meta](vault-meta.md)
 
-## Skills (21)
+## Skills (23)
 
 - [cavecrew](../notes/reasoning-ideation/cavecrew.md) — Decision guide for delegating to caveman-style subagents
 - [caveman](../notes/reasoning-ideation/caveman.md) — Ultra-compressed communication mode. Cuts output tokens 65% (measured) by speaking like caveman while keeping full technical accuracy
@@ -28,12 +28,14 @@ created: 2026-06-13
 - [dhdna-profiler](../notes/reasoning-ideation/dhdna-profiler.md) — Extract cognitive patterns and thinking fingerprints from any text
 - [grill-me](../notes/reasoning-ideation/grill-me.md) — A relentless interview to sharpen a plan or design
 - [grill-with-docs](../notes/reasoning-ideation/grill-with-docs.md) — A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go
-- [grilling](../notes/reasoning-ideation/grilling.md) — Interview the user relentlessly about a plan or design
+- [grilling](../notes/reasoning-ideation/grilling.md) — Grill the user relentlessly about a plan, decision, or idea
 - [hypogenic](../notes/reasoning-ideation/hypogenic.md) — Automated LLM-driven hypothesis generation and testing on tabular datasets
 - [hypothesis-generation](../notes/reasoning-ideation/hypothesis-generation.md) — Generate testable hypotheses. Formulate from observations, design experiments, explore competing explanations, develop predictions, propose mechanisms, for scientific inquiry across...
 - [idea-evaluator](../notes/reasoning-ideation/idea-evaluator.md) — Evaluates a preliminary research idea against a five-dimension framework (Higher, Faster, Stronger, Cheaper, Broader) plus idea-lifecycle and student-capability matching...
 - [idea-refine](../notes/reasoning-ideation/idea-refine.md) — Refines raw ideas into sharp, actionable concepts through structured divergent and convergent thinking
 - [interview-me](../notes/reasoning-ideation/interview-me.md) — Extracts what the user actually wants instead of what they think they should want
+- [loop-me](../notes/reasoning-ideation/loop-me.md) — Grill me about specs for the workflows I want to build, within this workspace
 - [scientific-brainstorming](../notes/reasoning-ideation/scientific-brainstorming.md) — Creative research ideation and exploration
 - [vibe-research-workflow](../notes/reasoning-ideation/vibe-research-workflow.md) — Guides AI-assisted research across three sub-flows, Vibe Coding, Vibe Figure, and Vibe Writing, with behavioural rules that keep the user in charge of academic judgment while...
+- [wayfinder](../notes/reasoning-ideation/wayfinder.md) — Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the...
 - [what-if-oracle](../notes/reasoning-ideation/what-if-oracle.md) — Run structured What-If scenario analysis with 4–6 branch possibility exploration (best, likely, worst, wild card, contrarian, second-order)

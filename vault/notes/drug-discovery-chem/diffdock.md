@@ -21,7 +21,7 @@ created: 2026-06-09
 ## Related skills
 
 - [diffdock-nim](../../notes/drug-discovery-chem/diffdock-nim.md) — Run DiffDock molecular docking via NVIDIA NIM to predict small-molecule binding poses against protein targets
-- [drug-discovery-pipeline](../../notes/drug-discovery-chem/drug-discovery-pipeline.md) — Run a complete computational drug discovery pipeline using NVIDIA BioNeMo NIMs: generate drug-like molecules with GenMol, dock them to a protein target with DiffDock, then predict...
+- [drug-discovery-pipeline](../../notes/drug-discovery-chem/drug-discovery-pipeline.md) — NOTE: molecule and target inputs and your NGC_API_KEY are transmitted to external NVIDIA-hosted API endpoints on every call
 - [molecular-docking](../../notes/drug-discovery-chem/molecular-docking.md) — Use when running classical protein-ligand docking with AutoDock Vina, smina, or GNINA, including receptor or ligand preparation, search-box setup, docking, pose analysis, virtual...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

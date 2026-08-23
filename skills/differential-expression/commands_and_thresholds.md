@@ -9,7 +9,7 @@ from pydeseq2.ds import DeseqStats
 dds = DeseqDataSet(
     counts=counts_df,
     metadata=metadata_df,
-    design_factors=["condition", "batch"],
+    design="~condition + batch",
 )
 dds.deseq2()
 

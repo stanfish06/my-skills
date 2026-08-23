@@ -1,0 +1,3 @@
+[submodule "skills/agentic-workflows/templates"]
+	path = skills/agentic-workflows/templates
+	url = https://github.com/githubnext/agentics.git

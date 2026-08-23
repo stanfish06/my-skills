@@ -12,14 +12,12 @@ created: 2026-06-20
 # implement
 
 > [!info] What it does
-> Implement a piece of work based on a PRD or set of issues.
+> Implement a piece of work based on a spec or set of tickets.
 
 **Source:** [skills/implement/SKILL.md](../../../skills/implement/SKILL.md)  ·  **Domain:** [Software Development & Engineering](../../maps/software-dev.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [base44-cli](../../notes/saas-platforms/base44-cli.md) — The base44 CLI is used for EVERYTHING related to base44 projects: resource configuration (entities, backend functions, ai agents), initialization and actions (resource creation...
-- [base44-sdk](../../notes/saas-platforms/base44-sdk.md) — The base44 SDK is the library to communicate with base44 services
 - [circleci-builds](../../notes/hosting-edge-platforms/circleci-builds.md) — Diagnose and fix failing CircleCI builds quickly and safely
 - [figma-design-to-code](../../notes/web-automation-frontend/figma-design-to-code.md) — Use this skill when implementing a Figma design as code (design → code) — the read-FROM-Figma direction
 - [figma-implement-design](../../notes/web-automation-frontend/figma-implement-design.md) — Translates Figma designs into production-ready application code with 1:1 visual fidelity

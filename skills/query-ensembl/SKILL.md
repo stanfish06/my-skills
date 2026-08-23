@@ -53,8 +53,8 @@ def overlap_region(species, chrom, start, end, feature="gene"):
     return r.json()
 
 # 5. Cross-species homologs
-def get_homologs(ensembl_id, target_species=None):
-    url = f"{BASE_URL}/homology/id/{ensembl_id}"
+def get_homologs(ensembl_id, species="homo_sapiens", target_species=None):
+    url = f"{BASE_URL}/homology/id/{species}/{ensembl_id}"
     params = {}
     if target_species:
         params["target_species"] = target_species
@@ -81,7 +81,7 @@ print(f"Description: {gene.get('description', 'N/A')}")
 | `/sequence/id/{id}?type=genomic` | Get sequence |
 | `/variation/{species}/{rsid}` | Variant info |
 | `/overlap/region/{species}/{chr}:{start}-{end}` | Features in region |
-| `/homology/id/{id}` | Orthologs/paralogs |
+| `/homology/id/{species}/{id}` | Orthologs/paralogs |
 | `/vep/{species}/hgvs/{hgvs}` | Variant effect prediction |
 
 ## Notes

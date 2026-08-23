@@ -35,8 +35,8 @@ Detected that you have a complete paper — you can proceed directly to Stage 3 
 Before starting, let me confirm a few things:
 1. What's the paper structure? (IMRaD / other)
 2. What review mode would you like?
-   - full: Complete 4-person review (EIC + 3 Peer Reviewers)
-   - quick: EIC quick assessment (15-minute version)
+   - full: Complete 5-person review (Journal-Fit Reviewer + R1/R2/R3 + Devil's Advocate)
+   - quick: Journal-Fit Reviewer quick assessment (15-minute version)
    - guided: Socratic guided review (interactive dialogue)
 3. Which journal (or what tier) are you targeting?
 4. Will you need revision and format conversion after the review?
@@ -53,7 +53,7 @@ Got it. Pipeline configuration:
 
   Stage 1 RESEARCH    [--] Skipped (you already have a research foundation)
   Stage 2 WRITE       [--] Skipped (you already have a complete paper)
-  Stage 3 REVIEW:     quick -- EIC quick assessment first, checking the big picture
+  Stage 3 REVIEW:     quick -- Journal-Fit Reviewer quick assessment first, checking the big picture
   Stage 4 REVISE:     TBD -- based on Stage 3 results
   Stage 5 FINALIZE:   TBD -- when needed
 
@@ -83,12 +83,12 @@ Paper domain: Educational Data Mining / Higher Education
 Method type: Machine Learning (Supervised Classification)
 Target journal: Computers & Education (SSCI Q1, IF: 12.0)
 
-EIC Persona:
+Journal-Fit Reviewer Persona:
   Computers & Education Associate Editor
   Specialization: Learning Analytics, Educational AI
 ```
 
-**EIC Quick Assessment:**
+**Journal-Fit Reviewer Quick Assessment:**
 
 ```
 Overall: Promising but needs work (Minor-to-Major Revision range)
@@ -119,7 +119,7 @@ Quick Verdict: Major Revision
 ```
 
 **Stage 3 Deliverables:**
-- EIC Quick Assessment Report
+- Journal-Fit Reviewer Quick Assessment Report
 - 3 key issues list (priority sorted)
 
 ---
@@ -137,7 +137,7 @@ Review result: Major Revision direction
 This is the quick review result. You have several options:
 
   a) Proceed directly to Stage 4 (REVISE) to address these 3 issues
-  b) Upgrade to full review (complete 4-person review),
+  b) Upgrade to full review (complete five-seat review),
      to see if there are other issues
   c) Revise on your own first, come back when done
 
@@ -215,8 +215,9 @@ Revision results:
 - Added Ethics section, SHAP analysis, international literature
 - Added 11 new citations
 
-Next step is Stage 3' (RE-REVIEW) -- this time using full mode.
-4 reviewers will do a complete review of the revised version.
+Next step is Stage 3' (RE-REVIEW) -- this time using a user-requested fresh full review,
+not the contract-governed verification re-review. Five role-separated seats will
+review the revised version (four configured identities plus the fixed Devil's Advocate).
 This is revision cycle 1 (max 2 cycles).
 
 Submit for full review?
@@ -235,12 +236,16 @@ Entering Stage 3' (RE-REVIEW) -- full mode, Loop 1/2
 
 Loading academic-paper-reviewer SKILL.md (full mode)...
 Passing Revised Draft + Response to Reviewers + Editorial Decision Letter (#539 Judge Record input)...
-field_analyst_agent re-analyzing...
+field_analyst_agent analyzing (legitimate here: the user requested a NEW full review
+of the revised version — a fresh review, not a verification re-review — and full mode
+runs field_analyst by definition; Round 1 was an ARS quick assessment. The yardstick
+freeze in re_review_mode_protocol.md § Yardstick Continuity governs re-review mode only)...
 ```
 
 **Reviewer Configuration:**
 ```
-EIC:        Computers & Education Associate Editor
+Journal-Fit Reviewer (serialized source ID EIC):
+            Computers & Education Associate Editor
             Educational AI, Learning Analytics
 Reviewer 1: Machine Learning expert
             Predictive modeling, Model evaluation
@@ -248,12 +253,14 @@ Reviewer 2: Higher Education researcher
             Student success, Retention strategies
 Reviewer 3: Research Ethics / Data Science ethicist
             Algorithmic fairness, Educational data mining ethics
+Fixed seat: Devil's Advocate
+            Core-argument stress test, strongest counter-explanations
 ```
 
-**4 Review Reports Compiled:**
+**5 Review Reports Compiled:**
 
 ```
-EIC: Minor Revision
+Journal-Fit Reviewer: Minor Revision
   - C1 response adequate, Ethics section well-structured
   - Recommend updating Abstract to reflect new ethics + interpretability contributions
   - Recommend adding a Practical Implications section for university administrators
@@ -272,6 +279,10 @@ Reviewer 3: Accept
   - Ethics section quality is high, exceeding typical C&E standards
   - Algorithmic fairness metrics well-chosen
   - Recommend adding a "limitations of fairness metrics" reflection paragraph
+
+Devil's Advocate: No unresolved Critical challenge
+  - Fairness metrics still rely on contested group definitions
+  - Preserve this limitation explicitly rather than presenting the metrics as complete
 ```
 
 **Editorial Decision: Minor Revision (Accept direction)**
@@ -296,7 +307,8 @@ S4: Add fairness metrics limitations paragraph
 Stage 3' (RE-REVIEW) Complete!
 
 Review result: Minor Revision (Accept direction)
-  - 2 out of 4 reviewers Accept + 2 Minor Revision
+  - Among the 4 non-DA scoring reviewers: 2 Accept + 2 Minor Revision
+  - The fixed Devil's Advocate raised no unresolved Critical challenge
   - 2 required items (Abstract update + Practical Implications)
   - 4 suggested modifications
 

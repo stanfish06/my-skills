@@ -14,7 +14,7 @@ created: 2026-06-09
 # e2b-sandbox
 
 > [!info] What it does
-> Guide for creating and managing E2B sandboxes using ComputeSDK. Use when building applications that need E2B Firecracker microVM sandboxes for secure code execution, AI code runners, or isolated development environments on E2B.
+> Guide for creating and managing E2B sandboxes using ComputeSDK. Use when building applications that need E2B provider for ComputeSDK - cloud sandboxes with full Linux environments, filesystem access, and microVM isolation.
 
 **Source:** [skills/e2b-sandbox/SKILL.md](../../../skills/e2b-sandbox/SKILL.md)  ·  **Domain:** [Cloud, Infra & MLOps](../../maps/cloud-devops.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

@@ -21,8 +21,7 @@ created: 2026-08-07
 ## Related skills
 
 - [github](../../notes/software-dev/github.md) — Triage and orient GitHub repository, pull request, and issue work through the connected GitHub app
-- [implement](../../notes/software-dev/implement.md) — Implement a piece of work based on a PRD or set of issues
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
+- [implement](../../notes/software-dev/implement.md) — Implement a piece of work based on a spec or set of tickets
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

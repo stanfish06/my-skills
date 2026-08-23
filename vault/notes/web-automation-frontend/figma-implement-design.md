@@ -20,8 +20,8 @@ created: 2026-06-09
 
 ## Related skills
 
-- [figma-use](../../notes/web-automation-frontend/figma-use.md) — **MANDATORY prerequisite** — you MUST invoke this skill BEFORE every `use_figma` tool call
-- [implement](../../notes/software-dev/implement.md) — Implement a piece of work based on a PRD or set of issues
+- [figma-use](../../notes/web-automation-frontend/figma-use.md) — Load this skill before every `use_figma` tool call
+- [implement](../../notes/software-dev/implement.md) — Implement a piece of work based on a spec or set of tickets
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

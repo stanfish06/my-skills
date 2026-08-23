@@ -35,15 +35,15 @@ created: 2026-06-13
 - [dogfood](../notes/web-automation-frontend/dogfood.md) — Systematically explore and test a web application to find bugs, UX issues, and other problems
 - [electron](../notes/web-automation-frontend/electron.md) — Automate Electron desktop apps (VS Code, Slack, Discord, Figma, Notion, Spotify, etc.) using agent-browser via Chrome DevTools Protocol
 - [figma-code-connect](../notes/web-automation-frontend/figma-code-connect.md) — Creates and maintains Figma Code Connect template files that map Figma components to code snippets
-- [figma-create-new-file](../notes/web-automation-frontend/figma-create-new-file.md) — **MANDATORY prerequisite** — you MUST invoke this skill BEFORE every `create_new_file` tool call
+- [figma-create-new-file](../notes/web-automation-frontend/figma-create-new-file.md) — Load this skill before every `create_new_file` tool call
 - [figma-design-to-code](../notes/web-automation-frontend/figma-design-to-code.md) — Use this skill when implementing a Figma design as code (design → code) — the read-FROM-Figma direction
 - [figma-generate-design](../notes/web-automation-frontend/figma-generate-design.md) — Use this skill alongside figma-use when the task involves translating an application page, view, or multi-section layout into Figma
-- [figma-generate-diagram](../notes/web-automation-frontend/figma-generate-diagram.md) — MANDATORY prerequisite — load this skill BEFORE every `generate_diagram` tool call
+- [figma-generate-diagram](../notes/web-automation-frontend/figma-generate-diagram.md) — Load this skill BEFORE every `generate_diagram` tool call
 - [figma-generate-library](../notes/web-automation-frontend/figma-generate-library.md) — Build or update a professional-grade design system in Figma from a codebase
 - [figma-implement-design](../notes/web-automation-frontend/figma-implement-design.md) — Translates Figma designs into production-ready application code with 1:1 visual fidelity
 - [figma-implement-motion](../notes/web-automation-frontend/figma-implement-motion.md) — Translates Figma motion and animations into production-ready application code
 - [figma-swiftui](../notes/web-automation-frontend/figma-swiftui.md) — SwiftUI ↔ Figma translation. Use whenever the user mentions Swift, SwiftUI, iOS, iPhone, or iPad — in EITHER direction — translating a Figma design into SwiftUI (design → code), or...
-- [figma-use](../notes/web-automation-frontend/figma-use.md) — **MANDATORY prerequisite** — you MUST invoke this skill BEFORE every `use_figma` tool call
+- [figma-use](../notes/web-automation-frontend/figma-use.md) — Load this skill before every `use_figma` tool call
 - [figma-use-figjam](../notes/web-automation-frontend/figma-use-figjam.md) — This skill helps agents use Figma's use_figma MCP tool in the FigJam context
 - [figma-use-motion](../notes/web-automation-frontend/figma-use-motion.md) — Motion / animation context for the `use_figma` MCP tool — animating Figma nodes via manual keyframes, animation styles, easing, and timeline duration
 - [figma-use-slides](../notes/web-automation-frontend/figma-use-slides.md) — This skill helps agents use Figma's use_figma MCP tool in the Slides context

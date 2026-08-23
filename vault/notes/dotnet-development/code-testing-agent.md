@@ -25,6 +25,7 @@ created: 2026-07-21
 - [crap-score](../../notes/dotnet-development/crap-score.md) — Calculates targeted CRAP (Change Risk Anti-Patterns) scores for a named .NET method, class, or single source file
 - [jest](../../notes/software-dev/jest.md) — JavaScript testing with Jest — unit tests, mocks, spies, snapshot testing, code coverage, and configuration
 - [pytest](../../notes/software-dev/pytest.md) — Testing Python code with pytest — fixtures, parametrization, markers, mocking, coverage, and configuration
+- [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
 - [run-tests](../../notes/dotnet-development/run-tests.md) — Recommend or run the exact `dotnet test` command
 - [test-anti-patterns](../../notes/dotnet-development/test-anti-patterns.md) — Audits an existing test file or suite in any language for anti-patterns and quality issues — produces a severity-ranked report (Critical/Warning/Info)
 - [test-gap-analysis](../../notes/dotnet-development/test-gap-analysis.md) — Performs pseudo-mutation analysis on production code in any language to find gaps in existing tests

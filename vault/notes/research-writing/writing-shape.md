@@ -14,7 +14,7 @@ created: 2026-06-20
 # writing-shape
 
 > [!info] What it does
-> Take a markdown file of raw material and shape it into an article through a conversational session — drafting candidate openings, growing the piece paragraph by paragraph, arguing about format (lists, tables, callouts, quotes) at each step. Use when the user has a pile of notes, fragments, or a rough draft and wants help turning it into something publishable.
+> Writing, exploit: shape raw material into an article, paragraph by paragraph.
 
 **Source:** [skills/writing-shape/SKILL.md](../../../skills/writing-shape/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](../../maps/research-writing.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

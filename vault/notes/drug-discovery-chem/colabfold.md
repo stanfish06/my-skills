@@ -22,7 +22,7 @@ created: 2026-06-09
 ## Related skills
 
 - [msa-search-nim](../../notes/sequence-phylogenetics/msa-search-nim.md) — Generate multiple sequence alignments (MSAs) for protein sequences using the ColabFold MSA-Search NIM
-- [msa-structure-prediction-pipeline](../../notes/sequence-phylogenetics/msa-structure-prediction-pipeline.md) — Run a complete protein structure prediction pipeline using NVIDIA BioNeMo NIMs: search for MSA alignments with MSA-Search (ColabFold), then predict the structure with OpenFold3 using...
+- [msa-structure-prediction-pipeline](../../notes/sequence-phylogenetics/msa-structure-prediction-pipeline.md) — NOTE: your protein sequence and the retrieved MSA alignment are transmitted to external NVIDIA-hosted APIs (health.api.nvidia.com) on every call
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

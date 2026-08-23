@@ -21,9 +21,8 @@ created: 2026-08-07
 ## Related skills
 
 - [cms](../../notes/web-automation-frontend/cms.md) — Headless CMS integration guidance — Sanity (native Vercel Marketplace), Contentful, DatoCMS, Storyblok, and Builder.io
-- [implement](../../notes/software-dev/implement.md) — Implement a piece of work based on a PRD or set of issues
+- [implement](../../notes/software-dev/implement.md) — Implement a piece of work based on a spec or set of tickets
 - [modal](../../notes/cloud-devops/modal.md) — Modal is a serverless cloud platform for running Python on demand, including on-demand GPUs
-- [review](../../notes/software-dev/review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

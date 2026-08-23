@@ -18,6 +18,7 @@ created: 2026-08-07
 
 ## Related skills
 
+- [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
 - [xlsx](../../notes/documents-office/xlsx.md) — Spreadsheet toolkit (.xlsx/.csv). Create/edit with formulas/formatting, analyze data, visualization, recalculate formulas, for spreadsheet processing and analysis
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

@@ -186,8 +186,8 @@ and in reproducible large-model releases.
 
 ### Frameworks and kernels
 - **PyTorch 2.x** — `torch.compile`, FSDP2, distributed; determinism:
-  `torch.manual_seed`, `cuda.manual_seed_all`, `cudnn.deterministic=True`,
-  `cudnn.benchmark=False`, `CUBLAS_WORKSPACE_CONFIG=:4096:8`; document residual nondeterminism.
+  `torch.manual_seed`, `torch.cuda.manual_seed_all`, `torch.backends.cudnn.deterministic=True`,
+  `torch.backends.cudnn.benchmark=False`, `CUBLAS_WORKSPACE_CONFIG=:4096:8`; document residual nondeterminism.
 - **JAX/Flax** — TPU-scale; explicit PRNG keys.
 - **FlashAttention-2/3, xFormers, TransformerEngine** — fused attention; FP8 block scaling.
 - **timm, torchvision, OpenCLIP** — vision baselines and contrastive reproduction.

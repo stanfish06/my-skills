@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Machine Learning & AI](ml-ai.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (25)
+## Skills (26)
 
 - [airflow](../notes/cloud-devops/airflow.md) — Queries, manages, and troubleshoots Apache Airflow using the `af` CLI
 - [aws-agentic-ai](../notes/cloud-devops/aws-agentic-ai.md) — AWS Bedrock AgentCore comprehensive expert for deploying and managing AI agents at scale
@@ -41,3 +41,4 @@ created: 2026-06-13
 - [terraform](../notes/cloud-devops/terraform.md) — Terraform and OpenTofu infrastructure-as-code (IaC) — declare cloud/SaaS resources in HCL, manage state with remote backends and locking, author and consume modules, and run the...
 - [vllm-deploy-simple](../notes/cloud-devops/vllm-deploy-simple.md) — Quick install and deploy vLLM, start serving with a simple LLM, and test OpenAI API
 - [wandb-primary](../notes/cloud-devops/wandb-primary.md) — Primary W&B skill for broad or mixed Weights & Biases work: project overviews, W&B runs and artifacts, Weave traces and evaluations, Reports, and Launch workflows
+- [wizard](../notes/cloud-devops/wizard.md) — Generate an interactive bash wizard that walks a human through steps only they can perform

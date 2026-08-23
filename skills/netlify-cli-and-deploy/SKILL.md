@@ -12,7 +12,7 @@ npm install -g netlify-cli    # Global (for local dev)
 npm install netlify-cli -D    # Local (for CI)
 ```
 
-Requires Node.js 18.14.0+.
+Requires Node.js 22.13.0+.
 
 ## Authentication
 

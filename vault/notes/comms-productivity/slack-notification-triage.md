@@ -21,7 +21,7 @@ created: 2026-08-07
 ## Related skills
 
 - [slack](../../notes/web-automation-frontend/slack.md) — Read Slack context, route to the right Slack workflow, and prepare or perform Slack writes that match the user's intent
-- [triage](../../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs
+- [triage](../../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

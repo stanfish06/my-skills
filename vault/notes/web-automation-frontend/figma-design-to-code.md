@@ -22,8 +22,8 @@ created: 2026-08-07
 
 - [figma-code-connect](../../notes/web-automation-frontend/figma-code-connect.md) — Creates and maintains Figma Code Connect template files that map Figma components to code snippets
 - [figma-generate-design](../../notes/web-automation-frontend/figma-generate-design.md) — Use this skill alongside figma-use when the task involves translating an application page, view, or multi-section layout into Figma
-- [figma-use](../../notes/web-automation-frontend/figma-use.md) — **MANDATORY prerequisite** — you MUST invoke this skill BEFORE every `use_figma` tool call
-- [implement](../../notes/software-dev/implement.md) — Implement a piece of work based on a PRD or set of issues
+- [figma-use](../../notes/web-automation-frontend/figma-use.md) — Load this skill before every `use_figma` tool call
+- [implement](../../notes/software-dev/implement.md) — Implement a piece of work based on a spec or set of tickets
 - [workflow](../../notes/software-dev/workflow.md) — Vercel Workflow DevKit (WDK) expert guidance
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

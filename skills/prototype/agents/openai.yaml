@@ -1,4 +1,3 @@
 interface:
   display_name: "Prototype"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $prototype for this task."
+  short_description: "Prototype to answer a design question"

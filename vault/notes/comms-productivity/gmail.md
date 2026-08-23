@@ -20,7 +20,7 @@ created: 2026-08-07
 
 - [email](../../notes/comms-productivity/email.md) — Email sending integration guidance — Resend (native Vercel Marketplace) with React Email templates
 - [gmail-inbox-triage](../../notes/comms-productivity/gmail-inbox-triage.md) — Triage a Gmail inbox into actionable buckets such as urgent, needs reply soon, waiting, and FYI using connected Gmail data
-- [triage](../../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs
+- [triage](../../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

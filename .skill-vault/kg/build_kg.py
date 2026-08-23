@@ -27,7 +27,6 @@ import os
 import re
 import sys
 from collections import Counter, defaultdict
-from datetime import date
 from pathlib import Path
 
 ROOT = Path(os.environ.get("SKILL_VAULT_ROOT") or Path(__file__).resolve().parents[2])
@@ -38,9 +37,10 @@ ONTOLOGY_DIR = ROOT / ".skill-vault" / "ontology"
 OBSERVATIONS_DIR = ROOT / ".skill-vault" / "observations"
 OUT_PATH = ROOT / "vault" / "graph" / "graph.json"
 
-TODAY = date.today().isoformat()
 WORD = re.compile(r"[a-z0-9]+")
 MAX_NGRAM = 5  # longest skill id is 7 words; 5 covers all but a long tail cheaply
+OBSERVED_WEIGHT = 0.05  # start below the 1.0 cap so repeats can accumulate
+DISPATCHER = "scientific-agents"
 
 SOURCE_RE = re.compile(r"^source:\s*skills/(.+?)/SKILL\.md\s*$", re.MULTILINE)
 ALIASES_RE = re.compile(r"^aliases:\s*\n((?:\s*-\s*.+\n)+)", re.MULTILINE)
@@ -186,15 +186,22 @@ def parse_recipes(nameset):
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
         steps, seen = [], set()
-        # Ordered steps: numbered list items, in document order.
+        # Ordered steps: numbered list items, in document order. Only the first
+        # resolvable link on a line is a step — later links are alternatives
+        # or lower-level tools and stay in `members` so they do not form
+        # false chains_to edges (pydeseq2 -> rnaseq-de, etc.).
         for line in text.splitlines():
             if not re.match(r"^\s*\d+\.\s", line):
                 continue
+            primary = True
             for m in re.finditer(r"\[([^\]]+)\]\((?:\.\./)*notes/[^/]+/([a-z0-9.-]+)\.md\)", line):
                 sid = m.group(2)
-                if sid in nameset and sid not in seen:
+                if sid not in nameset:
+                    continue
+                if primary and sid not in seen:
                     seen.add(sid)
                     steps.append(sid)
+                primary = False
         # Non-step members (Related / alternatives) still co-occur.
         members = set(steps)
         for m in re.finditer(r"\[([^\]]+)\]\((?:\.\./)*notes/[^/]+/([a-z0-9.-]+)\.md\)", text):
@@ -233,9 +240,15 @@ def load_observations():
             if not line or line.startswith("#"):
                 continue
             try:
-                episodes.append(json.loads(line))
+                ep = json.loads(line)
             except json.JSONDecodeError:
                 continue
+            if not isinstance(ep, dict):
+                continue
+            used = ep.get("used")
+            if not isinstance(used, list):
+                continue
+            episodes.append(ep)
     return episodes
 
 
@@ -259,7 +272,7 @@ class Graph:
             if self.prov_rank[provenance] > self.prov_rank[prior["provenance"]]:
                 prior["provenance"] = provenance
                 prior["justification"] = justification
-            prior["weight"] = round(min(1.0, prior["weight"] + 0.05 * weight), 4)
+            prior["weight"] = round(min(1.0, prior["weight"] + 0.05), 4)
         else:
             self._edges[key] = {
                 "src": src, "rel": rel, "dst": dst,
@@ -290,12 +303,13 @@ def build():
         print("no skills found — is SKILL_VAULT_ROOT correct?", file=sys.stderr)
         return None
 
+    profiles, disc_titles = load_disciplines()
     bodies, descs, is_profile = {}, {}, {}
     for sid, path in skills.items():
         text = path.read_text(encoding="utf-8", errors="replace")
         bodies[sid] = text[:window]
         descs[sid] = read_frontmatter_description(text)
-        is_profile[sid] = "expert-thinking profile" in bodies[sid].lower()
+        is_profile[sid] = sid in profiles and sid != DISPATCHER
 
     # Pass 1 — who names whom, plus document frequency for the IDF split.
     name_index = ngram_index(((sid, sid) for sid in nameset), exact=True)
@@ -310,6 +324,9 @@ def build():
 
     g = Graph({k: v["rank"] for k, v in schema["provenance_levels"].items()})
     domains, alias_map, alias_ambiguous = load_notes_layer()
+    aliases_by_sid = defaultdict(list)
+    for alias, sid in alias_map.items():
+        aliases_by_sid[sid].append(alias)
 
     for sid in skills:
         g.node(
@@ -318,6 +335,7 @@ def build():
             label=sid,
             description=descs[sid],
             source=f"skills/{sid}/SKILL.md",
+            aliases=sorted(aliases_by_sid.get(sid, [])),
             uses=0, successes=0, success_rate=None,
             last_used=None, deprecated=False,
         )
@@ -359,7 +377,6 @@ def build():
             alias_edges += 1
 
     # in_discipline — expert profiles, from the taxonomy already in this repo
-    profiles, disc_titles = load_disciplines()
     disc_edges = 0
     for sid, spec in profiles.items():
         if sid not in g.nodes:
@@ -417,7 +434,15 @@ def build():
     if assert_dir.is_dir():
         for path in sorted(assert_dir.glob("*.json")):
             for e in load_json(path).get("edges", []):
-                g.edge(e["src"], e["rel"], e["dst"], "ASSERTED",
+                src, dst, rel = e["src"], e["dst"], e["rel"]
+                if src not in g.nodes or dst not in g.nodes:
+                    print(
+                        f"skip assertion {src} -{rel}-> {dst} in {path.name}: "
+                        "unknown endpoint",
+                        file=sys.stderr,
+                    )
+                    continue
+                g.edge(src, rel, dst, "ASSERTED",
                        e.get("justification", f"curated in {path.name}"),
                        weight=e.get("weight", 1.0),
                        symmetric=e.get("symmetric", False))
@@ -433,12 +458,15 @@ def build():
             n["uses"] += 1
             n["successes"] += int(ok)
             n["success_rate"] = round(n["successes"] / n["uses"], 4)
-            n["last_used"] = ep.get("ts", TODAY)
+            ts = ep.get("ts")
+            if isinstance(ts, str) and ts and (n["last_used"] is None or ts > n["last_used"]):
+                n["last_used"] = ts
         if ok:
             for i, a in enumerate(used):
                 for b in used[i + 1:]:
                     g.edge(a, "co_occurs_with", b, "OBSERVED",
-                           "co-used in a successful episode", symmetric=True)
+                           "co-used in a successful episode",
+                           weight=OBSERVED_WEIGHT, symmetric=True)
     # SkillGraph deprecation rule: >=20 uses at <15% success
     for n in g.nodes.values():
         if n.get("uses", 0) >= 20 and (n.get("success_rate") or 0) < 0.15:
@@ -463,7 +491,6 @@ def build():
     rel_counts = Counter(e["rel"] for e in g.edges)
 
     metrics = {
-        "built": TODAY,
         "skills": total,
         "expert_profiles": sum(1 for v in is_profile.values() if v),
         "nodes": len(g.nodes),

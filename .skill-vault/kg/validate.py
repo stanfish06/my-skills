@@ -84,7 +84,10 @@ def index(graph):
 def check_shapes(graph, schema, nodes, out, rep):
     skills = [n for n in graph["nodes"] if n.get("type") in SKILL_TYPES]
     provs = set(schema["provenance_levels"])
-    del schema  # nothing below reads the TBox again
+    retrievable = set(graph.get("metrics", {}).get("retrievable_provenance") or [])
+    schema_retrievable = {
+        k for k, v in schema["provenance_levels"].items() if v.get("retrievable")
+    }
 
     missing_domain = [n["id"] for n in skills if not out[n["id"]].get("in_domain")]
     rep.add("SHAPES", "P1 in_domain>=1", "FAIL" if missing_domain else "PASS",
@@ -102,8 +105,13 @@ def check_shapes(graph, schema, nodes, out, rep):
     rep.add("SHAPES", "P3 provenance", "FAIL" if bad else "PASS",
             f"{len(bad)} edges missing provenance or justification")
 
-    leaked = [e for e in graph["edges"]
-              if e.get("provenance") == "PROPOSED" and e.get("status") != "proposed"]
+    if "PROPOSED" in retrievable or "PROPOSED" in schema_retrievable:
+        leaked = [e for e in graph["edges"] if e.get("provenance") == "PROPOSED"] or [
+            {"src": "metrics.retrievable_provenance", "rel": "includes", "dst": "PROPOSED"}
+        ]
+    else:
+        leaked = [e for e in graph["edges"]
+                  if e.get("provenance") == "PROPOSED" and e.get("status") != "proposed"]
     rep.add("SHAPES", "P4 PROPOSED gate", "FAIL" if leaked else "PASS",
             f"{len(leaked)} unreviewed edges marked retrievable")
 
@@ -132,8 +140,25 @@ def check_shapes(graph, schema, nodes, out, rep):
             f"{len(asym)} asymmetric alternative_to edges")
 
     amb = graph.get("ambiguous_aliases", {})
-    rep.add("SHAPES", "P7 term ambiguity", "PASS",
-            f"{len(amb)} ambiguous aliases parked, not silently resolved")
+    lexicon_path = ROOT / ".skill-vault" / "ontology" / "lexicon.json"
+    collisions = {}
+    flagged = 0
+    if lexicon_path.is_file():
+        lexicon = json.loads(lexicon_path.read_text(encoding="utf-8"))
+        flagged = len(lexicon.get("ambiguous_terms", {}))
+        by_term = defaultdict(set)
+        for aid, spec in lexicon.get("artifacts", {}).items():
+            for raw in (spec.get("label", ""), aid.split(":", 1)[-1].replace("-", " ")):
+                term = raw.strip().lower()
+                if term:
+                    by_term[term].add(aid)
+        declared = {t.lower() for t in lexicon.get("ambiguous_terms", {})}
+        collisions = {t: sorted(ids) for t, ids in by_term.items()
+                      if len(ids) > 1 and t not in declared}
+    rep.add("SHAPES", "P7 term ambiguity", "FAIL" if collisions else "PASS",
+            f"{len(amb)} ambiguous aliases parked; "
+            + (f"{len(collisions)} unflagged artifact-term collisions {list(collisions)[:3]}"
+               if collisions else f"{flagged} flagged artifact terms, no unflagged collisions"))
 
     dangling = []
     for r in graph.get("recipes", []):
@@ -269,7 +294,7 @@ def main():
     else:
         m = graph["metrics"]
         print(f"vault knowledge graph — {m['skills']} skills, {m['nodes']} nodes, "
-              f"{m['edges']} edges, built {m['built']}")
+              f"{m['edges']} edges")
         rep.render()
         n = len(rep.failed)
         print(f"\n{'FAILED' if n else 'OK'}: {n} violation(s), "

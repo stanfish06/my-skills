@@ -32,7 +32,18 @@ vs:SkillShape a sh:NodeShape ;
 vs:AssertionShape a sh:NodeShape ;
     sh:targetClass vs:Assertion ;
     sh:property [ sh:path rdf:subject   ; sh:minCount 1 ; sh:maxCount 1 ] ;
-    sh:property [ sh:path rdf:predicate ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [
+        sh:path rdf:predicate ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in (
+            vs:references vs:touches vs:consumes vs:produces vs:implements
+            vs:wraps vs:in_domain vs:in_discipline vs:prerequisite_of
+            vs:enhances vs:co_occurs_with vs:alternative_to vs:specializes
+            vs:supersedes vs:has_step vs:chains_to
+        ) ;
+        sh:severity sh:Violation ;
+        sh:message "assertion predicate is outside the closed relation vocabulary" ;
+    ] ;
     sh:property [ sh:path rdf:object    ; sh:minCount 1 ; sh:maxCount 1 ] ;
     sh:property [
         sh:path vs:justification ;

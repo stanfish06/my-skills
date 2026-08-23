@@ -16,8 +16,9 @@ Modelling choices worth defending:
   * Domains and disciplines are skos:Concept in a skos:ConceptScheme. They
     already behave like a thesaurus; SKOS says so in a way tools understand.
   * ExpertProfile instances are typed as BOTH vs:ExpertProfile and vs:Skill.
-    Without this, shapes and queries targeting vs:Skill silently skip 504 of
-    1818 skills — which is exactly how the first version under-counted orphans.
+    Without this, shapes and queries targeting vs:Skill silently skip the
+    expert-profile majority of the catalog — which is exactly how the first
+    version under-counted orphans.
   * Only ASSERTED and PROPOSED edges are reified with a justification. Those
     are the ones a human reviews. Reifying 12k EXTRACTED edges would restate
     what the extraction rule already says, at four times the file size.

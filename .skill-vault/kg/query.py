@@ -73,7 +73,9 @@ class VaultGraph:
             n = self.nodes[sid]
             doms = " ".join(d.split(":", 1)[1].replace("-", " ")
                             for d in self.out[sid].get("in_domain", ()))
-            words = tok(sid.replace("-", " ")) * 3 + tok(n.get("description", "")) + tok(doms)
+            aliases = " ".join(n.get("aliases") or ())
+            words = (tok(sid.replace("-", " ")) * 3
+                     + tok(n.get("description", "")) + tok(doms) + tok(aliases))
             self.tf[sid] = Counter(words)
             self.dl[sid] = len(words)
             for w in self.tf[sid]:
@@ -161,6 +163,9 @@ def retrieve(g: VaultGraph, query: str, k: int = 8):
                      key=lambda kv: -kv[1][0])
     ranked = direct[:math.ceil(k * 0.7)]
     ranked += derived[:k - len(ranked)]
+    if len(ranked) < k:
+        taken = {s for s, _ in ranked}
+        ranked += [(s, v) for s, v in direct if s not in taken][: k - len(ranked)]
 
     order = {sid: i for i, (sid, _) in enumerate(ranked)}
     # topological nudge: a skill that feeds another in the set comes first

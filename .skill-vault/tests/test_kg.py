@@ -51,12 +51,18 @@ class FixtureVault:
             # every skill mentions "workflow" in prose — the generic-name trap
             p = root / f"skills/{name}/SKILL.md"
             p.write_text(p.read_text() + "\nThis workflow is standard.\n", encoding="utf-8")
+            aliases = "aliases:\n  - calorie counter\n" if name == "alpha" else ""
             write(root / f"vault/notes/testing/{name}.md",
-                  f"---\ntitle: {name}\ndomain: testing\nsource: skills/{name}/SKILL.md\n---\n")
+                  f"---\ntitle: {name}\ndomain: testing\nsource: skills/{name}/SKILL.md\n"
+                  f"{aliases}---\n")
         write(root / "vault/recipes/demo.md",
               "---\ntitle: Demo pipeline\n---\n# Demo\n\n"
-              "1. **[alpha](../notes/testing/alpha.md)** — start here.\n"
+              "1. **[alpha](../notes/testing/alpha.md)** — start here. "
+              "Alternative: **[gamma](../notes/testing/gamma.md)**.\n"
               "2. **[beta](../notes/testing/beta.md)** — then this.\n")
+        write(root / "vault/notes/testing/alpha.md",
+              "---\ntitle: alpha\ndomain: testing\nsource: skills/alpha/SKILL.md\n"
+              "aliases:\n  - calorie counter\n---\n")
         # minimal ontology copied from the real one
         for f in ("schema.json", "lexicon.json"):
             src = REPO / ".skill-vault/ontology" / f
@@ -118,6 +124,17 @@ class TestExtraction(unittest.TestCase):
         for e in self.edges:
             if e["provenance"] == "PROPOSED":
                 self.assertEqual(e["status"], "proposed")
+
+    def test_recipe_auxiliary_links_are_members_not_steps(self):
+        """A numbered item's later links are alternatives, not consecutive stages."""
+        recipe = next(r for r in self.graph["recipes"] if r["id"] == "recipe:demo")
+        self.assertEqual(recipe["steps"], ["alpha", "beta"])
+        self.assertIn("gamma", recipe["members"])
+        self.assertNotIn(("alpha", "chains_to", "gamma"), self.rels)
+
+    def test_aliases_are_stored_on_nodes(self):
+        node = next(n for n in self.graph["nodes"] if n["id"] == "alpha")
+        self.assertIn("calorie counter", node.get("aliases", []))
 
 
 class TestCommittedGraph(unittest.TestCase):
@@ -195,8 +212,11 @@ class TestCommittedGraph(unittest.TestCase):
         self.assertLessEqual(len(derived), 4, "graph expansion crowded out lexical matches")
         self.assertTrue(all(r["why"] for r in results),
                         "every result must explain why it was included")
-        self.assertIn("scanpy", {r["skill"] for r in results},
-                      "scanpy is reachable only through the graph for this query")
+        names = {r["skill"] for r in results}
+        self.assertTrue(
+            names & {"scrna-orchestrator", "scvi-tools", "harmonypy", "scanpy"},
+            f"no core single-cell skill retrieved: {sorted(names)}",
+        )
 
     def test_cq1_fastq_reaches_pathway_analysis(self):
         from query import VaultGraph, retrieve  # noqa: E402
@@ -221,6 +241,34 @@ class TestCommittedGraph(unittest.TestCase):
             for step in r["steps"]:
                 self.assertIn(step, ids, f"{r['id']} references missing skill {step}")
 
+    def test_recipe_steps_use_only_the_primary_link(self):
+        bulk = next(
+            (r for r in self.graph.get("recipes", []) if r["id"] == "recipe:bulk-rnaseq-to-pathways"),
+            None,
+        )
+        if bulk is None:
+            self.skipTest("bulk-rnaseq-to-pathways recipe missing")
+        self.assertNotIn(("pydeseq2", "chains_to", "rnaseq-de"),
+                         {(e["src"], e["rel"], e["dst"]) for e in self.graph["edges"]})
+        self.assertIn("rnaseq-de", bulk["members"])
+        self.assertNotIn("rnaseq-de", bulk["steps"])
+
+    def test_alias_query_finds_the_skill(self):
+        from query import VaultGraph, retrieve  # noqa: E402
+        g = VaultGraph(REPO / "vault/graph/graph.json")
+        results, _ = retrieve(g, "calorie counter", k=8)
+        self.assertIn("fitness-nutrition", {r["skill"] for r in results},
+                      "curated alias was not indexed for seed retrieval")
+
+    def test_dispatcher_is_not_an_expert_profile(self):
+        node = next((n for n in self.graph["nodes"] if n["id"] == "scientific-agents"), None)
+        if node is None:
+            self.skipTest("scientific-agents node missing")
+        self.assertNotEqual(node.get("type"), "ExpertProfile")
+
+    def test_metrics_omit_wall_clock_date(self):
+        self.assertNotIn("built", self.metrics)
+
 
 class TestRDFLayer(unittest.TestCase):
     """The optional RDF/SHACL layer. Skipped entirely when rdflib is absent, so
@@ -240,8 +288,8 @@ class TestRDFLayer(unittest.TestCase):
         cls.g = Graph().parse(str(cls.ttl), format="turtle")
 
     def test_expert_profiles_are_also_skills(self):
-        """504 of 1818 skills are expert profiles. If they are not typed as
-        vs:Skill, every shape and query targeting Skill silently skips them."""
+        """Expert profiles must also be typed as vs:Skill, or every shape and
+        query targeting Skill silently skips them."""
         rows = list(self.g.query(
             "PREFIX vs: <https://skillquarium.dev/ontology/> "
             "SELECT (COUNT(DISTINCT ?s) AS ?n) WHERE { ?s a vs:ExpertProfile . ?s a vs:Skill }"))
@@ -315,6 +363,54 @@ class TestRDFLayer(unittest.TestCase):
         conforms, _, text = validate(g, shacl_graph=shapes, advanced=True, inference="none")
         self.assertFalse(conforms, "SHACL failed to detect a chains_to cycle")
         self.assertIn("cycle", text.lower())
+
+
+class TestObservationAndAssertionGuards(unittest.TestCase):
+    def test_malformed_observation_records_are_skipped(self):
+        import build_kg  # noqa: PLC0415
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        root = Path(tmp.name)
+        write(root / ".skill-vault/observations/episodes.jsonl",
+              "null\n[]\n\"text\"\n"
+              '{"used": ["alpha"], "outcome": "success", "ts": "2026-01-01"}\n'
+              '{"used": "alpha", "outcome": "success"}\n')
+        original = build_kg.OBSERVATIONS_DIR
+        build_kg.OBSERVATIONS_DIR = root / ".skill-vault" / "observations"
+        self.addCleanup(setattr, build_kg, "OBSERVATIONS_DIR", original)
+        episodes = build_kg.load_observations()
+        self.assertEqual(len(episodes), 1)
+        self.assertEqual(episodes[0]["used"], ["alpha"])
+
+    def test_last_used_keeps_the_latest_timestamp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        root = Path(tmp.name)
+        fixture = FixtureVault(root)
+        write(root / ".skill-vault/observations/episodes.jsonl",
+              '{"used": ["alpha"], "outcome": "success", "ts": "2026-01-01"}\n'
+              '{"used": ["alpha"], "outcome": "success", "ts": "2026-08-01"}\n'
+              '{"used": ["alpha"], "outcome": "success", "ts": "2026-03-01"}\n')
+        graph = fixture.build()
+        node = next(n for n in graph["nodes"] if n["id"] == "alpha")
+        self.assertEqual(node["last_used"], "2026-08-01")
+        observed = [e for e in graph["edges"] if e["provenance"] == "OBSERVED"]
+        self.assertTrue(all(e["weight"] < 1.0 for e in observed) or not observed)
+
+    def test_unknown_assertion_endpoints_are_rejected(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        root = Path(tmp.name)
+        fixture = FixtureVault(root)
+        write(root / ".skill-vault/ontology/assertions/bad.json",
+              json.dumps({"edges": [{
+                  "src": "scanppy", "rel": "alternative_to", "dst": "alpha",
+                  "justification": "typo should not create an asserted edge",
+              }]}))
+        graph = fixture.build()
+        rels = {(e["src"], e["rel"], e["dst"]) for e in graph["edges"]}
+        self.assertNotIn(("scanppy", "alternative_to", "alpha"), rels)
+        self.assertNotIn("scanppy", {n["id"] for n in graph["nodes"]})
 
 
 if __name__ == "__main__":

@@ -29,9 +29,9 @@ the ratios are the point. `build_kg.py` prints current figures.
 
 | | description-only (`build_related`) | knowledge graph |
 |---|---:|---:|
-| edges | 1,277 | 13,074 |
-| mean degree | 1.40 | 5.44 |
-| skills with **no** relations | **875 (48.1%)** | **132 (7.2%)** |
+| edges | 1,277 | 13,459 |
+| mean degree | 1.40 | 5.51 |
+| skills with **no** relations | **875 (48.1%)** | **126 (6.7%)** |
 
 Two measured facts drive the whole design:
 

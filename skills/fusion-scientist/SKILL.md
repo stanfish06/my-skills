@@ -16,11 +16,15 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 52
   scientific-agents-profile: true
+  local-patches:
+    - iter-2024-tungsten-first-wall
 ---
 
 # Fusion Scientist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -82,7 +86,8 @@ experimentalist, modeler, or fusion-energy systems analyst.
   ⁶Li(n,α)T and ⁷Li(n,nα)T reactions with **tritium breeding ratio (TBR) > 1** accounting for
   losses, decay, and hold-up in systems.
 - **Plasma-facing components (PFCs)** must survive steady and transient heat/particle loads;
-  ITER uses **beryllium** first wall and **tungsten** divertor; carbon is largely retired for
+  ITER's 2024 baseline specifies **tungsten** armour for the first wall and divertor;
+  carbon is largely retired for
   reactors because of tritium co-deposition and chemical erosion concerns.
 - Integrated prediction requires coupling **core transport** (TRANSP, TGYRO/GX), **MHD
   equilibrium** (EFIT, CHEASE, VMEC), and **edge/SOL/divertor** (SOLPS-ITER, UEDGE) — a good

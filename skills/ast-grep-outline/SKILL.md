@@ -79,4 +79,3 @@ ast-grep outline $(git diff --name-only HEAD) --items exports
 types, follow re-export chains, or build a call graph. Use `ast-grep run`,
 `rg`, or compiler-backed tools for those questions, then outline the candidate
 files they surface.
-````

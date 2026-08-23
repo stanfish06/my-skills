@@ -35,6 +35,21 @@ jobs:
       - name: Rebuild navigation layer
         run: python3 .skill-vault/build.py
 
+      - name: Rebuild knowledge graph
+        run: python3 .skill-vault/kg/build_kg.py
+
+      - name: Install optional RDF layer
+        run: pip install -r .skill-vault/kg/requirements-rdf.txt
+
+      - name: Export RDF
+        run: python3 .skill-vault/kg/to_rdf.py
+
+      - name: Validate knowledge graph
+        # Shape violations fail the build; NOT_YET competency questions do not,
+        # so an unpopulated Capability layer stays visible without blocking.
+        # --shacl adds real pySHACL validation against ontology/shapes.ttl.
+        run: python3 .skill-vault/kg/validate.py --shacl
+
       - name: Test vault navigation
         run: python3 -m unittest discover -s .skill-vault/tests -p 'test_*.py' -v
 

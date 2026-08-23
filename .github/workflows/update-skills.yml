@@ -82,6 +82,20 @@ jobs:
         # personal notes). Safe here because this job is the upstream-sync path.
         run: python3 .skill-vault/build.py --prune
 
+      - name: Rebuild knowledge graph
+        # Runs after build.py: the graph reads domain assignments from the
+        # notes layer, so it must be regenerated first.
+        run: python3 .skill-vault/kg/build_kg.py
+
+      - name: Install optional RDF layer
+        run: pip install -r .skill-vault/kg/requirements-rdf.txt
+
+      - name: Export RDF
+        run: python3 .skill-vault/kg/to_rdf.py
+
+      - name: Validate knowledge graph
+        run: python3 .skill-vault/kg/validate.py --shacl
+
       - name: Test vault navigation
         run: python3 -m unittest discover -s .skill-vault/tests -p 'test_*.py' -v
 

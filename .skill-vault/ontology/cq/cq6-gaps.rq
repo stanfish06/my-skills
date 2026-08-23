@@ -1,0 +1,21 @@
+# CQ6: the growth queue — what does the vault not yet cover?
+#
+# "Orphan" means no skill-to-skill relation. The artifact a skill touches does
+# not connect it to anything usable, so vs:touches deliberately does NOT count
+# here — writing this declaratively is what exposed that the metric and its
+# prose description had drifted apart.
+PREFIX vs: <https://skillquarium.dev/ontology/>
+SELECT ?kind ?node WHERE {
+  {
+    ?node a vs:Artifact . BIND("unused-artifact" AS ?kind)
+    FILTER NOT EXISTS { ?s vs:touches ?node }
+  } UNION {
+    ?node a vs:Skill . BIND("orphan-skill" AS ?kind)
+    FILTER NOT EXISTS {
+      ?node vs:references|vs:co_occurs_with|vs:chains_to ?x . ?x a vs:Skill .
+    }
+    FILTER NOT EXISTS {
+      ?y vs:references|vs:co_occurs_with|vs:chains_to ?node . ?y a vs:Skill .
+    }
+  }
+}

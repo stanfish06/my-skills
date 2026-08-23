@@ -1520,9 +1520,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/langfuse/skills.git",
       "skillPath": "skills/langfuse/SKILL.md",
-      "skillFolderHash": "84e0293f1fee642e63f949aca3f93907d1a19042",
+      "skillFolderHash": "bb24f62a476bba3fa81d602ee63ea5b14f4018e0",
       "installedAt": "2026-06-09T19:26:38.181Z",
-      "updatedAt": "2026-08-13T07:50:47.926Z"
+      "updatedAt": "2026-08-21T07:05:40.413Z"
     },
     "phoenix-cli": {
       "source": "arize-ai/phoenix",
@@ -2141,9 +2141,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mlflow/skills.git",
       "skillPath": "mlflow-onboarding/SKILL.md",
-      "skillFolderHash": "6a30f51f875616569c26ea80e699d56c6ee70a0a",
+      "skillFolderHash": "c9d42f75b05609ecb096d3c39bbbfb136b6317b0",
       "installedAt": "2026-06-25T13:10:54.748Z",
-      "updatedAt": "2026-06-25T13:10:54.748Z"
+      "updatedAt": "2026-08-22T06:58:28.098Z"
     },
     "qdrant-clients-sdk": {
       "source": "qdrant/skills",
@@ -8802,9 +8802,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "f6e64d8b5232cf4b14ff9b3c0f56667269e00f84",
+      "skillFolderHash": "7c6abed59bc483e352fd7ff4d2fbd1034bafd037",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-08-19T07:03:18.849Z"
+      "updatedAt": "2026-08-22T06:58:30.573Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8820,27 +8820,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ast-grep/agent-skill.git",
       "skillPath": "ast-grep/skills/outline/SKILL.md",
-      "skillFolderHash": "86dfd5539de37734e98187c80cdb4b7081ee10bb",
+      "skillFolderHash": "7ee23d31b0578aa6702d8bbafa15749fc499a8c0",
       "installedAt": "2026-08-14T05:36:42.463Z",
-      "updatedAt": "2026-08-14T05:36:42.463Z"
+      "updatedAt": "2026-08-22T06:58:31.718Z"
     },
     "agentic-workflows": {
       "source": "github/gh-aw",
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "becb262a6efdc35f4d30112ed5bc017b5f8f2d59",
+      "skillFolderHash": "71bf3a3afd5573c9acaf98c9c5cca0092d702c30",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-08-20T07:04:47.142Z"
+      "updatedAt": "2026-08-21T07:06:09.063Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/SKILL.md",
-      "skillFolderHash": "a5aca10622348b8aea3fb365a2ab7f282098ad03",
+      "skillFolderHash": "f6f061b6c88382667923641fdc60e9a447cf3696",
       "installedAt": "2026-08-20T02:13:18.927Z",
-      "updatedAt": "2026-08-20T07:04:55.958Z"
+      "updatedAt": "2026-08-22T06:58:40.846Z"
     },
     "api-security": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9153,9 +9153,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/reverse-engineering/SKILL.md",
-      "skillFolderHash": "07476066b1642e91c000aef71ceb0443139809d8",
+      "skillFolderHash": "69806e49d4854b0583648271ceecfb7a83802b57",
       "installedAt": "2026-08-20T02:13:19.746Z",
-      "updatedAt": "2026-08-20T02:19:55.597Z"
+      "updatedAt": "2026-08-22T06:58:42.551Z"
     },
     "supply-chain-security": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9477,10 +9477,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/productivity/grilling/SKILL.md",
-      "skillFolderHash": "0d40d978f1a588971a11ea7ae85b208e78102dc3",
-      "pluginName": "mattpocock-skills",
+      "skillFolderHash": "f0732035b8b1b60ae39454e4191caef32fa91903",
       "installedAt": "2026-08-20T03:52:19.267Z",
-      "updatedAt": "2026-08-20T03:52:19.267Z"
+      "updatedAt": "2026-08-21T07:06:10.707Z"
     },
     "handoff": {
       "source": "mattpocock/skills",
@@ -9547,9 +9546,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/stanfish06/mermaid-terminal.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "4eb02b63add314a7e55e2806edefb8a4652e7143",
+      "skillFolderHash": "2ecfca8ff2380993bea06f6e27835104ebfcbdb6",
       "installedAt": "2026-08-20T05:20:54.521Z",
-      "updatedAt": "2026-08-20T07:04:56.946Z"
+      "updatedAt": "2026-08-21T07:06:12.746Z"
     },
     "academic-paper": {
       "source": "Imbad0202/academic-research-skills",

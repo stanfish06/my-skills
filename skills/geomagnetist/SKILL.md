@@ -124,11 +124,14 @@ paleomagnetic and core-field findings with rigorous uncertainty and alternative 
 ## Tools, Instruments And Software
 
 ### Laboratory
-- **SQUID magnetometers** (2G, AGICO JR-6A) — high-sensitivity remanence; **VSM, MPMS** — hysteresis, FORC.
-- **AF demagnetizers, thermal furnaces** — controlled demagnetization to 1000°C.
+- **SQUID remanence magnetometers:** 2G systems.
+- **Spinner magnetometers:** AGICO JR-6A — rapid remanence measurement.
+- **VSM, MPMS** — hysteresis, FORC.
+- **AF demagnetizers** — controlled alternating-field demagnetization.
+- **Thermal furnaces** — controlled thermal demagnetization to 1000°C.
 - **Micromagnetic imaging (MFM)** — rare; mostly research on carriers.
 - **2G SQUID** — maintain pick-up coil calibration; monitor liquid helium levels for continuous operation.
-- **AGICO JR-6A** — rapid AF demagnetization; verify peak field achieved per specimen size.
+- **AGICO JR-6A** — rapid remanence measurement; verify holder type and orientation, specimen dimensions, instrument calibration, and holder correction when applicable.
 
 ### Field
 - **Proton precession, cesium vapor magnetometers** — total field mapping.

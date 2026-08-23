@@ -42,6 +42,8 @@ Use the **Opening ParaView GUI** section to launch ParaView with pvserver
 
 ## Opening ParaView GUI
 
+> **Known limitation:** the pvserver↔client connection below relies on a synchronization mechanism that upstream ParaView has deprecated in recent versions. On current ParaView releases this can cause the GUI to not display pvserver content correctly, or general instability. Prefer the headless `pvpython` batch workflow (Rule 1) whenever possible; only fall back to this GUI path when interactive inspection is truly required, and expect to troubleshoot connection issues.
+
 When the user says "Open ParaView GUI" or requests to launch ParaView:
 
 1. Start pvserver first:

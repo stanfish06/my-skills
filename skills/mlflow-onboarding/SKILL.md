@@ -1,7 +1,6 @@
 ---
 name: mlflow-onboarding
 description: Onboards users to MLflow by determining their use case (GenAI agents/apps or traditional ML/deep learning) and guiding them through relevant quickstart tutorials and initial integration. If an experiment ID is available, it should be supplied as input to help determine the use case. Use when the user asks to get started with MLflow, set up tracking, add observability, or integrate MLflow into their project. Triggers on "get started with MLflow", "set up MLflow", "onboard to MLflow", "add MLflow to my project", "how do I use MLflow".
-author: mlflow
 ---
 
 # MLflow Onboarding
@@ -34,11 +33,11 @@ Search the user's project for imports and usage patterns that indicate the use c
 - Dataset loading with tabular/image/time-series data
 
 ```bash
-# Search for GenAI indicators (Python, notebooks, JS/TS)
-rg -l -g '*.{py,ipynb,js,ts,tsx}' -e '(from openai|import openai|from anthropic|import anthropic|from langchain|from langgraph|import litellm|from mlflow\.genai|from mlflow\.tracing|mlflow\.openai|mlflow\.langchain|from langchain_openai|import google\.genai|import google\.generativeai|ChatCompletion|chat\.completions|dspy)' .
+# Search for GenAI indicators
+grep -rl --include='*.py' -E '(import openai|import anthropic|from langchain|from langgraph|import litellm|from mlflow\.genai|from mlflow\.tracing|mlflow\.openai|mlflow\.langchain|ChatCompletion|chat\.completions)' .
 
 # Search for ML indicators
-rg -l -g '*.{py,ipynb}' -e '(from sklearn|import torch|import tensorflow|import keras|import xgboost|import lightgbm|mlflow\.sklearn|mlflow\.pytorch|mlflow\.tensorflow|\.fit\()' .
+grep -rl --include='*.py' -E '(from sklearn|import torch|import tensorflow|import keras|import xgboost|import lightgbm|mlflow\.sklearn|mlflow\.pytorch|mlflow\.tensorflow|\.fit\()' .
 ```
 
 ### Signal 2: Check the Experiment Type Tag
@@ -164,6 +163,31 @@ mock_chat("What is MLflow?")
    ```
 
 **Where to add it:** Find the application's entry point or initialization module and add the autologging call there. Search for the main LLM client instantiation (e.g., `openai.OpenAI()`, `ChatOpenAI()`) to find the right location.
+
+4. **Prompt Registry** (optional) — MLflow can version, store, and load prompts so application code loads a prompt by URI instead of hard-coding the template.
+
+   ```python
+   import mlflow
+
+   # Register a prompt version
+   prompt_version = mlflow.genai.register_prompt(
+       name="my_prompt",
+       template="Answer the user's question: {{question}}",
+   )
+   print(prompt_version.uri)  # prompts:/my_prompt/1
+
+   # Load it back in application code
+   prompt = mlflow.genai.load_prompt("prompts:/my_prompt/1")
+   ```
+
+   **On Databricks (Unity Catalog):** prompts are stored under a UC `catalog.schema`, so `name` is a three-part `catalog.schema.my_prompt` and the workspace must have the Prompt Registry preview enabled (account admin -> Previews -> "Prompt Registry"). On success `register_prompt` logs a workspace UI link and auto-links the active experiment's Prompts tab to `catalog.schema`. If that tab is empty after registering, the active experiment was not auto-linked (older mlflow versions do not set this tag automatically). Set it manually:
+
+   ```python
+   mlflow.set_experiment_tag(
+       "mlflow.promptRegistryLocation",
+       "catalog.schema",  # two-part: catalog.schema (no prompt name)
+   )
+   ```
 
 ### Traditional ML Integration
 

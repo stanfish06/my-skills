@@ -48,11 +48,22 @@ Try these in order; stop when you have a match.
    `/name`). This covers most cases. The skill's full instructions live at
    `~/.agents/skills/<name>/SKILL.md`.
 
-2. **Query the vault for comprehensive discovery** (headless, ranked) — when native matching
-   isn't enough, or you want everything related to a concept:
+2. **Query the knowledge graph** (headless, ranked, no dependencies) — when native matching
+   isn't enough, when you need a *complete set* of skills rather than the single best
+   match, or when you want everything related to a concept:
    ```bash
    cd ~/.agents
-   graphify query "Which skills cover single-cell batch correction?" --graph graphify-out/graph.json --budget 1500
+   python3 .skill-vault/kg/query.py "batch correct single cell data and find markers"
+   python3 .skill-vault/kg/query.py "raw fastq to enriched pathways" --k 10 --json
+   ```
+   This is usually the right call for **multi-step work**. Native description matching
+   ranks skills independently, so it reliably finds `scanpy` and just as reliably misses
+   `harmonypy` and `pathway-enrichment` — high recall, incomplete answer. The graph
+   expands along `chains_to` / `co_occurs_with` and completes known workflows, and every
+   result says *why* it was included so you can judge it.
+
+   Other query paths, still available:
+   ```bash
    obsidian-cli search query="single cell batch correction" limit=8
    # zero-dependency fallback (works anywhere ripgrep is installed):
    rg -li "batch correction|integration|harmony" ~/.agents/*.md

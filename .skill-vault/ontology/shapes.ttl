@@ -1,0 +1,148 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix vs:   <https://skillquarium.dev/ontology/> .
+
+# S1 — every Skill carries at least one domain, and a label.
+vs:SkillShape a sh:NodeShape ;
+    sh:targetClass vs:Skill ;
+    sh:property [
+        sh:path vs:in_domain ;
+        sh:minCount 1 ;
+        sh:class skos:Concept ;
+        sh:severity sh:Violation ;
+        sh:message "Skill has no domain" ;
+    ] ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path vs:successRate ;
+        sh:maxCount 1 ;
+        sh:minInclusive 0.0 ; sh:maxInclusive 1.0 ;
+        sh:message "success_rate must be a probability" ;
+    ] .
+
+# S3 — a reviewable assertion must say who made it and why.
+vs:AssertionShape a sh:NodeShape ;
+    sh:targetClass vs:Assertion ;
+    sh:property [ sh:path rdf:subject   ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [
+        sh:path rdf:predicate ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in (
+            vs:references vs:touches vs:consumes vs:produces vs:implements
+            vs:wraps vs:in_domain vs:in_discipline vs:prerequisite_of
+            vs:enhances vs:co_occurs_with vs:alternative_to vs:specializes
+            vs:supersedes vs:has_step vs:chains_to
+        ) ;
+        sh:severity sh:Violation ;
+        sh:message "assertion predicate is outside the closed relation vocabulary" ;
+    ] ;
+    sh:property [ sh:path rdf:object    ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [
+        sh:path vs:justification ;
+        sh:minCount 1 ;
+        sh:minLength 8 ;
+        sh:severity sh:Violation ;
+        sh:message "assertion without a justification a reviewer can act on" ;
+    ] ;
+    sh:property [
+        sh:path prov:wasGeneratedBy ;
+        sh:minCount 1 ;
+        sh:class prov:Activity ;
+    ] ;
+    sh:property [
+        sh:path vs:weight ;
+        sh:maxCount 1 ; sh:minInclusive 0.0 ; sh:maxInclusive 1.0 ;
+    ] .
+
+# S5 — chains_to must be acyclic.
+# A property path finds cycles at any depth. The imperative version was a
+# hand-rolled DFS with an explicit colour map; here it is one triple pattern.
+vs:AcyclicChainShape a sh:NodeShape ;
+    sh:targetClass vs:Skill ;
+    sh:sparql [
+        sh:severity sh:Violation ;
+        sh:message "chains_to cycle through {$this}" ;
+        sh:prefixes [ sh:declare [ sh:prefix "vs" ;
+                      sh:namespace "https://skillquarium.dev/ontology/"^^xsd:anyURI ] ] ;
+        sh:select """
+            SELECT $this WHERE { $this vs:chains_to+ $this . }
+        """ ;
+    ] .
+
+# S6 — alternative_to is symmetric. Declarative; no pair bookkeeping.
+vs:SymmetricAlternativeShape a sh:NodeShape ;
+    sh:targetClass vs:Skill ;
+    sh:sparql [
+        sh:severity sh:Violation ;
+        sh:message "alternative_to from {$this} is not mirrored back" ;
+        sh:prefixes [ sh:declare [ sh:prefix "vs" ;
+                      sh:namespace "https://skillquarium.dev/ontology/"^^xsd:anyURI ] ] ;
+        sh:select """
+            SELECT $this WHERE {
+                $this vs:alternative_to ?other .
+                FILTER NOT EXISTS { ?other vs:alternative_to $this . }
+            }
+        """ ;
+    ] .
+
+# S4 — nothing in the retrievable graph may be PROPOSED.
+# This is the constraint the Python validator could only assert by convention:
+# there, "PROPOSED is not retrievable" was a filter in the query code, so a
+# second caller that forgot the filter would silently defeat it. Here it is a
+# property of the data.
+vs:NoProposedShape a sh:NodeShape ;
+    sh:targetClass vs:Assertion ;
+    sh:sparql [
+        sh:severity sh:Violation ;
+        sh:message "PROPOSED assertion present in the retrievable graph" ;
+        sh:prefixes [ sh:declare [ sh:prefix "prov" ;
+                      sh:namespace "http://www.w3.org/ns/prov#"^^xsd:anyURI ] ,
+                                  [ sh:prefix "rdfs" ;
+                      sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ] ] ;
+        sh:select """
+            SELECT $this WHERE {
+                $this prov:wasGeneratedBy ?a .
+                ?a rdfs:label "PROPOSED" .
+            }
+        """ ;
+    ] .
+
+# S7 — Artifact identifiers must be well formed and labelled.
+vs:ArtifactShape a sh:NodeShape ;
+    sh:targetClass vs:Artifact ;
+    sh:property [
+        sh:path rdfs:label ; sh:minCount 1 ;
+    ] ;
+    sh:nodeKind sh:IRI .
+
+# S9 — a Recipe must have at least two steps, or it is not a workflow.
+vs:RecipeShape a sh:NodeShape ;
+    sh:targetClass vs:Recipe ;
+    sh:property [
+        sh:path vs:has_step ;
+        sh:minCount 2 ;
+        sh:severity sh:Warning ;
+        sh:message "recipe with fewer than two steps is not a workflow" ;
+    ] .
+
+# S10 — an Assertion may only carry known predicates.
+# sh:closed catches a typo'd or invented property, which the imperative
+# validator could not detect at all: it only ever checked for the presence of
+# fields it already knew to look for, so a misspelled one was invisible.
+vs:ClosedAssertionShape a sh:NodeShape ;
+    sh:targetClass vs:Assertion ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type rdf:subject rdf:predicate rdf:object ) ;
+    sh:property [ sh:path prov:wasGeneratedBy ] ;
+    sh:property [ sh:path vs:justification ] ;
+    sh:property [ sh:path vs:weight ] ;
+    sh:severity sh:Violation ;
+    sh:message "assertion carries a property outside the agreed vocabulary" .

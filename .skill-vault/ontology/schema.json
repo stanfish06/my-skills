@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "iri_base": "https://skillquarium.dev/ontology/",
+  "note": "TBox for the vault knowledge graph. Deliberately OWL 2 RL-shaped (forward-chaining rules, no tableaux reasoning) — see docs/superpowers/specs/2026-08-12-vault-knowledge-graph-design.md sec. 3.",
+
+  "entity_types": {
+    "Skill": {
+      "label": "Skill",
+      "definition": "A skills/<id>/SKILL.md folder: the unit of agent instruction.",
+      "id_pattern": "^[a-z0-9][a-z0-9./-]*$",
+      "source": "skills/<id>/SKILL.md"
+    },
+    "ExpertProfile": {
+      "label": "Expert profile",
+      "definition": "A templated scientific expert-thinking persona imported from scientific-agents. Distinct from Skill: it wraps no tool and produces no artifact, so it must not be scored by tool/artifact relations.",
+      "subclass_of": "Skill",
+      "detect": "body contains 'expert-thinking profile'"
+    },
+    "Tool": {
+      "label": "Tool",
+      "definition": "Underlying software, library, or service that a Skill wraps (Scanpy, samtools, IQ-TREE).",
+      "id_prefix": "tool:"
+    },
+    "Artifact": {
+      "label": "Artifact",
+      "definition": "A typed data object exchanged between skills. Identified, never a bare string — the token 'rds' is ambiguous between artifact:r-serialized-data and service:aws-rds.",
+      "id_prefix": "artifact:"
+    },
+    "Capability": {
+      "label": "Capability",
+      "definition": "A verb-phrase of what gets done, cross-cutting domains (batch correction, variant calling).",
+      "id_prefix": "cap:",
+      "population": "curated + gated LLM proposal; NOT frequency-mined (measured: n-gram mining returns template boilerplate)"
+    },
+    "Domain": {
+      "label": "Domain",
+      "definition": "One of the 32 vault domains, as a SKOS concept scheme.",
+      "id_prefix": "domain:",
+      "source": ".skill-vault/build.py CATEGORIES"
+    },
+    "Discipline": {
+      "label": "Discipline",
+      "definition": "A scientific discipline from scientific-expert-taxonomy.json.",
+      "id_prefix": "discipline:"
+    },
+    "Recipe": {
+      "label": "Recipe",
+      "definition": "A named hyperedge: an ordered set of Skills achieving a goal. The vault's highest-value asset for set-completion.",
+      "id_prefix": "recipe:",
+      "source": "vault/recipes/*.md"
+    }
+  },
+
+  "object_properties": {
+    "references":      {"domain": "Skill",  "range": "Skill",      "symmetric": true,  "definition": "Skill body names another skill. Untyped association; the base connectivity layer."},
+    "touches":         {"domain": "Skill",  "range": "Artifact",   "definition": "Skill mentions an artifact type, direction unknown. High recall, deliberately undirected."},
+    "consumes":        {"domain": "Skill",  "range": "Artifact",   "definition": "Skill takes this artifact as input.", "provenance_floor": "ASSERTED"},
+    "produces":        {"domain": "Skill",  "range": "Artifact",   "definition": "Skill emits this artifact.", "provenance_floor": "ASSERTED"},
+    "implements":      {"domain": "Skill",  "range": "Capability"},
+    "wraps":           {"domain": "Skill",  "range": "Tool"},
+    "in_domain":       {"domain": "Skill",  "range": "Domain",     "cardinality": "n:m", "note": "was 1:1 in build.py, which was already lossy"},
+    "in_discipline":   {"domain": "Skill",  "range": "Discipline"},
+    "prerequisite_of": {"domain": "Skill",  "range": "Skill",      "acyclic": true},
+    "enhances":        {"domain": "Skill",  "range": "Skill"},
+    "co_occurs_with":  {"domain": "Skill",  "range": "Skill",      "symmetric": true, "weighted": true},
+    "alternative_to":  {"domain": "Skill",  "range": "Skill",      "symmetric": true, "near_equivalence": true,
+                        "guard": "NEVER asserted from embedding similarity or an unreviewed LLM suggestion alone (KR: no owl:equivalentClass from Text2Onto without curator review)"},
+    "specializes":     {"domain": "Skill",  "range": "Skill",      "acyclic": true},
+    "supersedes":      {"domain": "Skill",  "range": "Skill"},
+    "has_step":        {"domain": "Recipe", "range": "Skill",      "ordered": true},
+    "chains_to":       {"domain": "Skill",  "range": "Skill",      "derived": true, "acyclic": true}
+  },
+
+  "rules": [
+    {"id": "R1", "head": "chains_to(A,B)",
+     "body": "produces(A,x) AND consumes(B,x) AND A != B",
+     "provenance": "INFERRED"},
+    {"id": "R2", "head": "co_occurs_with(A,B)",
+     "body": "has_step(r,A) AND has_step(r,B) AND A != B",
+     "provenance": "INFERRED"},
+    {"id": "R3", "head": "chains_to(A,B)",
+     "body": "has_step(r,A,i) AND has_step(r,B,j) AND j = i+1",
+     "provenance": "INFERRED",
+     "note": "recipe step order is human-authored direction — the only direction source that is both cheap and trustworthy today"},
+    {"id": "R4", "head": "alternative_to(A,B)",
+     "body": "implements(A,c) AND implements(B,c) AND wraps(A,t1) AND wraps(B,t2) AND t1 != t2 AND jaccard(sig(A),sig(B)) >= 0.5",
+     "provenance": "INFERRED",
+     "enabled": false,
+     "note": "disabled until Capability and Tool are populated; firing it on a sparse TBox would assert near-equivalence on no evidence"}
+  ],
+
+  "provenance_levels": {
+    "ASSERTED":  {"rank": 5, "definition": "Curated by a human in an assertions file or a recipe note.", "retrievable": true},
+    "OBSERVED":  {"rank": 4, "definition": "Derived from real usage episodes.", "retrievable": true},
+    "EXTRACTED": {"rank": 3, "definition": "Deterministic parse of SKILL.md. No model involved.", "retrievable": true},
+    "INFERRED":  {"rank": 2, "definition": "Materialised by a rule from other edges.", "retrievable": true},
+    "PROPOSED":  {"rank": 1, "definition": "Suggested by an LLM, unreviewed.", "retrievable": false}
+  },
+
+  "extraction_policy": {
+    "note": "Two-tier name matching. Measured: matching skill names anywhere in the body takes orphans 48.1% -> 1.4%, but skill ids that are common words (github df=42%, workflow df=41%, start df=37%) contaminate every neighbourhood. IDF separates them without a hand-maintained blocklist.",
+    "distinctive_df_max": 0.02,
+    "tier1": "df <= 2% of corpus: match anywhere in the first 8KB of the body",
+    "tier2": "df > 2%: match ONLY in high-precision contexts (backticked, skills/<id> path, markdown link, frontmatter) — recovers recall without prose noise",
+    "body_window_bytes": 8000
+  },
+
+  "python_checks": {
+    "note": "These document the stdlib checks in kg/validate.py, which run with no dependencies installed. They are NOT the SHACL shapes — ontology/shapes.ttl is authoritative for constraint validation and is what CI enforces. Ids are deliberately P-prefixed: an earlier version numbered both catalogues S1..Sn, and they drifted into meaning different things under the same id.",
+    "authoritative_shapes": ".skill-vault/ontology/shapes.ttl",
+    "checks": [
+      {"id": "P1", "target": "Skill", "constraint": "in_domain minCount 1", "severity": "Violation", "shacl_equivalent": "S1"},
+      {"id": "P2", "target": "Skill", "constraint": "degree(references|co_occurs_with|chains_to) minCount 1", "severity": "Warning",
+       "gate": "orphan_rate must not regress; baseline 48.1%, target < 5%",
+       "shacl_equivalent": null,
+       "note": "no SHACL equivalent: this is a corpus health metric, not a per-node constraint"},
+      {"id": "P3", "target": "Edge", "constraint": "provenance in provenance_levels AND justification minCount 1", "severity": "Violation", "shacl_equivalent": "S3"},
+      {"id": "P4", "target": "Edge", "constraint": "provenance == PROPOSED implies not retrievable", "severity": "Violation", "shacl_equivalent": "S4"},
+      {"id": "P5", "target": "chains_to", "constraint": "acyclic", "severity": "Warning", "shacl_equivalent": "S5"},
+      {"id": "P6", "target": "alternative_to", "constraint": "symmetric", "severity": "Violation", "shacl_equivalent": "S6"},
+      {"id": "P7", "target": "Artifact", "constraint": "every lexicon term maps to exactly one id, or is flagged ambiguous", "severity": "Violation", "shacl_equivalent": "S7"},
+      {"id": "P8", "target": "Recipe", "constraint": "has_step targets resolve to existing Skills", "severity": "Violation", "shacl_equivalent": null}
+    ]
+  }
+}

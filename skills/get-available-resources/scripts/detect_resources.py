@@ -149,7 +149,7 @@ def detect_amd_gpus() -> List[Dict[str, Any]]:
 
 def detect_apple_silicon_gpu() -> Optional[Dict[str, Any]]:
     """Detect the integrated Metal GPU on Apple Silicon."""
-    # gate on architecture, not chip generation, so new chips are not false negatives
+    # gate on architecture, not chip generation
     if platform.system() != "Darwin" or platform.machine().lower() not in ("arm64", "aarch64"):
         return None
 

@@ -2,6 +2,7 @@
 name: beyla
 license: Apache-2.0
 description: Auto-instrument an application's HTTP / gRPC / DB traffic with Grafana Beyla eBPF — no code changes, no SDK, no restart. Covers requirements (Linux 5.8+ with BTF, CAP_SYS_ADMIN, host PID), language matrix (Go / Java / Python / Ruby / Node / .NET / Rust / C++ / PHP), Docker + Helm + DaemonSet install, port- / process- / Kubernetes-metadata discovery, OTLP traces + Prometheus metrics export, routes decorator (cardinality control), trace sampling, and Grafana Cloud via Alloy. Use when adding observability to a service you can't recompile, instrumenting a closed-source binary, getting RED metrics + spans onto Tempo/Mimir without touching the app, or rolling Beyla as a cluster-wide DaemonSet — even when the user says "zero-code APM", "instrument legacy app", "trace this binary", "eBPF observability", or "no SDK" without naming Beyla.
+disable-model-invocation: true
 ---
 
 # Grafana Beyla

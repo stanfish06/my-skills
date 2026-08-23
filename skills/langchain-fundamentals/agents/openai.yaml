@@ -1,0 +1,7 @@
+interface:
+  display_name: "Langchain Fundamentals"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $langchain-fundamentals for this task."
+
+policy:
+  allow_implicit_invocation: false

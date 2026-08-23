@@ -1,0 +1,7 @@
+interface:
+  display_name: "Apollo Kotlin"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $apollo-kotlin for this task."
+
+policy:
+  allow_implicit_invocation: false

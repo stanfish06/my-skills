@@ -5,6 +5,7 @@ compatibility: Requires databricks CLI (>= v1.0.0)
 metadata:
   version: "0.1.0"
 parent: databricks-core
+disable-model-invocation: true
 ---
 
 > Catalog and schema are **always user-supplied** — never default to any value. If the user hasn't provided them, ask. For any UC write, **always create the schema if it doesn't exist** before writing data.

@@ -13,6 +13,7 @@ metadata:
   author: apollographql
   version: "1.0.0"
   compatibility: "Requires Apollo Router with native plugin support"
+disable-model-invocation: true
 ---
 
 # Apollo Router Plugin Creator

@@ -7,6 +7,7 @@ description: >
   vars, request bodies, response transforms, or static-code-derived provider
   wrappers. Do not use for choosing eval assertions or red team plugins unless a
   smoke test is needed to verify the connection.
+disable-model-invocation: true
 ---
 
 # Promptfoo Provider Setup

@@ -12,6 +12,7 @@ description: Diagnoses and fixes slow Neo4j Cypher queries by reading execution 
   Does NOT cover index/constraint creation syntax details — use neo4j-cypher-skill references/indexes.md.
 allowed-tools: Bash WebFetch
 version: 1.0.5
+disable-model-invocation: true
 ---
 
 ## When to Use

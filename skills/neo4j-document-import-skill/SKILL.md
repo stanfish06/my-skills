@@ -12,6 +12,7 @@ description: Ingests unstructured and semi-structured documents into Neo4j as a 
 version: 1.0.5
 status: stable
 allowed-tools: Bash WebFetch
+disable-model-invocation: true
 ---
 
 # Neo4j Document Import Skill

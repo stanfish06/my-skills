@@ -13,6 +13,7 @@ metadata:
   author: apollographql
   version: "1.0.0"
 allowed-tools: Bash(npm:*) Bash(npx:*) Bash(node:*) Read Write Edit Glob Grep
+disable-model-invocation: true
 ---
 
 # Apollo Server 5.x Guide

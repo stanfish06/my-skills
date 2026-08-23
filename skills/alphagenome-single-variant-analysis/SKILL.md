@@ -9,6 +9,7 @@ description: >
   in promoters and enhancers. Also use for resolving biological terms to
   tissue/cell-type ontologies (UBERON/CL) or analyzing variants in
   chr:pos:ref>alt format.
+disable-model-invocation: true
 ---
 
 # Variant Analysis using AlphaGenome

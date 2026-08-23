@@ -8,6 +8,7 @@ description:
   AWS Firehose for CloudWatch logs, or troubleshoot a cloud integration. Triggers on phrases
   like "AWS CloudWatch", "Azure Monitor", "Confluent integration", "cloud integration",
   "hosted exporter", "AWS Firehose", "install integration", "cloud metrics", or "cloud logs".
+disable-model-invocation: true
 ---
 
 # Grafana Cloud Integrations

@@ -1,6 +1,7 @@
 ---
 name: debug-distributed-hang
 description: Debug hanging issues in SGLang distributed inference (TP/PP/DP/EP). Covers identifying hang locations via py-spy/watchdog/cuda coredump, per-rank logging to find state divergence, binary-search methodology for locating the first diverge point, and fix patterns. Use when a multi-GPU SGLang run hangs, freezes, or times out during collective operations.
+disable-model-invocation: true
 ---
 
 # Debugging Distributed Hangs in SGLang

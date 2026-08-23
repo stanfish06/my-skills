@@ -11,6 +11,7 @@ description: >
   asks to evaluate, audit, design, or improve Prometheus labels — or asks how to prevent
   high cardinality at the source. For "why is my Prometheus slow / expensive right now"
   triage, see prometheus-cardinality-troubleshooter.
+disable-model-invocation: true
 ---
 
 # Prometheus Label Strategy Evaluator

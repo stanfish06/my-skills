@@ -1,0 +1,7 @@
+interface:
+  display_name: "Graphql Schema"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $graphql-schema for this task."
+
+policy:
+  allow_implicit_invocation: false

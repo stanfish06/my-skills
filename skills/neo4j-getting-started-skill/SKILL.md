@@ -15,6 +15,7 @@ allowed-tools: Bash, WebFetch, Read, Write, Edit,
   mcp__neo4j_data_modeling__validate_data_model,
   mcp__neo4j_data_modeling__visualize_data_model
 compatibility: claude-code, cursor, windsurf, any-agent-with-bash
+disable-model-invocation: true
 ---
 
 # Neo4j Getting-Started Skill

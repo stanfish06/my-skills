@@ -10,6 +10,7 @@ description: Use when installing, configuring, or troubleshooting the official N
   Does NOT cover Aura instance provisioning — use neo4j-aura-provisioning-skill.
 allowed-tools: Bash, WebFetch
 version: 1.0.2
+disable-model-invocation: true
 ---
 
 # Neo4j MCP Skill

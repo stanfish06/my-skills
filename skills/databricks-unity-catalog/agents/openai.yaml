@@ -5,3 +5,6 @@ interface:
   icon_large: "./assets/databricks.png"
   brand_color: "#FF3621"
   default_prompt: "Use $databricks-unity-catalog to grant or revoke access, manage the UC privilege model and ownership, set up row/column security, create external locations and storage credentials, and query system tables (audit, lineage, billing) and volume files."
+
+policy:
+  allow_implicit_invocation: false

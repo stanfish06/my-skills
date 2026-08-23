@@ -5,3 +5,6 @@ interface:
   icon_large: "./assets/databricks.png"
   brand_color: "#FF3621"
   default_prompt: "Use $databricks-model-serving for Databricks Model Serving endpoint management."
+
+policy:
+  allow_implicit_invocation: false

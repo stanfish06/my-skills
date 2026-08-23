@@ -7,6 +7,7 @@ description: >
   or raw formats, selecting and parsing results, binding query parameters,
   managing sessions and temporary tables, working with data types or
   customizing JSON parsing. Do NOT use for browser/Web client code.
+disable-model-invocation: true
 ---
 
 # ClickHouse Node.js Client — Coding

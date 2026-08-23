@@ -5,6 +5,7 @@ license: MIT
 metadata:
   author: redis
   version: "1.0.0"
+disable-model-invocation: true
 ---
 
 # Iris: Redis Agent Memory

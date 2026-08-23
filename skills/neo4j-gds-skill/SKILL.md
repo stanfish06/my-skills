@@ -11,6 +11,7 @@ description: Neo4j Graph Data Science (GDS) embedded plugin via Python client or
   Does NOT cover driver setup — use neo4j-driver-python-skill or other driver skill.
 version: 1.0.14
 allowed-tools: Bash WebFetch
+disable-model-invocation: true
 ---
 
 ## When to Use

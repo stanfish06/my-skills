@@ -7,6 +7,7 @@ description: >
   blocking-prerender / instant validation errors, run the
   `cache-components-instant-false` codemod, or decide between opting routes out
   with `export const instant = false` and fixing them in place.
+disable-model-invocation: true
 ---
 
 # next-cache-components-adoption

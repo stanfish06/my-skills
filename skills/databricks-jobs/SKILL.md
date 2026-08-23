@@ -5,6 +5,7 @@ compatibility: Requires databricks CLI (>= v1.0.0)
 metadata:
   version: "0.2.0"
 parent: databricks-core
+disable-model-invocation: true
 ---
 
 # Lakeflow Jobs Development

@@ -2,6 +2,7 @@
 name: k6
 license: Apache-2.0
 description: Generate, validate, and review k6 test scripts — load, stress, spike, soak, smoke, breakpoint, functional, and protocol. Covers HTTP, WebSocket, gRPC, browser, all executors, thresholds, checks, custom metrics, the k6-testing library, k6 Cloud execution, and the xk6 extension ecosystem; uses the xk6-docs CLI (with grafana.com web fallback) for docs lookup and validates every script by running it. Use when writing, generating, validating, or debugging any k6 or load-test script (including plain-language asks like "load test this API" or "stress test my service"), choosing executors/scenarios, or setting thresholds. For end-to-end website performance suites use k6-perf-test-website; for documenting k6 itself use k6-docs.
+disable-model-invocation: true
 ---
 
 # k6 Script Generation

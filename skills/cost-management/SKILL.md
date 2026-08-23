@@ -2,6 +2,7 @@
 name: cost-management
 license: Apache-2.0
 description: Cut your Grafana Cloud bill by attributing spend to teams and reducing telemetry volume. Covers FOCUS-compliant billing dashboards, cost-attribution labels in Alloy, Adaptive Metrics (cardinality reduction), Adaptive Logs (drop/sample), Adaptive Traces (tail sampling), usage alerts, and an optimization checklist. Use when investigating a high Grafana Cloud bill, attributing observability cost to a team or service, reducing active series / log bytes / trace spans, or setting up usage / quota alerts — even when the user says "our Grafana bill is too high", "who's burning the most metrics", "drop debug logs", "sample our traces", or "alert me before we hit quota" without naming Cost Management.
+disable-model-invocation: true
 ---
 
 # Grafana Cloud Cost Management

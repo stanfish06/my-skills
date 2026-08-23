@@ -13,6 +13,7 @@ description: >
   practices to my script", "modernize my k6 test", or "the service changed and
   my test broke". Also trigger when another skill (k6-trend-analysis or
   k6-cloud-investigate-test) hands off with a recommendation to edit a script.
+disable-model-invocation: true
 ---
 
 # k6 Test Maintenance

@@ -14,6 +14,7 @@ description: Use Neo4j GenAI Plugin ai.text.* functions and procedures for in-Cy
 version: 1.0.7
 status: active
 allowed-tools: Bash WebFetch
+disable-model-invocation: true
 ---
 
 ## When to Use

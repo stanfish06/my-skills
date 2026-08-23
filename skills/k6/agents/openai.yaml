@@ -1,0 +1,7 @@
+interface:
+  display_name: "K6"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $k6 for this task."
+
+policy:
+  allow_implicit_invocation: false

@@ -11,6 +11,7 @@ description: >
   static shell or fix its slow first paint, diagnose which Suspense boundary
   keeps a route out of its static shell, or write the instant() e2e guard for
   one. Requires Next.js 16.3+ with cacheComponents; directs an upgrade if older.
+disable-model-invocation: true
 ---
 
 # next-cache-components-optimizer

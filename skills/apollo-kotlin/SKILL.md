@@ -12,6 +12,7 @@ metadata:
   author: apollographql
   version: "1.0.3"
 allowed-tools: Bash(./gradlew:*) Bash(gradle:*) Bash(curl:*) Read Write Edit Glob Grep WebFetch
+disable-model-invocation: true
 ---
 
 # Apollo Kotlin Guide

@@ -5,6 +5,7 @@ license: MIT
 metadata:
   author: prisma
   version: "1.5.1"
+disable-model-invocation: true
 ---
 
 # Prisma Compute

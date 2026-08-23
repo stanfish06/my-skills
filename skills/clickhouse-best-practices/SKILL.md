@@ -5,6 +5,7 @@ license: Apache-2.0
 metadata:
   author: ClickHouse Inc
   version: "0.4.0"
+disable-model-invocation: true
 ---
 
 # ClickHouse Best Practices

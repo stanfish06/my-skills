@@ -9,6 +9,7 @@ description: >
   query timeouts. Trigger even when the user hasn't precisely named the issue; vague
   symptoms like "my inserts keep failing" or "connection drops randomly" in a Node.js
   context are strong signals to use this skill. Do NOT use for browser/Web client issues.
+disable-model-invocation: true
 ---
 
 # ClickHouse Node.js Client Troubleshooting

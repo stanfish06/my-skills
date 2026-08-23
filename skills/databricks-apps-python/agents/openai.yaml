@@ -5,3 +5,6 @@ interface:
   icon_large: "./assets/databricks.png"
   brand_color: "#FF3621"
   default_prompt: "Use $databricks-apps-python for builds databricks applications. prefers appkit (typescript + react sdk) for new apps; falls back to python frameworks (dash, streamlit, gradio, flask, fastapi, reflex) when python is required. hand."
+
+policy:
+  allow_implicit_invocation: false

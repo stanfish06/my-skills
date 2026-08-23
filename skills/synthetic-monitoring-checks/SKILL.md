@@ -13,6 +13,7 @@ description: >
   asking "is my site up from multiple regions". NOT for load, stress, or performance testing — SM runs one
   iteration per execution; for load tests use the grafana-k6 plugin or Grafana Cloud k6.
   For the broad Grafana Cloud Testing overview (SM + k6 Cloud + Faro), use the testing skill.
+disable-model-invocation: true
 ---
 
 # Synthetic Monitoring Check Authoring

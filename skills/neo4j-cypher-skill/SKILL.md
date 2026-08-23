@@ -8,6 +8,7 @@ description: Generates, optimizes, and validates Cypher 25 queries for Neo4j 202
   Does NOT cover DB administration or server ops — use neo4j-cli-tools-skill.
 compatibility: Neo4j >= 2025.01 (safe baseline); Cypher 25
 version: 1.0.22
+disable-model-invocation: true
 ---
 
 ## When to Use

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Prisma Compute"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $prisma-compute for this task."
+
+policy:
+  allow_implicit_invocation: false

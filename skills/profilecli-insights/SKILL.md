@@ -5,6 +5,7 @@ compatibility: Requires profilecli and pprof, or Go with go tool pprof, on PATH 
 description: >
   Query live Pyroscope profiles with profilecli, analyze them with pprof, and correlate hot functions with checked-out source code. Use when the user asks to investigate a service with a configured Pyroscope server, profilecli, and pprof.
 allowed-tools: Bash(profilecli:*) Bash(pprof:*) Bash(go tool pprof:*) Bash(git:*) Bash(mktemp:*) Read Grep Glob
+disable-model-invocation: true
 ---
 
 # Profilecli Insights

@@ -11,6 +11,7 @@ description: Neo4j JavaScript/TypeScript Driver v6 — driver lifecycle, execute
 compatibility: neo4j-driver v6; Node.js >=18; TypeScript supported via bundled types
 version: 1.0.5
 allowed-tools: Bash WebFetch
+disable-model-invocation: true
 ---
 
 ## When to Use

@@ -2,6 +2,7 @@
 name: app-observability
 license: Apache-2.0
 description: Get RED metrics + service maps + frontend RUM + AI/LLM monitoring out of Grafana Cloud — Application Observability (`traces_spanmetrics_*` from OTel traces, p50/p95/p99 latency, exemplar-to-trace, traces-to-logs / profiles), Frontend Observability with the Faro Web SDK (Core Web Vitals, session replay, `pushError`, React + router integration, `TracingInstrumentation` for browser → backend trace correlation), and AI Observability via OpenLIT (token / cost / latency, GPU, hallucination + toxicity evals). Use when standing up APM for a service, wiring an Alloy OTLP receiver + forwarding to Cloud, instrumenting a React frontend for RUM, debugging why service-map edges are missing, monitoring LLM cost drift, or correlating a frontend error to its backend trace — even when the user says "set up APM", "show service map", "monitor browser perf", "session replay", "RUM SDK", or "watch our OpenAI bill" without naming App / Frontend / AI Observability.
+disable-model-invocation: true
 ---
 
 # Grafana Cloud Application Observability

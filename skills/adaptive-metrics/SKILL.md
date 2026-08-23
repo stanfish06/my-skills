@@ -2,6 +2,7 @@
 name: adaptive-metrics
 license: Apache-2.0
 description: Cut Grafana Cloud Metrics cost by shrinking active-series count with Adaptive Metrics aggregation rules — auto-recommendations from query history, custom exact/regex rules, label-drop config, unused-metric detection, and Alloy remote_write fallback. Use when investigating a high Mimir/Grafana Cloud bill, hunting high-cardinality labels (`pod_uid`, `service_instance_id`, `version`), pre-aggregating counters/gauges, dropping unused metrics, or measuring `grafanacloud_instance_active_series` before/after — even when the user says "reduce cardinality", "too many series", "metrics spend", "active series count is exploding", or "drop the version label" without naming Adaptive Metrics.
+disable-model-invocation: true
 ---
 
 # Grafana Cloud Adaptive Metrics

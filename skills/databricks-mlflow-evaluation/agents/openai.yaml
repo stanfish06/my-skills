@@ -5,3 +5,6 @@ interface:
   icon_large: "./assets/databricks.png"
   brand_color: "#FF3621"
   default_prompt: "Use $databricks-mlflow-evaluation for mlflow 3 genai agent evaluation."
+
+policy:
+  allow_implicit_invocation: false

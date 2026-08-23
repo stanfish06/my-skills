@@ -1,0 +1,7 @@
+interface:
+  display_name: "Prisma Cli"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $prisma-cli for this task."
+
+policy:
+  allow_implicit_invocation: false

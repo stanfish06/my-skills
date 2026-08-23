@@ -13,6 +13,7 @@ description: Create and manage Neo4j vector indexes, run vector similarity searc
 version: 1.0.15
 compatibility: Neo4j >= 2025.01; SEARCH clause requires 2026.01+
 allowed-tools: Bash WebFetch
+disable-model-invocation: true
 ---
 
 ## When to Use

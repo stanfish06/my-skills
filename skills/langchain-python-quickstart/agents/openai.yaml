@@ -1,0 +1,7 @@
+interface:
+  display_name: "Langchain Python Quickstart"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $langchain-python-quickstart for this task."
+
+policy:
+  allow_implicit_invocation: false

@@ -14,6 +14,7 @@ description: Build GraphRAG retrieval pipelines on Neo4j using the neo4j-graphra
 version: 1.0.11
 status: active
 allowed-tools: Bash WebFetch
+disable-model-invocation: true
 ---
 
 # Neo4j GraphRAG Skill

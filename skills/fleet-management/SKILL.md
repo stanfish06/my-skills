@@ -2,6 +2,7 @@
 name: fleet-management
 license: Apache-2.0
 description: Manage a fleet of Grafana Alloy collectors with Fleet Management — author Alloy pipelines once, target them via attribute matchers (`env="production"`, regex `region=~"us-.*"`), push remotely via OpAMP without restarting collectors. Covers pipeline create / update / matcher RPCs, collector attribute API, `remotecfg` bootstrap block (standalone + Helm), pre-deploy `alloy fmt` validation, the local Alloy UI at port 12345 for component health, and post-deploy `REMOTE_CONFIG_STATUS_APPLIED` verification. Use when standing up a Cloud Alloy fleet, pushing a config change to 200 collectors, hunting why one collector shows `REMOTE_CONFIG_STATUS_FAILED`, validating River syntax before saving, or wiring `discovery.kubernetes` → `prometheus.remote_write` — even when the user says "configure Alloy", "remote config the collectors", "push pipeline", "OpAMP", "collector is unhealthy", or "manage agent config centrally" without naming Fleet Management.
+disable-model-invocation: true
 ---
 
 # Grafana Fleet Management + Alloy Configuration

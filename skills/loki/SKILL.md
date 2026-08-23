@@ -6,6 +6,7 @@ description: >
   label matchers, line filters, parsers: json/logfmt/pattern/regexp/unpack, label filters, line_format),
   Loki architecture, log ingestion via Alloy/Promtail/Fluent Bit, structured metadata, and Logs Drilldown.
   Use when writing LogQL queries, configuring Loki, troubleshooting log pipelines, or analyzing logs.
+disable-model-invocation: true
 ---
 
 # Grafana Loki - Log Aggregation

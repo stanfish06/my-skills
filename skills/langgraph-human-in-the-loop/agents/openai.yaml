@@ -1,0 +1,7 @@
+interface:
+  display_name: "Langgraph Human In The Loop"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $langgraph-human-in-the-loop for this task."
+
+policy:
+  allow_implicit_invocation: false

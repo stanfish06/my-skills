@@ -1,0 +1,7 @@
+interface:
+  display_name: "Redis Search"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $redis-search for this task."
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,7 @@
+interface:
+  display_name: "React 19 Plugin Migration"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $react-19-plugin-migration for this task."
+
+policy:
+  allow_implicit_invocation: false

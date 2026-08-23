@@ -11,6 +11,7 @@ description: Neo4j .NET Driver v6 — IDriver lifecycle, DI registration (single
 compatibility: .NET 8, 9, 10; Neo4j.Driver v6
 allowed-tools: Bash WebFetch
 version: 1.0.6
+disable-model-invocation: true
 ---
 
 ## When to Use

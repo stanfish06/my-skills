@@ -2,6 +2,7 @@
 name: admission-control
 license: Apache-2.0
 description: Use when the user asks to "write a validator", "add validation", "implement admission control", "write a mutating webhook", "add a mutation handler", "validate incoming resources", "implement admission logic", "add admission webhooks", "write ingress validation", or asks how to validate or mutate resources before they are persisted in a grafana-app-sdk app. Provides guidance on implementing validation and mutation admission handlers for grafana-app-sdk apps.
+disable-model-invocation: true
 ---
 
 # Admission Control

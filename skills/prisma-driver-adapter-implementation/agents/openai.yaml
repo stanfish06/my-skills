@@ -1,0 +1,7 @@
+interface:
+  display_name: "Prisma Driver Adapter Implementation"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $prisma-driver-adapter-implementation for this task."
+
+policy:
+  allow_implicit_invocation: false

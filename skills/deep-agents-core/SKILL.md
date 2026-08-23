@@ -1,6 +1,7 @@
 ---
 name: deep-agents-core
 description: "INVOKE THIS SKILL when building ANY Deep Agents application. Covers create_deep_agent(), harness architecture, SKILL.md format, and configuration options."
+disable-model-invocation: true
 ---
 
 <overview>

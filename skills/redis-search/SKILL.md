@@ -5,6 +5,7 @@ license: MIT
 metadata:
   author: Redis, Inc.
   version: "1.0.0"
+disable-model-invocation: true
 ---
 
 # Redis Search

@@ -8,6 +8,7 @@ description:
   help implement lazy loading in a Grafana app plugin. Triggers on phrases like "optimise plugin
   bundle size", "module.js is too large", "plugin is slow to load", "code split the plugin",
   "reduce initial JS payload", or "help me with Suspense in my plugin".
+disable-model-invocation: true
 ---
 
 # Grafana plugin bundle size optimisation

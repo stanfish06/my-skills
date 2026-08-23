@@ -2,6 +2,7 @@
 name: k6-docs
 license: Apache-2.0
 description: Write or review k6 documentation across the three k6 repositories - k6-DefinitelyTyped (TypeScript types), k6-docs (user documentation), and k6 (release notes / changelog). Applies k6 doc style conventions, generates TypeScript type definitions, drafts release notes, and validates examples by running them against k6@master. Use when working on k6 documentation, the k6 changelog, the k6 release notes, k6 API reference, k6 TypeScript types, load testing docs, or when the user asks to write, edit, or review anything in the k6, k6-docs, or k6-DefinitelyTyped repos - even if they don't explicitly say "documentation".
+disable-model-invocation: true
 ---
 
 # k6 Documentation

@@ -2,6 +2,7 @@
 name: dpm-finder
 license: Apache-2.0
 description: Find the Prometheus metrics that drive your Grafana Cloud bill. `dpm-finder` is a Grafana Professional Services CLI that ranks metrics by Data Points per Minute (DPM) with per-label-set breakdown, optional `--cost-per-1000-series` pricing, and a Prometheus-exporter mode. Use when investigating high Grafana Cloud spend, hunting noisy / high-cardinality metrics, comparing pre/post recording-rule cardinality, or feeding cost data into dashboards — even when the user says "why is my Mimir bill so high?", "find the biggest metrics", "cardinality offenders", or "optimize Prometheus cost" without naming dpm-finder.
+disable-model-invocation: true
 ---
 
 # dpm-finder

@@ -11,6 +11,7 @@ description: Serverless Aura Graph Analytics (AGA) GDS Sessions — covers GdsSe
   Does NOT cover Snowflake Graph Analytics — use neo4j-snowflake-graph-analytics-skill.
 version: 1.0.8
 allowed-tools: Bash WebFetch
+disable-model-invocation: true
 ---
 
 ## When to Use

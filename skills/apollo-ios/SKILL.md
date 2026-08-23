@@ -13,6 +13,7 @@ metadata:
   author: apollographql
   version: "1.0.0"
 allowed-tools: Bash(apollo-ios-cli:*) Bash(swift:*) Bash(xcodebuild:*) Bash(git:*) Read Write Edit Glob Grep WebFetch
+disable-model-invocation: true
 ---
 
 # Apollo iOS Guide

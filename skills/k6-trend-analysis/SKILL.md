@@ -12,6 +12,7 @@ description: >
   test X", "analyze my k6 test runs", or "is my test getting slower". Also
   trigger when a user asks to check all tests in a project -- run this skill
   once per test and synthesize.
+disable-model-invocation: true
 ---
 
 # k6 Trend Analysis

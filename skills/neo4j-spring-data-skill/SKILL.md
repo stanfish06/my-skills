@@ -9,6 +9,7 @@ description: Use when building Spring Boot applications with Neo4j using Spring 
   Does NOT handle driver version upgrades — use neo4j-migration-skill.
 version: 1.0.5
 allowed-tools: Bash WebFetch
+disable-model-invocation: true
 ---
 
 # Neo4j Spring Data Skill

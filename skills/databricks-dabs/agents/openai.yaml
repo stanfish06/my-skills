@@ -5,3 +5,6 @@ interface:
   icon_large: "./assets/databricks.png"
   brand_color: "#FF3621"
   default_prompt: "Use $databricks-dabs for creating, deploying, and managing Databricks resources through Declarative Automation Bundles."
+
+policy:
+  allow_implicit_invocation: false

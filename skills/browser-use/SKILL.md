@@ -19,6 +19,7 @@ metadata:
           ],
       },
   }
+disable-model-invocation: true
 ---
 
 # Browser Use

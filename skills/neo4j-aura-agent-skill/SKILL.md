@@ -9,6 +9,7 @@ description: Manages Neo4j Aura Agents via the v2beta1 REST API — create, list
   Does NOT cover vector index creation — use neo4j-vector-index-skill.
 version: 1.0.3
 allowed-tools: Bash WebFetch  
+disable-model-invocation: true
 ---
 
 ## When to Use

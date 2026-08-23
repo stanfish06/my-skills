@@ -13,6 +13,7 @@ metadata:
   author: apollographql
   version: "1.0.0"
 allowed-tools: Bash(rover:*) Read Write Edit Glob Grep
+disable-model-invocation: true
 ---
 
 # Apollo Connectors Schema Assistant

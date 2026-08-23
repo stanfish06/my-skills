@@ -7,6 +7,7 @@ description: >
   in with `export const prefetch = 'partial'`, audit
   `<Link prefetch={true}>` calls, or resolve the
   instant-link-prefetch-partial and instant-shell-url-data insights.
+disable-model-invocation: true
 ---
 
 # next-partial-prefetching-adoption

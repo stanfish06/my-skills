@@ -9,6 +9,7 @@ description: Programmatic security management in Neo4j — RBAC/ABAC, user lifec
   Property-level security and ABAC require Enterprise Edition.
 allowed-tools: Bash WebFetch
 version: 1.0.8
+disable-model-invocation: true
 ---
 
 ## When to Use

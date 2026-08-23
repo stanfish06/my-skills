@@ -1,0 +1,7 @@
+interface:
+  display_name: "Cloud Integrations"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $cloud-integrations for this task."
+
+policy:
+  allow_implicit_invocation: false

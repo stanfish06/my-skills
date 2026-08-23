@@ -4,4 +4,4 @@ interface:
   default_prompt: 'Use $promptfoo-redteam-setup to create a focused red team config from a live endpoint, OpenAPI spec, or code.'
 
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

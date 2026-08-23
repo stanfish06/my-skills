@@ -4,6 +4,7 @@ description: "Create, manage, and query Databricks Genie Agents — curated, per
 compatibility: Requires databricks CLI (>= v1.0.0)
 metadata:
   version: "0.1.0"
+disable-model-invocation: true
 ---
 
 # Databricks Genie Agents

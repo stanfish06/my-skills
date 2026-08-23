@@ -5,3 +5,6 @@ interface:
   icon_large: "./assets/databricks.png"
   brand_color: "#FF3621"
   default_prompt: "Use $databricks-synthetic-data-gen for generate realistic synthetic data using spark + faker (strongly recommended). supports serverless execution, multiple output formats (parquet/json/csv/delta), and scales from thousands to millions."
+
+policy:
+  allow_implicit_invocation: false

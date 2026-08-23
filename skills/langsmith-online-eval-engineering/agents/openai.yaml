@@ -1,0 +1,7 @@
+interface:
+  display_name: "Langsmith Online Eval Engineering"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $langsmith-online-eval-engineering for this task."
+
+policy:
+  allow_implicit_invocation: false

@@ -4,4 +4,4 @@ interface:
   default_prompt: 'Use $promptfoo-redteam-run to execute this generated redteam scan with its HTTP, Python, or JS target and summarize failures.'
 
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

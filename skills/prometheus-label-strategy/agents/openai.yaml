@@ -1,0 +1,7 @@
+interface:
+  display_name: "Prometheus Label Strategy"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $prometheus-label-strategy for this task."
+
+policy:
+  allow_implicit_invocation: false

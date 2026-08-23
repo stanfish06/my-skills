@@ -2,6 +2,7 @@
 name: incident-response
 description: Run an incident response workflow — triage, communicate, and write postmortem. Trigger with "we have an incident", "production is down", an alert that needs severity assessment, a status update mid-incident, or when writing a blameless postmortem after resolution.
 argument-hint: "<incident description or alert>"
+disable-model-invocation: true
 ---
 
 # /incident-response

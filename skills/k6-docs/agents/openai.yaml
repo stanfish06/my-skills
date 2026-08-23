@@ -1,0 +1,7 @@
+interface:
+  display_name: "K6 Docs"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $k6-docs for this task."
+
+policy:
+  allow_implicit_invocation: false

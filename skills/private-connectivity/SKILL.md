@@ -2,6 +2,7 @@
 name: private-connectivity
 license: Apache-2.0
 description: Set up private network connectivity to Grafana Cloud — AWS PrivateLink, Azure Private Link, GCP Private Service Connect, and Private Data Source Connect (PDC). Provisions VPC endpoints, private endpoints, or PSC forwarding rules per signal type (metrics / logs / traces / profiles); wires Alloy to push to the private DNS endpoint instead of the public one; verifies private DNS resolution + endpoint approval state. Use when sending telemetry to Grafana Cloud without traversing the public internet, eliminating cloud egress costs, meeting PCI-DSS / HIPAA / data-residency compliance, configuring PDC for private data-source queries, or connecting AWS / Azure / GCP workloads to Grafana — even when the user says "stop paying egress", "keep our telemetry off the public internet", or "PCI compliance for Grafana" without naming PrivateLink.
+disable-model-invocation: true
 ---
 
 # Grafana Cloud Private Connectivity

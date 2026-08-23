@@ -8,6 +8,7 @@ description: |
     Pulumi management. Do NOT load for greenfield Pulumi authoring, raw
     template conversion with no discovered-stack counterpart (i.e. no matching
     entry from the discovered-stacks API), or Terraform migration.
+disable-model-invocation: true
 ---
 
 **Scope: this skill only applies to stacks Pulumi Cloud's Discovery feature has already scanned and exposed through the discovered-stacks API** (`GET .../discovered-stacks/{projectName}/{stackName}/resources`, see below). It is not for migrating an arbitrary CloudFormation/ARM template or account that Discovery hasn't scanned yet — if no discovered stack exists for the source, this skill has nothing to read and does not apply.

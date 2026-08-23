@@ -5,6 +5,7 @@ description: |
 allowed-tools:
   - Bash(firecrawl *)
   - Bash(npx firecrawl-cli *)
+disable-model-invocation: true
 ---
 
 # firecrawl map

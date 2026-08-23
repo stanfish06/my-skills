@@ -4,4 +4,4 @@ interface:
   default_prompt: 'Use $promptfoo-provider-setup to connect Promptfoo to my HTTP endpoint, OpenAPI operation, Python provider, or app code.'
 
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

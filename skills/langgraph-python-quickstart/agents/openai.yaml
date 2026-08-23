@@ -1,0 +1,7 @@
+interface:
+  display_name: "Langgraph Python Quickstart"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $langgraph-python-quickstart for this task."
+
+policy:
+  allow_implicit_invocation: false

@@ -1,6 +1,7 @@
 ---
 name: ecosystem-primer
 description: "INVOKE FIRST for any LangChain / LangGraph / Deep Agents agent building project before consulting other skills or writing any agent code. Required starting point for up to date info on framework selection (LangChain vs LangGraph vs Deep Agents vs hybrid composition), agent patterns, install, environment setup, and which skill to load next."
+disable-model-invocation: true
 ---
 
 <overview>

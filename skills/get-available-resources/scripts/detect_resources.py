@@ -163,8 +163,8 @@ def detect_apple_silicon_gpu() -> Optional[Dict[str, Any]]:
 
         cpu_brand = result.stdout.strip()
 
-        # Check for Apple Silicon (M1, M2, M3, etc.)
-        if "Apple" in cpu_brand and any(chip in cpu_brand for chip in ["M1", "M2", "M3", "M4"]):
+        # Detect Apple Silicon from the Darwin ARM architecture.
+        if "Apple" in cpu_brand and platform.machine().lower() in {"arm64", "aarch64"}:
             # Get GPU core count if possible
             gpu_info = {
                 "name": cpu_brand,

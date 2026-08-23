@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Web Automation, Frontend & Design](web-automation-frontend.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (87)
+## Skills (89)
 
 - [aflpp](../notes/security-auditing/aflpp.md) — AFL++ is a fork of AFL with better fuzzing performance and advanced features
 - [agentic-actions-auditor](../notes/security-auditing/agentic-actions-auditor.md) — Audits GitHub Actions workflows for security vulnerabilities in AI agent integrations including Claude Code Action, Gemini CLI, OpenAI Codex, and GitHub AI Inference
@@ -23,6 +23,7 @@ created: 2026-06-13
 - [atheris](../notes/security-auditing/atheris.md) — Atheris is a coverage-guided Python fuzzer based on libFuzzer
 - [attack-chain](../notes/security-auditing/attack-chain.md) — Use for authorized multi-stage attack-path planning and orchestration when a task spans reconnaissance, initial access, privilege escalation, lateral movement, or impact assessment
 - [attack-path-analysis](../notes/security-auditing/attack-path-analysis.md) — Use when Codex is already in the attack-path-analysis phase of a security scan or the user explicitly asks to trace a security finding from source to sink and calibrate severity
+- [audit-and-reduce-dependencies](../notes/security-auditing/audit-and-reduce-dependencies.md) — Reduces JavaScript dependency footprint with pnpm while preserving lockfile, workspace layout, and dependency range style
 - [audit-context-building](../notes/security-auditing/audit-context-building.md) — Understand a codebase before looking for bugs in it - what each function assumes, what it guarantees, and what it depends on elsewhere
 - [audit-prep-assistant](../notes/security-auditing/audit-prep-assistant.md) — Prepares codebases for security review using Trail of Bits' checklist
 - [auth](../notes/security-auditing/auth.md) — Authentication integration guidance — Clerk (native Vercel Marketplace), Descope, and Auth0 setup for Next.js applications
@@ -32,6 +33,7 @@ created: 2026-06-13
 - [c-review](../notes/security-auditing/c-review.md) — Performs comprehensive C/C++ security review for memory corruption, integer overflows, race conditions, and platform-specific vulnerabilities
 - [cargo-fuzz](../notes/security-auditing/cargo-fuzz.md) — cargo-fuzz is the de facto fuzzing tool for Rust projects using Cargo
 - [case-review](../notes/security-auditing/case-review.md) — Reviews a reverse-skill case package for scope readiness, Evidence to Finding to Path traceability, work item coverage, timeline references, and optional artifact hash integrity before...
+- [check-npm](../notes/security-auditing/check-npm.md) — Audit a JavaScript/TypeScript repo's npm, yarn, or pnpm configuration for supply-chain hardening: tool version, lifecycle scripts, unsafe dependency protocols, and minimum release age...
 - [cloud-k8s](../notes/security-auditing/cloud-k8s.md) — Use for authorized cloud, container, and Kubernetes security assessment including metadata SSRF, IAM misconfig, container escape paths, and cluster RBAC review
 - [code-audit](../notes/security-auditing/code-audit.md) — Use for authorized source-code security review and SAST workflows including Semgrep, CodeQL patterns, dangerous API hunting, and fix verification
 - [code-maturity-assessor](../notes/security-auditing/code-maturity-assessor.md) — Systematic code maturity assessment using Trail of Bits' 9-category framework

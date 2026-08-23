@@ -34,6 +34,8 @@ created: 2026-08-19
 - [draft-long-form-memo](../../notes/finance-investment/draft-long-form-memo.md) — Writes a formal objective legal research memo (Questions Presented, Brief Answers, Facts, IRAC Discussion, Conclusion) as a .docx
 - [email-security](../../notes/security-auditing/email-security.md) — Use for authorized email security review including phishing analysis, header authentication (SPF/DKIM/DMARC), BEC patterns, and mailbox token abuse research
 - [exa-search](../../notes/literature-discovery/exa-search.md) — Web toolkit powered by Exa, tuned for scientific and technical content
+- [firecrawl](../../notes/web-automation-frontend/firecrawl.md) — Any live-web task via the Firecrawl CLI — including ordinary web research: searching the web, reading or extracting pages, gathering sources, discovering site URLs, bulk extraction...
+- [firecrawl-research-index](../../notes/web-automation-frontend/firecrawl-research-index.md) — Find the papers that answer a research query in Firecrawl's research paper index — a corpus of paper abstracts whose largest share is biomedical and life-science literature (PubMed...
 - [hardware-security](../../notes/security-auditing/hardware-security.md) — Use for authorized hardware and embedded interface security research including UART/JTAG discovery, debug pad triage, secure boot overview, and offline firmware extraction support
 - [huggingface-paper-publisher](../../notes/ml-ai/huggingface-paper-publisher.md) — Publish and manage research papers on Hugging Face Hub
 - [huggingface-papers](../../notes/ml-ai/huggingface-papers.md) — Look up and read Hugging Face paper pages in markdown, and use the papers API for structured metadata such as authors, linked models/datasets/spaces, Github repo and project page

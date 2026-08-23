@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Proteomics & Metabolomics](proteomics-metabolomics.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Machine Learning & AI](ml-ai.md)
 
-## Skills (65)
+## Skills (66)
 
 - [adaptyv](../notes/drug-discovery-chem/adaptyv.md) — How to use the Adaptyv Bio Foundry API and Python SDK for protein experiment design, submission, and results retrieval
 - [alphafold-skill](../notes/drug-discovery-chem/alphafold-skill.md) — Submit compact AlphaFold Protein Structure Database API requests for prediction, UniProt summary, sequence summary, and annotation lookups
@@ -47,6 +47,7 @@ created: 2026-06-13
 - [drug-discovery-pipeline](../notes/drug-discovery-chem/drug-discovery-pipeline.md) — NOTE: molecule and target inputs and your NGC_API_KEY are transmitted to external NVIDIA-hosted API endpoints on every call
 - [drug-repurposing-screen](../notes/drug-discovery-chem/drug-repurposing-screen.md) — Objective-driven pooled viability screen analysis: QC, hit calling, context-selectivity, biomarker sweep, and ranked repurposing candidates
 - [esm](../notes/drug-discovery-chem/esm.md) — Use when working directly with the `esm` Python SDK, ESM3 or ESMC model IDs, Forge/Biohub inference clients, or ESMFold2 folding workflows
+- [foldseek-structural-search](../notes/drug-discovery-chem/foldseek-structural-search.md) — Performs 3D structural searches of proteins against various databases (PDB, AlphaFold, CATH, MGnify, etc.) using the Foldseek API
 - [genmol-nim](../notes/drug-discovery-chem/genmol-nim.md) — Generate novel drug-like molecules using the GenMol NIM microservice
 - [hmdb-skill](../notes/drug-discovery-chem/hmdb-skill.md) — Submit compact HMDB search requests for metabolites, proteins, diseases, and pathways
 - [kermt-add-cmim-pretrain](../notes/drug-discovery-chem/kermt-add-cmim-pretrain.md) — Convert a grover_base checkpoint (encoder-only or encoder + vocab heads) into a hybrid checkpoint by adding a randomly-initialized cMIM decoder + latent_dist, then continue pretraining...

@@ -24,6 +24,8 @@ created: 2026-08-07
 - [accessibility-and-inclusive-visualization](../../notes/web-automation-frontend/accessibility-and-inclusive-visualization.md) — Make data visualizations accessible and inclusive
 - [agentic-actions-auditor](../../notes/security-auditing/agentic-actions-auditor.md) — Audits GitHub Actions workflows for security vulnerabilities in AI agent integrations including Claude Code Action, Gemini CLI, OpenAI Codex, and GitHub AI Inference
 - [agentic-workflows](../../notes/software-dev/agentic-workflows.md) — Route gh-aw workflow design/create/debug/upgrade requests to the right prompts
+- [app-sdk-concepts](../../notes/web-automation-frontend/app-sdk-concepts.md) — Use when starting any grafana-app-sdk work — scaffolding a Grafana app, initializing a Grafana App Platform app, picking a deployment mode (standalone operator / grafana/apps /...
+- [audit-and-reduce-dependencies](../../notes/security-auditing/audit-and-reduce-dependencies.md) — Reduces JavaScript dependency footprint with pnpm while preserving lockfile, workspace layout, and dependency range style
 - [authoring-github-workflows](../../notes/dotnet-development/authoring-github-workflows.md) — Author and review GitHub Actions workflow YAML safely so syntactically-valid YAML can't ship a workflow that GitHub Actions refuses to run
 - [bio-human-feedback](../../notes/research-writing/bio-human-feedback.md) — Phase 2.6 of the bio-manuscript pipeline: human review checkpoint
 - [bio-manuscript-pipeline](../../notes/research-writing/bio-manuscript-pipeline.md) — End-to-end bio-manuscript planning pipeline orchestrator: turn structured research input into a full manuscript plan
@@ -32,6 +34,7 @@ created: 2026-08-07
 - [build-chatgpt-app](../../notes/ml-ai/build-chatgpt-app.md) — Build, scaffold, refactor, and troubleshoot ChatGPT Apps SDK applications that combine an MCP server and widget UI
 - [bulk-rnaseq](../../notes/single-cell-rnaseq/bulk-rnaseq.md) — End-to-end bulk RNA-seq orchestrator — takes raw FASTQ reads through QC and trimming (FastQC, fastp/Trim Galore), alignment and quantification (STAR, Salmon, featureCounts), assembles...
 - [circleci-cli](../../notes/hosting-edge-platforms/circleci-cli.md) — Operate and troubleshoot CircleCI using the CircleCI CLI
+- [clickhouse-managed-postgres-rca](../../notes/analytics-engineering/clickhouse-managed-postgres-rca.md) — MUST USE when investigating performance issues on a ClickHouse-managed Postgres instance
 - [codex-expo-run-actions](../../notes/mobile-native-dev/codex-expo-run-actions.md) — Wire Expo projects into the Codex app with project-local run scripts and .codex/environments/environment.toml actions
 - [complexa-sweep](../../notes/drug-discovery-chem/complexa-sweep.md) — Use this skill whenever the user wants to run a parameter sweep over a Proteina-Complexa design pipeline — cartesian-product hyperparameter scans, Pareto search over...
 - [core](../../notes/web-automation-frontend/core.md) — Core agent-browser usage guide. Read this before running any agent-browser commands
@@ -47,6 +50,7 @@ created: 2026-08-07
 - [github](../../notes/software-dev/github.md) — Triage and orient GitHub repository, pull request, and issue work through the connected GitHub app
 - [github-actions-ci](../../notes/software-dev/github-actions-ci.md) — Authoring GitHub Actions CI/CD workflows — workflow/job/step structure, triggers, build-test matrices, dependency caching, secrets and least-privilege permissions, reusable workflows...
 - [hyperframes](../../notes/saas-platforms/hyperframes.md) — Create video compositions, animations, title cards, overlays, captions, voiceovers, audio-reactive visuals, and scene transitions in HyperFrames HTML
+- [incident-response](../../notes/cloud-devops/incident-response.md) — Run an incident response workflow — triage, communicate, and write postmortem
 - [investigation-mode](../../notes/software-dev/investigation-mode.md) — Orchestrated debugging coordinator. Triggers on frustration signals (stuck, hung, broken, waiting) and systematically triages: runtime logs → workflow status → browser verify →...
 - [jest](../../notes/software-dev/jest.md) — JavaScript testing with Jest — unit tests, mocks, spies, snapshot testing, code coverage, and configuration
 - [lamindb](../../notes/bio-databases-platforms/lamindb.md) — Use when working with LaminDB, the open-source lineage-native lakehouse for biological datasets and models

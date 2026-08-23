@@ -26,9 +26,12 @@ created: 2026-08-07
 - [get-available-resources](../../notes/vault-meta/get-available-resources.md) — Use at the start of computationally intensive scientific task to detect and report available system resources (CPU cores, GPUs, memory, disk space)
 - [gwas-catalog-region-fetch](../../notes/genomics-variants/gwas-catalog-region-fetch.md) — Fetch a region of GWAS summary statistics from the NHGRI-EBI GWAS Catalog harmonised collection via tabix-on-FTP
 - [ida-reverse](../../notes/security-auditing/ida-reverse.md) — IDA Pro 逆向分析辅助技能。当用户提到逆向、反编译、分析二进制/PE/ELF/APK/DLL/SO、破解、找密码、漏洞分析、病毒分析、firmware 固件分析，或需要分析 exe/dll/so/elf/macho/sys 等文件时，务必使用此技能。 Ensure to use this skill when the user wants to analyze...
+- [infra-clickhouse](../../notes/analytics-engineering/infra-clickhouse.md) — Sets up and manages ClickHouse using the clickhousectl CLI — installs and runs a local ClickHouse server for development, and creates managed ClickHouse Cloud services for production...
+- [k6-manage](../../notes/cloud-devops/k6-manage.md) — Interact with Grafana Cloud k6 (GCk6) — manage load tests, test runs, scripts, projects, schedules, env vars, fetch metrics or logs, and run scripts locally — using the `gcx` CLI (or...
 - [morning-briefing](../../notes/comms-productivity/morning-briefing.md) — Generates a morning briefing that triages your inbox and previews your day using the Superhuman Mail MCP server — acting as an AI chief of staff
 - [netlify-frameworks](../../notes/hosting-edge-platforms/netlify-frameworks.md) — Guide for deploying web frameworks on Netlify
 - [planning-and-task-breakdown](../../notes/software-dev/planning-and-task-breakdown.md) — Breaks work into ordered tasks. Use when you have a spec or clear requirements and need to break work into implementable tasks
+- [prisma-compute](../../notes/software-dev/prisma-compute.md) — Prisma Compute deployment and hosting guide
 - [render-debug](../../notes/hosting-edge-platforms/render-debug.md) — Debug failed Render deployments by analyzing logs, metrics, and database state
 - [shopify-onboarding-merchant](../../notes/saas-platforms/shopify-onboarding-merchant.md) — Set up and connect a Shopify store from your AI assistant
 - [thread-abort-migration](../../notes/dotnet-development/thread-abort-migration.md) — Guides migration of .NET Framework Thread.Abort usage to cooperative cancellation in modern .NET

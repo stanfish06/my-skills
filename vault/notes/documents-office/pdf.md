@@ -22,12 +22,14 @@ created: 2026-06-09
 - [cite-check](../../notes/literature-discovery/cite-check.md) — Cite-checks a brief, motion, or memo (PDF/Word): verifies each cited case is real, supports the proposition, is good law, and quoted accurately
 - [clinical-decision-support](../../notes/clinical-medical/clinical-decision-support.md) — Generate professional clinical decision support (CDS) documents for pharmaceutical and clinical research settings, including patient cohort analyses (biomarker-stratified with...
 - [etetoolkit](../../notes/sequence-phylogenetics/etetoolkit.md) — Phylogenetic tree toolkit (ETE). Tree manipulation (Newick/NHX), evolutionary event detection, orthology/paralogy, NCBI taxonomy, visualization (PDF/SVG), for phylogenomics
+- [firecrawl-parse](../../notes/web-automation-frontend/firecrawl-parse.md) — Convert a local file (PDF, DOCX, XLSX, HTML, …) to markdown, or answer questions about its content
 - [liteparse](../../notes/documents-office/liteparse.md) — Local document and PDF parsing with spatial text and bounding boxes
 - [markitdown](../../notes/documents-office/markitdown.md) — Convert files and office documents to Markdown
 - [matplotlib](../../notes/data-science-compute/matplotlib.md) — Low-level plotting library for full customization
 - [nature-figure](../../notes/academic-pipelines/nature-figure.md) — Create, revise, audit, and export submission-grade scientific figures for Nature-family and other high-impact venues in Python (matplotlib/seaborn) or R...
 - [nature-paper2ppt](../../notes/academic-pipelines/nature-paper2ppt.md) — Build a complete Nature-style Chinese PPTX presentation from a scientific paper, preprint, PDF, article text, figure legends, or reading notes
 - [nature-reader](../../notes/academic-pipelines/nature-reader.md) — Build full-paper Chinese-English side-by-side, figure/table-aware, source-grounded Markdown readers for journal or conference papers from PDF, DOI, arXiv, publisher HTML, or pasted text
+- [neo4j-import-skill](../../notes/analytics-engineering/neo4j-import-skill.md) — Import structured data into Neo4j — LOAD CSV, CALL IN TRANSACTIONS, neo4j-admin database import full (offline bulk), apoc.load.csv/json, apoc.periodic.iterate, driver batch writes
 - [paper-2-web](../../notes/research-writing/paper-2-web.md) — Use when converting academic papers into promotional and presentation formats including interactive websites (Paper2Web), presentation videos (Paper2Video), and conference posters...
 - [paper-lookup](../../notes/literature-discovery/paper-lookup.md) — Search 10 academic literature APIs for papers, preprints, citations, and open-access full text, and return results with reproducible provenance
 - [pptx-posters](../../notes/research-writing/pptx-posters.md) — Create research posters using HTML/CSS that can be exported to PDF or PPTX

@@ -16,7 +16,7 @@ created: 2026-08-13
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [databricks-apps-python](../../notes/analytics-engineering/databricks-apps-python.md) — Python backend for Databricks Apps — FastAPI (default), Flask, Dash, Streamlit, Gradio, Reflex
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -21,6 +21,7 @@ created: 2026-06-09
 ## Related skills
 
 - [libfuzzer](../../notes/security-auditing/libfuzzer.md) — Coverage-guided fuzzer built into LLVM for C/C++ projects
+- [mutation-testing](../../notes/software-dev/mutation-testing.md) — Configures mewt or muton mutation testing campaigns — scopes targets, tunes timeouts, and optimizes long-running runs
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

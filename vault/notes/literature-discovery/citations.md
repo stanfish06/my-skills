@@ -27,6 +27,7 @@ created: 2026-08-07
 - [notion-research-documentation](../../notes/comms-productivity/notion-research-documentation.md) — Research across Notion and synthesize into structured documentation
 - [paper-lookup](../../notes/literature-discovery/paper-lookup.md) — Search 10 academic literature APIs for papers, preprints, citations, and open-access full text, and return results with reproducible provenance
 - [pyzotero](../../notes/research-writing/pyzotero.md) — Interact with Zotero reference management libraries using the pyzotero Python client
+- [quarto-authoring](../../notes/documents-office/quarto-authoring.md) — Use when the user is explicitly working with Quarto, .qmd files, _quarto.yml, Quarto projects, or Quarto features such as callouts, cross-references, citations, Mermaid diagrams...
 - [scientific-writing](../../notes/research-writing/scientific-writing.md) — Core skill for the deep research and writing tool
 - [template](../../notes/vault-meta/template.md) — Canonical rules and HTML/CSS contract for the page chrome (head boilerplate, cover, table of contents, section block, sources-section wrapper, footer, outlook-badge, design tokens)...
 - [treatment-plans](../../notes/clinical-medical/treatment-plans.md) — Generate concise (3-4 page), focused medical treatment plans in LaTeX/PDF format for all clinical specialties

@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Genomics, Variants & Population Genetics](genomics-variants.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Clinical, Medical & Pharmacogenomics](clinical-medical.md) | [Cloud, Infra & MLOps](cloud-devops.md)
 
-## Skills (56)
+## Skills (57)
 
 - [article-data-fetcher](../notes/bio-databases-platforms/article-data-fetcher.md) — Given an article DOI or PubMed ID, discover and download the genomics data files deposited by the authors (VCF, FASTA, H5AD, CSV, JSON, BAM, etc.) from public repositories such as GEO...
 - [benchling-integration](../notes/bio-databases-platforms/benchling-integration.md) — Benchling Python SDK and REST API integration for registry entities, inventory, ELN entries, workflows, Benchling Apps, and Data Warehouse queries
@@ -46,6 +46,7 @@ created: 2026-06-13
 - [ncbi-clinicaltables-skill](../notes/bio-databases-platforms/ncbi-clinicaltables-skill.md) — Submit compact Clinical Tables NCBI Gene requests for human gene lookup, pagination, and field selection
 - [ncbi-entrez-skill](../notes/bio-databases-platforms/ncbi-entrez-skill.md) — Submit compact NCBI Entrez E-Utilities requests for PubMed, Gene, Protein, Nucleotide, PMC metadata, and GEO metadata workflows
 - [omero-integration](../notes/bio-databases-platforms/omero-integration.md) — Microscopy data management platform. Access images via Python, retrieve datasets, analyze pixels, manage ROIs/annotations, batch processing, for high-content screening and microscopy...
+- [ontology-term-resolution](../notes/bio-databases-platforms/ontology-term-resolution.md) — Resolve free-text scientific labels to ontology term IDs and validate existing CURIEs against the EBI Ontology Lookup Service (OLS4)
 - [opentargets-skill](../notes/bio-databases-platforms/opentargets-skill.md) — Submit compact Open Targets Platform GraphQL requests for target, disease, drug, variant, study, and search data, including associated-disease datasource heatmap matrices
 - [opentrons-integration](../notes/bio-databases-platforms/opentrons-integration.md) — Official Opentrons Protocol API for OT-2 and Flex robots
 - [pride-skill](../notes/bio-databases-platforms/pride-skill.md) — Submit compact PRIDE Archive API requests for proteomics project discovery and project-level metadata

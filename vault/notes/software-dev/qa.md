@@ -24,6 +24,9 @@ created: 2026-06-20
 - [game-playtest](../../notes/game-development/game-playtest.md) — Run browser-game playtests and frontend QA
 - [github](../../notes/software-dev/github.md) — Triage and orient GitHub repository, pull request, and issue work through the connected GitHub app
 - [nature-paper2ppt](../../notes/academic-pipelines/nature-paper2ppt.md) — Build a complete Nature-style Chinese PPTX presentation from a scientific paper, preprint, PDF, article text, figure legends, or reading notes
+- [promptfoo-evals](../../notes/ml-ai/promptfoo-evals.md) — Write, refine, run, and QA promptfoo evaluation suites: promptfooconfig.yaml, prompts, providers, vars, tests, assertions, model-graded rubrics, transforms, datasets, exports, and CI...
+- [promptfoo-redteam-run](../../notes/ml-ai/promptfoo-redteam-run.md) — Run, rerun, inspect, and QA promptfoo redteam scans from generated redteam YAML or an existing redteam setup config
+- [promptfoo-redteam-setup](../../notes/ml-ai/promptfoo-redteam-setup.md) — Create or refine promptfoo redteam setup configs: purpose, targets, plugins, strategies, frameworks, multi-input target inputs, policy text, grader guidance, contexts, and...
 - [replay-qa-api](../../notes/saas-platforms/replay-qa-api.md) — Use when calling Replay QA's REST API directly from Codex
 - [sharepoint-powerpoint](../../notes/comms-productivity/sharepoint-powerpoint.md) — Create, edit, restyle, and review PowerPoint `.pptx` files fetched from SharePoint, with emphasis on style preservation, slide cloning, theme-aware updates, and rendered visual QA
 - [testing-data-visualizations](../../notes/data-visualization/testing-data-visualizations.md) — Test data visualizations and dashboards

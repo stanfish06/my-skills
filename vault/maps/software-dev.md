@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [.NET & C# Development](dotnet-development.md) | [MATLAB Development](matlab-development.md)
 
-## Skills (92)
+## Skills (102)
 
 - [agentic-workflows](../notes/software-dev/agentic-workflows.md) — Route gh-aw workflow design/create/debug/upgrade requests to the right prompts
 - [api-and-interface-design](../notes/software-dev/api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
@@ -68,8 +68,18 @@ created: 2026-06-13
 - [linear](../notes/software-dev/linear.md) — Manage issues, projects & team workflows in Linear
 - [migrate-to-shoehorn](../notes/software-dev/migrate-to-shoehorn.md) — Migrate test files from `as` type assertions to @total-typescript/shoehorn
 - [modern-typescript](../notes/software-dev/modern-typescript.md) — Modern TypeScript 5.x idioms — strict tsconfig (strict, noUncheckedIndexedAccess), the type system (unions/intersections, generics + constraints, narrowing, discriminated unions...
+- [mutation-testing](../notes/software-dev/mutation-testing.md) — Configures mewt or muton mutation testing campaigns — scopes targets, tunes timeouts, and optimizes long-running runs
 - [opensrc](../notes/software-dev/opensrc.md) — Give coding agents the actual source code of any dependency
 - [planning-and-task-breakdown](../notes/software-dev/planning-and-task-breakdown.md) — Breaks work into ordered tasks. Use when you have a spec or clear requirements and need to break work into implementable tasks
+- [prisma-cli](../notes/software-dev/prisma-cli.md) — Prisma ORM CLI commands reference covering init, generate, migrate, db, dev, complete, studio, validate, format, debug, and mcp
+- [prisma-client-api](../notes/software-dev/prisma-client-api.md) — Prisma Client API reference covering model queries, filters, operators, and client methods
+- [prisma-compute](../notes/software-dev/prisma-compute.md) — Prisma Compute deployment and hosting guide
+- [prisma-database-setup](../notes/software-dev/prisma-database-setup.md) — Guides for configuring Prisma with different database providers (PostgreSQL, MySQL, SQLite, MongoDB, etc.)
+- [prisma-driver-adapter-implementation](../notes/software-dev/prisma-driver-adapter-implementation.md) — Required reference for Prisma ORM 7 SQL driver adapter work
+- [prisma-mongodb-upgrade](../notes/software-dev/prisma-mongodb-upgrade.md) — Decision and migration guide for Prisma ORM MongoDB projects on v6, which have no upgrade path to v7
+- [prisma-postgres](../notes/software-dev/prisma-postgres.md) — Prisma Postgres setup and operations guidance across Console, create-db CLI, Management API, and Management API SDK
+- [prisma-postgres-setup](../notes/software-dev/prisma-postgres-setup.md) — Set up a new Prisma Postgres database and connect it to a local project using the Management API
+- [prisma-upgrade-v7](../notes/software-dev/prisma-upgrade-v7.md) — Complete migration guide from Prisma ORM v6 to v7 covering all breaking changes
 - [prototype](../notes/software-dev/prototype.md) — Build a throwaway prototype to answer a design question
 - [pytest](../notes/software-dev/pytest.md) — Testing Python code with pytest — fixtures, parametrization, markers, mocking, coverage, and configuration
 - [qa](../notes/software-dev/qa.md) — Interactive QA session where user reports bugs or issues conversationally, and the agent files GitHub issues

@@ -10,7 +10,6 @@ description: Use when working with Neo4j command-line tools — neo4j-cli (moder
   Does NOT cover full MCP editor configuration — use neo4j-mcp-skill.
 allowed-tools: WebFetch, Bash
 version: 1.0.12
-disable-model-invocation: true
 ---
 
 # Neo4j CLI Tools skill

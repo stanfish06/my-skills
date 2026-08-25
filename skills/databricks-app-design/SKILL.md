@@ -4,7 +4,6 @@ parent: databricks-apps
 description: 'Design the UX of custom-code Databricks Apps (AppKit/React) data screens — KPI/overview pages, reports, charts, tables, and Genie/chat data assistants — mapped to concrete AppKit components. Use when BUILDING or reviewing the UI of an AppKit/React app that displays data or answers data questions: choosing genre, layout, charts, KPIs, semantic color, required states (loading/empty/error), IBCS notation, and AI-result trust (showing generated SQL/sources for Genie/chat). A plain "create a dashboard" request means a managed AI/BI (Lakeview) dashboard → use databricks-aibi-dashboards, NOT this skill. Also NOT for non-data frontend (forms, settings, auth, marketing) or scaffolding/build/deploy (→ databricks-apps). Complements databricks-apps; use it alongside whenever a custom app has a chart, table, KPI, report, or Genie/chat/AI surface.'
 metadata:
   version: 0.1.0
-disable-model-invocation: true
 ---
 
 # Data App Design

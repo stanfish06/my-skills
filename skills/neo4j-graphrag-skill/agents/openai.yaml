@@ -2,6 +2,3 @@ interface:
   display_name: "Neo4J Graphrag Skill"
   short_description: "Invoke this skill explicitly when needed."
   default_prompt: "Use $neo4j-graphrag-skill for this task."
-
-policy:
-  allow_implicit_invocation: false

@@ -2,6 +2,3 @@ interface:
   display_name: "Audit And Reduce Dependencies"
   short_description: "Invoke this skill explicitly when needed."
   default_prompt: "Use $audit-and-reduce-dependencies for this task."
-
-policy:
-  allow_implicit_invocation: false

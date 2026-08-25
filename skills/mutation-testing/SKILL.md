@@ -2,7 +2,6 @@
 name: mutation-testing
 description: "Configures mewt or muton mutation testing campaigns — scopes targets, tunes timeouts, and optimizes long-running runs. Use when the user mentions mewt, muton, mutation testing, or wants to configure or optimize a mutation testing campaign."
 allowed-tools: Read Write Bash Grep
-disable-model-invocation: true
 ---
 
 # Mutation Testing — Campaign Configuration (mewt/muton)

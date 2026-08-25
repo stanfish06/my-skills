@@ -1,7 +1,6 @@
 ---
 name: langchain-dependencies
 description: "INVOKE THIS SKILL when setting up a new project or when asked about package versions, installation, or dependency management for LangChain, LangGraph, LangSmith, or Deep Agents. Covers required packages, minimum versions, environment requirements, versioning best practices, and common community tool packages for both Python and TypeScript."
-disable-model-invocation: true
 ---
 
 <overview>

@@ -5,7 +5,6 @@ compatibility: Requires databricks CLI (>= v0.292.0)
 metadata:
   version: "0.1.0"
 parent: databricks-core
-disable-model-invocation: true
 ---
 
 # Serverless Compute Migration

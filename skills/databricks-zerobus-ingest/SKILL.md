@@ -4,7 +4,6 @@ description: "Build Zerobus Ingest clients for near real-time data ingestion int
 compatibility: Requires databricks CLI (>= v1.0.0)
 metadata:
   version: "0.1.0"
-disable-model-invocation: true
 ---
 
 # Zerobus Ingest

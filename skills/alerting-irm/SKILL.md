@@ -2,7 +2,6 @@
 name: alerting-irm
 license: Apache-2.0
 description: Configure Grafana Alerting, Incident Response Management (IRM), and SLOs end-to-end — provisions Grafana-managed and data-source-managed alert rules, contact points (Slack/PagerDuty/email/webhook), notification policies with hierarchical matchers, silences, mute timings, on-call schedules and escalation chains, incident-management integrations, and SLOs with multi-window burn-rate alerts. Use when configuring alerts, debugging notification routing, setting up on-call rotations, declaring or managing incidents, defining SLOs, provisioning alerting via YAML or API, picking matchers for a notification policy, building a PagerDuty/Slack webhook receiver, or troubleshooting why an alert isn't firing — even when the user says "page me on errors", "alert me when X happens", "route this to the platform team", or "set up an SLO" without naming Alerting or IRM.
-disable-model-invocation: true
 ---
 
 # Grafana Alerting & IRM

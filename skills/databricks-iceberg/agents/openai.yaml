@@ -5,6 +5,3 @@ interface:
   icon_large: "./assets/databricks.png"
   brand_color: "#FF3621"
   default_prompt: "Use $databricks-iceberg for apache iceberg tables on databricks — managed iceberg tables, external iceberg reads (fka uniform), compatibility mode, iceberg rest catalog (irc), iceberg v3, snowflake interop, pyiceberg, oss spa."
-
-policy:
-  allow_implicit_invocation: false

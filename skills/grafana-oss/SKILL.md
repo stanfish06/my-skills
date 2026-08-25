@@ -2,7 +2,6 @@
 name: grafana-oss
 license: Apache-2.0
 description: Configure Grafana OSS — provisions dashboards from YAML, sets up data sources (Prometheus / Loki / Tempo / Pyroscope), writes dashboard JSON with template variables, builds panel queries, assigns built-in roles (Viewer / Editor / Admin / GrafanaAdmin), mints service-account tokens, edits grafana.ini server config, creates annotations, installs plugins via provisioning, and validates each step with a health-check curl. Use when building dashboards, configuring data sources, setting up provisioning YAML, picking a panel type, writing template variables, managing users and roles, configuring SMTP/OAuth in grafana.ini, creating annotations via API, troubleshooting why a provisioned dashboard isn't showing up, or running Grafana OSS locally — even when the user says "set up a Prometheus data source", "provision dashboards from git", "make a service account", or "configure SSO in OSS" without saying "Grafana OSS".
-disable-model-invocation: true
 ---
 
 # Grafana OSS

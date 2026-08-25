@@ -2,7 +2,6 @@
 name: database-observability
 license: Apache-2.0
 description: Set up Grafana Cloud Database Observability for MySQL and PostgreSQL — enables `pg_stat_statements` / Performance Schema, creates a least-privilege monitoring user, configures the `database_observability.postgres` / `database_observability.mysql` Alloy components, ships query samples + visual explain plans + RED metrics + schema details to Grafana Cloud, and correlates slow queries with application traces via `db.statement` / `db.system` OTel attributes. Use when monitoring database performance, diagnosing slow queries, setting up DB observability for RDS / Aurora / Cloud SQL / Azure Database / self-managed instances, correlating DB metrics with APM, or alerting on query latency — even when the user says "my database is slow", "find the slow queries", or "monitor RDS" without saying "observability".
-disable-model-invocation: true
 ---
 
 # Grafana Cloud Database Observability

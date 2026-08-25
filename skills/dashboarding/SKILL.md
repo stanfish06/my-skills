@@ -2,7 +2,6 @@
 name: dashboarding
 license: Apache-2.0
 description: Build, modify, and ship Grafana dashboards as JSON via the HTTP API — panel types (timeseries / stat / gauge / table / heatmap / logs / traces / node-graph), `gridPos` 24-column layout, units, thresholds, template + datasource + chained variables, transformations (`organize` / `calculateField` / `filterByValue`), panel + dashboard links with `${__field.labels.x}` / `${__from}`, and Loki/Prometheus annotations. Use when scripting dashboard creation, writing the dashboard JSON for a new service, adding a `$job` dropdown variable, computing an "Error %" column with a transformation, overlaying deploys as annotations, or pushing a dashboard via `POST /api/dashboards/db` — even when the user says "create a dashboard for this metric", "add a service dropdown", "show errors as percentage", "overlay our deploys", or "export the dashboard JSON" without naming the API or schema. After every API push, verify with the returned `version` plus a GET on the dashboard UID.
-disable-model-invocation: true
 ---
 
 # Grafana Dashboard Authoring

@@ -2,7 +2,6 @@
 name: assistant-mcp
 license: Apache-2.0
 description: Connect AI coding agents (Claude Code, Cursor, VS Code, OpenAI Codex) to Grafana Cloud via the `mcp-grafana` Model Context Protocol server. Installs the server with `go install`, generates a Grafana service-account token, wires `~/.claude/settings.json` or `~/.cursor/mcp.json` with the `command` + `env` block, runs `--disable-write` for safer read-only sessions, switches to SSE transport for team-shared / VS Code setups, and verifies with `/mcp` + a `list_datasources` round-trip. Use when connecting Claude Code to Grafana, setting up MCP for Grafana, configuring the Grafana MCP server, using Grafana tools in Cursor/VS Code, querying Grafana from an AI agent, sharing the MCP server across a team — even when the user says "give my agent Grafana access", "let Claude see my metrics", or "Cursor + Grafana" without saying "MCP".
-disable-model-invocation: true
 ---
 
 # Grafana Cloud MCP Server Setup

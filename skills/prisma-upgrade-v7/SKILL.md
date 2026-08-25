@@ -5,7 +5,6 @@ license: MIT
 metadata:
   author: prisma
   version: "7.6.0"
-disable-model-invocation: true
 ---
 
 # Upgrade to Prisma ORM 7

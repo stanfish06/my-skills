@@ -2,7 +2,6 @@
 name: cue-kind-definition
 license: Apache-2.0
 description: Author CUE kind definitions for grafana-app-sdk apps - schemas, versioning, field constraints, named type definitions, custom routes, and codegen configuration. Scaffolds kinds via `grafana-app-sdk project kind add`, writes spec/status schemas with type constraints (regex, enum, range), defines `#`-prefixed named types for reusable structs, registers versions in the app manifest, and runs `grafana-app-sdk generate` with explicit error recovery. Use when working with CUE kinds, adding a new resource type, adding a version to an existing kind, writing schema field constraints, defining `#Definition` types, adding custom routes, editing files under `kinds/`, or when the user asks to "model a resource", "add a CUE schema", or "write a kind" — even without saying "CUE" explicitly.
-disable-model-invocation: true
 ---
 
 # CUE Kind Definition

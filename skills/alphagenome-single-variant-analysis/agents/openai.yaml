@@ -2,6 +2,3 @@ interface:
   display_name: "Alphagenome Single Variant Analysis"
   short_description: "Invoke this skill explicitly when needed."
   default_prompt: "Use $alphagenome-single-variant-analysis for this task."
-
-policy:
-  allow_implicit_invocation: false

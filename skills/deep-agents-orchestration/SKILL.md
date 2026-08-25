@@ -1,7 +1,6 @@
 ---
 name: deep-agents-orchestration
 description: "INVOKE THIS SKILL when using subagents, task planning, or human approval in Deep Agents. Covers SubAgentMiddleware, TodoList for planning, and HITL interrupts."
-disable-model-invocation: true
 ---
 
 <overview>

@@ -2,6 +2,3 @@ interface:
   display_name: "Neo4J Driver Dotnet Skill"
   short_description: "Invoke this skill explicitly when needed."
   default_prompt: "Use $neo4j-driver-dotnet-skill for this task."
-
-policy:
-  allow_implicit_invocation: false

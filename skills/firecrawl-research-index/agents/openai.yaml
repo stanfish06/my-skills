@@ -2,6 +2,3 @@ interface:
   display_name: "Firecrawl Research Index"
   short_description: "Invoke this skill explicitly when needed."
   default_prompt: "Use $firecrawl-research-index for this task."
-
-policy:
-  allow_implicit_invocation: false

@@ -11,7 +11,6 @@ description: Import structured data into Neo4j — LOAD CSV, CALL IN TRANSACTION
   — use neo4j-cli-tools-skill.
 version: 1.0.11
 allowed-tools: Bash WebFetch
-disable-model-invocation: true
 ---
 
 # Neo4j Import Skill

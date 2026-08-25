@@ -10,7 +10,6 @@ description: Migrates Neo4j driver code and Cypher queries from older versions (
   Does NOT provision new Neo4j instances — use neo4j-getting-started-skill.
 allowed-tools: WebFetch Bash
 version: 1.0.9
-disable-model-invocation: true
 ---
 
 ## When to Use

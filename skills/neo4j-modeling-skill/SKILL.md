@@ -11,7 +11,6 @@ description: Design, review, and refactor Neo4j graph data models. Use when choo
   Does NOT handle data import — use neo4j-import-skill.
 version: 1.0.6
 allowed-tools: WebFetch Bash
-disable-model-invocation: true
 ---
 
 ## When to Use

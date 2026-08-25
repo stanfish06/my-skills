@@ -2,7 +2,6 @@
 name: oncall-irm
 license: Apache-2.0
 description: Route alerts, run on-call rotations, and drive incidents in Grafana IRM / OnCall — integrations (Alertmanager / Grafana Alerting / generic webhook / PagerDuty), Jinja2 routing + grouping templates, escalation chains (wait → notify schedule → notify team → webhook → auto-resolve), schedules (web + iCal + Terraform `grafana_oncall_schedule`), Slack chatops with Acknowledge/Resolve/Silence, and the P1-P4 incident lifecycle. Use when wiring Alertmanager to OnCall, deciding which team gets paged, building rotations from a Google Calendar / iCal, hooking up Slack notifications, or declaring an incident from an alert — even when the user says "page the platform team on critical alerts", "send Prometheus alerts to Slack", "set up our on-call rota", "escalation policy", or "auto-resolve when the alert clears" without naming OnCall / IRM. Heads up — OnCall OSS is in maintenance mode (archived March 2026); Grafana Cloud users should use IRM.
-disable-model-invocation: true
 ---
 
 # Grafana OnCall & IRM

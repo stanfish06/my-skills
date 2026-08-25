@@ -2,7 +2,6 @@
 name: app-sdk-concepts
 license: Apache-2.0
 description: Use when starting any grafana-app-sdk work — scaffolding a Grafana app, initializing a Grafana App Platform app, picking a deployment mode (standalone operator / grafana/apps / frontend-only), wiring app-specific config, or onboarding to the SDK. Covers `grafana-app-sdk` CLI install, `project init` per deployment mode, project layout, the schema-centric workflow (CUE kinds → generated code → reconciler/admission logic), and `SpecificConfig` for env-driven app configuration. Use even if the user just says "make a new app", "Grafana app platform", "kinds and watchers", "operator scaffold", or asks about `apps/` inside the Grafana repo, without naming the SDK explicitly.
-disable-model-invocation: true
 ---
 
 # Grafana App SDK Concepts

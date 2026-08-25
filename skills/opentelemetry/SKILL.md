@@ -2,7 +2,6 @@
 name: opentelemetry
 license: Apache-2.0
 description: Instrument any app with OpenTelemetry and ship metrics / logs / traces to Grafana Cloud or self-hosted Mimir / Loki / Tempo / Pyroscope. Covers SDK auto-instrumentation for Go, Java (Grafana JVM agent), Python (`opentelemetry-instrument`), Node.js, .NET (`Grafana.OpenTelemetry`), Beyla eBPF for zero-code; Grafana Cloud OTLP gateway + Basic-auth (instanceID + API key, base64); env-var config (`OTEL_EXPORTER_OTLP_*`, `OTEL_RESOURCE_ATTRIBUTES`); Alloy / OTel-Collector pipelines; Kubernetes Operator inject-annotations; and head + tail sampling. Use when instrumenting a service, pointing OTLP at Grafana Cloud, switching from Jaeger / Datadog / New Relic, choosing head- vs tail-sampling, or debugging "spans aren't showing in Explore" — even when the user says "auto-instrument my Java app", "send traces to Grafana", "what env vars do I set", "OTLP endpoint", or "Operator inject" without naming OpenTelemetry.
-disable-model-invocation: true
 ---
 
 # OpenTelemetry with Grafana

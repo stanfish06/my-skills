@@ -5,7 +5,6 @@ metadata:
   author: Mickaël Canouil (@mcanouil)
   version: "1.4"
 license: MIT
-disable-model-invocation: true
 ---
 
 # Quarto Authoring

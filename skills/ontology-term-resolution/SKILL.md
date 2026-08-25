@@ -7,7 +7,6 @@ allowed-tools: Read Write Edit Bash
 metadata:
   version: "1.0"
   skill-author: K-Dense Inc.
-disable-model-invocation: true
 ---
 
 # Ontology Term Resolution

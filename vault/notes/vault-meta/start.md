@@ -18,6 +18,7 @@ created: 2026-08-07
 
 ## Related skills
 
+- [audit-prep-assistant](../../notes/security-auditing/audit-prep-assistant.md) — Prepares codebases for security review using Trail of Bits' checklist
 - [build-perf-baseline](../../notes/dotnet-development/build-perf-baseline.md) — Establish build performance baselines and apply systematic optimization techniques
 - [codex-expo-run-actions](../../notes/mobile-native-dev/codex-expo-run-actions.md) — Wire Expo projects into the Codex app with project-local run scripts and .codex/environments/environment.toml actions
 - [design-md-library](../../notes/web-automation-frontend/design-md-library.md) — Library of 74 ready-to-use DESIGN.md files — complete design systems (color tokens, type scale, components, layout, motion, do's/don'ts) reverse-engineered from real product and brand...
@@ -33,6 +34,7 @@ created: 2026-08-07
 - [planning-and-task-breakdown](../../notes/software-dev/planning-and-task-breakdown.md) — Breaks work into ordered tasks. Use when you have a spec or clear requirements and need to break work into implementable tasks
 - [prisma-compute](../../notes/software-dev/prisma-compute.md) — Prisma Compute deployment and hosting guide
 - [render-debug](../../notes/hosting-edge-platforms/render-debug.md) — Debug failed Render deployments by analyzing logs, metrics, and database state
+- [secure-workflow-guide](../../notes/security-auditing/secure-workflow-guide.md) — Guides through Trail of Bits' 5-step secure development workflow
 - [shopify-onboarding-merchant](../../notes/saas-platforms/shopify-onboarding-merchant.md) — Set up and connect a Shopify store from your AI assistant
 - [thread-abort-migration](../../notes/dotnet-development/thread-abort-migration.md) — Guides migration of .NET Framework Thread.Abort usage to cooperative cancellation in modern .NET
 - [twilio-messaging-overview](../../notes/saas-platforms/twilio-messaging-overview.md) — Twilio Messaging channel overview and onboarding guide

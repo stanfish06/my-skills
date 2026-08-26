@@ -27,6 +27,7 @@ created: 2026-08-07
 - [cost-management](../../notes/cloud-devops/cost-management.md) — Cut your Grafana Cloud bill by attributing spend to teams and reducing telemetry volume
 - [database-observability](../../notes/cloud-devops/database-observability.md) — Set up Grafana Cloud Database Observability for MySQL and PostgreSQL — enables `pg_stat_statements` / Performance Schema, creates a least-privilege monitoring user, configures the...
 - [databricks-unity-catalog](../../notes/analytics-engineering/databricks-unity-catalog.md) — Unity Catalog governance, access control, and observability
+- [langfuse](../../notes/analytics-engineering/langfuse.md) — Interact with Langfuse and access its documentation: tracing, monitoring, creating datasets, running experiments, and evaluating AI applications
 - [llm-observability-evals](../../notes/analytics-engineering/llm-observability-evals.md) — LLM and agent observability, tracing, and evaluation workflows with langfuse, phoenix-cli, and phoenix-evals
 - [logfire-instrumentation](../../notes/analytics-engineering/logfire-instrumentation.md) — Add Pydantic Logfire observability to applications and send as much useful telemetry as possible
 - [matlab-instrument-opentelemetry-tracing](../../notes/matlab-development/matlab-instrument-opentelemetry-tracing.md) — Add OpenTelemetry tracing to MATLAB code

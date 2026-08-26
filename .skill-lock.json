@@ -1520,9 +1520,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/langfuse/skills.git",
       "skillPath": "skills/langfuse/SKILL.md",
-      "skillFolderHash": "bb24f62a476bba3fa81d602ee63ea5b14f4018e0",
+      "skillFolderHash": "8c4c3925a60a9431107b1be0cb7cc8c25c412733",
       "installedAt": "2026-06-09T19:26:38.181Z",
-      "updatedAt": "2026-08-21T07:05:40.413Z"
+      "updatedAt": "2026-08-26T07:06:57.074Z"
     },
     "phoenix-cli": {
       "source": "arize-ai/phoenix",
@@ -1655,54 +1655,54 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/building-secure-contracts/skills/audit-prep-assistant/SKILL.md",
-      "skillFolderHash": "e3173d9f75502450d5a035dda5f7fc6f37378634",
+      "skillFolderHash": "906cb6d32e9928953b9129f1208289153e663b75",
       "installedAt": "2026-06-09T19:28:14.010Z",
-      "updatedAt": "2026-06-09T19:28:14.010Z"
+      "updatedAt": "2026-08-26T07:06:59.795Z"
     },
     "code-maturity-assessor": {
       "source": "trailofbits/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/building-secure-contracts/skills/code-maturity-assessor/SKILL.md",
-      "skillFolderHash": "5094419e192f0d9d0d3b5e7e76e5238c2a7aed2e",
+      "skillFolderHash": "c45f50b2a0dea0f123f936674ac6f8d6b71c69cb",
       "installedAt": "2026-06-09T19:28:14.011Z",
-      "updatedAt": "2026-06-09T19:28:14.011Z"
+      "updatedAt": "2026-08-26T07:07:02.452Z"
     },
     "guidelines-advisor": {
       "source": "trailofbits/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/building-secure-contracts/skills/guidelines-advisor/SKILL.md",
-      "skillFolderHash": "5a41fab8751f015f54abcf3809e90dab0ccf1ca3",
+      "skillFolderHash": "bf9a8debdcd27d96d0801204209c6a8db28edfe6",
       "installedAt": "2026-06-09T19:28:14.012Z",
-      "updatedAt": "2026-06-09T19:28:14.012Z"
+      "updatedAt": "2026-08-26T07:07:05.143Z"
     },
     "secure-workflow-guide": {
       "source": "trailofbits/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/building-secure-contracts/skills/secure-workflow-guide/SKILL.md",
-      "skillFolderHash": "b1873b2e98bbcc0a5dbb0a307bb875be7041a652",
+      "skillFolderHash": "08613a3b02b1d8cf50d6d7b35c3117bc5cb7f620",
       "installedAt": "2026-06-09T19:28:14.012Z",
-      "updatedAt": "2026-06-09T19:28:14.012Z"
+      "updatedAt": "2026-08-26T07:07:07.417Z"
     },
     "token-integration-analyzer": {
       "source": "trailofbits/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/building-secure-contracts/skills/token-integration-analyzer/SKILL.md",
-      "skillFolderHash": "eac97c64cb897aadfbef17189e1a1fab1fc7e0bb",
+      "skillFolderHash": "6c9e486abe9f731fcd1cb50e3e769c9604ce7ad7",
       "installedAt": "2026-06-09T19:28:14.013Z",
-      "updatedAt": "2026-06-09T19:28:14.013Z"
+      "updatedAt": "2026-08-26T07:07:10.159Z"
     },
     "constant-time-analysis": {
       "source": "trailofbits/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/constant-time-analysis/skills/constant-time-analysis/SKILL.md",
-      "skillFolderHash": "7858c5e231aaf7b1ff7b0b3a48d727160942dc61",
+      "skillFolderHash": "f72d41d4765a6b80a73688751754cfe35c233ec0",
       "installedAt": "2026-06-09T19:28:14.014Z",
-      "updatedAt": "2026-08-10T04:45:14.624Z"
+      "updatedAt": "2026-08-26T07:07:13.329Z"
     },
     "devcontainer-setup": {
       "source": "trailofbits/skills",
@@ -1727,9 +1727,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/gh-cli/skills/gh-cli/SKILL.md",
-      "skillFolderHash": "d11c45dc5f3b5331ac03065e4c7167be760b6cc9",
+      "skillFolderHash": "c3c3162e1ddd5c2dfa4a491bee94dc83a4c903e1",
       "installedAt": "2026-06-09T19:28:14.015Z",
-      "updatedAt": "2026-06-09T19:28:14.015Z"
+      "updatedAt": "2026-08-26T07:07:15.973Z"
     },
     "entry-point-analyzer": {
       "source": "trailofbits/skills",
@@ -1808,9 +1808,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/testing-handbook-skills/skills/aflpp/SKILL.md",
-      "skillFolderHash": "73422d38409eb90ef390dbdb5aee14e724014e37",
+      "skillFolderHash": "94967f417c9f3a155348094f3fa2dfecaf367536",
       "installedAt": "2026-06-09T19:28:14.021Z",
-      "updatedAt": "2026-06-09T19:28:14.021Z"
+      "updatedAt": "2026-08-25T07:06:34.915Z"
     },
     "atheris": {
       "source": "trailofbits/skills",
@@ -1907,9 +1907,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/c-review/skills/c-review/SKILL.md",
-      "skillFolderHash": "d69b4ae0897bd25564cac3ec22cc5a1e3204f332",
+      "skillFolderHash": "da34aa873114b198e24dd3fd821bcb720414e74f",
       "installedAt": "2026-06-09T19:28:14.031Z",
-      "updatedAt": "2026-08-20T07:04:31.766Z"
+      "updatedAt": "2026-08-25T07:06:36.733Z"
     },
     "modern-python": {
       "source": "trailofbits/skills",
@@ -1943,9 +1943,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/zeroize-audit/skills/zeroize-audit/SKILL.md",
-      "skillFolderHash": "f5bd3388f5de4d1ace1877e72cb6d10bbddcab52",
+      "skillFolderHash": "8ed0190c90f175907203ae7e7791fe712ffb8a8a",
       "installedAt": "2026-06-09T19:28:14.034Z",
-      "updatedAt": "2026-08-20T07:04:34.785Z"
+      "updatedAt": "2026-08-25T07:06:39.579Z"
     },
     "agentic-actions-auditor": {
       "source": "trailofbits/skills",
@@ -2033,9 +2033,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman/SKILL.md",
-      "skillFolderHash": "bdf0c87a2bdd47fc7fe9008c40cc6491ee801b81",
+      "skillFolderHash": "75d927c628bcb304f061e193c80c21d617a314e5",
       "installedAt": "2026-06-13T13:23:12.859Z",
-      "updatedAt": "2026-08-17T07:14:08.978Z"
+      "updatedAt": "2026-08-24T07:18:38.088Z"
     },
     "caveman-compress": {
       "source": "juliusbrussee/caveman",
@@ -8802,9 +8802,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "55dd17fa669f3557f9fad6c10e3345df80c9aa73",
+      "skillFolderHash": "886cbe484141920eb7e22b435837ebdd8b2e87b7",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-08-23T06:58:52.488Z"
+      "updatedAt": "2026-08-26T07:07:18.788Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8829,18 +8829,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "951a0138ac21f9f9caa2ba6873d55ca4f8df7396",
+      "skillFolderHash": "310ef506a852b0d3b2d70b9dc84a417aaa386bce",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-08-23T06:59:03.900Z"
+      "updatedAt": "2026-08-24T07:18:53.982Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/SKILL.md",
-      "skillFolderHash": "f6f061b6c88382667923641fdc60e9a447cf3696",
+      "skillFolderHash": "b987933f34f52947444ecee61dd7df0ba4182410",
       "installedAt": "2026-08-20T02:13:18.927Z",
-      "updatedAt": "2026-08-22T06:58:40.846Z"
+      "updatedAt": "2026-08-24T07:19:06.124Z"
     },
     "api-security": {
       "source": "zhaoxuya520/reverse-skill",
@@ -8901,9 +8901,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/case-review/SKILL.md",
-      "skillFolderHash": "00e475b394511da1b437ece5a17431e5473487b0",
+      "skillFolderHash": "d002eec42876e05183bb6d27c798dda31541f61b",
       "installedAt": "2026-08-20T02:13:19.004Z",
-      "updatedAt": "2026-08-20T02:19:55.506Z"
+      "updatedAt": "2026-08-24T07:19:08.659Z"
     },
     "cloud-k8s": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9575,20 +9575,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "73fdb96cb646b41b902132cbccca3d9f2219f556",
-      "pluginName": "academic-research-skills",
+      "skillFolderHash": "752cad4393c1df2de268facbd51668873cb133c9",
       "installedAt": "2026-08-21T01:50:31.552Z",
-      "updatedAt": "2026-08-21T01:50:31.552Z"
+      "updatedAt": "2026-08-25T07:06:46.090Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "b0a3ea23a1a07bbde8391748167af8debc44a510",
-      "pluginName": "academic-research-skills",
+      "skillFolderHash": "fb3d0b1485380c4b2b79684cd35d9a05c033e7a2",
       "installedAt": "2026-08-21T01:50:31.555Z",
-      "updatedAt": "2026-08-21T01:50:31.555Z"
+      "updatedAt": "2026-08-25T07:06:49.735Z"
     },
     "prisma-cli": {
       "source": "prisma/skills",
@@ -10895,10 +10893,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-graphql-skill/SKILL.md",
-      "skillFolderHash": "c84ce3edbe0e9f5749273b81fbd1e741c8c27945",
-      "pluginName": "neo4j-skills",
+      "skillFolderHash": "10ca6373b618272c15dd6c0ec41fa47ecc3a02a6",
       "installedAt": "2026-08-23T17:20:44.766Z",
-      "updatedAt": "2026-08-23T17:20:44.766Z"
+      "updatedAt": "2026-08-26T07:07:20.826Z"
     },
     "neo4j-graphrag-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -10925,10 +10922,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-kafka-skill/SKILL.md",
-      "skillFolderHash": "55099d0444580ec42cb1d1df04ccde3383afd7fe",
-      "pluginName": "neo4j-skills",
+      "skillFolderHash": "ddf8a3bb931bccbd7bd4c81a2d46d90aa1525b58",
       "installedAt": "2026-08-23T17:20:44.777Z",
-      "updatedAt": "2026-08-23T17:20:44.777Z"
+      "updatedAt": "2026-08-26T07:07:23.036Z"
     },
     "neo4j-mcp-skill": {
       "source": "neo4j-contrib/neo4j-skills",

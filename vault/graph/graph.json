@@ -4,11 +4,11 @@
   "skills": 2079,
   "expert_profiles": 503,
   "nodes": 2153,
-  "edges": 15204,
+  "edges": 15206,
   "generic_names_blocked": 32,
-  "tier1_edges": 4432,
+  "tier1_edges": 4433,
   "tier2_edges": 701,
-  "alias_edges": 4223,
+  "alias_edges": 4224,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 525,
@@ -20,13 +20,13 @@
   "orphan_count": 131,
   "orphan_rate": 0.063,
   "by_provenance": {
-   "EXTRACTED": 14418,
+   "EXTRACTED": 14420,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2079,
-   "references": 11814,
+   "references": 11816,
    "in_discipline": 599,
    "touches": 525,
    "has_step": 69,
@@ -1864,7 +1864,7 @@
    "id": "audit-prep-assistant",
    "type": "Skill",
    "label": "audit-prep-assistant",
-   "description": "Prepares codebases for security review using Trail of Bits' checklist. Helps set review goals, runs static analysis tools, increases test coverage, removes dead code, ensures accessibility, and generates documentation (flowcharts, user stories, inline comments).",
+   "description": "Prepares codebases for security review using Trail of Bits' checklist. Helps set review goals, runs static analysis tools, increases test coverage, removes dead code, ensures accessibility, and generates documentation (flowcharts, user stories, inline comments). Use when preparing your own codebase to be audited by someone else, getting a repository review-ready before an external security review, deciding what to fix before auditors start, or asking what assessors need from a project. For understanding unfamiliar code you are about to audit, use audit-context-building instead.",
    "source": "skills/audit-prep-assistant/SKILL.md",
    "aliases": [
     "audit prep assistant"
@@ -5259,7 +5259,7 @@
    "id": "code-maturity-assessor",
    "type": "Skill",
    "label": "code-maturity-assessor",
-   "description": "Systematic code maturity assessment using Trail of Bits' 9-category framework. Analyzes codebase for arithmetic safety, auditing practices, access controls, complexity, decentralization, documentation, MEV risks, low-level code, and testing. Produces professional scorecard with evidence-based ratings and actionable recommendations.",
+   "description": "Systematic code maturity assessment using Trail of Bits' 9-category framework. Analyzes codebase for arithmetic safety, auditing practices, access controls, complexity, decentralization, documentation, MEV risks, low-level code, and testing, then produces a scorecard with evidence-based ratings and a priority-ordered roadmap. Use when assessing or scoring the maturity of a smart contract or blockchain codebase, producing a maturity scorecard or evaluation, or judging how mature, well-tested, or well-documented such a project is against a rubric.",
    "source": "skills/code-maturity-assessor/SKILL.md",
    "aliases": [
     "code maturity assessor"
@@ -11742,7 +11742,7 @@
    "id": "gh-cli",
    "type": "Skill",
    "label": "gh-cli",
-   "description": "Enforces authenticated gh CLI workflows over unauthenticated curl/WebFetch patterns. Use when working with GitHub URLs, API access, pull requests, or issues.",
+   "description": "Enforces authenticated gh CLI workflows over unauthenticated curl, WebFetch, and MCP fetch patterns. Use when working with GitHub URLs, API access, pull requests, or issues.",
    "source": "skills/gh-cli/SKILL.md",
    "aliases": [
     "gh cli"
@@ -12517,7 +12517,7 @@
    "id": "guidelines-advisor",
    "type": "Skill",
    "label": "guidelines-advisor",
-   "description": "Smart contract development advisor based on Trail of Bits' best practices. Analyzes codebase to generate documentation/specifications, review architecture, check upgradeability patterns, assess implementation quality, identify pitfalls, review dependencies, and evaluate testing. Provides actionable recommendations.",
+   "description": "Smart contract development advisor based on Trail of Bits' best practices. Analyzes codebase to generate documentation/specifications, review architecture, check upgradeability patterns, assess implementation quality, identify pitfalls, review dependencies, and evaluate testing. Use when asking whether a smart contract project follows development best practices, reviewing on-chain/off-chain split, upgradeability, or delegatecall proxy patterns against guidelines, or seeking recommendations on contract design, inheritance, events, documentation, dependencies, or test strategy.",
    "source": "skills/guidelines-advisor/SKILL.md",
    "aliases": [
     "guidelines advisor"
@@ -14612,7 +14612,7 @@
    "id": "langfuse",
    "type": "Skill",
    "label": "langfuse",
-   "description": "Interact with Langfuse and access its documentation. Use when needing to (1) query or modify Langfuse data programmatically via the CLI \u2014 traces, prompts, datasets, scores, sessions, and any other API resource, (2) look up Langfuse documentation, concepts, integration guides, or SDK usage, or (3) understand how any Langfuse feature works. This skill covers CLI-based API access (via npx) and multiple documentation retrieval methods.",
+   "description": ">- Interact with Langfuse and access its documentation: tracing, monitoring, creating datasets, running experiments, and evaluating AI applications. Use when needing to (1) query or modify Langfuse data, (2) look up Langfuse documentation, concepts, integration guides, a feature or SDK usage, or (3) do any AI engineering task (AI observability, prompt engineering/management, evaluation and evaluator management, experimentation, dataset management, evaluation-driven CI/CD, feedback collection). Invoke it for tasks in this scope even when Langfuse is not configured or explicitly mentioned.",
    "source": "skills/langfuse/SKILL.md",
    "aliases": [],
    "uses": 0,
@@ -25346,7 +25346,7 @@
    "id": "secure-workflow-guide",
    "type": "Skill",
    "label": "secure-workflow-guide",
-   "description": "Guides through Trail of Bits' 5-step secure development workflow. Runs Slither scans, checks special features (upgradeability/ERC conformance/token integration), generates visual security diagrams, helps document security properties for fuzzing/verification, and reviews manual security areas.",
+   "description": "Guides through Trail of Bits' 5-step secure development workflow. Runs Slither scans, checks special features (upgradeability/ERC conformance/token integration), generates visual security diagrams, helps document security properties for fuzzing/verification, and reviews manual security areas. Use when securing a smart contract end to end rather than hunting one bug, checking a project on every check-in or before deployment, triaging a Slither report, or asking where to start on smart contract security.",
    "source": "skills/secure-workflow-guide/SKILL.md",
    "aliases": [
     "secure workflow guide"
@@ -28253,7 +28253,7 @@
    "id": "token-integration-analyzer",
    "type": "Skill",
    "label": "token-integration-analyzer",
-   "description": "Token integration and implementation analyzer based on Trail of Bits' token integration checklist. Analyzes token implementations for ERC20/ERC721 conformity, checks for 20+ weird token patterns, assesses contract composition and owner privileges, performs on-chain scarcity analysis, and evaluates how protocols handle non-standard tokens. Context-aware for both token implementations and token integrations.",
+   "description": "Token integration and implementation analyzer based on Trail of Bits' token integration checklist. Analyzes token implementations for ERC20/ERC721 conformity, checks for 20+ weird token patterns, assesses contract composition and owner privileges, performs on-chain scarcity analysis, and evaluates how protocols handle non-standard tokens. Use when integrating or accepting arbitrary ERC20/ERC721 tokens, auditing a token implementation for standards conformity, or assessing risk from weird tokens such as fee-on-transfer, rebasing, missing return values, or blocklists.",
    "source": "skills/token-integration-analyzer/SKILL.md",
    "aliases": [
     "token integration analyzer"
@@ -30854,7 +30854,7 @@
    "id": "worktrunk",
    "type": "Skill",
    "label": "worktrunk",
-   "description": "Guidance for Worktrunk (the `wt` CLI) \u2014 git worktree management, hooks, and config. Load when editing .config/wt.toml or ~/.config/worktrunk/config.toml; adding, modifying, or debugging hooks (post-merge, post-start, pre-commit, pre-merge, post-switch, etc.); configuring commit message generation or command aliases; or troubleshooting wt behavior. Also answers general worktrunk/wt questions.",
+   "description": "Guidance for Worktrunk (the `wt` CLI) \u2014 git worktree management, hooks, and config. Load when working out which worktree a `wt` command will act on, or reaching for the global `-C <path>` to target one; editing .config/wt.toml or ~/.config/worktrunk/config.toml; adding, modifying, or debugging hooks (post-merge, post-start, pre-commit, pre-merge, post-switch, etc.); configuring commit message generation or command aliases; or troubleshooting wt behavior. Also answers general worktrunk/wt questions.",
    "source": "skills/worktrunk/SKILL.md",
    "aliases": [
     "parallel agents",
@@ -38968,6 +38968,15 @@
   {
    "src": "audit-context-building",
    "rel": "references",
+   "dst": "audit-prep-assistant",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "audit-context-building named in audit-prep-assistant/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "audit-context-building",
+   "rel": "references",
    "dst": "differential-review",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -39017,6 +39026,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "audit-prep-assistant",
+   "rel": "references",
+   "dst": "audit-context-building",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "audit-context-building named in audit-prep-assistant/SKILL.md body",
    "status": "accepted"
   },
   {

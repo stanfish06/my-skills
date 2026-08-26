@@ -27,7 +27,7 @@ created: 2026-08-07
 - [datasources-provisioning](../../notes/cloud-devops/datasources-provisioning.md) — Generate a copy-paste Grafana data source provisioning file (YAML or Terraform) for any plugin from its standardized settings schema on the plugins CDN
 - [gantt-chart-visualization](../../notes/data-visualization/gantt-chart-visualization.md) — Design, critique, route, and implement Gantt charts and schedule visualizations
 - [gh-address-comments](../../notes/software-dev/gh-address-comments.md) — Address actionable GitHub pull request review feedback
-- [gh-cli](../../notes/security-auditing/gh-cli.md) — Enforces authenticated gh CLI workflows over unauthenticated curl/WebFetch patterns
+- [gh-cli](../../notes/security-auditing/gh-cli.md) — Enforces authenticated gh CLI workflows over unauthenticated curl, WebFetch, and MCP fetch patterns
 - [gh-fix-ci](../../notes/software-dev/gh-fix-ci.md) — Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions
 - [github-actions-ci](../../notes/software-dev/github-actions-ci.md) — Authoring GitHub Actions CI/CD workflows — workflow/job/step structure, triggers, build-test matrices, dependency caching, secrets and least-privilege permissions, reusable workflows...
 - [greploop](../../notes/software-dev/greploop.md) — Iteratively improves a PR (GitHub), MR (GitLab), or shelved changelist (Perforce) until Greptile gives it a 5/5 confidence score with zero unresolved comments

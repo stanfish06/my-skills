@@ -65,7 +65,7 @@ created: 2026-06-13
 - [infra-clickhouse](../notes/analytics-engineering/infra-clickhouse.md) — Sets up and manages ClickHouse using the clickhousectl CLI — installs and runs a local ClickHouse server for development, and creates managed ClickHouse Cloud services for production...
 - [infra-postgres](../notes/analytics-engineering/infra-postgres.md) — Sets up and manages Postgres using the clickhousectl CLI — runs a local Docker-backed Postgres for development, and creates and operates managed ClickHouse Cloud Postgres services...
 - [iris-development](../notes/analytics-engineering/iris-development.md) — Iris is Redis's umbrella for AI-focused products
-- [langfuse](../notes/analytics-engineering/langfuse.md) — Interact with Langfuse and access its documentation
+- [langfuse](../notes/analytics-engineering/langfuse.md) — Interact with Langfuse and access its documentation: tracing, monitoring, creating datasets, running experiments, and evaluating AI applications
 - [llm-observability-evals](../notes/analytics-engineering/llm-observability-evals.md) — LLM and agent observability, tracing, and evaluation workflows with langfuse, phoenix-cli, and phoenix-evals
 - [logfire-instrumentation](../notes/analytics-engineering/logfire-instrumentation.md) — Add Pydantic Logfire observability to applications and send as much useful telemetry as possible
 - [logfire-query](../notes/analytics-engineering/logfire-query.md) — Query and analyze Logfire telemetry data — traces, logs, spans, metrics, summaries, and SQL results

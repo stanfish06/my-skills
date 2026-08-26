@@ -55,7 +55,7 @@ created: 2026-06-13
 - [fp-check](../notes/security-auditing/fp-check.md) — Systematically verifies suspected security bugs to eliminate false positives, producing a TRUE POSITIVE or FALSE POSITIVE verdict with documented evidence for each
 - [fuzzing-dictionary](../notes/security-auditing/fuzzing-dictionary.md) — Fuzzing dictionaries guide fuzzers with domain-specific tokens
 - [fuzzing-obstacles](../notes/security-auditing/fuzzing-obstacles.md) — Techniques for patching code to overcome fuzzing obstacles
-- [gh-cli](../notes/security-auditing/gh-cli.md) — Enforces authenticated gh CLI workflows over unauthenticated curl/WebFetch patterns
+- [gh-cli](../notes/security-auditing/gh-cli.md) — Enforces authenticated gh CLI workflows over unauthenticated curl, WebFetch, and MCP fetch patterns
 - [ghidra-reverse](../notes/security-auditing/ghidra-reverse.md) — Use for free/open reverse engineering with Ghidra (headless or GUI), including decompile, cross-refs, and optional Ghidra MCP workflows when IDA is unavailable
 - [go-rust-reverse](../notes/security-auditing/go-rust-reverse.md) — Use for reverse engineering stripped Go and Rust binaries including runtime recognition, pclntab/moduel data recovery, panic strings, and idiomatic decompilation recovery
 - [guidelines-advisor](../notes/security-auditing/guidelines-advisor.md) — Smart contract development advisor based on Trail of Bits' best practices

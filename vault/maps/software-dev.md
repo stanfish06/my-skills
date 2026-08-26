@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [.NET & C# Development](dotnet-development.md) | [MATLAB Development](matlab-development.md)
 
-## Skills (102)
+## Skills (103)
 
 - [agentic-workflows](../notes/software-dev/agentic-workflows.md) — Route gh-aw workflow design/create/debug/upgrade requests to the right prompts
 - [api-and-interface-design](../notes/software-dev/api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
@@ -106,6 +106,7 @@ created: 2026-06-13
 - [triage](../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs
 - [triage-issue](../notes/software-dev/triage-issue.md) — Intelligently triage bug reports and error messages by searching for duplicates in Jira and offering to create new issues or add comments to existing ones
 - [ubiquitous-language](../notes/software-dev/ubiquitous-language.md) — Extract a DDD-style ubiquitous language glossary from the current conversation, flagging ambiguities and proposing canonical terms
+- [use-modern-go](../notes/software-dev/use-modern-go.md) — Use the Modern Go Guidelines CLI whenever writing, modifying, fixing, or refactoring Go code
 - [using-agent-skills](../notes/software-dev/using-agent-skills.md) — Discovers and invokes agent skills. Use when starting a session or when you need to discover which skill applies to the current task
 - [using-git-worktrees](../notes/software-dev/using-git-worktrees.md) — Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git...
 - [using-superpowers](../notes/software-dev/using-superpowers.md) — Use when discovering which skill applies — establishes how to find and use skills

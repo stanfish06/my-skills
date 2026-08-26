@@ -29697,6 +29697,12 @@
 <https://skillquarium.dev/id/use-js-interop> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/author-component> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/use-js-interop> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/collect-user-input> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/use-js-interop> <https://skillquarium.dev/ontology/source> "skills/use-js-interop/SKILL.md" <urn:vault:core> .
+<https://skillquarium.dev/id/use-modern-go> <http://purl.org/dc/terms/description> "Use the Modern Go Guidelines CLI whenever writing, modifying, fixing, or refactoring Go code. Apply its version-specific guidance to generated changes." <urn:vault:core> .
+<https://skillquarium.dev/id/use-modern-go> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
+<https://skillquarium.dev/id/use-modern-go> <http://www.w3.org/2000/01/rdf-schema#label> "use-modern-go" <urn:vault:core> .
+<https://skillquarium.dev/id/use-modern-go> <https://skillquarium.dev/ontology/identifier> "use-modern-go" <urn:vault:core> .
+<https://skillquarium.dev/id/use-modern-go> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_software-dev> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/use-modern-go> <https://skillquarium.dev/ontology/source> "skills/use-modern-go/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/usfiscaldata> <http://purl.org/dc/terms/description> "Query the U.S. Treasury Fiscal Data REST API for federal financial data. No API key required. Use for national debt (Debt to the Penny), Daily Treasury Statements, Monthly Treasury Statements, Treasury securities auctions, interest rates, foreign exchange rates, savings bonds, or U.S. government revenue and spending statistics." <urn:vault:core> .
 <https://skillquarium.dev/id/usfiscaldata> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/usfiscaldata> <http://www.w3.org/2000/01/rdf-schema#label> "usfiscaldata" <urn:vault:core> .

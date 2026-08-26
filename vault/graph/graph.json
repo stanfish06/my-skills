@@ -1,10 +1,10 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2079,
+  "skills": 2080,
   "expert_profiles": 503,
-  "nodes": 2153,
-  "edges": 15206,
+  "nodes": 2154,
+  "edges": 15207,
   "generic_names_blocked": 32,
   "tier1_edges": 4433,
   "tier2_edges": 701,
@@ -17,15 +17,15 @@
   "observations": 0,
   "mean_skill_degree": 5.71,
   "median_skill_degree": 4,
-  "orphan_count": 131,
-  "orphan_rate": 0.063,
+  "orphan_count": 132,
+  "orphan_rate": 0.0635,
   "by_provenance": {
-   "EXTRACTED": 14420,
+   "EXTRACTED": 14421,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2079,
+   "in_domain": 2080,
    "references": 11816,
    "in_discipline": 599,
    "touches": 525,
@@ -29661,6 +29661,21 @@
    "source": "skills/use-js-interop/SKILL.md",
    "aliases": [
     "use js interop"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "use-modern-go",
+   "type": "Skill",
+   "label": "use-modern-go",
+   "description": "Use the Modern Go Guidelines CLI whenever writing, modifying, fixing, or refactoring Go code. Apply its version-specific guidance to generated changes.",
+   "source": "skills/use-modern-go/SKILL.md",
+   "aliases": [
+    "use modern go"
    ],
    "uses": 0,
    "successes": 0,
@@ -161249,6 +161264,15 @@
    "status": "accepted"
   },
   {
+   "src": "use-modern-go",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
    "src": "usfiscaldata",
    "rel": "in_domain",
    "dst": "domain:data-science-compute",
@@ -168703,6 +168727,7 @@
   "tpmi-phewas-skill",
   "ukb-topmed-phewas-skill",
   "upgrading-expo",
+  "use-modern-go",
   "vercel-composition-patterns",
   "vercel-react-view-transitions",
   "webapp-testing",

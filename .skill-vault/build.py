@@ -1464,6 +1464,7 @@ EXTRA_ASSIGNMENTS = {
     "to-tickets": "software-dev", "to-spec": "software-dev", "triage": "software-dev",
     "ubiquitous-language": "software-dev", "teach": "software-dev",
     "scaffold-exercises": "software-dev", "modern-typescript": "software-dev",
+    "use-modern-go": "software-dev",
     "research": "software-dev", "claude-handoff": "software-dev",
     "setup-ts-deep-modules": "software-dev",
     # Vault, Skills & Workflow Meta

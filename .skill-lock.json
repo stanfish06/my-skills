@@ -11501,6 +11501,15 @@
       "skillFolderHash": "558ab2f1c05e08ffdf97a53e9b404e519ac76805",
       "installedAt": "2026-08-23T17:24:49.218Z",
       "updatedAt": "2026-08-23T17:24:49.218Z"
+    },
+    "use-modern-go": {
+      "source": "JetBrains/go-modern-guidelines",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/JetBrains/go-modern-guidelines.git",
+      "skillPath": "plugin/skills/use-modern-go/SKILL.md",
+      "skillFolderHash": "7f444611bbbd10587b96113e1fd087e9864c5a26",
+      "installedAt": "2026-08-26T17:43:00.679Z",
+      "updatedAt": "2026-08-26T17:43:00.679Z"
     }
   },
   "dismissed": {

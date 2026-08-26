@@ -9,7 +9,6 @@ description: >
   Use when the user is *currently experiencing* a cardinality fire. For preventing
   cardinality issues at the source, route to prometheus-label-strategy. For post-ingest
   aggregation, route to adaptive-metrics. For DPM-specific analysis, route to dpm-finder.
-disable-model-invocation: true
 ---
 
 # Prometheus Cardinality Troubleshooter

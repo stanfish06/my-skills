@@ -10,7 +10,6 @@ description: Provisions and manages Neo4j Aura instances via CLI (aura-cli v1.7+
   Does NOT cover neo4j-admin/cypher-shell — use neo4j-cli-tools-skill.
 version: 1.0.4
 allowed-tools: Bash WebFetch
-disable-model-invocation: true
 ---
 
 ## When to Use

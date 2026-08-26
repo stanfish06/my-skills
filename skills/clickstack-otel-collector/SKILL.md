@@ -5,7 +5,6 @@ license: Apache-2.0
 metadata:
   author: ClickHouse Inc
   version: "0.6.0"
-disable-model-invocation: true
 ---
 
 # Set up an OpenTelemetry collector for Managed ClickStack

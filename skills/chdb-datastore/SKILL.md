@@ -18,7 +18,6 @@ metadata:
   author: chdb-io
   version: "4.1"
   homepage: https://clickhouse.com/docs/chdb
-disable-model-invocation: true
 ---
 
 # chdb DataStore — It's Just Faster Pandas

@@ -9,7 +9,6 @@ description: Build and configure a GraphQL API backed by Neo4j using @neo4j/grap
   Does NOT cover Spring Data Neo4j entity mapping — use neo4j-spring-data-skill.
 version: 1.0.3
 allowed-tools: Bash WebFetch
-disable-model-invocation: true
 ---
 
 ## When to Use

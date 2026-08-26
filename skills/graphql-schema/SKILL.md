@@ -13,7 +13,6 @@ metadata:
   author: apollographql
   version: "1.0.1"
 allowed-tools: Bash(npm:*) Bash(npx:*) Read Write Edit Glob Grep
-disable-model-invocation: true
 ---
 
 # GraphQL Schema Design Guide

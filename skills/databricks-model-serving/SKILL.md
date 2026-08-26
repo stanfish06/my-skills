@@ -5,7 +5,6 @@ compatibility: Requires databricks CLI (>= v0.294.0)
 metadata:
   version: "0.4.0"
 parent: databricks-core
-disable-model-invocation: true
 ---
 
 # Model Serving Endpoints

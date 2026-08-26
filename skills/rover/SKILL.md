@@ -14,7 +14,6 @@ metadata:
   author: apollographql
   version: "1.1.2"
 allowed-tools: Bash(rover:*) Bash(npm:*) Bash(npx:*) Read Write Edit Glob Grep
-disable-model-invocation: true
 ---
 
 # Apollo Rover CLI Guide

@@ -1,7 +1,6 @@
 ---
 name: langgraph-cli
 description: "INVOKE THIS SKILL when using the langgraph CLI to scaffold, develop, build, or deploy LangGraph applications. Covers langgraph new, dev, build, up, deploy, and langgraph.json configuration."
-disable-model-invocation: true
 ---
 
 <overview>

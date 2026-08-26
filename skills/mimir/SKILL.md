@@ -2,7 +2,6 @@
 name: mimir
 license: Apache-2.0
 description: Stand up Grafana Mimir for horizontally scalable, multi-tenant, long-term Prometheus + OTLP metrics storage. Covers monolithic / read-write / microservices deployment, S3 / GCS / Azure / filesystem block storage, Prometheus `remote_write` and OTLP ingestion, multi-tenancy with `X-Scope-OrgID`, ingester replication factor, compactor retention, and per-tenant limits. Use when running Mimir locally or on Kubernetes (Helm `mimir-distributed`), scaling Prometheus past a single node, picking ingest / query / backend split, configuring tenants and ingestion rate, debugging `/ready` 503s or `429 Too Many Requests`, or pointing Grafana at a Mimir datasource — even when the user says "I need long-term Prometheus storage", "scale Prometheus", "multi-tenant metrics backend", "Cortex replacement", "remote_write target", or "store 10M active series" without naming Mimir.
-disable-model-invocation: true
 ---
 
 # Grafana Mimir

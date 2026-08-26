@@ -2,7 +2,6 @@
 name: reconciler-logic
 license: Apache-2.0
 description: Implement reconcilers and watchers for grafana-app-sdk apps — write `TypedReconciler[*MyKind]` reconcile functions, apply generation-based skip patterns, do conflict-safe status updates via `resource.UpdateObject`, configure `BasicReconcileOptions` (namespace, label/field filters, finalizer management), use `Watcher` for event-style handling, reconcile `UnmanagedKinds` (resources your app doesn't own), and register the whole thing in `app.go`. Use when writing a reconciler, implementing the reconcile loop, adding async business logic, handling create/update/delete events, processing resource state changes, scheduling periodic resyncs with `RequeueAfter`, picking between Watcher and Reconciler, or wiring a controller into `app.go` — even when the user says "process this resource", "handle X events", or "write a controller" without saying "reconciler".
-disable-model-invocation: true
 ---
 
 # Reconciler Logic

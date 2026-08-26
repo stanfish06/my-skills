@@ -1,7 +1,6 @@
 ---
 name: deepagents-python-quickstart
 description: "Scaffold a minimal local Deep Agent in Python by following the official quickstart, using provider-native web search instead of Tavily. Use when the user wants to quickly build or try a Deep Agent locally."
-disable-model-invocation: true
 ---
 
 # Deep Agents Python quickstart

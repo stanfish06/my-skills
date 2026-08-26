@@ -8,7 +8,6 @@ description:
   Triggers on phrases like "update plugin for React 19", "React 19 migration", "prepare for
   React 19", "plugin React 19 compat", "grafanaDependency 12.3.0", "JSX runtime externals",
   "react-detect", "SECRET_INTERNALS", "ReactCurrentOwner", or "ReactCurrentDispatcher".
-disable-model-invocation: true
 ---
 
 # Migrate Grafana Plugin to React 19

@@ -5,7 +5,6 @@ license: MIT
 metadata:
   author: Redis, Inc.
   version: "0.1.0"
-disable-model-invocation: true
 ---
 
 # Redis Observability

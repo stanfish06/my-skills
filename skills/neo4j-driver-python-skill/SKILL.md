@@ -11,7 +11,6 @@ description: Neo4j Python Driver v6 — driver lifecycle, execute_query, managed
   Does NOT cover GraphRAG pipelines (neo4j-graphrag package) — use neo4j-graphrag-skill.
 version: 1.0.7
 allowed-tools: Bash WebFetch
-disable-model-invocation: true
 ---
 
 ## When to Use

@@ -6,7 +6,6 @@ description: >
   rubrics, transforms, datasets, exports, and CI gates. Use for non-redteam eval
   coverage, regression tests, or new eval matrices. Do not use for adversarial
   redteam plugin or strategy setup.
-disable-model-invocation: true
 ---
 
 # Writing Promptfoo Evals

@@ -7,7 +7,6 @@ description: >
   dynamic label rules, and consistency checks. Use when the user asks to evaluate,
   audit, design, or improve a Loki label strategy — or asks why their Loki queries
   are slow.
-disable-model-invocation: true
 ---
 
 # Loki Label Strategy Evaluator

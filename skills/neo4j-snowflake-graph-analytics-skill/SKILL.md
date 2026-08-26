@@ -13,7 +13,6 @@ description: Run Neo4j Graph Analytics algorithms (PageRank, Louvain, WCC, Dijks
   Does NOT cover self-managed GDS — use neo4j-gds-skill.
 version: 1.2.0
 allowed-tools: Bash WebFetch
-disable-model-invocation: true
 ---
 
 Snowflake Native App — graph algorithm power inside Snowflake. Data stays in Snowflake; project into a graph, run algorithms via SQL `CALL`, results written back to Snowflake tables.

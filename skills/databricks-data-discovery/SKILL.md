@@ -5,7 +5,6 @@ compatibility: Requires databricks CLI >= v1.9.0 for `databricks genie ask` (old
 metadata:
   version: "0.1.0"
 parent: databricks-core
-disable-model-invocation: true
 ---
 
 # Databricks Data Discovery

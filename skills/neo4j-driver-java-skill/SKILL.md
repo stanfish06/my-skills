@@ -10,7 +10,6 @@ description: Neo4j Java Driver v6 — driver lifecycle, Maven/Gradle setup, exec
   Does NOT cover Spring Data Neo4j (@Node, Neo4jRepository) — use neo4j-spring-data-skill.
 version: 1.0.10
 allowed-tools: Bash WebFetch
-disable-model-invocation: true
 ---
 
 ## When to Use

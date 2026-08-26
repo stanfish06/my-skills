@@ -4,7 +4,6 @@ description: "Databricks CLI operations and the parent/entry-point skill for Dat
 compatibility: Requires databricks CLI (>= v0.292.0)
 metadata:
   version: "0.1.0"
-disable-model-invocation: true
 ---
 
 # Databricks

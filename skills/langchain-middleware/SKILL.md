@@ -1,7 +1,6 @@
 ---
 name: langchain-middleware
 description: "INVOKE THIS SKILL when you need human-in-the-loop approval, custom middleware, or structured output. Covers HumanInTheLoopMiddleware for human approval of dangerous tool calls, creating custom middleware with hooks, Command resume patterns, and structured output with Pydantic/Zod."
-disable-model-invocation: true
 ---
 
 <overview>

@@ -2,7 +2,6 @@
 name: pyroscope
 license: Apache-2.0
 description: Continuously profile applications with Grafana Pyroscope and read the result as flame graphs. Covers three instrumentation paths — language SDK push (Go / Java / Python / Ruby / Node / .NET / Rust), Alloy eBPF auto-instrumentation (no code change, requires kernel 5.8+ with BTF), and SDK → Alloy receiver — plus ProfileQL queries, profile types (CPU / memory / allocations / goroutines / mutex), Grafana Cloud Profiles endpoint, and Span Profiles trace-to-profile linking. Use when adding profiling to a service, deploying Alloy as a cluster-wide eBPF profiler, hunting CPU / memory hotspots from a flame graph, comparing two profiles to find a regression, or correlating a slow Tempo trace to its profile — even when the user says "find what's burning CPU", "flame graph this app", "continuous profiling", "heap hotspots", or "why is allocation so high" without naming Pyroscope.
-disable-model-invocation: true
 ---
 
 # Grafana Pyroscope

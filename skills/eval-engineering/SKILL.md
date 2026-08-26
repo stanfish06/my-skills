@@ -1,7 +1,6 @@
 ---
 name: eval-engineering
 description: Inspect an agent repository and optional traces, interview the user, write reviewed Task Specs, build and audit Harbor tasks, and bootstrap reusable project World Knowledge Skills. Use for agent evals, benchmark design, Task generation, controlled Environments, synthetic data, Verifiers, Harbor runs, calibration, or continuous benchmark maintenance.
-disable-model-invocation: true
 ---
 
 # Eval Engineering

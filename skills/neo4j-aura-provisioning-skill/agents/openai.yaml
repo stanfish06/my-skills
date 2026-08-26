@@ -2,6 +2,3 @@ interface:
   display_name: "Neo4J Aura Provisioning Skill"
   short_description: "Invoke this skill explicitly when needed."
   default_prompt: "Use $neo4j-aura-provisioning-skill for this task."
-
-policy:
-  allow_implicit_invocation: false

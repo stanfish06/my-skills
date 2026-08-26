@@ -2,6 +2,3 @@ interface:
   display_name: "Chdb Sql"
   short_description: "Invoke this skill explicitly when needed."
   default_prompt: "Use $chdb-sql for this task."
-
-policy:
-  allow_implicit_invocation: false

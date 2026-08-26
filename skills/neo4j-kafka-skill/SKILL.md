@@ -10,7 +10,6 @@ description: Configure and operate the Neo4j Connector for Kafka (sink + source)
   neo4j-import-skill. Does NOT handle GDS algorithms — use neo4j-gds-skill.
 allowed-tools: Bash WebFetch
 version: 1.0.3
-disable-model-invocation: true
 ---
 
 # Neo4j Kafka Skill

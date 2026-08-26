@@ -16,7 +16,6 @@ metadata:
   author: apollographql
   version: "2.5.0"
 allowed-tools: Bash(router:*) Bash(./router:*) Bash(rover:*) Bash(curl:*) Bash(docker:*) Read Write Edit Glob Grep
-disable-model-invocation: true
 ---
 
 # Apollo Router Config Generator

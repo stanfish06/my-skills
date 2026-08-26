@@ -8,7 +8,6 @@ description: >
   configs, or when generating adversarial test cases for QA. Do not use for
   basic provider wiring alone or for running/evaluating an already-generated
   redteam scan.
-disable-model-invocation: true
 ---
 
 # Promptfoo Redteam Setup

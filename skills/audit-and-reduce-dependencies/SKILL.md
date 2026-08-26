@@ -8,7 +8,6 @@ description: >-
   Keep/Replace/Remove triage. Use when cleaning up pnpm dependencies, reducing
   lockfile size, or shrinking node_modules in Grafana plugins; not for Go
   modules or full GitHub Actions workflow audits.
-disable-model-invocation: true
 ---
 
 # Audit and reduce dependencies

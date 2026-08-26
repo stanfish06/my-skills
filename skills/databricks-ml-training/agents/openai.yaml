@@ -5,6 +5,3 @@ interface:
   icon_large: "./assets/databricks.png"
   brand_color: "#FF3621"
   default_prompt: "Use $databricks-ml-training for training and registering ML models on Databricks."
-
-policy:
-  allow_implicit_invocation: false

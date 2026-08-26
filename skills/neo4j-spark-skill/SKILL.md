@@ -10,7 +10,6 @@ description: Use when reading from or writing to Neo4j with Apache Spark or Data
   bolt driver — use neo4j-driver-python-skill. Does NOT handle GDS algorithms — use neo4j-gds-skill.
 version: 1.0.3
 allowed-tools: Bash WebFetch
-disable-model-invocation: true
 ---
 
 # Neo4j Connector for Apache Spark

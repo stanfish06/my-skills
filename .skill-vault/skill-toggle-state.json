@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "saved_at": "2026-08-20T04:27:18.649406+00:00",
-  "root": "/Users/stan/.agents",
+  "saved_at": "2026-08-25T09:13:28.549892+00:00",
+  "root": "/home/stan/.agents",
   "skills": {
     "academic-paper": {
       "claude_enabled": false,
@@ -35,6 +35,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "adaptive-metrics": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "adaptyv": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -50,6 +54,10 @@
     "adjusttext": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "admission-control": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "aeon": {
       "claude_enabled": false,
@@ -167,6 +175,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "alerting-irm": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "algebraist": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -179,7 +191,15 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "alloy": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "alphafold-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "alphagenome-single-variant-analysis": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -259,6 +279,50 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "apollo-client": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "apollo-connectors": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "apollo-federation": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "apollo-ios": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "apollo-kotlin": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "apollo-mcp-server": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "apollo-router": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "apollo-router-plugin-creator": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "apollo-server": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "app-observability": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "app-sdk-concepts": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "appkit-interop": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -294,6 +358,10 @@
     "assertion-quality": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "assistant-mcp": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "ast-grep": {
       "claude_enabled": true,
@@ -379,6 +447,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "audit-and-reduce-dependencies": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "audit-context-building": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -435,10 +507,6 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
-    "banner-design": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
     "base44-cli": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -478,6 +546,10 @@
     "benchmark-paper-template": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "beyla": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "bgee-skill": {
       "claude_enabled": true,
@@ -711,10 +783,6 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
-    "brand": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
     "brand-guidelines": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -742,6 +810,10 @@
     "browser-testing-with-devtools": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "browser-use": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "build-chatgpt-app": {
       "claude_enabled": true,
@@ -1015,11 +1087,23 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "chdb-datastore": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "chdb-sql": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "chebi-skill": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "check-bin-obj-clash": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "check-npm": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -1139,6 +1223,34 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "clickhouse-architecture-advisor": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "clickhouse-best-practices": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "clickhouse-js-node-coding": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "clickhouse-js-node-rowbinary": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "clickhouse-js-node-troubleshooting": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "clickhouse-managed-postgres-rca": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "clickstack-otel-collector": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "climate-risk-analyst": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -1207,6 +1319,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "cloud-integrations": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "cloud-k8s": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -1214,6 +1330,10 @@
     "cloudflare": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "cloudformation-to-pulumi": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "clr-activation-debugging": {
       "claude_enabled": false,
@@ -1495,6 +1615,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "cost-management": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "coverage-analysis": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -1559,6 +1683,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "cue-kind-definition": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "cuequivariance": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -1579,6 +1707,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "dagster-expert": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "dairy-scientist": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -1586,6 +1718,10 @@
     "dashboard-expert": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "dashboarding": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "dashboards-and-real-time-visualization": {
       "claude_enabled": true,
@@ -1615,6 +1751,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "database-observability": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "database-security": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -1623,7 +1763,131 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "databricks-agent-bricks": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-ai-functions": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-aibi-dashboards": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-app-design": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-apps": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-apps-python": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-core": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-dabs": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-data-discovery": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-dbsql": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-docs": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-execution-compute": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-genie-agents": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-iceberg": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-jobs": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-lakebase": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-lakeflow-connect": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-metric-views": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-ml-training": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-mlflow-evaluation": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-model-serving": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-pipelines": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-python-sdk": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-serverless-migration": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-spark-structured-streaming": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-synthetic-data-gen": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-unity-catalog": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-unstructured-pdf-generation": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-vector-search": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "databricks-zerobus-ingest": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "datamol": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "datasources-provisioning": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -1636,6 +1900,10 @@
       "codex_enabled": true
     },
     "deal-tracker": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "debug-distributed-hang": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -1655,6 +1923,18 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "deep-agents-core": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "deep-agents-memory": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "deep-agents-orchestration": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "deep-learning-scientist": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -1666,6 +1946,14 @@
     "deep-security-scan": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "deepagents-python-quickstart": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "deepagents-typescript-quickstart": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "deepchem": {
       "claude_enabled": false,
@@ -1719,19 +2007,11 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
-    "design": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
     "design-an-interface": {
       "claude_enabled": true,
       "codex_enabled": true
     },
     "design-md-library": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
-    "design-system": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -1891,6 +2171,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "dpm-finder": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "draft-brief": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -1972,6 +2256,10 @@
       "codex_enabled": false
     },
     "ecosystem-ecologist": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "ecosystem-primer": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -2144,6 +2432,10 @@
       "codex_enabled": false
     },
     "eva-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "eval-engineering": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -2363,6 +2655,54 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "firecrawl": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "firecrawl-agent": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "firecrawl-crawl": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "firecrawl-developer-index": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "firecrawl-download": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "firecrawl-interact": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "firecrawl-map": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "firecrawl-monitor": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "firecrawl-parse": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "firecrawl-research-index": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "firecrawl-scrape": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "firecrawl-search": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "firmware-pentest": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -2395,6 +2735,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "fleet-management": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "flow-bio": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -2412,6 +2756,10 @@
       "codex_enabled": false
     },
     "fluidsim": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "foldseek-structural-search": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -2815,9 +3163,25 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "grafana-oss": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "grafana-scenes": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "grammar-of-graphics-and-declarative-visualization": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "graphql-operations": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "graphql-schema": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "gravitational-physicist": {
       "claude_enabled": false,
@@ -3163,6 +3527,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "incident-response": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "including-generated-files": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -3208,6 +3576,14 @@
       "codex_enabled": true
     },
     "information-retrieval-scientist": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "infra-clickhouse": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "infra-postgres": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -3275,6 +3651,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "iris-development": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "irl-tracker": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -3310,6 +3690,34 @@
     "json-render": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "k6": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "k6-cloud-investigate-test": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "k6-docs": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "k6-manage": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "k6-perf-test-website": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "k6-test-maintenance": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "k6-trend-analysis": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "kermt-add-cmim-pretrain": {
       "claude_enabled": false,
@@ -3367,6 +3775,30 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "langchain-dependencies": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "langchain-fundamentals": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "langchain-middleware": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "langchain-python-quickstart": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "langchain-rag": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "langchain-typescript-quickstart": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "langfuse": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -3374,6 +3806,34 @@
     "langgraph": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "langgraph-cli": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "langgraph-fundamentals": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "langgraph-human-in-the-loop": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "langgraph-persistence": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "langgraph-python-quickstart": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "langgraph-typescript-quickstart": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "langsmith-online-eval-engineering": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "laser-physicist": {
       "claude_enabled": false,
@@ -3475,6 +3935,14 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "loki": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "loki-label-analyzer": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "loop-me": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -3504,6 +3972,10 @@
       "codex_enabled": true
     },
     "mammalogist": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "managed-deep-agents": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -3811,6 +4283,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "mermaid-terminal": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "metabolights-skill": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -3930,6 +4406,10 @@
     "migrating-dbt-project-across-platforms": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "mimir": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "mineralogist": {
       "claude_enabled": false,
@@ -4107,6 +4587,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "mutation-testing": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "mycobacteriologist": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -4218,6 +4702,122 @@
     "nemoclaw-user-get-started": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "neo4j-agent-memory-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-aura-agent-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-aura-graph-analytics-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-aura-provisioning-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-cli-tools-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-cypher-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-document-import-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-driver-dotnet-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-driver-go-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-driver-java-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-driver-javascript-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-driver-python-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-gds-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-genai-plugin-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-getting-started-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-graphql-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-graphrag-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-import-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-kafka-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-mcp-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-migration-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-modeling-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-nvl-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-query-tuning-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-security-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-snowflake-graph-analytics-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-spark-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-spring-data-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "neo4j-vector-index-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "neon-postgres": {
       "claude_enabled": false,
@@ -4331,9 +4931,25 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "next-cache-components-adoption": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "next-cache-components-optimizer": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "next-dev-loop": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "next-forge": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "next-partial-prefetching-adoption": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "nextflow": {
       "claude_enabled": true,
@@ -4587,7 +5203,15 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "oncall-irm": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "oncologist": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "ontology-term-resolution": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -4620,6 +5244,10 @@
       "codex_enabled": true
     },
     "opentargets-skill": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "opentelemetry": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -5019,6 +5647,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "plugin-bundle-size": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "plugin-creator": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -5111,6 +5743,46 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "prisma-cli": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "prisma-client-api": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "prisma-compute": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "prisma-database-setup": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "prisma-driver-adapter-implementation": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "prisma-mongodb-upgrade": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "prisma-postgres": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "prisma-postgres-setup": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "prisma-upgrade-v7": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "private-connectivity": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "probabilist": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -5131,7 +5803,43 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "profilecli-insights": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "programming-languages-researcher": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "prometheus": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "prometheus-cardinality-troubleshooter": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "prometheus-label-strategy": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "promptfoo-evals": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "promptfoo-provider-setup": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "promptfoo-redteam-run": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "promptfoo-redteam-setup": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "promql": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -5239,6 +5947,30 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "pulumi-arm-to-pulumi": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "pulumi-cdk-to-pulumi": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "pulumi-migrate-from-discovered-stack": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "pulumi-neo-handoff": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "pulumi-terraform-to-pulumi": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "pulumi-upgrade-provider": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "pure-mathematician": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -5292,6 +6024,10 @@
       "codex_enabled": true
     },
     "pyopenms": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "pyroscope": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -5352,6 +6088,10 @@
       "codex_enabled": false
     },
     "quantum-physicist": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "quarto-authoring": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -5455,6 +6195,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "react-19-plugin-migration": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "react-and-nextjs-data-visualization": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -5487,9 +6231,41 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "reconciler-logic": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "redesign-existing-projects": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "redis-clustering": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "redis-connections": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "redis-core": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "redis-observability": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "redis-search": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "redis-security": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "redis-semantic-cache": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "regenerative-medicine-scientist": {
       "claude_enabled": false,
@@ -5508,6 +6284,10 @@
       "codex_enabled": false
     },
     "reliability-engineer": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "remote-browser": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -5726,6 +6506,10 @@
     "routing-middleware": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "rover": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "rowan": {
       "claude_enabled": false,
@@ -5971,6 +6755,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "sglang-prod-incident-triage": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "shadcn": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -6146,10 +6934,6 @@
     "sleep-scientist": {
       "claude_enabled": false,
       "codex_enabled": false
-    },
-    "slides": {
-      "claude_enabled": true,
-      "codex_enabled": true
     },
     "smart-file-renaming": {
       "claude_enabled": true,
@@ -6415,13 +7199,17 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "synthetic-monitoring-checks": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "system-text-json-net11": {
       "claude_enabled": false,
       "codex_enabled": false
     },
     "systematic-debugging": {
-      "claude_enabled": true,
-      "codex_enabled": true
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "systems-biologist": {
       "claude_enabled": false,
@@ -6530,6 +7318,10 @@
     "template-validation": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "tempo": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "temporal-developer": {
       "claude_enabled": false,
@@ -6971,15 +7763,7 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
-    "ui-styling": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
     "ui-toolkit": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
-    "ui-ux-pro-max": {
       "claude_enabled": true,
       "codex_enabled": true
     },

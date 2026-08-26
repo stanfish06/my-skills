@@ -2,7 +2,6 @@
 name: remote-browser
 description: Controls a local browser from a sandboxed remote machine. Use when the agent is running in a sandbox (no GUI) and needs to navigate websites, interact with web pages, fill forms, take screenshots, or expose local dev servers via tunnels.
 allowed-tools: Bash(browser-use:*)
-disable-model-invocation: true
 ---
 
 # Browser Automation for Sandboxed Agents

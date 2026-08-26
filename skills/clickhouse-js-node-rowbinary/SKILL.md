@@ -6,7 +6,6 @@ description: >
   Use this skill whenever a user wants to parse or produce `RowBinary`,
   `RowBinaryWithNames`, or `RowBinaryWithNamesAndTypes`.
   Node.js only, doesn't cover browsers.
-disable-model-invocation: true
 ---
 
 # ClickHouse JS RowBinary Codec Generator for Node.js

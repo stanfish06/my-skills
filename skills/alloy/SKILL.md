@@ -2,7 +2,6 @@
 name: alloy
 license: Apache-2.0
 description: Build a unified telemetry pipeline with Grafana Alloy — one OpenTelemetry-compatible binary that collects metrics, logs, traces, and profiles and ships to Grafana Cloud / Prometheus / Loki / Tempo / Pyroscope. Covers the Alloy config language (blocks, `sys.env`, component refs), `prometheus.scrape` → `remote_write`, `loki.source.file` + `loki.process` → `loki.write`, `otelcol.receiver.otlp` → `otelcol.exporter.otlp`, `pyroscope.scrape`, K8s / Docker / EC2 discovery, relabeling, modules (`import.file/git/http`), clustering, Fleet Management `remotecfg`, the Alloy UI at `:12345`, and `alloy fmt` / `alloy validate`. Use when writing a `config.alloy`, replacing Grafana Agent / OTel Collector, scraping K8s pods, parsing logs, ingesting OTLP, or debugging "Alloy isn't sending anything" — even when the user says "set up the agent", "write me a scrape config", "drop these logs before sending", or "OTel collector config" without naming Alloy.
-disable-model-invocation: true
 ---
 
 # Grafana Alloy

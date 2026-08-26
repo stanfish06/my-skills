@@ -21,7 +21,6 @@ metadata:
   author: chdb-io
   version: "4.1"
   homepage: https://clickhouse.com/docs/chdb
-disable-model-invocation: true
 ---
 
 # chdb SQL — ClickHouse in Your Python Process

@@ -2,6 +2,3 @@ interface:
   display_name: "ARM/Bicep to Pulumi Migration"
   short_description: "Convert Azure ARM or Bicep templates to Pulumi"
   default_prompt: "Use $pulumi-arm-to-pulumi to migrate Azure ARM or Bicep templates and imports to Pulumi."
-
-policy:
-  allow_implicit_invocation: false

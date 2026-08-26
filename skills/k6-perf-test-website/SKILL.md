@@ -14,7 +14,6 @@ description: >
   stress testing, performance testing, or wants to validate a website
   under traffic — even if they don't explicitly use the word "test" or
   ask for the specific outputs this skill produces.
-disable-model-invocation: true
 ---
 
 # `k6-perf-test-website`

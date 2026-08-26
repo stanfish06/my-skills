@@ -2,6 +2,3 @@ interface:
   display_name: "Prisma Client Api"
   short_description: "Invoke this skill explicitly when needed."
   default_prompt: "Use $prisma-client-api for this task."
-
-policy:
-  allow_implicit_invocation: false

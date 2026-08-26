@@ -7,7 +7,6 @@ description: >
   rate, grader failures, target errors, filter/rerun commands, reports, or CI
   gates. Do not use for initial provider wiring or for choosing plugins and
   strategies before generation.
-disable-model-invocation: true
 ---
 
 # Promptfoo Redteam Run

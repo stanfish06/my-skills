@@ -4,7 +4,6 @@ description: "Databricks Vector Search endpoints and indexes for RAG and semanti
 metadata:
   version: "0.1.0"
 parent: databricks-core
-disable-model-invocation: true
 ---
 
 # Databricks Vector Search

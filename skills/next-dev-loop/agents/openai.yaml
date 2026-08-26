@@ -2,6 +2,3 @@ interface:
   display_name: "Next Dev Loop"
   short_description: "Invoke this skill explicitly when needed."
   default_prompt: "Use $next-dev-loop for this task."
-
-policy:
-  allow_implicit_invocation: false

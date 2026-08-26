@@ -2,6 +2,3 @@ interface:
   display_name: "Langchain Rag"
   short_description: "Invoke this skill explicitly when needed."
   default_prompt: "Use $langchain-rag for this task."
-
-policy:
-  allow_implicit_invocation: false

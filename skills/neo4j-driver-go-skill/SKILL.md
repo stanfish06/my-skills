@@ -9,7 +9,6 @@ description: Covers the Neo4j Go Driver v6 — driver lifecycle, ExecuteQuery, m
   Does NOT cover driver version migration steps — use neo4j-migration-skill.
 version: 1.0.6
 allowed-tools: Bash WebFetch
-disable-model-invocation: true
 ---
 
 ## When to Use

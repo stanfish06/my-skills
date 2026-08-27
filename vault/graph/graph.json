@@ -4,11 +4,11 @@
   "skills": 2080,
   "expert_profiles": 503,
   "nodes": 2154,
-  "edges": 15207,
+  "edges": 15209,
   "generic_names_blocked": 32,
-  "tier1_edges": 4433,
+  "tier1_edges": 4434,
   "tier2_edges": 701,
-  "alias_edges": 4224,
+  "alias_edges": 4225,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 525,
@@ -20,13 +20,13 @@
   "orphan_count": 132,
   "orphan_rate": 0.0635,
   "by_provenance": {
-   "EXTRACTED": 14421,
+   "EXTRACTED": 14423,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2080,
-   "references": 11816,
+   "references": 11818,
    "in_discipline": 599,
    "touches": 525,
    "has_step": 69,
@@ -347,7 +347,7 @@
    "id": "aflpp",
    "type": "Skill",
    "label": "aflpp",
-   "description": "> AFL++ is a fork of AFL with better fuzzing performance and advanced features. Use for multi-core fuzzing of C/C++ projects.",
+   "description": "Sets up and runs AFL++ for multi-core fuzzing of C/C++ projects built with afl-clang-fast or afl-gcc-fast. Covers instrumentation modes, parallel main and secondary campaigns, persistent mode, corpus minimization, and crash triage. Use when scaling fuzzing across cores, fuzzing a mature C/C++ codebase, reading the afl-fuzz status screen, or moving on after libFuzzer has plateaued.",
    "source": "skills/aflpp/SKILL.md",
    "aliases": [],
    "uses": 0,
@@ -1714,7 +1714,7 @@
    "id": "atheris",
    "type": "Skill",
    "label": "atheris",
-   "description": "> Atheris is a coverage-guided Python fuzzer based on libFuzzer. Use for fuzzing pure Python code and Python C extensions.",
+   "description": "Sets up and runs Atheris, the coverage-guided Python fuzzer built on libFuzzer. Covers TestOneInput harnesses, FuzzedDataProvider, instrumenting both pure Python and native C extensions, and running under AddressSanitizer. Use when fuzzing a Python package, hunting memory corruption in a Python C extension, or choosing between Atheris and Hypothesis for a Python target.",
    "source": "skills/atheris/SKILL.md",
    "aliases": [],
    "uses": 0,
@@ -3749,7 +3749,7 @@
    "id": "cargo-fuzz",
    "type": "Skill",
    "label": "cargo-fuzz",
-   "description": "> cargo-fuzz is the de facto fuzzing tool for Rust projects using Cargo. Use for fuzzing Rust code with libFuzzer backend.",
+   "description": "Sets up and runs cargo-fuzz, the standard fuzzing tool for Cargo-based Rust projects. Covers cargo fuzz init, the nightly toolchain requirement, fuzz_target! harnesses, Arbitrary-derived structured inputs, sanitizer options, cargo fuzz coverage, and reproducing a crash artifact. Use when fuzzing a Rust crate, writing a fuzz_target!, exercising unsafe blocks or FFI in Rust, or triaging a cargo fuzz crash.",
    "source": "skills/cargo-fuzz/SKILL.md",
    "aliases": [
     "cargo fuzz"
@@ -6038,7 +6038,7 @@
    "id": "constant-time-testing",
    "type": "Skill",
    "label": "constant-time-testing",
-   "description": "> Constant-time testing detects timing side channels in cryptographic code. Use when auditing crypto implementations for timing vulnerabilities.",
+   "description": "Measures timing side channels in cryptographic implementations by running them, using dudect for statistical analysis and Timecop over Valgrind for dynamic tracing. Covers the formal, symbolic, dynamic, and statistical tool categories and how to read a result. Use when testing whether a running implementation is constant-time, measuring timing variance on a compiled binary, or investigating a suspected timing attack. Not for statically inspecting compiler output \u2014 the constant-time-analysis plugin covers that.",
    "source": "skills/constant-time-testing/SKILL.md",
    "aliases": [
     "constant time testing"
@@ -6242,7 +6242,7 @@
    "id": "coverage-analysis",
    "type": "Skill",
    "label": "coverage-analysis",
-   "description": "> Coverage analysis measures code exercised during fuzzing. Use when assessing harness effectiveness or identifying fuzzing blockers.",
+   "description": "Measures and interprets what a fuzzing campaign actually reaches, using llvm-cov, lcov, or a fuzzer's own coverage output. Covers baselining a new campaign, reading coverage reports, and turning uncovered regions into harness, seed, or dictionary work. Use when a fuzzer plateaus, when judging whether a harness is effective, after changing a harness, or when asking why some code is never reached.",
    "source": "skills/coverage-analysis/SKILL.md",
    "aliases": [
     "coverage analysis"
@@ -7930,7 +7930,7 @@
    "id": "differential-review",
    "type": "Skill",
    "label": "differential-review",
-   "description": "> Performs security-focused differential review of code changes (PRs, commits, diffs). Adapts analysis depth to codebase size, uses git history for context, calculates blast radius, checks test coverage, and generates comprehensive markdown reports. Automatically detects and prevents security regressions.",
+   "description": "Performs security-focused differential review of code changes. Adapts analysis depth to codebase size, uses git blame for context, calculates blast radius by counting callers, checks test coverage of modified code, and generates a markdown report. Use when reviewing a PR, commit, or diff for security vulnerabilities, checking whether a change re-introduces a previously fixed bug, asking what else a change could break, or finding which modified code has no test covering it.",
    "source": "skills/differential-review/SKILL.md",
    "aliases": [
     "differential review"
@@ -11074,7 +11074,7 @@
    "id": "fuzzing-dictionary",
    "type": "Skill",
    "label": "fuzzing-dictionary",
-   "description": "> Fuzzing dictionaries guide fuzzers with domain-specific tokens. Use when fuzzing parsers, protocols, or format-specific code.",
+   "description": "Builds and applies fuzzing dictionaries so a fuzzer can produce the keywords, magic bytes, and tokens a target expects. Covers extracting tokens from source, headers, binaries, and specifications, dictionary syntax, and wiring one into libFuzzer or AFL++. Use when fuzzing a parser, protocol, or file format, when coverage stalls at input validation, or when a target compares against fixed strings.",
    "source": "skills/fuzzing-dictionary/SKILL.md",
    "aliases": [
     "fuzzing dictionary"
@@ -11089,7 +11089,7 @@
    "id": "fuzzing-obstacles",
    "type": "Skill",
    "label": "fuzzing-obstacles",
-   "description": "> Techniques for patching code to overcome fuzzing obstacles. Use when checksums, global state, or other barriers block fuzzer progress.",
+   "description": "Patches past the barriers that stop a fuzzer making progress \u2014 checksum and hash verification, magic-value validation, time-based seeds, and other non-deterministic global state. Covers locating the blocking check, neutering it behind a fuzzing build flag, and avoiding the false positives a patch can introduce. Use when a fuzzer is stuck at validation, when coverage shows large regions behind a checksum, or when valid inputs are impractical to generate.",
    "source": "skills/fuzzing-obstacles/SKILL.md",
    "aliases": [
     "fuzzing obstacles"
@@ -12653,7 +12653,7 @@
    "id": "harness-writing",
    "type": "Skill",
    "label": "harness-writing",
-   "description": "> Techniques for writing effective fuzzing harnesses across languages. Use when creating new fuzz targets or improving existing harness code.",
+   "description": "Designs and improves fuzzing harnesses for C/C++ and Rust. Covers mapping raw bytes onto a target API, generating structured inputs, avoiding non-determinism and false crashes, and deciding what to fuzz together. Use when writing a first LLVMFuzzerTestOneInput or fuzz_target! harness, when a campaign finds nothing or reports crashes that will not reproduce, or when the target API needs structured rather than raw input.",
    "source": "skills/harness-writing/SKILL.md",
    "aliases": [
     "harness writing"
@@ -14818,7 +14818,7 @@
    "id": "libfuzzer",
    "type": "Skill",
    "label": "libfuzzer",
-   "description": "> Coverage-guided fuzzer built into LLVM for C/C++ projects. Use for fuzzing C/C++ code that can be compiled with Clang.",
+   "description": "Sets up and runs libFuzzer, the coverage-guided fuzzer built into LLVM, on C/C++ code that compiles with Clang. Covers harness structure, -fsanitize=fuzzer builds, corpus and dictionary management, sanitizer integration, and campaign triage. Use when writing or debugging an LLVMFuzzerTestOneInput harness, starting fuzzing on a C/C++ library, choosing between libFuzzer and AFL++, or working out why a libFuzzer run finds nothing.",
    "source": "skills/libfuzzer/SKILL.md",
    "aliases": [],
    "uses": 0,
@@ -20282,7 +20282,7 @@
    "id": "ossfuzz",
    "type": "Skill",
    "label": "ossfuzz",
-   "description": "> OSS-Fuzz provides free continuous fuzzing for open source projects. Use when setting up continuous fuzzing infrastructure or enrolling projects.",
+   "description": "Enrolls a project in OSS-Fuzz, Google's free continuous fuzzing service for open source, and drives it locally. Covers project.yaml, Dockerfile and build.sh setup, the helper scripts, reproducing OSS-Fuzz crash reports, and the acceptance criteria. Use when setting up continuous fuzzing for an open-source project, reproducing an OSS-Fuzz bug report, or testing an OSS-Fuzz build before submitting it.",
    "source": "skills/ossfuzz/SKILL.md",
    "aliases": [],
    "uses": 0,
@@ -56276,6 +56276,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "performance-optimization named in constant-time-testing/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "constant-time-testing",
+   "rel": "references",
+   "dst": "statistical-analysis",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "statistical-analysis named in constant-time-testing/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -147842,6 +147851,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "curated alias of cognitive-scientist appears in statistical-analysis/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "statistical-analysis",
+   "rel": "references",
+   "dst": "constant-time-testing",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "statistical-analysis named in constant-time-testing/SKILL.md body",
    "status": "accepted"
   },
   {

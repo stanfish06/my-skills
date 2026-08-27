@@ -14,13 +14,13 @@ created: 2026-06-09
 # constant-time-testing
 
 > [!info] What it does
-> Constant-time testing detects timing side channels in cryptographic code. Use when auditing crypto implementations for timing vulnerabilities.
+> Measures timing side channels in cryptographic implementations by running them, using dudect for statistical analysis and Timecop over Valgrind for dynamic tracing. Covers the formal, symbolic, dynamic, and statistical tool categories and how to read a result. Use when testing whether a running implementation is constant-time, measuring timing variance on a compiled binary, or investigating a suspected timing attack. Not for statically inspecting compiler output — the constant-time-analysis plugin covers that.
 
 **Source:** [skills/constant-time-testing/SKILL.md](../../../skills/constant-time-testing/SKILL.md)  ·  **Domain:** [Security & Auditing](../../maps/security-auditing.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [constant-time-analysis](../../notes/security-auditing/constant-time-analysis.md) — Detects timing side-channel vulnerabilities in cryptographic code
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -246,7 +246,7 @@
 <https://skillquarium.dev/id/affinity-proteomics> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/synthetic-biologist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/affinity-proteomics> <https://skillquarium.dev/ontology/source> "skills/affinity-proteomics/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/affinity-proteomics> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_parquet> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/aflpp> <http://purl.org/dc/terms/description> "> AFL++ is a fork of AFL with better fuzzing performance and advanced features. Use for multi-core fuzzing of C/C++ projects." <urn:vault:core> .
+<https://skillquarium.dev/id/aflpp> <http://purl.org/dc/terms/description> "Sets up and runs AFL++ for multi-core fuzzing of C/C++ projects built with afl-clang-fast or afl-gcc-fast. Covers instrumentation modes, parallel main and secondary campaigns, persistent mode, corpus minimization, and crash triage. Use when scaling fuzzing across cores, fuzzing a mature C/C++ codebase, reading the afl-fuzz status screen, or moving on after libFuzzer has plateaued." <urn:vault:core> .
 <https://skillquarium.dev/id/aflpp> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/aflpp> <http://www.w3.org/2000/01/rdf-schema#label> "aflpp" <urn:vault:core> .
 <https://skillquarium.dev/id/aflpp> <https://skillquarium.dev/ontology/identifier> "aflpp" <urn:vault:core> .
@@ -1375,7 +1375,7 @@
 <https://skillquarium.dev/id/atac-seq> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_bam> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/atac-seq> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_bed> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/atac-seq> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_fastq> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/atheris> <http://purl.org/dc/terms/description> "> Atheris is a coverage-guided Python fuzzer based on libFuzzer. Use for fuzzing pure Python code and Python C extensions." <urn:vault:core> .
+<https://skillquarium.dev/id/atheris> <http://purl.org/dc/terms/description> "Sets up and runs Atheris, the coverage-guided Python fuzzer built on libFuzzer. Covers TestOneInput harnesses, FuzzedDataProvider, instrumenting both pure Python and native C extensions, and running under AddressSanitizer. Use when fuzzing a Python package, hunting memory corruption in a Python C extension, or choosing between Atheris and Hypothesis for a Python target." <urn:vault:core> .
 <https://skillquarium.dev/id/atheris> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/atheris> <http://www.w3.org/2000/01/rdf-schema#label> "atheris" <urn:vault:core> .
 <https://skillquarium.dev/id/atheris> <https://skillquarium.dev/ontology/identifier> "atheris" <urn:vault:core> .
@@ -2988,7 +2988,7 @@
 <https://skillquarium.dev/id/cardiologist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/telemetry> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cardiologist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/water-resources-scientist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cardiologist> <https://skillquarium.dev/ontology/source> "skills/cardiologist/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/cargo-fuzz> <http://purl.org/dc/terms/description> "> cargo-fuzz is the de facto fuzzing tool for Rust projects using Cargo. Use for fuzzing Rust code with libFuzzer backend." <urn:vault:core> .
+<https://skillquarium.dev/id/cargo-fuzz> <http://purl.org/dc/terms/description> "Sets up and runs cargo-fuzz, the standard fuzzing tool for Cargo-based Rust projects. Covers cargo fuzz init, the nightly toolchain requirement, fuzz_target! harnesses, Arbitrary-derived structured inputs, sanitizer options, cargo fuzz coverage, and reproducing a crash artifact. Use when fuzzing a Rust crate, writing a fuzz_target!, exercising unsafe blocks or FFI in Rust, or triaging a cargo fuzz crash." <urn:vault:core> .
 <https://skillquarium.dev/id/cargo-fuzz> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/cargo-fuzz> <http://www.w3.org/2000/01/rdf-schema#label> "cargo-fuzz" <urn:vault:core> .
 <https://skillquarium.dev/id/cargo-fuzz> <https://skillquarium.dev/ontology/identifier> "cargo-fuzz" <urn:vault:core> .
@@ -4879,13 +4879,14 @@
 <https://skillquarium.dev/id/constant-time-analysis> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_security-auditing> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/constant-time-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/constant-time-testing> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/constant-time-analysis> <https://skillquarium.dev/ontology/source> "skills/constant-time-analysis/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/constant-time-testing> <http://purl.org/dc/terms/description> "> Constant-time testing detects timing side channels in cryptographic code. Use when auditing crypto implementations for timing vulnerabilities." <urn:vault:core> .
+<https://skillquarium.dev/id/constant-time-testing> <http://purl.org/dc/terms/description> "Measures timing side channels in cryptographic implementations by running them, using dudect for statistical analysis and Timecop over Valgrind for dynamic tracing. Covers the formal, symbolic, dynamic, and statistical tool categories and how to read a result. Use when testing whether a running implementation is constant-time, measuring timing variance on a compiled binary, or investigating a suspected timing attack. Not for statically inspecting compiler output — the constant-time-analysis plugin covers that." <urn:vault:core> .
 <https://skillquarium.dev/id/constant-time-testing> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/constant-time-testing> <http://www.w3.org/2000/01/rdf-schema#label> "constant-time-testing" <urn:vault:core> .
 <https://skillquarium.dev/id/constant-time-testing> <https://skillquarium.dev/ontology/identifier> "constant-time-testing" <urn:vault:core> .
 <https://skillquarium.dev/id/constant-time-testing> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_security-auditing> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/constant-time-testing> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/constant-time-analysis> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/constant-time-testing> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/performance-optimization> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/constant-time-testing> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/statistical-analysis> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/constant-time-testing> <https://skillquarium.dev/ontology/source> "skills/constant-time-testing/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/construction-engineer> <http://purl.org/dc/terms/description> "> Expert-thinking profile for Construction Engineer (field + office / construction management, means & methods, QA/QC): Reasons from design intent versus means-and- methods through CPM/P6 and Last Planner scheduling, Revit/Navisworks BIM coordination, IBC Chapter 17 special inspections, ASTM C31/C39 cylinder acceptance, and ACI 318 low- break/core protocols while treating formwork collapse, honeycombing, tolerance stack- up, and schedule..." <urn:vault:core> .
 <https://skillquarium.dev/id/construction-engineer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/ExpertProfile> <urn:vault:core> .
@@ -5023,7 +5024,7 @@
 <https://skillquarium.dev/id/cost-management> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/telemetry> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cost-management> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/using-dbt-for-analytics-engineering> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cost-management> <https://skillquarium.dev/ontology/source> "skills/cost-management/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/coverage-analysis> <http://purl.org/dc/terms/description> "> Coverage analysis measures code exercised during fuzzing. Use when assessing harness effectiveness or identifying fuzzing blockers." <urn:vault:core> .
+<https://skillquarium.dev/id/coverage-analysis> <http://purl.org/dc/terms/description> "Measures and interprets what a fuzzing campaign actually reaches, using llvm-cov, lcov, or a fuzzer's own coverage output. Covers baselining a new campaign, reading coverage reports, and turning uncovered regions into harness, seed, or dictionary work. Use when a fuzzer plateaus, when judging whether a harness is effective, after changing a harness, or when asking why some code is never reached." <urn:vault:core> .
 <https://skillquarium.dev/id/coverage-analysis> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/coverage-analysis> <http://www.w3.org/2000/01/rdf-schema#label> "coverage-analysis" <urn:vault:core> .
 <https://skillquarium.dev/id/coverage-analysis> <https://skillquarium.dev/ontology/identifier> "coverage-analysis" <urn:vault:core> .
@@ -6402,7 +6403,7 @@
 <https://skillquarium.dev/id/differential-geometer> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_scientific-expert-profiles> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/differential-geometer> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scientific-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/differential-geometer> <https://skillquarium.dev/ontology/source> "skills/differential-geometer/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/differential-review> <http://purl.org/dc/terms/description> "> Performs security-focused differential review of code changes (PRs, commits, diffs). Adapts analysis depth to codebase size, uses git history for context, calculates blast radius, checks test coverage, and generates comprehensive markdown reports. Automatically detects and prevents security regressions." <urn:vault:core> .
+<https://skillquarium.dev/id/differential-review> <http://purl.org/dc/terms/description> "Performs security-focused differential review of code changes. Adapts analysis depth to codebase size, uses git blame for context, calculates blast radius by counting callers, checks test coverage of modified code, and generates a markdown report. Use when reviewing a PR, commit, or diff for security vulnerabilities, checking whether a change re-introduces a previously fixed bug, asking what else a change could break, or finding which modified code has no test covering it." <urn:vault:core> .
 <https://skillquarium.dev/id/differential-review> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/differential-review> <http://www.w3.org/2000/01/rdf-schema#label> "differential-review" <urn:vault:core> .
 <https://skillquarium.dev/id/differential-review> <https://skillquarium.dev/ontology/identifier> "differential-review" <urn:vault:core> .
@@ -8835,7 +8836,7 @@
 <https://skillquarium.dev/id/fusion-scientist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/plasma-physicist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/fusion-scientist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scientific-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/fusion-scientist> <https://skillquarium.dev/ontology/source> "skills/fusion-scientist/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/fuzzing-dictionary> <http://purl.org/dc/terms/description> "> Fuzzing dictionaries guide fuzzers with domain-specific tokens. Use when fuzzing parsers, protocols, or format-specific code." <urn:vault:core> .
+<https://skillquarium.dev/id/fuzzing-dictionary> <http://purl.org/dc/terms/description> "Builds and applies fuzzing dictionaries so a fuzzer can produce the keywords, magic bytes, and tokens a target expects. Covers extracting tokens from source, headers, binaries, and specifications, dictionary syntax, and wiring one into libFuzzer or AFL++. Use when fuzzing a parser, protocol, or file format, when coverage stalls at input validation, or when a target compares against fixed strings." <urn:vault:core> .
 <https://skillquarium.dev/id/fuzzing-dictionary> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/fuzzing-dictionary> <http://www.w3.org/2000/01/rdf-schema#label> "fuzzing-dictionary" <urn:vault:core> .
 <https://skillquarium.dev/id/fuzzing-dictionary> <https://skillquarium.dev/ontology/identifier> "fuzzing-dictionary" <urn:vault:core> .
@@ -8845,7 +8846,7 @@
 <https://skillquarium.dev/id/fuzzing-dictionary> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hex> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/fuzzing-dictionary> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/libfuzzer> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/fuzzing-dictionary> <https://skillquarium.dev/ontology/source> "skills/fuzzing-dictionary/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/fuzzing-obstacles> <http://purl.org/dc/terms/description> "> Techniques for patching code to overcome fuzzing obstacles. Use when checksums, global state, or other barriers block fuzzer progress." <urn:vault:core> .
+<https://skillquarium.dev/id/fuzzing-obstacles> <http://purl.org/dc/terms/description> "Patches past the barriers that stop a fuzzer making progress — checksum and hash verification, magic-value validation, time-based seeds, and other non-deterministic global state. Covers locating the blocking check, neutering it behind a fuzzing build flag, and avoiding the false positives a patch can introduce. Use when a fuzzer is stuck at validation, when coverage shows large regions behind a checksum, or when valid inputs are impractical to generate." <urn:vault:core> .
 <https://skillquarium.dev/id/fuzzing-obstacles> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/fuzzing-obstacles> <http://www.w3.org/2000/01/rdf-schema#label> "fuzzing-obstacles" <urn:vault:core> .
 <https://skillquarium.dev/id/fuzzing-obstacles> <https://skillquarium.dev/ontology/identifier> "fuzzing-obstacles" <urn:vault:core> .
@@ -10181,7 +10182,7 @@
 <https://skillquarium.dev/id/harmonypy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/seurat> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/harmonypy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/umap-learn> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/harmonypy> <https://skillquarium.dev/ontology/source> "skills/harmonypy/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/harness-writing> <http://purl.org/dc/terms/description> "> Techniques for writing effective fuzzing harnesses across languages. Use when creating new fuzz targets or improving existing harness code." <urn:vault:core> .
+<https://skillquarium.dev/id/harness-writing> <http://purl.org/dc/terms/description> "Designs and improves fuzzing harnesses for C/C++ and Rust. Covers mapping raw bytes onto a target API, generating structured inputs, avoiding non-determinism and false crashes, and deciding what to fuzz together. Use when writing a first LLVMFuzzerTestOneInput or fuzz_target! harness, when a campaign finds nothing or reports crashes that will not reproduce, or when the target API needs structured rather than raw input." <urn:vault:core> .
 <https://skillquarium.dev/id/harness-writing> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/harness-writing> <http://www.w3.org/2000/01/rdf-schema#label> "harness-writing" <urn:vault:core> .
 <https://skillquarium.dev/id/harness-writing> <https://skillquarium.dev/ontology/identifier> "harness-writing" <urn:vault:core> .
@@ -11822,7 +11823,7 @@
 <https://skillquarium.dev/id/ld-1000g-region-compute> <https://skillquarium.dev/ontology/source> "skills/ld-1000g-region-compute/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/ld-1000g-region-compute> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_genotypes> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ld-1000g-region-compute> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_vcf> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/libfuzzer> <http://purl.org/dc/terms/description> "> Coverage-guided fuzzer built into LLVM for C/C++ projects. Use for fuzzing C/C++ code that can be compiled with Clang." <urn:vault:core> .
+<https://skillquarium.dev/id/libfuzzer> <http://purl.org/dc/terms/description> "Sets up and runs libFuzzer, the coverage-guided fuzzer built into LLVM, on C/C++ code that compiles with Clang. Covers harness structure, -fsanitize=fuzzer builds, corpus and dictionary management, sanitizer integration, and campaign triage. Use when writing or debugging an LLVMFuzzerTestOneInput harness, starting fuzzing on a C/C++ library, choosing between libFuzzer and AFL++, or working out why a libFuzzer run finds nothing." <urn:vault:core> .
 <https://skillquarium.dev/id/libfuzzer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/libfuzzer> <http://www.w3.org/2000/01/rdf-schema#label> "libfuzzer" <urn:vault:core> .
 <https://skillquarium.dev/id/libfuzzer> <https://skillquarium.dev/ontology/identifier> "libfuzzer" <urn:vault:core> .
@@ -16407,7 +16408,7 @@
 <https://skillquarium.dev/id/orthopedic-biomechanist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/matlab> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/orthopedic-biomechanist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scientific-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/orthopedic-biomechanist> <https://skillquarium.dev/ontology/source> "skills/orthopedic-biomechanist/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/ossfuzz> <http://purl.org/dc/terms/description> "> OSS-Fuzz provides free continuous fuzzing for open source projects. Use when setting up continuous fuzzing infrastructure or enrolling projects." <urn:vault:core> .
+<https://skillquarium.dev/id/ossfuzz> <http://purl.org/dc/terms/description> "Enrolls a project in OSS-Fuzz, Google's free continuous fuzzing service for open source, and drives it locally. Covers project.yaml, Dockerfile and build.sh setup, the helper scripts, reproducing OSS-Fuzz crash reports, and the acceptance criteria. Use when setting up continuous fuzzing for an open-source project, reproducing an OSS-Fuzz bug report, or testing an OSS-Fuzz build before submitting it." <urn:vault:core> .
 <https://skillquarium.dev/id/ossfuzz> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/ossfuzz> <http://www.w3.org/2000/01/rdf-schema#label> "ossfuzz" <urn:vault:core> .
 <https://skillquarium.dev/id/ossfuzz> <https://skillquarium.dev/ontology/identifier> "ossfuzz" <urn:vault:core> .
@@ -22511,6 +22512,7 @@
 <https://skillquarium.dev/id/statistical-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cirq> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/statistical-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/clinical-decision-support> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/statistical-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cognitive-scientist> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/statistical-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/constant-time-testing> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/statistical-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/emergency-medicine-researcher> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/statistical-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/metrology-scientist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/statistical-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/network-scientist> <urn:vault:EXTRACTED> .

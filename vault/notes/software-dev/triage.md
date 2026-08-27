@@ -18,6 +18,7 @@ created: 2026-06-20
 
 ## Related skills
 
+- [aflpp](../../notes/security-auditing/aflpp.md) — Sets up and runs AFL++ for multi-core fuzzing of C/C++ projects built with afl-clang-fast or afl-gcc-fast
 - [audit-and-reduce-dependencies](../../notes/security-auditing/audit-and-reduce-dependencies.md) — Reduces JavaScript dependency footprint with pnpm while preserving lockfile, workspace layout, and dependency range style
 - [circleci-builds](../../notes/hosting-edge-platforms/circleci-builds.md) — Diagnose and fix failing CircleCI builds quickly and safely
 - [digital-forensics](../../notes/security-auditing/digital-forensics.md) — Use for authorized digital forensics including memory dumps, disk timelines, PCAP investigation, artifact triage, and IR evidence preservation
@@ -26,6 +27,7 @@ created: 2026-06-20
 - [gmail-inbox-triage](../../notes/comms-productivity/gmail-inbox-triage.md) — Triage a Gmail inbox into actionable buckets such as urgent, needs reply soon, waiting, and FYI using connected Gmail data
 - [hardware-security](../../notes/security-auditing/hardware-security.md) — Use for authorized hardware and embedded interface security research including UART/JTAG discovery, debug pad triage, secure boot overview, and offline firmware extraction support
 - [incident-response](../../notes/cloud-devops/incident-response.md) — Run an incident response workflow — triage, communicate, and write postmortem
+- [libfuzzer](../../notes/security-auditing/libfuzzer.md) — Sets up and runs libFuzzer, the coverage-guided fuzzer built into LLVM, on C/C++ code that compiles with Clang
 - [matlab-define-toolbox-api](../../notes/matlab-development/matlab-define-toolbox-api.md) — Scan a folder, triage files into include/exclude, identify the public API, and produce a toolboxSpecification.m Interface Spec — all in one pass
 - [medchem](../../notes/drug-discovery-chem/medchem.md) — Medicinal chemistry filters for compound triage
 - [morning-briefing](../../notes/comms-productivity/morning-briefing.md) — Generates a morning briefing that triages your inbox and previews your day using the Superhuman Mail MCP server — acting as an AI chief of staff

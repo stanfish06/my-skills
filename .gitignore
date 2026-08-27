@@ -129,3 +129,6 @@ vault/graph/graph.trig
 
 # githubnext/agentics clone the agentic-workflows skill reads templates from.
 /skills/agentic-workflows/templates/
+
+# no docs
+docs/

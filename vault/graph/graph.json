@@ -4,29 +4,29 @@
   "skills": 2080,
   "expert_profiles": 503,
   "nodes": 2154,
-  "edges": 15209,
+  "edges": 15219,
   "generic_names_blocked": 32,
-  "tier1_edges": 4434,
-  "tier2_edges": 701,
-  "alias_edges": 4225,
+  "tier1_edges": 4440,
+  "tier2_edges": 700,
+  "alias_edges": 4233,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 525,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.71,
+  "mean_skill_degree": 5.72,
   "median_skill_degree": 4,
   "orphan_count": 132,
   "orphan_rate": 0.0635,
   "by_provenance": {
-   "EXTRACTED": 14423,
+   "EXTRACTED": 14433,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2080,
-   "references": 11818,
+   "references": 11828,
    "in_discipline": 599,
    "touches": 525,
    "has_step": 69,
@@ -18914,7 +18914,7 @@
    "id": "next-partial-prefetching-adoption",
    "type": "Skill",
    "label": "next-partial-prefetching-adoption",
-   "description": "> Turn on Partial Prefetching in a Next.js app and work through the insights it surfaces. Use when the user wants to enable or adopt Partial Prefetching, flip the `partialPrefetching` flag, opt routes in with `export const prefetch = 'partial'`, audit `<Link prefetch={true}>` calls, or resolve the instant-link-prefetch-partial and instant-shell-url-data insights.",
+   "description": "> Turn on Partial Prefetching in a Next.js app and work through the insights it surfaces. Use when the user wants to enable or adopt Partial Prefetching, flip the `partialPrefetching` flag, opt routes in with `export const prefetch = 'partial'`, audit `Link prefetch={true}` behavior, preserve existing prefetched UI with `instant()` tests, or resolve the instant-link-prefetch-partial and instant-shell-url-data insights.",
    "source": "skills/next-partial-prefetching-adoption/SKILL.md",
    "aliases": [
     "next partial prefetching adoption"
@@ -58936,6 +58936,15 @@
   {
    "src": "databricks-agent-bricks",
    "rel": "references",
+   "dst": "databricks-genie-agents",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-agent-bricks named in databricks-genie-agents/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-agent-bricks",
+   "rel": "references",
    "dst": "databricks-model-serving",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -58994,6 +59003,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "databricks-core named in databricks-aibi-dashboards/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-aibi-dashboards",
+   "rel": "references",
+   "dst": "databricks-metric-views",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-aibi-dashboards named in databricks-metric-views/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -59548,10 +59566,28 @@
   {
    "src": "databricks-dabs",
    "rel": "references",
+   "dst": "databricks-genie-agents",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of databricks-dabs appears in databricks-genie-agents/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-dabs",
+   "rel": "references",
    "dst": "databricks-jobs",
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "curated alias of databricks-dabs appears in databricks-jobs/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-dabs",
+   "rel": "references",
+   "dst": "databricks-metric-views",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-dabs named in databricks-metric-views/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -59588,6 +59624,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "databricks-data-discovery named in databricks-genie-agents/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-data-discovery",
+   "rel": "references",
+   "dst": "databricks-metric-views",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-data-discovery named in databricks-metric-views/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -59764,6 +59809,24 @@
   {
    "src": "databricks-genie-agents",
    "rel": "references",
+   "dst": "databricks-agent-bricks",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-agent-bricks named in databricks-genie-agents/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-genie-agents",
+   "rel": "references",
+   "dst": "databricks-dabs",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of databricks-dabs appears in databricks-genie-agents/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-genie-agents",
+   "rel": "references",
    "dst": "databricks-data-discovery",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -59773,10 +59836,19 @@
   {
    "src": "databricks-genie-agents",
    "rel": "references",
-   "dst": "hex",
+   "dst": "databricks-metric-views",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "hex named in databricks-genie-agents/SKILL.md body",
+   "justification": "databricks-metric-views named in databricks-genie-agents/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-genie-agents",
+   "rel": "references",
+   "dst": "databricks-unity-catalog",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-unity-catalog named in databricks-genie-agents/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -59971,6 +60043,15 @@
   {
    "src": "databricks-metric-views",
    "rel": "references",
+   "dst": "databricks-aibi-dashboards",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-aibi-dashboards named in databricks-metric-views/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-metric-views",
+   "rel": "references",
    "dst": "databricks-core",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -59980,10 +60061,28 @@
   {
    "src": "databricks-metric-views",
    "rel": "references",
-   "dst": "query",
+   "dst": "databricks-dabs",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "query referenced in code/link context in databricks-metric-views/SKILL.md",
+   "justification": "databricks-dabs named in databricks-metric-views/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-metric-views",
+   "rel": "references",
+   "dst": "databricks-data-discovery",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-data-discovery named in databricks-metric-views/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-metric-views",
+   "rel": "references",
+   "dst": "databricks-genie-agents",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-metric-views named in databricks-genie-agents/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -60389,6 +60488,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "databricks-unity-catalog named in databricks-docs/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-unity-catalog",
+   "rel": "references",
+   "dst": "databricks-genie-agents",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-unity-catalog named in databricks-genie-agents/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -82070,15 +82178,6 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "hex named in databricks-app-design/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "hex",
-   "rel": "references",
-   "dst": "databricks-genie-agents",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "hex named in databricks-genie-agents/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -127052,15 +127151,6 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "query referenced in code/link context in civic-skill/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "query",
-   "rel": "references",
-   "dst": "databricks-metric-views",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "query referenced in code/link context in databricks-metric-views/SKILL.md",
    "status": "accepted"
   },
   {

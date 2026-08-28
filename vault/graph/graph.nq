@@ -5449,6 +5449,7 @@
 <https://skillquarium.dev/id/databricks-agent-bricks> <https://skillquarium.dev/ontology/identifier> "databricks-agent-bricks" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-agent-bricks> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_analytics-engineering> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-agent-bricks> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-core> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-agent-bricks> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-genie-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-agent-bricks> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-model-serving> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-agent-bricks> <https://skillquarium.dev/ontology/source> "skills/databricks-agent-bricks/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-ai-functions> <http://purl.org/dc/terms/description> "Use Databricks built-in AI Functions (ai_classify, ai_extract, ai_summarize, ai_mask, ai_translate, ai_fix_grammar, ai_gen, ai_analyze_sentiment, ai_similarity, ai_parse_document, ai_prep_search, ai_query, ai_forecast) to add AI capabilities directly to SQL and PySpark pipelines without managing model endpoints. Also covers document parsing and building custom RAG pipelines (parse → prep_search → index → query)." <urn:vault:core> .
@@ -5466,6 +5467,7 @@
 <https://skillquarium.dev/id/databricks-aibi-dashboards> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-app-design> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-aibi-dashboards> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-apps> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-aibi-dashboards> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-core> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-aibi-dashboards> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-metric-views> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-aibi-dashboards> <https://skillquarium.dev/ontology/source> "skills/databricks-aibi-dashboards/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-app-design> <http://purl.org/dc/terms/description> "Design the UX of custom-code Databricks Apps (AppKit/React) data screens — KPI/overview pages, reports, charts, tables, and Genie/chat data assistants — mapped to concrete AppKit components. Use when BUILDING or reviewing the UI of an AppKit/React app that displays data or answers data questions: choosing genre, layout, charts, KPIs, semantic color, required states (loading/empty/error), IBCS notation, and AI-result trust (showing generated SQL/sources for Genie/chat). A plain \"create a dashboard\" request means a managed AI/BI (Lakeview) dashboard → use databricks-aibi-dashboards, NOT this skill. Also NOT for non-data frontend (forms, settings, auth, marketing) or scaffolding/build/deploy (→ databricks-apps). Complements databricks-apps; use it alongside whenever a custom app has a chart, table, KPI, report, or Genie/chat/AI surface." <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-app-design> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
@@ -5552,7 +5554,9 @@
 <https://skillquarium.dev/id/databricks-dabs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-core> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-dabs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-data-discovery> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-dabs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-execution-compute> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-dabs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-genie-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-dabs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-jobs> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-dabs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-metric-views> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-dabs> <https://skillquarium.dev/ontology/source> "skills/databricks-dabs/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-data-discovery> <http://purl.org/dc/terms/description> "Discover, explore, and query Databricks data via Genie — the CLI equivalent of the Genie One MCP. MUST be invoked whenever the user asks to find or locate data ('what tables are in X', 'where does X live', 'which catalog/schema has Y'), answer a natural-language question about the data, or write a SQL query." <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-data-discovery> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
@@ -5562,6 +5566,7 @@
 <https://skillquarium.dev/id/databricks-data-discovery> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-core> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-data-discovery> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-dabs> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-data-discovery> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-genie-agents> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-data-discovery> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-metric-views> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-data-discovery> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/neuroscientist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-data-discovery> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/reverse-engineering> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-data-discovery> <https://skillquarium.dev/ontology/source> "skills/databricks-data-discovery/SKILL.md" <urn:vault:core> .
@@ -5601,8 +5606,11 @@
 <https://skillquarium.dev/id/databricks-genie-agents> <http://www.w3.org/2000/01/rdf-schema#label> "databricks-genie-agents" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/identifier> "databricks-genie-agents" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_analytics-engineering> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-agent-bricks> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-dabs> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-data-discovery> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hex> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-metric-views> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-unity-catalog> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/source> "skills/databricks-genie-agents/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-iceberg> <http://purl.org/dc/terms/description> "Apache Iceberg tables on Databricks — Managed Iceberg tables, External Iceberg Reads (fka Uniform), Compatibility Mode, Iceberg REST Catalog (IRC), Iceberg v3, Snowflake interop, PyIceberg, OSS Spark, external engine access and credential vending. Use when creating Iceberg tables, enabling External Iceberg Reads (uniform) on Delta tables (including Streaming Tables and Materialized Views via compatibility mode), configuring external engines to read Databricks tables via Unity Catalog IRC, integrating with Snowflake catalog to read Foreign Iceberg tables" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-iceberg> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
@@ -5649,8 +5657,11 @@
 <https://skillquarium.dev/id/databricks-metric-views> <http://www.w3.org/2000/01/rdf-schema#label> "databricks-metric-views" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/identifier> "databricks-metric-views" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_analytics-engineering> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-aibi-dashboards> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-core> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/query> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-dabs> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-data-discovery> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-genie-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/source> "skills/databricks-metric-views/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-ml-training> <http://purl.org/dc/terms/description> "Train ML models on Databricks. Use for: classification/regression/deep-learning (XGBoost, scikit-learn, LightGBM, PyTorch) with Optuna, @prod/@challenger aliases, batch scoring (spark_udf for plain models, fe.score_batch for feature-store-backed), custom PyFunc, custom ResponsesAgent (LangGraph + UC Function/Vector Search); UC feature tables + FeatureLookup + point-in-time joins + Lakebase online store; declarative Feature Views (create_feature, DeltaTableSource, RollingWindow/SlidingWindow/TumblingWindow, materialize_features, streaming Kafka features). NOT for: endpoint ops (databricks-model-serving), MLflow evaluation (databricks-mlflow-evaluation)." <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-ml-training> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
@@ -5741,6 +5752,7 @@
 <https://skillquarium.dev/id/databricks-unity-catalog> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_analytics-engineering> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-unity-catalog> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-core> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-unity-catalog> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-docs> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-unity-catalog> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-genie-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-unity-catalog> <https://skillquarium.dev/ontology/source> "skills/databricks-unity-catalog/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-unstructured-pdf-generation> <http://purl.org/dc/terms/description> "Build RAG / unstructured-document evaluation datasets and demo documents (e.g. for Knowledge Assistant) on Databricks: generate synthetic PDFs locally, upload to Unity Catalog volumes, and pair each document with test questions for retrieval evaluation." <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-unstructured-pdf-generation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
@@ -10293,7 +10305,6 @@
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cavekit-design-system> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/clickstack-otel-collector> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-app-design> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-genie-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/design-md-library> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/figma-design-to-code> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/figma-generate-design> <urn:vault:EXTRACTED> .
@@ -15154,7 +15165,7 @@
 <https://skillquarium.dev/id/next-forge> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/turborepo> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/next-forge> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/vercel-flags> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/next-forge> <https://skillquarium.dev/ontology/source> "skills/next-forge/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/next-partial-prefetching-adoption> <http://purl.org/dc/terms/description> "> Turn on Partial Prefetching in a Next.js app and work through the insights it surfaces. Use when the user wants to enable or adopt Partial Prefetching, flip the `partialPrefetching` flag, opt routes in with `export const prefetch = 'partial'`, audit `<Link prefetch={true}>` calls, or resolve the instant-link-prefetch-partial and instant-shell-url-data insights." <urn:vault:core> .
+<https://skillquarium.dev/id/next-partial-prefetching-adoption> <http://purl.org/dc/terms/description> "> Turn on Partial Prefetching in a Next.js app and work through the insights it surfaces. Use when the user wants to enable or adopt Partial Prefetching, flip the `partialPrefetching` flag, opt routes in with `export const prefetch = 'partial'`, audit `Link prefetch={true}` behavior, preserve existing prefetched UI with `instant()` tests, or resolve the instant-link-prefetch-partial and instant-shell-url-data insights." <urn:vault:core> .
 <https://skillquarium.dev/id/next-partial-prefetching-adoption> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/next-partial-prefetching-adoption> <http://www.w3.org/2000/01/rdf-schema#label> "next-partial-prefetching-adoption" <urn:vault:core> .
 <https://skillquarium.dev/id/next-partial-prefetching-adoption> <https://skillquarium.dev/ontology/identifier> "next-partial-prefetching-adoption" <urn:vault:core> .
@@ -19062,7 +19073,6 @@
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_data-science-compute> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/bgee-skill> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/civic-skill> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-metric-views> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/duckdb-docs> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/entry-point-analyzer> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/fastapi> <urn:vault:EXTRACTED> .

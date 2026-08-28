@@ -1356,9 +1356,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
       "skillPath": "skills/react-view-transitions/SKILL.md",
-      "skillFolderHash": "c6752cf14a6a317fb0c65328f95c1498574b422d",
+      "skillFolderHash": "13063dbbfc1b085cbc11b9bd5d4324aa2f41bb3a",
       "installedAt": "2026-06-09T19:26:11.069Z",
-      "updatedAt": "2026-08-27T17:36:44.864Z"
+      "updatedAt": "2026-08-28T18:38:50.487Z"
     },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
@@ -1520,18 +1520,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/langfuse/skills.git",
       "skillPath": "skills/langfuse/SKILL.md",
-      "skillFolderHash": "b39c69a6e5d99120baf6cb9bb58a0bd5449d6c54",
+      "skillFolderHash": "a8c9f7cf7bab8d6b6fcadc0f3581afec7ae44045",
       "installedAt": "2026-06-09T19:26:38.181Z",
-      "updatedAt": "2026-08-27T17:36:46.756Z"
+      "updatedAt": "2026-08-28T18:38:53.127Z"
     },
     "phoenix-cli": {
       "source": "arize-ai/phoenix",
       "sourceType": "github",
       "sourceUrl": "https://github.com/arize-ai/phoenix.git",
       "skillPath": ".agents/skills/phoenix-cli/SKILL.md",
-      "skillFolderHash": "0395e2564a7cd358a02b3aa66e94369cef2ddb18",
+      "skillFolderHash": "3b301a6322c8a154d21311ed6044c895d7990964",
       "installedAt": "2026-06-09T19:26:52.824Z",
-      "updatedAt": "2026-08-20T07:04:18.162Z"
+      "updatedAt": "2026-08-28T18:38:58.023Z"
     },
     "phoenix-evals": {
       "source": "arize-ai/phoenix",
@@ -1646,9 +1646,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/audit-context-building/skills/audit-context-building/SKILL.md",
-      "skillFolderHash": "2fee1a2e10b9c861e97013d192a81379d070a60e",
+      "skillFolderHash": "bd5f23bed6d9e0432e3582dcd8947e07948f27dc",
       "installedAt": "2026-06-09T19:28:14.009Z",
-      "updatedAt": "2026-08-10T04:45:12.224Z"
+      "updatedAt": "2026-08-28T18:39:01.078Z"
     },
     "audit-prep-assistant": {
       "source": "trailofbits/skills",
@@ -1934,9 +1934,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/supply-chain-risk-auditor/skills/supply-chain-risk-auditor/SKILL.md",
-      "skillFolderHash": "e0f446332d689ade2947cfba3480a8c194231640",
+      "skillFolderHash": "402f9cd20c760ffa898d5f1de6175d6a92e48e85",
       "installedAt": "2026-06-09T19:28:14.033Z",
-      "updatedAt": "2026-08-11T07:34:21.597Z"
+      "updatedAt": "2026-08-28T18:39:04.031Z"
     },
     "zeroize-audit": {
       "source": "trailofbits/skills",
@@ -8802,9 +8802,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "cfe60a956489d7d7fc9c33ca45e77cb7b635067f",
+      "skillFolderHash": "c4d60deae95c19384b4e3424b05c9f74b7320464",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-08-27T17:37:27.071Z"
+      "updatedAt": "2026-08-28T18:39:06.853Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8829,9 +8829,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "310ef506a852b0d3b2d70b9dc84a417aaa386bce",
+      "skillFolderHash": "b309e38a7aa5349f48ebed7e3b873b2786bbf91d",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-08-24T07:18:53.982Z"
+      "updatedAt": "2026-08-28T18:39:20.992Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -10509,9 +10509,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-apps/SKILL.md",
-      "skillFolderHash": "6f4b323520dd93ac739986284117bd9835ca9556",
+      "skillFolderHash": "be113793ea338ea437d2ab4c79665281520d0c0d",
       "installedAt": "2026-08-23T17:20:36.114Z",
-      "updatedAt": "2026-08-23T17:20:36.114Z"
+      "updatedAt": "2026-08-28T18:39:23.405Z"
     },
     "databricks-apps-python": {
       "source": "databricks/databricks-agent-skills",
@@ -10581,9 +10581,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-genie-agents/SKILL.md",
-      "skillFolderHash": "ac0b64938d60229be99cf580b3db767760bee9bf",
+      "skillFolderHash": "282d5a5f363f2ba552425f7e817bb11edda52c59",
       "installedAt": "2026-08-23T17:20:36.152Z",
-      "updatedAt": "2026-08-23T17:20:36.152Z"
+      "updatedAt": "2026-08-28T18:39:25.376Z"
     },
     "databricks-iceberg": {
       "source": "databricks/databricks-agent-skills",
@@ -10626,9 +10626,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-metric-views/SKILL.md",
-      "skillFolderHash": "f0898ed58bc68fc15275a581385e2102576fe894",
+      "skillFolderHash": "5fd080372a6b6f4d1a1e51692eb4df9fe15796f6",
       "installedAt": "2026-08-23T17:20:36.172Z",
-      "updatedAt": "2026-08-23T17:20:36.172Z"
+      "updatedAt": "2026-08-28T18:39:27.324Z"
     },
     "databricks-ml-training": {
       "source": "databricks/databricks-agent-skills",
@@ -10662,9 +10662,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-pipelines/SKILL.md",
-      "skillFolderHash": "7937c3a7c8c87a8e514359ad4d83c8314e08329a",
+      "skillFolderHash": "f494d5aae82ac56213a48043d9f14e149821f78c",
       "installedAt": "2026-08-23T17:20:36.191Z",
-      "updatedAt": "2026-08-23T17:20:36.191Z"
+      "updatedAt": "2026-08-28T18:39:29.916Z"
     },
     "databricks-python-sdk": {
       "source": "databricks/databricks-agent-skills",
@@ -10689,9 +10689,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-spark-structured-streaming/SKILL.md",
-      "skillFolderHash": "11ff356d8ffc2e149fdd053ecee55fb9467530ae",
+      "skillFolderHash": "ea43480196e04dd7308df7765ed0415f0e2ba274",
       "installedAt": "2026-08-23T17:20:36.202Z",
-      "updatedAt": "2026-08-23T17:20:36.202Z"
+      "updatedAt": "2026-08-28T18:39:32.122Z"
     },
     "databricks-synthetic-data-gen": {
       "source": "databricks/databricks-agent-skills",
@@ -11464,18 +11464,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-cache-components-optimizer/SKILL.md",
-      "skillFolderHash": "c5e83944e64b711e8c49f898bafd67fd99255a2f",
+      "skillFolderHash": "1b7319f20b0f2cf2f033940c583561025a341d41",
       "installedAt": "2026-08-23T17:24:26.730Z",
-      "updatedAt": "2026-08-23T17:24:26.730Z"
+      "updatedAt": "2026-08-28T18:39:34.804Z"
     },
     "next-partial-prefetching-adoption": {
       "source": "vercel/next.js",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-partial-prefetching-adoption/SKILL.md",
-      "skillFolderHash": "66533620b7f0cf5436a57821c215f17dbc5b631a",
+      "skillFolderHash": "813330ab0efd5b94d9f4eedb3692686273db8f00",
       "installedAt": "2026-08-23T17:24:38.535Z",
-      "updatedAt": "2026-08-23T17:24:38.535Z"
+      "updatedAt": "2026-08-28T18:39:36.960Z"
     },
     "incident-response": {
       "source": "anthropics/knowledge-work-plugins",

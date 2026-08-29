@@ -8802,9 +8802,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "c4d60deae95c19384b4e3424b05c9f74b7320464",
+      "skillFolderHash": "85c0a2c58e134047e8b7d439f649dd47e0bc063d",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-08-28T18:39:06.853Z"
+      "updatedAt": "2026-08-29T12:39:45.072Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -11374,9 +11374,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/browser-use/browser-use.git",
       "skillPath": "skills/browser-use/SKILL.md",
-      "skillFolderHash": "b3f160a9254dc3d49e6c22a17eae24f2a138daba",
+      "skillFolderHash": "b45284862134b60f0510f74971da82b896025a00",
       "installedAt": "2026-08-23T17:22:58.895Z",
-      "updatedAt": "2026-08-27T17:38:17.445Z"
+      "updatedAt": "2026-08-29T12:39:46.697Z"
     },
     "remote-browser": {
       "source": "browser-use/browser-use",

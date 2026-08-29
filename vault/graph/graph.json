@@ -1,10 +1,10 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2080,
+  "skills": 2081,
   "expert_profiles": 503,
-  "nodes": 2154,
-  "edges": 15219,
+  "nodes": 2155,
+  "edges": 15220,
   "generic_names_blocked": 32,
   "tier1_edges": 4440,
   "tier2_edges": 700,
@@ -15,17 +15,17 @@
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.72,
+  "mean_skill_degree": 5.71,
   "median_skill_degree": 4,
-  "orphan_count": 132,
-  "orphan_rate": 0.0635,
+  "orphan_count": 133,
+  "orphan_rate": 0.0639,
   "by_provenance": {
-   "EXTRACTED": 14433,
+   "EXTRACTED": 14434,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2080,
+   "in_domain": 2081,
    "references": 11828,
    "in_discipline": 599,
    "touches": 525,
@@ -26256,6 +26256,21 @@
    "source": "skills/skill-builder/SKILL.md",
    "aliases": [
     "skill builder"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "skill-doctor",
+   "type": "Skill",
+   "label": "skill-doctor",
+   "description": "Grades agent skills by scoring agent conversations against efficiency and code-quality rubrics, then drafts concrete skill edits and a shareable report. Use when the user wants their agent setup graded from real conversation history, or asks which of their installed skills are actually working.",
+   "source": "skills/skill-doctor/SKILL.md",
+   "aliases": [
+    "skill doctor"
    ],
    "uses": 0,
    "successes": 0,
@@ -145955,6 +145970,15 @@
    "status": "accepted"
   },
   {
+   "src": "skill-doctor",
+   "rel": "in_domain",
+   "dst": "domain:vault-meta",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
    "src": "skills-hub",
    "rel": "in_domain",
    "dst": "domain:vault-meta",
@@ -168824,6 +168848,7 @@
   "shopify-polaris-customer-account-extensions",
   "sign-in-with-vercel",
   "signing-entitlements",
+  "skill-doctor",
   "soul2dna",
   "statistical-and-uncertainty-visualization",
   "swiftpm-macos",

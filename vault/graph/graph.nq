@@ -22132,6 +22132,12 @@
 <https://skillquarium.dev/id/skill-builder> <https://skillquarium.dev/ontology/source> "skills/skill-builder/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/skill-builder> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_genotypes> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/skill-builder> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_vcf> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/skill-doctor> <http://purl.org/dc/terms/description> "Grades agent skills by scoring agent conversations against efficiency and code-quality rubrics, then drafts concrete skill edits and a shareable report. Use when the user wants their agent setup graded from real conversation history, or asks which of their installed skills are actually working." <urn:vault:core> .
+<https://skillquarium.dev/id/skill-doctor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
+<https://skillquarium.dev/id/skill-doctor> <http://www.w3.org/2000/01/rdf-schema#label> "skill-doctor" <urn:vault:core> .
+<https://skillquarium.dev/id/skill-doctor> <https://skillquarium.dev/ontology/identifier> "skill-doctor" <urn:vault:core> .
+<https://skillquarium.dev/id/skill-doctor> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_vault-meta> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/skill-doctor> <https://skillquarium.dev/ontology/source> "skills/skill-doctor/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/skills-hub> <http://purl.org/dc/terms/description> "Browse and install community skills from the BioClaw Skills Hub. Use when a user's task is not covered by built-in skills, or when the user asks about available skills, advanced workflows, or specialized analysis pipelines. Triggers on \"skills hub\", \"more skills\", \"install skill\", \"community skills\", \"find a skill for\"." <urn:vault:core> .
 <https://skillquarium.dev/id/skills-hub> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/skills-hub> <http://www.w3.org/2000/01/rdf-schema#label> "skills-hub" <urn:vault:core> .

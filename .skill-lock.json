@@ -11494,6 +11494,15 @@
       "skillFolderHash": "7f444611bbbd10587b96113e1fd087e9864c5a26",
       "installedAt": "2026-08-26T17:43:00.679Z",
       "updatedAt": "2026-08-26T17:43:00.679Z"
+    },
+    "skill-doctor": {
+      "source": "warpdotdev/common-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/warpdotdev/common-skills.git",
+      "skillPath": ".agents/skills/skill-doctor/SKILL.md",
+      "skillFolderHash": "cb24c48dc82ced19c1061453decc4bc0e5328c15",
+      "installedAt": "2026-08-29T11:22:31.692Z",
+      "updatedAt": "2026-08-29T11:22:31.692Z"
     }
   },
   "dismissed": {

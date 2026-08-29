@@ -1470,7 +1470,7 @@ EXTRA_ASSIGNMENTS = {
     # Vault, Skills & Workflow Meta
     "ask-matt": "vault-meta", "obsidian-vault": "vault-meta",
     "setup-matt-pocock-skills": "vault-meta", "writing-great-skills": "vault-meta",
-    "writing-for-agents": "vault-meta",
+    "writing-for-agents": "vault-meta", "skill-doctor": "vault-meta",
     # Reasoning, Ideation & Decision
     "decision-mapping": "reasoning-ideation", "grill-me": "reasoning-ideation",
     "grill-with-docs": "reasoning-ideation", "grilling": "reasoning-ideation",

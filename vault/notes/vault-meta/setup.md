@@ -84,6 +84,7 @@ created: 2026-08-07
 - [shopify-admin](../../notes/saas-platforms/shopify-admin.md) — Write or explain **Admin GraphQL** queries and mutations for apps and integrations that extend the Shopify admin
 - [shopify-onboarding-merchant](../../notes/saas-platforms/shopify-onboarding-merchant.md) — Set up and connect a Shopify store from your AI assistant
 - [shopify-use-shopify-cli](../../notes/saas-platforms/shopify-use-shopify-cli.md) — Choose when the user needs **Shopify CLI** to run or fix something now: validate app or extension config on disk (`shopify.app.toml`, `shopify.app.<name>.toml`...
+- [skill-doctor](../../notes/vault-meta/skill-doctor.md) — Grades agent skills by scoring agent conversations against efficiency and code-quality rubrics, then drafts concrete skill edits and a shareable report
 - [stripe-best-practices](../../notes/saas-platforms/stripe-best-practices.md) — Guides Stripe integration decisions — API selection (Checkout Sessions vs PaymentIntents), Connect platform setup (Accounts v2, controller properties), billing/subscriptions, Treasury...
 - [test-analysis-extensions](../../notes/dotnet-development/test-analysis-extensions.md) — Provides file paths to language-specific reference files for the test ANALYSIS skills (assertion-quality, test-anti-patterns, test-gap-analysis, test-smell-detection, test-tagging)
 - [test-triage](../../notes/software-dev/test-triage.md) — Triage macOS tests across Xcode and SwiftPM

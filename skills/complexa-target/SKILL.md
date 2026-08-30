@@ -211,7 +211,7 @@ Then write the appended YAML snippet (the lines `complexa target add` wrote unde
 
 None for target definition — this is a YAML edit, not a training/inference step. Disk impact is a few KB appended to the targets dict (plus an automatic `.yaml.bak` backup written by `save_targets_dict`).
 
-For the downstream design / evaluate runs that consume the target, defer to `complexa-design` and `_shared/reference/hardware.md`.
+For the downstream design / evaluate runs that consume the target, defer to `complexa-design` and `_shared/reference/hardware.md` (the `_shared/` bundle is not vendored here — see `open-models-skills/proteina-complexa/_shared/` in `NVIDIA-BioNeMo/bionemo-agent-toolkit`).
 
 ## Troubleshooting
 

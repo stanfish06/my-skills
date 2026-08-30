@@ -41,7 +41,7 @@ Example usage:
     # HF Jobs execution
     hf jobs uv run --flavor l4x4 \\
         --image vllm/vllm-openai \\
-        -e HF_TOKEN=$(python3 -c "from huggingface_hub import get_token; print(get_token())") \\
+        -s HF_TOKEN \\
         https://huggingface.co/datasets/uv-scripts/synthetic-data/raw/main/cot-self-instruct.py \\
         [args...]
 """
@@ -704,7 +704,7 @@ def main():
         print("\nTo run on HF Jobs:")
         print(f"""hf jobs uv run --flavor l4x4 \\
     --image vllm/vllm-openai \\
-    -e HF_TOKEN=$(python3 -c "from huggingface_hub import get_token; print(get_token())") \\
+    -s HF_TOKEN \\
     https://huggingface.co/datasets/uv-scripts/synthetic-data/raw/main/cot-self-instruct.py \\
     --seed-dataset {args.seed_dataset} \\
     --output-dataset {args.output_dataset} \\

@@ -14,8 +14,10 @@ adata = pred.to_adata()
 adata.obs["cell_type_raw"] = adata.obs["majority_voting"]
 adata.obs["cell_type_confidence"] = adata.obs["conf_score"]
 
-adata.obs["cell_type_final"] = adata.obs["cell_type_raw"]
+# cast out of CellTypist's Categorical before assigning "Unknown", then restore
+adata.obs["cell_type_final"] = adata.obs["cell_type_raw"].astype(str)
 adata.obs.loc[adata.obs["cell_type_confidence"] < 0.2, "cell_type_final"] = "Unknown"
+adata.obs["cell_type_final"] = adata.obs["cell_type_final"].astype("category")
 
 adata.write("results/annotated.h5ad")
 adata.obs[["cell_type_raw", "cell_type_confidence", "cell_type_final"]].to_csv(

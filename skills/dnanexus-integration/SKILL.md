@@ -185,6 +185,7 @@ import dxpy
 files = dxpy.find_data_objects(
     classname="file",
     name="*.bam",
+    name_mode="glob",
     properties={"experiment": "exp001"},
     project="project-xxxx"
 )
@@ -285,6 +286,7 @@ Process multiple files with the same analysis:
 files = dxpy.find_data_objects(
     classname="file",
     name="*.fastq",
+    name_mode="glob",
     project="project-xxxx"
 )
 

@@ -11,11 +11,13 @@
 - one reference mode:
   - `--fasta`, or
   - `--genome`
+- `--pipeline-version`: revision for `-r`. nf-core/pacsomatic has no release and
+  its default branch `main` takes `sample,fastq_1,fastq_2`; the BAM schema is on
+  `dev`. Pass `dev` or a commit SHA from it.
 
 ## Core Optional Controls
 
 - `--profile`: Nextflow profile list (for example `singularity,sanger`)
-- `--pipeline-version`: release pin for reproducibility
 - `--params-file`: structured pipeline params
 - `--resume`: rerun interrupted work
 - `--with-report`: Nextflow report path

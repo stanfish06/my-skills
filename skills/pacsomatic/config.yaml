@@ -4,6 +4,8 @@
 pipeline:
   name: nf-core/pacsomatic
   repo_url: https://github.com/nf-core/pacsomatic.git
+  # No nf-core/pacsomatic release exists; `main` is schema-incompatible with the
+  # BAM samplesheet this skill writes. Set to `dev` or a commit SHA on `dev`.
   default_version: ""
 
 runtime:

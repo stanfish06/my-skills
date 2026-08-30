@@ -12,11 +12,19 @@ Typical upstream command from official docs:
 
 ```bash
 nextflow run nf-core/pacsomatic \
+  -r dev \
   -profile <docker/singularity/.../institute> \
   --input samplesheet.csv \
   --outdir <OUTDIR> \
   --genome GRCh38
 ```
+
+The matched tumor-normal workflow and that samplesheet schema live on the
+`dev` branch. The repository's default branch `main` is still the nf-core
+template — its `assets/schema_input.json` requires `sample,fastq_1,fastq_2` —
+and there is no tagged release, so `nextflow run nf-core/pacsomatic` without
+`-r` resolves to an incompatible revision. Always pass `-r dev` or a commit SHA
+from `dev`.
 
 Important notes from docs:
 
@@ -183,6 +191,7 @@ module load nextflow/21.10.5
 export NXF_WORK="$WORKDIR"
 
 nextflow run nf-core/pacsomatic \
+  -r dev \
   -profile singularity,sanger \
   --input "$SAMPLESHEET" \
   --outdir "$OUTDIR" \
@@ -246,8 +255,8 @@ Reference: <https://nf-co.re/configs/sanger/>
 ## Best practices
 
 - Ensure BAMs are coordinate-valid and index files are available when possible.
-- Use explicit pipeline version with `--pipeline-version` for reproducibility.
-- Prefer pinning `--pipeline-version` when using fixed test datasets to avoid schema drift across pipeline revisions.
+- `--pipeline-version` is mandatory; the helper refuses to launch without it.
+- Pin a commit SHA rather than the `dev` branch name when a run must be reproducible — `dev` moves and its input schema has changed before.
 - Use `--params-file` for large parameter sets and keep script options minimal.
 - Prefer containerized profile (`singularity` or `docker`) on HPC.
 - Set `NXF_OPTS` memory ceiling if Nextflow launcher memory spikes.

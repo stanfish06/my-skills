@@ -11,6 +11,7 @@ Supports models like:
 For image editing, provide an input image along with an editing prompt.
 """
 
+import os
 import sys
 import json
 import base64
@@ -98,9 +99,9 @@ def generate_image(
         print("Error: 'requests' library not found. Install with: pip install requests")
         sys.exit(1)
 
-    # Check for API key
+    # Resolution order: --api-key, OPENROUTER_API_KEY, .env
     if not api_key:
-        api_key = check_env_file()
+        api_key = os.environ.get("OPENROUTER_API_KEY", "").strip() or check_env_file()
 
     if not api_key:
         print("❌ Error: OPENROUTER_API_KEY not found!")

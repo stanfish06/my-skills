@@ -156,8 +156,9 @@ Accepts:
 - AncestryDNA `.csv`
 - Standard VCF (extracts GT field)
 
-Auto-detects format from header lines. Normalises alleles to forward strand using
-a hard-coded reference table (avoids requiring external databases).
+Auto-detects format from header lines. No strand normalisation happens here —
+strand is resolved per SNP in `extract_genotypes.py` against the panel's reference
+and risk alleles.
 
 ### 2. Genotype Extraction (`extract_genotypes.py`)
 
@@ -165,6 +166,9 @@ For each SNP in the panel:
 1. Look up rsid in parsed data
 2. Return genotype string (e.g. `"AT"`, `"TT"`, `"AA"`)
 3. Flag as `"NOT_TESTED"` if absent (common for chip-to-chip variation)
+4. Score homozygous reference as 0 copies before attempting a strand flip. At the
+   three complementary SNPs (rs9939609, rs1801282, rs12934922) heterozygous and
+   homozygous-alternate calls stay strand-ambiguous and are taken as reported.
 
 ### 3. Risk Scoring (`score_variants.py`)
 
@@ -260,8 +264,14 @@ skills/nutrigx-advisor/
 ## Privacy
 
 All computation runs **locally**. No genetic data is transmitted. Input files are
-read-only; no raw genotype data appears in any output file (reports contain only
-gene names, SNP IDs, and risk categories).
+read-only.
+
+Outputs are **not** de-identified. `nutrigx_report.md` prints a Genotype column
+with a per-SNP call for every tested panel SNP, and `result.json` embeds the raw
+and normalised genotype strings. Two of those calls carry findings outside this
+skill's nutrition scope: rs429358 + rs7412 together give a complete APOE ε
+genotype, and rs671 gives ALDH2 status. Treat both output files as genetic data
+when sharing them.
 
 ---
 

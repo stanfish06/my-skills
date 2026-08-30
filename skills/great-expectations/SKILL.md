@@ -30,8 +30,8 @@ from scripts.expectations import (
 ```python
 from scripts.expectations import get_pandas_context, add_dataframe_asset
 
-context, datasource = get_pandas_context("my_datasource")
-batch_request = add_dataframe_asset(datasource, "users", df)
+context, data_source = get_pandas_context("my_datasource")
+batch_definition = add_dataframe_asset(data_source, "users")
 ```
 
 ### Create Expectation Suite
@@ -57,8 +57,9 @@ from scripts.expectations import run_validation
 results = run_validation(
     context,
     checkpoint_name="user_checkpoint",
-    batch_request=batch_request,
-    suite_name="user_suite"
+    batch_definition=batch_definition,
+    suite=suite,
+    df=df
 )
 
 if results['success']:
@@ -91,10 +92,11 @@ context.open_data_docs()
 ## Directory Structure
 
 ```
-great_expectations/
+gx/
 ├── great_expectations.yml     # Config
 ├── expectations/              # Expectation suites (JSON)
 ├── checkpoints/               # Checkpoint definitions
+├── validation_definitions/    # Validation definitions
 ├── plugins/                   # Custom expectations
 └── uncommitted/
     ├── data_docs/            # Generated HTML docs
@@ -114,6 +116,6 @@ great_expectations/
 ## Dependencies
 
 ```
-great_expectations>=0.18
+great_expectations>=1.0,<2.0
 pandas
 ```

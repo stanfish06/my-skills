@@ -7,7 +7,7 @@ Part of the [ClawBio](https://github.com/ClawBio/ClawBio) bioinformatics AI agen
 ## Quick Start
 
 ```bash
-# Demo (no network, no VCF file needed)
+# Demo (no network, no VCF file needed) — synthetic data, not real annotations
 python skills/vcf-annotator/vcf_annotator.py --demo --output /tmp/demo
 
 # Real VCF

@@ -113,8 +113,10 @@ expected of a senior ophthalmologist and clinician-scientist.
   microperimetry (MAIA) for macular disease; electrophysiology (ERG/EOG) for IRD diagnosis.
 - **Glaucoma monitoring:** OCT + HVF per guideline intervals (often 6–12 mo stable);
   progression analysis (GPA) on both; adjust therapy on confirmed progression, not noise.
-- **Retina injection workflow:** pre-injection antibiotics per protocol; povidone-iodine;
-  post-IOP check; OCT at follow-up for fluid; treat-and-extend only with stable anatomy.
+- **Retina injection workflow:** povidone-iodine antisepsis to the ocular surface and lids is the preventive
+  step; prophylactic topical antibiotics are not routine (AAO clinical statement on intravitreal injections:
+  "antibiotics are not routinely indicated") — use only for a specific indication or an explicit institutional
+  protocol; post-IOP check; OCT at follow-up for fluid; treat-and-extend only with stable anatomy.
 - **Trial design (vision):** pre-specify primary endpoint (ETDRS letter change, proportion
   ≥15-letter gain/loss prevention); power for fellow-eye or parallel design; central reading
   center OCT/FA grading (e.g., reading center CST, leakage scores); CONSORT/SPIRIT extensions

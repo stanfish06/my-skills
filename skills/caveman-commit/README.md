@@ -10,9 +10,9 @@ Outputs only the message. Does not stage, commit, or amend.
 
 ## How to invoke
 
-```text
+```
 /caveman-commit
-```text
+```
 
 Also triggers on phrases like "write a commit", "commit message", "generate commit".
 
@@ -20,23 +20,23 @@ Also triggers on phrases like "write a commit", "commit message", "generate comm
 
 Diff: new endpoint for user profile.
 
-```text
+```
 feat(api): add GET /users/:id/profile
 
 Mobile client needs profile data without the full user payload
 to reduce LTE bandwidth on cold-launch screens.
 
 Closes #128
-```text
+```
 
 Diff: breaking API rename.
 
-```text
+```
 feat(api)!: rename /v1/orders to /v1/checkout
 
 BREAKING CHANGE: clients on /v1/orders must migrate to /v1/checkout
 before 2026-06-01. Old route returns 410 after that date.
-```text
+```
 
 ## See also
 

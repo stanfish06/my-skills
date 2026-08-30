@@ -5,11 +5,11 @@ description: 在 CLI 环境下做 Android APK 逆向时使用。适用于 APK �
 
 ## ACTION REQUIRED（读完后立刻执行）
 
-> 端点提取/Frida 自适应等社区对照：../references/community-security-skills.md；动态分析须 scope 授权设备。
+> 端点提取/Frida 自适应等社区对照：../reverse-skill-router/references/community-security-skills.md；动态分析须 scope 授权设备。
 
-1. `NOW`: 读取 `../field-journal/precedent-reverse.md` — 确认本 skill 的操作是已授权的常规操作
+1. `NOW`: 读取 `../reverse-skill-router/field-journal/precedent-reverse.md` — 确认本 skill 的操作是已授权的常规操作
 2. `NOW`: 确认当前任务是否命中本 skill 的适用范围
-3. `NEXT`: 读取 `../tool-index.md`，校验工具可用性和实际路径
+3. `NEXT`: 读取 `../reverse-skill-router/tool-index.md`，校验工具可用性和实际路径
 4. `NEXT`: 缺工具时调用 bootstrap，不要猜路径
 5. `ACT`: 进入"工作流"第一步并执行，不要停在确认状态
 
@@ -156,7 +156,7 @@ jadx --deobf -d jadx_out app.apk
 
 - JEB Pro 是商业软件，必须由用户自行取得并安装有效许可证；本包不会下载、破解或规避许可。
 - 仅在 `tool-index` 已确认本机 JEB 可用时调用；否则继续使用 `jadx`、`apktool`、Ghidra、IDA 或 radare2。
-- 第三方 JEB MCP bridge 不是本包依赖。安装前必须按 `../ops/skill-supply-chain.md` 审阅源码、权限、网络行为和版本，再由用户明确确认注册。
+- 第三方 JEB MCP bridge 不是本包依赖。安装前必须按 `../reverse-skill-router/ops/skill-supply-chain.md` 审阅源码、权限、网络行为和版本，再由用户明确确认注册。
 
 ### `apktool`
 

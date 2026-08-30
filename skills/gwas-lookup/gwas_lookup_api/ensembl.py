@@ -14,23 +14,43 @@ from typing import Any, Optional
 from .base_client import BaseClient
 
 BASE_URL = "https://rest.ensembl.org"
+# GRCh37 lives on its own host; rest.ensembl.org returns GRCh38 mappings only
+GRCH37_BASE_URL = "https://grch37.rest.ensembl.org"
 RATE_INTERVAL = 0.15  # Ensembl allows ~15 req/sec
 
 
-def _make_client(cache_dir: Optional[Path], use_cache: bool) -> BaseClient:
+def _make_client(cache_dir: Optional[Path], use_cache: bool, base_url: str = BASE_URL) -> BaseClient:
     return BaseClient(
-        base_url=BASE_URL,
+        base_url=base_url,
         rate_interval=RATE_INTERVAL,
         cache_dir=cache_dir,
         use_cache=use_cache,
     )
 
 
+def _grch37_position(rsid: str, cache_dir: Optional[Path], use_cache: bool):
+    """GRCh37 start for `rsid`, or None. Second request; failures are non-fatal."""
+    client = _make_client(cache_dir, use_cache, base_url=GRCH37_BASE_URL)
+    try:
+        data = client.get(f"variation/human/{rsid}", params={"content-type": "application/json"})
+    except Exception:
+        return None
+    for m in data.get("mappings", []):
+        if m.get("assembly_name") == "GRCh37":
+            return m.get("start")
+    return None
+
+
 def get_variant_info(rsid: str, cache_dir: Optional[Path] = None, use_cache: bool = True) -> dict:
     """Fetch variant metadata from Ensembl /variation/human/{rsid}."""
     client = _make_client(cache_dir, use_cache)
     try:
-        data = client.get(f"variation/human/{rsid}", params={"content-type": "application/json"})
+        # pops=1 is required for the populations block; without it the
+        # allele-frequency figure is never written
+        data = client.get(
+            f"variation/human/{rsid}",
+            params={"content-type": "application/json", "pops": 1},
+        )
     except Exception as e:
         return {"source": "ensembl_variation", "status": "error", "message": str(e)}
 
@@ -76,6 +96,10 @@ def get_variant_info(rsid: str, cache_dir: Optional[Path] = None, use_cache: boo
 
     if grch37:
         result["pos_grch37"] = grch37.get("start")
+    else:
+        pos_37 = _grch37_position(rsid, cache_dir, use_cache)
+        if pos_37 is not None:
+            result["pos_grch37"] = pos_37
 
     result["populations"] = populations
     return result

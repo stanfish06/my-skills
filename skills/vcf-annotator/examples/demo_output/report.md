@@ -1,16 +1,17 @@
 # 🦖 ClawBio VCF Annotator Report
 
-**Input**: demo_variants.vcf  
-**Date**: 2026-04-18 19:07 UTC  
+**Input**: demo_variants.vcf (synthetic)  
+**Data**: SYNTHETIC — not real annotations  
+**Date**: 2026-08-30 11:48 UTC  
 **Total variants**: 5  
-**HIGH impact**: 3 | **MODERATE**: 2 | **LOW**: 0  
+**HIGH impact**: 2 | **MODERATE**: 3 | **LOW**: 0  
 **ClinVar Pathogenic/Likely Pathogenic**: 3
 
 ---
 
 ## Summary
 
-Annotated 5 variants against Ensembl VEP, ClinVar, and gnomAD. 3 variant(s) carry HIGH impact consequences. 3 variant(s) are classified as Pathogenic or Likely Pathogenic in ClinVar. Variants are ranked by predicted functional impact below.
+**Synthetic illustrative data — invented coordinates, frequencies and pathogenicity calls, not real annotations. Run without --demo to annotate against Ensembl VEP, ClinVar and gnomAD.** These 5 records were not annotated against any database. 2 variant(s) carry HIGH impact consequences. 3 variant(s) are classified as Pathogenic or Likely Pathogenic in ClinVar. Variants are ranked by predicted functional impact below.
 
 ---
 
@@ -18,9 +19,9 @@ Annotated 5 variants against Ensembl VEP, ClinVar, and gnomAD. 3 variant(s) carr
 
 | # | Gene | Variant | Consequence | Impact | ClinVar | gnomAD AF |
 |---|------|---------|-------------|--------|---------|-----------|
-| 1 | BRCA1 | 17:43044295 G>A | missense_variant | **HIGH** | Pathogenic | 0.000008 |
-| 2 | BRCA2 | 13:32316461 C>T | stop_gained | **HIGH** | Pathogenic | 0.000004 |
-| 3 | CFTR | 7:117548628 CTTT>C | frameshift_variant | **HIGH** | Pathogenic | 0.021000 |
+| 1 | BRCA2 | 13:32316461 C>T | stop_gained | **HIGH** | Pathogenic | 0.000004 |
+| 2 | CFTR | 7:117548628 CTTT>C | frameshift_variant | **HIGH** | Pathogenic | 0.021000 |
+| 3 | BRCA1 | 17:43044295 G>A | missense_variant | **MODERATE** | Pathogenic | 0.000008 |
 | 4 | APOE | 19:11089199 T>C | missense_variant | **MODERATE** | Risk factor | 0.147000 |
 | 5 | MTHFR | 1:69515 G>A | missense_variant | **MODERATE** | Benign/Likely benign | 0.312000 |
 
@@ -28,28 +29,12 @@ Annotated 5 variants against Ensembl VEP, ClinVar, and gnomAD. 3 variant(s) carr
 
 ## Detailed Annotations
 
-### 1. BRCA1 — 17:43044295 G>A
+### 1. BRCA2 — 13:32316461 C>T
 
 | Field | Value |
 |-------|-------|
-| **rsID** | rs80357382 |
-| **HGVS** | NM_007294.4:c.5266dupC |
-| **Consequence** | missense_variant |
-| **Impact** | HIGH |
-| **SIFT** | deleterious |
-| **PolyPhen** | probably_damaging |
-| **ClinVar** | Pathogenic |
-| **ClinVar Condition** | Hereditary breast and ovarian cancer syndrome |
-| **gnomAD AF (global)** | 0.000008 |
-| **gnomAD AF (AFR)** | 0.000000 |
-| **gnomAD AF (EUR)** | 0.000012 |
-
-### 2. BRCA2 — 13:32316461 C>T
-
-| Field | Value |
-|-------|-------|
-| **rsID** | rs80359550 |
-| **HGVS** | NM_000059.4:c.9976A>T |
+| **rsID** | DEMO_VAR_2 |
+| **HGVS** | N/A |
 | **Consequence** | stop_gained |
 | **Impact** | HIGH |
 | **SIFT** | deleterious |
@@ -60,12 +45,12 @@ Annotated 5 variants against Ensembl VEP, ClinVar, and gnomAD. 3 variant(s) carr
 | **gnomAD AF (AFR)** | 0.000000 |
 | **gnomAD AF (EUR)** | 0.000006 |
 
-### 3. CFTR — 7:117548628 CTTT>C
+### 2. CFTR — 7:117548628 CTTT>C
 
 | Field | Value |
 |-------|-------|
-| **rsID** | rs113993960 |
-| **HGVS** | NM_000492.4:c.1521_1523delCTT |
+| **rsID** | DEMO_VAR_3 |
+| **HGVS** | N/A |
 | **Consequence** | frameshift_variant |
 | **Impact** | HIGH |
 | **SIFT** | deleterious |
@@ -76,12 +61,28 @@ Annotated 5 variants against Ensembl VEP, ClinVar, and gnomAD. 3 variant(s) carr
 | **gnomAD AF (AFR)** | 0.000300 |
 | **gnomAD AF (EUR)** | 0.033000 |
 
+### 3. BRCA1 — 17:43044295 G>A
+
+| Field | Value |
+|-------|-------|
+| **rsID** | DEMO_VAR_1 |
+| **HGVS** | N/A |
+| **Consequence** | missense_variant |
+| **Impact** | MODERATE |
+| **SIFT** | deleterious |
+| **PolyPhen** | probably_damaging |
+| **ClinVar** | Pathogenic |
+| **ClinVar Condition** | Hereditary breast and ovarian cancer syndrome |
+| **gnomAD AF (global)** | 0.000008 |
+| **gnomAD AF (AFR)** | 0.000000 |
+| **gnomAD AF (EUR)** | 0.000012 |
+
 ### 4. APOE — 19:11089199 T>C
 
 | Field | Value |
 |-------|-------|
-| **rsID** | rs429358 |
-| **HGVS** | NM_000041.4:c.388T>C |
+| **rsID** | DEMO_VAR_4 |
+| **HGVS** | N/A |
 | **Consequence** | missense_variant |
 | **Impact** | MODERATE |
 | **SIFT** | tolerated |
@@ -96,8 +97,8 @@ Annotated 5 variants against Ensembl VEP, ClinVar, and gnomAD. 3 variant(s) carr
 
 | Field | Value |
 |-------|-------|
-| **rsID** | rs1801133 |
-| **HGVS** | NM_005957.5:c.665C>T |
+| **rsID** | DEMO_VAR_5 |
+| **HGVS** | N/A |
 | **Consequence** | missense_variant |
 | **Impact** | MODERATE |
 | **SIFT** | tolerated |

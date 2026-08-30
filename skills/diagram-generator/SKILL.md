@@ -8,7 +8,7 @@ description: generate, refine, validate, and render diagrams from natural langua
 ## ACTION REQUIRED（读完后立刻执行）
 
 1. `NOW`：确认当前任务是否命中本 skill 的适用范围
-2. `NOW`：读取 `../tool-index.md`，校验工具可用性和实际路径
+2. `NOW`：读取 `../reverse-skill-router/tool-index.md`，校验工具可用性和实际路径
 3. `NEXT`：缺工具时调用 bootstrap，不要猜路径
 4. `ACT`：进入"工作流"第一步并执行，不要停在确认状态
 

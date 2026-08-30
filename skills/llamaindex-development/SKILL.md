@@ -319,13 +319,23 @@ response = await agent.run("Find information about X")
 
 ### Caching
 
-```python
-from llama_index.core import Settings
-from llama_index.core.llms import LLMCache
+LlamaIndex has no LLM response cache. `IngestionCache` caches transformation and embedding output, keyed by node hash, and is passed to an `IngestionPipeline`:
 
-# Enable LLM response caching
-Settings.llm = OpenAI(model="gpt-4o")
-Settings.llm_cache = LLMCache()
+```python
+from llama_index.core.ingestion import IngestionCache, IngestionPipeline
+from llama_index.core.node_parser import SentenceSplitter
+from llama_index.embeddings.openai import OpenAIEmbedding
+
+cache = IngestionCache()
+pipeline = IngestionPipeline(
+    transformations=[SentenceSplitter(chunk_size=512), OpenAIEmbedding()],
+    cache=cache,
+)
+nodes = pipeline.run(documents=documents)
+
+# reuse across runs
+cache.persist("./ingestion_cache.json")
+cache = IngestionCache.from_persist_path("./ingestion_cache.json")
 ```
 
 ### Async Operations

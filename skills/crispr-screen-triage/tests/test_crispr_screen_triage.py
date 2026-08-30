@@ -33,6 +33,51 @@ def test_load_counts_rejects_non_numeric_counts(tmp_path):
         raise AssertionError("non-numeric counts should fail")
 
 
+def test_load_counts_rejects_negative_counts(tmp_path):
+    module = load_module()
+    bad = tmp_path / "negative.csv"
+    bad.write_text("guide_id,gene,control_count,treatment_count,essentiality,druggability\ng1,TP53,-1,10,0.5,0.5\n", encoding="utf-8")
+    try:
+        module.load_counts(bad)
+    except ValueError as exc:
+        assert "non-negative" in str(exc).lower()
+    else:
+        raise AssertionError("negative counts should fail")
+
+
+def test_load_counts_rejects_non_finite_values(tmp_path):
+    module = load_module()
+    for literal in ("nan", "inf", "-inf"):
+        bad = tmp_path / f"{literal}.csv"
+        bad.write_text(
+            f"guide_id,gene,control_count,treatment_count,essentiality,druggability\ng1,TP53,10,20,{literal},0.5\n",
+            encoding="utf-8",
+        )
+        try:
+            module.load_counts(bad)
+        except ValueError as exc:
+            assert "finite" in str(exc).lower()
+        else:
+            raise AssertionError(f"{literal} should fail")
+
+
+def test_cli_rejects_nan_without_traceback(tmp_path):
+    bad = tmp_path / "nan.csv"
+    bad.write_text(
+        "guide_id,gene,control_count,treatment_count,essentiality,druggability\ng1,TP53,10,20,nan,0.5\n",
+        encoding="utf-8",
+    )
+    completed = subprocess.run(
+        [sys.executable, str(MODULE_PATH), "--input", str(bad), "--output", str(tmp_path / "out")],
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert completed.returncode == 2
+    assert "ERROR:" in completed.stderr
+    assert "Traceback" not in completed.stderr
+
+
 def test_empty_input_handled(tmp_path):
     module = load_module()
     empty = tmp_path / "empty.csv"

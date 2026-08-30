@@ -52,6 +52,8 @@ The local preflight (`_shared/scripts/preflight.sh`) covers GPU / ckpts / tools
 on the **local** host. SLURM submission additionally needs cluster
 reachability, an `sbatch` binary, and a live partition. Run **both** preflights.
 
+> Prerequisite: the `_shared/` bundle is not vendored in this flat vault. Install `open-models-skills/proteina-complexa/_shared/` from `NVIDIA-BioNeMo/bionemo-agent-toolkit` to `.claude/skills/_shared/` (`scripts/preflight.sh`, `scripts/write_manifest.py`, `reference/hardware.md`), or substitute an inline `nvidia-smi` / `df -h` probe. `complexa-slurm/scripts/cluster_preflight.sh` is vendored and resolves.
+
 ```bash
 bash .claude/skills/_shared/scripts/preflight.sh           # local
 bash .claude/skills/complexa-slurm/scripts/cluster_preflight.sh   # cluster

@@ -3,6 +3,8 @@ name: ngs-epigenomics-peaks
 description: Dispatch ATAC-seq, ChIP-seq, CUT&RUN, or CUT&Tag requests to assay-specific QC, alignment, signal-track, peak-calling, consensus, and differential peak workflows.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # Epigenomics Peaks
 
 Use this skill as the epigenomics dispatcher for ATAC-seq, ChIP-seq, CUT&RUN, or CUT&Tag analysis. Hand off to the assay-specific deep skill once the assay type is known.

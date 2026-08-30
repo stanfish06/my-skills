@@ -16,13 +16,13 @@ created: 2026-06-13
 
 ## Skills (23)
 
-- [cavecrew](../notes/reasoning-ideation/cavecrew.md) — Decision guide for delegating to caveman-style subagents
-- [caveman](../notes/reasoning-ideation/caveman.md) — Ultra-compressed communication mode. Cuts output tokens 65% (measured) by speaking like caveman while keeping full technical accuracy
-- [caveman-commit](../notes/reasoning-ideation/caveman-commit.md) — Ultra-compressed commit message generator
-- [caveman-compress](../notes/reasoning-ideation/caveman-compress.md) — Compress natural language memory files (CLAUDE.md, todos, preferences) into caveman format to save input tokens
-- [caveman-help](../notes/reasoning-ideation/caveman-help.md) — Quick-reference card for all caveman modes, skills, and commands
-- [caveman-review](../notes/reasoning-ideation/caveman-review.md) — Ultra-compressed code review comments. Cuts noise from PR feedback while preserving the actionable signal
-- [caveman-stats](../notes/reasoning-ideation/caveman-stats.md) — Show real token usage and estimated savings for the current session
+- [cavecrew](../notes/reasoning-ideation/cavecrew.md) — When to delegate to `cavecrew-investigator` (locate code), `cavecrew-builder` (1-2 file edit) or `cavecrew-reviewer` (diff review) instead of working inline or using `Explore`
+- [caveman](../notes/reasoning-ideation/caveman.md) — Ultra-compressed communication mode that cuts output tokens while keeping technical accuracy
+- [caveman-commit](../notes/reasoning-ideation/caveman-commit.md) — Write a Conventional Commits message compressed to intent only
+- [caveman-compress](../notes/reasoning-ideation/caveman-compress.md) — Compress a memory file such as CLAUDE.md or a todo list into caveman format to save input tokens, keeping a readable backup
+- [caveman-help](../notes/reasoning-ideation/caveman-help.md) — Quick-reference card for caveman modes, skills and commands
+- [caveman-review](../notes/reasoning-ideation/caveman-review.md) — Compressed code review - one line per finding with location, problem and fix
+- [caveman-stats](../notes/reasoning-ideation/caveman-stats.md) — Show real token usage and estimated savings for the current session, read from the session log
 - [consciousness-council](../notes/reasoning-ideation/consciousness-council.md) — Run a multi-perspective Mind Council deliberation on any question, decision, or creative challenge
 - [decision-mapping](../notes/reasoning-ideation/decision-mapping.md) — Turn a loose idea into a sequenced map of investigation tickets, then drive them to resolution one at a time
 - [dhdna-profiler](../notes/reasoning-ideation/dhdna-profiler.md) — Extract cognitive patterns and thinking fingerprints from any text

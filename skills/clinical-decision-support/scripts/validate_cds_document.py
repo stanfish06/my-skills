@@ -121,8 +121,8 @@ class CDSValidator:
     def check_recommendation_grading(self):
         """Check for GRADE-style recommendation strength."""
         
-        # Look for GRADE notation (1A, 1B, 2A, 2B, 2C)
-        grade_pattern = r'GRADE\s*[12][A-C]|Grade\s*[12][A-C]|\(?\s*[12][A-C]\s*\)?'
+        # ACCP/CHEST notation is eight cells: 1A-1D and 2A-2D
+        grade_pattern = r'GRADE\s*[12][A-D]|Grade\s*[12][A-D]|\(?\s*[12][A-D]\s*\)?'
         grades = re.findall(grade_pattern, self.content, re.IGNORECASE)
         
         # Look for strong/conditional language
@@ -135,7 +135,7 @@ class CDSValidator:
         if grades:
             self.info.append(f"Found {len(grades)} GRADE-style recommendations")
         else:
-            self.warnings.append("No GRADE-style recommendation grading found (1A, 1B, 2A, etc.)")
+            self.warnings.append("No recommendation grading found (1A-1D, 2A-2D)")
         
         if strong_count > 0 or conditional_count > 0:
             self.info.append(f"Recommendation language: {strong_count} strong, {conditional_count} conditional")

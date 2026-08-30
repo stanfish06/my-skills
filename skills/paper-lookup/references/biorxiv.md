@@ -27,10 +27,10 @@ GET /details/biorxiv/{interval}/{cursor}/{format}
 | `interval` | `YYYY-MM-DD/YYYY-MM-DD` | Date range (inclusive). Keep ranges narrow (1-3 days) to avoid timeouts. |
 | | `N` (integer) | N most recent preprints |
 | | `Nd` (integer + "d") | Last N days |
-| `cursor` | Integer (default `0`) | Pagination offset (100 results per page) |
+| `cursor` | Integer (default `0`) | Record offset. `/details/` returns 30 records per request |
 | `format` | `json` (default), `xml` | Response format |
 
-Optional query parameter: `?category=neuroscience` (filter by category, use underscores for spaces)
+Optional query parameter: `?category=neuroscience` (filter by category, use underscores for spaces; an unrecognized name is silently ignored)
 
 **Examples:**
 ```
@@ -79,7 +79,7 @@ https://api.biorxiv.org/publisher/10.15252/2024-01-01/2024-06-01/0
 {
   "messages": [{
     "status": "ok",
-    "count": 100,
+    "count": 30,
     "total": "1029",
     "cursor": 0
   }],
@@ -107,7 +107,7 @@ https://api.biorxiv.org/publisher/10.15252/2024-01-01/2024-06-01/0
 
 ## Pagination
 
-All multi-result endpoints return **100 results per page**. Use `cursor` to paginate. The `messages` object tells you the `total` count.
+`cursor` is a record offset, not a page number. Page size is not uniform: on `api.biorxiv.org` the `/details/` endpoints return **30** records per request and `/pubs/` returns **100**. Advance `cursor` by the `count` reported in `messages`, never by an assumed page size -- stepping by 100 across `/details/` skips 70 records per page. `messages[0].total` gives the size of the full result set.
 
 ## Rate Limits
 
@@ -115,4 +115,8 @@ No documented rate limits. No authentication required. Be reasonable with reques
 
 ## Categories
 
-`animal-behavior-and-cognition`, `biochemistry`, `bioengineering`, `bioinformatics`, `biophysics`, `cancer-biology`, `cell-biology`, `clinical-trials`, `developmental-biology`, `ecology`, `epidemiology`, `evolutionary-biology`, `genetics`, `genomics`, `immunology`, `microbiology`, `molecular-biology`, `neuroscience`, `paleontology`, `pathology`, `pharmacology-and-toxicology`, `physiology`, `plant-biology`, `scientific-communication-and-education`, `synthetic-biology`, `systems-biology`, `zoology`
+Underscores for spaces. Hyphenated names are **not** recognized -- the API accepts them, ignores the filter, and returns the unfiltered set. Confirm the `category` echoed back in `messages` matches what you asked for before reporting a filtered result.
+
+`animal_behavior_and_cognition`, `biochemistry`, `bioengineering`, `bioinformatics`, `biophysics`, `cancer_biology`, `cell_biology`, `developmental_biology`, `ecology`, `evolutionary_biology`, `genetics`, `genomics`, `immunology`, `microbiology`, `molecular_biology`, `neuroscience`, `paleontology`, `pathology`, `pharmacology_and_toxicology`, `physiology`, `plant_biology`, `scientific_communication_and_education`, `synthetic_biology`, `systems_biology`, `zoology`
+
+`clinical_trials` and `epidemiology` are medRxiv categories, not bioRxiv ones; both are ignored here.

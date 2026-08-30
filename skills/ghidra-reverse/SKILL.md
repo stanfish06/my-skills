@@ -7,9 +7,9 @@ description: Use for free/open reverse engineering with Ghidra (headless or GUI)
 
 ## ACTION REQUIRED（读完后立刻执行）
 
-1. `NOW`: 读取 `../field-journal/precedent-reverse.md`
+1. `NOW`: 读取 `../reverse-skill-router/field-journal/precedent-reverse.md`
 2. `NOW`: 确认需要 **Ghidra**（无 IDA / 偏好开源 / 批量 headless）
-3. `NEXT`: 读 `../tool-index.md` 查 ghidra / ghidra-mcp 路径
+3. `NEXT`: 读 `../reverse-skill-router/tool-index.md` 查 ghidra / ghidra-mcp 路径
 4. `NEXT`: 缺工具 → bootstrap `ghidra-mcp`（若 manifest 支持）或按手动步骤装 Ghidra
 5. `ACT`: 导入样本 → 自动分析 → 导出关键函数反编译
 

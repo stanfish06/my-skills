@@ -74,25 +74,55 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def _mask_sql_literals(text: str) -> str:
-    patterns = [
-        r"'(?:''|[^'])*'",
-        r'"(?:\\"|[^"])*"',
-        r"`(?:``|[^`])*`",
-    ]
-    masked = text
-    for pattern in patterns:
-        masked = re.sub(pattern, lambda m: " " * len(m.group(0)), masked, flags=re.DOTALL)
-    return masked
+_SQL_QUOTES = ("'''", '"""', "'", '"', "`")
 
 
-def _strip_sql_comments(text: str) -> str:
-    no_block = re.sub(r"/\*.*?\*/", " ", text, flags=re.DOTALL)
-    return re.sub(r"--.*?$", " ", no_block, flags=re.MULTILINE)
+def _mask_sql_noise(text: str) -> tuple[str, bool]:
+    """Blank comments and quoted spans in one left-to-right pass, preserving offsets.
+
+    Returns the masked text and False when a literal or block comment is unterminated.
+    A single pass is required: stripping comments first lets a ``--`` inside a string
+    literal hide the rest of the line from every downstream guard.
+    """
+    out = list(text)
+    length = len(text)
+    balanced = True
+    index = 0
+    while index < length:
+        rest = text[index:]
+        if rest.startswith("--") or rest.startswith("#"):
+            end = text.find("\n", index)
+            end = length if end < 0 else end
+        elif rest.startswith("/*"):
+            end = text.find("*/", index + 2)
+            if end < 0:
+                end, balanced = length, False
+            else:
+                end += 2
+        else:
+            quote = next((q for q in _SQL_QUOTES if rest.startswith(q)), None)
+            if quote is None:
+                index += 1
+                continue
+            end = index + len(quote)
+            while end < length:
+                # a backslash escapes the next character, including the closing quote
+                if text[end] == "\\":
+                    end += 2
+                    continue
+                if text.startswith(quote, end):
+                    end += len(quote)
+                    break
+                end += 1
+            else:
+                end, balanced = length, False
+        out[index:end] = " " * (end - index)
+        index = end
+    return "".join(out), balanced
 
 
 def _analysis_sql(query: str) -> str:
-    return re.sub(r"\s+", " ", _mask_sql_literals(_strip_sql_comments(query))).strip().upper()
+    return re.sub(r"\s+", " ", _mask_sql_noise(query)[0]).strip().upper()
 
 
 def validate_read_only_sql(query: str) -> str:
@@ -100,7 +130,9 @@ def validate_read_only_sql(query: str) -> str:
     if not cleaned:
         raise QueryValidationError("Query is empty.")
 
-    masked = _mask_sql_literals(_strip_sql_comments(cleaned))
+    masked, balanced = _mask_sql_noise(cleaned)
+    if not balanced:
+        raise QueryValidationError("Unterminated string literal or comment in query.")
     masked_stripped = masked.strip()
     leading = masked_stripped.upper()
     if not (leading.startswith("SELECT") or leading.startswith("WITH")):

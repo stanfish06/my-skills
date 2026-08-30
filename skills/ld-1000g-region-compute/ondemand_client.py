@@ -252,21 +252,19 @@ class OnDemand1000GLDClient:
                 for s in samples:
                     f.write(f"{s}\t{s}\n")
             out_prefix = td_path / "ld_out"
-            # 1000G GRCh38 VCFs hold rsids in the ID column, not chr:pos:ref:alt.
-            # plink 1.9 `--set-missing-var-ids '@:#:$1:$2'` rewrites IDs into
-            # the canonical chr:pos:ref:alt form (@=chr, #=bp, $1/$2=alleles).
-            # `--set-all-var-ids` (plink2's spelling) is NOT available in 1.9;
-            # `--set-missing-var-ids` covers the case because every VCF row's
-            # ID field is `.` in this distribution, which 1.9 treats as missing.
-            sep = ":"
-            lead_panel = lead.replace("_", sep, 3)
-            partner_panel = [p.replace("_", sep, 3) for p in partner_list]
+            # Every ID in this distribution's VCFs is `.`, so plink 1.9's
+            # `--set-missing-var-ids '@:#:$1:$2'` names every variant. `$1`/`$2`
+            # are the two alleles in ASCII-sort order, NOT ref/alt (plink 1.9
+            # has no REF/ALT template; that needs plink2 --set-all-var-ids), so
+            # build the lookup ids the same way instead of positionally.
+            lead_panel = _panel_id(lead)
+            panel_to_ot = {_panel_id(p): p for p in partner_list}
 
             extract_path = td_path / "extract.txt"
             with extract_path.open("w") as f:
                 f.write(lead_panel + "\n")
-                for p in partner_panel:
-                    f.write(p + "\n")
+                for panel_id in panel_to_ot:
+                    f.write(panel_id + "\n")
 
             cmd = [
                 self.plink_bin,
@@ -299,7 +297,18 @@ class OnDemand1000GLDClient:
                 )
             pairs = _parse_ld(ld_path, lead_panel, notes)
             for p in pairs:
-                p.partner_variant_id = p.partner_variant_id.replace(":", "_", 3)
+                p.partner_variant_id = panel_to_ot.get(
+                    p.partner_variant_id, p.partner_variant_id
+                )
+            returned = {p.partner_variant_id for p in pairs}
+            absent = [ot for ot in panel_to_ot.values() if ot not in returned]
+            if absent:
+                notes.append(
+                    "no r² row from plink for "
+                    + ", ".join(sorted(absent))
+                    + " — variant absent from the 1000G panel, or dropped by "
+                    "the panel's own QC"
+                )
 
         return OnDemandLDResult(
             panel_id=self.panel_id, panel_version=self.panel_version,
@@ -310,6 +319,20 @@ class OnDemand1000GLDClient:
             fetched_at_utc=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             notes=notes,
         )
+
+
+def _panel_id(variant_id: str) -> str:
+    """Map an OT-style `chr_pos_ref_alt` id to the id plink 1.9 assigns it.
+
+    `--set-missing-var-ids '@:#:$1:$2'` writes the two alleles in ASCII-sort
+    order, so `1_109270398_G_A` is `1:109270398:A:G` in the panel.
+    """
+    parts = variant_id.split("_", 3)
+    if len(parts) < 4:
+        raise OnDemandLDError(f"cannot parse variant id: {variant_id!r}")
+    chrom, pos, a1, a2 = parts
+    first, second = sorted((a1, a2))
+    return f"{chrom}:{pos}:{first}:{second}"
 
 
 def _parse_ld(path: Path, lead: str, notes: list[str]) -> list[OnDemandLDPair]:
@@ -334,7 +357,8 @@ def _parse_ld(path: Path, lead: str, notes: list[str]) -> list[OnDemandLDPair]:
             id_a = row.get("SNP_A", "")
             id_b = row.get("SNP_B", "")
             partner = id_b if id_a == lead else (id_a if id_b == lead else None)
-            if partner is None:
+            # --ld-snp emits a lead-vs-lead diagonal row; it is not a partner
+            if partner is None or partner == lead:
                 continue
             r2_str = row.get("R2", "")
             if not r2_str or r2_str == "NA":

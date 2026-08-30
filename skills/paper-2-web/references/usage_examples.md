@@ -21,7 +21,7 @@ cp bibliography.bib input/neurips2025_paper/
 # Step 2: Generate all components
 python pipeline_all.py \
   --input-dir input/neurips2025_paper \
-  --output-dir output/ \
+  --output_dir output/ \
   --model-choice 1 \
   --generate-website \
   --generate-poster \
@@ -57,7 +57,7 @@ ls -R output/neurips2025_paper/
 # Using PDF input (LaTeX not available)
 python pipeline_all.py \
   --input-dir papers/genomics_preprint/ \
-  --output-dir output/genomics_web/ \
+  --output_dir output/genomics_web/ \
   --model-choice 1 \
   --generate-website
 
@@ -122,7 +122,7 @@ mkdir -p batch_input/
 # Batch process
 python pipeline_all.py \
   --input-dir batch_input/ \
-  --output-dir batch_output/ \
+  --output_dir batch_output/ \
   --model-choice 1 \
   --generate-website \
   --enable-logo-search
@@ -155,7 +155,7 @@ python pipeline_all.py \
 # Generate poster with QR codes and links
 python pipeline_all.py \
   --input-dir papers/ismb_submission/ \
-  --output-dir output/ismb_poster/ \
+  --output_dir output/ismb_poster/ \
   --model-choice 1 \
   --generate-poster \
   --poster-width-inches 48 \
@@ -220,7 +220,7 @@ python pipeline_light.py \
 ```bash
 python pipeline_all.py \
   --input-dir [latex_dir] \
-  --output-dir [output_dir] \
+  --output_dir [output_dir] \
   --model-choice 1 \
   --generate-website \
   --generate-poster \
@@ -239,7 +239,7 @@ python pipeline_all.py \
 ```bash
 python pipeline_all.py \
   --input-dir [pdf_dir] \
-  --output-dir [output_dir] \
+  --output_dir [output_dir] \
   --model-choice 1 \
   --generate-website
 ```
@@ -256,7 +256,7 @@ python pipeline_all.py \
 ```bash
 python pipeline_all.py \
   --input-dir [latex_dir] \
-  --output-dir [output_dir] \
+  --output_dir [output_dir] \
   --model-choice 1 \
   --generate-poster \
   --poster-width-inches [width] \
@@ -370,7 +370,7 @@ mkdir -p input/xhs_genomics/
 # Use GPT-3.5-turbo for simple papers
 python pipeline_all.py \
   --input-dir [paper_dir] \
-  --output-dir [output_dir] \
+  --output_dir [output_dir] \
   --model-choice 3
 
 # Generate only needed components

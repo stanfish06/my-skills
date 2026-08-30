@@ -61,12 +61,21 @@ Required:
 - normal sample ID
 - output directory
 - exactly one reference mode: `--fasta` or `--genome`
+- pipeline revision (`--pipeline-version`, passed to Nextflow as `-r`)
 
 Optional:
 - profile, resources, scheduler account/queue
-- pipeline version (`-r`)
 - params file, resume/report/dag flags
 - `--dry-run` and/or `--run`
+
+**Upstream revision.** nf-core/pacsomatic has no tagged release. Its default
+branch `main` is still the nf-core template: `assets/schema_input.json` there
+requires `sample,fastq_1,fastq_2`, so it rejects the BAM samplesheet this skill
+writes. The matched tumor-normal BAM schema
+(`patient,sample,status,bam,pbi`) lives on `dev`. `run_pacsomatic.py` therefore
+refuses to build a command without `--pipeline-version`. `dev` is a moving
+branch — pass a commit SHA from it when a run must be reproducible, and read
+`assets/schema_input.json` at that revision before launching.
 
 ## Workflow
 
@@ -102,6 +111,7 @@ python scripts/run_pacsomatic.py \
   --outdir /path/to/output \
   --genome GRCh38 \
   --profile singularity,sanger \
+  --pipeline-version dev \
   --dry-run
 ```
 
@@ -117,6 +127,7 @@ python scripts/run_pacsomatic.py \
   --outdir /path/to/output \
   --genome GRCh38 \
   --profile singularity,sanger \
+  --pipeline-version dev \
   --executor slurm \
   --queue compute \
   --project my_account \

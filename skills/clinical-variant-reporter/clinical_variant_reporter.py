@@ -144,6 +144,7 @@ def build_evidence_from_cache(record: VcfRecord, cache: dict[str, dict]) -> Vari
         is_missense=cached.get("is_missense", False),
         is_synonymous=cached.get("is_synonymous", False),
         is_inframe_indel=cached.get("is_inframe_indel", False),
+        annotation_failed=not cached,
     )
 
 
@@ -296,6 +297,7 @@ def annotate_variants_vep(
                 evidence_list.append(VariantEvidence(
                     chrom=rec.chrom, pos=rec.pos, ref=rec.ref, alt=rec.alt,
                     gene=rec.info.get("GENE", ""),
+                    annotation_failed=True,
                 ))
             continue
 
@@ -312,6 +314,7 @@ def annotate_variants_vep(
                 evidence_list.append(VariantEvidence(
                     chrom=rec.chrom, pos=rec.pos, ref=rec.ref, alt=rec.alt,
                     gene=rec.info.get("GENE", ""),
+                    annotation_failed=True,
                 ))
 
         time.sleep(VEP_RATE_LIMIT_SECONDS)

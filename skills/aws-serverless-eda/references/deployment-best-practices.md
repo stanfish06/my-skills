@@ -162,6 +162,8 @@ Resources:
 **Comprehensive pipeline**:
 
 ```typescript
+import * as cdk from 'aws-cdk-lib';
+import * as iam from 'aws-cdk-lib/aws-iam';
 import * as codepipeline from 'aws-cdk-lib/aws-codepipeline';
 import * as codepipeline_actions from 'aws-cdk-lib/aws-codepipeline-actions';
 
@@ -200,6 +202,15 @@ pipeline.addStage({
   ],
 });
 
+// One deployment role per stage, granted only what that stack's own resources need.
+// Add statements with addToPolicy() naming the concrete resource ARNs.
+const testDeployRole = new iam.Role(this, 'TestDeployRole', {
+  assumedBy: new iam.ServicePrincipal('cloudformation.amazonaws.com'),
+});
+const prodDeployRole = new iam.Role(this, 'ProdDeployRole', {
+  assumedBy: new iam.ServicePrincipal('cloudformation.amazonaws.com'),
+});
+
 // Test stage
 pipeline.addStage({
   stageName: 'Test',
@@ -208,7 +219,9 @@ pipeline.addStage({
       actionName: 'Deploy_Test',
       templatePath: buildOutput.atPath('packaged.yaml'),
       stackName: 'test-stack',
-      adminPermissions: true,
+      adminPermissions: false,
+      deploymentRole: testDeployRole,
+      cfnCapabilities: [cdk.CfnCapabilities.NAMED_IAM],
     }),
     new codepipeline_actions.CodeBuildAction({
       actionName: 'Integration_Tests',
@@ -230,12 +243,21 @@ pipeline.addStage({
       actionName: 'Deploy_Prod',
       templatePath: buildOutput.atPath('packaged.yaml'),
       stackName: 'prod-stack',
-      adminPermissions: true,
+      adminPermissions: false,
+      deploymentRole: prodDeployRole,
+      cfnCapabilities: [cdk.CfnCapabilities.NAMED_IAM],
       runOrder: 2,
     }),
   ],
 });
 ```
+
+`adminPermissions` is a required prop, so set it to `false` and pass a `deploymentRole`
+scoped to the stack's resources. `adminPermissions: true` attaches
+`actions: ['*'], resources: ['*']` to a generated role and defaults capabilities to
+`NAMED_IAM`, so anyone who can land a template in the pipeline gets account-wide admin
+plus IAM creation. Grant only the actions the stack's own resources need, per
+`security-best-practices.md:46`.
 
 ### GitHub Actions
 

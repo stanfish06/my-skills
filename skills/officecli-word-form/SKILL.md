@@ -39,7 +39,7 @@ This skill teaches what a real form needs, not every CLI flag. When a prop / ali
 
 ## Mental Model & Inheritance
 
-A Word form is a `.docx` plus four OpenXML payload layers plain-docx skills do not touch: **`<w:sdt>`** content controls (types: text / richtext / dropdown / combobox / date / picture / group), **`<w:ffData>`** legacy FormField (still the only way to get a real checkbox — SDT `type=checkbox` is not implemented), **`<w:fldChar>`** complex fields (MERGEFIELD, REF, PAGEREF, SEQ, IF — template-time, not user-fill), and **`documentProtection`** (the lock that makes non-field text read-only in Word — and, on the CLI, `protection=forms` locks non-field content edits (those need `--force` or `raw-set`) but still allows form-field (SDT) edits, which is the point of forms protection).
+A Word form is a `.docx` plus four OpenXML payload layers plain-docx skills do not touch: **`<w:sdt>`** content controls (types: text / richtext / dropdown / combobox / date / picture / group / checkbox), **`<w:ffData>`** legacy FormField (a compatibility path; SDT `type=checkbox` is a real Word check-box content control and is the default choice), **`<w:fldChar>`** complex fields (MERGEFIELD, REF, PAGEREF, SEQ, IF — template-time, not user-fill), and **`documentProtection`** (the lock that makes non-field text read-only in Word — and, on the CLI, `protection=forms` locks non-field content edits (those need `--force` or `raw-set`) but still allows form-field (SDT) edits, which is the point of forms protection).
 
 **No inheritance from docx v2.** docx's Delivery Gate (cover-fill %, live-PAGE check) does NOT apply — form QA is `view forms` + `query sdt alias+tag` + `protectionEnforced`.
 
@@ -86,14 +86,14 @@ A real fillable form requires **structured fields** + **document protection**.
 
 | Approach | Word user sees | CLI-readable | Real form? |
 |---|---|---|---|
-| SDT controls + `protection=forms` | Gray-bordered fields; rest locked | `query sdt` / `view forms` | **YES** |
-| FormField checkbox + `protection=forms` | Real clickable checkbox; rest locked | `query formfield` / `view forms` | **YES** (checkbox only) |
+| SDT controls + `protection=forms` | Gray-bordered fields, ☒/☐ check boxes; rest locked | `query sdt` / `view forms` | **YES** |
+| FormField + `protection=forms` | Legacy clickable checkbox; rest locked | `query formfield` / `view forms` | **YES** (compatibility path) |
 | MERGEFIELD placeholders | `«CustomerName»` merged by downstream engine | `query field` | **YES** (template-time) |
 | Underscores `___` / blank lines | Visual-only; whole doc editable | No — no structured fields | **NO** |
 
 **Do not simulate fields with underscores.** `姓名：_______________` produces zero structured data and leaks past every verification. Always use `--type sdt` or `--type formfield`.
 
-**Checkbox is formfield, NOT SDT.** `--type sdt --prop type=checkbox` exits 1 (`SDT type 'checkbox' is not implemented`). Every checkbox in every recipe uses `--type formfield --prop type=checkbox`.
+**Checkbox is an SDT.** `--type sdt --prop type=checkbox --prop checked=true` creates a real Word check-box content control (a `<w14:checkbox>` marker in `sdtPr`; `checked=true` renders ☒, `false` renders ☐) and `get` reads back `type=checkbox checked=…`. Use it by default. `--type formfield --prop type=checkbox` remains valid for documents that must open in legacy FormField-only consumers.
 
 **MERGEFIELD is a separate track.** `view forms` lists SDT + formfield only; `query field` lists complex fields only. Two disjoint inventories; both valid in one file.
 
@@ -107,14 +107,14 @@ Every form must satisfy these — Delivery Gate enforces each as an executable c
 4. Every date SDT shows the intended `format=...`.
 5. Every locked SDT shows `lock=sdtLocked` / `contentLocked` / `sdtContentLocked` as intended.
 6. Zero `WARNING: UNSUPPORTED` in build log.
-7. Zero `type=checkbox` on any SDT.
+7. Every checkbox SDT reads back `type=checkbox` with the intended `checked=`.
 8. Every formfield `name` ≤ 20 characters.
 9. Zero underscore-line / blank-line placeholders.
 10. Field types match user intent (short text / paragraph / fixed list / list+custom / date / boolean).
 
 ## Three Paths (core decision)
 
-SDT props are **first-class on `add`** — confirm the current set with `officecli help docx sdt`. Today that includes `type, tag, alias, text, items, format, lock, placeholder/placeholderText, date.*` and the SDT types `text / richtext / dropdown / combobox / date / group / picture`. So most forms are pure `add` — no raw-set, no Word template. Two paths remain only for the genuinely-unreachable cases. **Pick the path before writing a single command.**
+SDT props are **first-class on `add`** — confirm the current set with `officecli help docx sdt`. Today that includes `type, tag, alias, text, items, format, lock, checked, placeholder/placeholderText, date.*` and the SDT types `text / richtext / dropdown / combobox / date / group / picture / checkbox`. So most forms are pure `add` — no raw-set, no Word template. Two paths remain only for the genuinely-unreachable cases. **Pick the path before writing a single command.**
 
 ### Path A — Pure CLI (the default for almost everything)
 
@@ -137,20 +137,18 @@ officecli add "$FILE" /body --type sdt --prop type=text --prop tag=full_name \
 
 ### Path B — CLI + `raw-set` bridge (only an attribute help does NOT expose)
 
-**Use when**: you need an SDT attribute that `help docx sdt` does not list (e.g. a `<w:listItem>` whose `w:value` must differ from its display text, or a sdtPr child with no `--prop`). `raw-set` is OfficeCLI's universal OpenXML fallback — `officecli --help` lists it as a top-level command. For ordinary dropdowns use `--prop items=` (Path A); raw-set here is the exception, not the rule.
+**Use when**: you need a sdtPr child that `help docx sdt` exposes no `--prop` for. `raw-set` is OfficeCLI's universal OpenXML fallback — `officecli --help` lists it as a top-level command. Display-text-≠-stored-value dropdowns are NO LONGER here: `items=` takes `Display|VALUE` pairs directly (Path A). raw-set is the exception, not the rule.
 
 ```bash
-# Display text ≠ stored value — not expressible via items=, so inject the listItems directly:
-officecli add "$FILE" /body --type sdt --prop type=dropdown --prop alias="Department" --prop tag=dept
-officecli raw-set "$FILE" /document \
-  --xpath "//w:sdt[w:sdtPr/w:tag/@w:val='dept']/w:sdtPr/w:dropDownList" \
-  --action append \
-  --xml '<w:listItem xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" w:displayText="Engineering" w:value="ENG"/><w:listItem xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" w:displayText="Finance" w:value="FIN"/>'
+# Display text ≠ stored value — one add, no raw-set:
+officecli add "$FILE" /body --type sdt --prop type=dropdown --prop alias="Department" --prop tag=dept \
+  --prop items="Engineering|ENG,Finance|FIN,Human Resources|HR"
+officecli get "$FILE" '/body/sdt[1]'   # expect: type=dropdown items=Engineering|ENG,Finance|FIN,...
 ```
 
 ### Path C — Word template (only what no API reaches)
 
-**Use when**: a **real SDT checkbox** (`type=checkbox` still exits 1 — use a legacy FormField instead, see §Legacy FormField), a `placeholderDocPart` prompt-text part, or custom richtext appearance / cross-part nesting beyond `--prop` reach. Picture and grouped SDTs are NO LONGER here — they add fine via Path A.
+**Use when**: a `placeholderDocPart` prompt-text part, a `buildingBlockGallery` / `repeatingSection` control, or custom richtext appearance / cross-part nesting beyond `--prop` reach. Picture, grouped, and checkbox SDTs are NO LONGER here — all three add fine via Path A.
 
 ```bash
 # One-time in Word: Developer tab → Insert Content Control → Save as template.docx
@@ -170,14 +168,15 @@ officecli set "$FILE" / --prop protection=forms
 | dropdown / combobox **with options** | **A** | `--prop items="A,B,C"` |
 | date SDT with non-default format | **A** | `--prop format="yyyy年MM月dd日"` |
 | signature picture SDT, grouped SDT | **A** | `--prop type=picture` / `type=group` add directly |
-| dropdown whose stored value ≠ display text | **B** | raw-set append `<w:listItem w:value=…>` |
-| real checkbox | **FormField** | `--type formfield --prop type=checkbox` (see §Legacy FormField) |
+| dropdown whose stored value ≠ display text | **A** | `--prop items="Engineering|ENG,Finance|FIN"` |
+| real checkbox | **A** | `--prop type=checkbox --prop checked=false` |
+| checkbox for a legacy FormField-only consumer | **FormField** | `--type formfield --prop type=checkbox` (see §Legacy FormField) |
 | mail-merge placeholder | **MERGEFIELD** | `--type field --prop fieldType=mergefield` (see §MERGEFIELD) |
-| real SDT checkbox / placeholder part / custom appearance | **C** | build skeleton in Word, fill via CLI |
+| placeholder part / buildingBlockGallery / custom appearance | **C** | build skeleton in Word, fill via CLI |
 
-## Quick Start — Path A + FormField (minimal intake form)
+## Quick Start — Path A (minimal intake form)
 
-Two SDT text fields, one checkbox, protection. Paste and adapt; this is the smallest form worth shipping.
+A text SDT, a date SDT, a checkbox SDT, protection. Paste and adapt; this is the smallest form worth shipping.
 
 ```bash
 FILE=intake.docx
@@ -204,8 +203,8 @@ officecli add "$FILE" /body --type sdt --prop type=date \
 
 officecli add "$FILE" /body --type paragraph \
   --prop text="Read and agree to employee handbook" --prop size=11 --prop spaceAfter=4pt
-officecli add "$FILE" /body --type formfield \
-  --prop type=checkbox --prop name=agree_handbook --prop checked=false
+officecli add "$FILE" /body --type sdt --prop type=checkbox \
+  --prop alias="Handbook Agreement" --prop tag=agree_handbook --prop checked=false
 
 officecli set "$FILE" '/body/sdt[1]' --prop lock=sdtlocked
 officecli set "$FILE" '/body/sdt[2]' --prop lock=sdtlocked
@@ -290,7 +289,7 @@ officecli get "$FILE" '/body/sdt[N]'   # expect: type=date format=yyyy年MM月dd
 
 ## Path C — Word template workflow
 
-For fields CLI cannot express (signature `picture` SDT, real SDT checkbox, `placeholderDocPart` prompt text, grouped SDTs, custom richtext styling), build the skeleton once in Word, then fill via CLI.
+For fields CLI cannot express (`placeholderDocPart` prompt text, `buildingBlockGallery` / `repeatingSection` controls, custom richtext styling), build the skeleton once in Word, then fill via CLI.
 
 **One-time in Word:** File → Options → Customise Ribbon → Developer. Developer tab → Insert Picture / Check Box / Grouping Content Control → right-click → Properties → set Title (`alias`) + Tag. Save as `template.docx`.
 
@@ -353,12 +352,12 @@ Nested wrappers like `{ IF { MERGEFIELD X } = "Y" { REF bm } "fallback" }` are n
 
 ## Legacy FormField
 
-Use FormField **when you need a real checkbox**. For text/dropdown, prefer SDT.
+Use FormField **only for legacy compatibility** — a consumer that reads `<w:ffData>` but not content controls. Checkboxes, text, and dropdowns are all better served by SDT (§Path A).
 
 `help docx formfield`: `type` (text/checkbox/check/dropdown), `name` (required, **≤ 20 chars** — OpenXML schema MaxLength; add passes longer but `validate` rejects), `text` (text only, alias `value`), `checked` (checkbox only).
 
 ```bash
-# CHECKBOX — the only real checkbox (SDT type=checkbox is not implemented)
+# CHECKBOX — legacy form of an SDT checkbox
 officecli add "$FILE" /body --type formfield --prop type=checkbox \
   --prop name=agree_terms --prop checked=false
 
@@ -366,7 +365,7 @@ officecli add "$FILE" /body --type formfield --prop type=checkbox \
 officecli add "$FILE" /body --type formfield --prop type=text \
   --prop name=emp_name --prop text="Enter name"
 
-# DROPDOWN formfield — items NOT settable via CLI; use Word template or SDT Path B
+# DROPDOWN formfield — items NOT settable via CLI; use an SDT dropdown with --prop items=
 officecli add "$FILE" /body --type formfield --prop type=dropdown --prop name=dept_select
 
 # Read / modify by name (stable) or 1-based index
@@ -548,7 +547,7 @@ officecli query "$FILE" field     # expect 2 MERGEFIELDs: CustomerName, Contract
 
 ```
 Date → type=date | Fixed list → type=dropdown | List + custom → type=combobox
-Short text → type=text | Long text → type=richtext | Boolean → formfield checkbox
+Short text → type=text | Long text → type=richtext | Boolean → type=checkbox
 ```
 
 **Typography scale.** Spacing unit trap: `spaceBefore` / `spaceAfter` / `spaceLine` default to **twips** (1/20 pt) — always write `spaceBefore=18pt`.
@@ -566,7 +565,7 @@ Short text → type=text | Long text → type=richtext | Boolean → formfield c
 
 **Field ordering.** (1) Personal / ID, (2) role / classification, (3) dates, (4) supplemental free-text, (5) confirmation / signature.
 
-**Yes/No + conditional follow-up** (common in compliance / medical intake): formfield checkbox followed by a richtext SDT whose `alias` carries the cue — e.g. `--type formfield --prop type=checkbox --prop name=has_cond` then `--type sdt --prop type=richtext --prop alias="If yes, explain" --prop tag=cond_detail --prop text="If yes, explain here"`.
+**Yes/No + conditional follow-up** (common in compliance / medical intake): a checkbox SDT followed by a richtext SDT whose `alias` carries the cue — e.g. `--type sdt --prop type=checkbox --prop alias="Has condition" --prop tag=has_cond --prop checked=false` then `--type sdt --prop type=richtext --prop alias="If yes, explain" --prop tag=cond_detail --prop text="If yes, explain here"`.
 
 **Signature block order.** Label on its own paragraph, SDT on the next paragraph (with `spaceBefore=18pt` on the label, `spaceAfter=4pt` on the SDT). Never `Label: SDT` inline — Word renders the runs as touching, visually stuck together.
 
@@ -630,9 +629,9 @@ PROT=$(officecli get "$FILE" / --json | jq -r '.data.results[0].format.protectio
 [ "$PROT" = "forms" ] && echo "Gate 5 OK (protection=forms enforced)" || { echo "REJECT Gate 5: protection is '$PROT', expected 'forms'"; exit 1; }
 officecli view "$FILE" forms | head -40   # visual spot-check: every dropdown shows items=; every date shows format=; every locked SDT shows lock=
 
-# Gate 6 — No type=checkbox leaked onto any SDT
-BAD_CB=$(officecli query "$FILE" sdt --json | jq '[.data.results[] | select(.format.type == "checkbox")] | length')
-[ "$BAD_CB" -eq 0 ] && echo "Gate 6 OK (no SDT checkbox — formfield only)" || { echo "REJECT Gate 6: $BAD_CB SDT with type=checkbox"; exit 1; }
+# Gate 6 — Every checkbox SDT carries an explicit checked= state
+CB_BAD=$(officecli query "$FILE" sdt --json | jq '[.data.results[] | select(.format.type == "checkbox") | select(.format.checked == null or .format.checked == "")] | length')
+[ "$CB_BAD" -eq 0 ] && echo "Gate 6 OK (every checkbox SDT reads back checked=)" || { echo "REJECT Gate 6: $CB_BAD checkbox SDT(s) with no checked= readback"; exit 1; }
 ```
 
 **Why `view issues` is not a gate.** It runs only prose-style checks (first-line-indent, heading size) and flags every form label as `Body paragraph missing first-line indent` — a false-positive avalanche on forms. Ignore for this skill. Use `validate` (schema integrity) and `view forms` (field inventory).
@@ -641,7 +640,6 @@ BAD_CB=$(officecli query "$FILE" sdt --json | jq '[.data.results[] | select(.for
 
 | # | Issue | Behavior | Workaround |
 |---|---|---|---|
-| K1 | SDT `type=checkbox` not implemented | `add ... --type sdt --prop type=checkbox` → `Error: SDT type 'checkbox' is not implemented`, exit 1 (error now lists the supported types incl. group/picture) | Use `--type formfield --prop type=checkbox` |
 | K3 | SDT `maxlength` UNSUPPORTED on `add` | `WARNING: UNSUPPORTED: maxlength`, exit 2; element still created. (`items` / `format` / `lock` / `placeholderText` are NOW supported on `add` — only `maxlength` is rejected; `name` is accepted but a no-op on SDT — use `alias`/`tag`) | Enforce length downstream; use `text` for initial content |
 | K4 | SDT `items` / `format` / `type` not settable AFTER creation | `set --prop items=...` → `UNSUPPORTED props (use raw-set instead)`. (They ARE settable on `add` — set them inline at creation) | Set at `add` time; to change later, Path B `raw-set` or `remove` + re-add |
 | K5 | FormField `maxlength` UNSUPPORTED | `WARNING: UNSUPPORTED: maxlength`; formfield created | Enforce length in downstream validation |
@@ -662,14 +660,13 @@ Some polish is out of CLI scope. Hand the file to a human for these; none are re
 
 | Need | Why open Word |
 |---|---|
-| Real SDT checkbox with specific locking | `type=checkbox` exits 1; use Developer → Check Box Content Control (or a legacy FormField checkbox via CLI) |
 | Prompt text ("Click here to enter a date") | Needs `placeholderDocPart` in `/word/glossary/document.xml` |
 | Custom richtext default appearance | Adjust the referenced style in Word's style pane |
 | Watermark resize | `width` / `height` not settable; drag shape handles |
 
-(`picture` and `group` SDTs add directly via `--type sdt --prop type=picture` / `type=group` — no longer Phase-2 items.)
+(`picture`, `group`, and `checkbox` SDTs add directly via `--type sdt --prop type=picture` / `type=group` / `type=checkbox` — no longer Phase-2 items.)
 
-For the first four, build the skeleton once (Path C) and reuse.
+For the first three, build the skeleton once (Path C) and reuse.
 
 ## Help pointer
 

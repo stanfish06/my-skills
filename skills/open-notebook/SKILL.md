@@ -38,11 +38,15 @@ Deploy Open Notebook using Docker Compose:
 # Download the docker-compose file
 curl -o docker-compose.yml https://raw.githubusercontent.com/lfnovo/open-notebook/main/docker-compose.yml
 
-# Set the required encryption key
-export OPEN_NOTEBOOK_ENCRYPTION_KEY="your-secret-key-here"
+# Set the required encryption key. The compose file hardcodes
+# OPEN_NOTEBOOK_ENCRYPTION_KEY=change-me-to-a-secret-string with no ${...}
+# interpolation, so an exported shell variable is ignored -- edit the file.
+KEY=$(openssl rand -hex 32)
+sed "s/change-me-to-a-secret-string/$KEY/" docker-compose.yml > docker-compose.yml.tmp
+mv docker-compose.yml.tmp docker-compose.yml
 
 # Launch the services
-docker-compose up -d
+docker compose up -d
 ```
 
 Access the application:
@@ -281,5 +285,6 @@ Open Notebook uses a modern stack:
 - Open Notebook requires Docker for deployment
 - At least one AI provider must be configured for AI features to work
 - For free local inference without API costs, use Ollama
-- The `OPEN_NOTEBOOK_ENCRYPTION_KEY` must be set before first launch and kept consistent across restarts
+- The `OPEN_NOTEBOOK_ENCRYPTION_KEY` must be edited into `docker-compose.yml` before first launch and kept consistent across restarts; it encrypts the provider API keys stored in the database
+- The bundled SurrealDB defaults to `root:root`; those two *do* interpolate, so `export SURREAL_USER=... SURREAL_PASSWORD=...` works for them, and the compose file warns to set them before exposing the instance to a network
 - All data is stored locally in Docker volumes for complete data sovereignty

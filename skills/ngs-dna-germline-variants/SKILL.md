@@ -3,6 +3,8 @@ name: ngs-dna-germline-variants
 description: Run or plan deep germline WGS, WES, targeted-panel, cohort, or trio variant-calling workflows with reference-build, known-sites, QC, joint-calling, and annotation checks.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # Germline DNA Variants
 
 Use this skill for germline WGS, WES, or inherited-disease panel analysis from FASTQ, BAM, or CRAM. If the request is tumor-only, tumor-normal, or low-frequency molecular-barcode panel calling, use a somatic or UMI-panel skill instead.

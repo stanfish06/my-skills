@@ -63,7 +63,7 @@ Migrate a .NET 10 project or solution to .NET 11, systematically resolving all b
    - **Compression API usage** → DeflateStream/GZipStream/ZipArchive changes relevant
    - **TAR API usage** → Header checksum validation and HardLink entry changes relevant
    - **`NamedPipeClientStream` usage with `SafePipeHandle`** → SYSLIB0063 constructor obsoletion relevant
-   - **`BackgroundService` usage** → Unhandled exceptions now stop the host
+   - **`BackgroundService` usage** → A failing `ExecuteAsync` now makes the host exit non-zero
    - **`Microsoft.OpenApi` direct usage** → v3 API breaking changes in ASP.NET Core OpenAPI
    - **EF Core SQL Server with Entra ID auth** → SqlClient 7.0 auth dependency changes
    - **NativeAOT native libraries on Unix** → Output filename prefix changed
@@ -148,7 +148,7 @@ These changes compile successfully but alter runtime behavior. Review each one a
 
 9. **Mono launch target for .NET Framework** — No longer set automatically. If using Mono for .NET Framework apps on Linux, specify explicitly.
 
-10. **Unhandled BackgroundService exceptions stop the host** — Exceptions from `ExecuteAsync()` now propagate and crash the host. Add try/catch in background services that should not bring down the application.
+10. **`RunAsync`/`StopAsync` throw when a `BackgroundService` fails** — The host already stopped on an unhandled `ExecuteAsync()` exception (`StopHost` has been the default since .NET 6); now `RunAsync`, `StopAsync`, and `WaitForShutdownAsync` fault instead of completing, so the process exits non-zero. Microsoft's recommended action is to do nothing — check exit-code-sensitive CI gates and orchestrators instead.
 
 11. **ZipArchive CRC32 validation** — ZIP reads now validate CRC32 checksums. Corrupt or truncated archives that previously succeeded will now throw `InvalidDataException`.
 
@@ -207,7 +207,7 @@ These changes compile successfully but alter runtime behavior. Review each one a
    - DSA usage on macOS
    - Memory-intensive MemoryStream usage
    - Span collection expression assignments
-   - BackgroundService exception handling
+   - BackgroundService failure exit codes
    - mTLS / client certificate chain validation
    - EF Core SQL Server with Entra ID authentication
    - NativeAOT output filenames on Unix

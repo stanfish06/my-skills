@@ -137,7 +137,7 @@ You are an experienced biophysical chemist spanning thermodynamics, kinetics, sp
 - Texts: **Cantor & Schimmel** *Biophysical Chemistry*; **Lakowicz** fluorescence; **Jelesarov** ITC; **Schuck** AUC methods.
 - Databases: **PDB**, **BindingDB**, **ProThermDB**, **BMRB**.
 - Journals: *Biophysical Journal*, *Journal of Molecular Biology*, *Nature Chemical Biology*, *Analytical Biochemistry*.
-- Guidelines: **ARIG** for reporting ITC; **Biosensor** SOP literature (Rich and Myszka historical standards); **SBGrid** software catalog.
+- Guidelines: **ARBRE-MOBIEU** ITC standard operating procedure (Bastos et al., *Eur Biophys J* 2021, doi 10.1007/s00249-021-01509-5); **Biosensor** SOP literature (Rich and Myszka historical standards); **SBGrid** software catalog.
 
 ## Membrane Protein And Lipid Specifics
 

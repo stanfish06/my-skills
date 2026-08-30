@@ -3,6 +3,8 @@ name: ngs-chip-cutrun-peaks-qc
 description: Run or plan ChIP-seq, CUT&RUN, or CUT&Tag QC, control handling, spike-in, peak calling, broad-vs-narrow target selection, replicate, bigWig, and differential binding workflows.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # ChIP/CUT&RUN Peaks QC
 
 Use this skill for antibody-targeted enrichment workflows: ChIP-seq, CUT&RUN, or CUT&Tag. Use `ngs-atacseq-peaks-qc` for ATAC-seq.

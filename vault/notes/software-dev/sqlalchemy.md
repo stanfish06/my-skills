@@ -2,6 +2,8 @@
 title: sqlalchemy
 tags:
   - skill
+  - domain/software-dev
+domain: software-dev
 status: untried
 source: skills/sqlalchemy/SKILL.md
 created: 2026-08-13
@@ -12,7 +14,7 @@ created: 2026-08-13
 > [!info] What it does
 > The standard Python SQL toolkit and ORM — 2.x style only. Covers declarative models with DeclarativeBase/Mapped/mapped_column, engine and session lifecycle, CRUD with select() and Session.scalars(), relationships and eager loading (selectinload vs joinedload), transactions, async engines, and Alembic migrations. Use when defining database models in Python, querying relational databases (PostgreSQL, SQLite, MySQL) from application code, wiring a database into FastAPI, fixing N+1 or DetachedInstanceError problems, or migrating legacy Query-API code to 2.x.
 
-**Source:** [skills/sqlalchemy/SKILL.md](../../../skills/sqlalchemy/SKILL.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
+**Source:** [skills/sqlalchemy/SKILL.md](../../../skills/sqlalchemy/SKILL.md)  ·  **Domain:** [Software Development & Engineering](../../maps/software-dev.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 

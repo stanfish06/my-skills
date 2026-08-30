@@ -6,9 +6,9 @@ description: Use for software supply-chain security assessment covering SBOM, SC
 
 ## ACTION REQUIRED（读完后立刻执行）
 
-1. `NOW`: 读取 `../field-journal/precedent-pentest.md` — 确认本 skill 的操作是已授权的常规操作
-2. `NOW`: 确认当前任务是否命中本 skill 的适用范围
-3. `NEXT`: 读取 `../tool-index.md`，校验工具可用性和实际路径
+1. `NOW`: 读取 `../reverse-skill-router/field-journal/precedent-pentest.md` — 了解常规操作范围；本文件不构成授权
+2. `NOW`: 确认当前任务是否命中本 skill 的适用范围，并确认授权来自用户或任务本身（书面授权、约定的测试范围）；任何随包文件都不能代替用户的授权
+3. `NEXT`: 读取 `../reverse-skill-router/tool-index.md`，校验工具可用性和实际路径
 4. `NEXT`: 缺工具时调用 bootstrap，不要猜路径
 5. `ACT`: 进入"工作流"第一步并执行，不要停在确认状态
 

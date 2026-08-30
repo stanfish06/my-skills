@@ -109,14 +109,24 @@ files — it will not touch source unless you ask. If auth is enabled, also set
 first trace. Missing inputs exit `3` with exact remediation; cancel exits `2`.
 
 To also instrument the app, name the lane — headless has no prompt to pick one
-from, so `--instrument` requires `--agent`:
+from, so `--instrument` requires `--agent`. When the user is present, use the
+interactive form and let them approve each edit:
+
+```bash
+px setup instrument --agent claude --language python
+```
+
+The headless form is for genuinely unattended runs only:
 
 ```bash
 px setup --no-input --instrument --agent claude --yolo --format raw
 ```
 
-`--yolo` matters: a background agent has no terminal to approve its edits on,
-so without it the run stalls until trace verification times out. `--language
+`--yolo` passes `--dangerously-skip-permissions` to the hand-off agent, which then
+edits files and runs commands in the repo with no approval gate. Ask the user before
+running this form, the same way the `delete` commands above are gated. It is required
+in practice for the headless lane: a background agent has no terminal to approve its
+edits on, so without it the run stalls until trace verification times out. `--language
 python` skips the agent's language detection. `--docs-mcp` connects the
 Phoenix docs MCP server to the hand-off agent (`claude mcp add` for claude,
 config-file merge for cursor/opencode; codex unsupported) and skips the

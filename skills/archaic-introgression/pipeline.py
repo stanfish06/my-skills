@@ -539,7 +539,8 @@ def _lod_score_table_segment(
         if m_gt > 0 and a_gt > 0:
             delta = 0.8 + 0.2 * min(m_gt, a_gt)
         elif m_gt == 0 and a_gt == 0:
-            delta = 0.1
+            # Both hom-ref: no shared derived allele, so no introgression evidence
+            delta = 0.0
         else:
             delta = -0.5
 

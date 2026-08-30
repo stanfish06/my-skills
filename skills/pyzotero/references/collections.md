@@ -72,10 +72,14 @@ zot.update_collections(cols)
 col = zot.collection('COLKEY')
 zot.delete_collection(col)
 
-# Delete multiple collections
-cols = zot.collections()
+# Delete multiple collections — always scope the selection
+cols = [c for c in zot.collections() if c['data']['name'].startswith('Import 2024-')]
 zot.delete_collection(cols)  # pass a list of dicts
 ```
+
+Deletion is irreversible and hits the user's live library. Never pass an unfiltered
+`zot.collections()` to `delete_collection` — that removes every collection. Show the
+selected names and confirm with the user before deleting.
 
 ## Managing Items in Collections
 

@@ -3,7 +3,7 @@
     "rsid": "rs3798220",
     "chr": "6",
     "pos_grch38": 160540105,
-    "pos_grch37": 160531442,
+    "pos_grch37": 160961137,
     "ref": "T",
     "alt": "C",
     "alt_alleles": ["C"],
@@ -28,7 +28,7 @@
       "open_targets": "6_160540105_T_C",
       "gtex": "chr6_160540105_T_C_b38",
       "pheweb": "6:160540105-T-C",
-      "bbj": "6:160531442-T-C"
+      "bbj": "6:160961137-T-C"
     },
     "ensembl_info": {
       "source": "ensembl_variation",
@@ -340,7 +340,7 @@
     "pheweb_bbj": {
       "source": "pheweb_bbj",
       "status": "ok",
-      "variant": "6:160531442-T-C",
+      "variant": "6:160961137-T-C",
       "coordinate_system": "GRCh37",
       "total_associations": 1,
       "associations": [

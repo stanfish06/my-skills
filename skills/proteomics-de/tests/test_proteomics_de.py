@@ -224,6 +224,26 @@ class TestRunDE:
         assert all(0 <= p <= 1 for p in result["pvalue"].dropna())
         assert all(0 <= p <= 1 for p in result["padj"].dropna())
 
+    def test_null_matrix_calls_nothing(self):
+        """Pure null: no protein may be called significant, at any matrix size.
+
+        Guards against thresholding raw p-values against a per-test alpha, which
+        would call a fixed ~1.8% of all proteins regardless of n.
+        """
+        for n_proteins in (500, 3000):
+            rng = np.random.default_rng(0)
+            cols = [f"S{i+1}" for i in range(6)]
+            matrix = pd.DataFrame(
+                rng.normal(20, 1, size=(n_proteins, 6)),
+                index=[f"P{i:05d}" for i in range(n_proteins)],
+                columns=cols,
+            )
+            meta = pd.DataFrame(
+                {"sample_id": cols, "group": ["treated"] * 3 + ["control"] * 3}
+            ).set_index("sample_id")
+            result = run_differential_expression(matrix, meta, "treated", "control")
+            assert (result["regulation"] != "non significant").sum() == 0
+
 
 # ---------------------------------------------------------------------------
 # run_pca

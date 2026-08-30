@@ -14,13 +14,13 @@ created: 2026-06-13
 # caveman-compress
 
 > [!info] What it does
-> Compress natural language memory files (CLAUDE.md, todos, preferences) into caveman format to save input tokens. Preserves all technical substance, code, URLs, and structure. Compressed version overwrites the original file. Human-readable backup saved as FILE.original.md. Trigger: /caveman-compress FILEPATH or "compress memory file
+> Compress a memory file such as CLAUDE.md or a todo list into caveman format to save input tokens, keeping a readable backup. Trigger: /caveman-compress.
 
 **Source:** [skills/caveman-compress/SKILL.md](../../../skills/caveman-compress/SKILL.md)  ·  **Domain:** [Reasoning, Ideation & Decision](../../maps/reasoning-ideation.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [caveman](../../notes/reasoning-ideation/caveman.md) — Ultra-compressed communication mode. Cuts output tokens 65% (measured) by speaking like caveman while keeping full technical accuracy
+- [caveman](../../notes/reasoning-ideation/caveman.md) — Ultra-compressed communication mode that cuts output tokens while keeping technical accuracy
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

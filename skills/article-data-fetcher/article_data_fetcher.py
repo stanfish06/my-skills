@@ -332,6 +332,16 @@ def infer_data_type(filename: str, description: str = "") -> str:
     return "data file"
 
 
+def safe_path_component(value: str) -> str:
+    """Flatten a remote-supplied name into a single path component.
+
+    Repository titles, DOIs and file keys are third-party text: separators and
+    leading dots are folded so they cannot escape the output directory.
+    """
+    flattened = re.sub(r"[/\\]", "_", value).strip().strip(".")
+    return flattened or "unnamed"
+
+
 # ---------------------------------------------------------------------------
 
 def discover_accessions(text: str) -> dict[str, list[str]]:
@@ -725,7 +735,8 @@ def search_datacite_by_doi(doi: str) -> list[dict]:
             print(f"     • [{publisher}] {ds_title[:60]}")
             # Try to resolve known repositories from the dataset DOI/URL
             if "zenodo" in url.lower():
-                m = re.search(r"zenodo\.org/records?/(\d+)", url, re.IGNORECASE)
+                # DataCite returns the DOI landing form zenodo.org/doi/10.5281/zenodo.<id>
+                m = re.search(r"zenodo\.org/(?:records?/|doi/10\.5281/zenodo\.)(\d+)", url, re.IGNORECASE)
                 if m:
                     files.extend(fetch_zenodo_files(m.group(1)))
                     continue
@@ -743,7 +754,7 @@ def search_datacite_by_doi(doi: str) -> list[dict]:
             # Generic: just surface the landing page URL so user can visit it
             if url:
                 files.append({
-                    "filename": ds_title[:80],
+                    "filename": safe_path_component(ds_title[:80]),
                     "url": url,
                     "repository": publisher or "DataCite",
                     "accession": ds_doi,
@@ -952,8 +963,11 @@ def run(
     print(f"\n⬇️  Downloading {len(selected)} file(s) to {output_dir}/\n")
     manifest_files = []
     for f in selected:
-        acc_dir = output_dir / f["accession"]
-        dest = acc_dir / f["filename"]
+        acc_dir = output_dir / safe_path_component(f["accession"])
+        dest = acc_dir / safe_path_component(f["filename"])
+        if not dest.resolve().is_relative_to(output_dir.resolve()):
+            print(f"  ⛔ Skipped {f['filename']} — resolves outside {output_dir}")
+            continue
         print(f"  ⬇  {f['filename']}")
         ok = download_file(f["url"], dest, expected_md5=f.get("checksum"), unzip=unzip)
         manifest_files.append({

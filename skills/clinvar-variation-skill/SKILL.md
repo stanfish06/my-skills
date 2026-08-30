@@ -15,7 +15,8 @@ description: Submit compact ClinVar Clinical Tables and NCBI Variation requests 
 - Return concise markdown summaries from the script JSON by default.
 - Return the JSON verbatim only if the user explicitly asks for machine-readable output.
 - Use `action=search` for the Clinical Tables endpoint.
-- Use `action=vcv|rcv|scv|refsnp` for NCBI Variation beta objects.
+- Use `action=vcv|rcv|scv` for ClinVar accessions; they resolve through E-utilities `db=clinvar`. Use `action=refsnp` for the NCBI Variation RefSNP object.
+- `action=search` queries the Clinical Tables variants index, which has no VCV/RCV/SCV field. Search by gene symbol or HGVS name; look accessions up with `vcv`/`rcv`/`scv` instead.
 
 ## Input
 - Read one JSON object from stdin.
@@ -36,7 +37,7 @@ description: Submit compact ClinVar Clinical Tables and NCBI Variation requests 
 
 ## Execution
 ```bash
-echo '{"action":"search","terms":"VCV000013080","max_items":10}' | python scripts/clinvar_variation.py
+echo '{"action":"search","terms":"BRCA1","max_items":10}' | python scripts/clinvar_variation.py
 ```
 
 ## References

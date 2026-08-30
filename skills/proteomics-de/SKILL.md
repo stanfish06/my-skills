@@ -84,26 +84,30 @@ This skill performs differential expression analysis on label-free quantitative 
 
 ---
 
-### 6. s0-based FDR Correction
-- Uses **s0-based thresholding** to stabilize variance
-- Combines:
-  - log2 fold change
-  - p-value
-- Based on:
-  - Giai Gianetto et al. (2016)
+### 6. Multiple-Testing Correction
+- **Benjamini-Hochberg** on the raw t-test p-values → `padj`
+- This is what controls the false discovery rate
 
 ---
 
-### 7. Significance Thresholding
+### 7. s0 Fold-Change Curve
+- Hyperbolic volcano boundary combining log2 fold change and p-value
+- Shape follows Giai Gianetto et al. (2016)
+- s0 is a fold-change fudge factor, **not** a multiplicity correction. Perseus and SAM derive an FDR for this curve by permutation; permutation is not implemented here, so the curve is used only as an additional effect-size requirement on top of BH
+
+---
+
+### 8. Significance Thresholding
+- A protein is called `upregulated`/`downregulated` only when it clears **both**:
+  - `padj <= --fdr` (Benjamini-Hochberg)
+  - the s0 curve
 - Default:
   - `FDR = 0.05`
   - `s0 = 0.1`
-- Produces:
-  - Adjusted significance boundary (used in volcano plot)
 
 ---
 
-### 8. Visualization Outputs
+### 9. Visualization Outputs
 - PCA plot
 - Volcano plot (with s0 curve)
 - Imputation distribution comparison
@@ -230,7 +234,7 @@ python proteomics_de.py \
 | `--metadata`         | Metadata file         | -               |
 | `--contrast`         | treatment,control     | treated,control |
 | `--s0`               | s0 parameter          | 0.1             |
-| `--fdr`              | FDR threshold         | 0.05            |
+| `--fdr`              | BH FDR threshold; also positions the s0 curve | 0.05 |
 | `--ttest-df`         | Degrees of freedom    | 4               |
 | `--imputation-shift` | Imputation shift      | 1.8             |
 | `--imputation-scale` | Imputation scale      | 0.3             |

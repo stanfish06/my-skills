@@ -11,7 +11,7 @@ description: |
 ## ACTION REQUIRED（读完后立刻执行）
 
 1. `NOW`：确认当前任务是否命中本 skill 的适用范围
-2. `NOW`：读取 `../tool-index.md`，校验工具可用性和实际路径
+2. `NOW`：读取 `../reverse-skill-router/tool-index.md`，校验工具可用性和实际路径
 3. `NEXT`：缺工具时调用 bootstrap，不要猜路径
 4. `ACT`：进入"工作流"第一步并执行，不要停在确认状态
 
@@ -68,9 +68,9 @@ For writing style, tone, and voice guidance, use `Skill(ce:writer)` with **The E
 - 关键发现必须有证据支撑
 - 复现步骤必须让第三方能独立重现
 - 敏感信息（真实 token、密码、内部 URL）用占位符替代
-- **MUST** 包含 Evidence → Finding → Path 链（见 `../ops/evidence-finding-path.md` 与模板 §0）
+- **MUST** 包含 Evidence → Finding → Path 链（见 `../reverse-skill-router/ops/evidence-finding-path.md` 与模板 §0）
 - **MUST** 读取 `references/vendor-report-rules.md`：选定 `malware` / `apt` 或 `flavor = null`（漏洞任务可叠加 thin `vuln`）；无 flavor 时只输出原任务模板和适用的 Base 元素，不强制 IOC/ATT&CK
-- **SHOULD** 引用 case `scope.md` / `timeline.md`（`../scripts/case-init.ps1`）
+- **SHOULD** 引用 case `scope.md` / `timeline.md`（`../reverse-skill-router/scripts/case-init.ps1`）
 
 ### 图表集成
 

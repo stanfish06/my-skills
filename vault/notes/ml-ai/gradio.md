@@ -2,6 +2,8 @@
 title: gradio
 tags:
   - skill
+  - domain/ml-ai
+domain: ml-ai
 status: untried
 source: skills/gradio/SKILL.md
 created: 2026-08-13
@@ -12,7 +14,7 @@ created: 2026-08-13
 > [!info] What it does
 > Building ML demos and web UIs in Python with Gradio 6 — gr.Interface for wrapping a function, gr.Blocks for custom layouts with event listeners, gr.ChatInterface for LLM chat, streaming generator outputs, gr.State, image/audio components, queueing and concurrency, launch()/share links, and mounting into FastAPI with gr.mount_gradio_app. Use when demoing a model (image, audio, text, LLM), building a quick UI around a Python function, sharing a prototype via a public link, or hosting on Hugging Face Spaces.
 
-**Source:** [skills/gradio/SKILL.md](../../../skills/gradio/SKILL.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
+**Source:** [skills/gradio/SKILL.md](../../../skills/gradio/SKILL.md)  ·  **Domain:** [Machine Learning & AI](../../maps/ml-ai.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 

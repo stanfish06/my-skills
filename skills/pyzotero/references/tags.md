@@ -40,6 +40,9 @@ tags_to_remove = ['deprecated', 'temp']
 zot.delete_tags(*tags_to_remove)
 ```
 
+`delete_tags` strips each named tag from every item in the library and is irreversible.
+Name the tags explicitly and confirm with the user first; never expand `zot.tags()` into it.
+
 ## Searching Items by Tag
 
 ```python

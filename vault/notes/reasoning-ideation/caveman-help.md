@@ -14,13 +14,13 @@ created: 2026-06-13
 # caveman-help
 
 > [!info] What it does
-> Quick-reference card for all caveman modes, skills, and commands. One-shot display, not a persistent mode. Trigger: /caveman-help, "caveman help", "what caveman commands", "how do I use caveman".
+> Quick-reference card for caveman modes, skills and commands. Trigger: /caveman-help or "caveman help".
 
 **Source:** [skills/caveman-help/SKILL.md](../../../skills/caveman-help/SKILL.md)  ·  **Domain:** [Reasoning, Ideation & Decision](../../maps/reasoning-ideation.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [caveman](../../notes/reasoning-ideation/caveman.md) — Ultra-compressed communication mode. Cuts output tokens 65% (measured) by speaking like caveman while keeping full technical accuracy
+- [caveman](../../notes/reasoning-ideation/caveman.md) — Ultra-compressed communication mode that cuts output tokens while keeping technical accuracy
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

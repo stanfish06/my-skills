@@ -436,6 +436,20 @@ def verify_bam_and_index(label, bam_path, pbi_path):
 
 
 def validate_inputs(args):
+    # nf-core/pacsomatic has no release; its default branch `main` is still the
+    # nf-core template and takes `sample,fastq_1,fastq_2`, not the BAM
+    # samplesheet this helper writes. Refuse to launch an unpinned revision.
+    if args.pipeline == "nf-core/pacsomatic" and not args.pipeline_version:
+        fail(
+            "--pipeline-version is required for nf-core/pacsomatic. Its default "
+            "branch `main` expects a sample,fastq_1,fastq_2 samplesheet and does "
+            "not implement the tumor-normal workflow; the BAM schema "
+            "(patient,sample,status,bam,pbi) lives on `dev`, and there is no "
+            "tagged release. Pass --pipeline-version dev (moving target) or a "
+            "commit SHA from that branch, and check "
+            "assets/schema_input.json at that revision before launching."
+        )
+
     ensure_no_spaces("patient-id", args.patient_id)
     ensure_no_spaces("tumor-sample-id", args.tumor_sample_id)
     ensure_no_spaces("normal-sample-id", args.normal_sample_id)
@@ -621,7 +635,7 @@ def parse_args():
     parser.add_argument("--repo-url", default="https://github.com/nf-core/pacsomatic.git", help="Pipeline repository URL when cloning")
     parser.add_argument("--checkout-dir", default="", help="Directory where pipeline repo should be cloned")
     parser.add_argument("--repo-name", default="pacsomatic", help="Folder name inside checkout-dir for cloned repo")
-    parser.add_argument("--pipeline-version", default="", help="Pipeline version for -r")
+    parser.add_argument("--pipeline-version", default="", help="Pipeline revision for -r (tag, branch, or commit). Required for nf-core/pacsomatic — it has no release and `main` is schema-incompatible")
     parser.add_argument("--nextflow-bin", default="nextflow", help="Nextflow executable path")
     parser.add_argument("--profile", default="singularity", help="Nextflow profile, e.g. singularity or singularity,institute")
     parser.add_argument("--params-file", default="", help="Path to Nextflow -params-file (yaml/json)")

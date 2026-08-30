@@ -132,3 +132,15 @@ vault/graph/graph.trig
 
 # no docs
 docs/
+
+# Secrets — never commit
+vercel-api.txt
+.env
+.env.*
+!.env.example
+
+# Eval suite local state
+/eval/node_modules/
+/eval/runs/
+/eval/.cache/
+/eval/work/

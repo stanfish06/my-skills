@@ -63,7 +63,7 @@ observational programs, and consortium-scale genomics.
 - Treat Type I error as a portfolio problem. Multiplicity lives in endpoints, time
   points, doses, interim looks, subgroups, and analysis populations — not only in
   primary p-values.
-- Distinguish estimands from analysis sets. CONSORT and CONSORT-SPIRIT discourage vague
+- Distinguish estimands from analysis sets. CONSORT 2025 and SPIRIT 2025 discourage vague
   "ITT" labels; define who is analyzed, in which arm, and how ICEs and missing data are
   handled.
 - Reason from the data-generating process. Causal DAGs, target-trial emulation, and ICE
@@ -159,8 +159,8 @@ observational programs, and consortium-scale genomics.
 ## Data, Resources, And Literature
 
 - **Guidelines:** ICH E9 and E9(R1); FDA multiplicity and adaptive-design guidances; EMA
-  scientific advice; CONSORT 2010 and extensions; CONSORT-SPIRIT for estimands in protocols;
-  STROBE for observational studies; STRATOS topic-group papers for analysis practice.
+  scientific advice; CONSORT 2025 and extensions; SPIRIT 2025 for protocols (estimands per
+  ICH E9(R1)); STROBE for observational studies; STRATOS topic-group papers for analysis practice.
 - **Trial repositories:** ClinicalTrials.gov (protocol, SAP, results); EU CTIS; CDISC
   ADaM IG and controlled terminology.
 - **Genomics:** GWAS Catalog, dbGaP, TOPMed, UK Biobank, GTEx; GEO/SRA for expression;

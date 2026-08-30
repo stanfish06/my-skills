@@ -33,14 +33,14 @@ The system uses an iterative pipeline:
 ```bash
 python pipeline_all.py \
   --input-dir "path/to/papers" \
-  --output-dir "path/to/output" \
+  --output_dir "path/to/output" \
   --model-choice 1
 ```
 
 ### Parameters
 
 - `--input-dir`: Directory containing paper files (PDF or LaTeX)
-- `--output-dir`: Directory for generated website files
+- `--output_dir`: Directory for generated website files
 - `--model-choice`: LLM model selection (1=GPT-4, 2=GPT-4.1)
 - `--enable-logo-search`: Use Google Search API to find institution logos (optional)
 

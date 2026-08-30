@@ -50,7 +50,7 @@ result, and `test_generation_scripts.py` fails if this block and the script disa
 # - queries: .
 #   from: trailofbits/<CODEQL_LANG>-queries
 # - queries: .
-#   from: GitHubSecurityLab/CodeQL-Community-Packs-<CODEQL_LANG>
+#   from: githubsecuritylab/codeql-<CODEQL_LANG>-queries
 # Filtering: security only, high/very-high precision (any severity),
 # medium precision (any severity — low-severity filtered post-analysis by security-severity score).
 # Experimental queries included.

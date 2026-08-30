@@ -29,7 +29,7 @@ Do **not** invoke it for one-off questions about screenpipe itself, for real-tim
 
 ## Privacy Posture
 
-- **Screenpipe handles app/window filtering at capture time.** Install a starter deny-list by copying `references/screenpipe-config.yaml` into the user's screenpipe config. Sensitive apps (password managers, messaging, banking) are never OCR'd in the first place.
+- **Screenpipe filters apps/windows at capture time.** Merge `references/screenpipe-config.toml` into `~/.screenpipe/config.toml` — the CLI parses that path as TOML — or pass the same entries as repeated `--ignored-windows` flags. Entries are case-insensitive substrings, not globs. Confirm the deny-list works against a running daemon before relying on it; until then treat capture-time exclusion as unverified and `scripts/redact.py` as the enforced layer.
 - **Raw OCR never leaves the machine.** `scripts/fetch_window.py` pulls data over localhost HTTP. `scripts/cluster.py` reduces the timeline to app/duration/title summaries. `scripts/redact.py` strips emails, API keys, bearer tokens, and phone numbers as defense-in-depth before any cluster summary reaches the LLM.
 - **LLM backend defaults to `local`.** The recommended setup is [LM Studio](https://lmstudio.ai/) running `Gemma-4-31B-it` — strong reasoning at a size that fits on most workstation GPUs, and no data ever leaves your machine. Cloud backends (`claude`, `foundry`) are opt-in and documented in `config.yaml` for users who explicitly want them. Detection and embeddings always run locally regardless of backend choice.
 - **Dry-run mode** (`--plan`) prints the exact timeline that will be analyzed before any LLM call.

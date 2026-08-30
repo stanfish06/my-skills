@@ -282,8 +282,11 @@ noise, product NVH, or industrial hygiene.
 
 ## Building Codes And Rating Systems
 
-- **IECC / ASHRAE 90.1:** sound transmission class for demising walls in multifamily — IECC references
-  ASTM E90 tested assemblies; flanking at floor-ceiling junction requires resilient channels.
+- **IBC §1206** (§1207 in the 2015 edition and earlier): the US code text for multifamily demising
+  assemblies — airborne STC ≥ 50 per ASTM E90, or NNIC ≥ 45 field-tested per ASTM E336;
+  structure-borne IIC ≥ 50 per ASTM E492, or NISR ≥ 45 field-tested per ASTM E1007. IECC and
+  ASHRAE 90.1 are energy documents and set no acoustic requirement; flanking at the floor-ceiling
+  junction requires resilient channels regardless of the lab rating.
 - **WELL / LEED acoustic credits:** background noise levels in open offices; reverberation time caps —
   do not sacrifice ventilation acoustic attenuation for LEED points without 62.1 compliance.
 - **Façade engineering:** outdoor-indoor transmission class OITC for traffic; glazing STC vs frame

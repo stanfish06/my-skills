@@ -50,26 +50,26 @@ brew install libreoffice poppler
 
 ## API Configuration
 
-Create a `.env` file in the project root with the following credentials:
+Export the credentials into the environment. `pipeline_all.py` never calls
+`load_dotenv()`, so a `.env` file in the project root is not read.
 
-### Required API Keys
+### Required API Key
 
-**Option 1: OpenAI API**
-```
-OPENAI_API_KEY=your_openai_api_key_here
-```
+`OPENROUTER_API_KEY` is the only key `pipeline_all.py` reads. Its module docstring
+states "Only supports OPENROUTER_API_KEY, does not support other APIs", and `main()`
+prints an error and returns if the variable is unset. `OPENAI_API_KEY` is not an
+alternative — it is never read.
 
-**Option 2: OpenRouter API** (alternative to OpenAI)
-```
-OPENROUTER_API_KEY=your_openrouter_api_key_here
+```bash
+export OPENROUTER_API_KEY=your_openrouter_api_key_here
 ```
 
 ### Optional API Keys
 
 **Google Search API** (for automatic logo discovery)
-```
-GOOGLE_API_KEY=your_google_api_key_here
-GOOGLE_CSE_ID=your_custom_search_engine_id_here
+```bash
+export GOOGLE_API_KEY=your_google_api_key_here
+export GOOGLE_CSE_ID=your_custom_search_engine_id_here
 ```
 
 ## Model Configuration

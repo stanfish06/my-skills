@@ -159,11 +159,16 @@ print(spectrum.get("precursor_mz"))   # Returns 250.5
 
 # Derive chemical information
 from matchms.filtering import derive_inchi_from_smiles, derive_inchikey_from_inchi
-from matchms.filtering import add_fingerprint
 
 spectrum = derive_inchi_from_smiles(spectrum)
 spectrum = derive_inchikey_from_inchi(spectrum)
-spectrum = add_fingerprint(spectrum, fingerprint_type="morgan", nbits=2048)
+
+# Fingerprints are computed and stored separately from the spectrum.
+# fingerprint_algorithm: "daylight", "morgan1", "morgan2", "morgan3" (Morgan radius 1/2/3)
+from matchms import Fingerprints
+
+fpgen = Fingerprints(fingerprint_algorithm="morgan2", nbits=2048)
+fingerprint = fpgen.compute_fingerprint(spectrum)
 ```
 
 ## Common Workflows

@@ -103,7 +103,7 @@ You are **Mendelian Randomisation**, a specialised ClawBio agent for causal infe
 ## Core Capabilities
 
 1. **Four MR estimators**: IVW (random effects), MR-Egger, weighted median, weighted mode
-2. **Full sensitivity battery**: Cochran's Q, Egger intercept, Steiger directionality, F-statistic, I²_GX, leave-one-out
+2. **Full sensitivity battery**: Cochran's Q, Egger intercept, Steiger directionality (direction only — the correlated-correlations significance test needs exposure and outcome GWAS sample sizes, which the input contract does not carry), F-statistic, I²_GX, leave-one-out
 3. **Instrument diagnostics**: F-statistic per SNP (warning when F < 10), palindromic SNP flagging, weak instrument detection
 4. **Publication plots**: Scatter, forest, funnel, leave-one-out (four .png files)
 5. **STROBE-MR report**: Assumptions stated, all methods and sensitivity results tabulated, caveats explicit
@@ -148,14 +148,14 @@ python clawbio.py run mr --demo
 python clawbio.py run mr --demo
 ```
 
-Expected output: A full MR report for 30 synthetic BMI → T2D instruments showing a positive causal effect (IVW beta ≈ 0.60), consistent across all four methods, with no heterogeneity, no pleiotropy, strong instruments, and correct Steiger direction. Four plots generated.
+Expected output: A full MR report for 30 synthetic BMI → T2D instruments showing a positive causal effect (IVW beta ≈ 0.60), consistent across all four methods, with no heterogeneity, no pleiotropy, strong instruments, and exposure → outcome Steiger direction. Four plots generated.
 
 ## Algorithm / Methodology
 
 1. **IVW**: beta = sum(w * bx * by) / sum(w * bx²), with multiplicative random-effects variance inflation (Burgess et al., 2013)
 2. **MR-Egger**: Weighted linear regression of by on bx with intercept; slope = causal estimate, intercept = pleiotropy (Bowden et al., 2015)
 3. **Weighted Median**: Median of Wald ratios weighted by inverse-variance; consistent when ≥50% weight from valid instruments (Bowden et al., 2016)
-4. **Weighted Mode**: Kernel density mode of weighted Wald ratios (Hartwig et al., 2017)
+4. **Weighted Mode**: Kernel density mode of weighted Wald ratios (Hartwig et al., 2017), with the modified Silverman/Bickel bandwidth `0.9 * min(sd, mad) / k^(1/5)`. The mode SE has no closed form: it is the MAD over a 1000-draw parametric bootstrap of the ratio estimates, and the P-value is t on k-1 df, matching MRCIEU/TwoSampleMR `R/mr_mode.R`. The mode is strictly less efficient than IVW, so its SE should always exceed the IVW SE.
 
 **Key thresholds**:
 - F-statistic > 10 for instrument strength (Staiger & Stock, 1997)
@@ -179,7 +179,7 @@ Expected output: A full MR report for 30 synthetic BMI → T2D instruments showi
 | IVW | 0.5979 | 0.0369 | [0.5255, 0.6702] | 5.17e-59 |
 | MR-Egger | 0.5989 | 0.0391 | [0.5223, 0.6756] | 6.62e-53 |
 | Weighted Median | 0.6001 | 0.0469 | [0.5081, 0.6921] | 2.07e-37 |
-| Weighted Mode | 0.5989 | 0.0144 | [0.5708, 0.6271] | 0.00e+00 |
+| Weighted Mode | 0.6032 | 0.0757 | [0.4548, 0.7516] | 8.68e-09 |
 
 ## Sensitivity Analysis
 
@@ -188,7 +188,7 @@ Expected output: A full MR report for 30 synthetic BMI → T2D instruments showi
 | Cochran's Q | 0.73 (P=1.00) | No heterogeneity |
 | Egger intercept | 0.0001 (P=0.93) | No pleiotropy |
 | Mean F-statistic | 70.6 | Strong instruments |
-| Steiger direction | Correct (P<0.001) | Confirmed |
+| Steiger direction | Exposure → Outcome | Direction only; no P-value |
 
 *ClawBio is a research tool. Not a medical device.*
 ```
@@ -228,7 +228,7 @@ output_directory/
 
 - **Winner's curse**: You will want to select instruments from the same GWAS used as the exposure dataset. Do not, when possible. Selecting instruments from the discovery GWAS inflates effect sizes (winner's curse), biasing the MR estimate away from null. The skill documents this caveat in the report. When independent replication data is unavailable, note this as a limitation.
 
-- **Ignoring MR-Egger intercept**: You will want to report a significant Egger intercept alongside a significant IVW and claim "robust causal evidence." Do not. A significant intercept means directional pleiotropy is present. If Egger intercept P < 0.05, the IVW estimate is biased and the Egger slope should be preferred. The skill's report narrative explicitly flags this.
+- **Ignoring MR-Egger intercept**: You will want to report a significant Egger intercept alongside a significant IVW and claim "robust causal evidence." Do not. A significant intercept means directional pleiotropy is present. If Egger intercept P < 0.05, the IVW estimate is biased and the Egger slope should be preferred. The report narrative reads `egger_intercept_pvalue`, `cochran_q_pvalue` and the weak-instrument count directly, so it flags this rather than inferring agreement from point estimates — a pleiotropy-inflated IVW SE widens any across-method tolerance enough to hide the gap.
 
 ## Safety
 

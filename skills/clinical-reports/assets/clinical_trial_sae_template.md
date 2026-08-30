@@ -32,7 +32,7 @@
 
 **Subject ID / Randomization Number:** [ID only, no name]  
 **Subject Initials:** [XX] (if permitted by regulatory authority)  
-**Age:** [Years] OR **Date of Birth:** [Year only: YYYY]  
+**Age:** [Years; give any age over 89 as "90 or older"] OR **Date of Birth:** [Year only: YYYY]  
 **Sex:** [ ] Male  [ ] Female  [ ] Other  
 **Race:** [Category]  
 **Ethnicity:** [Hispanic or Latino / Not Hispanic or Latino]  

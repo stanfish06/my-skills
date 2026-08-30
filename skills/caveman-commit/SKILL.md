@@ -1,10 +1,8 @@
 ---
 name: caveman-commit
 description: >
-  Ultra-compressed commit message generator. Cuts noise from commit messages while preserving
-  intent and reasoning. Conventional Commits format. Subject ≤50 chars, body only when "why"
-  isn't obvious. Use when user says "write a commit", "commit message", "generate commit",
-  "/commit", or invokes /caveman-commit. Auto-triggers when staging changes.
+  Write a Conventional Commits message compressed to intent only. Use for
+  "write a commit", "commit message", /commit or /caveman-commit.
 ---
 
 Write commit messages terse and exact. Conventional Commits format. No fluff. Why over what.
@@ -37,18 +35,24 @@ Write commit messages terse and exact. Conventional Commits format. No fluff. Wh
 
 Diff: new endpoint for user profile with body explaining the why
 - ❌ "feat: add a new endpoint to get user profile information from the database"
-- ✅ feat(api): add GET /users/:id/profile
+- ✅
+  ```
+  feat(api): add GET /users/:id/profile
 
   Mobile client needs profile data without the full user payload
   to reduce LTE bandwidth on cold-launch screens.
 
   Closes #128
+  ```
 
 Diff: breaking API change
-- ✅ feat(api)!: rename /v1/orders to /v1/checkout
+- ✅
+  ```
+  feat(api)!: rename /v1/orders to /v1/checkout
 
   BREAKING CHANGE: clients on /v1/orders must migrate to /v1/checkout
   before 2026-06-01. Old route returns 410 after that date.
+  ```
 
 ## Auto-Clarity
 
@@ -56,4 +60,4 @@ Always include body for: breaking changes, security fixes, data migrations, anyt
 
 ## Boundaries
 
-Only outputs the commit message as raw text (does not stage, commit, or amend; ready to paste). "stop caveman-commit" or "normal mode": revert to verbose commit style.
+Only generates the commit message. Does not run `git commit`, does not stage files, does not amend. Output the message as a code block ready to paste. "stop caveman-commit" or "normal mode": revert to verbose commit style.

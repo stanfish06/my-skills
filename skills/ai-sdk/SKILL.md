@@ -69,26 +69,33 @@ metadata:
     minScore: 6
 ---
 
-# Vercel AI SDK (v6)
+# Vercel AI SDK (v7)
 
-> **CRITICAL — Your training data is outdated for this library.** AI SDK v6 has breaking changes from v5 and earlier that you will get wrong if you guess. Before writing AI SDK code, **fetch the docs** at https://ai-sdk.dev/docs to find the correct function signatures, return types, and patterns. Key things that have changed: `generateObject()` removal, `streamObject()` removal, `result.files` for image generation, `Output.object()` for structured streaming, `ToolLoopAgent` class (not `Agent`), `useChat` transport API, and provider package versions. Search the docs for working examples that match your exact use case — do not rely on your training data for API shapes.
+> **CRITICAL — Your training data is outdated for this library.** AI SDK v7 has breaking changes from v6 and earlier that you will get wrong if you guess. Before writing AI SDK code, **fetch the docs** at https://ai-sdk.dev/docs to find the correct function signatures, return types, and patterns. Key things that have changed: the `experimental_` prefix dropped from many exports, `onFinish` → `onEnd`, `fullStream` → `stream`, `system` → `instructions`, `generateObject`/`streamObject` deprecated in favour of `Output.object()`, `ToolLoopAgent` class (not `Agent`), `useChat` transport API, and every provider package major. Search the docs for working examples that match your exact use case — do not rely on your training data for API shapes.
 
-You are an expert in the Vercel AI SDK v6. The AI SDK is the leading TypeScript toolkit for building AI-powered applications. It provides a unified API across all LLM providers.
+You are an expert in the Vercel AI SDK v7. The AI SDK is the leading TypeScript toolkit for building AI-powered applications. It provides a unified API across all LLM providers.
 
-## v6 Migration Pitfalls (Read First)
+## v7 Migration Pitfalls (Read First)
 
-- `ai@^6.0.0` is the umbrella package for AI SDK v6 (latest: 6.0.83).
-- `@ai-sdk/react` is `^3.0.x` in v6 projects (NOT `^6.0.0`).
-- `@ai-sdk/gateway` is `^3.x` in v6 projects (NOT `^1.x`).
+- `ai@^7.0.0` is the umbrella package for AI SDK v7 (latest: 7.0.85).
+- **v7 requires Node 22+ and is ESM-only** — `package.json` sets `"type": "module"` and ships no `require` condition. A CJS project must move to ESM or use dynamic `import()`.
+- `@ai-sdk/react` is `^4.0.x` in v7 projects (NOT `^3.0.x`); `@ai-sdk/react@4.0.88` pins `ai@7.0.85`.
+- `@ai-sdk/gateway` is `^4.x` in v7 projects (NOT `^3.x`); `ai@7.0.85` depends on `@ai-sdk/gateway@4.0.69`.
+- The `experimental_` prefix was dropped from stabilised exports: `experimental_customProvider` → `customProvider`, `experimental_generateImage` → `generateImage`, `experimental_transcribe` → `transcribe`, `experimental_generateSpeech` → `generateSpeech`, `experimental_telemetry` → `telemetry`, `experimental_activeTools` → `activeTools`, `experimental_prepareStep` → `prepareStep`, `experimental_output` → `output`, `experimental_context` → `context`, `experimental_include` / `includeRawChunks` → `include`.
+- Callbacks renamed: `onFinish` → `onEnd`, `onStepFinish` → `onStepEnd`, `onEmbedFinish` → `onEmbedEnd`, `onRerankFinish` → `onRerankEnd`. Old names still resolve but are deprecated aliases.
+- `result.fullStream` → `result.stream`; `fullStream` is deprecated.
+- `system` → `instructions` on `Prompt` and on `ToolLoopAgent`; `system` is deprecated.
+- `generateObject` / `streamObject` still exist but are `@deprecated` — use `generateText` / `streamText` with an `output` setting.
+- `ToolCallOptions` type and `isToolOrDynamicToolUIPart` were removed; the `media` content part type is gone (use `file`).
 - In `createUIMessageStream`, write with `stream.writer.write(...)` (NOT `stream.write(...)`).
 - `useChat` no longer supports `body` or `onResponse`; configure behavior through `transport`.
 - UI tool parts are typed as `tool-<toolName>` (for example `tool-weather`), not `tool-invocation`.
-- `DynamicToolCall` does not provide typed `.args`; cast via `unknown` first.
+- `DynamicToolCall` carries `input: unknown` (there is no `.args`); cast via `unknown` first.
 - `TypedToolResult` exposes `.output` (NOT `.result`).
 - The agent class is `ToolLoopAgent` (NOT `Agent` — `Agent` is just an interface).
 - Constructor uses `instructions` (NOT `system`).
 - Agent methods are `agent.generate()` and `agent.stream()` (NOT `agent.generateText()` or `agent.streamText()`).
-- AI Gateway does not support embeddings; use `@ai-sdk/openai` directly for `openai.embedding(...)`.
+- AI Gateway **does** support embeddings in v7 — `gateway.embedding(id)` / `gateway.embeddingModel(id)`. `textEmbeddingModel` is deprecated.
 - `useChat()` with no transport defaults to `DefaultChatTransport({ api: '/api/chat' })` — explicit transport only needed for custom endpoints or `DirectChatTransport`.
 - Default `stopWhen` for ToolLoopAgent is `stepCountIs(20)`, not `stepCountIs(1)` — override if you need fewer steps.
 - `strict: true` on tools is opt-in per tool, not global — only set on tools with provider-compatible schemas.
@@ -101,15 +108,15 @@ You are an expert in the Vercel AI SDK v6. The AI SDK is the leading TypeScript 
 ## Installation
 
 ```bash
-npm install ai@^6.0.0 @ai-sdk/react@^3.0.0
-npm install @ai-sdk/openai@^3.0.41      # Optional: required for embeddings
-npm install @ai-sdk/anthropic@^3.0.58   # Optional: direct Anthropic provider access
-npm install @ai-sdk/vercel@^2.0.37      # Optional: v0 model provider (v0-1.0-md)
+npm install ai@^7.0.0 @ai-sdk/react@^4.0.0
+npm install @ai-sdk/openai@^4.0.52      # Optional: direct OpenAI provider access
+npm install @ai-sdk/anthropic@^4.0.46   # Optional: direct Anthropic provider access
+npm install @ai-sdk/vercel@^3.0.30      # Optional: v0 model provider (v0-1.0-md)
 ```
 
-> **`@ai-sdk/react` is a separate package** — it is NOT included in the `ai` package. For v6 projects, install `@ai-sdk/react@^3.0.x` alongside `ai@^6.0.0`.
+> **`@ai-sdk/react` is a separate package** — it is NOT included in the `ai` package. For v7 projects, install `@ai-sdk/react@^4.0.x` alongside `ai@^7.0.0`.
 
-> **If you install `@ai-sdk/gateway` directly, use `@ai-sdk/gateway@^3.x`** (NOT `^1.x`).
+> **If you install `@ai-sdk/gateway` directly, use `@ai-sdk/gateway@^4.x`** (NOT `^3.x`).
 
 > **Only install a direct provider SDK** (e.g., `@ai-sdk/anthropic`) if you need provider-specific features not exposed through the gateway.
 
@@ -123,7 +130,7 @@ AI SDK is not just text — it handles **text, images, structured data, tool cal
 | **Image generation** | `generateText()` with `model: "google/gemini-3.1-flash-image-preview"` — images in `result.files`. **Always use this model, never older gemini-2.x models** |
 | Structured JSON output | `generateText()` with `output: Output.object({ schema })` |
 | Tool calling / agents | `generateText()` with `tools: { ... }` or `ToolLoopAgent` |
-| Embeddings | `embed()` / `embedMany()` with `@ai-sdk/openai` |
+| Embeddings | `embed()` / `embedMany()` with `gateway.embedding(...)` or a direct provider |
 
 **If the product needs generated images** (portraits, posters, cover art, illustrations, comics, diagrams), use `generateText` with an image model — do NOT use placeholder images or skip image generation.
 
@@ -135,7 +142,7 @@ For the smoothest experience, link to a Vercel project so AI Gateway credentials
 vercel link                    # Connect to your Vercel project
 # Enable AI Gateway at https://vercel.com/{team}/{project}/settings → AI Gateway
 vercel env pull .env.local     # Provisions VERCEL_OIDC_TOKEN automatically
-npm install ai@^6.0.0         # Gateway is built in
+npm install ai@^7.0.0         # Gateway is built in
 npx ai-elements                # Required: install AI text rendering components
 ```
 
@@ -145,7 +152,7 @@ This gives you AI Gateway access with OIDC authentication, cost tracking, failov
 
 ## Global Provider System (AI Gateway — Default)
 
-In AI SDK 6, pass a `"provider/model"` string to the `model` parameter — it automatically routes through the Vercel AI Gateway:
+In AI SDK 7, pass a `"provider/model"` string to the `model` parameter — it automatically routes through the Vercel AI Gateway:
 
 ```ts
 import { generateText } from "ai";
@@ -171,8 +178,6 @@ const { text } = await generateText({
 Both approaches provide failover, cost tracking, and observability on Vercel.
 
 **Model slug rules**: Always use `provider/model` format. Version numbers use **dots**, not hyphens: `anthropic/claude-sonnet-4.6` (not `claude-sonnet-4-6`). Default to `openai/gpt-5.4` or `anthropic/claude-sonnet-4.6`. Never use outdated models like `gpt-4o`.
-
-> AI Gateway does not support embeddings. Use a direct provider SDK such as `@ai-sdk/openai` for embeddings.
 
 > **Direct provider SDKs** (`@ai-sdk/openai`, `@ai-sdk/anthropic`, etc.) are only needed for provider-specific features not exposed through the gateway (e.g., Anthropic computer use, OpenAI fine-tuned model endpoints).
 
@@ -202,7 +207,7 @@ for await (const chunk of result.textStream) {
 
 ### Structured Output
 
-**`generateObject` was removed in AI SDK v6.** Use `generateText` with `output: Output.object()` instead. Do NOT import `generateObject` — it does not exist.
+**`generateObject` and `streamObject` are deprecated as of v7** (still exported, marked `@deprecated`). Use `generateText` / `streamText` with an `output` setting instead.
 
 ```ts
 import { generateText, Output } from "ai";
@@ -230,7 +235,7 @@ const { output } = await generateText({
 
 ### Tool Calling (MCP-Aligned)
 
-In AI SDK 6, tools use `inputSchema` (not `parameters`) and `output`/`outputSchema` (not `result`), aligned with the MCP specification. Per-tool `strict` mode ensures providers only generate valid tool calls matching your schema.
+In AI SDK 7, tools use `inputSchema` (not `parameters`) and `output`/`outputSchema` (not `result`), aligned with the MCP specification. Per-tool `strict` mode ensures providers only generate valid tool calls matching your schema.
 
 ```ts
 import { generateText, tool } from "ai";
@@ -401,21 +406,20 @@ function Chat() {
 
 ### Embeddings & Reranking
 
-Use a direct provider SDK for embeddings. AI Gateway does not support embedding models.
+AI Gateway serves embedding models in v7 — `gateway.embedding(id)`. Use a direct provider SDK only for provider-specific embedding options.
 
 ```ts
-import { embed, embedMany, rerank } from "ai";
-import { openai } from "@ai-sdk/openai";
+import { embed, embedMany, rerank, gateway } from "ai";
 
 // Single embedding
 const { embedding } = await embed({
-  model: openai.embedding("text-embedding-3-small"),
+  model: gateway.embedding("openai/text-embedding-3-small"),
   value: "The quick brown fox",
 });
 
 // Batch embeddings
 const { embeddings } = await embedMany({
-  model: openai.embedding("text-embedding-3-small"),
+  model: gateway.embedding("openai/text-embedding-3-small"),
   values: ["text 1", "text 2", "text 3"],
 });
 
@@ -454,7 +458,7 @@ const stream = streamText({
   model: "google/gemini-3.1-flash-image-preview",
   prompt: "A futuristic cityscape at sunset",
 });
-for await (const delta of stream.fullStream) {
+for await (const delta of stream.stream) {
   if (delta.type === "text-delta") process.stdout.write(delta.text);
 }
 const finalResult = await stream;
@@ -463,10 +467,10 @@ console.log(`Generated ${finalResult.files.length} image(s)`);
 
 **Default image model**: `google/gemini-3.1-flash-image-preview` — fast, high-quality. This is the ONLY recommended model for image generation.
 
-#### Image-only models (use `experimental_generateImage`)
+#### Image-only models (use `generateImage`)
 
 ```ts
-import { experimental_generateImage as generateImage } from "ai";
+import { generateImage } from "ai";   // v7: the experimental_ prefix was dropped
 
 const { images } = await generateImage({
   model: "google/imagen-4.0-generate-001",
@@ -563,7 +567,7 @@ function Chat() {
 
 Useful for SSR scenarios, testing without network, and single-process apps.
 
-**v6 changes from v5:**
+**`useChat` changes since v5 (unchanged in v7):**
 
 - `useChat({ api })` → `useChat({ transport: new DefaultChatTransport({ api }) })`
 - `handleSubmit` → `sendMessage({ text })`
@@ -588,7 +592,7 @@ import type { UIMessage } from "ai";
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
-  // IMPORTANT: convertToModelMessages is async in v6
+  // IMPORTANT: convertToModelMessages returns a Promise
   const modelMessages = await convertToModelMessages(messages);
   const result = streamText({
     model: "openai/gpt-5.4",
@@ -597,7 +601,7 @@ export async function POST(req: Request) {
       /* your tools */
     },
     // IMPORTANT: use stopWhen with stepCountIs for multi-step tool calling
-    // maxSteps was removed in v6 — use this instead
+    // maxSteps no longer exists — use this instead
     stopWhen: stepCountIs(5),
   });
   // Use toUIMessageStreamResponse (not toDataStreamResponse) for chat UIs
@@ -721,10 +725,10 @@ npx @ai-sdk/devtools
 
 ## Common Pitfall: Structured Output Property Name
 
-In v6, `generateText` with `Output.object()` returns the parsed result on the **`output`** property (NOT `object`):
+`generateText` with `Output.object()` returns the parsed result on the **`output`** property (NOT `object`):
 
 ```ts
-// CORRECT — v6
+// CORRECT
 const { output } = await generateText({
   model: 'openai/gpt-5.4',
   output: Output.object({ schema: mySchema }),
@@ -733,14 +737,39 @@ const { output } = await generateText({
 console.log(output) // ✅ parsed object
 
 // WRONG — v5 habit
-const { object } = await generateText({ ... }) // ❌ undefined — `object` doesn't exist in v6
+const { object } = await generateText({ ... }) // ❌ undefined — `object` is not on the result
 ```
 
-This is one of the most common v5→v6 migration mistakes. The config key is `output` and the result key is also `output`.
+This is one of the most common v5 migration mistakes. The config key is `output` and the result key is also `output`.
 
-## Migration from AI SDK 5
+## Migration from AI SDK 6
 
-Run `npx @ai-sdk/codemod upgrade` (or `npx @ai-sdk/codemod v6`) to auto-migrate. Preview with `npx @ai-sdk/codemod --dry upgrade`. Key changes:
+Run `npx @ai-sdk/codemod upgrade` (or `npx @ai-sdk/codemod v7`) to auto-migrate. Preview with `npx @ai-sdk/codemod --dry upgrade`. The v7 bundle covers:
+
+- Runtime: Node 22+, ESM-only (`"type": "module"`, no `require` export condition)
+- `experimental_customProvider` → `customProvider`
+- `experimental_generateImage` → `generateImage`
+- `experimental_transcribe` → `transcribe`; `experimental_generateSpeech` → `generateSpeech`
+- `experimental_output` → `output`; `experimental_prepareStep` → `prepareStep`
+- `experimental_activeTools` → `activeTools`; `experimental_telemetry` → `telemetry`
+- `experimental_context` → `context`; `experimental_include` / `includeRawChunks` → `include`
+- `experimental_onStart` → `onStart`; `experimental_onStepStart` → `onStepStart`
+- `onFinish` → `onEnd`; `onStepFinish` → `onStepEnd`; `onEmbedFinish` → `onEmbedEnd`; `onRerankFinish` → `onRerankEnd`
+- `experimental_onToolCallStart` / `Finish` → `onToolExecutionStart` / `onToolExecutionEnd`
+- `fullStream` → `stream`
+- `system` → `instructions`
+- `stepCountIs` → `isStepCount` (`stepCountIs` remains an alias export)
+- `CallSettings` type renamed; `ToolCallOptions` type removed
+- `isToolOrDynamicToolUIPart` removed; `media` message part → `file`
+- `cachedInputTokens` / `reasoningTokens` usage fields replaced; Anthropic `cacheCreationInputTokens` replaced
+- `google-generative-ai` provider id → `google`
+- `generateObject` / `streamObject` deprecated in favour of `generateText` / `streamText` with `output`
+- AI Gateway gained embedding models (`gateway.embedding`), so `@ai-sdk/openai` is no longer required for `embed()`
+- Package majors: `ai@^7`, `@ai-sdk/react@^4`, `@ai-sdk/gateway@^4`, `@ai-sdk/openai@^4`, `@ai-sdk/anthropic@^4`, `@ai-sdk/azure@^4`, `@ai-sdk/google-vertex@^5`, `@ai-sdk/vercel@^3`
+
+### Earlier: migration from AI SDK 5
+
+Run `npx @ai-sdk/codemod v6` first if coming from v5. Key changes:
 
 - `generateObject` / `streamObject` → `generateText` / `streamText` with `Output.object()`
 - `parameters` → `inputSchema`
@@ -765,9 +794,9 @@ Run `npx @ai-sdk/codemod upgrade` (or `npx @ai-sdk/codemod v6`) to auto-migrate.
 - UIMessage / ModelMessage types introduced
 - `DynamicToolCall.args` is not strongly typed; cast via `unknown` first
 - `TypedToolResult.result` → `TypedToolResult.output`
-- `ai@^6.0.0` is the umbrella package
-- `@ai-sdk/react` must be installed separately at `^3.0.x`
-- `@ai-sdk/gateway` (if installed directly) is `^3.x`, not `^1.x`
+- `ai@^6.0.0` was the umbrella package for v6
+- `@ai-sdk/react` must be installed separately (`^3.0.x` for v6, `^4.0.x` for v7)
+- `@ai-sdk/gateway` (if installed directly) was `^3.x` for v6
 - New: `needsApproval` on tools (boolean or async function) for human-in-the-loop approval
 - New: `strict: true` per-tool opt-in for strict schema validation
 - New: `DirectChatTransport` — connect `useChat` to an Agent in-process, no API route needed

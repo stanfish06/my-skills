@@ -80,6 +80,9 @@ point_forecast, quantile_forecast = model.forecast(
 
 Run inference with exogenous variables (requires `timesfm[xreg]`).
 
+Requires the model to have been compiled with `return_backcast=True`; otherwise
+the call raises `ValueError` before any covariate work.
+
 ```python
 point, quantiles = model.forecast_with_covariates(
     inputs=inputs,
@@ -187,7 +190,7 @@ Post-process quantiles to ensure monotonicity (q10 ≤ q20 ≤ ... ≤ q90).
 
 Return the model's reconstruction of the input (backcast) in addition to forecast.
 
-- **True**: Used for covariate workflows and diagnostics
+- **True**: Required by `forecast_with_covariates()`; also used for diagnostics
 - **False**: Only return forecast
 
 ---

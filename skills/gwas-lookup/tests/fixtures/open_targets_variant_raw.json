@@ -1,0 +1,265 @@
+{
+  "data": {
+    "variant": {
+      "id": "6_160540105_T_C",
+      "rsIds": [
+        "rs3798220"
+      ],
+      "chromosome": "6",
+      "position": 160540105,
+      "referenceAllele": "T",
+      "alternateAllele": "C",
+      "mostSevereConsequence": {
+        "id": "SO:0001583",
+        "label": "missense_variant"
+      },
+      "alleleFrequencies": [
+        {
+          "populationName": "sas_adj",
+          "alleleFrequency": 0.0044471285824091355
+        },
+        {
+          "populationName": "remaining_adj",
+          "alleleFrequency": 0.02564471747616305
+        },
+        {
+          "populationName": "nfe_adj",
+          "alleleFrequency": 0.018614154384347333
+        },
+        {
+          "populationName": "mid_adj",
+          "alleleFrequency": 0.005608709996700759
+        },
+        {
+          "populationName": "fin_adj",
+          "alleleFrequency": 0.010651922656420829
+        },
+        {
+          "populationName": "eas_adj",
+          "alleleFrequency": 0.09515000222885928
+        },
+        {
+          "populationName": "asj_adj",
+          "alleleFrequency": 0.0017900567414212375
+        },
+        {
+          "populationName": "amr_adj",
+          "alleleFrequency": 0.24290904242909042
+        },
+        {
+          "populationName": "ami_adj",
+          "alleleFrequency": 0.013157894736842105
+        },
+        {
+          "populationName": "afr_adj",
+          "alleleFrequency": 0.0074231035769497305
+        }
+      ],
+      "transcriptConsequences": [
+        {
+          "distanceFromFootprint": 428601,
+          "target": {
+            "id": "ENSG00000197081",
+            "approvedSymbol": "IGF2R"
+          }
+        },
+        {
+          "distanceFromFootprint": 87528,
+          "target": {
+            "id": "ENSG00000146477",
+            "approvedSymbol": "SLC22A3"
+          }
+        },
+        {
+          "distanceFromFootprint": 381387,
+          "target": {
+            "id": "ENSG00000175003",
+            "approvedSymbol": "SLC22A1"
+          }
+        },
+        {
+          "distanceFromFootprint": 450213,
+          "target": {
+            "id": "ENSG00000272841",
+            "approvedSymbol": "MAP3K4-AS1"
+          }
+        },
+        {
+          "distanceFromFootprint": 446112,
+          "target": {
+            "id": "ENSG00000213073",
+            "approvedSymbol": "CHP1P2"
+          }
+        },
+        {
+          "distanceFromFootprint": 432742,
+          "target": {
+            "id": "ENSG00000294966",
+            "approvedSymbol": "ENSG00000294966"
+          }
+        },
+        {
+          "distanceFromFootprint": 334105,
+          "target": {
+            "id": "ENSG00000304281",
+            "approvedSymbol": "ENSG00000304281"
+          }
+        },
+        {
+          "distanceFromFootprint": 332783,
+          "target": {
+            "id": "ENSG00000224371",
+            "approvedSymbol": "ENSG00000224371"
+          }
+        },
+        {
+          "distanceFromFootprint": 284352,
+          "target": {
+            "id": "ENSG00000294112",
+            "approvedSymbol": "ENSG00000294112"
+          }
+        },
+        {
+          "distanceFromFootprint": 263975,
+          "target": {
+            "id": "ENSG00000230234",
+            "approvedSymbol": "ENSG00000230234"
+          }
+        },
+        {
+          "distanceFromFootprint": 235197,
+          "target": {
+            "id": "ENSG00000303572",
+            "approvedSymbol": "ENSG00000303572"
+          }
+        },
+        {
+          "distanceFromFootprint": 215293,
+          "target": {
+            "id": "ENSG00000276960",
+            "approvedSymbol": "ENSG00000276960"
+          }
+        },
+        {
+          "distanceFromFootprint": 202404,
+          "target": {
+            "id": "ENSG00000287558",
+            "approvedSymbol": "ENSG00000287558"
+          }
+        },
+        {
+          "distanceFromFootprint": 126123,
+          "target": {
+            "id": "ENSG00000243831",
+            "approvedSymbol": "ENSG00000243831"
+          }
+        },
+        {
+          "distanceFromFootprint": 126099,
+          "target": {
+            "id": "ENSG00000303834",
+            "approvedSymbol": "ENSG00000303834"
+          }
+        },
+        {
+          "distanceFromFootprint": 451664,
+          "target": {
+            "id": "ENSG00000085511",
+            "approvedSymbol": "MAP3K4"
+          }
+        },
+        {
+          "distanceFromFootprint": 162139,
+          "target": {
+            "id": "ENSG00000122194",
+            "approvedSymbol": "PLG"
+          }
+        },
+        {
+          "distanceFromFootprint": 281284,
+          "target": {
+            "id": "ENSG00000112499",
+            "approvedSymbol": "SLC22A2"
+          }
+        },
+        {
+          "distanceFromFootprint": 385744,
+          "target": {
+            "id": "ENSG00000231863",
+            "approvedSymbol": "ENSG00000231863"
+          }
+        },
+        {
+          "distanceFromFootprint": 378336,
+          "target": {
+            "id": "ENSG00000301636",
+            "approvedSymbol": "ENSG00000301636"
+          }
+        },
+        {
+          "distanceFromFootprint": 376350,
+          "target": {
+            "id": "ENSG00000216516",
+            "approvedSymbol": "ENSG00000216516"
+          }
+        },
+        {
+          "distanceFromFootprint": 358444,
+          "target": {
+            "id": "ENSG00000220913",
+            "approvedSymbol": "ENSG00000220913"
+          }
+        },
+        {
+          "distanceFromFootprint": 343183,
+          "target": {
+            "id": "ENSG00000292246",
+            "approvedSymbol": "ENSG00000292246"
+          }
+        },
+        {
+          "distanceFromFootprint": 233883,
+          "target": {
+            "id": "ENSG00000274903",
+            "approvedSymbol": "ENSG00000274903"
+          }
+        },
+        {
+          "distanceFromFootprint": 158047,
+          "target": {
+            "id": "ENSG00000224477",
+            "approvedSymbol": "ENSG00000224477"
+          }
+        },
+        {
+          "distanceFromFootprint": 153171,
+          "target": {
+            "id": "ENSG00000287656",
+            "approvedSymbol": "ENSG00000287656"
+          }
+        },
+        {
+          "distanceFromFootprint": 29098,
+          "target": {
+            "id": "ENSG00000213071",
+            "approvedSymbol": "LPAL2"
+          }
+        },
+        {
+          "distanceFromFootprint": 28981,
+          "target": {
+            "id": "ENSG00000290613",
+            "approvedSymbol": "LPAL2"
+          }
+        },
+        {
+          "distanceFromFootprint": 0,
+          "target": {
+            "id": "ENSG00000198670",
+            "approvedSymbol": "LPA"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -14,7 +14,8 @@ description: Fetch compact BioBank Japan PheWAS summaries for single variants by
 ## Execution behavior
 - Return concise markdown summaries from the script JSON by default.
 - Return the JSON verbatim only if the user explicitly asks for machine-readable output.
-- Surface the canonical queried variant, total association count, and whether the results were truncated.
+- Surface the canonical queried variant, total association count, whether the results were truncated, and every entry in `warnings`.
+- A multi-allelic rsID is probed against each alternate allele in turn; report which canonical variant the counts came from, since it may not be the first alternate Ensembl lists.
 - Increase `max_results` gradually instead of asking for large association dumps in one call.
 
 ## Input

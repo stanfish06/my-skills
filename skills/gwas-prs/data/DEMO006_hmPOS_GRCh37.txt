@@ -1,8 +1,9 @@
-#pgs_id=PGS000039
-#pgs_name=PRS for BMI (Khera et al. 2019)
+#pgs_id=DEMO006
+#pgs_name=Synthetic demo score — Body mass index
 #trait_reported=Body mass index
 #genome_build=GRCh37
 #variants_number=97
+#note=SYNTHETIC. Effect weights and the reference mean/SD in curated_scores.json are illustrative values for offline demos, not a PGS Catalog score. Not suitable for interpretation. Fetch a real score with --pgs-id or --trait.
 rsID	chr_name	chr_position	effect_allele	other_allele	effect_weight	allelefrequency_effect
 rs1558902	16	53803574	A	T	0.09	0.42
 rs9939609	16	53820527	A	T	0.08	0.42

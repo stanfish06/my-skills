@@ -72,8 +72,8 @@ Single-cell workflows are easy to misconfigure and hard to reproduce when run ad
 4. **Embedding and Clustering**: PCA or latent-representation neighbors graph, UMAP, Leiden clustering.
 5. **Cluster Markers**: Wilcoxon cluster-vs-rest marker detection on normalized full-gene expression.
 6. **Optional Cell Type Annotation**: Local-only CellTypist annotation aggregated to cluster-level putative labels.
-7. **Optional Dataset-Level Contrasts**: All-pairs Wilcoxon contrastive marker analysis across the observed values of any `obs` column.
-8. **Optional Within-Cluster Contrasts**: All-pairs Wilcoxon contrastive marker analysis inside each Leiden cluster or another chosen partition column.
+7. **Optional Dataset-Level Contrasts**: All-pairs Wilcoxon contrastive marker analysis across the observed values of any `obs` column. **Exploratory only** — see Safety.
+8. **Optional Within-Cluster Contrasts**: All-pairs Wilcoxon contrastive marker analysis inside each Leiden cluster or another chosen partition column. **Exploratory only** — see Safety.
 9. **Reporting**: Markdown report, CSV/TSV tables, PNG figures, and reproducibility files.
 
 ## Input Formats
@@ -253,6 +253,7 @@ output_directory/
 - **Disclaimer**: Reports include the ClawBio medical disclaimer.
 - **Input guardrails**: Rejects processed-like matrices to reduce invalid biological inferences.
 - **Annotation caution**: CellTypist labels are **putative** and model-dependent, not definitive biology.
+- **Contrast caution**: `--contrast-groupby` runs a per-**cell** Wilcoxon test. When the column is a biological condition (treated/control, genotype, timepoint), cells from one donor are not independent replicates, so the exported `pvals_adj` reflects cell count rather than biological replication. Treat `contrastive_markers_*.csv` as a ranked exploratory list, never as condition-level differential expression. For a defensible condition contrast, aggregate to pseudobulk per donor-sample per cell type (`scanpy.get.aggregate` by sample × cell type) and run `pydeseq2`, DESeq2, edgeR, or limma-voom with donor as a blocking factor — see the `pydeseq2` and `single-cell-biologist` skills.
 - **Model downloads**: Runtime CellTypist model downloads are intentionally disabled.
 - **Reproducibility**: Writes command/environment/checksum bundle.
 

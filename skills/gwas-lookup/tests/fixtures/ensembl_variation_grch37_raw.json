@@ -1,0 +1,43 @@
+{
+  "MAF": 0.051318,
+  "name": "rs3798220",
+  "synonyms": [
+    "RCV001251437",
+    "VCV000975030",
+    "VAR_047301",
+    "PA166157081",
+    "152200.0007",
+    "rs52832866"
+  ],
+  "evidence": [
+    "Frequency",
+    "1000Genomes",
+    "Cited",
+    "ESP",
+    "Phenotype_or_Disease",
+    "ExAC",
+    "TOPMed",
+    "gnomAD"
+  ],
+  "mappings": [
+    {
+      "location": "6:160961137-160961137",
+      "ancestral_allele": null,
+      "start": 160961137,
+      "allele_string": "T/C",
+      "assembly_name": "GRCh37",
+      "coord_system": "chromosome",
+      "strand": 1,
+      "seq_region_name": "6",
+      "end": 160961137
+    }
+  ],
+  "source": "Variants (including SNPs and indels) imported from dbSNP",
+  "most_severe_consequence": "missense_variant",
+  "ambiguity": "Y",
+  "var_class": "SNP",
+  "minor_allele": "C",
+  "clinical_significance": [
+    "benign"
+  ]
+}

@@ -52,7 +52,7 @@ All fields are optional (minimum: provide `input_pdb`).
 | Field | Type | Description |
 |---|---|---|
 | `mfasta` | string | Multi-FASTA string with all designed sequences |
-| `scores` | array[float] | Log-probabilities per designed sequence (higher = more confident) |
+| `scores` | array[float] | Mean negative log-likelihood per designed sequence (lower = more confident) |
 | `probs` | array | Per-position amino acid probabilities |
 
 ### Example mfasta output

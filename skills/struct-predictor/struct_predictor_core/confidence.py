@@ -2,7 +2,8 @@
 confidence.py — Extract pLDDT and PAE from Boltz-2 output files.
 
 pLDDT is stored as B-factors in the output CIF (CA atoms only).
-PAE is stored in the companion confidence JSON under key "pae".
+PAE is NOT in the confidence JSON — Boltz writes it to a separate
+pae_<name>_model_<rank>.npz, and only when --write_full_pae is passed.
 """
 from __future__ import annotations
 
@@ -15,20 +16,22 @@ import numpy as np
 def extract_confidence(
     cif_path: Path,
     confidence_json_path: Path | None,
+    pae_npz_path: Path | None = None,
 ) -> dict:
     """Extract pLDDT, PAE, and chain boundaries from Boltz output.
 
     Returns:
         {
             "plddt": np.ndarray,           # shape [n_residues], float32
-            "pae": np.ndarray,             # shape [n_residues, n_residues], float32
+            "pae": np.ndarray | None,      # shape [n_residues, n_residues], float32
+                                           # None when Boltz wrote no usable PAE
             "chain_boundaries": [
                 {"chain_id": str, "start": int, "end": int}
             ]
         }
     """
     plddt, chain_boundaries = _parse_cif_atoms(cif_path)
-    pae = _parse_pae_from_json(confidence_json_path, len(plddt))
+    pae = _load_pae(pae_npz_path, confidence_json_path, len(plddt))
     return {
         "plddt": plddt,
         "pae": pae,
@@ -167,20 +170,39 @@ def _parse_plddt_from_cif(cif_path: Path) -> np.ndarray:
     return plddt
 
 
-def _parse_pae_from_json(
+def _load_pae(
+    pae_npz_path: Path | None,
     confidence_json_path: Path | None,
     n_residues: int,
-) -> np.ndarray:
-    """Load PAE matrix from Boltz confidence JSON.
+) -> np.ndarray | None:
+    """Load the PAE matrix, or return None when Boltz produced none.
 
-    If the JSON is absent or lacks a 'pae' key, returns a zero matrix.
+    Boltz writes PAE to pae_<name>_model_<rank>.npz under the "pae" key. The
+    confidence JSON carries only scalar scores (confidence_score, ptm, iptm,
+    complex_plddt, ...) and never a "pae" key; the JSON is still checked as a
+    fallback for AlphaFold-style inputs.
+
+    Returns None rather than a zero matrix — an all-zero PAE renders as
+    uniformly confident and would misreport a missing metric as a perfect one.
     """
-    if confidence_json_path is None or not Path(confidence_json_path).exists():
-        return np.zeros((n_residues, n_residues), dtype=np.float32)
+    pae = None
 
-    data = json.loads(Path(confidence_json_path).read_text())
+    if pae_npz_path is not None and Path(pae_npz_path).exists():
+        with np.load(pae_npz_path) as npz:
+            if "pae" in npz:
+                pae = np.array(npz["pae"], dtype=np.float32)
 
-    if "pae" not in data:
-        return np.zeros((n_residues, n_residues), dtype=np.float32)
+    if pae is None and confidence_json_path is not None and Path(confidence_json_path).exists():
+        data = json.loads(Path(confidence_json_path).read_text())
+        if "pae" in data:
+            pae = np.array(data["pae"], dtype=np.float32)
 
-    return np.array(data["pae"], dtype=np.float32)
+    if pae is None:
+        return None
+
+    # Boltz indexes PAE by token, which need not match the CA-derived residue
+    # count once ligands or modified residues are present.
+    if pae.ndim != 2 or pae.shape != (n_residues, n_residues):
+        return None
+
+    return pae

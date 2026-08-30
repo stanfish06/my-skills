@@ -105,15 +105,18 @@ For each pack available for the detected language (see [ruleset-catalog.md](../r
 
 | Language | Trail of Bits | Community Pack |
 |----------|---------------|----------------|
-| C/C++ | `trailofbits/cpp-queries` | `GitHubSecurityLab/CodeQL-Community-Packs-CPP` |
-| Go | `trailofbits/go-queries` | `GitHubSecurityLab/CodeQL-Community-Packs-Go` |
-| Java | `trailofbits/java-queries` | `GitHubSecurityLab/CodeQL-Community-Packs-Java` |
-| JavaScript | — | `GitHubSecurityLab/CodeQL-Community-Packs-JavaScript` |
-| Python | — | `GitHubSecurityLab/CodeQL-Community-Packs-Python` |
-| C# | — | `GitHubSecurityLab/CodeQL-Community-Packs-CSharp` |
-| Ruby | — | `GitHubSecurityLab/CodeQL-Community-Packs-Ruby` |
+| C/C++ | `trailofbits/cpp-queries` | `githubsecuritylab/codeql-cpp-queries` |
+| Go | `trailofbits/go-queries` | `githubsecuritylab/codeql-go-queries` |
+| Java | `trailofbits/java-queries` | `githubsecuritylab/codeql-java-queries` |
+| JavaScript | — | `githubsecuritylab/codeql-javascript-queries` |
+| Python | — | `githubsecuritylab/codeql-python-queries` |
+| C# | — | `githubsecuritylab/codeql-csharp-queries` |
+| Ruby | — | `githubsecuritylab/codeql-ruby-queries` |
 
-Check if installed (`codeql resolve qlpacks | grep -i "<PACK_NAME>"`). If not, ask user to install or ignore.
+Check if installed (`codeql resolve qlpacks | grep -i "<PACK_NAME>"`). On a miss, report the exact
+pack name that did not resolve and the `codeql pack download <PACK_NAME>` command to install it, then
+ask the user to install or skip. Never drop a pack silently — record every skipped pack in the run
+output so the coverage gap is visible.
 
 #### 2b: Detect Model Packs
 

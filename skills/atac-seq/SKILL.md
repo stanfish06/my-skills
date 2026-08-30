@@ -76,21 +76,24 @@ macs3 callpeak \
   -f BAMPE \
   -g hs \
   -n sample \
-  --nomodel \
-  --shift -100 \
-  --extsize 200 \
   -q 0.01 \
   --outdir results/peaks
+```
+
+`BAMPE` piles up the real fragments inferred from the read pairs. MACS3 zeroes `--shift` whenever the format is `BAMPE`/`BEDPE`/`FRAG`, and takes the fragment length from the pairs rather than `--extsize`, so passing `--nomodel --shift -100 --extsize 200` alongside `-f BAMPE` changes nothing. To pile up Tn5 insertion sites instead, drop to single-end mode where those flags apply:
+
+```bash
+macs3 callpeak -t atac.bam -f BAM -g hs -n sample -q 0.01 --nomodel --shift -100 --extsize 200
 ```
 
 ## Key Parameters
 
 | Parameter | Typical value | Notes |
 |---|---|---|
-| `-f` | `BAMPE` | paired-end ATAC should use fragment-aware mode |
-| `--nomodel` | on | standard for ATAC |
-| `--shift` | `-100` | common Tn5 offset convention |
-| `--extsize` | `200` | common first-pass extension |
+| `-f` | `BAMPE` | paired-end fragment mode; `BAM` for the insertion-site workflow |
+| `--nomodel` | `-f BAM` only | pairs with `--shift`/`--extsize`; ignored under `BAMPE` |
+| `--shift` | `-100` | Tn5 offset; MACS3 forces it to `0` under `BAMPE` |
+| `--extsize` | `200` | smoothing window for the shifted cut sites; `BAMPE` uses real fragment length |
 | `-q` | `0.01` | starting FDR threshold |
 
 ## Workflow
@@ -106,7 +109,7 @@ Review:
 
 ### 2. Call peaks with ATAC-specific settings
 
-Use fragment-aware paired-end mode and Tn5-aware shifting or equivalent settings.
+Use fragment-aware paired-end mode (`-f BAMPE`), or single-end mode with Tn5-aware shifting (`-f BAM --nomodel --shift -100 --extsize 200`). The two are alternatives — `BAMPE` discards the shift.
 
 ### 3. Build a consensus peak matrix
 

@@ -17,14 +17,14 @@ created: 2026-06-13
 # caveman
 
 > [!info] What it does
-> Ultra-compressed communication mode. Cuts output tokens 65% (measured) by speaking like caveman while keeping full technical accuracy. Supports intensity levels: lite, full (default), ultra, wenyan-lite, wenyan-full, wenyan-ultra. Use when user says "caveman mode", "talk like caveman", "use caveman", "less tokens", "be brief", or invokes /caveman. Also auto-triggers when token efficiency is requested.
+> Ultra-compressed communication mode that cuts output tokens while keeping technical accuracy. Levels: lite, full, ultra and the wenyan variants. Use for /caveman, "caveman mode", "talk like caveman", "be brief" or "less tokens".
 
 **Source:** [skills/caveman/SKILL.md](../../../skills/caveman/SKILL.md)  ·  **Domain:** [Reasoning, Ideation & Decision](../../maps/reasoning-ideation.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [caveman-compress](../../notes/reasoning-ideation/caveman-compress.md) — Compress natural language memory files (CLAUDE.md, todos, preferences) into caveman format to save input tokens
-- [caveman-help](../../notes/reasoning-ideation/caveman-help.md) — Quick-reference card for all caveman modes, skills, and commands
+- [caveman-compress](../../notes/reasoning-ideation/caveman-compress.md) — Compress a memory file such as CLAUDE.md or a todo list into caveman format to save input tokens, keeping a readable backup
+- [caveman-help](../../notes/reasoning-ideation/caveman-help.md) — Quick-reference card for caveman modes, skills and commands
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

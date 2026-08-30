@@ -48,6 +48,8 @@ Always run the shared preflight before touching the environment. It does not
 require `.env` to exist — it falls back to defaults — and it tells you whether
 the host can run Complexa at all.
 
+> Prerequisite: the `_shared/` bundle is not vendored in this flat vault. Install `open-models-skills/proteina-complexa/_shared/` from `NVIDIA-BioNeMo/bionemo-agent-toolkit` to `.claude/skills/_shared/` (`scripts/preflight.sh`, `scripts/write_manifest.py`, `reference/hardware.md`), or substitute an inline `nvidia-smi` / `df -h` probe.
+
 ```bash
 bash .claude/skills/_shared/scripts/preflight.sh
 ```

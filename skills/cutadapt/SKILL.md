@@ -71,11 +71,14 @@ Lowercase flags (`-a`, `-g`, `-b`, `-q`) apply to R1; uppercase (`-A`, `-G`, `-B
 ## Quality, Length, and N Filtering
 
 ```bash
+# -q 20,20    trim low-quality bases from both ends (Phred cutoff)
+# -m 20       discard reads shorter than 20nt after trimming
+# --max-n 0.1 discard reads with too many Ns
 cutadapt \
   -a AGATCGGAAGAGC \
-  -q 20,20 \             # trim low-quality bases from both ends (Phred cutoff)
-  -m 20 \                # discard reads shorter than 20nt after trimming
-  --max-n 0.1 \          # discard reads with too many Ns
+  -q 20,20 \
+  -m 20 \
+  --max-n 0.1 \
   -o trimmed.fastq.gz input.fastq.gz
 ```
 
@@ -98,8 +101,8 @@ cutadapt \
 # Small RNA: keep short reads, trim the 3' adapter, discard anything too short to be biological signal
 cutadapt -a TGGAATTCTCGGGTGCCAAGG -m 18 -M 30 -o trimmed.fastq.gz input.fastq.gz
 
-# Poly-A tail removal (RNA-seq)
-cutadapt -a "A{100}" -o trimmed.fastq.gz input.fastq.gz
+# Poly-A tail removal (RNA-seq) — --poly-a supersedes the older `-a "A{100}"` recipe
+cutadapt --poly-a -o trimmed.fastq.gz input.fastq.gz
 ```
 
 ## Multi-Core and Reports

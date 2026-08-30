@@ -7,7 +7,7 @@ description: Use for authorized security testing of desktop thick clients includ
 
 ## ACTION REQUIRED（读完后立刻执行）
 
-1. `NOW`: 读取 `../field-journal/precedent-pentest.md`
+1. `NOW`: 读取 `../reverse-skill-router/field-journal/precedent-pentest.md`
 2. `NOW`: 确认目标是 **桌面厚客户端**（Win/macOS/Linux GUI 或服务伴生），非纯 Web
 3. `NOW`: case-init；安装包来源与测试账号写入 scope
 4. `NEXT`: 工具（Burp 上游代理、进程监控、逆向工具）

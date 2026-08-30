@@ -182,43 +182,65 @@ ds.save_as('modified.dcm')
 
 ### Anonymizing DICOM Files
 
-Remove or replace patient identifiable information:
+**A keyword allowlist is not a de-identification profile.** DICOM PS3.15 Annex E
+Table E.1-1 assigns action **X** (remove) to every Private Attribute
+`(gggg,eeee)` where `gggg` is odd, action **U** (replace with a UID internally
+consistent within a set of Instances) to `SOPInstanceUID (0008,0018)`,
+`StudyInstanceUID (0020,000D)` and `SeriesInstanceUID (0020,000E)`, and applies
+"whether contained in the top level Data Set or embedded in an Item of a Sequence
+of Items". Annex E Note 1 states directly that the listed attributes "may not be
+sufficient to guarantee confidentiality of patient identity". For data leaving an
+institution use a maintained conformant implementation —
+[`pydicom/deid`](https://github.com/pydicom/deid) or
+[`dicognito`](https://github.com/blairconrad/dicognito), both MIT-licensed.
+
+The example below and `scripts/anonymize_dicom.py` are demonstrations of the
+pydicom API, **not** conformant profiles: neither reaches identifiers nested in
+Sequence Items, structured report content, overlays, or text burned into Pixel
+Data.
 
 ```python
 import pydicom
-from datetime import datetime
 
 ds = pydicom.dcmread('input.dcm')
 
-# Tags commonly containing PHI (Protected Health Information)
-tags_to_anonymize = [
-    'PatientName', 'PatientID', 'PatientBirthDate',
-    'PatientSex', 'PatientAge', 'PatientAddress',
-    'InstitutionName', 'InstitutionAddress',
-    'ReferringPhysicianName', 'PerformingPhysicianName',
-    'OperatorsName', 'StudyDescription', 'SeriesDescription',
-]
-
-# Remove or replace sensitive data
-for tag in tags_to_anonymize:
+# Action Z: replace with a zero-length or dummy value (Type 2, must stay present)
+ds.PatientName = 'ANONYMOUS'
+ds.PatientID = 'ANONYMOUS'
+ds.PatientBirthDate = '19000101'
+for tag in ['AccessionNumber', 'ReferringPhysicianName', 'StudyDate', 'StudyTime']:
     if hasattr(ds, tag):
-        if tag in ['PatientName', 'PatientID']:
-            setattr(ds, tag, 'ANONYMOUS')
-        elif tag == 'PatientBirthDate':
-            setattr(ds, tag, '19000101')
-        else:
-            delattr(ds, tag)
+        setattr(ds, tag, '')
 
-# Update dates to maintain temporal relationships
-if hasattr(ds, 'StudyDate'):
-    # Shift dates by a random offset
-    ds.StudyDate = '20000101'
+# Action X: remove
+for tag in ['PatientSex', 'PatientAge', 'PatientAddress', 'OtherPatientIDs',
+            'InstitutionName', 'InstitutionAddress', 'PerformingPhysicianName',
+            'OperatorsName', 'StudyDescription', 'SeriesDescription',
+            'RequestAttributesSequence', 'SeriesDate', 'AcquisitionDate']:
+    if hasattr(ds, tag):
+        delattr(ds, tag)
 
-# Keep pixel data intact
+# Private Attributes are action X. Many scanners store name, ID and accession
+# number here, so an allowlist alone leaves them intact.
+ds.remove_private_tags()
+
+# Action U. entropy_srcs makes the mapping deterministic, so every Instance in a
+# study or series gets the same replacement across separate invocations.
+for tag in ['StudyInstanceUID', 'SeriesInstanceUID', 'SOPInstanceUID']:
+    original = getattr(ds, tag, None)
+    if original:
+        setattr(ds, tag, pydicom.uid.generate_uid(entropy_srcs=[str(original)]))
+ds.file_meta.MediaStorageSOPInstanceUID = ds.SOPInstanceUID
+
+# PS3.15 E.1.1 requires both of these on a de-identified Data Set
+ds.PatientIdentityRemoved = 'YES'
+ds.DeidentificationMethod = 'keyword allowlist; not PS3.15 Annex E conformant'
+
+# Pixel Data is untouched: check BurnedInAnnotation separately
 ds.save_as('anonymized.dcm')
 ```
 
-Use the provided script: `python scripts/anonymize_dicom.py input.dcm output.dcm`
+Demonstration script: `python scripts/anonymize_dicom.py input.dcm output.dcm`
 
 ### Writing DICOM Files
 
@@ -365,7 +387,9 @@ print(f"Voxel size: {pixel_spacing[0]}x{pixel_spacing[1]}x{slice_thickness} mm")
 This skill includes utility scripts in the `scripts/` directory:
 
 ### anonymize_dicom.py
-Anonymize DICOM files by removing or replacing Protected Health Information (PHI).
+Remove or replace Protected Health Information (PHI) in a DICOM file. Not a
+PS3.15 Annex E conformant profile — see the warning under "Anonymizing DICOM
+Files" before using it on real data.
 
 ```bash
 python scripts/anonymize_dicom.py input.dcm output.dcm
@@ -416,7 +440,7 @@ Detailed reference information is available in the `references/` directory:
 4. **Handle exceptions** when reading files from untrusted sources
 5. **Apply proper windowing** (VOI LUT) for medical image visualization
 6. **Maintain spatial information** (pixel spacing, slice thickness) when processing 3D volumes
-7. **Verify anonymization** thoroughly before sharing medical data
+7. **Verify anonymization** against DICOM PS3.15 Annex E before sharing medical data; a keyword allowlist is not a conformant profile
 8. **Use UIDs correctly** - generate new UIDs when creating new instances, preserve them when modifying
 
 ## Documentation

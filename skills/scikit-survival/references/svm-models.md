@@ -169,22 +169,21 @@ risk_scores = estimator.predict(X_test)
 from sklearn.model_selection import GridSearchCV
 from sksurv.metrics import as_concordance_index_ipcw_scorer
 
-# Define parameter grid
+# Define parameter grid — estimator__ prefix, because the model is wrapped
 param_grid = {
-    'alpha': [0.1, 0.5, 1.0, 5.0, 10.0, 50.0]
+    'estimator__alpha': [0.1, 0.5, 1.0, 5.0, 10.0, 50.0]
 }
 
 # Grid search
 cv = GridSearchCV(
-    FastSurvivalSVM(),
+    as_concordance_index_ipcw_scorer(FastSurvivalSVM()),
     param_grid,
-    scoring=as_concordance_index_ipcw_scorer(),
     cv=5,
     n_jobs=-1
 )
 cv.fit(X, y)
 
-print(f"Best alpha: {cv.best_params_['alpha']}")
+print(f"Best alpha: {cv.best_params_['estimator__alpha']}")
 print(f"Best C-index: {cv.best_score_:.3f}")
 ```
 
@@ -195,15 +194,14 @@ from sklearn.model_selection import GridSearchCV
 
 # Define parameter grid for kernel SVM
 param_grid = {
-    'alpha': [0.1, 1.0, 10.0],
-    'gamma': ['scale', 'auto', 0.001, 0.01, 0.1, 1.0]
+    'estimator__alpha': [0.1, 1.0, 10.0],
+    'estimator__gamma': ['scale', 'auto', 0.001, 0.01, 0.1, 1.0]
 }
 
 # Grid search
 cv = GridSearchCV(
-    FastKernelSurvivalSVM(kernel='rbf'),
+    as_concordance_index_ipcw_scorer(FastKernelSurvivalSVM(kernel='rbf')),
     param_grid,
-    scoring=as_concordance_index_ipcw_scorer(),
     cv=5,
     n_jobs=-1
 )
@@ -267,11 +265,10 @@ X_scaled = scaler.fit_transform(X)
 # Create model
 svm = FastSurvivalSVM(alpha=1.0, max_iter=100, random_state=42)
 
-# Cross-validation
+# Cross-validation — the wrapper overrides score(), so scoring= is omitted
 scores = cross_val_score(
-    svm, X_scaled, y,
+    as_concordance_index_ipcw_scorer(svm), X_scaled, y,
     cv=5,
-    scoring=as_concordance_index_ipcw_scorer(),
     n_jobs=-1
 )
 
@@ -334,17 +331,16 @@ pipeline = Pipeline([
     ('svm', FastKernelSurvivalSVM(kernel='rbf'))
 ])
 
-# Define parameter grid
+# Define parameter grid — estimator__ for the wrapper, svm__ for the pipeline step
 param_grid = {
-    'svm__alpha': [0.1, 1.0, 10.0],
-    'svm__gamma': ['scale', 0.01, 0.1, 1.0]
+    'estimator__svm__alpha': [0.1, 1.0, 10.0],
+    'estimator__svm__gamma': ['scale', 0.01, 0.1, 1.0]
 }
 
 # Grid search
 cv = GridSearchCV(
-    pipeline,
+    as_concordance_index_ipcw_scorer(pipeline),
     param_grid,
-    scoring=as_concordance_index_ipcw_scorer(),
     cv=5,
     n_jobs=-1,
     verbose=1
@@ -352,7 +348,7 @@ cv = GridSearchCV(
 cv.fit(X_train, y_train)
 
 # Best model
-best_model = cv.best_estimator_
+best_model = cv.best_estimator_.estimator_
 print(f"Best parameters: {cv.best_params_}")
 print(f"Best CV C-index: {cv.best_score_:.3f}")
 

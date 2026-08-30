@@ -5,18 +5,36 @@ Each Agent Registry exposes an MCP-compatible endpoint (MCP spec 2025-11-25) tha
 ## Endpoint Format
 
 ```
-https://bedrock-agentcore.<region>.amazonaws.com/registry/<registryId>/mcp
+https://agent-registry.<region>.api.aws/registry/<registryId>/mcp
 ```
 
-The endpoint exposes a single MCP tool: `search_registry_records`.
+The endpoint exposes three MCP tools.
 
-### Tool Parameters
+### `search_discoverable_registry_records`
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `searchQuery` | string | Yes | Natural language or keyword query (1-256 chars) |
 | `maxResults` | integer | No | Number of results (1-20, default 10) |
-| `filter` | object | No | Metadata filter using `$eq`, `$ne`, `$in`, `$and`, `$or` operators |
+| `filter` | object | No | Metadata filter using `$eq`, `$ne`, `$in`, `$and`, `$or` on `name`, `recordType`, `recordVersion` |
+
+### `list_discoverable_registry_records`
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `maxResults` | integer | No | Results per page (1-100, default 20) |
+| `nextToken` | string | No | Pagination token from a previous response |
+| `filters` | array | No | `{"name": "recordType"\|"descriptorType", "values": [...]}` entries; values OR within a filter, AND across filters |
+
+Returns summaries without descriptor content.
+
+### `batch_get_discoverable_registry_record`
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `recordIds` | array | Yes | 1-100 record ARNs or IDs |
+
+Returns HTTP 200 on partial failure; unreadable records appear in `errors` with `RESOURCE_NOT_FOUND`, `ACCESS_DENIED`, or `INTERNAL_ERROR`.
 
 ## IAM-Based Access (Recommended)
 
@@ -32,8 +50,8 @@ For IAM (SigV4) authentication, use the `mcp-proxy-for-aws` proxy which handles 
       "command": "uvx",
       "args": [
         "mcp-proxy-for-aws@latest",
-        "https://bedrock-agentcore.<region>.amazonaws.com/registry/<registryId>/mcp",
-        "--service", "bedrock-agentcore",
+        "https://agent-registry.<region>.api.aws/registry/<registryId>/mcp",
+        "--service", "agent-registry",
         "--region", "<region>",
         "--profile", "my-profile"
       ]
@@ -55,10 +73,12 @@ MCP tool invocation requires **both** permissions:
     {
       "Effect": "Allow",
       "Action": [
-        "bedrock-agentcore:InvokeRegistryMcp",
-        "bedrock-agentcore:SearchRegistryRecords"
+        "agent-registry:InvokeRegistryMcp",
+        "agent-registry:SearchDiscoverableRegistryRecords",
+        "agent-registry:ListDiscoverableRegistryRecords",
+        "agent-registry:GetDiscoverableRegistryRecord"
       ],
-      "Resource": "arn:aws:bedrock-agentcore:<region>:<account>:registry/<registryId>"
+      "Resource": "arn:aws:agent-registry:<region>:<account>:registry/<registryId>"
     }
   ]
 }
@@ -66,12 +86,12 @@ MCP tool invocation requires **both** permissions:
 
 ### Using via AWS CLI in Skill Context
 
-The `aws-agentic-ai` skill permits `Bash(aws bedrock-agentcore *)` for data plane commands. Search directly without MCP configuration:
+The `aws-agentic-ai` skill permits `Bash(aws agent-registry *)` for data plane commands. Search directly without MCP configuration:
 
 ```bash
-aws bedrock-agentcore search-registry-records \
+aws agent-registry search-discoverable-registry-records \
   --search-query "your search query" \
-  --registry-ids "arn:aws:bedrock-agentcore:us-east-1:<account-id>:registry/reg-abc123def456" \
+  --registry-ids "arn:aws:agent-registry:us-east-1:<account-id>:registry/reg-abc123def456" \
   --region us-east-1
 ```
 
@@ -79,7 +99,7 @@ This approach works out of the box with existing AWS credential chains.
 
 ## JWT-Based Access (OAuth 2.0)
 
-For external access or cross-organization scenarios. The registry must be created with `--authorizer-type CUSTOM_JWT`. **Authorization type cannot be changed after creation.**
+For external access or cross-organization scenarios. The registry must be created with `--discovery-configuration '{"authorizerType": "CUSTOM_JWT", ...}'`. Changing it later breaks consumers that rely on the previous type.
 
 ### Option 1: Bearer Token
 
@@ -88,7 +108,7 @@ For external access or cross-organization scenarios. The registry must be create
   "mcpServers": {
     "my-registry": {
       "type": "http",
-      "url": "https://bedrock-agentcore.<region>.amazonaws.com/registry/<registryId>/mcp",
+      "url": "https://agent-registry.<region>.api.aws/registry/<registryId>/mcp",
       "headers": {
         "Authorization": "Bearer ${ACCESS_TOKEN}"
       }
@@ -102,13 +122,15 @@ For external access or cross-organization scenarios. The registry must be create
 Register the client ID in the registry's authorizer configuration:
 
 ```bash
-aws bedrock-agentcore-control update-registry \
+aws agent-registry-control update-registry \
   --registry-id <registryId> \
-  --authorizer-configuration '{
-    "optionalValue": {
-      "customJWTAuthorizer": {
-        "discoveryUrl": "https://<idp-domain>/.well-known/openid-configuration",
-        "allowedClients": ["<client-id>"]
+  --discovery-configuration '{
+    "authorizerConfiguration": {
+      "optionalValue": {
+        "customJWTAuthorizer": {
+          "discoveryUrl": "https://<idp-domain>/.well-known/openid-configuration",
+          "allowedClients": ["<client-id>"]
+        }
       }
     }
   }' \
@@ -121,7 +143,7 @@ MCP client config:
   "mcpServers": {
     "pre-registered-registry": {
       "type": "http",
-      "url": "https://bedrock-agentcore.<region>.amazonaws.com/registry/<registryId>/mcp",
+      "url": "https://agent-registry.<region>.api.aws/registry/<registryId>/mcp",
       "oauth": {
         "clientId": "<client-id>",
         "callbackPort": "<port-number>"
@@ -136,13 +158,15 @@ MCP client config:
 Configure with `allowedAudience` instead of `allowedClients`:
 
 ```bash
-aws bedrock-agentcore-control update-registry \
+aws agent-registry-control update-registry \
   --registry-id <registryId> \
-  --authorizer-configuration '{
-    "optionalValue": {
-      "customJWTAuthorizer": {
-        "discoveryUrl": "https://<idp-domain>/.well-known/openid-configuration",
-        "allowedAudience": ["https://bedrock-agentcore.<region>.amazonaws.com/registry/<registryId>/mcp"]
+  --discovery-configuration '{
+    "authorizerConfiguration": {
+      "optionalValue": {
+        "customJWTAuthorizer": {
+          "discoveryUrl": "https://<idp-domain>/.well-known/openid-configuration",
+          "allowedAudience": ["https://agent-registry.<region>.api.aws/registry/<registryId>/mcp"]
+        }
       }
     }
   }' \
@@ -155,7 +179,7 @@ MCP client config (no `oauth` needed — uses DCR):
   "mcpServers": {
     "dcr-registry": {
       "type": "http",
-      "url": "https://bedrock-agentcore.<region>.amazonaws.com/registry/<registryId>/mcp"
+      "url": "https://agent-registry.<region>.api.aws/registry/<registryId>/mcp"
     }
   }
 }
@@ -163,7 +187,7 @@ MCP client config (no `oauth` needed — uses DCR):
 
 **OAuth well-known path** for resource metadata discovery:
 ```
-https://bedrock-agentcore.<region>.amazonaws.com/.well-known/oauth-protected-resource/registry/<registryId>/mcp
+https://agent-registry.<region>.api.aws/.well-known/oauth-protected-resource/registry/<registryId>/mcp
 ```
 
 Supported identity providers: Amazon Cognito, Okta, Azure AD (Microsoft Entra ID), Auth0, or any OIDC-compatible provider.
@@ -180,8 +204,8 @@ Kiro supports MCP servers natively. Use the same `mcp-proxy-for-aws` approach fo
       "command": "uvx",
       "args": [
         "mcp-proxy-for-aws@latest",
-        "https://bedrock-agentcore.<region>.amazonaws.com/registry/<registryId>/mcp",
-        "--service", "bedrock-agentcore",
+        "https://agent-registry.<region>.api.aws/registry/<registryId>/mcp",
+        "--service", "agent-registry",
         "--region", "<region>"
       ]
     }
@@ -198,7 +222,7 @@ Kiro supports MCP servers natively. Use the same `mcp-proxy-for-aws` approach fo
   "jsonrpc": "2.0",
   "method": "tools/call",
   "params": {
-    "name": "search_registry_records",
+    "name": "search_discoverable_registry_records",
     "arguments": {
       "searchQuery": "payment processing tools"
     }
@@ -214,12 +238,12 @@ Kiro supports MCP servers natively. Use the same `mcp-proxy-for-aws` approach fo
   "jsonrpc": "2.0",
   "method": "tools/call",
   "params": {
-    "name": "search_registry_records",
+    "name": "search_discoverable_registry_records",
     "arguments": {
       "searchQuery": "data analytics",
       "maxResults": 5,
       "filter": {
-        "descriptorType": {
+        "recordType": {
           "$eq": "MCP"
         }
       }
@@ -236,12 +260,12 @@ Kiro supports MCP servers natively. Use the same `mcp-proxy-for-aws` approach fo
   "jsonrpc": "2.0",
   "method": "tools/call",
   "params": {
-    "name": "search_registry_records",
+    "name": "search_discoverable_registry_records",
     "arguments": {
       "searchQuery": "customer",
       "filter": {
         "$and": [
-          {"descriptorType": {"$in": ["A2A", "MCP"]}},
+          {"recordType": {"$in": ["AGENT", "MCP"]}},
           {"name": {"$ne": "deprecated-agent"}}
         ]
       }
@@ -257,22 +281,22 @@ Kiro supports MCP servers natively. Use the same `mcp-proxy-for-aws` approach fo
 
 ```bash
 curl -s -X POST \
-  "https://bedrock-agentcore.<region>.amazonaws.com/registry/<registryId>/mcp" \
+  "https://agent-registry.<region>.api.aws/registry/<registryId>/mcp" \
   -H "Content-Type: application/json" \
   -H "X-Amz-Security-Token: ${AWS_SESSION_TOKEN}" \
-  --aws-sigv4 "aws:amz:<region>:bedrock-agentcore" \
+  --aws-sigv4 "aws:amz:<region>:agent-registry" \
   --user "${AWS_ACCESS_KEY_ID}:${AWS_SECRET_ACCESS_KEY}" \
-  -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"search_registry_records","arguments":{"searchQuery":"weather"}}}'
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"search_discoverable_registry_records","arguments":{"searchQuery":"weather"}}}'
 ```
 
 ### OAuth Verification
 
 ```bash
 curl -s -X POST \
-  "https://bedrock-agentcore.<region>.amazonaws.com/registry/<registryId>/mcp" \
+  "https://agent-registry.<region>.api.aws/registry/<registryId>/mcp" \
   -H "Authorization: Bearer ${ACCESS_TOKEN}" \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"search_registry_records","arguments":{"searchQuery":"weather"}}}'
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"search_discoverable_registry_records","arguments":{"searchQuery":"weather"}}}'
 ```
 
 ## Agent-to-Agent Discovery Pattern
@@ -289,11 +313,11 @@ This enables dynamic, runtime agent composition without hardcoded dependencies.
 
 | Issue | Cause | Solution |
 |-------|-------|----------|
-| 403 Forbidden | Missing IAM permission | Add both `InvokeRegistryMcp` and `SearchRegistryRecords` to role |
+| 403 Forbidden | Missing IAM permission | Add both `InvokeRegistryMcp` and `SearchDiscoverableRegistryRecords` to role |
 | Connection refused | Wrong region or registry ID | Verify endpoint URL matches registry region and ID |
 | Empty results | No approved records | Ensure records are approved, not just in Draft status |
 | JWT auth fails | Token expired or wrong audience | Check token validity and `allowedClients`/`allowedAudience` config |
-| Timeout | Network/VPC configuration | Ensure outbound HTTPS (443) to `bedrock-agentcore.<region>.amazonaws.com` |
+| Timeout | Network/VPC configuration | Ensure outbound HTTPS (443) to `agent-registry.<region>.api.aws` |
 | `mcp-proxy-for-aws` errors | Missing AWS credentials | Ensure `--profile` or environment variables are configured |
 
 ## Related

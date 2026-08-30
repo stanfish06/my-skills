@@ -31,6 +31,8 @@ Score a directory of pre-existing PDB files against the same metrics Proteina-Co
 
 Always check GPU / disk / tool binaries before launching a refold job. RF3 and ColabDesign-AF2 are large.
 
+> Prerequisite: the `_shared/` bundle is not vendored in this flat vault. Install `open-models-skills/proteina-complexa/_shared/` from `NVIDIA-BioNeMo/bionemo-agent-toolkit` to `.claude/skills/_shared/` (`scripts/preflight.sh`, `scripts/write_manifest.py`, `reference/hardware.md`), or substitute an inline `nvidia-smi` / `df -h` probe.
+
 ```bash
 bash .claude/skills/_shared/scripts/preflight.sh
 ```

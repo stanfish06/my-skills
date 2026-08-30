@@ -86,8 +86,11 @@ chemotherapy for advanced non-squamous NSCLC in patients without disease progres
 (Conditional recommendation, Moderate-quality evidence - GRADE 2B)."
 
 Rationale:
-- Modest PFS benefit: 4.0 vs 2.0 months (HR 0.62)
-- No OS benefit: 13.9 vs 11.0 months (HR 0.79, p=0.23)
+- Modest PFS benefit: 4.1 vs 2.8 months (HR 0.62, 95% CI 0.49-0.79, p<0.0001)
+- Modest OS benefit: 13.9 vs 11.0 months (HR 0.78, 95% CI 0.64-0.96, p=0.0195)
+- Absolute gain is 2.9 months of median OS, bought with continuous rather than
+  intermittent therapy — a real but small benefit, which is what makes the
+  recommendation conditional rather than strong
 - Toxicity: Continued chemotherapy burden
 - Quality of life: Trade-off between symptom control and treatment side effects
 - Patient values: Some prioritize time off treatment, others prioritize disease control
@@ -279,7 +282,7 @@ RECOMMENDATION: [State recommendation clearly]
 
 Strength: [STRONG / CONDITIONAL]
 Quality of Evidence: [HIGH / MODERATE / LOW / VERY LOW]
-GRADE: [1A / 1B / 2A / 2B / 2C]
+Grade (ACCP/CHEST notation): [1A / 1B / 1C / 1D / 2A / 2B / 2C / 2D]
 
 Evidence Summary:
 - Primary study: [Citation]
@@ -315,7 +318,7 @@ Before finalizing recommendations, verify:
 - [ ] Recommendation statement is clear and actionable
 - [ ] Strength is explicitly stated (strong vs conditional)
 - [ ] Quality of evidence is graded (high/moderate/low/very low)
-- [ ] GRADE notation provided (1A, 1B, 2A, 2B, 2C)
+- [ ] Grade notation provided (1A, 1B, 1C, 1D, 2A, 2B, 2C, 2D)
 - [ ] Evidence is cited with specific study results
 - [ ] Benefits are quantified (effect sizes with CIs)
 - [ ] Harms are quantified (AE rates)

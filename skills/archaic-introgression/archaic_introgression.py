@@ -2,7 +2,8 @@
 """Archaic introgression detection skill for ClawBio.
 
 Detects Neanderthal and Denisovan introgression segments from modern
-human genomes using IBDmix, Sprime, hmmix, or a pure-Python LOD fallback.
+human genomes using IBDmix, or a pure-Python LOD fallback when the IBDmix
+binaries are not installed.
 """
 
 from __future__ import annotations
@@ -10,7 +11,6 @@ from __future__ import annotations
 import argparse
 import json
 import math
-import os
 import shutil
 import subprocess
 import sys
@@ -23,12 +23,6 @@ import numpy as np
 # ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
-
-JAVA_HOME = os.environ.get(
-    "JAVA_HOME",
-    "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home",
-)
-SPRIME_JAR = os.environ.get("SPRIME_JAR", "/opt/homebrew/bin/sprime.jar")
 
 SKILL_DIR = Path(__file__).resolve().parent
 DEMO_MODERN = SKILL_DIR / "examples" / "demo_modern.vcf"
@@ -75,24 +69,9 @@ class IntrogressionSegment:
 
 
 def find_tool(name: str) -> Optional[str]:
-    """Find an external tool binary on PATH.
-
-    For sprime, also checks the default SPRIME_JAR location.
-    Returns the path string or None.
-    """
+    """Find an external tool binary on PATH. Returns the path string or None."""
     name_lower = name.lower()
 
-    if name_lower == "sprime":
-        jar = Path(SPRIME_JAR)
-        if jar.exists():
-            return str(jar)
-        # Also try PATH
-        found = shutil.which("sprime")
-        if found:
-            return found
-        return None
-
-    # ibdmix, hmmix, or anything else
     found = shutil.which(name_lower)
     if found:
         return found
@@ -109,12 +88,8 @@ def find_tool(name: str) -> Optional[str]:
 def list_available_methods() -> List[str]:
     """Return names of methods whose external tools are available."""
     methods = []
-    if find_tool("ibdmix") is not None:
+    if find_tool("ibdmix") is not None and find_tool("generate_gt") is not None:
         methods.append("ibdmix")
-    if find_tool("sprime") is not None:
-        methods.append("sprime")
-    if find_tool("hmmix") is not None:
-        methods.append("hmmix")
     # Pure-python fallback is always available
     if "ibdmix" not in methods:
         methods.append("ibdmix_fallback")
@@ -230,67 +205,43 @@ def get_shared_positions(
 # ---------------------------------------------------------------------------
 
 
-def build_ibdmix_command(
+def build_ibdmix_commands(
     modern_vcf: str,
     archaic_vcf: str,
-    output_dir: str,
+    genotype_path: str,
+    output_path: str,
     lod_threshold: float = 3.0,
-) -> List[str]:
-    """Build IBDmix command line."""
+    archaic_name: Optional[str] = None,
+    sample_file: Optional[str] = None,
+) -> List[List[str]]:
+    """Build IBDmix's two-step invocation: generate_gt, then ibdmix.
+
+    ibdmix reads a merged genotype table written by generate_gt (-g) and writes
+    a single output file (-o); it does not accept VCF paths. Option names follow
+    PrincetonUniversity/IBDmix. Returns [] when either binary is missing.
+    """
+    generate_gt = find_tool("generate_gt")
     ibdmix_bin = find_tool("ibdmix")
-    if ibdmix_bin is None:
+    if generate_gt is None or ibdmix_bin is None:
         return []
-    return [
-        ibdmix_bin,
-        "--modern", modern_vcf,
+
+    gt_cmd = [
+        generate_gt,
         "--archaic", archaic_vcf,
-        "--output", output_dir,
-        "--lod", str(lod_threshold),
+        "--modern", modern_vcf,
+        "--output", genotype_path,
     ]
-
-
-def build_sprime_command(
-    modern_vcf: str,
-    outgroup_vcf: str,
-    output_prefix: str,
-) -> List[str]:
-    """Build Sprime command line."""
-    sprime_path = find_tool("sprime")
-    if sprime_path is None:
-        return []
-
-    java_bin = str(Path(JAVA_HOME) / "bin" / "java")
-    if not Path(java_bin).exists():
-        java_bin = "java"
-
-    if sprime_path.endswith(".jar"):
-        return [
-            java_bin, "-jar", sprime_path,
-            "gt=" + modern_vcf,
-            "outgroup=" + outgroup_vcf,
-            "output=" + output_prefix,
-        ]
-    return [
-        sprime_path,
-        "--vcf", modern_vcf,
-        "--outgroup", outgroup_vcf,
-        "--out", output_prefix,
+    ibd_cmd = [
+        ibdmix_bin,
+        "--genotype", genotype_path,
+        "--output", output_path,
+        "--LOD-threshold", str(lod_threshold),
     ]
-
-
-def build_hmmix_command(
-    modern_vcf: str,
-    output_dir: str,
-) -> List[str]:
-    """Build hmmix command line."""
-    hmmix_bin = find_tool("hmmix")
-    if hmmix_bin is None:
-        return []
-    return [
-        hmmix_bin,
-        "--infile", modern_vcf,
-        "--outfolder", output_dir,
-    ]
+    if archaic_name:
+        ibd_cmd += ["--archaic", archaic_name]
+    if sample_file:
+        ibd_cmd += ["--sample", sample_file]
+    return [gt_cmd, ibd_cmd]
 
 
 # ---------------------------------------------------------------------------
@@ -332,8 +283,8 @@ def _lod_score_segment(
             # Both carry alt allele: evidence for shared ancestry
             delta = 0.8 + 0.2 * min(m_gt, a_gt)
         elif m_gt == 0 and a_gt == 0:
-            # Both hom-ref: weak positive signal
-            delta = 0.1
+            # Both hom-ref: no shared derived allele, so no introgression evidence
+            delta = 0.0
         else:
             # Discordant: evidence against
             delta = -0.5
@@ -383,20 +334,40 @@ def run_ibdmix(
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Try external binary first
-    ibdmix_bin = find_tool("ibdmix")
-    if ibdmix_bin is not None:
-        cmd = build_ibdmix_command(
-            str(modern_vcf), str(archaic_vcf), str(output_dir), lod_threshold
-        )
+    # Try the real IBDmix binaries first
+    results_file = output_dir / "ibdmix_results.txt"
+    cmds = build_ibdmix_commands(
+        str(modern_vcf),
+        str(archaic_vcf),
+        str(output_dir / "ibdmix_genotypes.txt"),
+        str(results_file),
+        lod_threshold,
+    )
+    if cmds:
         try:
-            subprocess.run(cmd, check=True, capture_output=True, text=True)
-            # Parse IBDmix output (tab-separated: sample, chrom, start, end, lod, n_snps)
-            results_file = output_dir / "ibdmix_results.txt"
+            for cmd in cmds:
+                proc = subprocess.run(cmd, capture_output=True, text=True)
+                if proc.returncode != 0:
+                    # never downgrade to the heuristic without saying why
+                    raise RuntimeError(
+                        f"{Path(cmd[0]).name} exited {proc.returncode}: "
+                        f"{proc.stderr.strip() or '(no stderr)'}"
+                    )
             if results_file.exists():
                 return _parse_ibdmix_output(results_file)
-        except (subprocess.CalledProcessError, FileNotFoundError):
-            pass  # Fall through to pure-Python
+            raise RuntimeError(f"ibdmix succeeded but wrote no {results_file}")
+        except (OSError, RuntimeError) as exc:
+            print(
+                f"Warning: IBDmix failed ({exc}); falling back to the pure-Python "
+                f"LOD heuristic, which is not IBDmix and is not a validated caller.",
+                file=sys.stderr,
+            )
+    else:
+        print(
+            "Warning: ibdmix/generate_gt not found; using the pure-Python LOD "
+            "heuristic, which is not IBDmix and is not a validated caller.",
+            file=sys.stderr,
+        )
 
     # Pure-Python fallback
     return _run_ibdmix_fallback(
@@ -405,14 +376,17 @@ def run_ibdmix(
 
 
 def _parse_ibdmix_output(results_file: Path) -> List[IntrogressionSegment]:
-    """Parse IBDmix binary output file."""
+    """Parse IBDmix output: tab-delimited ID, chrom, start, end, LOD.
+
+    A sixth `sites` column is present only when ibdmix is run with --more-stats.
+    """
     segments: List[IntrogressionSegment] = []
     with open(results_file) as fh:
         for line in fh:
-            if line.startswith("#") or line.startswith("sample"):
+            if line.startswith("#") or line.startswith("ID"):
                 continue
             parts = line.strip().split("\t")
-            if len(parts) < 6:
+            if len(parts) < 5:
                 continue
             segments.append(
                 IntrogressionSegment(
@@ -423,7 +397,7 @@ def _parse_ibdmix_output(results_file: Path) -> List[IntrogressionSegment]:
                     archaic_source="Neanderthal",
                     method="ibdmix",
                     score=float(parts[4]),
-                    num_variants=int(parts[5]),
+                    num_variants=int(parts[5]) if len(parts) > 5 else 0,
                 )
             )
     return segments
@@ -589,8 +563,8 @@ def build_parser() -> argparse.ArgumentParser:
         "--method", "-m",
         type=str,
         default="ibdmix",
-        choices=["ibdmix", "sprime", "hmmix"],
-        help="Detection method (default: ibdmix)",
+        choices=["ibdmix"],
+        help="Detection method (only ibdmix is implemented)",
     )
     parser.add_argument(
         "--samples", "-s",
@@ -639,9 +613,15 @@ def main(args: Optional[List[str]] = None) -> int:
         opts.input, opts.archaic, output_dir, opts.lod, sample_list
     )
 
+    # Label the output with the method that actually ran, not the one requested
+    methods_used = sorted({seg.method for seg in segments})
+    method_used = methods_used[0] if len(methods_used) == 1 else (
+        ",".join(methods_used) if methods_used else list_available_methods()[0]
+    )
+
     # Write outputs
-    json_path = write_result_json(segments, output_dir, opts.method, opts.lod)
-    bed_path = write_report(segments, output_dir, opts.method, opts.lod)
+    json_path = write_result_json(segments, output_dir, method_used, opts.lod)
+    bed_path = write_report(segments, output_dir, method_used, opts.lod)
 
     # Print summary
     summary = compute_summary(segments)

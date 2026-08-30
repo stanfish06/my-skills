@@ -1165,15 +1165,19 @@ def build_interpretation_paragraph(report, styles):
             f"prescribir los medicamentos indicados."
         )
 
-    # Homozygosity
-    if hom_het > 2.0:
+    # Homozygosity. La fuente no indica si reporta Hom/Het o Het/Hom, y ~1,5
+    # solo es plausible como Het/Hom, por lo que no se infiere consanguinidad.
+    if hom_het:
         sentences.append(
-            f"Se observa un patron de homocigosidad elevada "
-            f"(ratio Hom/Het = {hom_het:.2f}, frente al ~1,5 esperado en "
-            f"poblaciones no consanguineas), lo que puede reflejar "
-            f"estructura poblacional especifica o consanguinidad parental, "
-            f"y debe tenerse en cuenta al interpretar el riesgo de "
-            f"enfermedades recesivas."
+            f"La ratio homocigosidad/heterocigosidad notificada es {hom_het:.2f}. "
+            f"Los valores publicados para exoma completo son Het/Hom ~2,0 en "
+            f"equilibrio de Hardy-Weinberg, con medianas por ascendencia de 1,4 "
+            f"(asiatica) a 2,0 (africana) (Wang et al., Bioinformatics "
+            f"2015;31:318-323), equivalentes a Hom/Het 0,50-0,71. La fuente no "
+            f"indica en que orientacion reporta esta ratio, por lo que no se "
+            f"interpreta aqui: la consanguinidad no puede inferirse de este valor "
+            f"y requiere analisis de runs-of-homozygosity o del coeficiente de "
+            f"consanguinidad (F)."
         )
 
     # Rare damaging
@@ -1373,11 +1377,11 @@ def _build_limitations_section(styles):
         ),
         (
             "Homocigosidad y consanguinidad",
-            "La elevada ratio de homocigosidad observada en todas las muestras "
-            "puede deberse a estructura poblacional, consanguinidad o al sesgo "
-            "inherente de la captura exomica. Un analisis formal con datos "
-            "genomicos completos y coeficientes de consanguinidad (F-statistics) "
-            "seria necesario para distinguir entre estas causas."
+            "La fuente reporta una ratio homocigosidad/heterocigosidad sin "
+            "indicar su orientacion, por lo que este informe no la interpreta. "
+            "Distinguir entre estructura poblacional, consanguinidad y el sesgo "
+            "inherente de la captura exomica requiere datos genomicos completos "
+            "con coeficientes de consanguinidad (F-statistics)."
         ),
         (
             "Validacion clinica",

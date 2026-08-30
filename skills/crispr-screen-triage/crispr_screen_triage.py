@@ -17,6 +17,7 @@ DISCLAIMER = (
     "before making any medical decisions."
 )
 REQUIRED_COLUMNS = {"guide_id", "gene", "control_count", "treatment_count", "essentiality", "druggability"}
+COUNT_COLUMNS = {"control_count", "treatment_count"}
 
 
 def load_counts(path: Path) -> list[dict[str, str | float]]:
@@ -30,9 +31,15 @@ def load_counts(path: Path) -> list[dict[str, str | float]]:
             row: dict[str, str | float] = {"guide_id": raw["guide_id"], "gene": raw["gene"]}
             for column in REQUIRED_COLUMNS - {"guide_id", "gene"}:
                 try:
-                    row[column] = float(raw[column])
+                    value = float(raw[column])
                 except (TypeError, ValueError) as exc:
                     raise ValueError(f"Column {column} must be numeric") from exc
+                # float() accepts nan/inf, which would propagate into scores and result.json
+                if not math.isfinite(value):
+                    raise ValueError(f"Column {column} must be a finite number, got {raw[column]!r}")
+                if column in COUNT_COLUMNS and value < 0:
+                    raise ValueError(f"Column {column} must be non-negative, got {value}")
+                row[column] = value
             rows.append(row)
     if not rows:
         raise ValueError("Input contains no guides")
@@ -135,7 +142,10 @@ def write_outputs(result: dict, input_path: Path, output_dir: Path, command: lis
             "low_count",
         ],
     )
-    (output_dir / "result.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    # allow_nan=False keeps result.json inside strict RFC 8259 rather than Python's NaN extension
+    (output_dir / "result.json").write_text(
+        json.dumps(result, indent=2, allow_nan=False) + "\n", encoding="utf-8"
+    )
     rows = [
         "# CRISPR Screen Triage Report",
         "",

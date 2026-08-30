@@ -94,34 +94,32 @@ Source: https://learn.microsoft.com/en-us/dotnet/core/compatibility/globalizatio
 
 Source: https://github.com/dotnet/runtime/pull/124766
 
-### Unhandled BackgroundService exceptions now stop the host (Preview 3)
+### IHost.RunAsync and IHost.StopAsync throw when a BackgroundService fails (Preview 3)
 
-**Impact: Medium.** Unhandled exceptions thrown from `BackgroundService.ExecuteAsync()` now propagate and stop the host application. Previously they were silently swallowed.
+**Impact: Medium.** The host already stopped on an unhandled `BackgroundService.ExecuteAsync()` exception — `HostOptions.BackgroundServiceExceptionBehavior` has defaulted to `StopHost` since .NET 6. What changed is the outcome: the tasks returned by `RunAsync`, `StopAsync`, `WaitForShutdownAsync` and their synchronous equivalents now fail with that exception instead of completing successfully, so the process exits non-zero. Several failing services produce an `AggregateException`.
 
 ```csharp
-// .NET 10: exception silently swallowed, host continues
-// .NET 11: exception propagates, host stops
+// .NET 10: host stops, RunAsync completes successfully, exit code 0
+// .NET 11: host stops, RunAsync throws, exit code non-zero
 protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 {
-    throw new InvalidOperationException("oops"); // now kills the host
+    throw new InvalidOperationException("oops");
 }
 
-// FIX: Add proper exception handling
-protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+// To keep the old success exit code, catch at the host boundary — NOT inside ExecuteAsync
+try
 {
-    try
-    {
-        // ... work ...
-    }
-    catch (Exception ex) when (ex is not OperationCanceledException)
-    {
-        _logger.LogError(ex, "Background service failed");
-    }
+    await host.RunAsync();
+}
+catch (Exception ex)
+{
+    _logger.LogError(ex, "Host stopped: a background service failed");
 }
 ```
 
-**Fix:** Add try/catch in `ExecuteAsync()` for any `BackgroundService` that should not crash the host on failure.
+**Fix:** Do nothing. Instead audit CI gates, container orchestrators, and supervisors that key on exit status — they will now see failures that previously exited zero. Do not add a terminal `try/catch` inside `ExecuteAsync`: swallowing the exception there suppresses the `StopHost` shutdown as well as the exit code, leaving a live process with a dead worker.
 
+Source: https://learn.microsoft.com/en-us/dotnet/core/compatibility/extensions/11/ihost-runasync-stopasync-throw-backgroundservice-failure
 Source: https://github.com/dotnet/runtime/pull/124863
 
 ### TarWriter emits HardLink entries for hard-linked files (Preview 3)

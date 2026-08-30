@@ -1,11 +1,11 @@
 """
 Great Expectations patterns for data pipeline validation.
 
-Includes context setup, expectation suite creation, and validation.
+Targets the GX 1.x Core API. Includes context setup, expectation suite
+creation, and validation.
 """
 
 import great_expectations as gx
-from great_expectations.checkpoint import Checkpoint
 
 
 # =============================================================================
@@ -13,32 +13,34 @@ from great_expectations.checkpoint import Checkpoint
 # =============================================================================
 
 def get_pandas_context(datasource_name: str = "pandas_datasource"):
-    """Get GX context with pandas datasource configured.
+    """Get GX context with pandas data source configured.
 
     Args:
-        datasource_name: Name for the pandas datasource
+        datasource_name: Name for the pandas data source
 
     Returns:
-        Tuple of (context, datasource)
+        Tuple of (context, data_source)
     """
     context = gx.get_context()
-    datasource = context.sources.add_pandas(datasource_name)
-    return context, datasource
+    data_source = context.data_sources.add_pandas(name=datasource_name)
+    return context, data_source
 
 
-def add_dataframe_asset(datasource, asset_name: str, df):
-    """Add DataFrame as data asset and build batch request.
+def add_dataframe_asset(data_source, asset_name: str):
+    """Add DataFrame asset and return a whole-dataframe batch definition.
+
+    The DataFrame itself is supplied at run time through
+    `batch_parameters={"dataframe": df}`, not here.
 
     Args:
-        datasource: GX datasource
+        data_source: GX pandas data source
         asset_name: Name for the data asset
-        df: pandas DataFrame
 
     Returns:
-        Batch request for the DataFrame
+        Batch definition covering the whole DataFrame
     """
-    asset = datasource.add_dataframe_asset(name=asset_name)
-    return asset.build_batch_request(dataframe=df)
+    asset = data_source.add_dataframe_asset(name=asset_name)
+    return asset.add_batch_definition_whole_dataframe(f"{asset_name}_batch")
 
 
 # =============================================================================
@@ -63,7 +65,7 @@ def create_basic_suite(context, suite_name: str, columns_config: dict):
     Returns:
         Expectation suite
     """
-    suite = context.add_expectation_suite(suite_name)
+    suite = context.suites.add(gx.ExpectationSuite(name=suite_name))
 
     for column, config in columns_config.items():
         # Column existence
@@ -130,29 +132,38 @@ def create_basic_suite(context, suite_name: str, columns_config: dict):
 def run_validation(
     context,
     checkpoint_name: str,
-    batch_request,
-    suite_name: str
+    batch_definition,
+    suite,
+    df
 ) -> dict:
     """Run validation checkpoint and return results summary.
 
     Args:
         context: GX context
         checkpoint_name: Name for the checkpoint
-        batch_request: Batch request for data
-        suite_name: Name of expectation suite to use
+        batch_definition: Batch definition from add_dataframe_asset()
+        suite: ExpectationSuite from create_basic_suite()
+        df: pandas DataFrame to validate
 
     Returns:
         Dict with 'success' bool and 'failures' list
     """
-    checkpoint = context.add_or_update_checkpoint(
-        name=checkpoint_name,
-        validations=[{
-            "batch_request": batch_request,
-            "expectation_suite_name": suite_name
-        }]
+    validation_definition = context.validation_definitions.add(
+        gx.ValidationDefinition(
+            name=f"{checkpoint_name}_validation",
+            data=batch_definition,
+            suite=suite
+        )
     )
 
-    results = checkpoint.run()
+    checkpoint = context.checkpoints.add(
+        gx.Checkpoint(
+            name=checkpoint_name,
+            validation_definitions=[validation_definition]
+        )
+    )
+
+    results = checkpoint.run(batch_parameters={"dataframe": df})
 
     summary = {
         'success': results.success,
@@ -164,7 +175,7 @@ def run_validation(
             for exp_result in result.results:
                 if not exp_result.success:
                     summary['failures'].append({
-                        'expectation': exp_result.expectation_config.expectation_type,
+                        'expectation': exp_result.expectation_config.type,
                         'column': exp_result.expectation_config.kwargs.get('column'),
                     })
 

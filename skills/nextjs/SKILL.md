@@ -489,19 +489,13 @@ An attacker can bypass middleware-based authorization by sending a crafted `x-mi
 
 ### Patched Versions
 
-| Release Line | Minimum Safe Version (all CVEs) |
-|---|---|
-| 14.x | `next@14.2.35` |
-| 15.0.x | `next@15.0.5` |
-| 15.1.x | `next@15.1.9` |
-| 15.2.x | `next@15.2.6` |
-| 15.3.x | `next@15.3.6` |
-| 15.4.x | `next@15.4.8` |
-| 15.5.x | `next@15.5.7` |
-| 16.0.x | `next@16.0.11` |
-| 16.1.x | `next@16.1.5` |
+Minimum safe version: **`next@15.5.21`** or **`next@16.2.11`** (both published 2026-07-21).
 
-Upgrade React to at least **19.0.1** / **19.1.2** / **19.2.1** for the RCE fix (CVE-2025-55182), and **19.2.4+** to fully address all DoS vectors (CVE-2025-55184, CVE-2025-67779, CVE-2026-23864).
+There is no per-release-line patch below that. The nine advisories published 2026-07-22 (CVE-2026-64641 through CVE-2026-64649, four rated High) have vulnerable ranges `>= 12.0.0, < 15.5.21` and `>= 16.0.0, < 16.2.11`, so 14.x, 15.0.x–15.4.x, 16.0.x and 16.1.x have no fixed release at all — `14.2.35`, `16.0.11` and `16.1.7` are the last patches ever published on those lines and every one of them sits inside the vulnerable range. Remediating those lines requires a minor-version move, not a patch bump.
+
+Upgrade the React RSC packages (`react-server-dom-webpack`, `-turbopack`, `-parcel`) to at least **19.0.8** / **19.1.9** / **19.2.8** — the floor for CVE-2026-44907 (High, 2026-07-24). The earlier 19.0.1 / 19.1.2 / 19.2.1 covers only the CVE-2025-55182 RCE.
+
+These floors move. Confirm the current one with `npm audit` or `gh api "/advisories?ecosystem=npm&affects=next"` before pinning.
 
 ```bash
 # Upgrade to latest patched versions

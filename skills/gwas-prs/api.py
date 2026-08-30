@@ -12,7 +12,7 @@ Usage:
 
     result = run(
         genotypes={"rs7903146": "CT", "rs1801282": "CG", ...},
-        options={"pgs_id": "PGS000013", "build": "GRCh37"},
+        options={"pgs_id": "DEMO001", "build": "GRCh37"},
     )
 """
 
@@ -41,8 +41,10 @@ def run(genotypes: dict[str, str], options: dict | None = None) -> dict:
     Args:
         genotypes: Mapping of rsid -> genotype string (e.g. {"rs7903146": "CT"}).
         options: Optional settings dict. Recognised keys:
-            - pgs_id (str): Specific PGS Catalog score ID (e.g. "PGS000013").
-                            If omitted, all curated scores are used.
+            - pgs_id (str): Bundled synthetic demo score id (e.g. "DEMO001").
+                            This entry point reads only the scoring files in
+                            data/, which are synthetic; it does not fetch from
+                            the PGS Catalog. If omitted, all of them are used.
             - build (str): Genome build, "GRCh37" (default) or "GRCh38".
             - min_overlap (float): Minimum SNP overlap fraction (default 0.5).
 
@@ -66,7 +68,7 @@ def run(genotypes: dict[str, str], options: dict | None = None) -> dict:
 
     if pgs_id:
         pgs_id = pgs_id.strip().upper()
-        if not pgs_id.startswith("PGS"):
+        if not pgs_id.startswith(("PGS", "DEMO")):
             pgs_id = "PGS" + pgs_id.lstrip("0")
         ids_to_score = [pgs_id]
     else:
@@ -127,5 +129,6 @@ def run(genotypes: dict[str, str], options: dict | None = None) -> dict:
     return {
         "results": all_results,
         "scores_calculated": len(all_results),
+        "synthetic": True,
         "disclaimer": _engine.DISCLAIMER,
     }

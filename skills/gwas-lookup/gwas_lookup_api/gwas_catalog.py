@@ -2,7 +2,12 @@
 gwas_catalog.py — NHGRI-EBI GWAS Catalog REST API.
 
 Endpoint:
-  GET /singleNucleotidePolymorphisms/{rsid}/associations
+  GET /singleNucleotidePolymorphisms/{rsid}/associations?projection=associationByStudy
+
+The unprojected association resource carries neither `efoTraits` nor `study`;
+`associationByStudy` inlines both, so the trait and the study accession come
+back in one request. The risk allele lives at
+`loci[0].strongestRiskAlleles[0].riskAlleleName`; `riskFrequency` is top-level.
 """
 
 from __future__ import annotations
@@ -29,7 +34,10 @@ def get_associations(rsid: str, max_hits: int = 100, cache_dir: Optional[Path] =
     """Fetch GWAS associations for a given rsID from the GWAS Catalog."""
     client = _make_client(cache_dir, use_cache)
     try:
-        data = client.get(f"singleNucleotidePolymorphisms/{rsid}/associations")
+        data = client.get(
+            f"singleNucleotidePolymorphisms/{rsid}/associations",
+            params={"projection": "associationByStudy"},
+        )
     except Exception as e:
         return {"source": "gwas_catalog", "status": "error", "message": str(e)}
 
@@ -37,21 +45,21 @@ def get_associations(rsid: str, max_hits: int = 100, cache_dir: Optional[Path] =
     raw_assocs = embedded.get("associations", [])
 
     associations = []
+    incomplete = 0
     for a in raw_assocs[:max_hits]:
-        # Extract trait
-        traits = []
-        for t in a.get("efoTraits", []):
-            traits.append(t.get("trait", ""))
+        traits = [t.get("trait", "") for t in (a.get("efoTraits") or [])]
 
-        # Extract risk allele and frequency
-        risk_alleles = a.get("riskAlleles", [])
-        risk_allele = risk_alleles[0].get("riskAlleleName", "") if risk_alleles else ""
-        risk_freq = risk_alleles[0].get("riskFrequency", "") if risk_alleles else ""
+        loci = a.get("loci") or []
+        strongest = (loci[0].get("strongestRiskAlleles") or [{}])[0] if loci else {}
+        risk_allele = strongest.get("riskAlleleName", "") or ""
+        risk_freq = a.get("riskFrequency", "") or ""
 
-        # Extract study info
-        study = a.get("study", {})
-        # The GWAS Catalog embeds study info via _links
-        # We extract what's available in the association payload
+        study = a.get("study") or {}
+        study_accession = study.get("accessionId", "") or ""
+
+        if not traits or not study_accession:
+            incomplete += 1
+
         associations.append({
             "pvalue": a.get("pvalue"),
             "pvalue_mlog": a.get("pvalueMantissa"),
@@ -64,13 +72,27 @@ def get_associations(rsid: str, max_hits: int = 100, cache_dir: Optional[Path] =
             "beta_unit": a.get("betaUnit"),
             "ci": a.get("range", ""),
             "traits": traits,
-            "study_accession": a.get("studyAccession", ""),
+            "study_accession": study_accession,
         })
 
-    return {
+    # a row with statistics but no trait label is not a usable association;
+    # say so rather than returning it under status "ok"
+    status = "ok"
+    warning = ""
+    if associations and incomplete:
+        status = "partial"
+        warning = (
+            f"{incomplete} of {len(associations)} associations returned without "
+            "a trait label or study accession"
+        )
+
+    result = {
         "source": "gwas_catalog",
-        "status": "ok",
+        "status": status,
         "rsid": rsid,
         "total_associations": len(raw_assocs),
         "associations": associations,
     }
+    if warning:
+        result["message"] = warning
+    return result

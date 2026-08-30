@@ -1,0 +1,18 @@
+{
+  "docker-expert": [
+    {
+      "id": "compose-v2-cli",
+      "issue": 298,
+      "source": "sickn33/antigravity-awesome-skills",
+      "find": "   docker-compose config 2>/dev/null && echo \"Compose config valid\"",
+      "replace": "   docker compose config 2>/dev/null && echo \"Compose config valid\""
+    },
+    {
+      "id": "compose-version-key-obsolete",
+      "issue": 298,
+      "source": "sickn33/antigravity-awesome-skills",
+      "find": "```yaml\nversion: '3.8'\nservices:\n",
+      "replace": "```yaml\nservices:\n"
+    }
+  ]
+}

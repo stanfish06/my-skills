@@ -159,7 +159,8 @@ import { MyAgent } from "./agent";
 
 export default {
   async fetch(request: Request, env: Env) {
-    // routeAgentRequest handles routing to /agents/:class/:name
+    // routeAgentRequest routes /agents/:binding/:instance, where :binding is the
+    // Durable Object binding name kebab-cased — not the class name
     return (
       (await routeAgentRequest(request, env)) ||
       new Response("Not found", { status: 404 })
@@ -170,24 +171,27 @@ export default {
 export { MyAgent };
 ```
 
-Clients connect via: `wss://my-agent.workers.dev/agents/MyAgent/session-id`
+Clients connect via: `wss://my-agent.workers.dev/agents/my-agent/session-id`
+(`my-agent` is the `MyAgent` binding name kebab-cased).
 
 ## Wrangler Configuration
 
 ```toml
 name = "my-agent"
 main = "src/index.ts"
-compatibility_date = "2024-12-01"
+compatibility_date = "2026-06-11"
+compatibility_flags = ["nodejs_compat"]  # agents imports node:async_hooks
 
 [ai]
 binding = "AI"
 
 [durable_objects]
-bindings = [{ name = "AGENT", class_name = "MyAgent" }]
+# The binding name becomes the URL segment (kebab-cased), so keep it matching the class
+bindings = [{ name = "MyAgent", class_name = "MyAgent" }]
 
 [[migrations]]
 tag = "v1"
-new_classes = ["MyAgent"]
+new_sqlite_classes = ["MyAgent"]  # agents requires SQLite storage; new_classes throws at construction
 ```
 
 ## State Management
@@ -294,19 +298,19 @@ await this.cancelSchedule(taskId);
 
 ## Chat Agent (AI-Powered)
 
-For chat-focused agents, extend `AIChatAgent`:
+For chat-focused agents, extend `AIChatAgent` from `@cloudflare/ai-chat`
+(`npm i @cloudflare/ai-chat` — the old `agents/ai-chat-agent` module now only throws):
 
 ```typescript
-import { AIChatAgent } from "agents/ai-chat-agent";
+import { AIChatAgent, type OnChatMessageOptions } from "@cloudflare/ai-chat";
 
 export class ChatBot extends AIChatAgent<Env> {
-  // Called for each user message
-  async onChatMessage(message: string) {
+  // Called once per chat turn; the new user message is already in this.messages
+  async onChatMessage(_onFinish: unknown, options?: OnChatMessageOptions) {
     const response = await this.env.AI.run("@cf/meta/llama-3-8b-instruct", {
       messages: [
         { role: "system", content: "You are a helpful assistant." },
         ...this.messages,  // Automatic history management
-        { role: "user", content: message },
       ],
       stream: true,
     });
@@ -353,7 +357,7 @@ function Chat() {
 ### Vanilla JavaScript
 
 ```javascript
-const ws = new WebSocket("wss://my-agent.workers.dev/agents/MyAgent/user123");
+const ws = new WebSocket("wss://my-agent.workers.dev/agents/my-agent/user123");
 
 ws.onopen = () => {
   console.log("Connected to agent");
@@ -385,7 +389,7 @@ npx wrangler deploy
 wrangler tail
 
 # Test endpoint
-curl https://my-agent.workers.dev/agents/MyAgent/test-user
+curl https://my-agent.workers.dev/agents/my-agent/test-user
 ```
 
 ## Troubleshooting

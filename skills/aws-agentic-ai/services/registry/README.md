@@ -1,6 +1,6 @@
 # Agent Registry Service
 
-> **Status**: Preview (launched April 9, 2026)
+> **Status**: GA under the `agent-registry` namespace since 2026-08-06. The public-preview `bedrock-agentcore` namespace shuts down 2026-09-17 — see [Migration from the Preview namespace](#migration-from-the-preview-namespace).
 
 ## Overview
 
@@ -8,15 +8,28 @@ AWS Agent Registry is a fully managed discovery service within Amazon Bedrock Ag
 
 **Problem it solves**: As organizations scale AI agents and tools, resources become siloed across teams. Teams build MCP servers, deploy agents, and create specialized tools, but without a central catalog, duplication of effort occurs because builders cannot discover what already exists.
 
-## Regional Availability
+## Migration from the Preview namespace
 
-| Region | Code |
-|--------|------|
-| US East (N. Virginia) | `us-east-1` |
-| US West (Oregon) | `us-west-2` |
-| Europe (Ireland) | `eu-west-1` |
-| Asia Pacific (Tokyo) | `ap-northeast-1` |
-| Asia Pacific (Sydney) | `ap-southeast-2` |
+New customers must start on `agent-registry`; the `bedrock-agentcore` namespace is closed to accounts with no registries as of 2026-08-06 and shuts down entirely on 2026-09-17. GA changed every surface:
+
+| Surface | Preview (`bedrock-agentcore`) | GA (`agent-registry`) |
+|---|---|---|
+| Data plane endpoint | `bedrock-agentcore.{region}.amazonaws.com` | `agent-registry.{region}.api.aws` |
+| Control plane endpoint | `bedrock-agentcore-control.{region}.amazonaws.com` | `agent-registry-control.{region}.api.aws` |
+| IAM action prefix | `bedrock-agentcore:*` | `agent-registry:*` |
+| Service principal | `bedrock-agentcore.amazonaws.com` | `agent-registry.amazonaws.com` |
+| Managed policy | `BedrockAgentCoreFullAccess` | `AgentRegistryFullAccess` |
+| SDK clients | `BedrockAgentCoreClient` / `BedrockAgentCoreControlClient` | `AgentRegistryClient` / `AgentRegistryControlClient` |
+| CLI namespace | `aws bedrock-agentcore` | `aws agent-registry` |
+| ARN namespace | `arn:aws:bedrock-agentcore:…` | `arn:aws:agent-registry:…` |
+| CloudTrail event source | `bedrock-agentcore.amazonaws.com` | `agent-registry.amazonaws.com` |
+| EventBridge source | `aws.bedrock-agentcore` | `aws.agent-registry` |
+| CloudWatch namespace | `AWS/BedrockAgentCore` | `AWS/AgentRegistry` |
+| Search API | `SearchRegistryRecords` | `SearchDiscoverableRegistryRecords` |
+
+Workload identity and OAuth credential provider resources stay on `bedrock-agentcore` — keep `bedrock-agentcore:CreateWorkloadIdentity`, `GetWorkloadIdentity`, and `DeleteWorkloadIdentity` in registry policies.
+
+The record schema also changed: see [Registry Records](#registry-records). Data does not migrate itself; AWS ships tooling in [agentcore-samples](https://github.com/awslabs/agentcore-samples/tree/main/01-features/07-centralize-and-govern-your-ai-infrastructure/03-registry/04-migrate-to-new-namespace). Full mapping: [migration guide](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/registry-faq.html).
 
 ## Core Concepts
 
@@ -24,8 +37,8 @@ AWS Agent Registry is a fully managed discovery service within Amazon Bedrock Ag
 
 Top-level catalogs in your AWS account. Each registry has its own:
 - Name and description
-- Authorization configuration (IAM or JWT) — **cannot be changed after creation**
-- Approval settings (auto-approve or manual review)
+- `discoveryConfiguration.authorizerType` (`AWS_IAM` or `CUSTOM_JWT`) plus `discoveryConfiguration.authorizerConfiguration`
+- `approvalConfiguration.autoApprovalRules` — a list; `["APPROVE_ALL"]` auto-approves, empty or omitted requires manual review
 - Set of registry records
 
 **Naming**: Must start alphanumeric. Valid characters: `a-z`, `A-Z`, `0-9`, `_`, `-`, `.`, `/`. Max 64 characters.
@@ -35,19 +48,22 @@ Organize registries by resource type, environment stage (prod/QA/dev), team, or 
 ### Registry Records
 
 Metadata entries describing individual resources. Each record has:
-- **Name** (max 255 chars) and **description** (max 4,096 chars)
-- **Version** (semantic versioning recommended)
-- **Descriptor type** (`MCP`, `A2A`, `SKILL`, `CUSTOM`)
-- **Type-specific metadata** (protocol definitions, tool schemas, etc.)
+- **`name`** — required dedup key, unique within the registry (unique with `recordVersion` when both are set)
+- **`displayName`** — human-readable label (this was `name` in Preview)
+- **`description`** (max 4,096 chars) and **`recordVersion`** (semantic versioning recommended)
+- **`recordType`** — required: `AGENT`, `MCP`, `SKILL`, or `CUSTOM`
+- **`descriptors`** — exactly one primary descriptor key, keyed by descriptor name rather than the removed `descriptorType` union
 
-### Resource Types
+### Record types and their descriptors
 
-| Descriptor Type | Description | Validation |
+| `recordType` | Valid primary descriptors | Validation |
 |-----------------|-------------|------------|
-| **`MCP`** | MCP server + tool definitions | Validated against MCP protocol schema (multiple schema versions supported) |
-| **`A2A`** | Agent cards per A2A protocol spec | Validated against A2A agent card schema (version `0.3`) |
-| **`SKILL`** | Reusable capabilities with markdown documentation | Optional structured definition (schema `0.1.0`) |
-| **`CUSTOM`** | Any JSON metadata for resources that don't fit standard types | No validation (free-form JSON) |
+| **`MCP`** | `mcpServer`, `custom` | Server JSON in `mcpServer.data`, tools in `mcpServer.additionalData.tools`; validated against the MCP schema named by `dataSchemaVersion` |
+| **`AGENT`** | `a2aAgentCard`, `mcpServer`, `custom` | Agent card in `a2aAgentCard.data`; `dataSchemaVersion` `0.3` |
+| **`SKILL`** | `agentSkillsDefinition`, `custom` | Definition in `agentSkillsDefinition.data` (`dataSchemaVersion` `0.1.0`), SKILL.md in `agentSkillsDefinition.additionalData.skillMd.data` |
+| **`CUSTOM`** | `custom` | JSON in `custom.data`, no schema validation |
+
+Inside every descriptor the payload field is `data` and its version field is `dataSchemaVersion` (Preview used `inlineContent` plus `schemaVersion`/`protocolVersion`). URL sync moved from a top-level `synchronizationConfiguration` to a per-descriptor `source` — only `mcpServer` and `a2aAgentCard` carry one and only those two auto-sync.
 
 ### Record Lifecycle
 
@@ -91,20 +107,20 @@ Combines semantic (vector-based, natural language) search with keyword matching.
 - `$in` — In list
 - `$and`, `$or` — Logical combinators
 
-Filterable fields: `name`, `descriptorType`, `version`.
+Filterable fields: `name`, `recordType`, `recordVersion`.
 
 ### MCP-Native Access
 
 Each registry exposes an MCP-compatible endpoint (MCP spec 2025-11-25):
 
 ```
-https://bedrock-agentcore.<region>.amazonaws.com/registry/<registryId>/mcp
+https://agent-registry.<region>.api.aws/registry/<registryId>/mcp
 ```
 
-The endpoint provides one tool: `search_registry_records` with parameters:
-- `searchQuery` (required) — Natural language or keyword query (1-256 chars)
-- `maxResults` (1-20, default 10) — Number of results to return
-- `filter` (optional) — Metadata filter object
+The endpoint exposes three tools:
+- `search_discoverable_registry_records` — `searchQuery` (required, 1-256 chars), `maxResults` (1-20, default 10), `filter` (optional metadata filter object)
+- `list_discoverable_registry_records` — `maxResults` (1-100, default 20), `nextToken`, `filters` (list of `{"name": …, "values": […]}`)
+- `batch_get_discoverable_registry_record` — `recordIds` (required, 1-100 record ARNs or IDs)
 
 Any MCP-compatible client (Claude Code, Kiro, etc.) can connect directly.
 
@@ -124,9 +140,11 @@ See [Sync Configuration](sync-configuration.md) for details.
 
 ### EventBridge Notifications
 
-Events sent to default EventBridge bus (source: `aws.bedrock-agentcore`) when:
-- Records are submitted for approval (`detail-type: "Registry Record State changed to Pending Approval"`)
-- Registries finish provisioning (`detail-type: "Registry State transitions from Creating to Ready"`)
+Events sent to the default EventBridge bus (source: `aws.agent-registry`).
+
+Record events (`detail` carries `registryRecordId` and `registryId`): `Registry Record State changed to Draft` / `… to Pending Approval` / `… to Approved` / `… to Rejected` / `… to Deprecated`.
+
+Registry events (`detail` carries `registryId` and `registryName`): `Registry Creating`, `Registry Ready`, `Registry Create Failed`, `Registry Updating`, `Registry Update Failed`, `Registry Deleting`, `Registry Delete Failed`. `Registry Ready` replaces the Preview detail type `Registry State transitions from Creating to Ready` — a rule matching the old string no longer fires.
 
 Enables automated review pipelines via Lambda, SNS, SQS, or Step Functions.
 
@@ -136,82 +154,88 @@ All control plane API calls are logged as management events in CloudTrail.
 
 ## API Reference
 
-### Control Plane CLI (`bedrock-agentcore-control`)
+### Control Plane CLI (`agent-registry-control`)
 
 #### Registry Operations
 
 | Operation | CLI Command |
 |-----------|-------------|
-| Create registry | `aws bedrock-agentcore-control create-registry` |
-| Get registry | `aws bedrock-agentcore-control get-registry` |
-| Update registry | `aws bedrock-agentcore-control update-registry` |
-| Delete registry | `aws bedrock-agentcore-control delete-registry` |
-| List registries | `aws bedrock-agentcore-control list-registries` |
+| Create registry | `aws agent-registry-control create-registry` |
+| Get registry | `aws agent-registry-control get-registry` |
+| Update registry | `aws agent-registry-control update-registry` |
+| Delete registry | `aws agent-registry-control delete-registry` |
+| List registries | `aws agent-registry-control list-registries` |
 
 #### Record Operations
 
 | Operation | CLI Command |
 |-----------|-------------|
-| Create record | `aws bedrock-agentcore-control create-registry-record` |
-| Get record | `aws bedrock-agentcore-control get-registry-record` |
-| Update record | `aws bedrock-agentcore-control update-registry-record` |
-| Delete record | `aws bedrock-agentcore-control delete-registry-record` |
-| List records | `aws bedrock-agentcore-control list-registry-records` |
+| Create record | `aws agent-registry-control create-registry-record` |
+| Get record | `aws agent-registry-control get-registry-record` |
+| Update record | `aws agent-registry-control update-registry-record` |
+| Delete record | `aws agent-registry-control delete-registry-record` |
+| List records | `aws agent-registry-control list-registry-records` |
 
 #### Approval Operations
 
 | Operation | CLI Command |
 |-----------|-------------|
-| Submit for approval | `aws bedrock-agentcore-control submit-registry-record-for-approval` |
-| Update status (approve/reject/deprecate) | `aws bedrock-agentcore-control update-registry-record-status` |
+| Submit for approval | `aws agent-registry-control submit-registry-record-for-approval` |
+| Update status (approve/reject/deprecate) | `aws agent-registry-control update-registry-record-status` |
 
-### Data Plane CLI (`bedrock-agentcore`)
+### Data Plane CLI (`agent-registry`)
 
 | Operation | CLI Command |
 |-----------|-------------|
-| Search records | `aws bedrock-agentcore search-registry-records` |
-| MCP endpoint | POST to `https://bedrock-agentcore.<region>.amazonaws.com/registry/<registryId>/mcp` |
+| Search approved records | `aws agent-registry search-discoverable-registry-records` |
+| List approved records | `aws agent-registry list-discoverable-registry-records` |
+| Batch get approved records | `aws agent-registry batch-get-discoverable-registry-record` |
+| MCP endpoint | POST to `https://agent-registry.<region>.api.aws/registry/<registryId>/mcp` |
 
 ### IAM Actions
 
-> **Important**: ALL IAM actions use the `bedrock-agentcore:` prefix — both control and data plane operations.
+> **Important**: registry IAM actions use the `agent-registry:` prefix — both control and data plane. The workload identity actions the service calls on your behalf during `CreateRegistry`/`DeleteRegistry` stay on `bedrock-agentcore:`.
 
 **Control Plane:**
 
 | Action | Description |
 |--------|-------------|
-| `bedrock-agentcore:CreateRegistry` | Create a registry |
-| `bedrock-agentcore:GetRegistry` | Get a registry |
-| `bedrock-agentcore:UpdateRegistry` | Update a registry |
-| `bedrock-agentcore:DeleteRegistry` | Delete a registry |
-| `bedrock-agentcore:ListRegistries` | List registries |
-| `bedrock-agentcore:CreateRegistryRecord` | Create a record |
-| `bedrock-agentcore:GetRegistryRecord` | Get a record |
-| `bedrock-agentcore:UpdateRegistryRecord` | Update a record |
-| `bedrock-agentcore:DeleteRegistryRecord` | Delete a record |
-| `bedrock-agentcore:ListRegistryRecords` | List records |
-| `bedrock-agentcore:SubmitRegistryRecordForApproval` | Submit for approval |
-| `bedrock-agentcore:UpdateRegistryRecordStatus` | Approve/reject/deprecate |
+| `agent-registry:CreateRegistry` | Create a registry |
+| `agent-registry:GetRegistry` | Get a registry |
+| `agent-registry:UpdateRegistry` | Update a registry |
+| `agent-registry:DeleteRegistry` | Delete a registry |
+| `agent-registry:ListRegistries` | List registries |
+| `agent-registry:CreateRegistryRecord` | Create a record |
+| `agent-registry:GetRegistryRecord` | Get a record |
+| `agent-registry:UpdateRegistryRecord` | Update a record |
+| `agent-registry:DeleteRegistryRecord` | Delete a record |
+| `agent-registry:ListRegistryRecords` | List records |
+| `agent-registry:SubmitRegistryRecordForApproval` | Submit for approval |
+| `agent-registry:UpdateRegistryRecordStatus` | Approve/reject/deprecate |
 
 **Data Plane:**
 
 | Action | Description |
 |--------|-------------|
-| `bedrock-agentcore:SearchRegistryRecords` | Search registry records |
-| `bedrock-agentcore:InvokeRegistryMcp` | Invoke registry MCP endpoint |
+| `agent-registry:SearchDiscoverableRegistryRecords` | Search approved registry records |
+| `agent-registry:ListDiscoverableRegistryRecords` | List approved registry records |
+| `agent-registry:GetDiscoverableRegistryRecord` | Retrieve an approved record; also authorizes `BatchGetDiscoverableRegistryRecord` |
+| `agent-registry:InvokeRegistryMcp` | Invoke registry MCP endpoint |
 
-> **Note**: MCP tool invocation requires BOTH `InvokeRegistryMcp` AND `SearchRegistryRecords`.
+> **Note**: MCP tool invocation requires BOTH `InvokeRegistryMcp` AND `SearchDiscoverableRegistryRecords`.
+
+**Retained `bedrock-agentcore:` actions** (called by the service during registry lifecycle and URL sync): `CreateWorkloadIdentity`, `GetWorkloadIdentity`, `DeleteWorkloadIdentity`. `CreateRegistry` also needs `iam:CreateServiceLinkedRole`.
 
 **Resource ARN Formats:**
-- Registry: `arn:aws:bedrock-agentcore:{region}:{account}:registry/{registryId}`
-- Record: `arn:aws:bedrock-agentcore:{region}:{account}:registry/{registryId}/record/{recordId}`
+- Registry: `arn:aws:agent-registry:{region}:{account}:registry/{registryId}`
+- Record: `arn:aws:agent-registry:{region}:{account}:registry/{registryId}/record/{recordId}`
 
 ## Common Operations
 
 ### Create a Registry
 
 ```bash
-aws bedrock-agentcore-control create-registry \
+aws agent-registry-control create-registry \
   --name "MyOrgRegistry" \
   --description "Central catalog for all AI agents and tools" \
   --region us-east-1
@@ -220,14 +244,18 @@ aws bedrock-agentcore-control create-registry \
 ### Register an MCP Server
 
 ```bash
-aws bedrock-agentcore-control create-registry-record \
+aws agent-registry-control create-registry-record \
   --registry-id <REGISTRY_ID> \
-  --name "WeatherServer" \
-  --descriptor-type MCP \
+  --name "weather-server" \
+  --display-name "WeatherServer" \
+  --record-type MCP \
   --descriptors '{
-    "mcp": {
-      "server": {"schemaVersion": "2025-12-11", "inlineContent": "{\"name\": \"weather-server\", \"description\": \"Weather data service\", \"version\": \"1.0.0\"}"},
-      "tools": {"protocolVersion": "2024-11-05", "inlineContent": "{\"tools\": [{\"name\": \"get_forecast\", \"description\": \"Get weather forecast\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}}}]}"}
+    "mcpServer": {
+      "dataSchemaVersion": "2025-12-11",
+      "data": "{\"name\": \"weather-server\", \"description\": \"Weather data service\", \"version\": \"1.0.0\"}",
+      "additionalData": {
+        "tools": {"dataSchemaVersion": "2024-11-05", "data": "{\"tools\": [{\"name\": \"get_forecast\", \"description\": \"Get weather forecast\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\"}}}}]}"}
+      }
     }
   }' \
   --record-version "1.0" \
@@ -237,14 +265,13 @@ aws bedrock-agentcore-control create-registry-record \
 ### Register an Agent (A2A)
 
 ```bash
-aws bedrock-agentcore-control create-registry-record \
+aws agent-registry-control create-registry-record \
   --registry-id <REGISTRY_ID> \
-  --name "CustomerSupportAgent" \
-  --descriptor-type A2A \
+  --name "customer-support-agent" \
+  --display-name "CustomerSupportAgent" \
+  --record-type AGENT \
   --descriptors '{
-    "a2a": {
-      "agentCard": {"schemaVersion": "0.3", "inlineContent": "{\"name\": \"customer-support\", \"description\": \"Handles customer inquiries\", \"version\": \"1.0.0\", \"protocolVersion\": \"0.3.0\", \"url\": \"https://api.example.com/a2a\", \"capabilities\": {}, \"defaultInputModes\": [\"text/plain\"], \"defaultOutputModes\": [\"text/plain\"], \"skills\": [{\"id\": \"order-lookup\", \"name\": \"Order Lookup\", \"description\": \"Look up order status\", \"tags\": [\"orders\"]}]}"}
-    }
+    "a2aAgentCard": {"dataSchemaVersion": "0.3", "data": "{\"name\": \"customer-support\", \"description\": \"Handles customer inquiries\", \"version\": \"1.0.0\", \"protocolVersion\": \"0.3.0\", \"url\": \"https://api.example.com/a2a\", \"capabilities\": {}, \"defaultInputModes\": [\"text/plain\"], \"defaultOutputModes\": [\"text/plain\"], \"skills\": [{\"id\": \"order-lookup\", \"name\": \"Order Lookup\", \"description\": \"Look up order status\", \"tags\": [\"orders\"]}]}"}
   }' \
   --record-version "1.0" \
   --region us-east-1
@@ -253,7 +280,7 @@ aws bedrock-agentcore-control create-registry-record \
 ### Search Records
 
 ```bash
-aws bedrock-agentcore search-registry-records \
+aws agent-registry search-discoverable-registry-records \
   --search-query "weather forecast" \
   --registry-ids "<REGISTRY_ARN>" \
   --region us-east-1
@@ -262,17 +289,17 @@ aws bedrock-agentcore search-registry-records \
 ### Search with Filters
 
 ```bash
-aws bedrock-agentcore search-registry-records \
+aws agent-registry search-discoverable-registry-records \
   --search-query "customer" \
   --registry-ids "<REGISTRY_ARN>" \
-  --filter '{"$and": [{"descriptorType": {"$eq": "A2A"}}, {"version": {"$eq": "1.0"}}]}' \
+  --filters '{"$and": [{"recordType": {"$eq": "AGENT"}}, {"recordVersion": {"$eq": "1.0"}}]}' \
   --region us-east-1
 ```
 
 ### Delete a Record
 
 ```bash
-aws bedrock-agentcore-control delete-registry-record \
+aws agent-registry-control delete-registry-record \
   --registry-id <REGISTRY_ID> \
   --record-id <RECORD_ID> \
   --region us-east-1
@@ -293,10 +320,10 @@ Default authentication method. Works automatically with AWS CLI and SDKs.
     {
       "Effect": "Allow",
       "Action": [
-        "bedrock-agentcore:SearchRegistryRecords",
-        "bedrock-agentcore:InvokeRegistryMcp"
+        "agent-registry:SearchDiscoverableRegistryRecords",
+        "agent-registry:InvokeRegistryMcp"
       ],
-      "Resource": "arn:aws:bedrock-agentcore:<region>:<account>:registry/<registryId>"
+      "Resource": "arn:aws:agent-registry:<region>:<account>:registry/<registryId>"
     }
   ]
 }
@@ -307,13 +334,15 @@ Default authentication method. Works automatically with AWS CLI and SDKs.
 Supports Amazon Cognito, Okta, Azure AD, or any OIDC-compatible provider. Configure during registry creation. **Authorization type cannot be changed after creation.**
 
 ```bash
-aws bedrock-agentcore-control create-registry \
+aws agent-registry-control create-registry \
   --name "external-registry" \
-  --authorizer-type CUSTOM_JWT \
-  --authorizer-configuration '{
-    "customJWTAuthorizer": {
-      "discoveryUrl": "https://cognito-idp.us-east-1.amazonaws.com/<poolId>/.well-known/openid-configuration",
-      "allowedClients": ["<appClientId>"]
+  --discovery-configuration '{
+    "authorizerType": "CUSTOM_JWT",
+    "authorizerConfiguration": {
+      "customJWTAuthorizer": {
+        "discoveryUrl": "https://cognito-idp.us-east-1.amazonaws.com/<poolId>/.well-known/openid-configuration",
+        "allowedClients": ["<appClientId>"]
+      }
     }
   }' \
   --region us-east-1
@@ -335,7 +364,7 @@ aws bedrock-agentcore-control create-registry \
 
 ### Search Optimization
 - Write detailed descriptions to improve semantic search relevance
-- Use consistent descriptor types to enable effective filtering
+- Use consistent `recordType` values to enable effective filtering
 - Include relevant keywords in record metadata
 
 ### Security
@@ -349,10 +378,10 @@ aws bedrock-agentcore-control create-registry \
 | Issue | Cause | Solution |
 |-------|-------|----------|
 | Record not found in search | Record not approved | Check record status; submit for approval if in Draft |
-| MCP endpoint 403 | Missing IAM permissions | Add both `InvokeRegistryMcp` and `SearchRegistryRecords` |
+| MCP endpoint 403 | Missing IAM permissions | Add both `InvokeRegistryMcp` and `SearchDiscoverableRegistryRecords` |
 | Search returns no results | No approved records match query | Verify records exist and are approved; broaden search query |
-| Create registry fails | Region not supported | Use one of the 5 supported preview regions |
-| Schema validation error `'0.3.0' is not supported` | Wrong A2A schema version | Use `"schemaVersion": "0.3"` (not `0.3.0`) |
+| Create registry fails | Region not supported, or missing `iam:CreateServiceLinkedRole` | Check the region against the AWS Agent Registry endpoints reference; grant `iam:CreateServiceLinkedRole` |
+| Schema validation error `'0.3.0' is not supported` | Wrong A2A schema version | Use `"dataSchemaVersion": "0.3"` (not `0.3.0`) |
 | Sync not updating | Credential provider misconfigured | Verify outbound OAuth/IAM credentials for the source URL |
 
 ## Documentation
@@ -382,3 +411,4 @@ aws bedrock-agentcore-control create-registry \
 - [IAM Permissions](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/registry-iam-permissions.html)
 - [Record Lifecycle](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/registry-record-lifecycle.html)
 - [Record Synchronization](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/registry-sync-records.html)
+- [Migration guide (`bedrock-agentcore` → `agent-registry`)](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/registry-faq.html)

@@ -1,0 +1,69 @@
+{
+  "populations": [
+    {
+      "allele_count": 1422644,
+      "allele": "T",
+      "population": "gnomADe:ALL",
+      "frequency": 0.9732
+    },
+    {
+      "frequency": 0.02685,
+      "population": "gnomADe:ALL",
+      "allele_count": 39248,
+      "allele": "C"
+    },
+    {
+      "population": "gnomADe:amr",
+      "allele": "C",
+      "allele_count": 11930,
+      "frequency": 0.2667
+    },
+    {
+      "population": "gnomADe:amr",
+      "allele_count": 32794,
+      "allele": "T",
+      "frequency": 0.7333
+    }
+  ],
+  "synonyms": [
+    "VAR_047301",
+    "rs52832866",
+    "152200.0007",
+    "RCV001251437",
+    "VCV000975030",
+    "PA166157081"
+  ],
+  "var_class": "SNP",
+  "mappings": [
+    {
+      "allele_string": "T/C",
+      "coord_system": "chromosome",
+      "strand": 1,
+      "end": 160540105,
+      "start": 160540105,
+      "ancestral_allele": "T",
+      "seq_region_name": "6",
+      "location": "6:160540105-160540105",
+      "assembly_name": "GRCh38"
+    }
+  ],
+  "evidence": [
+    "Frequency",
+    "1000Genomes",
+    "Cited",
+    "ESP",
+    "Phenotype_or_Disease",
+    "ExAC",
+    "TOPMed",
+    "gnomAD"
+  ],
+  "name": "rs3798220",
+  "source": "Variants (including SNPs and indels) imported from dbSNP",
+  "most_severe_consequence": "missense_variant",
+  "ambiguity": "Y",
+  "clinical_significance": [
+    "benign"
+  ],
+  "MAF": null,
+  "minor_allele": null
+}

@@ -14,7 +14,7 @@ created: 2026-06-13
 # caveman-stats
 
 > [!info] What it does
-> Show real token usage and estimated savings for the current session. Reads directly from the Claude Code session log — no AI estimation. Triggers on /caveman-stats. Output is injected by the mode-tracker hook; the model itself does not compute the numbers.
+> Show real token usage and estimated savings for the current session, read from the session log. Trigger: /caveman-stats.
 
 **Source:** [skills/caveman-stats/SKILL.md](../../../skills/caveman-stats/SKILL.md)  ·  **Domain:** [Reasoning, Ideation & Decision](../../maps/reasoning-ideation.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

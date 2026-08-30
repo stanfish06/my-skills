@@ -20,7 +20,7 @@ created: 2026-08-23
 
 ## Related skills
 
-- [langgraph](../../notes/uncategorized/langgraph.md) — LangGraph is a low-level orchestration framework for building stateful LLM agents and workflows as explicit graphs — typed state with reducers, nodes/edges/conditional routing...
+- [langgraph](../../notes/ml-ai/langgraph.md) — LangGraph is a low-level orchestration framework for building stateful LLM agents and workflows as explicit graphs — typed state with reducers, nodes/edges/conditional routing...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

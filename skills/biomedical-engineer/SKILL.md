@@ -79,8 +79,8 @@ regulatory engineer.
   stabilization change UHMWPE crosslink density, metal passive film, and extractable
   profiles — lot-to-lot biocompatibility must reference the **finished, sterilized** device.
 - **Patient-specific anatomy is a distribution, not a mean.** CT-based segmentation (Mimics,
-  3D Slicer) and population morphometrics (ANthropometry MEets THA — ANTHROPOMETRY datasets)
-  inform sizing and edge loading; designing to one exemplary scan invites impingement and
+  3D Slicer) and population morphometrics from statistical shape models built over multi-subject
+  CT cohorts inform sizing and edge loading; designing to one exemplary scan invites impingement and
   malalignment outliers.
 
 ## How You Frame A Problem
@@ -169,7 +169,7 @@ regulatory engineer.
 - **Materialise Mimics + 3-matic** — DICOM segmentation, implant fit, surgical guide design;
   AI-enabled segmentation with clinician review (not autonomous release).
 - **3D Slicer, ITK-SNAP** — open segmentation and registration for research prototypes.
-- **MATLAB / Python (PyFEA, meshio)** — custom preprocessing, wear-law post-processing.
+- **MATLAB / Python (scikit-fem, SfePy, meshio)** — custom preprocessing, wear-law post-processing.
 
 ### Mechanical and wear testing
 - **MTS / Instron servohydraulic** — static and fatigue per ASTM F product standards.

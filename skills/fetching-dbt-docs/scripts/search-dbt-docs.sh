@@ -9,8 +9,10 @@
 set -euo pipefail
 
 FULL_URL="https://docs.getdbt.com/llms-full.txt"
+INDEX_URL="https://docs.getdbt.com/llms.txt"
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/dbt-docs"
 CACHE_FILE="$CACHE_DIR/llms-full.txt"
+INDEX_FILE="$CACHE_DIR/llms.txt"
 CACHE_MAX_AGE=86400  # 24 hours in seconds
 
 # Colors (disabled if not a terminal)
@@ -72,29 +74,46 @@ fi
 # Ensure cache directory exists
 mkdir -p "$CACHE_DIR"
 
-# Check if file needs download
+# Check if a cache file needs download
 need_download() {
+    local f="$1"
     if [[ "$FRESH" == "true" ]]; then
         return 0
     fi
-    if [[ ! -f "$CACHE_FILE" ]]; then
+    if [[ ! -s "$f" ]]; then
         return 0
     fi
-    # Check file age (cross-platform)
-    local file_age
-    if [[ "$(uname)" == "Darwin" ]]; then
-        file_age=$(( $(date +%s) - $(stat -f %m "$CACHE_FILE") ))
-    else
-        file_age=$(( $(date +%s) - $(stat -c %Y "$CACHE_FILE") ))
-    fi
-    [[ $file_age -gt $CACHE_MAX_AGE ]]
+    # mtime, cross-platform: GNU stat first, BSD stat second. Probing the binary
+    # beats branching on uname -- GNU coreutils ahead of /usr/bin on macOS makes
+    # `stat -f` mean "filesystem status" and print to stdout.
+    local mtime
+    mtime=$(stat -c %Y "$f" 2>/dev/null || stat -f %m "$f" 2>/dev/null || echo 0)
+    [[ $(( $(date +%s) - mtime )) -gt $CACHE_MAX_AGE ]]
 }
 
-# Download if needed
-if need_download; then
+# Download to a temp file and move into place only on success, so an HTTP error
+# never poisons the cache for the rest of the TTL
+download() {
+    local url="$1" dest="$2" tmp
+    tmp="$dest.tmp.$$"
+    if ! curl -fsSL "$url" -o "$tmp"; then
+        rm -f "$tmp"
+        echo "Error: failed to download $url" >&2
+        exit 1
+    fi
+    mv -f "$tmp" "$dest"
+}
+
+if need_download "$CACHE_FILE"; then
     echo -e "${DIM}Downloading dbt docs...${RESET}" >&2
-    curl -sL "$FULL_URL" -o "$CACHE_FILE"
+    download "$FULL_URL" "$CACHE_FILE"
     echo -e "${DIM}Cached at: $CACHE_FILE${RESET}" >&2
+fi
+
+if need_download "$INDEX_FILE"; then
+    echo -e "${DIM}Downloading dbt docs index...${RESET}" >&2
+    download "$INDEX_URL" "$INDEX_FILE"
+    echo -e "${DIM}Cached at: $INDEX_FILE${RESET}" >&2
 fi
 
 # Convert keywords to lowercase for matching
@@ -109,47 +128,47 @@ echo "" >&2
 
 # Search: find pages containing keywords
 # Logic:
-# 1. Page delimiter is: --- followed by ###
-# 2. After delimiter, first docs.getdbt.com link is the page URL
+# 1. llms.txt is the page index: "- [Title](URL): description"
+# 2. In llms-full.txt a page block starts at "### <Title>"; the block carries no
+#    self-URL, so resolve the URL by joining the header title against that index
 # 3. Match keywords in content, output unique page URLs
 results=$(awk -v keywords="$keywords_lower" '
+# collapse inline markdown links to their label so a lifecycle badge such as
+# "About dbt State [Preview](...)" matches the plain index title
+function norm(t) {
+    gsub(/\]\([^)]*\)/, "", t)
+    gsub(/\[/, "", t)
+    gsub(/[ \t]+/, " ", t)
+    sub(/^ /, "", t)
+    sub(/ $/, "", t)
+    return t
+}
+
 BEGIN {
     current_url = ""
     page_count = 0
-    in_new_page = 0
     n = split(keywords, kw_arr, "|")
 }
 
-# Detect page delimiter
-/^---$/ {
-    in_new_page = 1
-    next
-}
-
-# After ---, look for ### header to confirm new page
-in_new_page && /^### / {
-    in_new_page = 2  # Now looking for first docs.getdbt.com link
-    next
-}
-
-# Find first docs.getdbt.com URL after page header
-in_new_page == 2 && /docs\.getdbt\.com/ {
-    # Extract URL from markdown link: [text](URL) or just URL
-    line = $0
-    # Try to find (https://docs.getdbt.com/...)
-    if (match(line, /\(https:\/\/docs\.getdbt\.com\/[^)]+\)/)) {
-        url = substr(line, RSTART+1, RLENGTH-2)
-        current_url = url
-        in_new_page = 0
-    } else if (match(line, /https:\/\/docs\.getdbt\.com\/[^ \t\n\])]+/)) {
-        current_url = substr(line, RSTART, RLENGTH)
-        in_new_page = 0
+# First file: the llms.txt index -> title => URL
+NR == FNR {
+    if (match($0, /^- \[.*\]\(https:\/\/docs\.getdbt\.com\/[^)]+\)/)) {
+        close_bracket = index($0, "](")
+        title = substr($0, 4, close_bracket - 4)
+        rest = substr($0, close_bracket + 2)
+        url = substr(rest, 1, index(rest, ")") - 1)
+        key = norm(title)
+        if (!(key in index_url)) index_url[key] = url
     }
+    next
 }
 
-# Reset if we hit another --- without finding URL
-in_new_page && /^---$/ {
-    in_new_page = 1
+# Second file: page block header. Unresolvable titles clear the URL rather than
+# letting their content be credited to the previous page.
+/^### / {
+    key = norm(substr($0, 5))
+    current_url = (key in index_url) ? index_url[key] : ""
+    next
 }
 
 # Check content for keyword matches
@@ -173,7 +192,7 @@ END {
         print urls[i]
     }
 }
-' "$CACHE_FILE")
+' "$INDEX_FILE" "$CACHE_FILE")
 
 if [[ -z "$results" ]]; then
     echo "No matches found."

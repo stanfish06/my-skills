@@ -256,9 +256,14 @@ def _bh_fdr(pvalues: np.ndarray) -> np.ndarray:
     return out
 
 
-def s0_based_FDR_correction(fc_pvalue_df: pd.DataFrame, degree_of_freedom: int, fdr: float = 0.05, s0: float = 0.1) -> pd.DataFrame:
+def call_significance(fc_pvalue_df: pd.DataFrame, degree_of_freedom: int, fdr: float = 0.05, s0: float = 0.1) -> pd.DataFrame:
     '''
-    Calculate FDR based on s0 and ta smooth threshold, and annotate regulation status
+    Annotate regulation status. A protein is called only when it clears BOTH the
+    Benjamini-Hochberg adjusted p-value (`padj <= fdr`) and the s0 volcano curve.
+
+    The s0 curve is a fold-change fudge factor, not a multiplicity correction:
+    Perseus/SAM derive an FDR for it by permutation, which is not implemented
+    here. BH is what controls the false discovery rate in this function.
     '''
     from scipy.stats import t
 
@@ -293,7 +298,8 @@ def s0_based_FDR_correction(fc_pvalue_df: pd.DataFrame, degree_of_freedom: int, 
     else:
         raise ValueError("fc_pvalue_df must contain either 'log2FoldChange' or 'fc' column")
 
-    # Calculate ta from t-distribution based on FDR
+    # Curve position: two-sided t quantile at `fdr`. This positions the s0
+    # hyperbola only; multiplicity is handled by the padj gate below.
     ta = t.ppf(1 - (fdr / 2), df=degree_of_freedom)
     fc_df = fc_pvalue_df[fc_col]
 
@@ -309,10 +315,14 @@ def s0_based_FDR_correction(fc_pvalue_df: pd.DataFrame, degree_of_freedom: int, 
     fc_pvalue_df['-log10(pvalue)'] = -np.log10(fc_pvalue_df['pvalue'].clip(lower=1e-300))
     fc_pvalue_df['s0_corrected_-log10(pvalue)'] = thresholds
 
-    # Annotate regulation status
+    # Annotate regulation status: BH-adjusted p-value gate AND the s0 curve
+    if 'padj' not in fc_pvalue_df.columns:
+        raise ValueError("fc_pvalue_df must contain a 'padj' column (Benjamini-Hochberg adjusted p-values)")
+    passes_fdr = fc_pvalue_df['padj'] <= fdr
+    above_curve = fc_pvalue_df['-log10(pvalue)'] >= fc_pvalue_df['s0_corrected_-log10(pvalue)']
     conditions = [
-        (fc_pvalue_df[fc_col] > ta * s0) & (fc_pvalue_df['-log10(pvalue)'] >= fc_pvalue_df['s0_corrected_-log10(pvalue)']),
-        (fc_pvalue_df[fc_col] < -ta * s0) & (fc_pvalue_df['-log10(pvalue)'] >= fc_pvalue_df['s0_corrected_-log10(pvalue)']),
+        passes_fdr & above_curve & (fc_pvalue_df[fc_col] > ta * s0),
+        passes_fdr & above_curve & (fc_pvalue_df[fc_col] < -ta * s0),
     ]
     choices = ['upregulated', 'downregulated']
     fc_pvalue_df['regulation'] = np.select(conditions, choices, default='non significant')
@@ -346,7 +356,7 @@ def run_differential_expression(
     # Two-sample t-test
     t_stat, pvalues = stats.ttest_ind(treat_vals, ctrl_vals, axis=1, equal_var=False, nan_policy="omit")
 
-    # FDR correction
+    # Benjamini-Hochberg multiple-testing correction
     padj = _bh_fdr(pvalues)
 
     # Mean intensity across all samples
@@ -363,8 +373,8 @@ def run_differential_expression(
         "padj": padj
     }).sort_values("padj", ascending=True)
 
-    # Apply FDR correction with s0
-    result = s0_based_FDR_correction(result, degree_of_freedom=ttest_df, fdr=fdr, s0=s0)
+    # Call significance: BH padj <= fdr AND above the s0 curve
+    result = call_significance(result, degree_of_freedom=ttest_df, fdr=fdr, s0=s0)
 
     return result
 
@@ -444,7 +454,7 @@ def plot_volcano(de_results: pd.DataFrame, outpath: Path, s0: float = 0.1, fdr: 
         )
 
     # Plot s0 threshold curve
-    plt.plot(x_range, threshold_curve, color='black', linestyle='-', linewidth=1.5, label=f's0={s0}, FDR={fdr} threshold')
+    plt.plot(x_range, threshold_curve, color='black', linestyle='-', linewidth=1.5, label=f's0={s0} curve (t quantile at {fdr})')
 
     plt.axvline(0, linestyle='-', linewidth=0.8, color='gray')
     plt.axhline(0, linestyle='-', linewidth=0.8, color='gray')
@@ -636,7 +646,7 @@ def run_analysis(
 - Proteins pre-filter: {n_proteins_before}
 - Proteins post-filter/imputation: {n_proteins_after}
 - Contrast: `{treatment} vs {control}`
-- Significant proteins: {((de_results['regulation'] != 'non significant').sum())}
+- Significant proteins (BH padj <= {fdr} and above the s0 curve): {((de_results['regulation'] != 'non significant').sum())}
   - Upregulated: {len(de_results[de_results['regulation'] == 'upregulated'])}
   - Downregulated: {len(de_results[de_results['regulation'] == 'downregulated'])}
 
@@ -694,7 +704,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--metadata", help="Path to sample metadata (.csv/.tsv)")
     parser.add_argument("--contrast", default="treated,control", help="Contrast: treatment,control")
     parser.add_argument("--s0", type=float, default=0.1, help="s0 calibration parameter (default: 0.1)")
-    parser.add_argument("--fdr", type=float, default=0.05, help="False discovery rate threshold (default: 0.05)")
+    parser.add_argument("--fdr", type=float, default=0.05, help="Benjamini-Hochberg FDR threshold; also positions the s0 curve (default: 0.05)")
     parser.add_argument("--ttest-df", type=int, default=4, help="Degree of freedom for t-test (default: 4 for 3+3 replicates)")
     parser.add_argument("--imputation-shift", type=float, default=1.8, help="Down-shift for imputation (default: 1.8)")
     parser.add_argument("--imputation-scale", type=float, default=0.3, help="Scale factor for imputation (default: 0.3)")

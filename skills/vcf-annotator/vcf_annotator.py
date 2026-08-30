@@ -9,6 +9,7 @@ Usage:
     python vcf_annotator.py --demo --output /tmp/demo
 """
 
+import argparse
 import os
 import csv
 import hashlib
@@ -47,41 +48,32 @@ DISCLAIMER = (
     "Always consult a qualified geneticist for clinical decisions.*\n"
 )
 
-# ── Demo VCF data ──────────────────────────────────────────────────────────────
+# ── Demo data ──────────────────────────────────────────────────────────────────
+# Synthetic illustrative values only. Coordinates, frequencies and pathogenicity
+# calls below are invented to exercise the report layout; they match no genome
+# build and no database record. Never quote them as annotations.
+SYNTHETIC_DATA_NOTICE = (
+    "Synthetic illustrative data — invented coordinates, frequencies and "
+    "pathogenicity calls, not real annotations. Run without --demo to annotate "
+    "against Ensembl VEP, ClinVar and gnomAD."
+)
+
 DEMO_VCF_CONTENT = """##fileformat=VCFv4.2
-##reference=GRCh38
+##source=ClawBio vcf-annotator synthetic demo (not a real genome build)
 ##FILTER=<ID=PASS,Description="All filters passed">
 #CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO
-17\t43044295\trs80357382\tG\tA\t.\tPASS\t.
-13\t32316461\trs80359550\tC\tT\t.\tPASS\t.
-7\t117548628\trs113993960\tCTTT\tC\t.\tPASS\t.
-19\t11089199\trs429358\tT\tC\t.\tPASS\t.
-1\t69515\trs1801133\tG\tA\t.\tPASS\t.
+17\t43044295\tDEMO_VAR_1\tG\tA\t.\tPASS\t.
+13\t32316461\tDEMO_VAR_2\tC\tT\t.\tPASS\t.
+7\t117548628\tDEMO_VAR_3\tCTTT\tC\t.\tPASS\t.
+19\t11089199\tDEMO_VAR_4\tT\tC\t.\tPASS\t.
+1\t69515\tDEMO_VAR_5\tG\tA\t.\tPASS\t.
 """
 
 DEMO_ANNOTATIONS = [
     {
-        "chrom": "17",
-        "pos": "43044295",
-        "id": "rs80357382",
-        "ref": "G",
-        "alt": "A",
-        "gene": "BRCA1",
-        "consequence": "missense_variant",
-        "impact": "HIGH",
-        "clinvar_significance": "Pathogenic",
-        "clinvar_condition": "Hereditary breast and ovarian cancer syndrome",
-        "gnomad_af": 0.000008,
-        "gnomad_af_afr": 0.0,
-        "gnomad_af_eur": 0.000012,
-        "hgvs": "NM_007294.4:c.5266dupC",
-        "sift": "deleterious",
-        "polyphen": "probably_damaging",
-    },
-    {
         "chrom": "13",
         "pos": "32316461",
-        "id": "rs80359550",
+        "id": "DEMO_VAR_2",
         "ref": "C",
         "alt": "T",
         "gene": "BRCA2",
@@ -92,14 +84,14 @@ DEMO_ANNOTATIONS = [
         "gnomad_af": 0.000004,
         "gnomad_af_afr": 0.0,
         "gnomad_af_eur": 0.000006,
-        "hgvs": "NM_000059.4:c.9976A>T",
+        "hgvs": "N/A",
         "sift": "deleterious",
         "polyphen": "probably_damaging",
     },
     {
         "chrom": "7",
         "pos": "117548628",
-        "id": "rs113993960",
+        "id": "DEMO_VAR_3",
         "ref": "CTTT",
         "alt": "C",
         "gene": "CFTR",
@@ -110,14 +102,32 @@ DEMO_ANNOTATIONS = [
         "gnomad_af": 0.021,
         "gnomad_af_afr": 0.0003,
         "gnomad_af_eur": 0.033,
-        "hgvs": "NM_000492.4:c.1521_1523delCTT",
+        "hgvs": "N/A",
         "sift": "deleterious",
         "polyphen": "N/A",
     },
     {
+        "chrom": "17",
+        "pos": "43044295",
+        "id": "DEMO_VAR_1",
+        "ref": "G",
+        "alt": "A",
+        "gene": "BRCA1",
+        "consequence": "missense_variant",
+        "impact": "MODERATE",
+        "clinvar_significance": "Pathogenic",
+        "clinvar_condition": "Hereditary breast and ovarian cancer syndrome",
+        "gnomad_af": 0.000008,
+        "gnomad_af_afr": 0.0,
+        "gnomad_af_eur": 0.000012,
+        "hgvs": "N/A",
+        "sift": "deleterious",
+        "polyphen": "probably_damaging",
+    },
+    {
         "chrom": "19",
         "pos": "11089199",
-        "id": "rs429358",
+        "id": "DEMO_VAR_4",
         "ref": "T",
         "alt": "C",
         "gene": "APOE",
@@ -128,14 +138,14 @@ DEMO_ANNOTATIONS = [
         "gnomad_af": 0.147,
         "gnomad_af_afr": 0.232,
         "gnomad_af_eur": 0.143,
-        "hgvs": "NM_000041.4:c.388T>C",
+        "hgvs": "N/A",
         "sift": "tolerated",
         "polyphen": "benign",
     },
     {
         "chrom": "1",
         "pos": "69515",
-        "id": "rs1801133",
+        "id": "DEMO_VAR_5",
         "ref": "G",
         "alt": "A",
         "gene": "MTHFR",
@@ -146,7 +156,7 @@ DEMO_ANNOTATIONS = [
         "gnomad_af": 0.312,
         "gnomad_af_afr": 0.198,
         "gnomad_af_eur": 0.367,
-        "hgvs": "NM_005957.5:c.665C>T",
+        "hgvs": "N/A",
         "sift": "tolerated",
         "polyphen": "benign",
     },
@@ -339,6 +349,7 @@ def generate_report(
     variants: list[dict],
     output_dir: Path,
     input_label: str = "input.vcf",
+    synthetic: bool = False,
 ) -> None:
     """Write markdown report, JSON, CSV, and reproducibility bundle."""
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -360,6 +371,7 @@ def generate_report(
         "# 🦖 ClawBio VCF Annotator Report",
         "",
         f"**Input**: {input_label}  ",
+        *(["**Data**: SYNTHETIC — not real annotations  "] if synthetic else []),
         f"**Date**: {now}  ",
         f"**Total variants**: {total}  ",
         f"**HIGH impact**: {high} | **MODERATE**: {mod} | **LOW**: {low}  ",
@@ -369,8 +381,13 @@ def generate_report(
         "",
         "## Summary",
         "",
-        f"Annotated {total} variants against Ensembl VEP, ClinVar, and gnomAD. "
-        f"{high} variant(s) carry HIGH impact consequences. "
+        (
+            f"**{SYNTHETIC_DATA_NOTICE}** These {total} records were not annotated "
+            f"against any database."
+            if synthetic
+            else f"Annotated {total} variants against Ensembl VEP, ClinVar, and gnomAD."
+        )
+        + f" {high} variant(s) carry HIGH impact consequences. "
         f"{path_count} variant(s) are classified as Pathogenic or Likely Pathogenic "
         f"in ClinVar. Variants are ranked by predicted functional impact below.",
         "",
@@ -525,8 +542,9 @@ def main() -> None:
     if args.demo:
         print("🦖 ClawBio VCF Annotator — DEMO MODE")
         print("   Using built-in demo variants (no network calls)")
+        print(f"   {SYNTHETIC_DATA_NOTICE}")
         variants    = DEMO_ANNOTATIONS
-        input_label = "demo_variants.vcf"
+        input_label = "demo_variants.vcf (synthetic)"
     else:
         print("🦖 ClawBio VCF Annotator")
         vcf_path = Path(args.input)
@@ -546,7 +564,7 @@ def main() -> None:
         input_label = str(vcf_path)
 
     print("\n📝 Generating report …")
-    generate_report(variants, output_dir, input_label)
+    generate_report(variants, output_dir, input_label, synthetic=args.demo)
 
 
 if __name__ == "__main__":

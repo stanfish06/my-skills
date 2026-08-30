@@ -3,6 +3,8 @@ name: ngs-atacseq-peaks-qc
 description: Run or plan ATAC-seq QC, alignment, TSS enrichment, fragment-size, blacklist, peak-calling, consensus peak, and differential accessibility workflows.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # ATAC-seq Peaks QC
 
 Use this skill for ATAC-seq accessibility analysis from FASTQ or BAM. If the assay is ChIP-seq, CUT&RUN, CUT&Tag, or antibody-targeted enrichment, use `ngs-chip-cutrun-peaks-qc`.

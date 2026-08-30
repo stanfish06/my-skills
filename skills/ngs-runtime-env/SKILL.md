@@ -3,6 +3,8 @@ name: ngs-runtime-env
 description: Check whether public NGS tools and packages already exist before downloading, installing, or running a sequencing pipeline.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # NGS Runtime Environment
 
 Use this skill whenever an NGS workflow needs package checks, install planning, or runtime validation.

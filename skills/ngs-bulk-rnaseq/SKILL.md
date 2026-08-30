@@ -3,6 +3,8 @@ name: ngs-bulk-rnaseq
 description: Dispatch bulk RNA-seq requests to FASTQ-to-count QC or count-matrix differential-expression skills using nf-core/rnaseq, STAR, Salmon, featureCounts, MultiQC, and R/Bioconductor workflows.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # Bulk RNA-seq
 
 Use this skill as the bulk RNA-seq dispatcher. Route FASTQ/BAM processing to count-generation QC, and route count-matrix statistical analysis to differential-expression guidance.

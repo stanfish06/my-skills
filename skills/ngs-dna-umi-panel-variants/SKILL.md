@@ -3,6 +3,8 @@ name: ngs-dna-umi-panel-variants
 description: Run or plan targeted DNA panel variant workflows that use UMIs, duplex consensus reads, molecular barcodes, low-frequency calling, target coverage, and panel-specific QC.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # UMI Panel DNA Variants
 
 Use this skill for targeted DNA panels where molecular barcodes, UMIs, duplex consensus, or low-frequency allele detection are central to the analysis. If the panel is ordinary germline calling without molecular consensus, use `ngs-dna-germline-variants`.

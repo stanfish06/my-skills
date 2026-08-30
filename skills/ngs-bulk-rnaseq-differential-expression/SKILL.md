@@ -3,6 +3,8 @@ name: ngs-bulk-rnaseq-differential-expression
 description: Run or plan bulk RNA-seq differential-expression analysis from count matrices with replicate, design formula, contrast, batch, normalization, QC plot, and result-table checks.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # Bulk RNA-seq Differential Expression
 
 Use this skill when the user has raw counts or a count-generation output and wants differential expression, contrasts, QC plots, or ranked gene tables.

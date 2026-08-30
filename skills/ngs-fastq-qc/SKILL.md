@@ -3,6 +3,8 @@ name: ngs-fastq-qc
 description: Validate FASTQ inputs, run local FastQC/MultiQC QC, interpret QC signals, and optionally execute fastp or Cutadapt trimming branches without overwriting raw reads.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # FASTQ QC
 
 Use this skill for QC-only, trimming-first, or FASTQ quality interpretation workflows. This skill can execute the plugin-owned local FastQ QC runner when the user approves a local run. It should decide whether trimming or additional investigation is warranted; it should not blindly trim by default.

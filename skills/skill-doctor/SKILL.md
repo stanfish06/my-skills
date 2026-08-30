@@ -1,6 +1,7 @@
 ---
 name: "skill-doctor"
 description: "Grades agent skills by scoring agent conversations against efficiency and code-quality rubrics, then drafts concrete skill edits and a shareable report. Use when the user wants their agent setup graded from real conversation history, or asks which of their installed skills are actually working."
+disable-model-invocation: true
 ---
 # skill-doctor
 

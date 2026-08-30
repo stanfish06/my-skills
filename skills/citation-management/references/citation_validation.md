@@ -754,28 +754,11 @@ title = {Study of H\textsubscript{2}O}  % H₂O
 
 1. **Identify the missing fields** by scanning the BibTeX entry for empty or absent `volume`, `pages`, `number`, `doi` fields.
 
-2. **Search for the missing metadata using web search**:
-   ```bash
-   # Search by author + title to find complete citation info
-   python scripts/parallel_web.py search \
-     "AUTHOR_NAME PAPER_TITLE JOURNAL volume pages DOI" \
-     -o sources/search_YYYYMMDD_HHMMSS_citation_CITATIONKEY.md
-   ```
+2. **Search for the missing metadata**: `WebSearch` on `AUTHOR_NAME PAPER_TITLE JOURNAL volume pages DOI`.
 
-3. **If DOI is known, extract from DOI resolver page**:
-   ```bash
-   python scripts/parallel_web.py extract \
-     "https://doi.org/DOI_HERE" \
-     --objective "extract volume, issue number, page range, publication date" \
-     -o sources/extract_YYYYMMDD_HHMMSS_doi_CITATIONKEY.md
-   ```
+3. **If DOI is known, fetch the resolver page**: `WebFetch` on `https://doi.org/DOI_HERE`, asking for volume, issue number, page range, and publication date.
 
-4. **If DOI is unknown, search for it**:
-   ```bash
-   python scripts/parallel_web.py search \
-     "AUTHOR_NAME PAPER_TITLE JOURNAL_NAME DOI" \
-     -o sources/search_YYYYMMDD_HHMMSS_find_doi_CITATIONKEY.md
-   ```
+4. **If DOI is unknown, search for it**: `WebSearch` on `AUTHOR_NAME PAPER_TITLE JOURNAL_NAME DOI`, or `WebFetch` on `https://api.crossref.org/works?query.bibliographic=AUTHOR_NAME+PAPER_TITLE&rows=1`.
 
 5. **Try alternative metadata sources**:
    - CrossRef API (via DOI): Most reliable for volume/pages

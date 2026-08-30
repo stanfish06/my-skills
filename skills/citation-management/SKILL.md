@@ -236,34 +236,15 @@ Any `@article` entry missing `volume`, `pages`, or `doi` is considered **incompl
 
 For each incomplete entry, search for the missing information:
 
-**Option A — Search by title and author** (best for finding DOI):
-```bash
-python scripts/parallel_web.py search \
-  "FIRST_AUTHOR TITLE JOURNAL_NAME volume pages DOI" \
-  -o sources/search_YYYYMMDD_HHMMSS_citation_CITATIONKEY.md
-```
+Use `WebSearch` and `WebFetch`. The `parallel-web` skill is an optional substitute when it is installed; this skill ships no web helper of its own.
 
-**Option B — Extract from DOI page** (best when DOI is known but volume/pages missing):
-```bash
-python scripts/parallel_web.py extract \
-  "https://doi.org/10.XXXX/YYYY" \
-  --objective "extract complete citation metadata: volume, issue, pages, publication date" \
-  -o sources/extract_YYYYMMDD_HHMMSS_doi_CITATIONKEY.md
-```
+**Option A — Search by title and author** (best for finding DOI): `WebSearch` on `FIRST_AUTHOR TITLE JOURNAL_NAME volume pages DOI`.
 
-**Option C — Search CrossRef API directly** (programmatic, fast):
-```bash
-python scripts/parallel_web.py search \
-  "crossref DOI metadata FIRST_AUTHOR TITLE" \
-  -o sources/search_YYYYMMDD_HHMMSS_crossref_CITATIONKEY.md
-```
+**Option B — Fetch the DOI page** (best when DOI is known but volume/pages missing): `WebFetch` on `https://doi.org/10.XXXX/YYYY`, asking for volume, issue, page range, and publication date.
 
-**Option D — Search Google Scholar** (fallback for hard-to-find papers):
-```bash
-python scripts/parallel_web.py search \
-  "google scholar FIRST_AUTHOR TITLE YEAR complete citation" \
-  -o sources/search_YYYYMMDD_HHMMSS_scholar_CITATIONKEY.md
-```
+**Option C — Query CrossRef directly** (programmatic, fast): `WebFetch` on `https://api.crossref.org/works?query.bibliographic=FIRST_AUTHOR+TITLE&rows=1`, or `python scripts/doi_to_bibtex.py 10.XXXX/YYYY` when the DOI is already known.
+
+**Option D — Search Google Scholar** (fallback for hard-to-find papers): `python scripts/search_google_scholar.py "FIRST_AUTHOR TITLE YEAR"`.
 
 #### Step 3: Update BibTeX Entries
 
@@ -295,7 +276,7 @@ If metadata genuinely cannot be found after web search (very old paper, obscure 
 
 | Missing Field | Best Search Strategy |
 |---------------|---------------------|
-| DOI | Search "AUTHOR TITLE DOI" via parallel_web.py |
+| DOI | `WebSearch` on "AUTHOR TITLE DOI" |
 | Volume | Extract from DOI page or search "JOURNAL YEAR TITLE volume" |
 | Pages | Extract from DOI page or search publisher website |
 | Issue/Number | Extract from DOI page or CrossRef |

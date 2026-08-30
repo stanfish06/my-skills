@@ -56,7 +56,7 @@ print(f"Structure: {structure}")
 print(f"MFE:       {mfe:.2f} kcal/mol")
 # Sequence:  GCGGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCACCA
 # Structure: (((((((..((((........)))).(((((.......))))).....(((((.......))))))))))))....
-# MFE:       -31.30 kcal/mol
+# MFE:       -22.40 kcal/mol
 ```
 
 ## Workflow
@@ -133,7 +133,7 @@ n = len(sequence)
 
 fc = RNA.fold_compound(sequence)
 
-# Step 1: MFE folding (required before pf for proper initialization)
+# Step 1: MFE folding — gives the mfe value used to rescale below
 structure_mfe, mfe = fc.mfe()
 
 # Step 2: Rescale Boltzmann factors for numerical stability (optional but recommended)
@@ -143,7 +143,7 @@ fc.exp_params_rescale(mfe)
 structure_pf, gibbs_free_energy = fc.pf()
 print(f"Gibbs free energy (ensemble): {gibbs_free_energy:.2f} kcal/mol")
 print(f"MFE structure:  {structure_mfe}")
-print(f"Centroid (pf):  {structure_pf}")
+print(f"Pairing propensity (pf): {structure_pf}")   # not the centroid; use fc.centroid() for that
 
 # Step 4: Retrieve base pair probability matrix
 bpp = fc.bpp()   # returns (n+1)x(n+1) matrix; 1-indexed
@@ -221,11 +221,10 @@ print(f"miRNA:          {mirna_seq}")
 print(f"Target:         {target_seq}")
 print(f"Co-fold MFE:    {mfe:.2f} kcal/mol")
 
-# Parse the structure — & is retained in output
-n1, n2 = len(mirna_seq), len(target_seq)
+# Parse the structure — RNA.cofold strips the & from its output
+n1 = len(mirna_seq)
 struct_mirna  = structure[:n1]
-struct_ampersand = structure[n1]
-struct_target = structure[n1 + 1:]
+struct_target = structure[n1:]
 
 print(f"miRNA structure:  {struct_mirna}")
 print(f"Target structure: {struct_target}")
@@ -299,7 +298,7 @@ echo "GCGGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCAC
 
 # Output:
 # GCGGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAUUCGCACCA
-# (((((((..((((........)))).(((((.......))))).....(((((.......)))))))))))).... (-31.30)
+# (((((((..((((........)))).(((((.......))))).....(((((.......)))))))))))).... (-22.40)
 
 # Batch fold from FASTA file
 RNAfold < sequences.fasta > structures.txt
@@ -355,8 +354,8 @@ sequence = "GCGGAUUUAGCUCAGUUGGGAGAGCGCCAGACUGAAGAUCUGGAGGUCCUGUGUUCGAUCCACAGAAU
 # --- Constrained folding: force specific pairs ---
 fc = RNA.fold_compound(sequence)
 
-# Add hard constraint: force positions 1-7 to be paired (known stem)
-hc = RNA.hc_add_bp(fc, 1, 72)  # force pair between position 1 and 72 (0-indexed in C API)
+# Add hard constraint: force the closing pair of the acceptor stem
+fc.hc_add_bp(1, 72)  # force the pair between positions 1 and 72 (1-based)
 structure_c, mfe_c = fc.mfe()
 print(f"Constrained MFE:   {mfe_c:.2f} kcal/mol")
 print(f"Constrained struct: {structure_c}")
@@ -371,7 +370,7 @@ subopt_list = RNA.subopt(sequence, int(delta * 100))   # energy in 10-cal units
 print(f"\nSuboptimal structures within {delta} kcal/mol of MFE:")
 print(f"Total suboptimal structures: {len(subopt_list)}")
 for s in subopt_list[:3]:
-    e = s.energy / 100.0  # convert from 10-cal to kcal/mol
+    e = s.energy  # already kcal/mol
     print(f"  {s.structure}  ({e:.2f} kcal/mol)")
 ```
 
@@ -451,11 +450,12 @@ def assess_sgrna(guide_seq: str, scaffold: str = None) -> dict:
     bpp = fc.bpp()
 
     n_guide = len(guide_seq)
-    # Check if any guide bases are paired (bad for targeting)
+    # Sum each guide base's pairing probability against every partner in the full
+    # sgRNA — guide-to-scaffold pairs are what actually block Cas9 loading
     guide_paired = sum(
         bpp[min(i, j)][max(i, j)]
         for i in range(1, n_guide + 1)
-        for j in range(1, n_guide + 1)
+        for j in range(1, len(full_sgrna) + 1)
         if i != j
     )
     guide_accessibility = 1.0 - min(1.0, guide_paired / n_guide)
@@ -533,10 +533,10 @@ print(f"Saved: mountain_plot.png  (MFE structure: {structure[:40]}...)")
 
 | Problem | Cause | Solution |
 |---------|-------|----------|
-| `ImportError: No module named 'RNA'` | ViennaRNA Python bindings not installed | Install via `conda install -c conda-forge viennarna`; `pip install` alone may fail to link C library |
+| `ImportError: No module named 'RNA'` | ViennaRNA Python bindings not installed | Install via `conda install -c conda-forge -c bioconda viennarna` — the package lives in bioconda, not conda-forge; `pip install` alone may fail to link C library |
 | `RuntimeError: RNAfold not found` | ViennaRNA CLI not in PATH | Confirm with `which RNAfold`; if using conda env, activate it before running scripts |
 | MFE is unexpectedly positive (> 0) | Very short or repetitive sequence with no favorable pairs | Short sequences (< 10 nt) often have positive MFE; check sequence length and composition |
-| `bpp` matrix all zeros after `fc.pf()` | `fc.mfe()` must be called before `fc.pf()` on the same fold compound | Always call `fc.mfe()` first, then `fc.exp_params_rescale(mfe)`, then `fc.pf()` |
+| `bpp` matrix all zeros after `fc.pf()` | `fc.pf()` was never called on that fold compound, or only the `i > j` half of the matrix is being read | Call `fc.pf()` before `fc.bpp()`, and read `bpp[i][j]` with `i < j` only — the lower triangle is empty |
 | Suboptimal enumeration returns thousands of structures | Window too large for long sequences | Reduce delta to 2–3 kcal/mol for long sequences; very stable sequences have dense suboptimal ensembles |
 | Co-fold (`RNA.cofold`) shows unexpected pairing | Intramolecular folding dominates in one strand | Inspect each strand separately first; low individual-strand MFE indicates strong self-structure interfering with duplex |
 

@@ -58,11 +58,11 @@ max_x = df.x.max()        # Pass 3 through data
 mean_x = df.x.mean(delay=True)
 std_x = df.x.std(delay=True)
 max_x = df.x.max(delay=True)
-results = vaex.execute([mean_x, std_x, max_x])  # Single pass!
+df.execute()  # Single pass!
 
-print(results[0])  # mean
-print(results[1])  # std
-print(results[2])  # max
+print(mean_x.get())
+print(std_x.get())
+print(max_x.get())
 ```
 
 ### Delayed Execution with Multiple Columns
@@ -78,13 +78,13 @@ for column in ['sales', 'quantity', 'profit', 'cost']:
     delayed_results.extend([mean, std])
 
 # Execute all at once
-results = vaex.execute(delayed_results)
+df.execute()
 
 # Process results
 for i, column in enumerate(['sales', 'quantity', 'profit', 'cost']):
     stats[column] = {
-        'mean': results[i*2],
-        'std': results[i*2 + 1]
+        'mean': delayed_results[i*2].get(),
+        'std': delayed_results[i*2 + 1].get()
     }
 ```
 
@@ -104,12 +104,9 @@ mean3 = df.col3.mean()
 mean4 = df.col4.mean()
 
 # Good: 1 pass through dataset
-results = vaex.execute([
-    df.col1.mean(delay=True),
-    df.col2.mean(delay=True),
-    df.col3.mean(delay=True),
-    df.col4.mean(delay=True)
-])
+delayed = [df[c].mean(delay=True) for c in ['col1', 'col2', 'col3', 'col4']]
+df.execute()
+results = [d.get() for d in delayed]
 ```
 
 ## Asynchronous Operations
@@ -128,9 +125,9 @@ async def compute_statistics(df):
     std_task = df.x.std(delay=True)
 
     # Execute asynchronously
-    results = await vaex.async_execute([mean_task, std_task])
+    await df.execute_async()
 
-    return {'mean': results[0], 'std': results[1]}
+    return {'mean': mean_task.get(), 'std': std_task.get()}
 
 # Run async function
 async def main():
@@ -166,7 +163,7 @@ df['log_sales'] = df.sales.log()
 df['full_name'] = df.first_name + ' ' + df.last_name
 
 # Check if virtual
-print(df.is_local('total'))  # False = virtual
+print('total' in df.virtual_columns)  # True = virtual
 
 # Benefits:
 # - Zero memory overhead
@@ -184,7 +181,7 @@ df['total_materialized'] = df['total'].values
 df = df.materialize(df['total'], inplace=True)
 
 # Check if materialized
-print(df.is_local('total_materialized'))  # True = materialized
+print('total_materialized' in df.get_column_names(virtual=False))  # True = materialized
 
 # When to materialize:
 # - Column computed repeatedly (amortize cost)
@@ -286,15 +283,9 @@ result = df.x.mean()  # Handles large data automatically
 # Check DataFrame memory footprint
 print(df.byte_size())  # Bytes used by materialized columns
 
-# Check column memory
-for col in df.get_column_names():
-    if df.is_local(col):
-        print(f"{col}: {df[col].nbytes / 1e9:.2f} GB")
-
-# Profile operations
-import vaex.profiler
-with vaex.profiler():
-    result = df.x.mean()
+# Check column memory (materialized columns only)
+for col in df.get_column_names(virtual=False):
+    print(f"{col}: {df[col].nbytes / 1e9:.2f} GB")
 ```
 
 ## Parallel Computation
@@ -307,9 +298,9 @@ Vaex automatically parallelizes operations:
 # Vaex uses all CPU cores by default
 import vaex
 
-# Check/set thread count
-print(vaex.multithreading.thread_count_default)
-vaex.multithreading.thread_count_default = 8  # Use 8 threads
+# Check/set thread count (set before the first computation, or via VAEX_NUM_THREADS)
+print(vaex.settings.main.thread_count)
+vaex.settings.main.thread_count = 8  # Use 8 threads
 
 # Operations automatically parallelize
 mean = df.x.mean()  # Uses all threads
@@ -355,16 +346,18 @@ df['custom'] = df.apply(custom_calculation,
 
 ### Custom Aggregations
 
-```python
-@numba.jit
-def custom_sum(a):
-    total = 0
-    for val in a:
-        total += val * 2  # Custom logic
-    return total
+Vaex has no user-supplied aggregator hook. Register an elementwise function and
+aggregate the resulting expression with a built-in reducer:
 
-# Use in aggregation
-result = df.x.custom_agg(custom_sum)
+```python
+@vaex.register_function()
+def doubled(a):
+    return a * 2
+
+result = df.x.doubled().sum()
+
+# For arithmetic expressions, compile the expression itself with numba
+result = (df.x * 2 + df.y).jit_numba().sum()
 ```
 
 ## Optimization Strategies
@@ -419,8 +412,8 @@ delayed = [
     df.x.min(delay=True),
     df.x.max(delay=True)
 ]
-results = vaex.execute(delayed)
-stats = dict(zip(['mean', 'std', 'min', 'max'], results))
+df.execute()
+stats = dict(zip(['mean', 'std', 'min', 'max'], [d.get() for d in delayed]))
 ```
 
 ### Strategy 4: Choose Optimal File Formats
@@ -469,15 +462,6 @@ elapsed = time.time() - start
 print(f"Computed in {elapsed:.2f} seconds")
 ```
 
-### Detailed Profiling
-
-```python
-# Profile with context manager
-with vaex.profiler():
-    result = df.groupby('category').agg({'value': 'sum'})
-# Prints detailed timing information
-```
-
 ### Benchmarking Patterns
 
 ```python
@@ -506,9 +490,9 @@ for col in df.column_names:
 
 # Solution: Batch with delay=True
 delayed = [df[col].mean(delay=True) for col in df.column_names]
-results = vaex.execute(delayed)
-for col, result in zip(df.column_names, results):
-    print(f"{col}: {result}")
+df.execute()
+for col, d in zip(df.column_names, delayed):
+    print(f"{col}: {d.get()}")
 ```
 
 ### Issue: High Memory Usage

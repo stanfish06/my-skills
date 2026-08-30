@@ -177,8 +177,9 @@ mean_x = df.x.mean(delay=True)
 std_y = df.y.std(delay=True)
 sum_z = df.z.sum(delay=True)
 
-# Execute all at once
-results = vaex.execute([mean_x, std_y, sum_z])
+# Execute all at once, then read each promise
+df.execute()
+mean_x.get(), std_y.get(), sum_z.get()
 ```
 
 ### Pattern: Virtual Columns for Feature Engineering

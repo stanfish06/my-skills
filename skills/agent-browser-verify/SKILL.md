@@ -85,7 +85,8 @@ agent-browser wait --load networkidle
 agent-browser screenshot --annotate
 
 # 3. Check for errors
-agent-browser eval 'JSON.stringify(window.__consoleErrors || [])'
+agent-browser errors     # uncaught JavaScript exceptions
+agent-browser console    # console log/warn/error messages
 
 # 4. Snapshot interactive elements
 agent-browser snapshot -i
@@ -98,7 +99,7 @@ Run each check and report results:
 1. **Page loads** — `agent-browser open` succeeds without timeout
 2. **No blank page** — snapshot shows meaningful content (not empty body)
 3. **No error overlay** — no Next.js/Vite error overlay detected
-4. **Console errors** — evaluate `document.querySelectorAll('[data-nextjs-dialog]')` for error modals
+4. **Console errors** — `agent-browser errors` reports no uncaught exceptions and `agent-browser console` shows no `error`-level messages
 5. **Key elements render** — snapshot `-i` shows expected interactive elements
 6. **Navigation works** — if multiple routes exist, verify at least the home route
 
@@ -132,11 +133,16 @@ When the page appears stuck (spinner, blank content after load, frozen UI), the 
 # Screenshot the stuck state
 agent-browser screenshot stuck-state.png
 
-# Check for pending network requests (XHR/fetch that never resolved)
-agent-browser eval 'JSON.stringify(performance.getEntriesByType("resource").filter(r => r.duration === 0).map(r => r.name))'
+# Check for pending network requests (XHR/fetch that never resolved).
+# Request tracking is off until the first `network requests` call, so arm it,
+# reload, then list — a row printed without a trailing status code never resolved.
+agent-browser network requests
+agent-browser open http://localhost:3000
+agent-browser network requests --type xhr,fetch
 
 # Check console for errors or warnings
-agent-browser eval 'JSON.stringify(window.__consoleErrors || [])'
+agent-browser errors
+agent-browser console
 
 # Look for fetch calls to workflow/API routes that are pending
 agent-browser eval 'document.querySelector("[data-nextjs-dialog]") ? "ERROR_OVERLAY" : "OK"'

@@ -3,6 +3,8 @@ name: ngs-bulk-rnaseq-counts-qc
 description: Run or plan bulk RNA-seq FASTQ-to-count processing with sample-sheet, strandedness, genome annotation, alignment or pseudoalignment, MultiQC, and count-matrix QC checks.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # Bulk RNA-seq Counts QC
 
 Use this skill for bulk RNA-seq read processing, quantification, and count-matrix generation. If the user already has a count matrix and wants contrasts or statistics, use `ngs-bulk-rnaseq-differential-expression`.

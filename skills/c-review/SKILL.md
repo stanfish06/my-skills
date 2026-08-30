@@ -9,6 +9,8 @@ allowed-tools: Workflow AskUserQuestion Bash Read
 Resolve four parameters, make one `Workflow` call, return the report. The workflow owns
 concurrency, retries and result collection.
 
+> Prerequisite: this skill shells out to `${CLAUDE_PLUGIN_ROOT}/workflows/c-review.js` and `.../scripts/*.py`, which are not vendored in this flat vault — they live at the plugin root upstream. Install the `c-review` plugin from the `trailofbits/skills` marketplace so `CLAUDE_PLUGIN_ROOT` resolves (or the Phase 1 fallback finds it under `~/.claude`). Standalone the resolution step below correctly aborts and the skill does no review.
+
 **Use for:** native C/C++ userspace — memory safety, integer overflow, races, type
 confusion, Linux/macOS daemons, Windows services.
 

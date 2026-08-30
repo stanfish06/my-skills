@@ -3,6 +3,8 @@ name: scrna-seq-qc
 description: Process, quality-control, annotate, and visualize single-cell or single-nucleus RNA-seq datasets across tissues and species. Use when Codex needs to build, adapt, or review a general scRNA-seq QC pipeline; choose dataset-appropriate cell-level filters from QC distributions; run required scDblFinder-based doublet and ambient-RNA filtering; annotate cells with matched references or marker-based fallbacks; or generate global and per-group UMAP visualizations for large scRNA-seq datasets.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # scRNA-seq QC
 
 ## Start Here

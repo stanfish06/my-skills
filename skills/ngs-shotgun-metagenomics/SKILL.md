@@ -3,6 +3,8 @@ name: ngs-shotgun-metagenomics
 description: Kick off public shotgun metagenomics QC, host-depletion, taxonomic profiling, and functional profiling workflows using nf-core/taxprofiler, Kraken2, Bracken, MetaPhlAn, and HUMAnN.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # Shotgun Metagenomics
 
 Use this skill for shotgun metagenomic FASTQs.

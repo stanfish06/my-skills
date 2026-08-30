@@ -16,9 +16,11 @@ metadata:
 
 Universal deep research tool — a domain-agnostic 13-agent team for rigorous academic research on any topic.
 
+> Prerequisite: this skill cites repo-level material that lives outside the skill folder and was not vendored here — `.claude/CLAUDE.md`, the `shared/` bundle (`shared/references/*`, `shared/contracts/*`, `shared/mode_spectrum.md`, `shared/model_tiering.md`, `shared/compliance_checkpoint_protocol.md`), and `scripts/check_pipeline_integrity.py`. Install the full `Imbad0202/academic-research-skills` repository at the paths the skill expects, or the routing-discipline, compliance, model-tiering, and phase-integrity references below will not resolve. Sibling skills `academic-paper` and `academic-pipeline` are vendored one directory up and are referenced as `../academic-paper/…` / `../academic-pipeline/…`.
+
 **v2.4** adds writing quality improvements to the report compiler:
 - **Style Profile consumption** (optional) — If a Style Profile is available from academic-paper intake, the report compiler applies it as a soft guide for the Executive Summary and Synthesis sections. Discipline conventions and report objectivity take priority.
-- **Writing Quality Check** — The report compiler runs a writing quality checklist before finalizing: flags AI-typical overused terms, checks sentence/paragraph length variation, removes throat-clearing openers. See `academic-paper/references/writing_quality_check.md`.
+- **Writing Quality Check** — The report compiler runs a writing quality checklist before finalizing: flags AI-typical overused terms, checks sentence/paragraph length variation, removes throat-clearing openers. See `../academic-paper/references/writing_quality_check.md`.
 
 > **Routing discipline (v3.9.2):** see `.claude/CLAUDE.md` "Routing Discipline (v3.9.2)" + `shared/references/intent_clarification_protocol.md` for cross-skill routing rules. This skill assumes routing has already settled — ambiguous cross-phase materials should have been clarified upstream.
 
@@ -272,7 +274,7 @@ ARS pipeline runs in 6 phases. Two invocation modes:
 
 **Mode A — orchestrator-driven (default):** `pipeline_orchestrator_agent` (in `academic-pipeline` skill) runs all phases end-to-end with state tracking via Material Passport.
 
-**Mode B — phase-by-phase (cross-session resume):** User invokes one agent per phase across sessions for long-running projects. Common pattern via `ARS_PASSPORT_RESET=1` + `resume_from_passport=<hash>` (see `academic-pipeline/references/passport_as_reset_boundary.md`).
+**Mode B — phase-by-phase (cross-session resume):** User invokes one agent per phase across sessions for long-running projects. Common pattern via `ARS_PASSPORT_RESET=1` + `resume_from_passport=<hash>` (see `../academic-pipeline/references/passport_as_reset_boundary.md`).
 
 In Mode B, **single-phase agents (Bucket A per `docs/design/2026-05-18-ars-v3.9.2-agent-phase-classification.md`) stay strictly within their assigned phase for writes**. Reads from upstream phases are allowed. Multi-phase agents (Bucket B: `devils_advocate_agent`, `report_compiler_agent`) do exactly the work specified by the caller's invocation for that phase — no extension to other phases in the same call.
 
@@ -429,7 +431,7 @@ See `examples/handoff_to_paper.md` for a detailed handoff example.
 
 ## Full Academic Pipeline
 
-See `academic-pipeline/SKILL.md` for the complete workflow.
+See `../academic-pipeline/SKILL.md` for the complete workflow.
 
 ---
 

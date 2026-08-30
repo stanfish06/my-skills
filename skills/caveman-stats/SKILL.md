@@ -7,4 +7,6 @@ description: >
 
 This skill is delivered by `hooks/caveman-stats.js` (read by `hooks/caveman-mode-tracker.js` on `/caveman-stats`). The model does not need to do anything when this skill fires — the hook returns `decision: "block"` with the formatted stats as the reason. The user sees the numbers immediately.
 
+> Prerequisite: those hooks are not vendored in this vault — the skill folder ships no JavaScript, so `/caveman-stats` produces no output on its own. Install the full `caveman` plugin from `JuliusBrussee/caveman` and register its `UserPromptSubmit` hook (per the plugin's `.claude-plugin/plugin.json`); `caveman-mode-tracker.js` runs `caveman-stats.js`, which also requires the sibling `caveman-config.js`.
+
 Output also includes `Est. rule overhead` and `Est. net` lines wherever a savings estimate exists with a known turn count. Rule overhead is the estimated per-turn INPUT-token cost of the injected caveman rules (default 1,250 tokens/turn, override with `CAVEMAN_RULE_OVERHEAD_TOKENS`) times the turn count. Net is savings minus that overhead — when negative, the output says so plainly and suggests turning caveman off for that workload, rather than hiding the net-negative regime behind a gross-savings number (see `docs/HONEST-NUMBERS.md`).

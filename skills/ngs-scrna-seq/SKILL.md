@@ -3,6 +3,8 @@ name: ngs-scrna-seq
 description: Route single-cell or single-nucleus RNA-seq FASTQs to public count-generation workflows and defer post-count matrix QC, annotation, clustering, and UMAP analysis to the embedded scrna-seq-qc skill.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # Single-cell RNA-seq
 
 Use this skill for scRNA-seq or snRNA-seq kickoff from FASTQs, Cell Ranger-style outputs, matrices, `.h5`, `.h5ad`, or `.rds`. This skill owns upstream intake and FASTQ-to-count routing; post-count QC, annotation, clustering, and UMAPs must route to the embedded `scrna-seq-qc` skill.

@@ -3,6 +3,8 @@ name: ngs-bcl-to-fastq
 description: Validate Illumina BCL run folders and sample sheets, plan demultiplexing, review index/UMI/lane choices, run BCL-to-FASTQ conversion, and interpret demux metrics while surfacing license/download boundaries.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # BCL To FASTQ
 
 Use this skill when the input is an Illumina BCL run folder or the user asks to demultiplex a sequencing run. This is a deep demultiplexing and run-validation skill, not only a command wrapper.

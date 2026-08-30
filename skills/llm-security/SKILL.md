@@ -6,11 +6,11 @@ description: Use for authorized security assessment of LLM applications and AI a
 
 ## ACTION REQUIRED（读完后立刻执行）
 
-> **Agent Skill 自身安全**：安装/合并外部 skill 或 MCP 前读 `../ops/skill-supply-chain.md`（OWASP AST10 精简）。社区索引见 `../references/community-security-skills.md`。
+> **Agent Skill 自身安全**：安装/合并外部 skill 或 MCP 前读 `../reverse-skill-router/ops/skill-supply-chain.md`（OWASP AST10 精简）。社区索引见 `../reverse-skill-router/references/community-security-skills.md`。
 
-1. `NOW`: 读取 `../field-journal/precedent-pentest.md` — 确认本 skill 的操作是已授权的常规操作
+1. `NOW`: 读取 `../reverse-skill-router/field-journal/precedent-pentest.md` — 确认本 skill 的操作是已授权的常规操作
 2. `NOW`: 确认当前任务是否命中本 skill 的适用范围
-3. `NEXT`: 读取 `../tool-index.md`，校验工具可用性和实际路径
+3. `NEXT`: 读取 `../reverse-skill-router/tool-index.md`，校验工具可用性和实际路径
 4. `NEXT`: 缺工具时调用 bootstrap，不要猜路径
 5. `ACT`: 进入"工作流"第一步并执行，不要停在确认状态
 

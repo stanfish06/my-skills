@@ -3,6 +3,8 @@ name: ngs-dna-variant-calling
 description: Dispatch WGS, WES, or targeted DNA variant requests to germline, somatic, or UMI-panel skills, then plan public nf-core/sarek, GATK4, DeepVariant, samtools, or bcftools workflows.
 ---
 
+> Prerequisite: the `plugins/ngs-analysis/` plugin root (its `scripts/*.py` and `references/*.json`) is not vendored in this flat vault. Install the `ngs-analysis` plugin from `openai/plugins` at the repo root, or every `python plugins/ngs-analysis/...` command below fails with `No such file or directory`.
+
 # DNA Variant Calling
 
 Use this skill as the DNA variant-calling dispatcher for WGS, WES, or targeted DNA panel analysis from FASTQ, BAM, or CRAM. Once the sample model is clear, hand off to the narrow subtype skill.

@@ -22,9 +22,9 @@ It MUST NOT perform reconnaissance, exploitation, dynamic instrumentation, or ta
 
 ## ACTION REQUIRED
 
-1. `NOW`: read `../field-journal/precedent-reverse.md` and confirm that this is a review of an existing authorized case package.
+1. `NOW`: read `../reverse-skill-router/field-journal/precedent-reverse.md` and confirm that this is a review of an existing authorized case package.
 2. `NOW`: confirm the case path and choose read-only review mode.
-3. `NEXT`: read `../tool-index.md`; this skill uses only Python 3 standard library and does not require bootstrap.
+3. `NEXT`: read `../reverse-skill-router/tool-index.md`; this skill uses only Python 3 standard library and does not require bootstrap.
 4. `NEXT`: run `python3 scripts/review_case.py <case-root> --format markdown`.
 5. `ACT`: resolve every error, then rerun the review before claiming a handoff is complete.
 

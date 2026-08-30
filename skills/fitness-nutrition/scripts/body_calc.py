@@ -125,14 +125,18 @@ def macros(tdee_kcal, goal):
 
 def bodyfat(sex, neck_cm, waist_cm, hip_cm, height_cm):
     sex = sex.upper()
+    # Hodgdon-Beckett coefficients are the inches parameterisation; the CLI takes
+    # centimetres. Feeding cm straight in adds a fixed +6.46 pp for men and
+    # +26.53 pp for women, since both equations are log-linear.
+    neck, waist, hip, height = (v / 2.54 for v in (neck_cm, waist_cm, hip_cm, height_cm))
     if sex == "M":
-        if waist_cm <= neck_cm:
+        if waist <= neck:
             print("Error: waist must be larger than neck."); sys.exit(1)
-        bf = 86.010 * math.log10(waist_cm - neck_cm) - 70.041 * math.log10(height_cm) + 36.76
+        bf = 86.010 * math.log10(waist - neck) - 70.041 * math.log10(height) + 36.76
     else:
-        if (waist_cm + hip_cm) <= neck_cm:
+        if (waist + hip) <= neck:
             print("Error: waist + hip must be larger than neck."); sys.exit(1)
-        bf = 163.205 * math.log10(waist_cm + hip_cm - neck_cm) - 97.684 * math.log10(height_cm) - 78.387
+        bf = 163.205 * math.log10(waist + hip - neck) - 97.684 * math.log10(height) - 78.387
 
     print(f"Estimated body fat: {bf:.1f}%")
 

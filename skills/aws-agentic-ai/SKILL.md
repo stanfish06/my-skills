@@ -15,6 +15,8 @@ allowed-tools:
   - Bash(aws bedrock-agentcore *)
   - Bash(aws bedrock-agentcore-control *)
   - Bash(aws bedrock-agentcore-runtime *)
+  - Bash(aws agent-registry *)
+  - Bash(aws agent-registry-control *)
   - Bash(aws bedrock *)
   - Bash(aws s3 cp *)
   - Bash(aws s3 ls *)
@@ -23,6 +25,9 @@ allowed-tools:
 hooks:
   PreToolUse:
     - matcher: Bash(aws bedrock-agentcore-control create-*)
+      command: aws sts get-caller-identity --query Account --output text
+      once: true
+    - matcher: Bash(aws agent-registry-control create-*)
       command: aws sts get-caller-identity --query Account --output text
       once: true
 ---
@@ -52,7 +57,7 @@ Prefer the AgentCore docs MCP for AgentCore-specific questions. If MCP tools are
 | **Code Interpreter** | Secure code execution in sandboxes | [`services/code-interpreter/README.md`](services/code-interpreter/README.md) |
 | **Browser** | Web automation and scraping | [`services/browser/README.md`](services/browser/README.md) |
 | **Observability** | Tracing and monitoring | [`services/observability/README.md`](services/observability/README.md) |
-| **Agent Registry** | Catalog, discover, and govern agents/tools (Preview) | [`services/registry/README.md`](services/registry/README.md) |
+| **Agent Registry** | Catalog, discover, and govern agents/tools | [`services/registry/README.md`](services/registry/README.md) |
 | **Evaluations** | Automated agent quality assessment (LLM-as-a-Judge) | [`services/evaluations/README.md`](services/evaluations/README.md) |
 
 ## Common Workflows
@@ -86,7 +91,7 @@ Read [`services/registry/README.md`](services/registry/README.md) first — the 
 3. Submit records for approval (auto-approve for dev, manual for production)
 4. Search and discover approved resources via CLI or MCP endpoint
 
-> Agent Registry is in Preview. Available in us-east-1, us-west-2, eu-west-1, ap-northeast-1, ap-southeast-2.
+> Agent Registry moved to its own `agent-registry` namespace on 2026-08-06 — separate endpoints, IAM actions, ARNs, CLI, and record schema from the rest of AgentCore. The `bedrock-agentcore` namespace shuts down 2026-09-17. See [`services/registry/README.md`](services/registry/README.md#migration-from-the-preview-namespace).
 
 ### Evaluating Agent Quality
 

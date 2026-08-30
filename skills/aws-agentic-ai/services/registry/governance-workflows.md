@@ -34,7 +34,7 @@ When editing an **Approved** record, the system creates a new DRAFT revision whi
 
 | API | What It Returns |
 |-----|-----------------|
-| `SearchRegistryRecords` | Only approved revisions |
+| `SearchDiscoverableRegistryRecords` | Only approved revisions |
 | `InvokeRegistryMcp` | Only approved revisions |
 | `GetRegistryRecord` | Latest revision (any status) |
 | `ListRegistryRecords` | Latest revision (any status) |
@@ -46,12 +46,14 @@ When editing an **Approved** record, the system creates a new DRAFT revision whi
 Records are automatically approved upon submission. Suitable for development environments or trusted teams.
 
 ```bash
-aws bedrock-agentcore-control create-registry \
+aws agent-registry-control create-registry \
   --name "dev-registry" \
   --description "Development registry with auto-approval" \
-  --approval-configuration '{"autoApproval": true}' \
+  --approval-configuration '{"autoApprovalRules": ["APPROVE_ALL"]}' \
   --region us-east-1
 ```
+
+`autoApprovalRules` replaced the Preview boolean `autoApproval`; `["APPROVE_ALL"]` means what `true` meant, and an empty or omitted list requires manual review.
 
 > **Note**: Switching auto-approval from OFF to ON only affects records submitted after the change. Existing `PENDING_APPROVAL` records must still be manually approved or rejected.
 
@@ -65,14 +67,14 @@ Records require curator review. Suitable for production registries and organizat
 
 ```bash
 # List all records (filter output for pending status)
-aws bedrock-agentcore-control list-registry-records \
+aws agent-registry-control list-registry-records \
   --registry-id <REGISTRY_ID> \
   --region us-east-1
 ```
 
 ```bash
 # Get full details of a pending record
-aws bedrock-agentcore-control get-registry-record \
+aws agent-registry-control get-registry-record \
   --registry-id <REGISTRY_ID> \
   --record-id <RECORD_ID> \
   --region us-east-1
@@ -81,7 +83,7 @@ aws bedrock-agentcore-control get-registry-record \
 ### Approve a Record
 
 ```bash
-aws bedrock-agentcore-control update-registry-record-status \
+aws agent-registry-control update-registry-record-status \
   --registry-id <REGISTRY_ID> \
   --record-id <RECORD_ID> \
   --status APPROVED \
@@ -94,7 +96,7 @@ aws bedrock-agentcore-control update-registry-record-status \
 ### Reject a Record
 
 ```bash
-aws bedrock-agentcore-control update-registry-record-status \
+aws agent-registry-control update-registry-record-status \
   --registry-id <REGISTRY_ID> \
   --record-id <RECORD_ID> \
   --status REJECTED \
@@ -107,7 +109,7 @@ aws bedrock-agentcore-control update-registry-record-status \
 Deprecation is available from **any status** and is a **terminal, irreversible** operation. The record cannot be edited or un-deprecated. It remains visible via `GetRegistryRecord` and `ListRegistryRecords` for auditing but is removed from search.
 
 ```bash
-aws bedrock-agentcore-control update-registry-record-status \
+aws agent-registry-control update-registry-record-status \
   --registry-id <REGISTRY_ID> \
   --record-id <RECORD_ID> \
   --status DEPRECATED \
@@ -117,14 +119,33 @@ aws bedrock-agentcore-control update-registry-record-status \
 
 ## EventBridge Automation
 
-Agent Registry emits events to the default EventBridge bus (source: `aws.bedrock-agentcore`).
+Agent Registry emits events to the default EventBridge bus (source: `aws.agent-registry`).
 
 ### Event Types
 
+Record events — `detail` carries `registryRecordId` and `registryId`; `resources` is the record ARN:
+
 | Detail Type | Trigger |
 |-------------|---------|
+| `Registry Record State changed to Draft` | Record version enters `DRAFT` |
 | `Registry Record State changed to Pending Approval` | `submit-registry-record-for-approval` called |
-| `Registry State transitions from Creating to Ready` | Registry provisioning completes |
+| `Registry Record State changed to Approved` | Record transitions to `APPROVED` |
+| `Registry Record State changed to Rejected` | Record transitions to `REJECTED` |
+| `Registry Record State changed to Deprecated` | Record transitions to `DEPRECATED` |
+
+Registry events — `detail` carries `registryId` and `registryName`; `resources` is the registry ARN:
+
+| Detail Type | Trigger |
+|-------------|---------|
+| `Registry Creating` | Registry enters `CREATING` |
+| `Registry Ready` | Registry becomes `READY` |
+| `Registry Create Failed` | Registry enters `CREATE_FAILED` |
+| `Registry Updating` | Registry enters `UPDATING` |
+| `Registry Update Failed` | Registry enters `UPDATE_FAILED` |
+| `Registry Deleting` | Registry enters `DELETING` |
+| `Registry Delete Failed` | Registry enters `DELETE_FAILED` |
+
+`Registry Ready` replaces the Preview detail type `Registry State transitions from Creating to Ready`; a rule matching the old string no longer fires. Match a whole class with a `detail-type` prefix of `Registry Record State changed to` or `Registry `.
 
 ### Event Schema
 
@@ -132,11 +153,11 @@ Agent Registry emits events to the default EventBridge bus (source: `aws.bedrock
 {
   "version": "0",
   "detail-type": "Registry Record State changed to Pending Approval",
-  "source": "aws.bedrock-agentcore",
+  "source": "aws.agent-registry",
   "account": "<account-id>",
   "region": "us-west-2",
   "resources": [
-    "arn:aws:bedrock-agentcore:us-west-2:<account-id>:registry/REG_ID/record/REC_ID"
+    "arn:aws:agent-registry:us-west-2:<account-id>:registry/REG_ID/record/REC_ID"
   ],
   "detail": {
     "registryRecordId": "REC_ID",
@@ -149,7 +170,7 @@ Agent Registry emits events to the default EventBridge bus (source: `aws.bedrock
 
 ```json
 {
-  "source": ["aws.bedrock-agentcore"],
+  "source": ["aws.agent-registry"],
   "detail-type": ["Registry Record State changed to Pending Approval"],
   "detail": {
     "registryId": ["reg-abc123def456"]
@@ -164,7 +185,7 @@ import urllib3
 import boto3
 
 SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/T.../B.../xxx"
-client = boto3.client("bedrock-agentcore-control")
+client = boto3.client("agent-registry-control")
 
 def handler(event, context):
     detail = event["detail"]
@@ -179,8 +200,8 @@ def handler(event, context):
 
     message = {
         "text": f":clipboard: New registry record pending approval\n"
-                f"*Record*: {record['name']}\n"
-                f"*Type*: {record['descriptorType']}\n"
+                f"*Record*: {record['displayName']} ({record['name']})\n"
+                f"*Type*: {record['recordType']}\n"
                 f"*Registry*: {registry_id}\n"
                 f"*Record ID*: {record_id}"
     }
@@ -197,7 +218,7 @@ Automatically validate MCP server schemas before curator review.
 **EventBridge Rule** (target: Lambda):
 ```json
 {
-  "source": ["aws.bedrock-agentcore"],
+  "source": ["aws.agent-registry"],
   "detail-type": ["Registry Record State changed to Pending Approval"]
 }
 ```
@@ -207,7 +228,7 @@ Automatically validate MCP server schemas before curator review.
 import json
 import boto3
 
-client = boto3.client("bedrock-agentcore-control")
+client = boto3.client("agent-registry-control")
 
 def handler(event, context):
     detail = event["detail"]
@@ -221,13 +242,13 @@ def handler(event, context):
     )
 
     # Only auto-validate MCP records
-    if record.get("descriptorType") != "MCP":
+    if record.get("recordType") != "MCP":
         return  # Leave non-MCP records for manual review
 
     # Validate MCP schema has required fields
     descriptors = record.get("descriptors", {})
-    mcp = descriptors.get("mcp", {})
-    tools_content = mcp.get("tools", {}).get("inlineContent", "{}")
+    mcp_server = descriptors.get("mcpServer", {})
+    tools_content = mcp_server.get("additionalData", {}).get("tools", {}).get("data", "{}")
     tools_data = json.loads(tools_content)
 
     issues = []
@@ -283,7 +304,7 @@ For complex multi-step review processes:
 - Use **manual approval** for production registries
 - Use **auto-approval** only for dev/sandbox environments
 - Set up EventBridge rules for all submission events
-- Assign dedicated curator IAM roles per registry (use `bedrock-agentcore:UpdateRegistryRecordStatus` scoped to specific registry ARN)
+- Assign dedicated curator IAM roles per registry (use `agent-registry:UpdateRegistryRecordStatus` scoped to specific registry ARN)
 
 ### For Publishers
 - Write detailed, searchable descriptions

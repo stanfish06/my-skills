@@ -59,6 +59,15 @@ metadata:
 
 # Hla Typing
 
+> **UNIMPLEMENTED.** No HLA calling method is wired up. `run_analysis` raises
+> `NotImplementedError` and the CLI exits 2; it does not produce allele calls
+> and never produced any. Do not present its output, or its absence of output,
+> as an HLA result — zero findings is not a negative call. Implementing it
+> means choosing a method first: OptiType, HLA\*LA, arcasHLA or T1K for
+> sequence data, or a validated tag-SNP imputation panel for array data.
+> Allele calls cannot be derived from a chr6 position list against a linear
+> reference, which is what the workflow below assumes.
+
 You are **Hla Typing**, a specialised ClawBio agent for genomics. Your role is to HLA allele genotyping from WGS/WES VCF data.
 
 ## Trigger
@@ -81,7 +90,7 @@ descriptions. Use exact phrases, domain-specific terms, and multiple synonyms.
 
 - **Without it**: Users must manually perform HLA allele genotyping from WGS/WES VCF data using command-line tools and custom scripts
 - **With it**: Automated analysis in seconds with a structured, reproducible report
-- **Why ClawBio**: Grounded in real databases and algorithms, not LLM guessing
+- **Status**: not implemented — see the notice at the top of this file. Nothing below describes working behaviour.
 
 ## Core Capabilities
 
@@ -137,17 +146,19 @@ To verify the skill works:
 python clawbio.py run hla-typing --demo
 ```
 
-Expected output: a report covering synthetic input data with structured results.
+Expected output: `Error: hla-typing has no HLA calling implementation...` on stderr and exit code 2. No report is written.
 
 ## Algorithm / Methodology
+
+None. The steps below are the intended shape, not implemented behaviour:
 
 1. **Parse input**: Read VCF/TSV and extract relevant loci
 2. **Lookup**: Query reference databases for annotations
 3. **Score**: Apply scoring algorithm to classify findings
 4. **Report**: Generate structured output
 
-**Key thresholds / parameters**:
-- TODO: define thresholds with citations
+**Key thresholds / parameters**: none defined. Thresholds cannot be stated
+until a calling method is chosen.
 
 ## Example Queries
 
@@ -206,7 +217,7 @@ output_directory/
 - **Local-first**: No data upload without explicit consent
 - **Disclaimer**: Every report includes: *"ClawBio is a research and educational tool. It is not a medical device and does not provide clinical diagnoses. Consult a healthcare professional before making any medical decisions."*
 - **Audit trail**: Log all operations to reproducibility bundle
-- **No hallucinated science**: All parameters trace to cited databases
+- **No hallucinated science**: No parameters are defined and no database is queried, because nothing is implemented. Do not fill the gap by inferring alleles.
 
 ## Agent Boundary
 
@@ -231,4 +242,5 @@ The agent must NOT override thresholds or invent associations.
 
 ## Citations
 
-- TODO: Add relevant database and paper citations
+None. No database or algorithm is used, so there is nothing to cite. A working
+implementation would cite IPD-IMGT/HLA plus whichever caller it wraps.

@@ -32,17 +32,21 @@ def validate_input(input_path: Path) -> dict:
     return {"lines": lines, "source": str(input_path)}
 
 
+NOT_IMPLEMENTED_MSG = (
+    "hla-typing has no HLA calling implementation. Zero findings would be "
+    "indistinguishable from a true negative, and a negative HLA-B*57:01 or "
+    "HLA-B*15:02 call gates a drug decision, so this fails instead of "
+    "returning an empty success. Allele calls cannot be derived from a chr6 "
+    "position list against a linear reference: wiring this up needs a real "
+    "caller (OptiType, HLA*LA, arcasHLA, T1K) for sequence data, or a "
+    "validated tag-SNP imputation panel for array data. Use pharmgx-reporter "
+    "for the pharmacogenomic calls that are implemented."
+)
+
+
 def run_analysis(data: dict) -> dict:
-    """Core analysis logic. Returns result dict."""
-    # TODO: implement core hla-typing logic
-    return {
-        "skill": "hla-typing",
-        "version": "0.1.0",
-        "source": data.get("source", "unknown"),
-        "variants_processed": len(data.get("lines", [])),
-        "findings": [],
-        "status": "skeleton"
-    }
+    """Not implemented. Raises NotImplementedError."""
+    raise NotImplementedError(NOT_IMPLEMENTED_MSG)
 
 
 def write_report(result: dict, output_dir: Path) -> None:
@@ -101,6 +105,14 @@ def run_demo(output_dir: Path) -> None:
 
 def main():
     args = parse_args()
+    try:
+        _dispatch(args)
+    except NotImplementedError as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        sys.exit(2)
+
+
+def _dispatch(args) -> None:
     if args.demo:
         output = args.output or Path("/tmp") / "hla_typing" / "demo"
         run_demo(output)

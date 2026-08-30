@@ -18,7 +18,7 @@
 | Rare + computationally damaging | 245 |
 | ClinVar Pathogenic / Likely Pathogenic | 8 |
 
-The homozygosity to heterozygosity ratio is **2.35**, which is above the expected ~1.5 for outbred populations.
+The homozygosity to heterozygosity ratio is **2.35**.
 
 ## 2. Clinically Significant Variants
 

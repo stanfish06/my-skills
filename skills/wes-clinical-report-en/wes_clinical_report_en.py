@@ -750,14 +750,19 @@ def build_interpretation_paragraph(report, styles):
             f"should be considered before prescribing the indicated medications."
         )
 
-    # Homozygosity
-    if hom_het > 2.0:
+    # Homozygosity. The upstream summary does not state whether it reports
+    # Hom/Het or Het/Hom, and ~1.5 is only plausible as Het/Hom, so no
+    # consanguinity inference is drawn from the figure.
+    if hom_het:
         sentences.append(
-            f"An elevated homozygosity pattern was observed "
-            f"(Hom/Het ratio = {hom_het:.2f}, compared to the expected ~1.5 "
-            f"in outbred populations), which may reflect specific population "
-            f"structure or parental consanguinity, and should be taken into "
-            f"account when interpreting recessive disease risk."
+            f"The reported homozygosity/heterozygosity ratio is {hom_het:.2f}. "
+            f"Published whole-exome values are Het/Hom ~2.0 under Hardy-Weinberg "
+            f"equilibrium, with ancestry medians from 1.4 (Asian) to 2.0 (African) "
+            f"(Wang et al., Bioinformatics 2015;31:318-323), equivalently Hom/Het "
+            f"0.50-0.71. The source does not state which orientation it reports, "
+            f"so this value is not interpreted here: consanguinity cannot be "
+            f"inferred from it and requires runs-of-homozygosity or inbreeding "
+            f"coefficient (F) analysis."
         )
 
     # Rare damaging
@@ -938,11 +943,11 @@ def _build_limitations_section(styles):
         ),
         (
             "Homozygosity and consanguinity",
-            "Elevated homozygosity ratios observed across samples may be due "
-            "to population structure, consanguinity, or inherent exome capture "
-            "bias. A formal analysis with whole-genome data and inbreeding "
-            "coefficients (F-statistics) would be required to distinguish "
-            "between these causes."
+            "The upstream summary reports a homozygosity/heterozygosity ratio "
+            "without stating its orientation, so this report does not interpret "
+            "it. Distinguishing population structure, consanguinity, and "
+            "inherent exome capture bias requires whole-genome data with "
+            "inbreeding coefficients (F-statistics)."
         ),
         (
             "Clinical validation",

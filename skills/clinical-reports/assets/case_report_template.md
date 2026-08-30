@@ -66,7 +66,7 @@ Example: Appendicitis, Atypical presentation, Elderly, Diagnostic imaging
 ## Patient Information
 
 **Demographics:**
-- Age: [e.g., "A 72-year-old" or "A woman in her 70s"]
+- Age: [e.g., "A 72-year-old" or "A woman in her 70s"; give any age over 89 as "90 or older"]
 - Sex: [Male/Female]
 - Ethnicity: [if relevant to case]
 - Occupation: [if relevant]
@@ -328,6 +328,7 @@ Verify all HIPAA identifiers removed:
 - [ ] Names (patient, family, providers)
 - [ ] Geographic locations smaller than state
 - [ ] Exact dates (use year only or relative time)
+- [ ] Ages over 89 aggregated to "90 or older"
 - [ ] Phone numbers
 - [ ] Email addresses
 - [ ] Medical record numbers

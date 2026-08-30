@@ -67,6 +67,21 @@ def extract_snp_genotypes(genotype_table: dict, snp_panel: list) -> dict:
             }
             continue
 
+        # Resolve homozygous reference before attempting any strand flip: at the
+        # complementary SNPs (A/T, C/G) flipping hom-ref yields hom-risk.
+        if ref_allele and set(raw_geno) <= {ref_allele}:
+            results[rsid] = {
+                "rsid": rsid,
+                "gene": snp["gene"],
+                "status": "found",
+                "genotype": raw_geno,
+                "normalised": raw_geno,
+                "risk_allele": risk_allele,
+                "risk_count": 0,
+                "nutrient_domain": snp["nutrient_domain"],
+            }
+            continue
+
         # Try direct match first
         norm = raw_geno
         allele_matched = risk_allele in raw_geno
@@ -91,26 +106,13 @@ def extract_snp_genotypes(genotype_table: dict, snp_panel: list) -> dict:
             }
         else:
             # Genotype does not contain the risk allele on either strand.
-            # Check if this is homozygous reference (0 copies of risk allele).
+            # Hom-ref on the reported strand was already handled above, so the
+            # only remaining zero-risk case is hom-ref on the complement strand.
             # A true allele_mismatch is when the genotype contains alleles
             # that are neither ref nor risk (e.g. tri-allelic or data error).
             geno_alleles = set(norm)
-            known_alleles = {risk_allele, ref_allele} if ref_allele else {risk_allele}
-            flipped_known = {COMPLEMENT.get(a, a) for a in known_alleles}
 
-            if ref_allele and geno_alleles <= {ref_allele}:
-                # Homozygous reference: 0 copies of risk allele
-                results[rsid] = {
-                    "rsid": rsid,
-                    "gene": snp["gene"],
-                    "status": "found",
-                    "genotype": raw_geno,
-                    "normalised": norm,
-                    "risk_allele": risk_allele,
-                    "risk_count": 0,
-                    "nutrient_domain": snp["nutrient_domain"],
-                }
-            elif ref_allele and geno_alleles <= {COMPLEMENT.get(ref_allele, ref_allele)}:
+            if ref_allele and geno_alleles <= {COMPLEMENT.get(ref_allele, ref_allele)}:
                 # Homozygous reference on complement strand
                 results[rsid] = {
                     "rsid": rsid,

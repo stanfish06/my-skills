@@ -351,6 +351,19 @@ HAS-BLED ≥3: High bleeding risk → Modifiable factors, consider DOAC over war
 ```
 MELD = 3.78×ln(bilirubin mg/dL) + 11.2×ln(INR) + 9.57×ln(creatinine mg/dL) + 6.43
 
+Bounding rules — the score is undefined without them:
+- Any of bilirubin, INR or creatinine below 1.0 is set to 1.0 before the log
+  (all three at the floor give 6.43, so 6 is the minimum score)
+- Creatinine capped at 4.0 mg/dL; a patient dialysed ≥2× in the previous week is
+  assigned creatinine 4.0 mg/dL regardless of the measured value
+- Score capped at 40
+
+This is original (Kamath 2001) MELD, retained here for mortality interpretation
+only. OPTN allocation has used MELD 3.0 since July 2023: it adds serum albumin
+and female sex, adds bilirubin-sodium and albumin-creatinine interactions, and
+lowers the creatinine upper bound to 3.0 mg/dL. Do not use the formula above for
+allocation.
+
 Interpretation:
 ├─ MELD <10: 1.9% 3-month mortality (Low)
 │  └─ Consider resection or ablation for HCC
@@ -367,29 +380,21 @@ Interpretation:
       Too ill for transplant if MELD >35-40 typically
 ```
 
-**Adjuvant! Online (Breast Cancer Recurrence Risk)**
+**PREDICT (Breast Cancer Survival and Treatment Benefit)**
+
+Replaces Adjuvant! Online, which has not been available for over a decade —
+`adjuvantonline.com` now serves a placeholder page. PREDICT v2.1 is maintained at
+https://breast.predict.cam/ (formerly predict.nhs.uk) and is endorsed by the AJCC.
 
 ```
-Input Variables:
-- Age at diagnosis
-- Tumor size
-- Tumor grade (1-3)
-- ER status
-- Node status (0, 1-3, 4-9, ≥10)
-- HER2 status
-- Comorbidity index
+PREDICT estimates the proportion of similar patients surviving up to 15 years
+after surgery under different treatment combinations. Treatment benefit is the
+difference between scenarios, not a single stated "absolute reduction".
 
-Output: 10-year risk of:
-- Recurrence
-- Breast cancer mortality
-- Overall mortality
+Enter the patient and tumour details the live tool asks for; do not reconstruct
+its inputs or its output numbers from memory.
 
-Treatment Benefit Estimates:
-- Chemotherapy: Absolute reduction in recurrence
-- Endocrine therapy: Absolute reduction in recurrence
-- Trastuzumab: Absolute reduction (if HER2+)
-
-Clinical Application:
+Chemotherapy decision context (independent of the calculator):
 ├─ Low risk (<10% recurrence): Consider endocrine therapy alone if ER+
 ├─ Intermediate risk (10-20%): Chemotherapy discussion, genomic assay
 │  └─ Oncotype DX score <26: Endocrine therapy alone

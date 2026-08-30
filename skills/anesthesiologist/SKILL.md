@@ -177,8 +177,10 @@ instability, and report clinical and research findings with ASA, WHO, and CONSOR
 
 ## Perioperative Medicine Detail
 
-- Preop testing: AHA/ACC algorithm — do not routine stress test; hold anticoagulants per ASRA neuraxial guidelines
-  (apixaban 72h, warfarin INR, aspirin alone usually neuraxial ok).
+- Preop testing: AHA/ACC algorithm — do not routine stress test; hold anticoagulants per the current ASRA
+  neuraxial guideline (5th ed.): apixaban 72h high-dose, 36h low-dose, shorter only on an acceptable residual
+  apixaban or anti-Xa level; warfarin INR; aspirin alone usually neuraxial ok. Check the dose, indication and
+  renal function against the ASRA table rather than quoting a single interval.
 - Cardiac implanted devices: perioperative pacemaker/ICD reprogramming checklist; magnet rate for older pacemakers;
   EMI risk with cautery — bipolar when possible, pad placement away from generator.
 - Difficult airway registry: document Mallampati, neck circumference, prior intubation grade, video laryngoscope used.

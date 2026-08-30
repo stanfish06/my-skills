@@ -130,7 +130,7 @@ The classification engine implements the ACMG/AMP 2015 framework (Richards et al
 | PVS1 | Very strong | Loss-of-function variant type: nonsense, frameshift, canonical splice (±1,2), initiation codon loss |
 | PS1 | Strong | Same amino acid change as an established ClinVar Pathogenic variant (review stars ≥ 2) |
 | PM1 | Moderate | Located in a critical functional domain (from VEP consequence context) |
-| PM2 | Moderate | Absent or extremely rare in gnomAD: AF < 0.0001 (dominant) or AF < 0.001 (recessive) |
+| PM2 | Supporting | Absent or extremely rare in gnomAD: AF < 0.0001 (dominant) or AF < 0.001 (recessive). Downgraded from Moderate per ClinGen SVI PM2 v1.0 (2020-09-04); PVS1 + PM2_Supporting still reaches Likely Pathogenic under the SVI's added combining rule |
 | PM4 | Moderate | Protein length change from in-frame indel or stop-loss in a non-repeat region |
 | PM5 | Moderate | Novel missense at a residue where a different pathogenic missense is established |
 | PP3 | Supporting | In silico predictions support deleterious effect — CADD ≥ 25.3, SIFT=deleterious, PolyPhen=probably_damaging |
@@ -160,7 +160,7 @@ The classification engine implements the ACMG/AMP 2015 framework (Richards et al
 
 - **BA1**: gnomAD AF > 5% (Richards et al., 2015)
 - **BS1**: gnomAD AF > 1% (rare Mendelian disease default)
-- **PM2**: gnomAD AF < 0.0001 (dominant) or < 0.001 (recessive)
+- **PM2**: gnomAD AF < 0.0001 (dominant) or < 0.001 (recessive), applied at Supporting (PM2_Supporting). Not assessed when annotation failed and no frequency was retrieved
 - **PP3**: CADD ≥ 25.3
 - **BP4**: CADD < 15
 - **ClinVar minimum stars for PS1/PP5/BP6**: ≥ 2

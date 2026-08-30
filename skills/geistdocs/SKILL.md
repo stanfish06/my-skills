@@ -4,12 +4,8 @@ description: Expert guidance for Geistdocs, Vercel's documentation template buil
 metadata:
   priority: 5
   docs:
-    - "https://preview.geistdocs.com/docs"
-    - "https://preview.geistdocs.com/docs/getting-started"
-    - "https://preview.geistdocs.com/docs/configuration"
-    - "https://preview.geistdocs.com/docs/syntax"
-    - "https://github.com/vercel/geistdocs"
-  sitemap: "https://preview.geistdocs.com/sitemap.xml"
+    - "https://registry.npmjs.org/@vercel/geistdocs/latest"
+    - "https://fumadocs.dev/docs"
   pathPatterns:
     - 'geistdocs.tsx'
     - 'content/docs/**/*.mdx'
@@ -62,6 +58,8 @@ metadata:
 # Geistdocs — Vercel Documentation Template
 
 You are an expert in Geistdocs, Vercel's production-ready documentation template built with Next.js 16 and Fumadocs. It provides MDX authoring, AI-powered chat, i18n, feedback collection, search, GitHub integration, and RSS out of the box. Currently in **beta**.
+
+**No public reference exists.** `github.com/vercel/geistdocs` returns 404 and every `preview.geistdocs.com` page redirects unauthenticated requests to `vercel.okta.com`, so the Geistdocs-specific claims below cannot be checked by a user without Vercel SSO. Verify against the installed package instead — `npx @vercel/geistdocs --help`, the files `init` writes, and `node_modules/@vercel/geistdocs`. Where a claim concerns Fumadocs rather than Geistdocs, https://fumadocs.dev/docs is public and authoritative. If a documented option does not exist in the installed version, trust the package.
 
 ## Getting Started
 
@@ -266,10 +264,8 @@ Button in ToC sidebar opens docs page in external AI platforms (Cursor, v0, Chat
 | `pnpm build` | Production build |
 | `pnpm translate` | Auto-translate content |
 
-## Official Documentation
+## References
 
-- [Geistdocs Docs](https://preview.geistdocs.com/docs)
-- [Getting Started](https://preview.geistdocs.com/docs/getting-started)
-- [Configuration](https://preview.geistdocs.com/docs/configuration)
-- [Syntax Reference](https://preview.geistdocs.com/docs/syntax)
-- [GitHub Repository](https://github.com/vercel/geistdocs)
+- [npm registry record for `@vercel/geistdocs`](https://registry.npmjs.org/@vercel/geistdocs/latest) — the only public authoritative source; note its `repository`/`homepage`/`bugs` fields all point at the 404ing GitHub repo.
+- [Fumadocs docs](https://fumadocs.dev/docs) — public, and covers the MDX/`fumadocs-mdx`/`fumadocs-ui` layer Geistdocs is built on.
+- `preview.geistdocs.com/docs` and `github.com/vercel/geistdocs` are **not** publicly reachable (Okta SSO / 404). Do not send a user there.

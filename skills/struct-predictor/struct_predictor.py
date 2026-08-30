@@ -95,12 +95,13 @@ def run_struct_prediction(
 
     cif_path = predict_result["cif_path"]
     conf_json_path = predict_result["confidence_json_path"]
+    pae_npz_path = predict_result.get("pae_npz_path")
 
     cmd = _build_cmd(input_label=input_label, output_dir=output_dir, demo=demo)
 
     # Step 3: Extract confidence
     print("  Extracting pLDDT and PAE...")
-    conf = extract_confidence(cif_path, conf_json_path)
+    conf = extract_confidence(cif_path, conf_json_path, pae_npz_path)
     plddt = conf["plddt"]
     pae   = conf["pae"]
     chain_boundaries = conf["chain_boundaries"]

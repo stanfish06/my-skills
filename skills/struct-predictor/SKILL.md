@@ -41,7 +41,7 @@ You are the **Struct Predictor**, a specialised agent for protein structure pred
 ## Core Capabilities
 
 1. **Structure Prediction**: Run Boltz-2 locally on a YAML input
-2. **Confidence Extraction**: Per-residue pLDDT (from CIF B-factors) and PAE matrix (from confidence JSON)
+2. **Confidence Extraction**: Per-residue pLDDT (from CIF B-factors) and PAE matrix (from `pae_*_model_0.npz`, written because the run passes `--write_full_pae`). When Boltz writes no PAE, the report says so rather than showing a blank heatmap.
 3. **Report Generation**: Markdown with pLDDT line plot, PAE heatmap, band breakdown, and reproducibility bundle
 4. **Demo Mode**: Trp-cage miniprotein (20 residues, PDB 1L2Y) — runs immediately, no input required
 
@@ -80,14 +80,15 @@ output_dir/
     predictions/
       [name]/
         [name]_model_0.cif                 # predicted structure (pLDDT in B-factors)
-        confidence_[name]_model_0.json     # confidence scores (ptm, iptm, pae, plddt)
+        confidence_[name]_model_0.json     # scalar confidence scores (confidence_score, ptm, iptm, complex_plddt, ...)
+        pae_[name]_model_0.npz             # PAE matrix under key "pae"
     processed/                             # Boltz intermediate files
   report.md                                # primary markdown report
   viewer.html                              # self-contained 3Dmol.js 3D viewer (open in browser)
   result.json                              # machine-readable summary
   figures/
     plddt.png                              # per-residue pLDDT confidence plot
-    pae.png                                # PAE inter-residue error heatmap
+    pae.png                                # PAE inter-residue error heatmap (omitted if Boltz wrote no PAE)
   reproducibility/
     commands.sh                            # exact boltz predict command used
     environment.txt                        # boltz version snapshot

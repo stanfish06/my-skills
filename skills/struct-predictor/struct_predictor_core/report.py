@@ -30,7 +30,7 @@ def generate_report(
     output_dir: Path,
     sequences_info: list[dict],
     plddt: np.ndarray,
-    pae: np.ndarray,
+    pae: np.ndarray | None,
     chain_boundaries: list[dict],
     cif_path: Path,
     cmd: str,
@@ -50,6 +50,7 @@ def generate_report(
     md = _build_markdown(
         sequences_info=sequences_info,
         plddt=plddt,
+        pae=pae,
         chain_boundaries=chain_boundaries,
         band_bd=band_bd,
         mean_plddt=mean_plddt,
@@ -68,6 +69,7 @@ def generate_report(
         "mean_plddt": round(mean_plddt, 2),
         "min_plddt": round(min_plddt, 2),
         "band_breakdown": band_bd,
+        "pae_available": pae is not None,
         "sequences": [
             {"name": s["name"], "length": len(s["sequence"])}
             for s in sequences_info
@@ -76,7 +78,8 @@ def generate_report(
     (output_dir / "result.json").write_text(json.dumps(result, indent=2))
 
     _plot_plddt(output_dir / "figures" / "plddt.png", plddt, chain_boundaries)
-    _plot_pae(output_dir / "figures" / "pae.png", pae, chain_boundaries)
+    if pae is not None:
+        _plot_pae(output_dir / "figures" / "pae.png", pae, chain_boundaries)
 
     from struct_predictor_core.viewer import generate_viewer_html
     generate_viewer_html(
@@ -109,6 +112,7 @@ def _confidence_band_breakdown(plddt: np.ndarray) -> dict[str, float]:
 def _build_markdown(
     sequences_info: list[dict],
     plddt: np.ndarray,
+    pae: np.ndarray | None,
     chain_boundaries: list[dict],
     band_bd: dict,
     mean_plddt: float,
@@ -180,7 +184,9 @@ def _build_markdown(
         "",
         "![pLDDT per residue](figures/plddt.png)",
         "",
-        "![PAE heatmap](figures/pae.png)",
+        "![PAE heatmap](figures/pae.png)" if pae is not None
+        else "**PAE unavailable** — Boltz wrote no `pae_*_model_0.npz` for this run, so "
+             "inter-chain and inter-domain positioning confidence could not be assessed.",
         "",
         "---",
         "",
@@ -190,7 +196,9 @@ def _build_markdown(
         "- **High pLDDT (70–90)**: generally reliable, small side-chain errors possible.",
         "- **Low pLDDT (50–70)**: disordered or poorly predicted region; interpret with caution.",
         "- **Very low pLDDT (< 50)**: likely intrinsically disordered; structure should not be used.",
-        "- **PAE**: low values (dark) indicate confident relative positioning; high values indicate uncertain domain/chain packing.",
+        "- **PAE**: low values (dark) indicate confident relative positioning; high values indicate uncertain domain/chain packing."
+        if pae is not None
+        else "- **PAE**: not available for this run — do not infer anything about inter-chain or inter-domain packing.",
         "",
         "---",
         "",

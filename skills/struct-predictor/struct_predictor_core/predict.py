@@ -28,6 +28,7 @@ def run_boltz(
         {
             "cif_path": Path,
             "confidence_json_path": Path | None,
+            "pae_npz_path": Path | None,
             "boltz_output_dir": Path,
         }
 
@@ -66,6 +67,8 @@ def _build_boltz_cmd(
         "boltz", "predict",
         str(input_path),
         "--out_dir", str(boltz_output_dir),
+        # PAE is only dumped to pae_<name>_model_<rank>.npz when this is set
+        "--write_full_pae",
     ]
 
 
@@ -75,6 +78,7 @@ def _find_cif(boltz_output_dir: Path) -> dict:
     Boltz-2 writes to:
         <boltz_output_dir>/predictions/<name>/<name>_model_0.cif
         <boltz_output_dir>/predictions/<name>/confidence_<name>_model_0.json
+        <boltz_output_dir>/predictions/<name>/pae_<name>_model_0.npz
     """
     boltz_output_dir = Path(boltz_output_dir)
     cifs = list(boltz_output_dir.rglob("*_model_0.cif"))
@@ -88,9 +92,11 @@ def _find_cif(boltz_output_dir: Path) -> dict:
     pred_dir = cif_path.parent
 
     conf_candidates = list(pred_dir.glob("confidence_*_model_0.json"))
+    pae_candidates = list(pred_dir.glob("pae_*_model_0.npz"))
 
     return {
         "cif_path": cif_path,
         "confidence_json_path": conf_candidates[0] if conf_candidates else None,
+        "pae_npz_path": pae_candidates[0] if pae_candidates else None,
         "boltz_output_dir": boltz_output_dir,
     }

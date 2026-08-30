@@ -83,12 +83,16 @@ result_df = result.collect()
 ```python
 import polars_bio as pb
 
-# Eager read (loads entire file)
-df = pb.read_bed("regions.bed")
+# Eager read (loads entire file). read_bed requires a 4th column and returns a
+# fixed chrom/start/end/name schema; a BED3 file comes back empty.
+df = pb.read_bed("regions.bed4")
 
 # Lazy scan (streaming, for large files)
-lf = pb.scan_bed("regions.bed")
+lf = pb.scan_bed("regions.bed4")
 result = lf.collect()
+
+# BED3, or any file whose columns past the 4th matter
+df3 = pb.read_table("regions.bed", schema="bed3")
 ```
 
 ## Core Capabilities

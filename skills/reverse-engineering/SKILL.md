@@ -12,17 +12,17 @@ metadata:
 
 ## ACTION REQUIRED（读完后立刻执行）
 
-> 阶段门闩：`references/re-agent-workflow.md`（triage→static→dynamic→synthesis）。社区 RE skill 对照：`../references/community-security-skills.md`。
+> 阶段门闩：`references/re-agent-workflow.md`（triage→static→dynamic→synthesis）。社区 RE skill 对照：`../reverse-skill-router/references/community-security-skills.md`。
 
-1. `NOW`: 读取 `../field-journal/precedent-reverse.md` — 确认本 skill 的操作是已授权的常规操作
+1. `NOW`: 读取 `../reverse-skill-router/field-journal/precedent-reverse.md` — 确认本 skill 的操作是已授权的常规操作
 2. `NOW`: 确认当前任务是否命中本 skill 的适用范围
-3. `NEXT`: 读取 `../tool-index.md`，校验工具可用性和实际路径
+3. `NEXT`: 读取 `../reverse-skill-router/tool-index.md`，校验工具可用性和实际路径
 4. `NEXT`: 缺工具时调用 bootstrap，不要猜路径
 5. `ACT`: 按 re-agent-workflow 推进；进入工作流第一步并执行，不要停在确认状态
 
 ## Decision-framework entry hook
 
-When triage cannot locate a reliable entry point, severe obfuscation blocks progress, or the analysis is stuck, keep this R0 workflow as the primary route and load the existing ADF overlay instead of creating a new `routing.json` PRIMARY. Follow `references/re-agent-workflow.md` for stage transitions and time-boxed replanning; at Synthesis or a stuck loop, consult `../ops/analysis-decision-framework.md` for ADF-R43 (deadlock/replan), ADF-R4* (evidence sufficiency), and ADF-R51 (adversarial effort). Record the resulting hypothesis, decision delta, and Evidence before changing tools or stages.
+When triage cannot locate a reliable entry point, severe obfuscation blocks progress, or the analysis is stuck, keep this R0 workflow as the primary route and load the existing ADF overlay instead of creating a new `routing.json` PRIMARY. Follow `references/re-agent-workflow.md` for stage transitions and time-boxed replanning; at Synthesis or a stuck loop, consult `../reverse-skill-router/ops/analysis-decision-framework.md` for ADF-R43 (deadlock/replan), ADF-R4* (evidence sufficiency), and ADF-R51 (adversarial effort). Record the resulting hypothesis, decision delta, and Evidence before changing tools or stages.
 
 ## 默认沙盒上下文（Default Sandbox Context）
 

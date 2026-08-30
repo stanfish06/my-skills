@@ -7,7 +7,7 @@ description: Use for authorized digital forensics including memory dumps, disk t
 
 ## ACTION REQUIRED（读完后立刻执行）
 
-1. `NOW`: 读取 `../field-journal/precedent-pentest.md` 或组织 IR 授权说明
+1. `NOW`: 读取 `../reverse-skill-router/field-journal/precedent-pentest.md` 或组织 IR 授权说明
 2. `NOW`: 确认是**取证/溯源**而非进攻性扫描
 3. `NOW`: 建立 case；证据只读副本优先（原始介质写保护）
 4. `NEXT`: tool-index；Volatility 等常手动

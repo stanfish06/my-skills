@@ -7,7 +7,7 @@ description: Use for authorized reverse engineering of browser extensions (Chrom
 
 ## ACTION REQUIRED（读完后立刻执行）
 
-1. `NOW`: 读取 `../field-journal/precedent-reverse.md`
+1. `NOW`: 读取 `../reverse-skill-router/field-journal/precedent-reverse.md`
 2. `NOW`: 确认目标是**浏览器扩展**（crx/xpi/解压目录），不是普通网页 JS（普通 → `js-reverse/`）
 3. `NEXT`: 解压扩展；读 manifest
 4. `ACT`: 权限面 → 后台脚本 → 网络/存储钩子

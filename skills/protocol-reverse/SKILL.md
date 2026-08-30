@@ -7,10 +7,10 @@ description: Use for authorized reverse engineering of custom binary protocols, 
 
 ## ACTION REQUIRED（读完后立刻执行）
 
-1. `NOW`: 读取 `../field-journal/precedent-reverse.md` — 确认授权与常规操作边界
+1. `NOW`: 读取 `../reverse-skill-router/field-journal/precedent-reverse.md` — 确认授权与常规操作边界
 2. `NOW`: 确认任务是否为**协议/流量/序列化格式**逆向（非纯 Web 参数签名 → 转 `js-reverse/`）
-3. `NOW`: 若有目标网络交互 → `../scripts/case-init.ps1` 完成 scope；`auth` 未 granted 禁止对目标 ACT
-4. `NEXT`: 读取 `../tool-index.md`；缺工具 bootstrap（tshark/wireshark 等可能需手动）
+3. `NOW`: 若有目标网络交互 → `../reverse-skill-router/scripts/case-init.ps1` 完成 scope；`auth` 未 granted 禁止对目标 ACT
+4. `NEXT`: 读取 `../reverse-skill-router/tool-index.md`；缺工具 bootstrap（tshark/wireshark 等可能需手动）
 5. `ACT`: 进入工作流 Phase 1，产出帧布局或消息字典草稿
 
 ## 适用场景

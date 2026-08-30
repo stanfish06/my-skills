@@ -6,12 +6,12 @@ description: Use for authorized multi-stage attack-path planning and orchestrati
 
 ## ACTION REQUIRED（读完后立刻执行）
 
-1. `NOW`: 读取 `../field-journal/precedent-pentest.md` — 确认本 skill 的操作是已授权的常规操作
-2. `NOW`: **创建/更新 case**（`../scripts/case-init.ps1`）并完成 `scope.md`（`../ops/scope-contract.md`）；`auth.status!=granted` 禁止 ACT
-3. `NOW`: 以 **lead** 角色规划阶段（`../ops/role-map.md`），写入 specialist_roles
-4. `NEXT`: 读取 `../tool-index.md`，校验工具可用性和实际路径
+1. `NOW`: 读取 `../reverse-skill-router/field-journal/precedent-pentest.md` — 确认本 skill 的操作是已授权的常规操作
+2. `NOW`: **创建/更新 case**（`../reverse-skill-router/scripts/case-init.ps1`）并完成 `scope.md`（`../reverse-skill-router/ops/scope-contract.md`）；`auth.status!=granted` 禁止 ACT
+3. `NOW`: 以 **lead** 角色规划阶段（`../reverse-skill-router/ops/role-map.md`），写入 specialist_roles
+4. `NEXT`: 读取 `../reverse-skill-router/tool-index.md`，校验工具可用性和实际路径
 5. `NEXT`: 缺工具时调用 bootstrap，不要猜路径
-6. `ACT`: 按 `references/lifecycle-checklist.md` 过阶段门闩；每阶段更新 `timeline.md` + `workitems.md`（`../ops/timeline-workitem.md`）；发现提升为 Evidence/Finding
+6. `ACT`: 按 `references/lifecycle-checklist.md` 过阶段门闩；每阶段更新 `timeline.md` + `workitems.md`（`../reverse-skill-router/ops/timeline-workitem.md`）；发现提升为 Evidence/Finding
 7. 结束：`docs-generator` 报告必须含 Evidence 链
 
 > 多阶段攻击路径规划与执行的总指挥。当任务需要"从 A 打到 B"的完整链路时，本 Skill 负责编排各阶段、协调子 Skill、规划攻击路径。

@@ -221,7 +221,8 @@ mean_adult_age = df.age.mean(selection='adults')
 # Multiple at once with delay
 mean = df.age.mean(delay=True)
 std = df.age.std(delay=True)
-results = vaex.execute([mean, std])
+df.execute()
+mean.get(), std.get()
 ```
 
 ### Available Aggregation Functions
@@ -229,7 +230,7 @@ results = vaex.execute([mean, std])
 ```python
 # Central tendency
 df.x.mean()
-df.x.median_approx()  # Approximate median (fast)
+df.median_approx('x')  # Approximate median (fast)
 
 # Dispersion
 df.x.std()           # Standard deviation
@@ -246,9 +247,9 @@ df.x.count()         # Non-missing values
 df.x.sum()
 df.x.prod()
 
-# Percentiles
-df.x.quantile(0.5)           # Median
-df.x.quantile([0.25, 0.75])  # Quartiles
+# Percentiles (percentage is on a 0-100 scale)
+df.percentile_approx('x', 50)  # Median
+df.percentile_approx('x', 25), df.percentile_approx('x', 75)  # Quartiles
 
 # Correlation
 df.correlation(df.x, df.y)
@@ -342,7 +343,7 @@ df['value_bin'] = df.value.digitize(
 )
 
 # Quantile-based bins
-quantiles = df.value.quantile([0.25, 0.5, 0.75])
+quantiles = [df.percentile_approx('value', p) for p in (25, 50, 75)]
 df['value_quartile'] = df.value.digitize(quantiles)
 ```
 
@@ -360,7 +361,8 @@ mean_z = df.mean(df.z, binby=[df.x, df.y], limits=[[0, 10], [0, 10]], shape=(50,
 # Multiple statistics on grid
 stats = df.mean(df.z, binby=[df.x, df.y], shape=(50, 50), delay=True)
 counts = df.count(binby=[df.x, df.y], shape=(50, 50), delay=True)
-results = vaex.execute([stats, counts])
+df.execute()
+stats.get(), counts.get()
 ```
 
 ## Handling Missing Data

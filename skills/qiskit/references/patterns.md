@@ -171,7 +171,7 @@ Run ISA circuits on quantum hardware using primitives.
 from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2 as Sampler
 
 service = QiskitRuntimeService()
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 
 # Transpile first
 qc_isa = transpile(qc, backend=backend, optimization_level=3)
@@ -190,7 +190,7 @@ from qiskit_ibm_runtime import EstimatorV2 as Estimator
 from qiskit.quantum_info import SparsePauliOp
 
 service = QiskitRuntimeService()
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 
 # Transpile
 qc_isa = transpile(qc, backend=backend, optimization_level=3)
@@ -212,7 +212,7 @@ expectation_value = result[0].data.evs
 from qiskit_ibm_runtime import Session
 
 with Session(backend=backend) as session:
-    sampler = Sampler(session=session)
+    sampler = Sampler(mode=session)
 
     # Multiple iterations
     for iteration in range(max_iterations):
@@ -231,7 +231,7 @@ with Session(backend=backend) as session:
 from qiskit_ibm_runtime import Batch
 
 with Batch(backend=backend) as batch:
-    sampler = Sampler(session=batch)
+    sampler = Sampler(mode=batch)
 
     # Submit all jobs at once
     jobs = []
@@ -390,7 +390,7 @@ hamiltonian = SparsePauliOp(["IIZZ", "ZZII", "XXII", "IIXX"], coeffs=[0.3, 0.3, 
 
 # 2. OPTIMIZE: Connect and prepare
 service = QiskitRuntimeService()
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 
 ansatz, param_names = create_ansatz(num_qubits=4)
 
@@ -410,7 +410,7 @@ def cost_function(params):
     return energy
 
 with Session(backend=backend) as session:
-    estimator = Estimator(session=session)
+    estimator = Estimator(mode=session)
 
     # Classical optimization loop
     initial_params = np.random.random(len(param_names)) * 2 * np.pi
@@ -496,7 +496,7 @@ result = job.result()
 qc_isa = transpile(parameterized_circuit, backend=backend)
 
 with Batch(backend=backend) as batch:
-    sampler = Sampler(session=batch)
+    sampler = Sampler(mode=batch)
     results = []
 
     for param_set in parameter_sweep:
@@ -509,7 +509,7 @@ with Batch(backend=backend) as batch:
 ```python
 # Map → (Optimize → Execute → Post-process) repeated
 with Session(backend=backend) as session:
-    estimator = Estimator(session=session)
+    estimator = Estimator(mode=session)
 
     for iteration in range(max_iter):
         qc = update_circuit(params)

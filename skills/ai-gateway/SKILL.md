@@ -157,9 +157,11 @@ const result = await generateText({
 | `user` | End-user ID for usage tracking |
 | `tags` | Labels for cost attribution and reporting |
 
-## Cache-Control Headers
+## Caching
 
-AI Gateway supports response caching to reduce latency and cost for repeated or similar requests:
+The gateway exposes one caching switch, `caching: 'auto'`, which enables provider
+prompt caching where the underlying model supports it. There is no TTL or
+header-string option:
 
 ```ts
 const result = await generateText({
@@ -167,21 +169,11 @@ const result = await generateText({
   prompt: 'What is the capital of France?',
   providerOptions: {
     gateway: {
-      // Cache identical requests for 1 hour
-      cacheControl: 'max-age=3600',
+      caching: 'auto',
     },
   },
 })
 ```
-
-### Caching strategies
-
-| Header Value | Behavior |
-|-------------|----------|
-| `max-age=3600` | Cache response for 1 hour |
-| `max-age=0` | Bypass cache, always call provider |
-| `s-maxage=86400` | Cache at the edge for 24 hours |
-| `stale-while-revalidate=600` | Serve stale for 10 min while refreshing in background |
 
 ### When to use caching
 
@@ -189,10 +181,6 @@ const result = await generateText({
 - **User-specific conversations**: Do not cache — each response depends on conversation history
 - **Embeddings**: Cache embedding results for identical inputs to save cost
 - **Structured extraction**: Cache when extracting structured data from identical documents
-
-### Cache key composition
-
-The cache key is derived from: model, prompt/messages, temperature, and other generation parameters. Changing any parameter produces a new cache key.
 
 ## Per-User Rate Limiting
 
@@ -283,25 +271,29 @@ Use **separate gateway keys per environment** (dev, staging, prod) and per proje
 
 ### Pre-flight cost controls
 
-The AI Gateway dashboard provides observability (traces, token counts, spend tracking) but no programmatic metrics API. Build your own cost guardrails by estimating token counts and rejecting expensive requests before they execute:
+Query real spend from the gateway provider rather than estimating it:
 
 ```ts
-import { generateText } from 'ai'
+import { gateway } from 'ai'
 
-function estimateTokens(text: string): number {
-  return Math.ceil(text.length / 4) // rough estimate
-}
+const { balance, totalUsed } = await gateway.getCredits()
 
-async function callWithBudget(prompt: string, maxTokens: number) {
-  const estimated = estimateTokens(prompt)
-  if (estimated > maxTokens) {
-    throw new Error(`Prompt too large: ~${estimated} tokens exceeds ${maxTokens} limit`)
+const report = await gateway.getSpendReport({
+  startDate: '2026-08-01',
+  endDate: '2026-08-31',
+  groupBy: 'user', // or 'day' | 'model' | 'tag' | 'provider' | 'credential_type'
+})
+
+async function callWithBudget(prompt: string, maxSpendUsd: number) {
+  const spent = report.reduce((sum, row) => sum + row.totalCost, 0)
+  if (spent > maxSpendUsd) {
+    throw new Error(`Budget exhausted: $${spent} exceeds $${maxSpendUsd}`)
   }
   return generateText({ model: 'openai/gpt-5.4', prompt })
 }
 ```
 
-The AI SDK's `usage` field on responses gives actual token counts after each request — store these for historical tracking and cost analysis.
+The AI SDK's `usage` field on responses gives actual token counts after each request; `gateway.getGenerationInfo({ id })` returns cost, latency, and provider for a single generation.
 
 ### Hard spending limits
 
@@ -337,13 +329,7 @@ AI Gateway logs every request for compliance and debugging:
 ### Accessing logs
 
 - **Vercel Dashboard** at `https://vercel.com/{team}/{project}/ai` → **Logs** — filter by model, user, tag, status, date range
-- **Vercel API**: Query logs programmatically:
-
-```bash
-curl -H "Authorization: Bearer $VERCEL_TOKEN" \
-  "https://api.vercel.com/v1/ai-gateway/logs?projectId=$PROJECT_ID&limit=100"
-```
-
+- **Programmatic access**: there is no logs endpoint. Export CSV/JSON from the dashboard Logs page, use `gateway.getSpendReport(...)` for aggregates, or `gateway.getGenerationInfo({ id })` for one request's detail
 - **Log Drains**: Forward AI Gateway logs to Datadog, Splunk, or other providers via Vercel Log Drains (configure at `https://vercel.com/dashboard/{team}/~/settings/log-drains`) for long-term retention and custom analysis
 
 ### Compliance considerations
@@ -505,7 +491,7 @@ GPT-5.4 Pro targets maximum performance on complex tasks. Use standard GPT-5.4 f
 
 ## Multimodal Support
 
-Text and image generation both route through the gateway. For embeddings, use a direct provider SDK.
+Text, image, and embedding models all route through the gateway.
 
 ```ts
 // Text — through gateway
@@ -526,6 +512,13 @@ import { experimental_generateImage as generateImage } from 'ai'
 const { images: generated } = await generateImage({
   model: 'google/imagen-4.0-generate-001',
   prompt: 'A sunset',
+})
+
+// Embeddings — through gateway, no provider SDK needed
+import { embedMany, gateway } from 'ai'
+const { embeddings } = await embedMany({
+  model: gateway.embeddingModel('openai/text-embedding-3-small'),
+  values: ['first document', 'second document'],
 })
 ```
 

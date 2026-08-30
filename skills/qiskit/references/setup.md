@@ -51,7 +51,7 @@ from qiskit_ibm_runtime import QiskitRuntimeService
 
 # Save credentials (first time only)
 QiskitRuntimeService.save_account(
-    channel="ibm_quantum",
+    channel="ibm_quantum_platform",
     token="YOUR_IBM_QUANTUM_TOKEN"
 )
 

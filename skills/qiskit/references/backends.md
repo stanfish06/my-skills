@@ -24,7 +24,7 @@ from qiskit_ibm_runtime import QiskitRuntimeService
 
 # First time: save credentials
 QiskitRuntimeService.save_account(
-    channel="ibm_quantum",
+    channel="ibm_quantum_platform",
     token="YOUR_IBM_QUANTUM_TOKEN"
 )
 
@@ -43,15 +43,15 @@ for backend in backends:
 # Filter by minimum qubits
 backends_127q = service.backends(min_num_qubits=127)
 
-# Get specific backend
-backend = service.backend("ibm_brisbane")
-backend = service.least_busy()  # Get least busy backend
+# Get specific backend by name (QPUs are retired periodically; list names first)
+backend = service.backend(service.backends()[0].name)
+backend = service.least_busy(operational=True, simulator=False)  # Get least busy backend
 ```
 
 ### Backend Properties
 
 ```python
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 
 # Basic info
 print(f"Name: {backend.name}")
@@ -87,7 +87,7 @@ from qiskit import QuantumCircuit, transpile
 from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2 as Sampler
 
 service = QiskitRuntimeService()
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 
 # Create and transpile circuit
 qc = QuantumCircuit(2)
@@ -149,10 +149,10 @@ Use sessions for iterative algorithms (VQE, QAOA) to reduce queue time:
 from qiskit_ibm_runtime import Session, SamplerV2 as Sampler
 
 service = QiskitRuntimeService()
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 
 with Session(backend=backend) as session:
-    sampler = Sampler(session=session)
+    sampler = Sampler(mode=session)
 
     # Multiple iterations in same session
     for iteration in range(10):
@@ -178,10 +178,10 @@ Use batch mode for independent parallel jobs:
 from qiskit_ibm_runtime import Batch, SamplerV2 as Sampler
 
 service = QiskitRuntimeService()
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 
 with Batch(backend=backend) as batch:
-    sampler = Sampler(session=batch)
+    sampler = Sampler(mode=batch)
 
     # Submit multiple independent jobs
     jobs = []
@@ -215,7 +215,7 @@ from qiskit_ibm_runtime import SamplerV2 as Sampler
 simulator = AerSimulator()
 
 # Simulate with backend noise model
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 noisy_simulator = AerSimulator.from_backend(backend)
 
 # Run simulation
@@ -320,7 +320,7 @@ print(service.usage())
 ```python
 from qiskit_ibm_runtime import EstimatorV2 as Estimator
 
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 
 # Estimate job cost
 estimator = Estimator(backend)
@@ -369,7 +369,7 @@ shots_final = 10000
 backend = service.least_busy(min_num_qubits=5)
 
 # For production: Use backend matching requirements
-backend = service.backend("ibm_brisbane")  # 127 qubits
+backend = service.least_busy(min_num_qubits=127, operational=True, simulator=False)
 ```
 
 ### 5. Use Sessions for Variational Algorithms
@@ -402,7 +402,7 @@ print([b.name for b in service.backends()])
 ```python
 # Re-save credentials
 QiskitRuntimeService.save_account(
-    channel="ibm_quantum",
+    channel="ibm_quantum_platform",
     token="YOUR_TOKEN",
     overwrite=True
 )

@@ -248,7 +248,7 @@ qc_test = transpile(qc, backend=sim_backend, optimization_level=3)
 from qiskit_ibm_runtime import QiskitRuntimeService
 
 service = QiskitRuntimeService()
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 qc_transpiled = transpile(qc, backend=backend)
 ```
 

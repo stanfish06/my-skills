@@ -239,7 +239,7 @@ import vaex
 chunk_size = 1_000_000
 output_file = 'processed.hdf5'
 
-for i, df_chunk in enumerate(vaex.from_csv_chunked('huge.csv', chunk_size=chunk_size)):
+for i, df_chunk in enumerate(vaex.from_csv('huge.csv', chunk_size=chunk_size)):
     # Process chunk
     df_chunk['new_col'] = df_chunk.x + df_chunk.y
 
@@ -442,8 +442,8 @@ df = vaex.open('data.hdf5')  # No data loaded into RAM
 # Data is read from disk on-demand
 mean = df.x.mean()  # Streams through data, minimal memory
 
-# Check if column is memory-mapped
-print(df.is_local('column_name'))  # False = memory-mapped
+# Columns backed by the file rather than by a virtual expression
+print(df.get_column_names(virtual=False))
 ```
 
 ### Forcing Data into Memory

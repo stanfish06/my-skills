@@ -236,7 +236,7 @@ from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2 as Sampler
 from qiskit import transpile
 
 service = QiskitRuntimeService()
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 
 qc_optimized = transpile(qc, backend=backend, optimization_level=3)
 
@@ -252,7 +252,7 @@ from qiskit_ibm_runtime import Session, EstimatorV2 as Estimator
 from scipy.optimize import minimize
 
 with Session(backend=backend) as session:
-    estimator = Estimator(session=session)
+    estimator = Estimator(mode=session)
 
     def cost_function(params):
         bound_qc = ansatz.assign_parameters(params)

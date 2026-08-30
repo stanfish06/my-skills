@@ -434,16 +434,16 @@ def explain_xreg_modes() -> None:
     print("=" * 70)
     print("""
 "xreg + timesfm" (DEFAULT)
-  1. TimesFM makes baseline forecast
-  2. Fit regression on residuals (actual - baseline) ~ covariates
-  3. Final = TimesFM baseline + XReg adjustment
-  Best when: covariates explain residual variation (e.g. promotions)
-
-"timesfm + xreg"
   1. Fit regression: target ~ covariates
   2. TimesFM forecasts the residuals
   3. Final = XReg prediction + TimesFM residual forecast
   Best when: covariates explain the main signal (e.g. temperature)
+
+"timesfm + xreg"
+  1. TimesFM makes baseline forecast
+  2. Fit regression on residuals (actual - baseline) ~ covariates
+  3. Final = TimesFM baseline + XReg adjustment
+  Best when: covariates explain residual variation (e.g. promotions)
 """)
 
 
@@ -531,8 +531,8 @@ def main() -> None:
             "price": "-20 units per $1 above base price",
         },
         "xreg_modes": {
-            "xreg + timesfm": "Regression on TimesFM residuals (default)",
-            "timesfm + xreg": "TimesFM on regression residuals",
+            "xreg + timesfm": "TimesFM on regression residuals (default)",
+            "timesfm + xreg": "Regression on TimesFM residuals",
         },
         "bug_fixes_history": [
             "v1: Variable-shadowing -- all stores had identical covariates",

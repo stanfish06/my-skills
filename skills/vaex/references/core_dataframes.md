@@ -126,8 +126,9 @@ Vaex provides built-in example datasets for testing:
 ```python
 import vaex
 
-# NYC taxi dataset (~1GB, 11 million rows)
+# Helmi & de Zeeuw N-body simulation, 10% subset (columns x, y, z, vx, vy, vz, E, L, Lz, FeH)
 df = vaex.example()
+df = vaex.datasets.helmi_simulation_data(full=True)  # all 3.3 million rows
 
 # Smaller datasets
 df = vaex.datasets.titanic()
@@ -171,15 +172,15 @@ df.x.max()
 df.x.sum()
 df.x.count()
 
-# Quantiles
-df.x.quantile(0.5)   # Median
-df.x.quantile([0.25, 0.5, 0.75])  # Multiple quantiles
+# Percentiles (percentage is on a 0-100 scale)
+df.median_approx('x')                 # Median
+[df.percentile_approx('x', p) for p in (25, 50, 75)]
 ```
 
 ### Viewing Data
 
 ```python
-# First/last rows (returns pandas DataFrame)
+# First/last rows (returns a vaex DataFrame, not pandas)
 df.head(10)
 df.tail(10)
 

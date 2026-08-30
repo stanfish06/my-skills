@@ -225,13 +225,14 @@ from sksurv.metrics import as_concordance_index_ipcw_scorer
 estimator = CoxnetSurvivalAnalysis(l1_ratio=0.9)  # Lasso-like
 
 # 2. Tune regularization with cross-validation
-param_grid = {'alpha_min_ratio': [0.01, 0.001]}
-cv = GridSearchCV(estimator, param_grid,
-                  scoring=as_concordance_index_ipcw_scorer(), cv=5)
+#    The wrapper takes the estimator and overrides its score(); grid keys need an
+#    estimator__ prefix and scoring= is omitted
+param_grid = {'estimator__alpha_min_ratio': [0.01, 0.001]}
+cv = GridSearchCV(as_concordance_index_ipcw_scorer(estimator), param_grid, cv=5)
 cv.fit(X, y)
 
 # 3. Identify selected features
-best_model = cv.best_estimator_
+best_model = cv.best_estimator_.estimator_
 selected_features = np.where(best_model.coef_ != 0)[0]
 ```
 
@@ -240,22 +241,22 @@ selected_features = np.where(best_model.coef_ != 0)[0]
 ```python
 from sksurv.ensemble import GradientBoostingSurvivalAnalysis
 from sklearn.model_selection import GridSearchCV
+from sksurv.metrics import as_concordance_index_ipcw_scorer
 
 # 1. Define parameter grid
 param_grid = {
-    'learning_rate': [0.01, 0.05, 0.1],
-    'n_estimators': [100, 200, 300],
-    'max_depth': [3, 5, 7]
+    'estimator__learning_rate': [0.01, 0.05, 0.1],
+    'estimator__n_estimators': [100, 200, 300],
+    'estimator__max_depth': [3, 5, 7]
 }
 
 # 2. Grid search
 gbs = GradientBoostingSurvivalAnalysis()
-cv = GridSearchCV(gbs, param_grid, cv=5,
-                  scoring=as_concordance_index_ipcw_scorer(), n_jobs=-1)
+cv = GridSearchCV(as_concordance_index_ipcw_scorer(gbs), param_grid, cv=5, n_jobs=-1)
 cv.fit(X_train, y_train)
 
 # 3. Evaluate best model
-best_model = cv.best_estimator_
+best_model = cv.best_estimator_.estimator_
 risk_scores = best_model.predict(X_test)
 c_index = concordance_index_ipcw(y_train, y_test, risk_scores)[0]
 ```
@@ -306,8 +307,9 @@ pipeline = Pipeline([
 ])
 
 # Use cross-validation
-scores = cross_val_score(pipeline, X, y, cv=5,
-                         scoring=as_concordance_index_ipcw_scorer())
+from sksurv.metrics import as_concordance_index_ipcw_scorer
+
+scores = cross_val_score(as_concordance_index_ipcw_scorer(pipeline), X, y, cv=5)
 
 # Use grid search
 param_grid = {'model__alpha': [0.1, 1.0, 10.0]}
@@ -337,7 +339,7 @@ cv.fit(X, y)
 5. **Not checking for sufficient events per feature** → Rule of thumb: 10+ events per feature
 6. **Using built-in feature importance for RSF** → Use permutation importance
 7. **Ignoring proportional hazards assumption** → Validate or use alternative models
-8. **Not using appropriate scorers in cross-validation** → Use as_concordance_index_ipcw_scorer()
+8. **Not using appropriate scorers in cross-validation** → Wrap the estimator with `as_concordance_index_ipcw_scorer(estimator)` and omit `scoring=`
 
 ## Reference Files
 

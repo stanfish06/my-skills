@@ -206,6 +206,14 @@ TimesFM 2.5+ supports exogenous variables through `forecast_with_covariates()`. 
 
 ```python
 # Requires: uv pip install timesfm[xreg]
+# forecast_with_covariates() raises ValueError unless the model was compiled
+# with return_backcast=True
+model.compile(timesfm.ForecastConfig(
+    max_context=1024, max_horizon=256, normalize_inputs=True,
+    use_continuous_quantile_head=True, fix_quantile_crossing=True,
+    return_backcast=True,
+))
+
 point, quantiles = model.forecast_with_covariates(
     inputs=inputs,
     dynamic_numerical_covariates={"price": price_arrays},
@@ -223,8 +231,8 @@ point, quantiles = model.forecast_with_covariates(
 | `static_categorical` | Per-series categorical | store type, region, product category |
 
 **XReg Modes:**
-- `"xreg + timesfm"` (default): TimesFM forecasts first, then XReg adjusts residuals
-- `"timesfm + xreg"`: XReg fits first, then TimesFM forecasts residuals
+- `"xreg + timesfm"` (default): XReg fits the targets first, then TimesFM forecasts the residuals — use when covariates explain the main signal
+- `"timesfm + xreg"`: TimesFM forecasts first, then XReg fits the residuals of that forecast — use when covariates explain residual variation
 
 > See `examples/covariates-forecasting/` for a complete example with synthetic retail data.
 
@@ -342,7 +350,7 @@ timesfm.ForecastConfig(
     force_flip_invariance=True,          # Ensures f(-x) = -f(x) (mathematical consistency)
     infer_is_positive=True,              # Clamp forecasts ≥ 0 when all inputs > 0
     fix_quantile_crossing=True,          # Ensure q10 ≤ q20 ≤ ... ≤ q90
-    return_backcast=False,               # Return backcast (for covariate workflows)
+    return_backcast=False,               # Return backcast; MUST be True for forecast_with_covariates()
 )
 ```
 
@@ -356,6 +364,7 @@ timesfm.ForecastConfig(
 | `force_flip_invariance` | True | Keep True unless profiling shows it hurts |
 | `infer_is_positive` | True | Set False for series that can be negative (temperature, returns) |
 | `fix_quantile_crossing` | False | **Set True** to guarantee monotonic quantiles |
+| `return_backcast` | False | **Required True** for `forecast_with_covariates()` |
 
 ## 📋 Common Workflows
 

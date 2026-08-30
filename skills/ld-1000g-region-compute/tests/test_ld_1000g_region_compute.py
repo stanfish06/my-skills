@@ -57,7 +57,11 @@ def _write_ld(out_prefix: Path, lead: str, partner_pairs: list[tuple[str, float]
     """
 
     def _to_panel(ot_id: str) -> str:
-        return ot_id.replace("_", ":", 3)
+        # plink 1.9 --set-missing-var-ids '@:#:$1:$2' writes the two alleles in
+        # ASCII-sort order, not ref/alt.
+        chrom, pos, a1, a2 = ot_id.split("_", 3)
+        first, second = sorted((a1, a2))
+        return f"{chrom}:{pos}:{first}:{second}"
 
     rows = [" CHR_A         BP_A        SNP_A  CHR_B         BP_B        SNP_B           R2"]
     for partner, r2 in partner_pairs:

@@ -30,7 +30,7 @@ Evaluate the developer's task against this decision tree and select the appropri
 | Running a pre-trained or fine-tuned custom model in production | **ONNX Runtime** (`Microsoft.ML.OnnxRuntime`) | Hardware-accelerated inference, model-format agnostic |
 | Local/offline LLM inference with no cloud dependency | **OllamaSharp** with local [AI models supported by Ollama](https://ollama.com/search) | Privacy-sensitive, air-gapped, or cost-constrained scenarios |
 | Semantic search, RAG, or embedding storage | **Microsoft.Extensions.VectorData.Abstractions** + a vector database provider (e.g., Azure AI Search, Milvus, MongoDB, pgvector, Pinecone, Qdrant, Redis, SQL) | Provider-agnostic abstractions for vector similarity search; pair with a database-specific connector package (many are moving to community toolkits) |
-| Ingesting, chunking, and loading documents into a vector store | **Microsoft.Extensions.AI.DataIngestion** (preview) + **Microsoft.Extensions.VectorData.Abstractions** (MEVD) | Handles document parsing, text chunking, embedding generation, and upserting into a vector database; pairs with Microsoft.Extensions.VectorData.Abstractions |
+| Ingesting, chunking, and loading documents into a vector store | **Microsoft.Extensions.DataIngestion** (preview) + **Microsoft.Extensions.VectorData.Abstractions** (MEVD) | Handles document parsing, text chunking, embedding generation, and upserting into a vector database; pairs with Microsoft.Extensions.VectorData.Abstractions |
 | Both structured ML predictions AND natural language reasoning | **Hybrid**: ML.NET for predictions + LLM for reasoning layer | Keep loosely coupled; ML.NET handles reproducible scoring, LLM adds explanation |
 
 **Critical rule:** Do NOT use an LLM for tasks that ML.NET handles well (classification on tabular data, regression, clustering). LLMs are slower, more expensive, and non-deterministic for these tasks.
@@ -72,10 +72,10 @@ Install only the packages needed for the selected technology branch. Do not mix 
 #### Classic ML packages
 
 ```xml
-<PackageReference Include="Microsoft.ML" Version="4.*" />
+<PackageReference Include="Microsoft.ML" Version="5.*" />
 <PackageReference Include="Microsoft.ML.AutoML" Version="0.*" />
 <!-- Only if custom numerical work is needed: -->
-PackageReference Include="System.Numerics.Tensors" Version="10.*"
+<PackageReference Include="System.Numerics.Tensors" Version="10.*" />
 <PackageReference Include="MathNet.Numerics" Version="5.*" />
 <!-- Only for data exploration: -->
 <PackageReference Include="Microsoft.Data.Analysis" Version="0.*" />
@@ -87,10 +87,10 @@ PackageReference Include="System.Numerics.Tensors" Version="10.*"
 
 ```xml
 <!-- Always start with the abstraction layer -->
-<PackageReference Include="Microsoft.Extensions.AI" Version="9.*" />
+<PackageReference Include="Microsoft.Extensions.AI" Version="10.*" />
 
-<!-- Orchestration (agents, workflows, tools, memory) — prerelease; use dotnet add package Microsoft.Agents.AI --prerelease -->
-<PackageReference Include="Microsoft.Agents.AI" Version="1.*-*" />
+<!-- Orchestration (agents, workflows, tools, memory) -->
+<PackageReference Include="Microsoft.Agents.AI" Version="1.*" />
 
 <!-- Cloud LLM provider (pick one) -->
 <PackageReference Include="Azure.AI.OpenAI" Version="2.*" />
@@ -98,7 +98,7 @@ PackageReference Include="System.Numerics.Tensors" Version="10.*"
 <PackageReference Include="OpenAI" Version="2.*" />
 
 <!-- Client-side token counting for cost management -->
-    <PackageReference Include="Microsoft.ML.Tokenizers" Version="2.*" 
+<PackageReference Include="Microsoft.ML.Tokenizers" Version="2.*" />
 
 <!-- Local LLM inference -->
 <PackageReference Include="OllamaSharp" Version="5.*" />
@@ -107,10 +107,10 @@ PackageReference Include="System.Numerics.Tensors" Version="10.*"
 <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.*" />
 
 <!-- Vector store abstraction -->
-<PackageReference Include="Microsoft.Extensions.VectorData.Abstractions" Version="9.*" />
+<PackageReference Include="Microsoft.Extensions.VectorData.Abstractions" Version="10.*" />
 
 <!-- Document ingestion, chunking, and vector store loading (preview) -->
-<PackageReference Include="Microsoft.Extensions.AI.DataIngestion" Version="9.*-*" />
+<PackageReference Include="Microsoft.Extensions.DataIngestion" Version="10.*-*" />
 
 <!-- Copilot platform extensibility -->
 <PackageReference Include="GitHub.Copilot.SDK" Version="1.*" />
@@ -127,8 +127,9 @@ All AI/ML services must be registered via DI. Never instantiate clients directly
 services.Configure<AiOptions>(configuration.GetSection("AI"));
 
 // Register the AI client through the abstraction
-services.AddChatClient(builder => builder
-    .UseOpenAIChatClient("gpt-4o-mini-2024-07-18"));
+services.AddChatClient(sp => new OpenAIClient(configuration["AI:ApiKey"])
+    .GetChatClient("gpt-4o-mini-2024-07-18")
+    .AsIChatClient());
 ```
 
 ### Step 3: Implement with guardrails
@@ -174,14 +175,17 @@ Apply the guardrails for the selected technology branch. Every generated impleme
 
 2. **Structured output**: Always parse LLM output into strongly-typed objects with fallback handling:
    ```csharp
-   var result = await chatClient.GetResponseAsync<MySchema>(prompt, options, cancellationToken);
+   var result = await chatClient.GetResponseAsync<MySchema>(prompt, options, cancellationToken: cancellationToken);
    ```
 
-3. **Retry logic**: Always implement retry with exponential backoff:
+3. **Retry logic**: Always implement retry with exponential backoff. Microsoft.Extensions.AI ships no retry middleware, so add resilience on the transport (`Microsoft.Extensions.Http.Resilience`) or insert your own `DelegatingChatClient` subclass into the pipeline:
    ```csharp
-   services.AddChatClient(builder => builder
-       .UseOpenAIChatClient(modelId)
-       .Use(new RetryingChatClient(maxRetries: 3)));
+   services.AddChatClient(sp => new OpenAIClient(apiKey)
+       .GetChatClient(modelId)
+       .AsIChatClient()
+       .AsBuilder()
+       .Use(inner => new RetryChatClient(inner, maxRetries: 3)) // : DelegatingChatClient
+       .Build(sp));
    ```
 
 4. **Cost control**: Always estimate and log token usage. Use Microsoft.ML.Tokenizers to count tokens client-side before sending requests so you can enforce budgets proactively. Choose the smallest model tier that meets quality requirements (e.g., gpt-4o-mini before gpt-4o).
@@ -200,24 +204,29 @@ Apply the guardrails for the selected technology branch. Every generated impleme
 
 #### Agentic workflow guardrails
 
-0. **Use `Microsoft.Agents.AI` for all agentic workflows.** Do not implement tool dispatch loops or multi-step agent reasoning by hand with `IChatClient`. The Agent Framework provides `ChatClientAgent` (or `AgentWorker`) which handles the tool call → result → re-prompt cycle with built-in guardrails. All rules below assume you are using `Microsoft.Agents.AI`.
+0. **Use `Microsoft.Agents.AI` for all agentic workflows.** Do not implement tool dispatch loops or multi-step agent reasoning by hand with `IChatClient`. The Agent Framework provides `ChatClientAgent`, which handles the tool call → result → re-prompt cycle with built-in guardrails. All rules below assume you are using `Microsoft.Agents.AI`.
 
-1. **Iteration limits**: Always cap agentic loops to prevent runaway execution:
+1. **Iteration limits**: Always cap agentic loops to prevent runaway execution. The cap lives on the function-invoking chat client the agent runs on (`MaximumIterationsPerRequest`, default 40), not on the run options:
    ```csharp
-   var settings = new AgentInvokeOptions
-   {
-       MaximumIterations = 10,
-   };
+   IChatClient chatClient = new OpenAIClient(apiKey)
+       .GetChatClient(modelId)
+       .AsIChatClient()
+       .AsBuilder()
+       .UseFunctionInvocation(configure: c => c.MaximumIterationsPerRequest = 10)
+       .Build();
+
+   var agent = new ChatClientAgent(chatClient);
    ```
 
 2. **Cost ceiling**: Implement a token budget per execution and terminate when reached. Use Microsoft.ML.Tokenizers to count prompt and completion tokens locally and compare against the budget before each iteration.
 
 3. **Observability**: Log non-sensitive metadata for every agent step. Never log raw `message.Content` — it may contain user prompts, tool outputs, secrets, or PII that persist in plaintext in central logging systems:
    ```csharp
-   await foreach (var message in agent.InvokeStreamingAsync(history, settings))
+   var session = await agent.CreateSessionAsync();
+   await foreach (var update in agent.RunStreamingAsync(prompt, session))
    {
        logger.LogDebug("Agent step: Role={Role}, ContentLength={Length}",
-           message.Role, message.Content?.Length ?? 0);
+           update.Role, update.Text?.Length ?? 0);
    }
    ```
 
@@ -233,10 +242,9 @@ Apply the guardrails for the selected technology branch. Every generated impleme
 
 3. **Relevance thresholds**: Do not inject low-relevance chunks into context. Set a minimum similarity score:
    ```csharp
-   var results = await vectorStore.SearchAsync(query, new VectorSearchOptions
+   var results = collection.SearchAsync(query, top: 5, new VectorSearchOptions<MyRecord>
    {
-       Top = 5,
-       MinimumScore = 0.75f,
+       ScoreThreshold = 0.75,
    });
    ```
 
@@ -255,7 +263,7 @@ When the solution involves LLM calls or agentic workflows, explicitly address no
 3. **Graceful degradation**: Design a fallback path for when the LLM returns unexpected, malformed, or empty output:
    ```csharp
    var response = await chatClient.GetResponseAsync<ClassificationResult>(prompt, options);
-   if (response is null || !response.IsValid())
+   if (response is null || !response.TryGetResult(out var classification))
    {
        logger.LogWarning("LLM returned invalid response, falling back to rule-based classifier");
        return ruleBasedClassifier.Classify(input);
@@ -326,14 +334,14 @@ When reviewing or generating code, flag and redirect the developer if any of the
 | Anti-pattern | Redirect |
 |-------------|----------|
 | Using an LLM for classification on structured/tabular data | Use ML.NET instead — it is faster, cheaper, and deterministic |
-| Calling LLM APIs without retry or timeout logic | Add `RetryingChatClient` or Polly-based retry with exponential backoff |
+| Calling LLM APIs without retry or timeout logic | Add `Microsoft.Extensions.Http.Resilience` on the transport, or a `DelegatingChatClient` that retries with exponential backoff |
 | Storing API keys in `appsettings.json` committed to source control | Use user-secrets (dev), environment variables, or Azure Key Vault (prod) |
 | Using Accord.NET for new projects | Migrate to ML.NET — Accord.NET is archived and unmaintained |
 | Building custom neural networks in .NET from scratch | Use a pre-trained model via ONNX Runtime or call an LLM API |
 | RAG without chunking strategy or relevance filtering | Implement semantic chunking and set a minimum similarity score threshold |
-| Agentic loops without iteration limits or cost ceilings | Add `MaximumIterations` and a token budget ceiling |
+| Agentic loops without iteration limits or cost ceilings | Set `FunctionInvokingChatClient.MaximumIterationsPerRequest` and a token budget ceiling |
 | Using MEAI `IChatClient` with raw `HttpClient` calls to the same provider | Pick one abstraction layer and commit to it |
-| Implementing tool calling or agentic loops manually with `IChatClient` instead of using `Microsoft.Agents.AI` | Use `Microsoft.Agents.AI` — it provides iteration limits (`MaximumIterations`), built-in tool dispatch, observability hooks, and cost controls. Hand-rolled loops lack these guardrails. |
+| Implementing tool calling or agentic loops manually with `IChatClient` instead of using `Microsoft.Agents.AI` | Use `Microsoft.Agents.AI` — it provides iteration limits (`MaximumIterationsPerRequest`), built-in tool dispatch, observability hooks, and cost controls. Hand-rolled loops lack these guardrails. |
 | Using Agent Framework for a single prompt→response call | Use MEAI `IChatClient` directly — Agent Framework is for multi-step orchestration |
 | Using Copilot SDK for general-purpose LLM apps | Copilot SDK is for Copilot platform extensions only — use MEAI + Agent Framework for standalone apps |
 | Calling OpenAI SDK directly in business logic instead of through MEAI | Register the provider via `AddChatClient` and depend on `IChatClient` in business code |

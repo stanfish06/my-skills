@@ -61,11 +61,14 @@ tool) from an application failure (called it, ignored the answer).
 
 Trait scores are only computed on code that survives a gate. Compiling is not
 enough: a module can declare a tagged union and a `never` exhaustiveness helper,
-satisfy the whole `modern-typescript` rubric, and parse nothing. So every task
-also runs a harness-owned behaviour check.
+satisfy the whole `modern-typescript` rubric, and parse nothing. So every
+measurement task also runs a harness-owned behaviour check.
 
 - TS: `tsc --noEmit --strict --noUncheckedIndexedAccess` → `spec.ts`
 - Go: `go build` → `go vet` → `go test -run Test` → `go test -bench -benchmem`
+
+`ts-control-probe` is the one exception — it is a harness self-check, not a
+measurement, and is gated by `tsc` alone. See *The positive control* below.
 
 `trunc` counts generations that hit the output cap, including ones that returned
 partial code — a length-capped response is truncated whether or not it carries

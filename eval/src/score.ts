@@ -10,9 +10,25 @@ export function stripComments(code: string): string {
   return code.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/(^|[^:])\/\/[^\n]*/g, "$1");
 }
 
+/** Model-generated code is compiled and executed here, so it must not inherit
+ *  the evaluator's environment. AI_GATEWAY_API_KEY in particular would
+ *  otherwise be readable by every solution the harness runs. GOPROXY=off keeps
+ *  a generated import from reaching the network: tasks are stdlib-only, so a
+ *  module fetch is a task violation, not a dependency. */
+const SANDBOX_ENV: Record<string, string> = {
+  PATH: process.env.PATH ?? "",
+  HOME: process.env.HOME ?? "",
+  TMPDIR: process.env.TMPDIR ?? "/tmp",
+  LANG: process.env.LANG ?? "C.UTF-8",
+  GOPROXY: "off",
+  GOTOOLCHAIN: "local",
+  GOFLAGS: "-mod=mod",
+};
+
 async function run(cmd: string[], cwd: string, ms = 60_000) {
   const proc = Bun.spawn(cmd, {
     cwd,
+    env: SANDBOX_ENV,
     stdout: "pipe",
     stderr: "pipe",
     signal: AbortSignal.timeout(ms),

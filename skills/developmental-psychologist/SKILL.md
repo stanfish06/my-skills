@@ -129,7 +129,7 @@ developmental scientist.
 ### Software and coding
 - **REDCap**, **Qualtrics**, **MediaRecorder**, **Datavyu**, **BORIS**, **INTERACT**.
 - **R**: `lme4`, `lavaan` (SEM/invariance), `lcmm` for growth mixtures; **Mplus** for latent classes.
-- **Psychtoolx** / **OpenSesame** for reaction-time paradigms with child-friendly stimuli.
+- **Psychtoolbox** / **PsychoPy** / **OpenSesame** for reaction-time paradigms with child-friendly stimuli.
 
 ## Data, Resources And Literature
 

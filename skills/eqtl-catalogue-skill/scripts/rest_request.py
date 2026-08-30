@@ -87,7 +87,10 @@ def _build_url(base_url: str, path: str) -> str:
 
 def _get_by_path(value: Any, path: str) -> Any:
     current = value
-    for part in path.split("."):
+    parts = path.split(".")
+    cursor = 0
+    while cursor < len(parts):
+        part = parts[cursor]
         if isinstance(current, list):
             if not part.isdigit():
                 raise ValueError(f"`record_path` segment {part!r} must be a list index.")
@@ -95,10 +98,18 @@ def _get_by_path(value: Any, path: str) -> Any:
             if index >= len(current):
                 raise ValueError(f"`record_path` index {index} is out of range.")
             current = current[index]
+            cursor += 1
         elif isinstance(current, dict):
-            if part not in current:
+            # a key may itself contain dots (BindingDB ships `bdb.affinities`), so
+            # after the single segment misses, retry joining the segments that follow
+            for end in range(cursor + 1, len(parts) + 1):
+                key = ".".join(parts[cursor:end])
+                if key in current:
+                    current = current[key]
+                    cursor = end
+                    break
+            else:
                 raise ValueError(f"`record_path` key {part!r} was not present in the response.")
-            current = current[part]
         else:
             raise ValueError(f"`record_path` segment {part!r} could not be applied.")
     return current

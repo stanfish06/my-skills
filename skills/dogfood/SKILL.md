@@ -58,21 +58,25 @@ agent-browser --session {SESSION} wait --load networkidle
 
 If the app requires login:
 
+Never pass the password to `fill` -- it lands in the process table and shell history, and `agent-browser` warns about exactly this. Ask the user to store the credentials in the encrypted auth vault themselves, so the password never reaches argv or this transcript:
+
 ```bash
-agent-browser --session {SESSION} snapshot -i
-# Identify login form refs, fill credentials
-agent-browser --session {SESSION} fill @e1 "{EMAIL}"
-agent-browser --session {SESSION} fill @e2 "{PASSWORD}"
-agent-browser --session {SESSION} click @e3
+agent-browser auth save {SESSION} --url {LOGIN_URL} --username {EMAIL} --password-stdin
+```
+
+Then sign in from the vault:
+
+```bash
+agent-browser --session {SESSION} auth login {SESSION}
 agent-browser --session {SESSION} wait --load networkidle
 ```
 
 For OTP/email codes: ask the user, wait for their response, then enter the code.
 
-After successful login, save state for potential reuse:
+After successful login, save state for potential reuse. `state save` writes every cookie plus localStorage and sessionStorage for every visited origin, in plaintext unless `AGENT_BROWSER_ENCRYPTION_KEY` is set -- keep it out of `{OUTPUT_DIR}`, which is handed to other teams:
 
 ```bash
-agent-browser --session {SESSION} state save {OUTPUT_DIR}/auth-state.json
+agent-browser --session {SESSION} state save ~/.agent-browser/{SESSION}-auth-state.json
 ```
 
 ### 3. Orient
@@ -179,10 +183,11 @@ Aim to find **5-10 well-documented issues**, then wrap up. Depth of evidence mat
 After exploring:
 
 1. Re-read the report and update the summary severity counts so they match the actual issues. Every `### ISSUE-` block must be reflected in the totals.
-2. Close the session:
+2. Close the session and delete the saved auth state, which holds live session tokens:
 
 ```bash
 agent-browser --session {SESSION} close
+rm -f ~/.agent-browser/{SESSION}-auth-state.json
 ```
 
 3. Tell the user the report is ready and summarize findings: total issues, breakdown by severity, and the most critical items.

@@ -1,6 +1,6 @@
 import { mkdir, rm } from "node:fs/promises";
 import { resolve } from "node:path";
-import { EVAL_DIR, SKILLS, loadTasks, provenance, type RunConfig } from "./config.ts";
+import { EVAL_DIR, SKILLS, loadTasks, provenance, guidelinesVersion, type RunConfig } from "./config.ts";
 import { buildSystem, generate } from "./inject.ts";
 import { gate, bench, scoreTrait, verifyTraits } from "./score.ts";
 import type { Arm, Cell, SkillDef, Task } from "./types.ts";
@@ -16,6 +16,9 @@ function hash(parts: string[]): string {
 type Plan = { task: Task; skill: SkillDef | null; arm: Arm; rep: number; model: string };
 
 async function poolMap<T, R>(items: T[], limit: number, fn: (t: T, i: number) => Promise<R>): Promise<R[]> {
+  if (!Number.isInteger(limit) || limit < 1) {
+    throw new RangeError(`concurrency must be a positive integer, got ${limit}`);
+  }
   const out = new Array<R>(items.length);
   let next = 0;
   await Promise.all(
@@ -49,22 +52,33 @@ export async function runEval(cfg: RunConfig, opts: { concurrency: number }) {
     }
   }
 
-  const runId = `${new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19)}-${cfg.id}`;
+  // Random suffix so two runs started in the same second cannot overwrite each
+  // other's manifests, reports or scratch directories.
+  const stamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
+  const runId = `${stamp}-${cfg.id}-${Math.random().toString(36).slice(2, 8)}`;
   const runDir = resolve(EVAL_DIR, "runs", runId);
+  const workRoot = resolve(EVAL_DIR, "work", runId);
   await mkdir(runDir, { recursive: true });
   await mkdir(CACHE, { recursive: true });
+
+  // The guidelines CLI can change its rules while every SKILL.md stays
+  // byte-identical, so it belongs in the cache key, not just the manifest.
+  const toolVersion = await guidelinesVersion();
 
   console.log(`run ${runId}: ${plans.length} cells (${cfg.models.length} models x ${cfg.reps} reps)`);
 
   let done = 0;
   const cells = await poolMap(plans, opts.concurrency, async (p) => {
     const system = await buildSystem(p.arm, p.skill);
-    const key = hash([p.model, system, p.task.prompt, String(p.rep), p.skill?.injection ?? "none"]);
+    const key = hash([
+      p.model, system, p.task.prompt, String(p.rep),
+      p.skill?.injection ?? "none",
+      p.skill?.injection === "tool" ? toolVersion : "",
+      String(cfg.maxOutputTokens),
+    ]);
     const cacheFile = resolve(CACHE, `${key}.json`);
 
-    let gen = await Bun.file(cacheFile)
-      .json()
-      .catch(() => null);
+    let gen = await Bun.file(cacheFile).json().catch(() => null);
     const cached = gen !== null;
     const t0 = performance.now();
     if (!gen) {
@@ -79,37 +93,32 @@ export async function runEval(cfg: RunConfig, opts: { concurrency: number }) {
     }
     const ms = Math.round(performance.now() - t0);
 
+    // A length-capped response is truncated even when it carries partial code.
+    // Gating that partial file would report truncation as a code failure.
+    const truncated = gen.finishReason === "length" || !gen.code;
+
     const cell: Cell = {
-      runId,
-      key,
-      model: p.model,
-      taskId: p.task.id,
-      skillId: p.skill?.id ?? null,
-      arm: p.arm,
-      rep: p.rep,
-      system,
-      prompt: p.task.prompt,
-      code: gen.code,
-      raw: gen.raw,
-      toolCalls: gen.toolCalls,
-      steps: gen.steps,
+      runId, key, model: p.model, taskId: p.task.id, skillId: p.skill?.id ?? null,
+      arm: p.arm, rep: p.rep, system, prompt: p.task.prompt,
+      code: gen.code, raw: gen.raw, toolCalls: gen.toolCalls, steps: gen.steps,
       finishReason: gen.finishReason,
-      outcome: gen.error ? "error" : gen.code ? "gate-fail" : "empty",
-      usage: gen.usage,
-      ms,
-      cached,
-      error: gen.error,
-      gate: null,
-      traits: [],
-      bench: null,
+      outcome: gen.error ? "error" : truncated ? "empty" : "gate-fail",
+      usage: gen.usage, ms, cached, error: gen.error,
+      gate: null, traits: [], bench: null, benchError: null,
     };
 
-    if (!gen.error && gen.code) {
-      const g = await gate(p.task, gen.code, key);
+    if (cell.outcome === "gate-fail") {
+      const g = await gate(p.task, gen.code, workRoot, key);
       cell.gate = { pass: g.pass, detail: g.detail };
-      cell.traits = await Promise.all(p.task.traits.map((t) => scoreTrait(t, gen.code, p.task.lang)));
       cell.outcome = g.pass ? "ok" : "gate-fail";
-      if (g.pass && p.task.bench) cell.bench = await bench(g.dir);
+      cell.traits = await Promise.all(
+        p.task.traits.map((t) => scoreTrait(t, gen.code, p.task.lang, g.dir)),
+      );
+      if (g.pass && p.task.bench) {
+        const b = await bench(g.dir);
+        cell.bench = b.result;
+        cell.benchError = b.error;
+      }
       await rm(g.dir, { recursive: true, force: true });
     }
 
@@ -119,6 +128,8 @@ export async function runEval(cfg: RunConfig, opts: { concurrency: number }) {
     console.log(`  [${String(done).padStart(3)}/${plans.length}] ${mark} ${tag}${cached ? " (cached)" : ""}`);
     return cell;
   });
+
+  await rm(workRoot, { recursive: true, force: true });
 
   const manifest = {
     runId,
@@ -148,16 +159,25 @@ export async function replayRun(runId: string) {
   const problems = await verifyTraits(tasks);
   if (problems.length) throw new Error(`trait self-test failed:\n${problems.join("\n")}`);
 
+  const workRoot = resolve(EVAL_DIR, "work", `replay-${runId}`);
   for (const cell of cells) {
     const task = tasks.get(cell.taskId);
-    if (!task || cell.error || !cell.code) continue;
-    const g = await gate(task, cell.code, cell.key);
+    if (!task || cell.outcome === "error" || cell.outcome === "empty") continue;
+    const g = await gate(task, cell.code, workRoot, cell.key);
     cell.gate = { pass: g.pass, detail: g.detail };
     cell.outcome = g.pass ? "ok" : "gate-fail";
-    cell.traits = await Promise.all(task.traits.map((t) => scoreTrait(t, cell.code, task.lang)));
-    cell.bench = g.pass && task.bench ? await bench(g.dir) : null;
+    cell.traits = await Promise.all(task.traits.map((t) => scoreTrait(t, cell.code, task.lang, g.dir)));
+    if (g.pass && task.bench) {
+      const b = await bench(g.dir);
+      cell.bench = b.result;
+      cell.benchError = b.error;
+    } else {
+      cell.bench = null;
+      cell.benchError = null;
+    }
     await rm(g.dir, { recursive: true, force: true });
   }
+  await rm(workRoot, { recursive: true, force: true });
   await Bun.write(resolve(runDir, "cells.jsonl"), cells.map((c) => JSON.stringify(c)).join("\n") + "\n");
   return { runId, runDir, cells, manifest };
 }

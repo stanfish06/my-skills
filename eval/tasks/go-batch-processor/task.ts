@@ -7,6 +7,7 @@ export const task: Task = {
   lang: "go",
   prompt: await Bun.file(new URL("prompt.md", import.meta.url)).text(),
   bench: true,
+  spec: true,
   traits: [
     {
       id: "go-wg-go",

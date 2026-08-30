@@ -27,6 +27,10 @@ that task looks like. Each trait is tagged with which skill prescribes it:
 Both arms are scored against the same rubric, so the number that matters is the
 delta, not the level.
 
+**Only gate-passing cells contribute to either percentage.** Code that fails to
+compile or fails its behaviour check can still contain every token a rubric
+looks for; averaging it in would let broken code carry the delta.
+
 ## Arms
 
 `baseline` (task only) and `skill` (task + skill). `placebo` — a length-matched
@@ -55,14 +59,20 @@ tool) from an application failure (called it, ignored the answer).
 
 ## Gates
 
-Trait scores are only computed on code that survives a gate.
+Trait scores are only computed on code that survives a gate. Compiling is not
+enough: a module can declare a tagged union and a `never` exhaustiveness helper,
+satisfy the whole `modern-typescript` rubric, and parse nothing. So every task
+also runs a harness-owned behaviour check.
 
-- TS: `tsc --noEmit --strict --noUncheckedIndexedAccess`
-- Go: `go build` → `go vet` → `go test -run Test` against harness-owned tests
+- TS: `tsc --noEmit --strict --noUncheckedIndexedAccess` → `spec.ts`
+- Go: `go build` → `go vet` → `go test -run Test` → `go test -bench -benchmem`
 
-`trunc` in the report counts generations that hit the output cap and returned
-nothing. Those are held separate from gate failures on purpose — reporting an
-empty generation as a compile failure would read as the skill breaking the code.
+`trunc` counts generations that hit the output cap, including ones that returned
+partial code — a length-capped response is truncated whether or not it carries
+text, and gating the fragment would report truncation as a code failure. `err`
+counts gateway and tool failures. Both shrink the sample, so both are columns in
+the report rather than silent omissions. A benchmark that panics or deadlocks is
+counted in the `failed` column instead of vanishing from the medians.
 
 ## Trait self-test
 
@@ -78,6 +88,13 @@ prefixed `zz_`. No model does that unprompted, so baseline should score ~0% and
 the skill arm ~100%. If that delta does not appear, the harness is broken — not
 the skill. Check it before trusting any other row.
 
+Two traits, not one: a `require` for a `zz_` export and a paired `forbid` for
+any export without the prefix. One prefixed symbol next to an unprefixed `parse`
+is not adherence, and the require alone would score it 100%.
+
+The control runs on its own task (`ts-control-probe`), gated by `tsc` only. It
+renames exports, which would fight a behaviour check with fixed export names.
+
 ## Reading the bench numbers
 
 `allocs/op` and `B/op` are stable across re-runs on the same code. `ns/op` is
@@ -89,13 +106,23 @@ only.
 
 `runs/<runId>/` holds `cells.jsonl` (one row per generation: full system prompt,
 prompt, raw response, extracted code, tool calls, usage, gate detail, per-trait
-results, bench), `manifest.json` (config plus skill folder hashes and the
-guidelines CLI version, so an old run stays interpretable after a skill drifts),
+results, bench), `manifest.json` (config plus a content hash of every tested
+skill directory and the guidelines CLI version, so an old run stays
+interpretable after a skill drifts; the hashes come from the directories
+themselves because `.skill-lock.json` has no entry for vault-authored skills or
+for the local control),
 `report.md`, and `summary.json`.
 
 Generations are content-addressed in `.cache/gen/` by
-`(model, system, prompt, rep)`, so a re-run only pays for cells that changed.
-Truncated and empty generations are never cached.
+`(model, system, prompt, rep, maxOutputTokens, guidelines CLI version)`, so a
+re-run only pays for cells that changed. The CLI version is in the key because
+its rules can change while every `SKILL.md` stays byte-identical — without it a
+cached generation would be falsely attributed to the new rules. Truncated and
+empty generations are never cached.
+
+Run IDs carry a random suffix and each run gets its own `work/<runId>/` tree, so
+two overlapping runs cannot delete each other's compile directories or overwrite
+each other's reports.
 
 ## Known v0 limits
 

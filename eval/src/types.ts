@@ -28,6 +28,10 @@ export const Task = z.object({
   traits: z.array(Trait),
   /** Go only: run the harness-owned benchmark after the build gate passes. */
   bench: z.boolean().default(false),
+  /** Run the task-owned behaviour check (spec.ts / bench_test.go) in the gate.
+   *  Without it a module can declare the idioms a rubric looks for without
+   *  implementing anything. */
+  spec: z.boolean().default(false),
 });
 export type Task = z.infer<typeof Task>;
 
@@ -84,5 +88,6 @@ export const Cell = z.object({
   gate: z.object({ pass: z.boolean(), detail: z.string() }).nullable(),
   traits: z.array(TraitResult),
   bench: BenchResult.nullable(),
+  benchError: z.string().nullable(),
 });
 export type Cell = z.infer<typeof Cell>;

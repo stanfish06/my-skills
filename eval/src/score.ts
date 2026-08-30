@@ -1,4 +1,5 @@
 import { mkdir, rm, cp } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { EVAL_DIR } from "./config.ts";
 import type { Task, Trait, TraitResult, BenchResult } from "./types.ts";
@@ -38,7 +39,7 @@ async function go(): Promise<string> {
 
 let sgAvailable: boolean | null = null;
 
-async function matches(trait: Trait, code: string, lang: Task["lang"]): Promise<boolean> {
+async function matches(trait: Trait, code: string, lang: Task["lang"], dir: string): Promise<boolean> {
   const src = stripComments(code);
   if (trait.kind === "regex") return new RegExp(trait.pattern, "m").test(src);
 
@@ -47,16 +48,20 @@ async function matches(trait: Trait, code: string, lang: Task["lang"]): Promise<
       .code === 0;
   }
   if (!sgAvailable) throw new Error(`trait ${trait.id} needs ast-grep on PATH`);
-  const dir = resolve(EVAL_DIR, ".cache/sg");
   await mkdir(dir, { recursive: true });
-  const file = resolve(dir, `probe.${lang}`);
+  const file = resolve(dir, `probe-${trait.id}.${lang}`);
   await Bun.write(file, src);
   const r = await run(["ast-grep", "run", "-p", trait.pattern, "-l", lang, file, "--json=compact"], dir);
   return r.code === 0 && r.out.trim() !== "[]" && r.out.trim() !== "";
 }
 
-export async function scoreTrait(trait: Trait, code: string, lang: Task["lang"]): Promise<TraitResult> {
-  const m = await matches(trait, code, lang);
+export async function scoreTrait(
+  trait: Trait,
+  code: string,
+  lang: Task["lang"],
+  scratch = resolve(EVAL_DIR, ".cache/sg"),
+): Promise<TraitResult> {
+  const m = await matches(trait, code, lang, scratch);
   return {
     id: trait.id,
     matched: m,
@@ -80,29 +85,44 @@ export async function verifyTraits(tasks: Map<string, Task>): Promise<string[]> 
   return problems;
 }
 
+const taskDir = (id: string) => resolve(EVAL_DIR, "tasks", id);
+
+/** Gates run before traits are scored. Compiling is not enough: a module can
+ *  declare the idioms a rubric looks for without implementing the task, so
+ *  every task also runs harness-owned behaviour checks. */
 export async function gate(
   task: Task,
   code: string,
+  workRoot: string,
   key: string,
 ): Promise<{ pass: boolean; detail: string; dir: string }> {
-  const dir = resolve(EVAL_DIR, "work", key);
+  const dir = resolve(workRoot, key);
   await rm(dir, { recursive: true, force: true });
   await mkdir(dir, { recursive: true });
 
   if (task.lang === "ts") {
     await Bun.write(resolve(dir, "solution.ts"), code);
     const tsc = resolve(EVAL_DIR, "node_modules/.bin/tsc");
-    const r = await run(
+    const t = await run(
       [tsc, "--noEmit", "--strict", "--noUncheckedIndexedAccess", "--target", "es2022",
        "--lib", "es2023", "--skipLibCheck", "--moduleDetection", "force", "solution.ts"],
       dir,
     );
-    return { pass: r.code === 0, detail: r.code === 0 ? "tsc ok" : r.out.slice(0, 600), dir };
+    if (t.code !== 0) return { pass: false, detail: `tsc: ${t.out.slice(0, 600)}`, dir };
+
+    const spec = resolve(taskDir(task.id), "spec.ts");
+    if (task.spec && existsSync(spec)) {
+      await cp(spec, resolve(dir, "spec.ts"));
+      const s = await run([process.execPath, "spec.ts"], dir, 60_000);
+      if (s.code !== 0) return { pass: false, detail: `spec: ${s.out.slice(0, 600)}`, dir };
+      return { pass: true, detail: "tsc + spec ok", dir };
+    }
+    return { pass: true, detail: "tsc ok", dir };
   }
 
   await Bun.write(resolve(dir, "go.mod"), "module evaltask\n\ngo 1.27\n");
   await Bun.write(resolve(dir, "solution.go"), code);
-  await cp(resolve(EVAL_DIR, `tasks/${task.id}/bench_test.go`), resolve(dir, "bench_test.go"));
+  await cp(resolve(taskDir(task.id), "bench_test.go"), resolve(dir, "bench_test.go"));
 
   const g = await go();
   for (const [stage, cmd] of [
@@ -119,14 +139,21 @@ export async function gate(
 const BENCH_LINE =
   /^Benchmark\S*\s+\d+\s+([\d.]+)\s+ns\/op\s+([\d.]+)\s+B\/op\s+([\d.]+)\s+allocs\/op/m;
 
-export async function bench(dir: string): Promise<BenchResult | null> {
+/** A benchmark that panics, deadlocks or times out must be reported, not
+ *  silently dropped from the medians. */
+export async function bench(dir: string): Promise<{ result: BenchResult | null; error: string | null }> {
   const g = await go();
   const r = await run(
     [g, "test", "-run", "^$", "-bench=.", "-benchmem", "-count=1", "-timeout", "120s", "./..."],
     dir,
     180_000,
-  );
+  ).catch((e) => ({ code: 124, out: e instanceof Error ? e.message : String(e) }));
+
+  if (r.code !== 0) return { result: null, error: `go bench exit ${r.code}: ${r.out.slice(0, 400)}` };
   const m = r.out.match(BENCH_LINE);
-  if (!m) return null;
-  return { nsPerOp: Number(m[1]), bytesPerOp: Number(m[2]), allocsPerOp: Number(m[3]) };
+  if (!m) return { result: null, error: `no benchmark line in output: ${r.out.slice(0, 400)}` };
+  return {
+    result: { nsPerOp: Number(m[1]), bytesPerOp: Number(m[2]), allocsPerOp: Number(m[3]) },
+    error: null,
+  };
 }

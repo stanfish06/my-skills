@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "target": "es2022",
-    "lib": ["es2023"],
+    "lib": [
+      "es2023"
+    ],
     "module": "preserve",
     "moduleResolution": "bundler",
     "moduleDetection": "force",
@@ -10,7 +12,15 @@
     "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["bun"]
+    "types": [
+      "bun"
+    ]
   },
-  "include": ["src", "tasks"]
+  "include": [
+    "src",
+    "tasks"
+  ],
+  "exclude": [
+    "**/spec.ts"
+  ]
 }

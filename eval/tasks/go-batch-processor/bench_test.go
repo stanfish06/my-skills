@@ -30,17 +30,40 @@ func TestProcessBatchesOrder(t *testing.T) {
 }
 
 func TestProcessBatchesAggregatesErrors(t *testing.T) {
-	boom := errors.New("boom")
+	// Two distinct failures, so an implementation that reports only the first
+	// (or only the last) and wraps it in errors.Join cannot pass.
+	errLow := errors.New("low batch failed")
+	errHigh := errors.New("high batch failed")
 	fn := func(b []int) (int, error) {
-		if b[0] == 3 {
-			return 0, boom
+		switch b[0] {
+		case 3:
+			return 0, errLow
+		case 7:
+			return 0, errHigh
 		}
-		return b[0], nil
+		return b[0] * 100, nil
 	}
-	if _, err := ProcessBatches([]int{1, 2, 3, 4}, 2, fn); err == nil {
+
+	got, err := ProcessBatches([]int{1, 2, 3, 4, 5, 6, 7, 8}, 2, fn)
+	if err == nil {
 		t.Fatal("expected an error")
-	} else if !errors.Is(err, boom) {
-		t.Fatalf("error does not match the batch error: %v", err)
+	}
+	if !errors.Is(err, errLow) {
+		t.Fatalf("first batch error is not discoverable in %v", err)
+	}
+	if !errors.Is(err, errHigh) {
+		t.Fatalf("second batch error is not discoverable in %v", err)
+	}
+
+	// Results survive the failures, one entry per batch, still in batch order.
+	want := []int{100, 0, 500, 0}
+	if len(got) != len(want) {
+		t.Fatalf("len = %d, want %d (%v)", len(got), len(want), got)
+	}
+	for i := range want {
+		if got[i] != want[i] {
+			t.Fatalf("got %v, want %v", got, want)
+		}
 	}
 }
 

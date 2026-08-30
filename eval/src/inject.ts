@@ -39,24 +39,30 @@ async function runSkillCli(skillDir: string, args: string[]): Promise<string> {
     new Response(proc.stdout).text(),
     new Response(proc.stderr).text(),
   ]);
-  await proc.exited;
-  return (out || err).slice(0, 40_000);
+  const code = await proc.exited;
+  // Returning diagnostics as a successful tool result would let an install or
+  // lookup failure be scored as a real skill-arm sample.
+  if (code !== 0) {
+    throw new Error(`skill CLI \`${args.join(" ")}\` exited ${code}: ${(err || out).slice(0, 400)}`);
+  }
+  return out.slice(0, 40_000);
 }
 
-function skillTools(skill: SkillDef) {
+function skillTools(skill: SkillDef, onFailure: (e: unknown) => void) {
   const version = skill.goVersion ?? "1.27";
+  const guard = (fn: () => Promise<string>) => fn().catch((e) => { onFailure(e); throw e; });
   return {
     go_guidelines_list: tool({
       description:
         "List the modern Go guidelines that apply to a Go version. Returns one line per guideline, newest first. Read the whole list.",
       inputSchema: z.object({ goVersion: z.string().describe("e.g. 1.27") }),
-      execute: async ({ goVersion }) => runSkillCli(skill.dir, ["list", "--go-version", goVersion || version]),
+      execute: async ({ goVersion }) => guard(() => runSkillCli(skill.dir, ["list", "--go-version", goVersion || version])),
     }),
     go_guidelines_explain: tool({
       description:
         "Explain specific guideline IDs, with details and before/after examples. Pass only the IDs you intend to apply.",
       inputSchema: z.object({ ids: z.array(z.string()).min(1) }),
-      execute: async ({ ids }) => runSkillCli(skill.dir, ["explain", ...ids.slice(0, 12)]),
+      execute: async ({ ids }) => guard(() => runSkillCli(skill.dir, ["explain", ...ids.slice(0, 12)])),
     }),
   };
 }
@@ -93,6 +99,7 @@ export async function generate(opts: {
   maxOutputTokens: number;
 }): Promise<GenResult> {
   const useTools = opts.arm === "skill" && opts.skill?.injection === "tool";
+  let toolFailure: string | null = null;
   try {
     const r = await generateText({
       model: opts.model,
@@ -101,7 +108,12 @@ export async function generate(opts: {
       temperature: 0.2,
       maxOutputTokens: opts.maxOutputTokens,
       ...(useTools
-        ? { tools: skillTools(opts.skill!), stopWhen: stepCountIs(8) }
+        ? {
+            tools: skillTools(opts.skill!, (e) => {
+              toolFailure ??= e instanceof Error ? e.message : String(e);
+            }),
+            stopWhen: stepCountIs(8),
+          }
         : {}),
     });
     const toolCalls = r.steps.flatMap((s) =>
@@ -114,7 +126,8 @@ export async function generate(opts: {
       steps: r.steps.length,
       finishReason: r.finishReason ?? null,
       usage: (r.usage ?? null) as Record<string, unknown> | null,
-      error: null,
+      // Infrastructure failure must not be reported as a skill result.
+      error: toolFailure,
     };
   } catch (e) {
     return {

@@ -13,7 +13,9 @@ Behaviour:
 2. Process every batch **concurrently**, each in its own goroutine.
 3. Return one result per batch, in batch order — not in completion order.
 4. If any batches fail, return the results slice alongside a single error that
-   combines every batch error, so a caller can still match against each one.
+   combines **every** batch error, so a caller can match against each one
+   individually. The results slice always holds one entry per batch, in batch
+   order; a failed batch contributes the zero value at its index.
 5. `batchSize <= 0` or empty `items` returns an empty result and a nil error.
 
 The module targets Go 1.27. Return only the contents of `solution.go` in a

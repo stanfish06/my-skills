@@ -10,7 +10,7 @@ export const SKILLS: SkillDef[] = [
   { id: "use-modern-go", dir: resolve(REPO_DIR, "skills/use-modern-go"), injection: "tool", goVersion: "1.27" },
 ];
 
-const TASK_IDS = ["ts-settings-parser", "go-batch-processor"] as const;
+const TASK_IDS = ["ts-settings-parser", "ts-control-probe", "go-batch-processor"] as const;
 
 export async function loadTasks(): Promise<Map<string, Task>> {
   const out = new Map<string, Task>();
@@ -33,7 +33,7 @@ export type RunConfig = {
 };
 
 const PAIRS = [
-  { skill: "zz-prefix", task: "ts-settings-parser" },
+  { skill: "zz-prefix", task: "ts-control-probe" },
   { skill: "modern-typescript", task: "ts-settings-parser" },
   { skill: "use-modern-go", task: "go-batch-processor" },
 ];
@@ -54,21 +54,29 @@ export const CONFIGS: Record<string, RunConfig> = {
   },
 };
 
-/** Provenance: a skill's content and the guidelines CLI both drift under us.
- *  Recording both versions is what makes an old run interpretable later. */
+/** Hash of a skill directory's own contents. The install lock is not
+ *  authoritative here — it has no entry for vault-authored skills or for the
+ *  local control — so every tested skill is hashed from its files. */
+export async function skillHash(dir: string): Promise<string> {
+  const files = [...new Bun.Glob("**/*").scanSync({ cwd: dir, onlyFiles: true })].sort();
+  const h = new Bun.CryptoHasher("sha256");
+  for (const rel of files) {
+    h.update(rel + "\0");
+    h.update(await Bun.file(resolve(dir, rel)).arrayBuffer());
+  }
+  return h.digest("hex").slice(0, 16);
+}
+
+/** The guidelines CLI is a second version axis: its rules can change while
+ *  every SKILL.md stays byte-identical. */
+export async function guidelinesVersion(): Promise<string> {
+  return (await Bun.file(resolve(REPO_DIR, "skills/use-modern-go/scripts/VERSION")).text().catch(() => "unknown")).trim();
+}
+
+/** Recorded per run so an old result stays interpretable after a skill drifts. */
 export async function provenance(): Promise<Record<string, string>> {
   const out: Record<string, string> = {};
-  try {
-    const lock = await Bun.file(resolve(REPO_DIR, ".skill-lock.json")).json();
-    for (const s of SKILLS) {
-      const hash = lock?.skills?.[s.id]?.skillFolderHash;
-      if (hash) out[`skill:${s.id}`] = hash;
-    }
-  } catch {}
-  try {
-    out["go-modern-guidelines"] = (
-      await Bun.file(resolve(REPO_DIR, "skills/use-modern-go/scripts/VERSION")).text()
-    ).trim();
-  } catch {}
+  for (const s of SKILLS) out[`skill:${s.id}`] = await skillHash(s.dir).catch(() => "unreadable");
+  out["go-modern-guidelines"] = await guidelinesVersion();
   return out;
 }

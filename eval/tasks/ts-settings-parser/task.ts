@@ -1,13 +1,13 @@
 import type { Task } from "../../src/types.ts";
 
 const MT = ["modern-typescript"];
-const ZZ = ["zz-prefix"];
 
 export const task: Task = {
   id: "ts-settings-parser",
   lang: "ts",
   prompt: await Bun.file(new URL("prompt.md", import.meta.url)).text(),
   bench: false,
+  spec: true,
   traits: [
     {
       id: "ts-no-any",
@@ -43,18 +43,6 @@ export const task: Task = {
       fixture: {
         satisfies: `function assertNever(x: never): never { throw new Error(String(x)); }`,
         violates: `function fallback(x: unknown): string { throw new Error(String(x)); }`,
-      },
-    },
-    {
-      id: "zz-prefix",
-      polarity: "require",
-      kind: "regex",
-      pattern: String.raw`export\s+(function|const)\s+zz_`,
-      prescribedBy: ZZ,
-      note: "positive control: no model does this unprompted",
-      fixture: {
-        satisfies: `export function zz_parse(k: string) { return k; }`,
-        violates: `export function parse(k: string) { return k; }`,
       },
     },
     {

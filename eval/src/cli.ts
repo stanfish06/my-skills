@@ -30,7 +30,11 @@ switch (cmd) {
     const cfg = CONFIGS[name];
     if (!cfg) throw new Error(`unknown config "${name}" (have: ${Object.keys(CONFIGS).join(", ")})`);
     if (!process.env.AI_GATEWAY_API_KEY) throw new Error("AI_GATEWAY_API_KEY not set — run `mise run setup`");
-    const { runDir, cells, manifest } = await runEval(cfg, { concurrency: Number(flag("concurrency", "4")) });
+    const concurrency = Number(flag("concurrency", "4"));
+    if (!Number.isInteger(concurrency) || concurrency < 1) {
+      throw new Error(`--concurrency must be a positive integer, got "${flag("concurrency", "4")}"`);
+    }
+    const { runDir, cells, manifest } = await runEval(cfg, { concurrency });
     console.log("\n" + (await writeReport(runDir, cells, manifest)));
     console.log(`saved: ${runDir}/{cells.jsonl,report.md,summary.json}`);
     break;

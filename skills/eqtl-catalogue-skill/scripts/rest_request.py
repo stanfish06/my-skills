@@ -142,13 +142,9 @@ def _compact(value: Any, max_items: int, max_depth: int) -> Any:
             out.append(f"... (+{len(value) - max_items} more)")
         return out
     if isinstance(value, dict):
-        out: dict[str, Any] = {}
-        items = list(value.items())
-        for key, item in items[:max_items]:
-            out[str(key)] = _compact(item, max_items, max_depth - 1)
-        if len(items) > max_items:
-            out["_truncated_keys"] = len(items) - max_items
-        return out
+        # `max_items` caps list length only; dropping object keys would silently
+        # discard fields the caller asked for.
+        return {str(key): _compact(item, max_items, max_depth - 1) for key, item in value.items()}
     return value
 
 

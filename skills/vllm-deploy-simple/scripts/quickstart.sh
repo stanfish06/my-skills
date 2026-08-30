@@ -174,7 +174,17 @@ install_vllm() {
             ;;
         "AMD ROCm")
             log_info "Installing vLLM for AMD ROCm..."
-            $PACKAGE_MANAGER install vllm openai
+            # The default PyPI wheel is CUDA-only. ROCm wheels live on a separate index,
+            # and pip merges extra indexes by version rather than preferring them, so the
+            # CUDA wheel would win. uv gives --extra-index-url priority; require it.
+            if ! command -v uv &> /dev/null; then
+                log_error "ROCm installation requires uv (pip resolves the extra index to the CUDA wheel)."
+                log_error "Install uv, then: uv pip install vllm --extra-index-url https://wheels.vllm.ai/rocm/"
+                exit 1
+            fi
+            log_warning "ROCm wheels require Python 3.12, ROCm 7.0 and glibc >= 2.35."
+            uv pip install vllm --extra-index-url https://wheels.vllm.ai/rocm/
+            uv pip install openai
             ;;
         "Google TPU")
             log_info "Installing vLLM for Google TPU..."
@@ -182,7 +192,43 @@ install_vllm() {
             ;;
         *)
             log_info "Installing vLLM for CPU..."
-            $PACKAGE_MANAGER install vllm openai
+            # There is no CPU build on PyPI — `install vllm` pulls the CUDA wheel.
+            # Release CPU wheels are published as GitHub release assets per architecture.
+            OS_NAME=$(uname -s)
+            ARCH_NAME=$(uname -m)
+
+            if [[ "$OS_NAME" == "Darwin" ]]; then
+                log_error "No pre-built CPU wheels exist for Apple silicon; vLLM must be built from source."
+                log_error "See https://docs.vllm.ai/en/stable/getting_started/installation/cpu/ (Apple silicon tab)."
+                exit 1
+            fi
+
+            case "$ARCH_NAME" in
+                x86_64)  WHEEL_ARCH="x86_64" ;;
+                aarch64) WHEEL_ARCH="aarch64" ;;
+                *)
+                    log_error "No pre-built CPU wheel for $OS_NAME/$ARCH_NAME."
+                    log_error "See https://docs.vllm.ai/en/stable/getting_started/installation/cpu/."
+                    exit 1
+                    ;;
+            esac
+
+            VLLM_VERSION=$(python3 -c "import json,urllib.request; print(json.load(urllib.request.urlopen('https://api.github.com/repos/vllm-project/vllm/releases/latest'))['tag_name'].lstrip('v'))")
+            if [[ -z "$VLLM_VERSION" ]]; then
+                log_error "Could not resolve the latest vLLM release tag."
+                exit 1
+            fi
+            CPU_WHEEL="https://github.com/vllm-project/vllm/releases/download/v${VLLM_VERSION}/vllm-${VLLM_VERSION}+cpu-cp38-abi3-manylinux_2_34_${WHEEL_ARCH}.whl"
+            log_info "Installing CPU wheel: $CPU_WHEEL"
+
+            if command -v uv &> /dev/null; then
+                uv pip install "$CPU_WHEEL" --torch-backend cpu
+                uv pip install openai
+            else
+                pip install "$CPU_WHEEL" --extra-index-url https://download.pytorch.org/whl/cpu
+                pip install openai
+            fi
+            log_warning "Add Intel OpenMP to LD_PRELOAD before serving: find libiomp5.so, then export LD_PRELOAD=\"\$IOMP_PATH:\$LD_PRELOAD\"."
             ;;
     esac
 

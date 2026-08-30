@@ -4,11 +4,11 @@
   "skills": 2081,
   "expert_profiles": 503,
   "nodes": 2155,
-  "edges": 15220,
+  "edges": 15218,
   "generic_names_blocked": 32,
-  "tier1_edges": 4440,
+  "tier1_edges": 4439,
   "tier2_edges": 700,
-  "alias_edges": 4233,
+  "alias_edges": 4232,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 525,
@@ -20,13 +20,13 @@
   "orphan_count": 133,
   "orphan_rate": 0.0639,
   "by_provenance": {
-   "EXTRACTED": 14434,
+   "EXTRACTED": 14432,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2081,
-   "references": 11828,
+   "references": 11826,
    "in_discipline": 599,
    "touches": 525,
    "has_step": 69,
@@ -3843,7 +3843,7 @@
    "id": "cavecrew",
    "type": "Skill",
    "label": "cavecrew",
-   "description": "> Decision guide for delegating to caveman-style subagents. Tells the main thread WHEN to spawn `cavecrew-investigator` (locate code), `cavecrew-builder` (1-2 file edit), or `cavecrew-reviewer` (diff review) instead of doing the work inline or using vanilla `Explore`. Subagent output is caveman-compressed so the tool-result injected back into main context is ~60% smaller \u2014 main context lasts longer across long sessions. Trigger: \"delegate to subagent\", \"use cavecrew\", \"spawn investigator/builder/reviewer\", \"save context\", \"compressed agent output\".",
+   "description": "> When to delegate to `cavecrew-investigator` (locate code), `cavecrew-builder` (1-2 file edit) or `cavecrew-reviewer` (diff review) instead of working inline or using `Explore`. Their output is compressed, so main context lasts longer.",
    "source": "skills/cavecrew/SKILL.md",
    "aliases": [],
    "uses": 0,
@@ -3916,7 +3916,7 @@
    "id": "caveman",
    "type": "Skill",
    "label": "caveman",
-   "description": "> Ultra-compressed communication mode. Cuts output tokens 65% (measured) by speaking like caveman while keeping full technical accuracy. Supports intensity levels: lite, full (default), ultra, wenyan-lite, wenyan-full, wenyan-ultra. Use when user says \"caveman mode\", \"talk like caveman\", \"use caveman\", \"less tokens\", \"be brief\", or invokes /caveman. Also auto-triggers when token efficiency is requested.",
+   "description": "> Ultra-compressed communication mode that cuts output tokens while keeping technical accuracy. Levels: lite, full, ultra and the wenyan variants. Use for /caveman, \"caveman mode\", \"talk like caveman\", \"be brief\" or \"less tokens\".",
    "source": "skills/caveman/SKILL.md",
    "aliases": [
     "dumb it down",
@@ -3934,7 +3934,7 @@
    "id": "caveman-commit",
    "type": "Skill",
    "label": "caveman-commit",
-   "description": "> Ultra-compressed commit message generator. Cuts noise from commit messages while preserving intent and reasoning. Conventional Commits format. Subject \u226450 chars, body only when \"why\" isn't obvious. Use when user says \"write a commit\", \"commit message\", \"generate commit\", \"/commit\", or invokes /caveman-commit. Auto-triggers when staging changes.",
+   "description": "> Write a Conventional Commits message compressed to intent only. Use for \"write a commit\", \"commit message\", /commit or /caveman-commit.",
    "source": "skills/caveman-commit/SKILL.md",
    "aliases": [
     "caveman commit"
@@ -3949,7 +3949,7 @@
    "id": "caveman-compress",
    "type": "Skill",
    "label": "caveman-compress",
-   "description": "> Compress natural language memory files (CLAUDE.md, todos, preferences) into caveman format to save input tokens. Preserves all technical substance, code, URLs, and structure. Compressed version overwrites the original file. Human-readable backup saved as FILE.original.md. Trigger: /caveman-compress FILEPATH or \"compress memory file",
+   "description": "> Compress a memory file such as CLAUDE.md or a todo list into caveman format to save input tokens, keeping a readable backup. Trigger: /caveman-compress.",
    "source": "skills/caveman-compress/SKILL.md",
    "aliases": [
     "caveman compress"
@@ -3964,7 +3964,7 @@
    "id": "caveman-help",
    "type": "Skill",
    "label": "caveman-help",
-   "description": "> Quick-reference card for all caveman modes, skills, and commands. One-shot display, not a persistent mode. Trigger: /caveman-help, \"caveman help\", \"what caveman commands\", \"how do I use caveman\".",
+   "description": "> Quick-reference card for caveman modes, skills and commands. Trigger: /caveman-help or \"caveman help\".",
    "source": "skills/caveman-help/SKILL.md",
    "aliases": [
     "caveman help"
@@ -3979,7 +3979,7 @@
    "id": "caveman-review",
    "type": "Skill",
    "label": "caveman-review",
-   "description": "> Ultra-compressed code review comments. Cuts noise from PR feedback while preserving the actionable signal. Each comment is one line: location, problem, fix. Use when user says \"review this PR\", \"code review\", \"review the diff\", \"/review\", or invokes /caveman-review. Auto-triggers when reviewing pull requests.",
+   "description": "> Compressed code review - one line per finding with location, problem and fix. Use for /caveman-review, \"review this PR\", or \"review the diff\".",
    "source": "skills/caveman-review/SKILL.md",
    "aliases": [
     "caveman review"
@@ -3994,7 +3994,7 @@
    "id": "caveman-stats",
    "type": "Skill",
    "label": "caveman-stats",
-   "description": "> Show real token usage and estimated savings for the current session. Reads directly from the Claude Code session log \u2014 no AI estimation. Triggers on /caveman-stats. Output is injected by the mode-tracker hook; the model itself does not compute the numbers.",
+   "description": "> Show real token usage and estimated savings for the current session, read from the session log. Trigger: /caveman-stats.",
    "source": "skills/caveman-stats/SKILL.md",
    "aliases": [
     "caveman stats"
@@ -23974,7 +23974,7 @@
    "id": "remote-browser",
    "type": "Skill",
    "label": "remote-browser",
-   "description": "Controls a local browser from a sandboxed remote machine. Use when the agent is running in a sandbox (no GUI) and needs to navigate websites, interact with web pages, fill forms, take screenshots, or expose local dev servers via tunnels.",
+   "description": "Controls an isolated Browser Use Cloud browser from a sandboxed machine with the current Browser Use CLI.",
    "source": "skills/remote-browser/SKILL.md",
    "aliases": [
     "remote browser"
@@ -51899,15 +51899,6 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "curated alias of cloudflare appears in pybigwig/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "cloudflare",
-   "rel": "references",
-   "dst": "remote-browser",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "cloudflare named in remote-browser/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -130091,15 +130082,6 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "browser-use named in remote-browser/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "remote-browser",
-   "rel": "references",
-   "dst": "cloudflare",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "cloudflare named in remote-browser/SKILL.md body",
    "status": "accepted"
   },
   {

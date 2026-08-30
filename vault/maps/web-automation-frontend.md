@@ -107,7 +107,7 @@ created: 2026-06-13
 - [react-best-practices](../notes/web-automation-frontend/react-best-practices.md) — React and Next.js performance optimization guidelines from Vercel Engineering
 - [reconciler-logic](../notes/web-automation-frontend/reconciler-logic.md) — Implement reconcilers and watchers for grafana-app-sdk apps — write `TypedReconciler[*MyKind]` reconcile functions, apply generation-based skip patterns, do conflict-safe status...
 - [redesign-existing-projects](../notes/web-automation-frontend/redesign-existing-projects.md) — Upgrades existing websites and apps to premium quality
-- [remote-browser](../notes/web-automation-frontend/remote-browser.md) — Controls a local browser from a sandboxed remote machine
+- [remote-browser](../notes/web-automation-frontend/remote-browser.md) — Controls an isolated Browser Use Cloud browser from a sandboxed machine with the current Browser Use CLI
 - [remotion-best-practices](../notes/web-automation-frontend/remotion-best-practices.md) — Best practices for Remotion - Video creation in React
 - [rover](../notes/web-automation-frontend/rover.md) — Guide for using Apollo Rover CLI to manage GraphQL schemas and federation
 - [screenshot-cli](../notes/web-automation-frontend/screenshot-cli.md) — Use when the user's host screen must be captured — the full desktop, one monitor, or a pixel region — or when a screen capture needs cropping, resizing, rotation, flipping, format...

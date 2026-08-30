@@ -14,7 +14,7 @@ created: 2026-08-23
 # remote-browser
 
 > [!info] What it does
-> Controls a local browser from a sandboxed remote machine. Use when the agent is running in a sandbox (no GUI) and needs to navigate websites, interact with web pages, fill forms, take screenshots, or expose local dev servers via tunnels.
+> Controls an isolated Browser Use Cloud browser from a sandboxed machine with the current Browser Use CLI.
 
 **Source:** [skills/remote-browser/SKILL.md](../../../skills/remote-browser/SKILL.md)  ·  **Domain:** [Web Automation, Frontend & Design](../../maps/web-automation-frontend.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

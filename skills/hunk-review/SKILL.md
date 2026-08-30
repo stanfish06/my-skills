@@ -59,6 +59,7 @@ hunk session review (<session-id> | --repo <path>) [--include-patch] [--include-
 
 ```bash
 hunk session navigate (<session-id> | --repo <path>) --file <path> (--hunk <n> | --old-line <n> | --new-line <n>) [--json]
+hunk session navigate (<session-id> | --repo <path>) --comment <id> [--json]
 hunk session navigate (<session-id> | --repo <path>) (--next-comment | --prev-comment) [--json]
 ```
 
@@ -68,6 +69,12 @@ Absolute navigation requires `--file` and exactly one of `--hunk`, `--new-line`,
 hunk session navigate --repo . --file src/App.tsx --hunk 2
 hunk session navigate --repo . --file src/App.tsx --new-line 372
 hunk session navigate --repo . --file src/App.tsx --old-line 355
+```
+
+Exact comment navigation uses the `commentId` returned by `hunk session comment list --json` and does not require `--file`:
+
+```bash
+hunk session navigate --repo . --comment comment-1
 ```
 
 Relative comment navigation jumps between annotated hunks and does not require `--file`:
@@ -153,7 +160,7 @@ hunk session highlight clear --repo .
 
 - `highlight add` requires `--file`, exactly one of `--old-line` or `--new-line`, and the `--start` / `--end` offsets
 - `--start` is a 0-based inclusive offset into the line's text and `--end` is exclusive, counted in UTF-16 code units — the same `[start, end)` range extensions use
-- Tones: `match` (default), `info`, `warning`, `error`; `current` renders as reverse video and is best reserved for the one range under discussion
+- Tones: `match` (default), `info`, `warning`, `error`, `dim`; `current` renders as reverse video and is best reserved for the one range under discussion
 - Pass `--focus` to also land the viewport on the marked line
 - Marks survive scrolling, navigation, and reloads that leave the marked file's content unchanged; a reload that changes that file drops its marks, and `highlight clear` removes them explicitly (optionally per `--file`)
 - Marks are visual only — pair them with a `comment add` when the explanation should persist as a note

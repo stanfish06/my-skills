@@ -2033,63 +2033,63 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman/SKILL.md",
-      "skillFolderHash": "75d927c628bcb304f061e193c80c21d617a314e5",
+      "skillFolderHash": "70b4ee28a35dbf70934366bd250e71c6cb240082",
       "installedAt": "2026-06-13T13:23:12.859Z",
-      "updatedAt": "2026-08-24T07:18:38.088Z"
+      "updatedAt": "2026-08-30T11:52:09.075Z"
     },
     "caveman-compress": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-compress/SKILL.md",
-      "skillFolderHash": "93f72d3b21f227a8cc9d851325d474886e16dc0b",
+      "skillFolderHash": "2646544dc282abe163bf3fa472a7d7102cdbd3fa",
       "installedAt": "2026-06-13T13:27:36.566Z",
-      "updatedAt": "2026-08-20T07:04:36.444Z"
+      "updatedAt": "2026-08-30T11:52:11.906Z"
     },
     "cavecrew": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/cavecrew/SKILL.md",
-      "skillFolderHash": "9633b42303f12d321c80c9578b23c0f439667af5",
+      "skillFolderHash": "58b9a0bdb00d97953bfc840cb4dc3b38faf03759",
       "installedAt": "2026-06-13T13:42:44.373Z",
-      "updatedAt": "2026-08-17T07:14:11.802Z"
+      "updatedAt": "2026-08-30T11:52:14.502Z"
     },
     "caveman-commit": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-commit/SKILL.md",
-      "skillFolderHash": "6ba13fa3503e9607eed8f94828b524510d83b7ef",
+      "skillFolderHash": "7b600195c1d3cdd277dc608c56384c86afb7ec11",
       "installedAt": "2026-06-13T13:42:44.377Z",
-      "updatedAt": "2026-06-13T13:42:44.377Z"
+      "updatedAt": "2026-08-30T11:52:17.020Z"
     },
     "caveman-help": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-help/SKILL.md",
-      "skillFolderHash": "b4f5ebc5f3ce9bfa652996b5161bbe3cc0b88297",
+      "skillFolderHash": "6c85e34cfd4166be893224b7f39c6379d38c8b0c",
       "installedAt": "2026-06-13T13:42:44.380Z",
-      "updatedAt": "2026-08-12T07:49:42.999Z"
+      "updatedAt": "2026-08-30T11:52:19.562Z"
     },
     "caveman-review": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-review/SKILL.md",
-      "skillFolderHash": "2d9762b7aec395b9713fde57fb8965bc3bbd2c3f",
+      "skillFolderHash": "515d07fbd383fb9a15ad94647d133f681dc56197",
       "installedAt": "2026-06-13T13:42:44.380Z",
-      "updatedAt": "2026-06-13T13:42:44.380Z"
+      "updatedAt": "2026-08-30T11:52:21.938Z"
     },
     "caveman-stats": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-stats/SKILL.md",
-      "skillFolderHash": "0f13465d2cd3d3920c8fb991b93083f13035046c",
+      "skillFolderHash": "c0fb6ec46cd22173f570edfdd20463d0f7aea67c",
       "installedAt": "2026-06-13T13:42:44.381Z",
-      "updatedAt": "2026-08-10T04:45:34.479Z"
+      "updatedAt": "2026-08-30T11:52:24.262Z"
     },
     "docker-expert": {
       "source": "sickn33/antigravity-awesome-skills",
@@ -8793,9 +8793,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/modem-dev/hunk.git",
       "skillPath": "skills/hunk-review/SKILL.md",
-      "skillFolderHash": "8c78e66fe408c6a9ca156be8d4b109668e1fe690",
+      "skillFolderHash": "a1c5638dec5611780963bd68a347231f8baf9c62",
       "installedAt": "2026-07-29T08:40:36.012Z",
-      "updatedAt": "2026-08-15T06:55:47.213Z"
+      "updatedAt": "2026-08-30T11:52:26.807Z"
     },
     "worktrunk": {
       "source": "max-sixty/worktrunk",
@@ -11383,9 +11383,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/browser-use/browser-use.git",
       "skillPath": "skills/remote-browser/SKILL.md",
-      "skillFolderHash": "8439a23eb8183729c37ba2a938c9b73607e43301",
+      "skillFolderHash": "6d5752f2f948cb00d9af068e38f536f52ce7c3ee",
       "installedAt": "2026-08-23T17:23:01.265Z",
-      "updatedAt": "2026-08-23T17:23:01.265Z"
+      "updatedAt": "2026-08-30T11:52:28.797Z"
     },
     "sglang-prod-incident-triage": {
       "source": "sgl-project/sglang",
@@ -11491,9 +11491,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/JetBrains/go-modern-guidelines.git",
       "skillPath": "plugin/skills/use-modern-go/SKILL.md",
-      "skillFolderHash": "7f444611bbbd10587b96113e1fd087e9864c5a26",
+      "skillFolderHash": "fa7815e20c8ce17aa4adcec063a084c3b58feef8",
       "installedAt": "2026-08-26T17:43:00.679Z",
-      "updatedAt": "2026-08-26T17:43:00.679Z"
+      "updatedAt": "2026-08-30T11:52:30.746Z"
     },
     "skill-doctor": {
       "source": "warpdotdev/common-skills",

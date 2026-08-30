@@ -3054,7 +3054,7 @@
 <https://skillquarium.dev/id/causal-inference-scientist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hypothesis-generation> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/causal-inference-scientist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scientific-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/causal-inference-scientist> <https://skillquarium.dev/ontology/source> "skills/causal-inference-scientist/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/cavecrew> <http://purl.org/dc/terms/description> "> Decision guide for delegating to caveman-style subagents. Tells the main thread WHEN to spawn `cavecrew-investigator` (locate code), `cavecrew-builder` (1-2 file edit), or `cavecrew-reviewer` (diff review) instead of doing the work inline or using vanilla `Explore`. Subagent output is caveman-compressed so the tool-result injected back into main context is ~60% smaller — main context lasts longer across long sessions. Trigger: \"delegate to subagent\", \"use cavecrew\", \"spawn investigator/builder/reviewer\", \"save context\", \"compressed agent output\"." <urn:vault:core> .
+<https://skillquarium.dev/id/cavecrew> <http://purl.org/dc/terms/description> "> When to delegate to `cavecrew-investigator` (locate code), `cavecrew-builder` (1-2 file edit) or `cavecrew-reviewer` (diff review) instead of working inline or using `Explore`. Their output is compressed, so main context lasts longer." <urn:vault:core> .
 <https://skillquarium.dev/id/cavecrew> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/cavecrew> <http://www.w3.org/2000/01/rdf-schema#label> "cavecrew" <urn:vault:core> .
 <https://skillquarium.dev/id/cavecrew> <https://skillquarium.dev/ontology/identifier> "cavecrew" <urn:vault:core> .
@@ -3091,7 +3091,7 @@
 <https://skillquarium.dev/id/cavekit-validation-first> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_software-dev> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cavekit-validation-first> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/palliative-care-researcher> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cavekit-validation-first> <https://skillquarium.dev/ontology/source> "skills/cavekit-validation-first/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/caveman-commit> <http://purl.org/dc/terms/description> "> Ultra-compressed commit message generator. Cuts noise from commit messages while preserving intent and reasoning. Conventional Commits format. Subject ≤50 chars, body only when \"why\" isn't obvious. Use when user says \"write a commit\", \"commit message\", \"generate commit\", \"/commit\", or invokes /caveman-commit. Auto-triggers when staging changes." <urn:vault:core> .
+<https://skillquarium.dev/id/caveman-commit> <http://purl.org/dc/terms/description> "> Write a Conventional Commits message compressed to intent only. Use for \"write a commit\", \"commit message\", /commit or /caveman-commit." <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-commit> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-commit> <http://www.w3.org/2000/01/rdf-schema#label> "caveman-commit" <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-commit> <https://skillquarium.dev/ontology/identifier> "caveman-commit" <urn:vault:core> .
@@ -3099,7 +3099,7 @@
 <https://skillquarium.dev/id/caveman-commit> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/caveman-help> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/caveman-commit> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/caveman> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/caveman-commit> <https://skillquarium.dev/ontology/source> "skills/caveman-commit/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/caveman-compress> <http://purl.org/dc/terms/description> "> Compress natural language memory files (CLAUDE.md, todos, preferences) into caveman format to save input tokens. Preserves all technical substance, code, URLs, and structure. Compressed version overwrites the original file. Human-readable backup saved as FILE.original.md. Trigger: /caveman-compress FILEPATH or \"compress memory file" <urn:vault:core> .
+<https://skillquarium.dev/id/caveman-compress> <http://purl.org/dc/terms/description> "> Compress a memory file such as CLAUDE.md or a todo list into caveman format to save input tokens, keeping a readable backup. Trigger: /caveman-compress." <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-compress> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-compress> <http://www.w3.org/2000/01/rdf-schema#label> "caveman-compress" <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-compress> <https://skillquarium.dev/ontology/identifier> "caveman-compress" <urn:vault:core> .
@@ -3108,7 +3108,7 @@
 <https://skillquarium.dev/id/caveman-compress> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/caveman> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/caveman-compress> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/run-tests> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/caveman-compress> <https://skillquarium.dev/ontology/source> "skills/caveman-compress/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/caveman-help> <http://purl.org/dc/terms/description> "> Quick-reference card for all caveman modes, skills, and commands. One-shot display, not a persistent mode. Trigger: /caveman-help, \"caveman help\", \"what caveman commands\", \"how do I use caveman\"." <urn:vault:core> .
+<https://skillquarium.dev/id/caveman-help> <http://purl.org/dc/terms/description> "> Quick-reference card for caveman modes, skills and commands. Trigger: /caveman-help or \"caveman help\"." <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-help> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-help> <http://www.w3.org/2000/01/rdf-schema#label> "caveman-help" <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-help> <https://skillquarium.dev/ontology/identifier> "caveman-help" <urn:vault:core> .
@@ -3118,7 +3118,7 @@
 <https://skillquarium.dev/id/caveman-help> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/caveman-review> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/caveman-help> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/caveman> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/caveman-help> <https://skillquarium.dev/ontology/source> "skills/caveman-help/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/caveman-review> <http://purl.org/dc/terms/description> "> Ultra-compressed code review comments. Cuts noise from PR feedback while preserving the actionable signal. Each comment is one line: location, problem, fix. Use when user says \"review this PR\", \"code review\", \"review the diff\", \"/review\", or invokes /caveman-review. Auto-triggers when reviewing pull requests." <urn:vault:core> .
+<https://skillquarium.dev/id/caveman-review> <http://purl.org/dc/terms/description> "> Compressed code review - one line per finding with location, problem and fix. Use for /caveman-review, \"review this PR\", or \"review the diff\"." <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-review> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-review> <http://www.w3.org/2000/01/rdf-schema#label> "caveman-review" <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-review> <https://skillquarium.dev/ontology/identifier> "caveman-review" <urn:vault:core> .
@@ -3127,14 +3127,14 @@
 <https://skillquarium.dev/id/caveman-review> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/caveman> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/caveman-review> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/code-review> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/caveman-review> <https://skillquarium.dev/ontology/source> "skills/caveman-review/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/caveman-stats> <http://purl.org/dc/terms/description> "> Show real token usage and estimated savings for the current session. Reads directly from the Claude Code session log — no AI estimation. Triggers on /caveman-stats. Output is injected by the mode-tracker hook; the model itself does not compute the numbers." <urn:vault:core> .
+<https://skillquarium.dev/id/caveman-stats> <http://purl.org/dc/terms/description> "> Show real token usage and estimated savings for the current session, read from the session log. Trigger: /caveman-stats." <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-stats> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-stats> <http://www.w3.org/2000/01/rdf-schema#label> "caveman-stats" <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-stats> <https://skillquarium.dev/ontology/identifier> "caveman-stats" <urn:vault:core> .
 <https://skillquarium.dev/id/caveman-stats> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_reasoning-ideation> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/caveman-stats> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/caveman> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/caveman-stats> <https://skillquarium.dev/ontology/source> "skills/caveman-stats/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/caveman> <http://purl.org/dc/terms/description> "> Ultra-compressed communication mode. Cuts output tokens 65% (measured) by speaking like caveman while keeping full technical accuracy. Supports intensity levels: lite, full (default), ultra, wenyan-lite, wenyan-full, wenyan-ultra. Use when user says \"caveman mode\", \"talk like caveman\", \"use caveman\", \"less tokens\", \"be brief\", or invokes /caveman. Also auto-triggers when token efficiency is requested." <urn:vault:core> .
+<https://skillquarium.dev/id/caveman> <http://purl.org/dc/terms/description> "> Ultra-compressed communication mode that cuts output tokens while keeping technical accuracy. Levels: lite, full, ultra and the wenyan variants. Use for /caveman, \"caveman mode\", \"talk like caveman\", \"be brief\" or \"less tokens\"." <urn:vault:core> .
 <https://skillquarium.dev/id/caveman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/caveman> <http://www.w3.org/2000/01/rdf-schema#label> "caveman" <urn:vault:core> .
 <https://skillquarium.dev/id/caveman> <https://skillquarium.dev/ontology/identifier> "caveman" <urn:vault:core> .
@@ -4076,7 +4076,6 @@
 <https://skillquarium.dev/id/cloudflare> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/poultry-scientist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cloudflare> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/propulsion-engineer> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cloudflare> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/pybigwig> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/cloudflare> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/remote-browser> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cloudflare> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/render-domains> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cloudflare> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/sandbox-sdk> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cloudflare> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scientific-agents> <urn:vault:EXTRACTED> .
@@ -19577,14 +19576,13 @@
 <https://skillquarium.dev/id/reliability-engineer> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cognitive-scientist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/reliability-engineer> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scientific-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/reliability-engineer> <https://skillquarium.dev/ontology/source> "skills/reliability-engineer/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/remote-browser> <http://purl.org/dc/terms/description> "Controls a local browser from a sandboxed remote machine. Use when the agent is running in a sandbox (no GUI) and needs to navigate websites, interact with web pages, fill forms, take screenshots, or expose local dev servers via tunnels." <urn:vault:core> .
+<https://skillquarium.dev/id/remote-browser> <http://purl.org/dc/terms/description> "Controls an isolated Browser Use Cloud browser from a sandboxed machine with the current Browser Use CLI." <urn:vault:core> .
 <https://skillquarium.dev/id/remote-browser> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/remote-browser> <http://www.w3.org/2000/01/rdf-schema#label> "remote-browser" <urn:vault:core> .
 <https://skillquarium.dev/id/remote-browser> <https://skillquarium.dev/ontology/identifier> "remote-browser" <urn:vault:core> .
 <https://skillquarium.dev/id/remote-browser> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_web-automation-frontend> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/remote-browser> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/browser-automation> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/remote-browser> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/browser-use> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/remote-browser> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cloudflare> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/remote-browser> <https://skillquarium.dev/ontology/source> "skills/remote-browser/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/remote-sensing-scientist> <http://purl.org/dc/terms/description> "> Expert-thinking profile for Remote Sensing Scientist (Earth observation / optical-SAR- LiDAR / atmospheric & geometric correction / change detection / Olofsson validation): Reasons from sensor physics, atmospheric state, surface BRDF, and sampling geometry through Sen2Cor/LaSRC/6S atmospheric correction, sub-pixel coregistration, SAR radiometric terrain correction, and Olofsson area-adjusted accuracy while treating misregistration, NDVI saturation, BRDF anisotropy, mixed pixels, and..." <urn:vault:core> .
 <https://skillquarium.dev/id/remote-sensing-scientist> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/ExpertProfile> <urn:vault:core> .

@@ -63,6 +63,7 @@ allowed_bots: "dependabot[bot],renovate[bot]"
 | Configuration | Risk |
 |--------------|------|
 | `sandbox: danger-full-access` | No sandbox, no approvals, unrestricted filesystem and network access |
+| `permission-profile: ":danger-full-access"` | Same, expressed through the current input |
 | `safety-strategy: unsafe` | Disables all safety enforcement including sudo restrictions |
 | `allow-users: "*"` | Any GitHub user can trigger the action |
 | `allow-bots: true` | Any bot can trigger, enables automated attack chains |
@@ -70,12 +71,14 @@ allowed_bots: "dependabot[bot],renovate[bot]"
 
 ### Remediation Patterns
 
-**Restrict sandbox:** Use the default or a more restrictive mode:
+**Restrict sandbox:** Use `permission-profile`, which supersedes the legacy `sandbox` input and is mutually exclusive with it -- setting both is an error:
 
 ```yaml
-sandbox: workspace-write    # default: workspace access only, no network
-sandbox: read-only          # for analysis-only tasks
+permission-profile: ":workspace"    # workspace access only, no network
+permission-profile: ":read-only"    # for analysis-only tasks
 ```
+
+A named profile (`permission-profile: my-profile`) resolves in `codex-home/config.toml` under `default_permissions`; read that file before recording the sandbox posture. Workflows still on `sandbox: workspace-write` / `read-only` are equivalent but legacy.
 
 **Restrict safety strategy:** Use the default or a stricter option:
 
@@ -142,9 +145,11 @@ Or pass the `--sandbox` flag in CLI arguments.
 
 ### Default Security Posture
 
-- Inference-only API call -- no shell access, no filesystem access, no sandbox to configure
+- Inference-only **when `provider: github-models`** -- no shell access, no filesystem access, no sandbox to configure. That is the default through v2.x, but not a property of the action
+- `provider: copilot` shells out to the GitHub Copilot CLI on the runner. From v3 it is the only supported provider and the default. No tools are granted unless the workflow sets `copilot-allow-tools`, but whatever it lists becomes real shell/filesystem capability
+- `enable-github-mcp: true` (v1 through v2.x) connects the GitHub MCP server, executing tool calls with `github-mcp-token` -- a PAT -- across the toolsets named in `github-mcp-toolsets`. Ignored when `provider: copilot`
 - Access controlled by GitHub token scope
-- Primary risks: prompt injection via untrusted event data (Vector B), and AI output flowing to `eval` in subsequent workflow steps (Vector G)
+- Primary risks: prompt injection via untrusted event data (Vector B), AI output flowing to `eval` in subsequent workflow steps (Vector G), and -- once a tool grant is present -- every vector that assumes execution capability (C, F, H)
 
 ### Dangerous Configurations
 
@@ -153,6 +158,8 @@ Or pass the `--sandbox` flag in CLI arguments.
 | `prompt` containing `${{ github.event.* }}` | Attacker-controlled event contexts injected directly into AI prompt (Vector B) |
 | Overly scoped `token` parameter | Grants more permissions than needed, expanding blast radius of any exploitation |
 | AI output consumed by `eval`/`exec` in subsequent steps | Converts inference-only action into code execution vector (Vector G) |
+| `provider: copilot` with `copilot-allow-tools` granting `shell(*)` or `write` | Prompt injection becomes command execution on the runner (Vector H) |
+| `enable-github-mcp: true` with a broad `github-mcp-token` PAT, or `github-mcp-toolsets: all` | The model executes GitHub API tool calls with PAT scope, beyond the workflow's own token |
 
 ### Remediation Patterns
 
@@ -178,9 +185,9 @@ Or pass the `--sandbox` flag in CLI arguments.
 
 | Remediation Need | Claude Code Action | OpenAI Codex | Gemini CLI | GitHub AI Inference |
 |-----------------|-------------------|--------------|------------|-------------------|
-| Restrict shell access | `--allowedTools "Bash(specific:*)"` | `sandbox: workspace-write` | Remove expandable commands from `tools.core` | N/A (no shell) |
+| Restrict shell access | `--allowedTools "Bash(specific:*)"` | `permission-profile: ":workspace"` | Remove expandable commands from `tools.core` | Leave `copilot-allow-tools` empty, or scope it (`shell(git:log)`) |
 | Restrict user access | `allowed_non_write_users: "user1,user2"` | `allow-users: "user1,user2"` | Control via workflow trigger permissions | Control via token scope |
-| Disable dangerous mode | Remove `Bash(*)` from `claude_args` | Remove `danger-full-access` from `sandbox` | Remove `--yolo` from CLI args | N/A |
-| Sandbox enforcement | N/A (tool-level restriction) | `sandbox: read-only` | `"sandbox": true` in settings JSON | N/A (no execution) |
+| Disable dangerous mode | Remove `Bash(*)` from `claude_args` | Remove `danger-full-access` from `sandbox`/`permission-profile` | Remove `--yolo` from CLI args | Remove `shell(*)`/`write` from `copilot-allow-tools`; narrow `github-mcp-toolsets` from `all` |
+| Sandbox enforcement | N/A (tool-level restriction) | `permission-profile: ":read-only"` | `"sandbox": true` in settings JSON | N/A (tool-grant restriction, see above) |
 | Block bot triggers | Remove `allowed_bots: "*"` | Set `allow-bots: false` | Control via workflow trigger conditions | Control via token scope |
 | Protect output/logs | Keep `show_full_output: false` | N/A | N/A | Never `eval` AI output |

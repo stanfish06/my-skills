@@ -9,7 +9,7 @@ The prompt instructs the AI agent to fetch attacker-controlled content at runtim
 | Claude Code Action | Yes | Confirmed -- uses `gh` CLI via Bash tool to fetch issue/PR content |
 | Gemini CLI | Yes | Can execute `gh` commands if shell tools are enabled |
 | OpenAI Codex | Yes | Can execute `gh` commands if sandbox allows shell access |
-| GitHub AI Inference | No | No shell access -- cannot execute CLI commands at runtime |
+| GitHub AI Inference | Conditional | No shell under `provider: github-models`. With `provider: copilot` plus a `copilot-allow-tools` entry granting shell, or `enable-github-mcp: true`, the model can fetch attacker content at runtime |
 
 Applicability depends on the action having shell/CLI tool access. Actions without shell capabilities cannot fetch data at runtime.
 
@@ -80,4 +80,4 @@ jobs:
 - **Metadata-only CLI commands:** `gh` commands that only read repository metadata (labels, milestones, project boards) -- output is not attacker-controlled free text
 - **Trusted-author content:** `gh` commands operating on content authored by trusted maintainers (but this is difficult to distinguish statically -- err on the side of flagging)
 - **Explanatory text:** Prompt mentioning `gh` in explanatory or documentation text without actually instructing the AI to execute it (e.g., "this repo uses gh for CLI access")
-- **No shell access:** If the AI action does not have shell/CLI capabilities (e.g., GitHub AI Inference), `gh` commands in the prompt are inert instructions
+- **No shell access:** If the AI action has no shell/CLI capability, `gh` commands in the prompt are inert instructions. Confirm this from the step's own inputs -- for `actions/ai-inference` it holds only when `provider` is `github-models` (unavailable from v3) and neither `copilot-allow-tools` nor `enable-github-mcp` is set

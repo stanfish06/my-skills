@@ -184,7 +184,8 @@ Capture these security-relevant input fields based on the action type:
 **OpenAI Codex:**
 - `prompt` -- the instruction sent to the AI agent
 - `prompt-file` -- path to a file containing the prompt (check if attacker-controllable)
-- `sandbox` -- sandbox mode (`workspace-write`, `read-only`, `danger-full-access`)
+- `sandbox` -- legacy sandbox mode (`workspace-write`, `read-only`, `danger-full-access`)
+- `permission-profile` -- current sandbox selector (`:read-only`, `:workspace`, `:danger-full-access`, or a named profile in `codex-home/config.toml`); mutually exclusive with `sandbox`
 - `safety-strategy` -- safety enforcement level (`drop-sudo`, `unprivileged-user`, `read-only`, `unsafe`)
 - `allow-users` -- which users can trigger the action (wildcard `"*"` is a red flag)
 - `allow-bots` -- which bots can trigger the action
@@ -194,6 +195,11 @@ Capture these security-relevant input fields based on the action type:
 - `prompt` -- the instruction sent to the model
 - `model` -- which model is invoked
 - `token` -- GitHub token with model access (check scope)
+- `provider` -- `github-models` calls the REST API; `copilot` shells out to the Copilot CLI on the runner (the only provider from v3 onward, where it is also the default)
+- `copilot-allow-tools` -- tools granted to that CLI, passed through as `--allow-tool` (e.g. `shell(git:*)`, `write`); any value here is real execution capability
+- `enable-github-mcp` / `github-mcp-token` / `github-mcp-toolsets` -- GitHub MCP server access (v1 through v2.x); `github-mcp-token` must be a PAT, and `toolsets: all` grants every toolset
+
+The input set differs per major version, so read the pinned tag's own `action.yml` rather than assuming this list is complete.
 
 #### 3b. Workflow-Level Context
 
@@ -238,7 +244,7 @@ Then check each vector against the security context captured in Step 3:
 | E | Error Log Injection | CI logs, build output, or `workflow_dispatch` inputs passed to AI prompt | [{baseDir}/references/vector-e-error-log-injection.md]({baseDir}/references/vector-e-error-log-injection.md) |
 | F | Subshell Expansion | Tool restriction list includes commands supporting `$()` expansion | [{baseDir}/references/vector-f-subshell-expansion.md]({baseDir}/references/vector-f-subshell-expansion.md) |
 | G | Eval of AI Output | `eval`, `exec`, or `$()` in `run:` step consuming `steps.*.outputs.*` | [{baseDir}/references/vector-g-eval-of-ai-output.md]({baseDir}/references/vector-g-eval-of-ai-output.md) |
-| H | Dangerous Sandbox Configs | `danger-full-access`, `Bash(*)`, `--yolo`, `safety-strategy: unsafe` | [{baseDir}/references/vector-h-dangerous-sandbox-configs.md]({baseDir}/references/vector-h-dangerous-sandbox-configs.md) |
+| H | Dangerous Sandbox Configs | `danger-full-access`, `Bash(*)`, `--yolo`, `safety-strategy: unsafe`, `permission-profile: ":danger-full-access"`, `copilot-allow-tools`, `github-mcp-toolsets: all` | [{baseDir}/references/vector-h-dangerous-sandbox-configs.md]({baseDir}/references/vector-h-dangerous-sandbox-configs.md) |
 | I | Wildcard Allowlists | `allowed_non_write_users: "*"`, `allow-users: "*"` | [{baseDir}/references/vector-i-wildcard-allowlists.md]({baseDir}/references/vector-i-wildcard-allowlists.md) |
 
 For each vector, read the referenced file and apply its detection heuristic against the security context captured in Step 3. For each finding, record: the vector letter and name, the specific evidence from the workflow, the data flow path from attacker input to AI agent, and the affected workflow file and step.

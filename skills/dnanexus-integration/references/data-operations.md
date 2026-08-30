@@ -184,6 +184,8 @@ record.close()
 ```python
 results = dxpy.find_data_objects(
     name="*.fastq",
+    name_mode="glob",
+    describe=True,
     project="project-xxxx",
     folder="/raw_data"
 )

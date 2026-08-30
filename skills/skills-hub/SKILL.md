@@ -32,8 +32,8 @@ The Hub organizes skills into these domains:
 | `metagenomics-and-microbiome` | metagenomics, phylogenetics, microbial-community |
 | `proteomics-and-metabolomics` | mass-spec, metabolomics |
 | `multi-omics-and-systems` | multi-omics-integration, pathway-analysis |
-| `protein-design` | alphafold2-multimer, proteinmpnn, rfdiffusion, boltzgen |
-| `ehr-analysis` | electronic health record analysis |
+| `protein-design` | alphafold2-multimer, proteinmpnn, rfdiffusion, boltzgen (nested under `protein-design/skills/`) |
+| `ehr-analysis` | electronic health record analysis (single `SKILL.md`, no per-skill directory) |
 
 ## How to Execute
 
@@ -45,30 +45,45 @@ curl -sL "https://raw.githubusercontent.com/zongtingwei/Bioclaw_Skills_Hub/main/
 
 This returns the full skill catalog organized by domain. Use it to find the skill name that matches the user's need.
 
-### Step 2: List skills in a specific domain
+### Step 2: Resolve the SKILL.md path
+
+Domains do not share one on-disk layout, so never build the path from a template.
+`protein-design` nests its skills under `skills/protein-design/skills/<skill>/SKILL.md`
+and `ehr-analysis` is a single file at `skills/ehr-analysis/SKILL.md`, while the other
+eight domains use `skills/<domain>/<skill>/SKILL.md`. Read the real path out of the
+repository tree:
 
 ```bash
-curl -sL "https://api.github.com/repos/zongtingwei/Bioclaw_Skills_Hub/contents/skills/<domain>" | python3 -c "
+curl -sL "https://api.github.com/repos/zongtingwei/Bioclaw_Skills_Hub/git/trees/main?recursive=1" \
+  | python3 -c "
 import json, sys
-for item in json.load(sys.stdin):
-    if item['type'] == 'dir':
-        print(item['name'])
+tree = json.load(sys.stdin)
+paths = [t['path'] for t in tree['tree'] if t['path'].endswith('SKILL.md')]
+for p in paths:
+    print(p)
 "
 ```
 
-Replace `<domain>` with a domain name from the table above.
+Filter that list for the skill you want. To list the skills in one domain, keep the
+paths under `skills/<domain>/` and take the directory that immediately precedes
+`SKILL.md`.
 
 ### Step 3: Download and read a skill
 
 ```bash
-# Download the SKILL.md
-DOMAIN="<domain>"
+# SKILL_PATH is the repo-relative path resolved in Step 2, e.g.
+#   skills/single-cell-and-spatial/cell-annotation/SKILL.md
+#   skills/protein-design/skills/alphafold2-multimer/SKILL.md
+#   skills/ehr-analysis/SKILL.md
+SKILL_PATH="<path from step 2>"
 SKILL="<skill-name>"
 CACHE_DIR="/workspace/group/.hub-skills/${SKILL}"
 mkdir -p "${CACHE_DIR}"
-curl -sL "https://raw.githubusercontent.com/zongtingwei/Bioclaw_Skills_Hub/main/skills/${DOMAIN}/${SKILL}/SKILL.md" \
+curl -fsSL "https://raw.githubusercontent.com/zongtingwei/Bioclaw_Skills_Hub/main/${SKILL_PATH}" \
   -o "${CACHE_DIR}/SKILL.md"
 ```
+
+`curl -f` makes a 404 fail loudly instead of caching GitHub's error page as the skill.
 
 Then read the downloaded skill:
 ```

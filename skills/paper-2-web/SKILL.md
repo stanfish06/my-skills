@@ -137,11 +137,14 @@ Creates print-ready academic posters with professional layouts and visual design
    pip install -r requirements.txt
    ```
 
-2. **Configure API Keys** (create `.env` file):
-   ```
-   OPENAI_API_KEY=your_openai_api_key_here
+2. **Configure API Keys** — export them; `pipeline_all.py` never calls `load_dotenv()`, so a `.env` file is ignored:
+   ```bash
+   export OPENROUTER_API_KEY=your_openrouter_api_key_here
    # Optional: GOOGLE_API_KEY and GOOGLE_CSE_ID for logo search
    ```
+   `OPENROUTER_API_KEY` is the only key `pipeline_all.py` reads — its header says
+   "Only supports OPENROUTER_API_KEY, does not support other APIs", and it returns
+   immediately if the variable is unset. `OPENAI_API_KEY` has no effect.
 
 3. **Install System Dependencies**:
    - LibreOffice (document conversion)
@@ -158,7 +161,7 @@ Creates print-ready academic posters with professional layouts and visual design
 ```bash
 python pipeline_all.py \
   --input-dir "path/to/paper" \
-  --output-dir "path/to/output" \
+  --output_dir "path/to/output" \
   --model-choice 1
 ```
 
@@ -166,7 +169,7 @@ python pipeline_all.py \
 ```bash
 python pipeline_all.py \
   --input-dir "path/to/paper" \
-  --output-dir "path/to/output" \
+  --output_dir "path/to/output" \
   --model-choice 1 \
   --generate-website
 ```
@@ -175,7 +178,7 @@ python pipeline_all.py \
 ```bash
 python pipeline_all.py \
   --input-dir "path/to/paper" \
-  --output-dir "path/to/output" \
+  --output_dir "path/to/output" \
   --model-choice 1 \
   --generate-poster \
   --poster-width-inches 60 \
@@ -262,7 +265,7 @@ input/
 ## Common Parameters
 
 ### Model / Module Selection
-> [!warning] The CLI documentation in this skill diverges from the upstream [Paper2All](https://github.com/YuhangChen1/Paper2All) CLI — verify every command against the repo before use. In upstream `pipeline_all.py`, `--model-choice` selects the **module to run**, not the LLM: `1`=Paper2Web, `2`=Paper2Poster, `3`=AutoPR (omit it to run all modules). There are no top-level `--model_name_t`/`--model_name_v` or `--generate-website/-poster/-video` arguments — the LLM is configured inside each module (e.g. Paper2Poster sets its own text/vision model). Do not read `--model-choice` values as GPT versions; note `gpt-3.5-turbo` is deprecated by OpenAI.
+> [!warning] The CLI documentation in this skill diverges from the upstream [Paper2All](https://github.com/YuhangChen1/Paper2All) CLI — verify every command against the repo before use. In upstream `pipeline_all.py`, `--model-choice` selects the **module to run**, not the LLM: `1`=Paper2Web, `2`=Paper2Poster, `3`=AutoPR (omit it to run all modules). There are no top-level `--model_name_t`/`--model_name_v` or `--generate-website/-poster/-video` arguments — the LLM is configured inside each module (e.g. Paper2Poster sets its own text/vision model). Do not read `--model-choice` values as GPT versions; note `gpt-3.5-turbo` is deprecated by OpenAI. `pipeline_all.py` declares `--output_dir` with an underscore while `--input-dir` uses a dash; upstream's README documents the dash form, which argparse rejects with exit 2.
 - `--model-choice 1`: run Paper2Web (website)
 - `--model-choice 2`: run Paper2Poster (poster)
 - `--model-choice 3`: run AutoPR
@@ -431,7 +434,7 @@ Process multiple papers efficiently:
 for paper in paper1 paper2 paper3; do
     python pipeline_all.py \
       --input-dir input/$paper \
-      --output-dir output/$paper \
+      --output_dir output/$paper \
       --model-choice 1 &
 done
 wait

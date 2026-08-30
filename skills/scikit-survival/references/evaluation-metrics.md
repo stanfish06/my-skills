@@ -244,11 +244,11 @@ print(f"Improvement: {(bs_km - bs_model) / bs_km * 100:.1f}%")
 from sklearn.model_selection import cross_val_score
 from sksurv.metrics import as_concordance_index_ipcw_scorer
 
-# Create scorer
-scorer = as_concordance_index_ipcw_scorer()
+# Wrap the estimator: the wrapper overrides score(), so scoring= is omitted
+wrapped = as_concordance_index_ipcw_scorer(model)
 
 # Perform cross-validation
-scores = cross_val_score(model, X, y, cv=5, scoring=scorer)
+scores = cross_val_score(wrapped, X, y, cv=5)
 print(f"Mean C-index: {scores.mean():.3f} (±{scores.std():.3f})")
 ```
 
@@ -260,12 +260,12 @@ from sksurv.metrics import as_integrated_brier_score_scorer
 # Define time points for evaluation
 times = np.percentile(y['time'][y['event']], [25, 50, 75])
 
-# Create scorer
-scorer = as_integrated_brier_score_scorer(times)
+# Wrap the estimator; requires predict_survival_function (e.g. RandomSurvivalForest)
+wrapped = as_integrated_brier_score_scorer(model, times=times)
 
-# Perform cross-validation
-scores = cross_val_score(model, X, y, cv=5, scoring=scorer)
-print(f"Mean IBS: {scores.mean():.3f} (±{scores.std():.3f})")
+# Perform cross-validation — the score is the NEGATIVE integrated Brier score
+scores = cross_val_score(wrapped, X, y, cv=5)
+print(f"Mean -IBS: {scores.mean():.3f} (±{scores.std():.3f})")
 ```
 
 ## Model Selection with GridSearchCV
@@ -275,21 +275,18 @@ from sklearn.model_selection import GridSearchCV
 from sksurv.ensemble import RandomSurvivalForest
 from sksurv.metrics import as_concordance_index_ipcw_scorer
 
-# Define parameter grid
+# Define parameter grid — keys are prefixed with estimator__ because the model
+# is wrapped
 param_grid = {
-    'n_estimators': [100, 200, 300],
-    'min_samples_split': [10, 20, 30],
-    'max_depth': [None, 10, 20]
+    'estimator__n_estimators': [100, 200, 300],
+    'estimator__min_samples_split': [10, 20, 30],
+    'estimator__max_depth': [None, 10, 20]
 }
-
-# Create scorer
-scorer = as_concordance_index_ipcw_scorer()
 
 # Perform grid search
 cv = GridSearchCV(
-    RandomSurvivalForest(random_state=42),
+    as_concordance_index_ipcw_scorer(RandomSurvivalForest(random_state=42)),
     param_grid,
-    scoring=scorer,
     cv=5,
     n_jobs=-1
 )
@@ -297,6 +294,7 @@ cv.fit(X, y)
 
 print(f"Best parameters: {cv.best_params_}")
 print(f"Best C-index: {cv.best_score_:.3f}")
+best_model = cv.best_estimator_.estimator_  # the fitted RandomSurvivalForest
 ```
 
 ## Comprehensive Model Evaluation

@@ -110,29 +110,31 @@ impl Drop for ApiSecret {
 
 ---
 
-### A5 — `ZeroizeOnDrop` on Struct with Heap Fields
+### A5 — `ZeroizeOnDrop` on Struct with a Reallocating `Vec`/`String` Field
 
 **Category**: `PARTIAL_WIPE` | **Severity**: medium
 
-**Why it's dangerous**: `ZeroizeOnDrop` zeros all fields via the `Zeroize` implementation, but `Vec<T>` zeroes only `len` bytes, not the full allocated `capacity`. Excess capacity bytes remain readable until the allocator reclaims them.
+**Why it's dangerous**: `Vec::zeroize` does cover the full allocation — it calls `clear()` then zeroes `spare_capacity_mut()` (`zeroize` 1.9.0 `src/lib.rs:520-538`), and has done since 1.3.0. What it cannot cover is an *earlier* allocation: growing the `Vec` past its capacity copies the bytes into a new block and abandons the old one without wiping it. The crate's own doc comment says so — "Cannot ensure that previous reallocations did not leave values on the heap." Each `push`/`extend` that triggers a grow strands another copy of the secret on the heap. `String` has the same exposure (`String::zeroize` delegates to `Vec`).
 
 ```rust
 use zeroize::ZeroizeOnDrop;
 
-// BAD: ZeroizeOnDrop zeros len bytes but capacity tail is untouched
+// BAD: each grow leaves an unwiped copy in the abandoned allocation
 #[derive(ZeroizeOnDrop)]
 pub struct SessionKey {
     data: Vec<u8>,
 }
 
-fn example() {
-    let mut key = SessionKey { data: Vec::with_capacity(64) };
-    key.data.extend_from_slice(&[0x42; 32]);
-    // capacity[32..64] bytes never zeroed
+fn example(secret: &[u8; 64]) {
+    let mut key = SessionKey { data: Vec::new() };
+    key.data.extend_from_slice(&secret[..32]);
+    key.data.extend_from_slice(&secret[32..]);  // grows: old 32-byte buffer is abandoned unwiped
 }
 ```
 
-**Fix**: Use `Zeroizing<Vec<u8>>` which uses `zeroize_and_drop` for the full buffer, or manually `self.data.zeroize(); self.data.shrink_to_fit()` in `Drop`.
+**Fix**: Size the buffer once with `Vec::with_capacity(n)` and never exceed `n`, or use `Box<[u8]>`, which cannot reallocate. `Zeroizing<Vec<u8>>` is not a fix for this — its `Drop` is exactly `self.0.zeroize()`, the same code path as the derive.
+
+**Not a finding**: a `Vec` filled within its initial capacity. `with_capacity(64)` then 32 bytes written is fully wiped, capacity tail included.
 
 ---
 

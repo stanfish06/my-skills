@@ -7,9 +7,9 @@ AI action sandbox or safety configurations are set to values that disable protec
 | Action | Applicable | Notes |
 |--------|-----------|-------|
 | Claude Code Action | Yes | `claude_args` with `--allowedTools Bash(*)` disables tool restrictions |
-| OpenAI Codex | Yes | `sandbox: danger-full-access` and `safety-strategy: unsafe` disable protections |
+| OpenAI Codex | Yes | `sandbox: danger-full-access` or `permission-profile: ":danger-full-access"` and `safety-strategy: unsafe` disable protections |
 | Gemini CLI | Yes | `"sandbox": false` in settings JSON and `--yolo`/`--approval-mode=yolo` disable sandbox and approval |
-| GitHub AI Inference | No | Inference-only API with no sandbox/tool configuration -- no shell access to restrict |
+| GitHub AI Inference | Conditional | Not applicable while `provider: github-models` (the v1-v2.x default). Applicable once the workflow grants tools: `provider: copilot` with `copilot-allow-tools`, or `enable-github-mcp: true` |
 
 ## Trigger Events
 
@@ -41,6 +41,12 @@ Without dangerous configs, a successful prompt injection may still be contained 
 - `with.safety-strategy: unsafe` -- disables safety enforcement for all operations
 - Both together represent maximum exposure: unrestricted filesystem + no safety checks
 
+**GitHub AI Inference (`actions/ai-inference`):**
+
+- `with.provider: copilot` -- the action shells out to the GitHub Copilot CLI on the runner. From v3 this is the only provider and the default, so absence of the input no longer means absence of a shell
+- `with.copilot-allow-tools` -- each entry is forwarded as `--allow-tool`. `shell(*)` is unrestricted command execution; `write` is filesystem write. Empty means no tools are granted
+- `with.enable-github-mcp: true` (v1 through v2.x) -- the model executes GitHub API tool calls. Check `with.github-mcp-token` (must be a PAT, so scope may exceed the workflow token) and `with.github-mcp-toolsets` (`all` enables every toolset). Ignored when `provider: copilot`
+
 **Gemini CLI (`google-github-actions/run-gemini-cli`, `google-gemini/gemini-cli-action`):**
 
 - `with.settings` JSON containing `"sandbox": false` -- disables the sandbox entirely
@@ -52,7 +58,8 @@ Without dangerous configs, a successful prompt injection may still be contained 
 The `with:` block of AI action steps:
 
 - **Claude:** Parse `with.claude_args` string for `--allowedTools` patterns. Also check `with.settings` for external config file path
-- **Codex:** Check `with.sandbox` and `with.safety-strategy` field values directly
+- **Codex:** Check `with.sandbox`, `with.permission-profile` and `with.safety-strategy` field values directly. A named `permission-profile` resolves in `codex-home/config.toml` under `default_permissions` -- read that file
+- **AI Inference:** Check `with.provider`, `with.copilot-allow-tools`, `with.enable-github-mcp`, `with.github-mcp-token` and `with.github-mcp-toolsets`
 - **Gemini:** Parse `with.settings` JSON string for `"sandbox": false` and approval mode settings. Check any args-style fields for `--yolo` or `--approval-mode=yolo`
 
 ## Why It Matters

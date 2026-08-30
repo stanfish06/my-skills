@@ -65,9 +65,10 @@ MEDIUM_EVIDENCE_TAGS = {
     "generic_traversal",
 }
 
+# Growable collections only. Box<[T]> is exact-sized and cannot reallocate,
+# so it has no abandoned-allocation exposure; Box<Vec<u8>> still matches via Vec.
 HEAP_TYPE_NAMES = {
     "Vec",
-    "Box",
     "String",
     "HashMap",
     "BTreeMap",
@@ -345,22 +346,27 @@ def analyze(rustdoc: dict, cargo_toml_path: str | None) -> list[dict]:
                             )
                         )
 
-        # --- 4. ZeroizeOnDrop with heap (Vec/Box) fields ---
+        # --- 4. ZeroizeOnDrop with reallocating heap fields ---
         if has_zeroize_on_drop and kind == "struct":
             fields = struct_fields(item, index)
             heap_fields = _heap_fields(fields, index, source_file=file)
             alias_review = "__alias_review__" in heap_fields
             real_heap_fields = [f for f in heap_fields if f != "__alias_review__"]
             if real_heap_fields:
+                # rustdoc JSON shows the field types, not the pushes that grow them,
+                # so growth cannot be confirmed here — needs_review, never confirmed.
                 findings.append(
                     make_finding(
                         "PARTIAL_WIPE",
                         "medium",
-                        f"ZeroizeOnDrop on '{name}' which has heap fields {real_heap_fields} — "
-                        "capacity bytes beyond len may not be zeroed",
+                        f"ZeroizeOnDrop on '{name}' which has reallocating heap fields "
+                        f"{real_heap_fields} — zeroize covers the live allocation including "
+                        "spare capacity, but any earlier allocation abandoned by a grow is "
+                        "left unwiped; verify each buffer is sized once and never grown",
                         name,
                         file,
                         line,
+                        confidence="needs_review",
                         evidence_strength=["resolved_path", "generic_traversal", "trait_impl"],
                     )
                 )
@@ -370,7 +376,8 @@ def analyze(rustdoc: dict, cargo_toml_path: str | None) -> list[dict]:
                         "PARTIAL_WIPE",
                         "medium",
                         f"ZeroizeOnDrop on '{name}' — source file contains type aliases that may "
-                        "wrap heap types (Vec/Box/String); verify all heap fields are covered",
+                        "wrap growable heap types (Vec/String/HashMap); verify none is grown "
+                        "after allocation",
                         name,
                         file,
                         line,
@@ -660,7 +667,7 @@ def _zeroed_field_names_in_text(text: str, field_names: list[str]) -> set[str]:
 
 # Matches type alias definitions like: type SecretBuffer = Vec<u8>;
 _TYPE_ALIAS_RE = re.compile(
-    r"^\s*(?:pub\s+)?type\s+\w+\s*=\s*(?:Vec|Box|String|HashMap|BTreeMap)\b"
+    r"^\s*(?:pub\s+)?type\s+\w+\s*=\s*(?:Vec|String|HashMap|BTreeMap)\b"
 )
 
 

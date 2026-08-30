@@ -41,16 +41,13 @@ This generates/edits an image and saves it as `generated_image.png` in the curre
 
 ## API Key Setup
 
-**CRITICAL**: The script requires an OpenRouter API key. Before running, check if the user has configured their API key:
+The script requires an OpenRouter API key and resolves it in this order:
 
-1. Look for a `.env` file in the project directory or parent directories
-2. Check for `OPENROUTER_API_KEY=<key>` in the `.env` file
-3. If not found, inform the user they need to:
-   - Create a `.env` file with `OPENROUTER_API_KEY=your-api-key-here`
-   - Or set the environment variable: `export OPENROUTER_API_KEY=your-api-key-here`
-   - Get an API key from: https://openrouter.ai/keys
+1. `--api-key`
+2. the `OPENROUTER_API_KEY` environment variable
+3. `OPENROUTER_API_KEY=` in a `.env` file, searching the working directory upward
 
-The script will automatically detect the `.env` file and provide clear error messages if the API key is missing.
+Do not open the `.env` file to check for the key -- run the script and read its exit status. With no key it exits with setup instructions. Keys: https://openrouter.ai/keys
 
 ## Model Selection
 
@@ -113,7 +110,7 @@ python scripts/generate_image.py "Image 2 description" --output image2.png
 - `--input` or `-i`: Input image path for editing (enables edit mode)
 - `--model` or `-m`: OpenRouter model ID (default: google/gemini-3-pro-image-preview)
 - `--output` or `-o`: Output file path (default: generated_image.png)
-- `--api-key`: OpenRouter API key (overrides .env file)
+- `--api-key`: OpenRouter API key (overrides the environment and `.env` file)
 
 ## Example Use Cases
 

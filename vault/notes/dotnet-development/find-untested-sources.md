@@ -21,7 +21,7 @@ created: 2026-07-21
 ## Related skills
 
 - [assertion-quality](../../notes/dotnet-development/assertion-quality.md) — Analyzes the variety and depth of assertions across test suites in any language
-- [coverage-analysis](../../notes/security-auditing/coverage-analysis.md) — Coverage analysis measures code exercised during fuzzing
+- [coverage-analysis](../../notes/security-auditing/coverage-analysis.md) — Measures and interprets what a fuzzing campaign actually reaches, using llvm-cov, lcov, or a fuzzer's own coverage output
 - [test-gap-analysis](../../notes/dotnet-development/test-gap-analysis.md) — Performs pseudo-mutation analysis on production code in any language to find gaps in existing tests
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

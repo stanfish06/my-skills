@@ -246,7 +246,7 @@
 <https://skillquarium.dev/id/affinity-proteomics> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/synthetic-biologist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/affinity-proteomics> <https://skillquarium.dev/ontology/source> "skills/affinity-proteomics/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/affinity-proteomics> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_parquet> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/aflpp> <http://purl.org/dc/terms/description> "> AFL++ is a fork of AFL with better fuzzing performance and advanced features. Use for multi-core fuzzing of C/C++ projects." <urn:vault:core> .
+<https://skillquarium.dev/id/aflpp> <http://purl.org/dc/terms/description> "Sets up and runs AFL++ for multi-core fuzzing of C/C++ projects built with afl-clang-fast or afl-gcc-fast. Covers instrumentation modes, parallel main and secondary campaigns, persistent mode, corpus minimization, and crash triage. Use when scaling fuzzing across cores, fuzzing a mature C/C++ codebase, reading the afl-fuzz status screen, or moving on after libFuzzer has plateaued." <urn:vault:core> .
 <https://skillquarium.dev/id/aflpp> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/aflpp> <http://www.w3.org/2000/01/rdf-schema#label> "aflpp" <urn:vault:core> .
 <https://skillquarium.dev/id/aflpp> <https://skillquarium.dev/ontology/identifier> "aflpp" <urn:vault:core> .
@@ -1375,7 +1375,7 @@
 <https://skillquarium.dev/id/atac-seq> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_bam> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/atac-seq> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_bed> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/atac-seq> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_fastq> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/atheris> <http://purl.org/dc/terms/description> "> Atheris is a coverage-guided Python fuzzer based on libFuzzer. Use for fuzzing pure Python code and Python C extensions." <urn:vault:core> .
+<https://skillquarium.dev/id/atheris> <http://purl.org/dc/terms/description> "Sets up and runs Atheris, the coverage-guided Python fuzzer built on libFuzzer. Covers TestOneInput harnesses, FuzzedDataProvider, instrumenting both pure Python and native C extensions, and running under AddressSanitizer. Use when fuzzing a Python package, hunting memory corruption in a Python C extension, or choosing between Atheris and Hypothesis for a Python target." <urn:vault:core> .
 <https://skillquarium.dev/id/atheris> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/atheris> <http://www.w3.org/2000/01/rdf-schema#label> "atheris" <urn:vault:core> .
 <https://skillquarium.dev/id/atheris> <https://skillquarium.dev/ontology/identifier> "atheris" <urn:vault:core> .
@@ -2988,7 +2988,7 @@
 <https://skillquarium.dev/id/cardiologist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/telemetry> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cardiologist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/water-resources-scientist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cardiologist> <https://skillquarium.dev/ontology/source> "skills/cardiologist/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/cargo-fuzz> <http://purl.org/dc/terms/description> "> cargo-fuzz is the de facto fuzzing tool for Rust projects using Cargo. Use for fuzzing Rust code with libFuzzer backend." <urn:vault:core> .
+<https://skillquarium.dev/id/cargo-fuzz> <http://purl.org/dc/terms/description> "Sets up and runs cargo-fuzz, the standard fuzzing tool for Cargo-based Rust projects. Covers cargo fuzz init, the nightly toolchain requirement, fuzz_target! harnesses, Arbitrary-derived structured inputs, sanitizer options, cargo fuzz coverage, and reproducing a crash artifact. Use when fuzzing a Rust crate, writing a fuzz_target!, exercising unsafe blocks or FFI in Rust, or triaging a cargo fuzz crash." <urn:vault:core> .
 <https://skillquarium.dev/id/cargo-fuzz> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/cargo-fuzz> <http://www.w3.org/2000/01/rdf-schema#label> "cargo-fuzz" <urn:vault:core> .
 <https://skillquarium.dev/id/cargo-fuzz> <https://skillquarium.dev/ontology/identifier> "cargo-fuzz" <urn:vault:core> .
@@ -4879,13 +4879,14 @@
 <https://skillquarium.dev/id/constant-time-analysis> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_security-auditing> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/constant-time-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/constant-time-testing> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/constant-time-analysis> <https://skillquarium.dev/ontology/source> "skills/constant-time-analysis/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/constant-time-testing> <http://purl.org/dc/terms/description> "> Constant-time testing detects timing side channels in cryptographic code. Use when auditing crypto implementations for timing vulnerabilities." <urn:vault:core> .
+<https://skillquarium.dev/id/constant-time-testing> <http://purl.org/dc/terms/description> "Measures timing side channels in cryptographic implementations by running them, using dudect for statistical analysis and Timecop over Valgrind for dynamic tracing. Covers the formal, symbolic, dynamic, and statistical tool categories and how to read a result. Use when testing whether a running implementation is constant-time, measuring timing variance on a compiled binary, or investigating a suspected timing attack. Not for statically inspecting compiler output — the constant-time-analysis plugin covers that." <urn:vault:core> .
 <https://skillquarium.dev/id/constant-time-testing> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/constant-time-testing> <http://www.w3.org/2000/01/rdf-schema#label> "constant-time-testing" <urn:vault:core> .
 <https://skillquarium.dev/id/constant-time-testing> <https://skillquarium.dev/ontology/identifier> "constant-time-testing" <urn:vault:core> .
 <https://skillquarium.dev/id/constant-time-testing> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_security-auditing> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/constant-time-testing> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/constant-time-analysis> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/constant-time-testing> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/performance-optimization> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/constant-time-testing> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/statistical-analysis> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/constant-time-testing> <https://skillquarium.dev/ontology/source> "skills/constant-time-testing/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/construction-engineer> <http://purl.org/dc/terms/description> "> Expert-thinking profile for Construction Engineer (field + office / construction management, means & methods, QA/QC): Reasons from design intent versus means-and- methods through CPM/P6 and Last Planner scheduling, Revit/Navisworks BIM coordination, IBC Chapter 17 special inspections, ASTM C31/C39 cylinder acceptance, and ACI 318 low- break/core protocols while treating formwork collapse, honeycombing, tolerance stack- up, and schedule..." <urn:vault:core> .
 <https://skillquarium.dev/id/construction-engineer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/ExpertProfile> <urn:vault:core> .
@@ -5023,7 +5024,7 @@
 <https://skillquarium.dev/id/cost-management> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/telemetry> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cost-management> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/using-dbt-for-analytics-engineering> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cost-management> <https://skillquarium.dev/ontology/source> "skills/cost-management/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/coverage-analysis> <http://purl.org/dc/terms/description> "> Coverage analysis measures code exercised during fuzzing. Use when assessing harness effectiveness or identifying fuzzing blockers." <urn:vault:core> .
+<https://skillquarium.dev/id/coverage-analysis> <http://purl.org/dc/terms/description> "Measures and interprets what a fuzzing campaign actually reaches, using llvm-cov, lcov, or a fuzzer's own coverage output. Covers baselining a new campaign, reading coverage reports, and turning uncovered regions into harness, seed, or dictionary work. Use when a fuzzer plateaus, when judging whether a harness is effective, after changing a harness, or when asking why some code is never reached." <urn:vault:core> .
 <https://skillquarium.dev/id/coverage-analysis> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/coverage-analysis> <http://www.w3.org/2000/01/rdf-schema#label> "coverage-analysis" <urn:vault:core> .
 <https://skillquarium.dev/id/coverage-analysis> <https://skillquarium.dev/ontology/identifier> "coverage-analysis" <urn:vault:core> .
@@ -5448,6 +5449,7 @@
 <https://skillquarium.dev/id/databricks-agent-bricks> <https://skillquarium.dev/ontology/identifier> "databricks-agent-bricks" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-agent-bricks> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_analytics-engineering> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-agent-bricks> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-core> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-agent-bricks> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-genie-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-agent-bricks> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-model-serving> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-agent-bricks> <https://skillquarium.dev/ontology/source> "skills/databricks-agent-bricks/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-ai-functions> <http://purl.org/dc/terms/description> "Use Databricks built-in AI Functions (ai_classify, ai_extract, ai_summarize, ai_mask, ai_translate, ai_fix_grammar, ai_gen, ai_analyze_sentiment, ai_similarity, ai_parse_document, ai_prep_search, ai_query, ai_forecast) to add AI capabilities directly to SQL and PySpark pipelines without managing model endpoints. Also covers document parsing and building custom RAG pipelines (parse → prep_search → index → query)." <urn:vault:core> .
@@ -5465,6 +5467,7 @@
 <https://skillquarium.dev/id/databricks-aibi-dashboards> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-app-design> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-aibi-dashboards> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-apps> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-aibi-dashboards> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-core> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-aibi-dashboards> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-metric-views> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-aibi-dashboards> <https://skillquarium.dev/ontology/source> "skills/databricks-aibi-dashboards/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-app-design> <http://purl.org/dc/terms/description> "Design the UX of custom-code Databricks Apps (AppKit/React) data screens — KPI/overview pages, reports, charts, tables, and Genie/chat data assistants — mapped to concrete AppKit components. Use when BUILDING or reviewing the UI of an AppKit/React app that displays data or answers data questions: choosing genre, layout, charts, KPIs, semantic color, required states (loading/empty/error), IBCS notation, and AI-result trust (showing generated SQL/sources for Genie/chat). A plain \"create a dashboard\" request means a managed AI/BI (Lakeview) dashboard → use databricks-aibi-dashboards, NOT this skill. Also NOT for non-data frontend (forms, settings, auth, marketing) or scaffolding/build/deploy (→ databricks-apps). Complements databricks-apps; use it alongside whenever a custom app has a chart, table, KPI, report, or Genie/chat/AI surface." <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-app-design> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
@@ -5551,7 +5554,9 @@
 <https://skillquarium.dev/id/databricks-dabs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-core> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-dabs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-data-discovery> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-dabs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-execution-compute> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-dabs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-genie-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-dabs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-jobs> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-dabs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-metric-views> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-dabs> <https://skillquarium.dev/ontology/source> "skills/databricks-dabs/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-data-discovery> <http://purl.org/dc/terms/description> "Discover, explore, and query Databricks data via Genie — the CLI equivalent of the Genie One MCP. MUST be invoked whenever the user asks to find or locate data ('what tables are in X', 'where does X live', 'which catalog/schema has Y'), answer a natural-language question about the data, or write a SQL query." <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-data-discovery> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
@@ -5561,6 +5566,7 @@
 <https://skillquarium.dev/id/databricks-data-discovery> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-core> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-data-discovery> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-dabs> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-data-discovery> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-genie-agents> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-data-discovery> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-metric-views> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-data-discovery> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/neuroscientist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-data-discovery> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/reverse-engineering> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-data-discovery> <https://skillquarium.dev/ontology/source> "skills/databricks-data-discovery/SKILL.md" <urn:vault:core> .
@@ -5600,8 +5606,11 @@
 <https://skillquarium.dev/id/databricks-genie-agents> <http://www.w3.org/2000/01/rdf-schema#label> "databricks-genie-agents" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/identifier> "databricks-genie-agents" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_analytics-engineering> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-agent-bricks> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-dabs> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-data-discovery> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hex> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-metric-views> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-unity-catalog> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-genie-agents> <https://skillquarium.dev/ontology/source> "skills/databricks-genie-agents/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-iceberg> <http://purl.org/dc/terms/description> "Apache Iceberg tables on Databricks — Managed Iceberg tables, External Iceberg Reads (fka Uniform), Compatibility Mode, Iceberg REST Catalog (IRC), Iceberg v3, Snowflake interop, PyIceberg, OSS Spark, external engine access and credential vending. Use when creating Iceberg tables, enabling External Iceberg Reads (uniform) on Delta tables (including Streaming Tables and Materialized Views via compatibility mode), configuring external engines to read Databricks tables via Unity Catalog IRC, integrating with Snowflake catalog to read Foreign Iceberg tables" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-iceberg> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
@@ -5648,8 +5657,11 @@
 <https://skillquarium.dev/id/databricks-metric-views> <http://www.w3.org/2000/01/rdf-schema#label> "databricks-metric-views" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/identifier> "databricks-metric-views" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_analytics-engineering> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-aibi-dashboards> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-core> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/query> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-dabs> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-data-discovery> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-genie-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-metric-views> <https://skillquarium.dev/ontology/source> "skills/databricks-metric-views/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-ml-training> <http://purl.org/dc/terms/description> "Train ML models on Databricks. Use for: classification/regression/deep-learning (XGBoost, scikit-learn, LightGBM, PyTorch) with Optuna, @prod/@challenger aliases, batch scoring (spark_udf for plain models, fe.score_batch for feature-store-backed), custom PyFunc, custom ResponsesAgent (LangGraph + UC Function/Vector Search); UC feature tables + FeatureLookup + point-in-time joins + Lakebase online store; declarative Feature Views (create_feature, DeltaTableSource, RollingWindow/SlidingWindow/TumblingWindow, materialize_features, streaming Kafka features). NOT for: endpoint ops (databricks-model-serving), MLflow evaluation (databricks-mlflow-evaluation)." <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-ml-training> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
@@ -5740,6 +5752,7 @@
 <https://skillquarium.dev/id/databricks-unity-catalog> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_analytics-engineering> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-unity-catalog> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-core> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-unity-catalog> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-docs> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/databricks-unity-catalog> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-genie-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/databricks-unity-catalog> <https://skillquarium.dev/ontology/source> "skills/databricks-unity-catalog/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-unstructured-pdf-generation> <http://purl.org/dc/terms/description> "Build RAG / unstructured-document evaluation datasets and demo documents (e.g. for Knowledge Assistant) on Databricks: generate synthetic PDFs locally, upload to Unity Catalog volumes, and pair each document with test questions for retrieval evaluation." <urn:vault:core> .
 <https://skillquarium.dev/id/databricks-unstructured-pdf-generation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
@@ -6402,7 +6415,7 @@
 <https://skillquarium.dev/id/differential-geometer> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_scientific-expert-profiles> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/differential-geometer> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scientific-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/differential-geometer> <https://skillquarium.dev/ontology/source> "skills/differential-geometer/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/differential-review> <http://purl.org/dc/terms/description> "> Performs security-focused differential review of code changes (PRs, commits, diffs). Adapts analysis depth to codebase size, uses git history for context, calculates blast radius, checks test coverage, and generates comprehensive markdown reports. Automatically detects and prevents security regressions." <urn:vault:core> .
+<https://skillquarium.dev/id/differential-review> <http://purl.org/dc/terms/description> "Performs security-focused differential review of code changes. Adapts analysis depth to codebase size, uses git blame for context, calculates blast radius by counting callers, checks test coverage of modified code, and generates a markdown report. Use when reviewing a PR, commit, or diff for security vulnerabilities, checking whether a change re-introduces a previously fixed bug, asking what else a change could break, or finding which modified code has no test covering it." <urn:vault:core> .
 <https://skillquarium.dev/id/differential-review> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/differential-review> <http://www.w3.org/2000/01/rdf-schema#label> "differential-review" <urn:vault:core> .
 <https://skillquarium.dev/id/differential-review> <https://skillquarium.dev/ontology/identifier> "differential-review" <urn:vault:core> .
@@ -8835,7 +8848,7 @@
 <https://skillquarium.dev/id/fusion-scientist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/plasma-physicist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/fusion-scientist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scientific-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/fusion-scientist> <https://skillquarium.dev/ontology/source> "skills/fusion-scientist/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/fuzzing-dictionary> <http://purl.org/dc/terms/description> "> Fuzzing dictionaries guide fuzzers with domain-specific tokens. Use when fuzzing parsers, protocols, or format-specific code." <urn:vault:core> .
+<https://skillquarium.dev/id/fuzzing-dictionary> <http://purl.org/dc/terms/description> "Builds and applies fuzzing dictionaries so a fuzzer can produce the keywords, magic bytes, and tokens a target expects. Covers extracting tokens from source, headers, binaries, and specifications, dictionary syntax, and wiring one into libFuzzer or AFL++. Use when fuzzing a parser, protocol, or file format, when coverage stalls at input validation, or when a target compares against fixed strings." <urn:vault:core> .
 <https://skillquarium.dev/id/fuzzing-dictionary> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/fuzzing-dictionary> <http://www.w3.org/2000/01/rdf-schema#label> "fuzzing-dictionary" <urn:vault:core> .
 <https://skillquarium.dev/id/fuzzing-dictionary> <https://skillquarium.dev/ontology/identifier> "fuzzing-dictionary" <urn:vault:core> .
@@ -8845,7 +8858,7 @@
 <https://skillquarium.dev/id/fuzzing-dictionary> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hex> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/fuzzing-dictionary> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/libfuzzer> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/fuzzing-dictionary> <https://skillquarium.dev/ontology/source> "skills/fuzzing-dictionary/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/fuzzing-obstacles> <http://purl.org/dc/terms/description> "> Techniques for patching code to overcome fuzzing obstacles. Use when checksums, global state, or other barriers block fuzzer progress." <urn:vault:core> .
+<https://skillquarium.dev/id/fuzzing-obstacles> <http://purl.org/dc/terms/description> "Patches past the barriers that stop a fuzzer making progress — checksum and hash verification, magic-value validation, time-based seeds, and other non-deterministic global state. Covers locating the blocking check, neutering it behind a fuzzing build flag, and avoiding the false positives a patch can introduce. Use when a fuzzer is stuck at validation, when coverage shows large regions behind a checksum, or when valid inputs are impractical to generate." <urn:vault:core> .
 <https://skillquarium.dev/id/fuzzing-obstacles> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/fuzzing-obstacles> <http://www.w3.org/2000/01/rdf-schema#label> "fuzzing-obstacles" <urn:vault:core> .
 <https://skillquarium.dev/id/fuzzing-obstacles> <https://skillquarium.dev/ontology/identifier> "fuzzing-obstacles" <urn:vault:core> .
@@ -10181,7 +10194,7 @@
 <https://skillquarium.dev/id/harmonypy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/seurat> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/harmonypy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/umap-learn> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/harmonypy> <https://skillquarium.dev/ontology/source> "skills/harmonypy/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/harness-writing> <http://purl.org/dc/terms/description> "> Techniques for writing effective fuzzing harnesses across languages. Use when creating new fuzz targets or improving existing harness code." <urn:vault:core> .
+<https://skillquarium.dev/id/harness-writing> <http://purl.org/dc/terms/description> "Designs and improves fuzzing harnesses for C/C++ and Rust. Covers mapping raw bytes onto a target API, generating structured inputs, avoiding non-determinism and false crashes, and deciding what to fuzz together. Use when writing a first LLVMFuzzerTestOneInput or fuzz_target! harness, when a campaign finds nothing or reports crashes that will not reproduce, or when the target API needs structured rather than raw input." <urn:vault:core> .
 <https://skillquarium.dev/id/harness-writing> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/harness-writing> <http://www.w3.org/2000/01/rdf-schema#label> "harness-writing" <urn:vault:core> .
 <https://skillquarium.dev/id/harness-writing> <https://skillquarium.dev/ontology/identifier> "harness-writing" <urn:vault:core> .
@@ -10292,7 +10305,6 @@
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cavekit-design-system> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/clickstack-otel-collector> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-app-design> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-genie-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/design-md-library> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/figma-design-to-code> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/figma-generate-design> <urn:vault:EXTRACTED> .
@@ -11822,7 +11834,7 @@
 <https://skillquarium.dev/id/ld-1000g-region-compute> <https://skillquarium.dev/ontology/source> "skills/ld-1000g-region-compute/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/ld-1000g-region-compute> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_genotypes> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ld-1000g-region-compute> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_vcf> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/libfuzzer> <http://purl.org/dc/terms/description> "> Coverage-guided fuzzer built into LLVM for C/C++ projects. Use for fuzzing C/C++ code that can be compiled with Clang." <urn:vault:core> .
+<https://skillquarium.dev/id/libfuzzer> <http://purl.org/dc/terms/description> "Sets up and runs libFuzzer, the coverage-guided fuzzer built into LLVM, on C/C++ code that compiles with Clang. Covers harness structure, -fsanitize=fuzzer builds, corpus and dictionary management, sanitizer integration, and campaign triage. Use when writing or debugging an LLVMFuzzerTestOneInput harness, starting fuzzing on a C/C++ library, choosing between libFuzzer and AFL++, or working out why a libFuzzer run finds nothing." <urn:vault:core> .
 <https://skillquarium.dev/id/libfuzzer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/libfuzzer> <http://www.w3.org/2000/01/rdf-schema#label> "libfuzzer" <urn:vault:core> .
 <https://skillquarium.dev/id/libfuzzer> <https://skillquarium.dev/ontology/identifier> "libfuzzer" <urn:vault:core> .
@@ -15153,7 +15165,7 @@
 <https://skillquarium.dev/id/next-forge> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/turborepo> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/next-forge> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/vercel-flags> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/next-forge> <https://skillquarium.dev/ontology/source> "skills/next-forge/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/next-partial-prefetching-adoption> <http://purl.org/dc/terms/description> "> Turn on Partial Prefetching in a Next.js app and work through the insights it surfaces. Use when the user wants to enable or adopt Partial Prefetching, flip the `partialPrefetching` flag, opt routes in with `export const prefetch = 'partial'`, audit `<Link prefetch={true}>` calls, or resolve the instant-link-prefetch-partial and instant-shell-url-data insights." <urn:vault:core> .
+<https://skillquarium.dev/id/next-partial-prefetching-adoption> <http://purl.org/dc/terms/description> "> Turn on Partial Prefetching in a Next.js app and work through the insights it surfaces. Use when the user wants to enable or adopt Partial Prefetching, flip the `partialPrefetching` flag, opt routes in with `export const prefetch = 'partial'`, audit `Link prefetch={true}` behavior, preserve existing prefetched UI with `instant()` tests, or resolve the instant-link-prefetch-partial and instant-shell-url-data insights." <urn:vault:core> .
 <https://skillquarium.dev/id/next-partial-prefetching-adoption> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/next-partial-prefetching-adoption> <http://www.w3.org/2000/01/rdf-schema#label> "next-partial-prefetching-adoption" <urn:vault:core> .
 <https://skillquarium.dev/id/next-partial-prefetching-adoption> <https://skillquarium.dev/ontology/identifier> "next-partial-prefetching-adoption" <urn:vault:core> .
@@ -16407,7 +16419,7 @@
 <https://skillquarium.dev/id/orthopedic-biomechanist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/matlab> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/orthopedic-biomechanist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scientific-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/orthopedic-biomechanist> <https://skillquarium.dev/ontology/source> "skills/orthopedic-biomechanist/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/ossfuzz> <http://purl.org/dc/terms/description> "> OSS-Fuzz provides free continuous fuzzing for open source projects. Use when setting up continuous fuzzing infrastructure or enrolling projects." <urn:vault:core> .
+<https://skillquarium.dev/id/ossfuzz> <http://purl.org/dc/terms/description> "Enrolls a project in OSS-Fuzz, Google's free continuous fuzzing service for open source, and drives it locally. Covers project.yaml, Dockerfile and build.sh setup, the helper scripts, reproducing OSS-Fuzz crash reports, and the acceptance criteria. Use when setting up continuous fuzzing for an open-source project, reproducing an OSS-Fuzz bug report, or testing an OSS-Fuzz build before submitting it." <urn:vault:core> .
 <https://skillquarium.dev/id/ossfuzz> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/ossfuzz> <http://www.w3.org/2000/01/rdf-schema#label> "ossfuzz" <urn:vault:core> .
 <https://skillquarium.dev/id/ossfuzz> <https://skillquarium.dev/ontology/identifier> "ossfuzz" <urn:vault:core> .
@@ -19061,7 +19073,6 @@
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_data-science-compute> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/bgee-skill> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/civic-skill> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-metric-views> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/duckdb-docs> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/entry-point-analyzer> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/fastapi> <urn:vault:EXTRACTED> .
@@ -22121,6 +22132,12 @@
 <https://skillquarium.dev/id/skill-builder> <https://skillquarium.dev/ontology/source> "skills/skill-builder/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/skill-builder> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_genotypes> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/skill-builder> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_vcf> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/skill-doctor> <http://purl.org/dc/terms/description> "Grades agent skills by scoring agent conversations against efficiency and code-quality rubrics, then drafts concrete skill edits and a shareable report. Use when the user wants their agent setup graded from real conversation history, or asks which of their installed skills are actually working." <urn:vault:core> .
+<https://skillquarium.dev/id/skill-doctor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
+<https://skillquarium.dev/id/skill-doctor> <http://www.w3.org/2000/01/rdf-schema#label> "skill-doctor" <urn:vault:core> .
+<https://skillquarium.dev/id/skill-doctor> <https://skillquarium.dev/ontology/identifier> "skill-doctor" <urn:vault:core> .
+<https://skillquarium.dev/id/skill-doctor> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_vault-meta> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/skill-doctor> <https://skillquarium.dev/ontology/source> "skills/skill-doctor/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/skills-hub> <http://purl.org/dc/terms/description> "Browse and install community skills from the BioClaw Skills Hub. Use when a user's task is not covered by built-in skills, or when the user asks about available skills, advanced workflows, or specialized analysis pipelines. Triggers on \"skills hub\", \"more skills\", \"install skill\", \"community skills\", \"find a skill for\"." <urn:vault:core> .
 <https://skillquarium.dev/id/skills-hub> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/skills-hub> <http://www.w3.org/2000/01/rdf-schema#label> "skills-hub" <urn:vault:core> .
@@ -22511,6 +22528,7 @@
 <https://skillquarium.dev/id/statistical-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cirq> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/statistical-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/clinical-decision-support> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/statistical-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cognitive-scientist> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/statistical-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/constant-time-testing> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/statistical-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/emergency-medicine-researcher> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/statistical-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/metrology-scientist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/statistical-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/network-scientist> <urn:vault:EXTRACTED> .
@@ -29697,6 +29715,12 @@
 <https://skillquarium.dev/id/use-js-interop> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/author-component> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/use-js-interop> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/collect-user-input> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/use-js-interop> <https://skillquarium.dev/ontology/source> "skills/use-js-interop/SKILL.md" <urn:vault:core> .
+<https://skillquarium.dev/id/use-modern-go> <http://purl.org/dc/terms/description> "Use the Modern Go Guidelines CLI whenever writing, modifying, fixing, or refactoring Go code. Apply its version-specific guidance to generated changes." <urn:vault:core> .
+<https://skillquarium.dev/id/use-modern-go> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
+<https://skillquarium.dev/id/use-modern-go> <http://www.w3.org/2000/01/rdf-schema#label> "use-modern-go" <urn:vault:core> .
+<https://skillquarium.dev/id/use-modern-go> <https://skillquarium.dev/ontology/identifier> "use-modern-go" <urn:vault:core> .
+<https://skillquarium.dev/id/use-modern-go> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_software-dev> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/use-modern-go> <https://skillquarium.dev/ontology/source> "skills/use-modern-go/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/usfiscaldata> <http://purl.org/dc/terms/description> "Query the U.S. Treasury Fiscal Data REST API for federal financial data. No API key required. Use for national debt (Debt to the Penny), Daily Treasury Statements, Monthly Treasury Statements, Treasury securities auctions, interest rates, foreign exchange rates, savings bonds, or U.S. government revenue and spending statistics." <urn:vault:core> .
 <https://skillquarium.dev/id/usfiscaldata> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/usfiscaldata> <http://www.w3.org/2000/01/rdf-schema#label> "usfiscaldata" <urn:vault:core> .

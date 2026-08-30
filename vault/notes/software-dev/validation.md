@@ -35,6 +35,8 @@ created: 2026-08-07
 - [fastapi](../../notes/software-dev/fastapi.md) — Building HTTP/JSON APIs in Python with FastAPI — path/query/body params, Pydantic v2 models, async endpoints, dependency injection, the lifespan startup/shutdown pattern, error...
 - [fetch-and-send-data](../../notes/dotnet-development/fetch-and-send-data.md) — Call APIs, load data into components, and handle the async lifecycle in Blazor
 - [fleet-management](../../notes/cloud-devops/fleet-management.md) — Manage a fleet of Grafana Alloy collectors with Fleet Management — author Alloy pipelines once, target them via attribute matchers (`env="production"`, regex `region=~"us-.*"`), push...
+- [fuzzing-dictionary](../../notes/security-auditing/fuzzing-dictionary.md) — Builds and applies fuzzing dictionaries so a fuzzer can produce the keywords, magic bytes, and tokens a target expects
+- [fuzzing-obstacles](../../notes/security-auditing/fuzzing-obstacles.md) — Patches past the barriers that stop a fuzzer making progress — checksum and hash verification, magic-value validation, time-based seeds, and other non-deterministic global state
 - [great-expectations](../../notes/data-science-compute/great-expectations.md) — Data validation using Great Expectations
 - [huggingface-llm-trainer](../../notes/ml-ai/huggingface-llm-trainer.md) — Use when users want to train or fine-tune language models using TRL (Transformer Reinforcement Learning) on Hugging Face Jobs infrastructure
 - [lamindb](../../notes/bio-databases-platforms/lamindb.md) — Use when working with LaminDB, the open-source lineage-native lakehouse for biological datasets and models

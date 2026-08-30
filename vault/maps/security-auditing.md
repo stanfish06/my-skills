@@ -16,11 +16,11 @@ created: 2026-06-13
 
 ## Skills (89)
 
-- [aflpp](../notes/security-auditing/aflpp.md) — AFL++ is a fork of AFL with better fuzzing performance and advanced features
+- [aflpp](../notes/security-auditing/aflpp.md) — Sets up and runs AFL++ for multi-core fuzzing of C/C++ projects built with afl-clang-fast or afl-gcc-fast
 - [agentic-actions-auditor](../notes/security-auditing/agentic-actions-auditor.md) — Audits GitHub Actions workflows for security vulnerabilities in AI agent integrations including Claude Code Action, Gemini CLI, OpenAI Codex, and GitHub AI Inference
 - [api-security](../notes/security-auditing/api-security.md) — Use for authorized security assessment of REST, GraphQL, WebSocket, or SOAP APIs, including discovery, authentication, authorization, rate-limit, and CI/CD testing
 - [apk-reverse](../notes/security-auditing/apk-reverse.md) — 在 CLI 环境下做 Android APK 逆向时使用。适用于 APK 解包、Java 反编译、smali 修改、重打包、Frida 动态 Hook，以及按需切换到 so/native 分析。优先使用本机已安装的 jadx、apktool、frida、adb、ida-reverse、radare2。
-- [atheris](../notes/security-auditing/atheris.md) — Atheris is a coverage-guided Python fuzzer based on libFuzzer
+- [atheris](../notes/security-auditing/atheris.md) — Sets up and runs Atheris, the coverage-guided Python fuzzer built on libFuzzer
 - [attack-chain](../notes/security-auditing/attack-chain.md) — Use for authorized multi-stage attack-path planning and orchestration when a task spans reconnaissance, initial access, privilege escalation, lateral movement, or impact assessment
 - [attack-path-analysis](../notes/security-auditing/attack-path-analysis.md) — Use when Codex is already in the attack-path-analysis phase of a security scan or the user explicitly asks to trace a security finding from source to sink and calibrate severity
 - [audit-and-reduce-dependencies](../notes/security-auditing/audit-and-reduce-dependencies.md) — Reduces JavaScript dependency footprint with pnpm while preserving lockfile, workspace layout, and dependency range style
@@ -31,7 +31,7 @@ created: 2026-06-13
 - [browser-automation](../notes/security-auditing/browser-automation.md) — 统一自动化入口。覆盖浏览器自动化（Playwright）和 Windows 桌面应用自动化（OpenReverse）。 浏览器场景：打开网页、点击、填表、爬取、截图、自动化登录、渗透页面交互。 桌面场景：操作 IDA/x64dbg 等 GUI 工具、Windows UI Automation、视觉驱动交互、桌面应用网络抓包。...
 - [browser-extension-reverse](../notes/security-auditing/browser-extension-reverse.md) — Use for authorized reverse engineering of browser extensions (Chrome/Firefox) including manifest analysis, background workers, and extension-based credential or traffic logic recovery
 - [c-review](../notes/security-auditing/c-review.md) — Performs comprehensive C/C++ security review for memory corruption, integer overflows, race conditions, and platform-specific vulnerabilities
-- [cargo-fuzz](../notes/security-auditing/cargo-fuzz.md) — cargo-fuzz is the de facto fuzzing tool for Rust projects using Cargo
+- [cargo-fuzz](../notes/security-auditing/cargo-fuzz.md) — Sets up and runs cargo-fuzz, the standard fuzzing tool for Cargo-based Rust projects
 - [case-review](../notes/security-auditing/case-review.md) — Reviews a reverse-skill case package for scope readiness, Evidence to Finding to Path traceability, work item coverage, timeline references, and optional artifact hash integrity before...
 - [check-npm](../notes/security-auditing/check-npm.md) — Audit a JavaScript/TypeScript repo's npm, yarn, or pnpm configuration for supply-chain hardening: tool version, lifecycle scripts, unsafe dependency protocols, and minimum release age...
 - [cloud-k8s](../notes/security-auditing/cloud-k8s.md) — Use for authorized cloud, container, and Kubernetes security assessment including metadata SSRF, IAM misconfig, container escape paths, and cluster RBAC review
@@ -39,11 +39,11 @@ created: 2026-06-13
 - [code-maturity-assessor](../notes/security-auditing/code-maturity-assessor.md) — Systematic code maturity assessment using Trail of Bits' 9-category framework
 - [codeql](../notes/security-auditing/codeql.md) — Scans a codebase for security vulnerabilities using CodeQL's interprocedural data flow and taint tracking analysis
 - [constant-time-analysis](../notes/security-auditing/constant-time-analysis.md) — Detects timing side-channel vulnerabilities in cryptographic code
-- [constant-time-testing](../notes/security-auditing/constant-time-testing.md) — Constant-time testing detects timing side channels in cryptographic code
-- [coverage-analysis](../notes/security-auditing/coverage-analysis.md) — Coverage analysis measures code exercised during fuzzing
+- [constant-time-testing](../notes/security-auditing/constant-time-testing.md) — Measures timing side channels in cryptographic implementations by running them, using dudect for statistical analysis and Timecop over Valgrind for dynamic tracing
+- [coverage-analysis](../notes/security-auditing/coverage-analysis.md) — Measures and interprets what a fuzzing campaign actually reaches, using llvm-cov, lcov, or a fuzzer's own coverage output
 - [database-security](../notes/security-auditing/database-security.md) — Use for authorized database security assessment covering PostgreSQL/MySQL/MSSQL/Mongo/Redis exposure, authz, UDF/command paths, and misconfiguration review
 - [deep-security-scan](../notes/security-auditing/deep-security-scan.md) — Use when the user asks for a deep, exhaustive, multi-pass, or variance-reducing repository-wide or scoped-path Codex Security scan
-- [differential-review](../notes/security-auditing/differential-review.md) — Performs security-focused differential review of code changes (PRs, commits, diffs)
+- [differential-review](../notes/security-auditing/differential-review.md) — Performs security-focused differential review of code changes
 - [digital-forensics](../notes/security-auditing/digital-forensics.md) — Use for authorized digital forensics including memory dumps, disk timelines, PCAP investigation, artifact triage, and IR evidence preservation
 - [dotnet-reverse](../notes/security-auditing/dotnet-reverse.md) — .NET / C# 二进制逆向。当目标是 .NET assembly（PE 头含 CLR、.exe/.dll 托管程序）、C# 编译产物（含 NativeAOT）、红队 Sharp* 工具（Rubeus / SharpHound / SharpHound 等）、.NET 混淆程序（ConfuserEx / SmartAssembly / Babel /...
 - [edr-bypass-re](../notes/security-auditing/edr-bypass-re.md) — 逆向防御方实现 → 红队针对性绕过。把 EDR / Defender / AV 的 hook 表、ETW provider、AMSI 实现先逆向出来， 再写针对性的 unhook / 间接 syscall / ETW patch / call stack spoof。对照 MITRE ATT&CK T1562 防御规避。 触发关键词：EDR 绕过、AV...
@@ -53,25 +53,25 @@ created: 2026-06-13
 - [firmware-pentest](../notes/security-auditing/firmware-pentest.md) — 固件 / IoT 渗透链。从拿到一坨 .bin / .img 开始，闭环走完逆向 → 提取 → 模拟 → 利用。 方法论遵循 OWASP FSTM 九阶段；工具链以 binwalk v3、unblob、EMBA、Firmadyne、AFL++ 为主。 适用场景：路由器/摄像头/智能家居固件审计、固件升级包逆向、IoT CVE 复现、嵌入式 0day 挖掘。...
 - [fix-finding](../notes/security-auditing/fix-finding.md) — Use when the user explicitly asks to fix and verify a validated or plausible security finding
 - [fp-check](../notes/security-auditing/fp-check.md) — Systematically verifies suspected security bugs to eliminate false positives, producing a TRUE POSITIVE or FALSE POSITIVE verdict with documented evidence for each
-- [fuzzing-dictionary](../notes/security-auditing/fuzzing-dictionary.md) — Fuzzing dictionaries guide fuzzers with domain-specific tokens
-- [fuzzing-obstacles](../notes/security-auditing/fuzzing-obstacles.md) — Techniques for patching code to overcome fuzzing obstacles
+- [fuzzing-dictionary](../notes/security-auditing/fuzzing-dictionary.md) — Builds and applies fuzzing dictionaries so a fuzzer can produce the keywords, magic bytes, and tokens a target expects
+- [fuzzing-obstacles](../notes/security-auditing/fuzzing-obstacles.md) — Patches past the barriers that stop a fuzzer making progress — checksum and hash verification, magic-value validation, time-based seeds, and other non-deterministic global state
 - [gh-cli](../notes/security-auditing/gh-cli.md) — Enforces authenticated gh CLI workflows over unauthenticated curl, WebFetch, and MCP fetch patterns
 - [ghidra-reverse](../notes/security-auditing/ghidra-reverse.md) — Use for free/open reverse engineering with Ghidra (headless or GUI), including decompile, cross-refs, and optional Ghidra MCP workflows when IDA is unavailable
 - [go-rust-reverse](../notes/security-auditing/go-rust-reverse.md) — Use for reverse engineering stripped Go and Rust binaries including runtime recognition, pclntab/moduel data recovery, panic strings, and idiomatic decompilation recovery
 - [guidelines-advisor](../notes/security-auditing/guidelines-advisor.md) — Smart contract development advisor based on Trail of Bits' best practices
 - [hardware-security](../notes/security-auditing/hardware-security.md) — Use for authorized hardware and embedded interface security research including UART/JTAG discovery, debug pad triage, secure boot overview, and offline firmware extraction support
-- [harness-writing](../notes/security-auditing/harness-writing.md) — Techniques for writing effective fuzzing harnesses across languages
+- [harness-writing](../notes/security-auditing/harness-writing.md) — Designs and improves fuzzing harnesses for C/C++ and Rust
 - [ida-reverse](../notes/security-auditing/ida-reverse.md) — IDA Pro 逆向分析辅助技能。当用户提到逆向、反编译、分析二进制/PE/ELF/APK/DLL/SO、破解、找密码、漏洞分析、病毒分析、firmware 固件分析，或需要分析 exe/dll/so/elf/macho/sys 等文件时，务必使用此技能。 Ensure to use this skill when the user wants to analyze...
 - [identity-federation](../notes/security-auditing/identity-federation.md) — Use for authorized assessment of federated identity systems including SAML, OIDC, OAuth2 flows, SSO misconfiguration, and token confusion issues
 - [insecure-defaults](../notes/security-auditing/insecure-defaults.md) — Detects fail-open insecure defaults (hardcoded secrets, weak auth, permissive security) that allow apps to run insecurely in production
 - [js-reverse](../notes/security-auditing/js-reverse.md) — 在使用 js-reverse-mcp 做前端 JavaScript 逆向时使用，适用于签名链路定位、页面观察取证、运行时采样、本地补环境复现与证据化输出。优先适配当前环境里的 js-reverse_* 工具，需要更强的浏览器/CDP/Hook 面时联动 jshookmcp。
-- [libfuzzer](../notes/security-auditing/libfuzzer.md) — Coverage-guided fuzzer built into LLVM for C/C++ projects
+- [libfuzzer](../notes/security-auditing/libfuzzer.md) — Sets up and runs libFuzzer, the coverage-guided fuzzer built into LLVM, on C/C++ code that compiles with Clang
 - [llm-agent-security-redteam](../notes/security-auditing/llm-agent-security-redteam.md) — LLM and agent security red teaming with agentic-actions-auditor, supply-chain-risk-auditor, semgrep, codeql, and sarif-parsing
 - [llm-security](../notes/security-auditing/llm-security.md) — Use for authorized security assessment of LLM applications and AI agents, including prompt injection, tool abuse, RAG exposure, memory poisoning, and model supply-chain risks
 - [macos-reverse](../notes/security-auditing/macos-reverse.md) — Use for authorized macOS and Mach-O reverse engineering including codesign, Objective-C/Swift recovery, endpoint security surfaces, and Apple platform malware analysis
 - [malware-analysis](../notes/security-auditing/malware-analysis.md) — Use when analyzing suspected malware through static, dynamic, and behavioral techniques, including IOC extraction, YARA or Sigma rules, sandboxing, and anti-analysis behavior
 - [mobile-reverse](../notes/security-auditing/mobile-reverse.md) — Use for authorized Android or iOS application reverse engineering and security testing, including APK or IPA analysis, runtime instrumentation, SSL pinning, and platform protection...
-- [ossfuzz](../notes/security-auditing/ossfuzz.md) — OSS-Fuzz provides free continuous fuzzing for open source projects
+- [ossfuzz](../notes/security-auditing/ossfuzz.md) — Enrolls a project in OSS-Fuzz, Google's free continuous fuzzing service for open source, and drives it locally
 - [ot-ics](../notes/security-auditing/ot-ics.md) — Use for authorized OT/ICS security assessment covering Purdue model zoning, PLC/SCADA exposure, industrial protocol discovery, and safe passive-first evaluation
 - [patch-diff-exploit](../notes/security-auditing/patch-diff-exploit.md) — N-day 补丁差分到利用。从厂商发布的补丁里反推漏洞点、写 PoC、做成可用的攻击模块。 适用场景：已知 CVE 编号但只有补丁没有 PoC、SRC/红队需要打击未及时更新的资产、N-day 武器化、Patch Tuesday 跟进。 核心方法：拿 before/after 二进制 → 对齐符号 → 二进制 diff → 看新增的安全检查反推 bug class...
 - [pentest-tools](../notes/security-auditing/pentest-tools.md) — 主动渗透测试工具链。覆盖信息收集、端口扫描、漏洞扫描、Web 渗透、SQL 注入、目录爆破、密码破解等场景。 通过 MCP server（pentestMCP / mcp-security-hub）将 20+ 安全工具暴露给 AI agent。 触发关键词：渗透测试、端口扫描、Nmap、漏洞扫描、Nuclei、SQL...

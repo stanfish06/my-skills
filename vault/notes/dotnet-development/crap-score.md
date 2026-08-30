@@ -21,7 +21,7 @@ created: 2026-07-21
 ## Related skills
 
 - [code-testing-agent](../../notes/dotnet-development/code-testing-agent.md) — Generates and writes new unit tests for any programming language — scaffolds test projects and configures coverage tooling (coverlet, pytest-cov, @vitest/coverage-v8) as part of test...
-- [coverage-analysis](../../notes/security-auditing/coverage-analysis.md) — Coverage analysis measures code exercised during fuzzing
+- [coverage-analysis](../../notes/security-auditing/coverage-analysis.md) — Measures and interprets what a fuzzing campaign actually reaches, using llvm-cov, lcov, or a fuzzer's own coverage output
 - [dotnet-coverage-analysis](../../notes/dotnet-development/dotnet-coverage-analysis.md) — Project-wide code coverage and CRAP (Change Risk Anti-Patterns) score analysis for .NET projects
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

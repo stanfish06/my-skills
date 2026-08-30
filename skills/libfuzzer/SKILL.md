@@ -1,21 +1,18 @@
 ---
 name: libfuzzer
 type: fuzzer
-description: >
-  Coverage-guided fuzzer built into LLVM for C/C++ projects. Use for fuzzing
-  C/C++ code that can be compiled with Clang.
+description: "Sets up and runs libFuzzer, the coverage-guided fuzzer built into LLVM, on C/C++ code that compiles with Clang. Covers harness structure, -fsanitize=fuzzer builds, corpus and dictionary management, sanitizer integration, and campaign triage. Use when writing or debugging an LLVMFuzzerTestOneInput harness, starting fuzzing on a C/C++ library, choosing between libFuzzer and AFL++, or working out why a libFuzzer run finds nothing."
 ---
 
 # libFuzzer
 
-libFuzzer is an in-process, coverage-guided fuzzer that is part of the LLVM project. It's a well-established choice for fuzzing C/C++ projects due to its simplicity and integration with the LLVM toolchain. libFuzzer has been in maintenance-only mode since late 2022; the original authors migrated to Centipede (paired with FuzzTest) and Google now recommends FuzzTest+Centipede for new C++ projects. libFuzzer remains appropriate for quick setup, single-project fuzzing, and reusing existing harnesses — and its harnesses are compatible with AFL++ for a straightforward upgrade path.
+libFuzzer is an in-process, coverage-guided fuzzer that is part of the LLVM project. It's the recommended starting point for fuzzing C/C++ projects due to its simplicity and integration with the LLVM toolchain. While libFuzzer has been in maintenance-only mode since late 2022, it is easier to install and use than its alternatives, has wide support, and will be maintained for the foreseeable future.
 
 ## When to Use
 
 | Fuzzer | Best For | Complexity |
 |--------|----------|------------|
 | libFuzzer | Quick setup, single-project fuzzing | Low |
-| FuzzTest+Centipede | New C++ projects, GoogleTest integration | Low–Medium |
 | AFL++ | Multi-core fuzzing, diverse mutations | Medium |
 | LibAFL | Custom fuzzers, research projects | High |
 | Honggfuzz | Hardware-based coverage | Medium |

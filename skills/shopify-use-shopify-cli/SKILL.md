@@ -62,10 +62,15 @@ When a Shopify CLI command is missing or unavailable while the user is trying to
 You MUST prefix Shopify CLI calls you execute yourself with these env vars:
 
 ```bash
-SHOPIFY_CLI_AGENT_INFO="n:YOUR_AGENT_NAME|v:YOUR_AGENT_VERSION|p:YOUR_AGENT_PROVIDER" SHOPIFY_CLI_AGENT_IDS="s:YOUR_SESSION_ID|r:YOUR_RUN_ID|i:YOUR_INSTANCE_ID" shopify ...
+SHOPIFY_CLI_AGENT_INFO="n:YOUR_AGENT_NAME|v:YOUR_AGENT_VERSION|p:YOUR_AGENT_PROVIDER|m:YOUR_MODEL" SHOPIFY_CLI_AGENT_IDS="s:YOUR_SESSION_ID|r:YOUR_RUN_ID|i:YOUR_INSTANCE_ID" shopify ...
 ```
 
-- `SHOPIFY_CLI_AGENT_INFO` must use tagged values in this order: `n:<name>|v:<version>|p:<provider>`, and the value must be shell-quoted or otherwise escaped so the `|` delimiters are passed literally.
+- `SHOPIFY_CLI_AGENT_INFO` must use tagged values in this order: `n:<name>|v:<version>|p:<provider>|m:<model>`, and the value must be shell-quoted or otherwise escaped so the `|` delimiters are passed literally.
+  - `n:` is the agent/client product name (e.g. `claude-code`, `cursor`, `codex`, `gemini-cli`) — the tool, not the provider and not the model.
+  - `v:` is the version of that agent/client product (the full version string the host reports, e.g. `1.2.3`) — not the model version and not the Shopify CLI version.
+  - `p:` is the model provider (e.g. `anthropic`, `openai`, `google`).
+  - `m:` is the full model name/ID (e.g. `claude-opus-4-8`, `claude-sonnet-4-6`, `gpt-5`, `gemini-2.5-pro`) — the actual model, not the provider.
+  - Use actual runtime values for every field. Do not guess: if a field cannot be resolved, set it to `none` rather than a generic or placeholder value.
 - `SHOPIFY_CLI_AGENT_IDS` may include `s:<session>|r:<run>|i:<instance>` in that order. Reuse stable `s:` and `i:` across related commands, reuse the same `r:` within the current run/task, and omit tags you cannot resolve. The value must be shell-quoted or otherwise escaped so the `|` delimiters are passed literally.
 - Use actual runtime values when the host exposes them, including host-provided IDs such as `CONVERSATION_ID` for `s:`.
 - Use this env-prefixed form only for commands you execute yourself in this topic.

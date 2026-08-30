@@ -1,9 +1,7 @@
 ---
 name: cargo-fuzz
 type: fuzzer
-description: >
-  cargo-fuzz is the de facto fuzzing tool for Rust projects using Cargo.
-  Use for fuzzing Rust code with libFuzzer backend.
+description: "Sets up and runs cargo-fuzz, the standard fuzzing tool for Cargo-based Rust projects. Covers cargo fuzz init, the nightly toolchain requirement, fuzz_target! harnesses, Arbitrary-derived structured inputs, sanitizer options, cargo fuzz coverage, and reproducing a crash artifact. Use when fuzzing a Rust crate, writing a fuzz_target!, exercising unsafe blocks or FFI in Rust, or triaging a cargo fuzz crash."
 ---
 
 # cargo-fuzz
@@ -395,9 +393,9 @@ fuzz_target!(|data: &[u8]| {
 
 Seed the corpus:
 ```bash
-mkdir -p fuzz/corpus/fuzz_target_1/
-curl -L -o fuzz/corpus/fuzz_target_1/320x240.ogg \
-  https://commons.wikimedia.org/wiki/Special:FilePath/320x240.ogg
+mkdir fuzz/corpus/fuzz_target_1/
+curl -o fuzz/corpus/fuzz_target_1/320x240.ogg \
+  https://commons.wikimedia.org/wiki/File:320x240.ogg
 ```
 
 Run:

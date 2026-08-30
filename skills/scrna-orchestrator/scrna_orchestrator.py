@@ -49,6 +49,13 @@ DISCLAIMER = (
     "and does not provide clinical diagnoses. Consult a healthcare professional "
     "before making any medical decisions."
 )
+_CONTRAST_CAVEAT = (
+    "- **Exploratory only**: this is a per-cell Wilcoxon test. If the grouping column is a "
+    "biological condition, cells from one donor are not independent replicates, so `pvals_adj` "
+    "tracks cell count rather than biological replication. For a condition-level contrast, "
+    "aggregate to pseudobulk per donor-sample per cell type and run pydeseq2/DESeq2/edgeR/"
+    "limma-voom with donor as a blocking factor."
+)
 DEMO_SOURCE_ENV = "CLAWBIO_SCRNA_DEMO_SOURCE"
 DEFAULT_CELLTYPIST_MODEL = "Immune_All_Low"
 EMBEDDING_ARTIFACT_KEY = "clawbio_scrna_embedding"
@@ -1165,6 +1172,7 @@ def render_report(
     else:
         lines.append("- Not enabled for this run.")
     lines.append("- Downstream visualization: use `python clawbio.py run diffviz --mode scrna --input <scrna_output_dir>`.")
+    lines.append(_CONTRAST_CAVEAT)
 
     lines.extend(["", "## Within-Cluster Contrastive Markers", ""])
     if within_summary.get("enabled"):
@@ -1187,6 +1195,7 @@ def render_report(
     else:
         lines.append("- Not enabled for this run.")
     lines.append("- Downstream visualization: use `diff-visualizer` for cluster/comparison panels from the exported tables.")
+    lines.append(_CONTRAST_CAVEAT)
 
     lines.extend(["", "## Methods", ""])
     lines.append(
@@ -1662,7 +1671,14 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_CELLTYPIST_MODEL,
         help="Local CellTypist model name or path (used with --annotate celltypist)",
     )
-    parser.add_argument("--contrast-groupby", default=None, help="obs column for pairwise contrastive marker analysis")
+    parser.add_argument(
+        "--contrast-groupby",
+        default=None,
+        help=(
+            "obs column for pairwise contrastive marker analysis; per-cell Wilcoxon, "
+            "exploratory only — use pseudobulk + pydeseq2 for condition-level DE"
+        ),
+    )
     parser.add_argument(
         "--contrast-scope",
         choices=("dataset", "within-cluster", "both"),

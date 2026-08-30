@@ -212,7 +212,7 @@ class TestRunBoltz:
         cif = pred_dir / "Trpcage_model_0.cif"
         cif.write_text("data_Trpcage\n")
         conf = pred_dir / "confidence_Trpcage_model_0.json"
-        conf.write_text('{"plddt": [95.0], "pae": [[0.5]]}')
+        conf.write_text('{"confidence_score": 0.9, "ptm": 0.9}')
 
         mock_proc = MagicMock()
         mock_proc.returncode = 0
@@ -242,7 +242,7 @@ class TestRunBoltz:
 # TestConfidence
 # ---------------------------------------------------------------------------
 
-from struct_predictor_core.confidence import extract_confidence, _parse_plddt_from_cif, _parse_pae_from_json, _read_atom_site_columns
+from struct_predictor_core.confidence import extract_confidence, _parse_plddt_from_cif, _load_pae, _read_atom_site_columns
 
 
 def _make_synthetic_cif(tmp_path: Path, n_residues: int = 5, n_chains: int = 1) -> Path:
@@ -275,11 +275,17 @@ def _make_synthetic_cif(tmp_path: Path, n_residues: int = 5, n_chains: int = 1) 
 
 
 def _make_synthetic_conf_json(tmp_path: Path, n: int) -> Path:
-    plddt = [80.0 + i for i in range(n)]
-    pae = [[float(abs(i - j)) for j in range(n)] for i in range(n)]
-    data = {"plddt": plddt, "pae": pae, "ptm": 0.85, "iptm": 0.72}
+    """Mirror the real Boltz confidence JSON: scalar scores only, no "pae"."""
+    data = {"confidence_score": 0.81, "ptm": 0.85, "iptm": 0.72, "complex_plddt": 0.84}
     p = tmp_path / "confidence_TEST_model_0.json"
     p.write_text(json.dumps(data))
+    return p
+
+
+def _make_synthetic_pae_npz(tmp_path: Path, n: int) -> Path:
+    pae = np.array([[float(abs(i - j)) for j in range(n)] for i in range(n)], dtype=np.float32)
+    p = tmp_path / "pae_TEST_model_0.npz"
+    np.savez_compressed(p, pae=pae)
     return p
 
 
@@ -368,21 +374,23 @@ class TestConfidence:
 
     def test_pae_shape(self, tmp_path):
         n = 5
-        conf_json = _make_synthetic_conf_json(tmp_path, n)
-        pae = _parse_pae_from_json(conf_json, n)
+        pae = _load_pae(_make_synthetic_pae_npz(tmp_path, n), None, n)
         assert pae.shape == (n, n)
 
-    def test_pae_missing_json_returns_zeros(self, tmp_path):
-        n = 4
-        pae = _parse_pae_from_json(None, n)
-        assert pae.shape == (n, n)
-        assert np.all(pae == 0.0)
+    def test_pae_missing_returns_none(self, tmp_path):
+        # a real Boltz confidence JSON has no "pae" key and no npz is written
+        # without --write_full_pae; None must never be substituted with zeros
+        assert _load_pae(None, None, 4) is None
+        assert _load_pae(None, _make_synthetic_conf_json(tmp_path, 4), 4) is None
+
+    def test_pae_shape_mismatch_returns_none(self, tmp_path):
+        assert _load_pae(_make_synthetic_pae_npz(tmp_path, 5), None, 4) is None
 
     def test_extract_confidence_single_chain(self, tmp_path):
         n = 4
         cif = _make_synthetic_cif(tmp_path, n_residues=n, n_chains=1)
         conf = _make_synthetic_conf_json(tmp_path, n)
-        result = extract_confidence(cif, conf)
+        result = extract_confidence(cif, conf, _make_synthetic_pae_npz(tmp_path, n))
         assert result["plddt"].shape == (n,)
         assert result["pae"].shape == (n, n)
         assert len(result["chain_boundaries"]) == 1
@@ -394,7 +402,7 @@ class TestConfidence:
         n = 4  # 2 residues per chain
         cif = _make_synthetic_cif(tmp_path, n_residues=n, n_chains=2)
         conf = _make_synthetic_conf_json(tmp_path, n)
-        result = extract_confidence(cif, conf)
+        result = extract_confidence(cif, conf, _make_synthetic_pae_npz(tmp_path, n))
         assert len(result["chain_boundaries"]) == 2
         assert result["chain_boundaries"][0]["chain_id"] == "A"
         assert result["chain_boundaries"][1]["chain_id"] == "B"
@@ -561,9 +569,13 @@ class TestPipeline:
         for i in range(n):
             cif_lines.append(f"ATOM {i+1} CA A {i+1} {i:.1f} 0.0 0.0 {90.0+i*0.5:.1f}")
         (pred_dir / "Trpcage_model_0.cif").write_text("\n".join(cif_lines))
-        pae = [[float(abs(r - c)) for c in range(n)] for r in range(n)]
         (pred_dir / "confidence_Trpcage_model_0.json").write_text(
-            json.dumps({"plddt": [90.0 + i * 0.5 for i in range(n)], "pae": pae})
+            json.dumps({"confidence_score": 0.9, "ptm": 0.88, "iptm": 0.75})
+        )
+        # Boltz writes PAE to its own npz, not into the confidence JSON
+        np.savez_compressed(
+            pred_dir / "pae_Trpcage_model_0.npz",
+            pae=np.array([[float(abs(r - c)) for c in range(n)] for r in range(n)], dtype=np.float32),
         )
 
     def test_demo_end_to_end(self, tmp_path):

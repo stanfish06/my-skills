@@ -50,7 +50,7 @@ adata_atac = ad.AnnData(np.abs(np.random.randn(n_cells, n_atac)),
 
 ent = entry_point()
 ent.set_data_options(scale_groups=False, scale_views=True)
-ent.set_data_matrix([[adata_rna.X, adata_atac.X]],
+ent.set_data_matrix([[adata_rna.X], [adata_atac.X]],
                     likelihoods=["gaussian", "gaussian"],
                     views_names=["RNA", "ATAC"],
                     groups_names=["all_cells"],
@@ -108,7 +108,7 @@ print(f"Conditions: {adata_rna.obs['condition'].value_counts().to_dict()}")
 
 ### Step 2: Create the MOFA+ Model Object
 
-Instantiate the `entry_point` and register all data views. Views are provided as a list-of-lists: `data[groups][views]`. Assign meaningful view and group names for interpretability.
+Instantiate the `entry_point` and register all data views. Views are provided as a list-of-lists: `data[views][groups]` — outer list indexes views, inner list indexes groups. Assign meaningful view and group names for interpretability.
 
 ```python
 from mofapy2.run.entry_point import entry_point
@@ -121,10 +121,10 @@ ent.set_data_options(
     scale_views=True,     # Rescale each view to unit variance (recommended when views differ in scale)
 )
 
-# Provide data as list-of-lists: [groups][views]
-# Single group → wrap each view in a list
+# Provide data as list-of-lists: [views][groups]
+# Single group → wrap each view in a one-element list
 ent.set_data_matrix(
-    data=[[adata_rna.X, adata_atac.X]],       # outer list = groups, inner = views
+    data=[[adata_rna.X], [adata_atac.X]],       # outer list = views, inner = groups
     likelihoods=["gaussian", "bernoulli"],      # gaussian for continuous, bernoulli for binary ATAC
     views_names=["RNA", "ATAC"],
     groups_names=["all_cells"],
@@ -150,7 +150,7 @@ ent.set_model_options(
 # Training options
 ent.set_train_options(
     iter=1000,                     # Maximum EM iterations
-    convergence_mode="medium",     # "fast" (<1000 iter), "medium" (default), "slow" (>5000 iter)
+    convergence_mode="medium",     # library default is "fast"; "medium"/"slow" tighten the ELBO threshold 10x each
     startELBO=1,                   # Start computing ELBO from iteration 1
     freqELBO=5,                    # Compute ELBO every 5 iterations
     dropR2=0.01,                   # Drop factors explaining < 1% variance (set to None to disable)
@@ -174,7 +174,7 @@ ent.run()
 
 # Save trained model to HDF5 — required for downstream analysis
 output_path = "mofa_model.hdf5"
-ent.save(output_path, overwrite=True)
+ent.save(output_path)
 print(f"Model trained and saved to {output_path}")
 ```
 
@@ -199,10 +199,10 @@ def load_mofa_r2(model_path):
         # r2_per_factor: shape (n_groups, n_views, n_factors)
         r2_array = np.stack([r2[g][:] for g in groups], axis=0)  # (groups, views, factors)
 
-    # Average across groups; shape → (n_views, n_factors)
+    # Average across groups; shape → (n_views, n_factors). Already stored as percent.
     r2_mean = r2_array.mean(axis=0)
     n_factors = r2_mean.shape[1]
-    df = pd.DataFrame(r2_mean * 100,
+    df = pd.DataFrame(r2_mean,
                       index=views,
                       columns=[f"Factor{i+1}" for i in range(n_factors)])
     return df
@@ -364,15 +364,15 @@ print("\nFactor scores with cluster labels saved to mofa_factor_scores.csv")
 
 | Parameter | Default | Range / Options | Effect |
 |-----------|---------|-----------------|--------|
-| `factors` | `15` | `5`–`50` | Number of latent factors to infer; inactive ones pruned by ARD |
+| `factors` | `10` | `5`–`50` | Number of latent factors to infer; inactive ones pruned by ARD |
 | `likelihoods` | (required) | `"gaussian"`, `"bernoulli"`, `"poisson"` | Per-view likelihood; gaussian for normalized continuous, bernoulli for binary ATAC, poisson for raw counts |
-| `scale_views` | `True` | `True`/`False` | Rescale each view to unit variance; recommended when views differ in scale or unit |
+| `scale_views` | `False` | `True`/`False` | Rescale each view to unit variance; recommended when views differ in scale or unit |
 | `scale_groups` | `False` | `True`/`False` | Rescale variance across groups; set `True` if groups have very different total variances |
 | `spikeslab_weights` | `True` | `True`/`False` | Spike-and-slab sparsity prior on weights; enables feature selection via near-zero weights |
-| `ard_factors` | `True` | `True`/`False` | Automatic relevance determination per factor per view; prunes factors not used in a view |
+| `ard_factors` | `False` | `True`/`False` | Automatic relevance determination per factor per view; prunes factors not used in a view. Pass `True` explicitly for multi-group runs — mofapy2 warns when `G>1` and it is left `False` |
 | `iter` | `1000` | `200`–`5000` | Maximum EM iterations; convergence usually reached in 200–800 |
-| `convergence_mode` | `"medium"` | `"fast"`, `"medium"`, `"slow"` | ELBO convergence tolerance: fast = 1e-4, medium = 1e-6, slow = 1e-8 |
-| `dropR2` | `0.01` | `None`, `0.001`–`0.05` | Drop factors explaining less than this fraction of variance; `None` keeps all |
+| `convergence_mode` | `"fast"` | `"fast"`, `"medium"`, `"slow"` | ELBO convergence threshold as a percentage of the first ELBO: fast = 5e-4, medium = 5e-5, slow = 5e-6; three consecutive hits stop training |
+| `dropR2` | `None` | `None`, `0.001`–`0.05` | Drop factors explaining less than this fraction of variance; `None` keeps all |
 | `startELBO` | `1` | `1`–`100` | Iteration to start ELBO monitoring; set higher to skip initial instability |
 
 ## Key Concepts
@@ -424,10 +424,10 @@ sample_ids_B = [f"B_cell_{i}" for i in range(n_per_group)]
 ent = entry_point()
 ent.set_data_options(scale_groups=False, scale_views=True)
 
-# Multi-group: data[groups][views] — two groups, each with RNA and ATAC
+# Multi-group: data[views][groups] — two views, each with condA and condB
 ent.set_data_matrix(
-    data=[[groups["condA"]["rna"], groups["condA"]["atac"]],
-          [groups["condB"]["rna"], groups["condB"]["atac"]]],
+    data=[[groups["condA"]["rna"], groups["condB"]["rna"]],
+          [groups["condA"]["atac"], groups["condB"]["atac"]]],
     likelihoods=["gaussian", "bernoulli"],
     views_names=["RNA", "ATAC"],
     groups_names=["condA", "condB"],
@@ -438,7 +438,7 @@ ent.set_model_options(factors=10, spikeslab_weights=True, ard_factors=True)
 ent.set_train_options(iter=500, convergence_mode="fast", seed=0, verbose=False)
 ent.build()
 ent.run()
-ent.save("mofa_multigroup.hdf5", overwrite=True)
+ent.save("mofa_multigroup.hdf5")
 
 # Compare factor scores between groups
 factors_all = load_mofa_factors("mofa_multigroup.hdf5")
@@ -507,7 +507,7 @@ print("\nSaved mofa_factor_annotation.csv")
 | All factors show near-zero variance explained | Data not preprocessed or scale mismatch across views | Normalize each view before input; set `scale_views=True`; verify non-zero variance in input matrices |
 | Model trains but factor scores are NaN | Convergence failure due to extreme values or near-singular data | Check for Inf/NaN in input matrices; reduce `iter`; try `convergence_mode="fast"` first |
 | Too many factors pruned (only 1-2 remain) | `dropR2` threshold too aggressive or insufficient variation in data | Set `dropR2=0.001` or `dropR2=None`; increase data diversity or reduce noise |
-| `HDF5` file cannot be read | File truncated due to crash during training | Re-run training; check disk space; use `overwrite=True` in `ent.save()` |
+| `HDF5` file cannot be read | File truncated due to crash during training | Re-run training; check disk space. `ent.save()` replaces an existing file automatically and takes no `overwrite` argument |
 | Factor scores identical across all samples | Single-sample group or zero-variance input view | Confirm at least 2 distinct samples per group; check input matrix is not all zeros |
 | Very slow training (>1 hr) | Large feature space (>10k features per view) or many factors | Pre-filter to top HVGs (2000-5000) per view; reduce factors to 10-15; enable `verbose=False` |
 | ELBO not converging (oscillates) | Learning rate instability or poorly scaled data | Increase `startELBO`; standardize each view independently; use `convergence_mode="slow"` |

@@ -146,6 +146,13 @@ workspace/
 
 - All processing is local except scout web fetches for public resources.
 - ClawBio disclaimer: research/education tool, not a medical device.
+- The executor subagent holds `Bash`, `Write`, and `Edit`, and the instructions it
+  follows are the proposer's output, not human-reviewed text. It runs once per
+  iteration, up to `max_iterations` (default 30), and `--parallel K` runs K at once.
+- Subagents run under `--permission-mode acceptEdits` by default. `--yolo` switches
+  them to `bypassPermissions`, removing every approval prompt including for shell
+  commands. Get the user's explicit consent before passing it, and only for genuinely
+  unattended runs — the Phase 2 approval covers research scope, not this.
 
 ## Gotchas
 

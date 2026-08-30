@@ -7,7 +7,7 @@ using the PGS Catalog REST API and pre-curated scoring files.
 
 Usage:
     python gwas_prs.py --input <23andme_file> --trait "type 2 diabetes" --output <dir>
-    python gwas_prs.py --input <23andme_file> --pgs-id PGS000013 --output <dir>
+    python gwas_prs.py --input <23andme_file> --pgs-id PGS000001 --output <dir>
     python gwas_prs.py --demo --output /tmp/prs_demo
 """
 
@@ -64,71 +64,86 @@ DATA_DIR = SKILL_DIR / "data"
 # Curated scores — offline demo scoring with reference distributions
 # ---------------------------------------------------------------------------
 
+# Synthetic demo scores. The weights in data/ and the reference mean/SD below are
+# illustrative values for offline demos, not PGS Catalog scores; percentiles
+# derived from them are not interpretable. --pgs-id / --trait fetch real scores.
 CURATED_SCORES: dict[str, dict] = {
-    "PGS000013": {
-        "name": "PGS000013",
+    "DEMO001": {
+        "name": "Synthetic demo score — type 2 diabetes",
         "trait": "Type 2 diabetes",
         "variants_count": 8,
-        "publication": "Vassy et al. (2014) Ann Intern Med",
+        "synthetic": True,
+        "publication": "none — synthetic demo data",
         "reference_distribution": {
             "mean": 1.12,
             "sd": 0.30,
             "population": "EUR",
+            "synthetic": True,
         },
     },
-    "PGS000011": {
-        "name": "PGS000011",
+    "DEMO002": {
+        "name": "Synthetic demo score — atrial fibrillation",
         "trait": "Atrial fibrillation",
         "variants_count": 12,
-        "publication": "Tada et al. (2014) Circ Cardiovasc Genet",
+        "synthetic": True,
+        "publication": "none — synthetic demo data",
         "reference_distribution": {
             "mean": 0.65,
             "sd": 0.23,
             "population": "EUR",
+            "synthetic": True,
         },
     },
-    "PGS000004": {
-        "name": "PGS000004",
+    "DEMO003": {
+        "name": "Synthetic demo score — coronary artery disease",
         "trait": "Coronary artery disease",
         "variants_count": 46,
-        "publication": "Abraham et al. (2016) Eur Heart J",
+        "synthetic": True,
+        "publication": "none — synthetic demo data",
         "reference_distribution": {
             "mean": 2.84,
             "sd": 0.28,
             "population": "EUR",
+            "synthetic": True,
         },
     },
-    "PGS000001": {
-        "name": "PGS000001",
+    "DEMO004": {
+        "name": "Synthetic demo score — breast cancer",
         "trait": "Breast cancer",
         "variants_count": 77,
-        "publication": "Mavaddat et al. (2015) J Natl Cancer Inst",
+        "synthetic": True,
+        "publication": "none — synthetic demo data",
         "reference_distribution": {
             "mean": 4.23,
             "sd": 0.54,
             "population": "EUR",
+            "synthetic": True,
         },
     },
-    "PGS000057": {
-        "name": "PGS000057",
+    "DEMO005": {
+        "name": "Synthetic demo score — prostate cancer",
         "trait": "Prostate cancer",
         "variants_count": 147,
-        "publication": "Schumacher et al. (2018) Nat Genet",
+        "synthetic": True,
+        "publication": "none — synthetic demo data",
         "reference_distribution": {
             "mean": 7.11,
             "sd": 0.56,
             "population": "EUR",
+            "synthetic": True,
         },
     },
-    "PGS000039": {
-        "name": "PGS000039",
-        "trait": "BMI",
+    "DEMO006": {
+        "name": "Synthetic demo score — body mass index",
+        "trait": "Body mass index",
         "variants_count": 97,
-        "publication": "Locke et al. (2015) Nature",
+        "synthetic": True,
+        "publication": "none — synthetic demo data",
         "reference_distribution": {
             "mean": 2.89,
             "sd": 0.25,
             "population": "EUR",
+            "synthetic": True,
         },
     },
 }
@@ -718,6 +733,18 @@ def generate_report(
         "",
     ]
 
+    # every synthetic-score run must say so before any percentile is read
+    if any(r.get("pgs_id") in CURATED_SCORES for r in results):
+        lines[1:1] = [
+            "",
+            "> **SYNTHETIC DATA — NOT A RISK ESTIMATE.** This run used the "
+            "bundled demo scoring files. Their effect weights and reference "
+            "distributions are illustrative values, not PGS Catalog scores, "
+            "so the raw scores, percentiles and risk categories below describe "
+            "nothing about this individual. Rerun with `--pgs-id` or `--trait` "
+            "for a real score.",
+        ]
+
     # ----- Summary table -----
     lines.append("## Summary")
     lines.append("")
@@ -885,11 +912,11 @@ def generate_report(
     )
     lines.append("")
     lines.append(
-        "Percentile estimates use one of two methods: (1) curated EUR "
-        "reference distributions (mean and SD from published cohorts), or "
-        "(2) population-level allele frequency estimates from the PGS Catalog "
-        "scoring file to compute expected score and variance under "
-        "Hardy-Weinberg equilibrium."
+        "Percentile estimates use one of two methods: (1) the bundled EUR "
+        "reference distributions, which are synthetic demo values and produce "
+        "percentiles that are not interpretable, or (2) population-level "
+        "allele frequency estimates from the PGS Catalog scoring file to "
+        "compute expected score and variance under Hardy-Weinberg equilibrium."
     )
     lines.append("")
     lines.append("**Scoring files**: PGS Catalog "
@@ -948,7 +975,7 @@ def main():
     )
     parser.add_argument(
         "--pgs-id",
-        help="Specific PGS Catalog score ID (e.g., PGS000013)",
+        help="Specific PGS Catalog score ID (e.g., PGS000001)",
     )
     parser.add_argument(
         "--output", "-o",
@@ -1022,7 +1049,10 @@ def main():
             sys.exit(1)
         args.input = str(demo_patient)
 
-        print("GWAS-PRS: running demo with curated scores (no API calls)")
+        print("GWAS-PRS: running demo with synthetic scores (no API calls)")
+        print("  SYNTHETIC DATA — the bundled weights and reference "
+              "distributions are illustrative, not PGS Catalog scores. "
+              "Percentiles and risk categories below are not interpretable.")
         print(f"  Demo patient: {demo_patient}")
         print()
 
@@ -1047,7 +1077,8 @@ def main():
                     "variants_count": meta.get("variants_count", 0),
                 },
             })
-            print(f"  Loaded curated score: {pgs_id} ({meta['trait']})")
+            print(f"  Loaded synthetic demo score: {pgs_id} "
+                  f"({meta['trait']})")
 
         print()
 

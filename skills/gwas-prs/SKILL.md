@@ -42,13 +42,13 @@ When the user asks for a polygenic risk score calculation:
 
 1. **Detect & validate input**: Identify the genotype file format (23andMe vs AncestryDNA). Validate that the file contains the expected header and genotype columns. Report the total number of SNPs in the file.
 
-2. **Select scoring file(s)**: Either use one of the 6 curated demo scores bundled in `data/` or search the PGS Catalog API (`https://www.pgscatalog.org/rest/`) for a trait-specific score. Curated scores available:
-   - PGS000013 — Type 2 diabetes (8 variants)
-   - PGS000011 — Atrial fibrillation (12 variants)
-   - PGS000004 — Coronary artery disease (46 variants)
-   - PGS000001 — Breast cancer (77 variants)
-   - PGS000057 — Prostate cancer (147 variants)
-   - PGS000039 — BMI (97 variants)
+2. **Select scoring file(s)**: Either use one of the 6 synthetic demo scores bundled in `data/` (reachable only through `--demo`) or search the PGS Catalog API (`https://www.pgscatalog.org/rest/`) for a trait-specific score. The bundled demo scores are **synthetic**: their weights and reference distributions are illustrative values, not PGS Catalog scores, and the percentiles and risk categories they produce are not interpretable. Report a real risk estimate only from a score fetched with `--pgs-id` or `--trait`. Bundled demo scores:
+   - DEMO001 — Type 2 diabetes (8 variants)
+   - DEMO002 — Atrial fibrillation (12 variants)
+   - DEMO003 — Coronary artery disease (46 variants)
+   - DEMO004 — Breast cancer (77 variants)
+   - DEMO005 — Prostate cancer (147 variants)
+   - DEMO006 — Body mass index (97 variants)
 
 3. **Parse scoring file**: Read the PGS harmonised scoring file. Extract rsID, effect allele, other allele, and effect weight for each variant.
 
@@ -135,13 +135,13 @@ Missing genotypes (variant not in patient file) are excluded from the sum. The c
 
 ## Reference Distributions
 
-Population reference distributions for the 6 curated scores are stored in `curated_scores.json`. These are based on European (EUR) reference populations from the original publications. Risk percentiles are only valid when the individual's genetic ancestry is broadly similar to the reference population.
+Reference distributions for the 6 bundled demo scores are stored in `curated_scores.json` and are labelled `"synthetic": true`. They are illustrative EUR-shaped values, not distributions from a published cohort, so percentiles computed from them describe nothing. For a real score, `estimate_percentile` falls through to the Hardy-Weinberg estimate from the scoring file's own allele frequencies. Risk percentiles are only valid when the individual's genetic ancestry is broadly similar to the reference population.
 
 **Ancestry caveat**: PRS performance varies across ancestries. Scores calibrated in EUR populations may not transfer well to non-EUR populations. Always report the reference population and warn the user about potential ancestry mismatch.
 
 ## PGS Catalog API
 
-For scores beyond the 6 curated ones, query the PGS Catalog REST API:
+For any real score, query the PGS Catalog REST API:
 
 ```
 # Search by trait

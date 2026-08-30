@@ -7,8 +7,8 @@ description: "Use when you need to resolve an in-progress git merge/rebase confl
 
 2. **Find the primary sources** for each conflict. Understand deeply why each change was made, and what the original intent was. Read the commit messages, check the PRs, check original issues/tickets.
 
-3. **Resolve each hunk.** Preserve both intents where possible. Where incompatible, pick the one matching the merge's stated goal and note the trade-off. Do **not** invent new behaviour. Always resolve; never `--abort`.
+3. **Resolve each hunk.** Preserve both intents where possible. Where incompatible, pick the one matching the merge's stated goal and note the trade-off. Do **not** invent new behaviour. Resolve rather than `--abort`; if a hunk's intent cannot be established from the sources in step 2, `--abort` and ask, never commit it unresolved.
 
 4. Discover the project's **automated checks** and run them, typically typecheck, then tests, then format. Fix anything the merge broke.
 
-5. **Finish the merge/rebase.** Stage everything and commit. If rebasing, continue the rebase process until all commits are rebased.
+5. **Finish the merge/rebase.** Before staging, run `git diff --check` (warns on leftover conflict markers) and confirm `git ls-files -u` is empty. Stage only the files you resolved, then commit. Git will not stop you: staging a file that still contains `<<<<<<<` clears its unmerged entry and the commit succeeds with the markers in history. If rebasing, continue the rebase process until all commits are rebased.

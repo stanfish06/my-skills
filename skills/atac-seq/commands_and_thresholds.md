@@ -2,10 +2,24 @@
 
 ## Peak Calling
 
+Paired-end fragment mode:
+
 ```bash
 macs3 callpeak \
   -t atac.bam \
   -f BAMPE \
+  -g hs \
+  -n sample \
+  -q 0.01 \
+  --outdir results/peaks
+```
+
+Insertion-site mode — `--shift`/`--extsize` only take effect under `-f BAM`:
+
+```bash
+macs3 callpeak \
+  -t atac.bam \
+  -f BAM \
   -g hs \
   -n sample \
   --nomodel \

@@ -36,18 +36,11 @@ class TestToolDiscovery:
         result = ai.find_tool("python3")
         assert result is None or isinstance(result, str)
 
-    def test_find_tool_sprime_jar_missing(self):
-        """When SPRIME_JAR points to a nonexistent file and sprime not on PATH."""
-        with patch.object(ai, "SPRIME_JAR", "/nonexistent/sprime.jar"):
-            with patch("shutil.which", return_value=None):
-                assert ai.find_tool("sprime") is None
-
     def test_list_available_methods_always_has_fallback(self):
         """list_available_methods includes ibdmix_fallback when no binary exists."""
         with patch("shutil.which", return_value=None):
-            with patch.object(ai, "SPRIME_JAR", "/nonexistent/sprime.jar"):
-                methods = ai.list_available_methods()
-                assert "ibdmix_fallback" in methods
+            methods = ai.list_available_methods()
+            assert "ibdmix_fallback" in methods
 
 
 # -----------------------------------------------------------------------
@@ -134,34 +127,57 @@ class TestIBDmixRunner:
 
 
 # -----------------------------------------------------------------------
-# TestSprimeRunner (1 test)
+# TestIBDmixCommand (3 tests)
 # -----------------------------------------------------------------------
 
 
-class TestSprimeRunner:
-    """Test Sprime command builder."""
+class TestIBDmixCommand:
+    """Test the two-step IBDmix command builder."""
 
-    def test_build_sprime_no_binary(self):
-        """build_sprime_command returns empty list when tool not found."""
-        with patch.object(ai, "SPRIME_JAR", "/nonexistent/sprime.jar"):
-            with patch("shutil.which", return_value=None):
-                cmd = ai.build_sprime_command("modern.vcf", "outgroup.vcf", "out")
-                assert cmd == []
-
-
-# -----------------------------------------------------------------------
-# TestHmmixRunner (1 test)
-# -----------------------------------------------------------------------
-
-
-class TestHmmixRunner:
-    """Test hmmix command builder."""
-
-    def test_build_hmmix_no_binary(self):
-        """build_hmmix_command returns empty list when tool not found."""
+    def test_build_ibdmix_no_binary(self):
+        """Returns an empty list when generate_gt/ibdmix are not installed."""
         with patch("shutil.which", return_value=None):
-            cmd = ai.build_hmmix_command("modern.vcf", "/tmp/output")
-            assert cmd == []
+            assert ai.build_ibdmix_commands("m.vcf", "a.vcf", "gt.txt", "out.txt") == []
+
+    def test_build_ibdmix_uses_upstream_options(self):
+        """generate_gt merges the VCFs; ibdmix consumes -g and writes -o."""
+        with patch("shutil.which", side_effect=lambda n: f"/usr/bin/{n}"):
+            gt_cmd, ibd_cmd = ai.build_ibdmix_commands(
+                "m.vcf", "a.vcf", "gt.txt", "out.txt", lod_threshold=4.0
+            )
+        assert gt_cmd[1:] == [
+            "--archaic", "a.vcf", "--modern", "m.vcf", "--output", "gt.txt",
+        ]
+        assert ibd_cmd[1:] == [
+            "--genotype", "gt.txt", "--output", "out.txt", "--LOD-threshold", "4.0",
+        ]
+
+    def test_build_ibdmix_never_passes_vcfs_to_ibdmix(self):
+        """ibdmix takes no VCF and no --modern/--lod option."""
+        with patch("shutil.which", side_effect=lambda n: f"/usr/bin/{n}"):
+            _, ibd_cmd = ai.build_ibdmix_commands("m.vcf", "a.vcf", "gt.txt", "out.txt")
+        assert "--modern" not in ibd_cmd
+        assert "--lod" not in ibd_cmd
+        assert "m.vcf" not in ibd_cmd and "a.vcf" not in ibd_cmd
+
+
+# -----------------------------------------------------------------------
+# TestFallbackScoring (1 test)
+# -----------------------------------------------------------------------
+
+
+class TestFallbackScoring:
+    """The fallback must not score shared reference alleles as introgression."""
+
+    def test_hom_ref_sites_contribute_no_evidence(self):
+        """All-hom-ref modern and archaic genotypes yield no called segments."""
+        import numpy as np
+
+        modern = np.zeros((1, 200), dtype=int)
+        archaic = np.zeros((1, 200), dtype=int)
+        positions = list(range(1, 201))
+        segs = ai._lod_score_segment(modern, archaic, positions, 0, lod_threshold=3.0)
+        assert segs == []
 
 
 # -----------------------------------------------------------------------

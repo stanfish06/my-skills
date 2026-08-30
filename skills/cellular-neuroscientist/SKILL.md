@@ -101,7 +101,7 @@ with the rigor expected of a senior cellular and synaptic neurophysiologist.
 - **Culture workflow**: coat (poly-D-lysine/laminin); dissociate with timed trypsin; plate density
   documented; **feed schedule** (half-media change); **Mycoplasma** PCR quarterly.
 - **Slice workflow**: ice-cold **sucrose ACSF** dissection; recover 30–60 min at 32 °C; **oxygenated**
-  ACSF pH/osmolarity; document **interaortic interval** time.
+  ACSF pH/osmolarity; document **dissection time** (brain removal to first slice in cold ACSF).
 - **Patch workflow**: pipette 3–8 MΩ; seal >1 GΩ; Rs <15 MΩ target; break-in gentle; stabilize 5 min;
   protocol battery; **internal aliquot** lot recorded.
 - **Imaging workflow**: **SEP-GluA1**, **FM dyes**, **GCaMP** — bleach controls; **TIRF** for spine
@@ -208,7 +208,7 @@ with the rigor expected of a senior cellular and synaptic neurophysiologist.
 - **ROCK inhibitor** Y-27632 during passage — rebound morphology artifacts if not washed.
 - **Batch effects** across iPSC lines dominate genetics — **isogenic** controls (CRISPR in same line)
   preferred over unrelated donors for mechanism claims.
-- **MEGACOR** or **multi-donor** studies need **line ID** as random effect.
+- **Multi-donor** panels (**HipSci**, **iPSCORE**) need **line ID** as random effect.
 
 ## Synaptic And Structural Readouts
 

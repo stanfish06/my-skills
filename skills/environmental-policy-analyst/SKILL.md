@@ -69,7 +69,7 @@ environmental agency, or a policy research institute.
   that reflects reasonably foreseeable future conditions — not a frozen status quo and not an
   aspirational best-case. For continuing actions, both "continue without modification" and
   "discontinue" may be valid no-action framings depending on decision context (McCold & Saulsbury
-  1998; CEQ 40 CFR 1502.14).
+  1998; NEPA §102(2)(C)(iii), 42 U.S.C. §4332(2)(C)(iii)).
 - **Benefits and costs are social, not fiscal alone.** OMB Circular A-4 (2023 update) directs
   agencies to measure changes in social welfare — willingness to pay (WTP) for benefits,
   willingness to accept (WTA) for losses where appropriate — including health, environmental,
@@ -87,9 +87,10 @@ environmental agency, or a policy research institute.
   sensitivity); do not treat one rate as objectively correct.
 - **SC-GHG is a damage externality metric, not a carbon tax mandate.** EPA's December 2023
   SC-GHG values (e.g., ~$210/ton CO₂ in 2020$ at 2% for 2024 emissions) integrate climate
-  damages across sectors; use for comparing alternatives in RIAs and NEPA where CEQ's 2023 GHG
-  guidance recommends SC-GHG for context — but distinguish regulatory use from legislative
-  pricing decisions.
+  damages across sectors; use for comparing alternatives in RIAs. CEQ withdrew its 2023 interim
+  GHG guidance on 28 May 2025 (90 FR 22472), so SC-GHG use in NEPA now rests on the lead agency's
+  own NEPA procedures — confirm current agency practice before applying it, and distinguish
+  regulatory use from legislative pricing decisions.
 - **IAMs synthesize; they do not settle.** Integrated assessment models (DICE, FUND, PAGE,
   MESSAGE-GLOBIOM, REMIND, GCAM, AIM) link emissions, concentrations, temperature, damages, and
   mitigation costs — but structural uncertainty in damage functions, carbon cycle, and discount
@@ -128,9 +129,12 @@ environmental agency, or a policy research institute.
   facing? What alternatives are legally "reasonable" (NEPA: technically and economically feasible,
   not merely applicant-desirable)? What is the agency's "purpose and need"?
 - Map the **authority chain**: enabling statute → implementing regulations (CFR) → guidance
-  (EPA GPEA, CEQ NEPA regs 40 CFR 1500–1508, 50 CFR Part 402 ESA consultation) → executive
-  orders → OMB circulars. If authority is ambiguous, flag major-questions and nondelegation
-  exposure (post-_Loper Bright_, _West Virginia v. EPA_).
+  (EPA GPEA, 50 CFR Part 402 ESA consultation) → executive orders → OMB circulars. For NEPA the
+  chain now runs statute → **agency-specific NEPA implementing procedures** → current CEQ
+  guidance: CEQ removed 40 CFR 1500–1508 from the CFR effective 8 January 2026 (91 FR 618,
+  adopting the interim rule at 90 FR 10610), so cite the acting agency's procedures, not CEQ
+  regs. If authority is ambiguous, flag major-questions and nondelegation exposure
+  (post-_Loper Bright_, _West Virginia v. EPA_).
 - For NEPA, classify **effects scope**: direct (caused by action, same time/place), indirect
   (later in time or farther removed but reasonably foreseeable, including growth-inducing),
   cumulative (combined with other past/present/reasonably foreseeable actions). Significance
@@ -167,17 +171,19 @@ environmental agency, or a policy research institute.
 
 - **Scoping (NEPA/ESA):** early coordination; determine lead/cooperating agencies; identify
   listed species/critical habitat (IPaC, ECOS); screen for categorical exclusions (document
-  extraordinary circumstances per CEQ 2024 categorical-exclusion guidance); decide EA vs EIS.
+  extraordinary circumstances against the agency's own established CEs, per CEQ's 9 April 2026
+  categorical-exclusion memorandum, 91 FR 18836); decide EA vs EIS.
   For ESA, initiate §7 through FWS/NMFS when federal nexus exists — technical assistance →
   informal → formal consultation as effects clarify.
 - **Alternatives development (NEPA):** reasonable range including no action, applicant proposal,
   practicable alternatives that meet purpose and need; eliminate infeasible alternatives with
   documented rationale. For transportation/infrastructure, distinguish no-build from no-project
   when local jurisdiction has contingent plans.
-- **Impact analysis:** direct/indirect/cumulative effects; connect GHG emissions to CEQ 2023
-  guidance (quantify emissions, contextualize with SC-GHG where appropriate, assess resilience/
-  adaptation for projected climate impacts on project). Air/water/biodiversity/noise/social/
-  environmental justice — use agency-specific significance criteria.
+- **Impact analysis:** direct/indirect/cumulative effects; treat GHG emissions under the lead
+  agency's current NEPA procedures — CEQ's 2023 interim GHG guidance was withdrawn 28 May 2025
+  (quantify emissions, contextualize with SC-GHG where the agency's procedures support it, assess
+  resilience/adaptation for projected climate impacts on project). Air/water/biodiversity/noise/
+  social/environmental justice — use agency-specific significance criteria.
 - **Economic analysis (regulatory):**
   1. Define statutory objective and legal constraints.
   2. Specify baseline and policy alternatives.
@@ -249,15 +255,19 @@ environmental agency, or a policy research institute.
 
 ## Data, Resources & Literature
 
-- **Statutes and regulations:** NEPA (42 U.S.C. §4321 et seq.); ESA (16 U.S.C. §1531 et seq.);
-  APA (5 U.S.C. §553); Clean Air Act; Clean Water Act; CEQ NEPA regulations (40 CFR 1500–1508,
-  Phase II 2024 final rule); 50 CFR Part 402 (ESA consultation); agency NEPA procedures (DOE 10
-  CFR 1021, DOT/FHWA, etc.).
+- **Statutes and regulations:** NEPA (42 U.S.C. §4321 et seq., as amended by the Fiscal
+  Responsibility Act of 2023 — §§4332(2)(C)–(D) and 4336–4336e); ESA (16 U.S.C. §1531 et seq.);
+  APA (5 U.S.C. §553); Clean Air Act; Clean Water Act; 50 CFR Part 402 (ESA consultation);
+  agency NEPA procedures (DOE 10 CFR 1021, DOT/FHWA, etc.) — these carry the procedural detail
+  now that CEQ has removed 40 CFR 1500–1508 (including the 2024 Phase II rule) from the CFR,
+  effective 8 January 2026, 91 FR 618.
 - **Guidance (essential):**
   - OMB **Circular A-4** (2023) — regulatory analysis.
   - EPA **Guidelines for Preparing Economic Analyses** (3rd ed.) — benefits, costs, transfer.
   - EPA **Benefit Transfer and Meta-Analysis** chapters and 2016 Handbook materials.
-  - CEQ **NEPA Guidance on GHG Emissions and Climate Change** (2023).
+  - CEQ **Implementation of NEPA** memorandum (29 Sept. 2025, 90 FR 47734) and **categorical
+    exclusions** memorandum (9 Apr. 2026, 91 FR 18836) — CEQ's 2023 GHG guidance and its
+    June 2024 implementation memo are withdrawn (90 FR 22472; 91 FR 39086).
   - CEQ **Citizen's Guide to NEPA** — alternatives, commenting, significance.
   - NOAA/FWS **ESA Section 7 Consultation Handbook** and Services' biop templates.
 - **Landmark economics/climate:** Stern Review (2007); Nordhaus DICE; Tol SCC survey; Greenstone,

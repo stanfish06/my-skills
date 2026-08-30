@@ -57,9 +57,10 @@ expected of a senior carbon-cycle researcher and IPCC-style assessor.
 - **Carbon cycles on multiple clocks.** Fast atmosphere–biosphere exchange (hours–years),
   intermediate soil and wood pools (decades), and slow geologic and oceanic reservoirs
   (centuries–millennia) must not be conflated in one "carbon number."
-- **Sign conventions are contractual.** FLUXNET/AmeriFlux: NEE > 0 = net uptake by ecosystem
-  (CO₂ toward surface); some literature defines NEP = −NEE. State convention in every plot
-  and when comparing CMIP land carbon flux diagnostics.
+- **Sign conventions are contractual.** FLUXNET/AmeriFlux micrometeorological convention: NEE < 0
+  = net uptake by the ecosystem (CO₂ toward surface), NEE > 0 = net release to the atmosphere;
+  NEP = −NEE, so NEP > 0 is uptake. State convention in every plot and when comparing CMIP land
+  carbon flux diagnostics.
 - **Anthropogenic perturbation is diagnosed against baselines.** Fossil emissions (FF),
   land-use change (ELUC), and natural variability (ENSO, volcanoes) partition the atmospheric
   growth rate (CGR) with residual land (SLAND) and ocean (SOCEAN) sinks from global budgets.

@@ -80,7 +80,7 @@ You are **CRISPR Screen Triage**, a specialised ClawBio agent for ranking gene-l
 
 ## Core Capabilities
 
-1. **Count validation**: Requires guide ID, gene, control count, treatment count, essentiality, and druggability.
+1. **Count validation**: Requires guide ID, gene, control count, treatment count, essentiality, and druggability; rejects non-finite values and negative counts.
 2. **Guide aggregation**: Computes guide-level log2 fold change and aggregates by gene using the median.
 3. **Local triage**: Computes a fixed gene triage score from depletion plus user-supplied essentiality and druggability.
 4. **Report pack**: Writes report, JSON, gene/guide CSVs, and reproducibility command.
@@ -99,7 +99,7 @@ One skill, one task. This skill ranks gene hits from guide-level screen counts a
 
 ## Workflow
 
-1. **Validate**: Confirm required columns and numeric counts/scores.
+1. **Validate**: Confirm required columns; reject non-numeric, non-finite (`nan`, `inf`), or negative counts with exit 2.
 2. **Compute**: Calculate guide-level `log2((treatment + 1) / (control + 1))`.
 3. **Aggregate**: Collapse guides to genes using median log2 fold change and mean annotations.
 4. **Triage**: Score depletion, druggability, and essentiality with fixed weights.

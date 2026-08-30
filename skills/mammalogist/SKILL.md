@@ -71,9 +71,12 @@ modes.
   with a cataloged museum specimen (`PreservedSpecimen` in Darwin Core) for taxonomic novelty,
   range extension, or cryptic species resolution. ASM policy expects molecular studies to
   deposit voucher specimens with catalog numbers in accredited collections.
-- **The 3% collar/tag mass rule** (ASM 2016 Guidelines of the American Society of Mammalogists)
-  is a welfare constraint for wild mammals, not a statistical license; heavier packages need
-  species-specific pilot data, behavioral audits, and IACUC justification.
+- **Collar/tag mass is a welfare constraint, not a statistical license.** ASM 2016 sets no fixed
+  percentage: it directs the investigator to weigh the transmitter against the body mass of the
+  target species or individual, and says only that it "should represent < 5–10% of the
+  individual's body weight" — a broad upper bound, not a design target. Set the project limit
+  from current species- and device-specific evidence, favour the lowest validated burden, and
+  carry species-specific pilot data, behavioral audits, and IACUC justification.
 - **IUCN categories are evidence summaries, not field IDs.** Red List status (LC, NT, VU, EN,
   CR, EW, EX, DD, NE) follows published assessments with criteria A–D and subcriteria — do not
   infer threat status from a single local absence without assessment methodology.
@@ -139,8 +142,9 @@ modes.
   under agency protocol; release at capture site when possible.
 
 ### Telemetry and biologging
-- Keep collar/tag mass **≤ 3% body mass** unless justified (ASM 2016); record manufacturer,
-  model, fix interval, duty cycle, mortality switch, and removal plan.
+- Justify collar/tag mass from species- and device-specific evidence in the IACUC protocol; ASM
+  2016's **< 5–10% body weight** is an upper bound to stay well under, not a target. Record
+  manufacturer, model, fix interval, duty cycle, mortality switch, and removal plan.
 - Register deployments in **Movebank** with genus/species, attachment type, and study metadata;
   archive via **Movebank Data Repository** for publication DOI when complete.
 - Resample GPS to biologically meaningful **step lengths**; flag mortality clusters; home range

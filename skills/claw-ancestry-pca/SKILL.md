@@ -27,9 +27,7 @@ metadata:
   outputs:
   - name: figure
     type: file
-    format:
-    - png
-    - pdf
+    format: png
     description: Multi-panel PCA composite figure showing ancestry decomposition
   - name: report
     type: file
@@ -48,10 +46,6 @@ metadata:
     - numpy
     - matplotlib
     - scikit-learn
-    - adjustText
-    system_dependencies:
-    - plink
-    - bcftools
     requires:
       bins:
       - python3
@@ -60,100 +54,90 @@ metadata:
 
 # 🦖 Ancestry Decomposition PCA
 
-Place your study cohort in global genetic context by computing a joint PCA against the Simons Genome Diversity Project (SGDP) — 345 samples from 164 populations spanning every inhabited continent.
+Compute a principal-component decomposition of your own cohort's genotypes from a VCF, coloured by population label, and write a report plus a 4-panel figure.
 
 ## What it does
 
-1. Takes your VCF + population map as input
-2. Finds common variants between your cohort and the SGDP reference panel (bundled)
-3. Runs PLINK PCA on the merged dataset
-4. Separates your cohort from SGDP reference samples
-5. Matches SGDP samples to their population labels (164 populations)
-6. Generates a publication-quality multi-panel figure:
-   - **Panel A**: PC1 vs PC2 — main population structure of your cohort
-   - **Panel B**: PC3 vs PC2 with regional groupings and confidence ellipses
-   - **Panel C**: PC3 vs PC1 with language/cultural groupings
-   - **Panel D**: Global context — your samples (circles) vs SGDP (triangles)
-7. Produces a markdown report with variance explained, population assignments, and reproducibility bundle
+1. Takes your VCF + optional population map as input
+2. Parses genotypes into a sample × variant matrix (0/1/2, `-1` missing)
+3. Mean-imputes missing genotypes per variant
+4. Runs `sklearn.decomposition.PCA` on that matrix
+5. Generates a 4-panel figure:
+   - **Panel A**: PC1 vs PC2
+   - **Panel B**: PC2 vs PC3
+   - **Panel C**: PC1 vs PC3
+   - **Panel D**: Scree plot — per-PC and cumulative variance explained
+6. Produces `report.md`, `result.json`, and `tables/` with PC coordinates and variance explained
 
-## Why this exists
+## Scope and limits
 
-If you ask ChatGPT to "run a PCA against a global reference panel," it will:
-- Not know which reference panel to use
-- Hallucinate PLINK flags for merging datasets with different variant sets
-- Skip IBD removal (related individuals distort PCA)
-- Not normalise contig names between your VCF and the reference
-- Produce a single scatter plot with no population labels
+Read these before interpreting the output.
 
-This skill encodes the correct methodological decisions:
-- Uses SGDP (the gold-standard reference for global diversity)
-- Handles contig normalisation (chr1 vs 1)
-- Filters to common biallelic SNPs shared between datasets
-- Removes related individuals via IBD checks
-- Produces publication-quality multi-panel figures with confidence ellipses
-- Differentiates your samples (circles) from reference (triangles)
+- **Single cohort only.** No reference panel ships with this skill and none is downloaded. Samples are not placed in global context, and the figure has no reference-vs-cohort marker distinction and no confidence ellipses.
+- **No PLINK, no bcftools.** The script never shells out; PCA is computed in-process with scikit-learn.
+- **No Patterson standardisation.** Genotypes are not divided by `sqrt(p(1-p))`, so PCs are not on the standard population-genetics scale.
+- **No LD pruning and no relatedness (IBD) filtering.** Prune and remove related individuals upstream — otherwise PCs will track LD blocks and cryptic relatedness rather than ancestry.
+- **No contig-name normalisation.** Supply one consistent naming scheme (`chr1` or `1`).
 
-## Reference Panel
+## Requirements
 
-The skill bundles the SGDP v4 dataset (Mallick et al., 2016, Nature):
-- 345 samples from 164 populations
-- Whole-genome sequencing at high coverage
-- MAF > 0.1% filter applied
-- Populations span: Africa, Americas, Central/South Asia, East Asia, Europe, Middle East, Oceania
+The script imports `clawbio.common` (VCF parsing, checksums, report helpers) from three directory levels above itself, and reads its demo data from `examples/`. Both come from https://github.com/ClawBio/ClawBio — run this skill from inside a ClawBio checkout, or put `clawbio/` and `examples/` on that path. Without them the script fails at import.
 
 ## Usage
 
 ```bash
 python ancestry_pca.py \
-    --vcf your_cohort.vcf.gz \
-    --pop-map your_populations.tsv \
+    --input your_cohort.vcf.gz \
+    --pop-map your_populations.csv \
     --output ancestry_report
 ```
 
-### Demo (works out of the box)
+Omit `--output` for a text summary on stdout. `--pop-map` is a CSV/TSV with `sample_id` and `population` columns; unmapped samples are labelled `UNKNOWN`.
+
+### Demo
 
 ```bash
 python ancestry_pca.py --demo --output demo_report
 ```
 
-The demo uses pre-computed PCA results from the Peruvian Genome Project (736 samples, 28 populations) and generates the full 4-panel figure instantly.
+The demo runs on `examples/demo_populations.vcf` from the ClawBio checkout — 50 samples, 500 variants, 5 population labels.
 
 ## Example Output
 
+Verbatim from `--demo`:
+
 ```
-Ancestry Decomposition PCA
-==========================
-Cohort: 736 samples, 28 populations
-Reference: SGDP (345 samples, 164 populations)
-Common variants: 42,831 biallelic SNPs
+Parsing VCF...
+  50 samples, 500 variants
+  Populations: AFR (n=8), AMR (n=5), EAS (n=7), EUR (n=22), SAS (n=8)
+Computing PCA (10 components)...
+  PC1: 7.6%  PC2: 4.9%
+Generating figures...
+Generating report...
 
-Variance explained:
-  PC1: 51.44%  PC2: 21.70%  PC3: 6.70%
+Done.
+  Report: demo_report/report.md
+  Figures: demo_report/figures
+```
 
-Panel D — Global Context:
-  Cohort samples cluster between European and East Asian
-  reference populations, with Amazonian groups showing
-  distinct positioning from Highland and Coastal groups.
+Written under the output directory:
 
-Figures saved to: ancestry_report/
-  Figure3_PCA_composite.png (300 dpi)
-  Figure3_PCA_composite.pdf (vector)
-
-Reproducibility:
-  commands.sh | environment.yml | checksums.sha256
+```
+report.md
+result.json
+figures/pca_composite.png
+tables/pc_coordinates.csv
+tables/variance_explained.csv
 ```
 
 ## Interpretation Guide
 
-- **PC1** typically captures the largest axis of global differentiation (often Africa vs non-Africa)
-- **PC2** separates major continental groups (Europe, East Asia, Americas)
-- **PC3** often reveals finer substructure within continental groups
-- Confidence ellipses show 2.5 standard deviations around each population cluster
-- Your samples shown as **circles**, SGDP reference as **triangles**
+- **PC1/PC2** capture the largest axes of variation *in the supplied cohort* — with no reference panel these are cohort-relative, not global, axes
+- Variance explained is low and spread across many PCs when the cohort is genetically homogeneous; check Panel D before reading structure into A–C
+- Unstandardised, unpruned PCs are sensitive to LD blocks and relatedness — confirm both were handled upstream before calling a cluster "ancestry"
 
 ## Citation
 
 If you use this skill in a publication, please cite:
 
-- Mallick, S. et al. (2016). The Simons Genome Diversity Project. Nature, 538, 201-206.
 - Corpas, M. (2026). ClawBio. https://github.com/ClawBio/ClawBio

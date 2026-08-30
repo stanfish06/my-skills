@@ -106,7 +106,7 @@ paper it returns is real and verifiable.
 ## Core Capabilities
 
 1. **PubMed search**: Queries NCBI E-utilities (free, no API key required)
-2. **bioRxiv search**: Queries bioRxiv's public REST API for preprints
+2. **bioRxiv search**: Keyword search over bioRxiv preprints via the Europe PMC REST API, newest first
 3. **Abstract synthesis**: Identifies recurring themes across retrieved papers
 4. **Citation graph**: Builds a JSON node-edge graph of internal citations
 5. **Reproducibility bundle**: Exports `commands.sh`, `environment.yml`, SHA-256 checksums
@@ -127,7 +127,7 @@ clinical recommendations, annotate variants, or replace a systematic review.
 
 1. **Parse query**: Accept free-text or PubMed boolean query
 2. **Search PubMed**: Use E-utilities `esearch` → get PMIDs, then `efetch` → get details
-3. **Search bioRxiv**: Query the public bioRxiv API, filter by keywords
+3. **Search bioRxiv**: Query Europe PMC restricted to bioRxiv preprints, sorted newest first
 4. **Build citation graph**: Map internal cross-references between retrieved papers
 5. **Synthesise**: Identify recurring terms across abstracts
 6. **Report**: Write `report.md` with paper summaries, citation graph, and reproducibility bundle
@@ -169,7 +169,7 @@ with a citation graph of 3 nodes and 3 edges, plus a full reproducibility bundle
 1. **E-utilities search** (`esearch`): POST query to NCBI, receive list of PMIDs
 2. **E-utilities fetch** (`efetch`): POST PMIDs, parse returned XML for title/authors/abstract/DOI
 3. **Rate limiting**: 0.34 s sleep between NCBI requests (respects 3 req/s limit)
-4. **bioRxiv API**: GET `https://api.biorxiv.org/details/biorxiv/{date_range}/0/json`, filter by keywords
+4. **bioRxiv search**: GET `https://www.ebi.ac.uk/europepmc/webservices/rest/search` with `query=(<user query>) AND SRC:PPR AND PUBLISHER:"bioRxiv"`, `resultType=core`, `sort=P_PDATE_D desc`
 5. **Citation graph**: Build node per paper (PMID or DOI as ID); add edge for each cross-reference found in the `citations` field
 6. **Theme extraction**: Frequency scan of 15 domain-specific terms across all abstracts
 
@@ -250,9 +250,12 @@ output_directory/
 
 ## Gotchas
 
-- **bioRxiv API returns date-ordered results, not keyword-ranked**: The skill
-  filters by keyword locally after fetching. For very broad queries this may
-  return zero bioRxiv results. Use a specific query to improve recall.
+- **bioRxiv preprints come from Europe PMC, not `api.biorxiv.org`**: bioRxiv's own
+  `/details/{server}/{interval}/{cursor}/json` endpoint is a date-ordered dump with
+  no query parameter — one cursor page is 30 records out of ~227k. Europe PMC indexes
+  bioRxiv preprints and does relevance-ranked keyword search, so the skill queries it
+  with `SRC:PPR AND PUBLISHER:"bioRxiv"`. Preprints not yet indexed by Europe PMC will
+  not appear.
 
 - **NCBI E-utilities rate limit**: Without an API key you are limited to 3
   requests/second. The skill enforces a 0.34 s sleep. Do NOT remove this sleep
@@ -299,5 +302,5 @@ The agent must NOT invent paper titles, authors, or DOIs.
 ## Citations
 
 - [NCBI E-utilities](https://www.ncbi.nlm.nih.gov/books/NBK25499/); PubMed programmatic search API
-- [bioRxiv API](https://api.biorxiv.org/); preprint search and metadata
+- [Europe PMC RESTful API](https://europepmc.org/RestfulWebService); keyword search over bioRxiv preprints (`SRC:PPR`)
 - [Biopython Entrez module](https://biopython.org/docs/latest/api/Bio.Entrez.html); Python wrapper for E-utilities

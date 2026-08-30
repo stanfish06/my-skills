@@ -33,8 +33,6 @@ metadata:
     - Neanderthal DNA
     - Denisovan ancestry
     - IBDmix
-    - Sprime
-    - hmmix
     - introgressed segments
 ---
 
@@ -45,7 +43,7 @@ metadata:
 **Fire when:**
 - User asks about Neanderthal or Denisovan DNA in modern humans
 - User wants to detect archaic introgression segments
-- User mentions IBDmix, Sprime, or hmmix methods
+- User mentions IBDmix or archaic-segment calling
 - User has modern + archaic VCF files and wants to compare them
 
 **Do NOT fire when:**
@@ -57,19 +55,16 @@ metadata:
 
 Between 1-4% of non-African modern human genomes derive from archaic hominins
 (Neanderthals, Denisovans). Identifying these segments matters for understanding
-human evolution, disease susceptibility, and immune adaptation. Three complementary
-methods exist (IBDmix, Sprime, hmmix), each with different strengths. This skill
-wraps all three behind a unified interface with a pure-Python fallback when
-external binaries are unavailable.
+human evolution, disease susceptibility, and immune adaptation. This skill wraps
+IBDmix (Chen et al. 2020) and falls back to a pure-Python LOD heuristic when the
+IBDmix binaries are not installed.
 
 ## Core Capabilities
 
-1. **IBDmix**: Detect segments shared IBD between modern and archaic genomes using LOD score thresholds
-2. **Sprime**: Identify introgressed haplotypes without requiring an archaic reference panel
-3. **hmmix**: HMM-based detection of archaic ancestry tracts
-4. **Pure-Python fallback**: LOD-score-based segment calling when IBDmix binary is not installed
-5. **EIGENSTRAT support**: Read .ind/.snp/.geno files (text and binary packed formats)
-6. **Summary statistics**: Per-individual introgression burden, segment count, mean length
+1. **IBDmix**: `generate_gt` merges the modern and archaic VCFs into a genotype table, then `ibdmix -g … -o … -d <LOD>` calls segments
+2. **Pure-Python fallback**: LOD-style segment calling when `ibdmix`/`generate_gt` are not on PATH — prints a warning and labels every segment `ibdmix_fallback`
+3. **EIGENSTRAT support**: Read .ind/.snp/.geno files (text and binary packed formats)
+4. **Summary statistics**: Per-individual introgression burden, segment count, mean length
 
 ## Scope
 
@@ -88,7 +83,7 @@ vcf-annotator for that).
 1. Parse modern VCF to extract sample names and genotype matrix (numpy array)
 2. Parse archaic VCF to extract reference genotypes at matching positions
 3. Identify shared variant positions between modern and archaic panels
-4. Run selected method (IBDmix / Sprime / hmmix) or pure-Python LOD fallback
+4. Run IBDmix (generate_gt → ibdmix) or, if its binaries are absent, the pure-Python LOD fallback
 5. Collect IntrogressionSegment results per sample
 6. Compute per-individual summary statistics
 7. Write JSON report and optional BED file
@@ -142,6 +137,10 @@ output_dir/
 
 ### JSON structure
 
+The top-level `method` records what actually ran, not what `--method` requested:
+`ibdmix` only when the binaries were found and succeeded, otherwise
+`ibdmix_fallback`.
+
 ```json
 {
   "method": "ibdmix",
@@ -175,14 +174,14 @@ output_dir/
 
 - Python 3.11+
 - numpy
-- Optional: IBDmix binary, Sprime JAR, hmmix binary
+- Optional: IBDmix (`generate_gt` and `ibdmix` binaries, https://github.com/PrincetonUniversity/IBDmix)
 - Optional: bcftools (for indexed VCF extraction)
 
 ## Gotchas
 
 1. **The model will want to report percentage of genome that is Neanderthal from 10 SNPs.** Do not. Demo data is too sparse for genome-wide estimates. State the segment coordinates and LOD scores only.
 2. **The model will want to assume all archaic segments are Neanderthal.** Do not. Check the archaic source label. Denisovan segments have different frequency distributions in different populations.
-3. **The model will want to skip the pure-Python fallback and just say IBDmix is required.** Do not. The fallback LOD scoring works well for demonstration and small datasets.
+3. **The fallback is not IBDmix.** Its per-site scores are an unvalidated heuristic, not the IBDmix LOD model. Segments it emits carry `"method": "ibdmix_fallback"` and the run prints a warning on stderr. Report them as heuristic calls on demo-scale data, never as IBDmix results, and install IBDmix for anything real.
 4. **The model will want to interpret introgression as harmful.** Do not. Many introgressed segments are adaptive (e.g., immune genes, altitude adaptation). Present findings neutrally.
 5. **The model will want to use text .geno parsing for binary packed files.** Do not. Check for the 'GENO' magic header and switch to binary unpacking (2-bit per genotype).
 
@@ -207,11 +206,9 @@ LOD scoring outside this module.
 ## Maintenance
 
 - Review quarterly against new archaic genome releases
-- Update when new IBDmix/Sprime/hmmix versions change output formats
-- Deprecate if a unified tool supersedes all three methods
+- Update when new IBDmix versions change option names or output columns
+- Deprecate if a unified tool supersedes IBDmix
 
 ## Citations
 
 - Chen L, Wolf AB, Fu W, Li L, Akey JM. Identifying and interpreting apparent Neanderthal ancestry in African individuals. Cell. 2020;180(4):677-687. (IBDmix)
-- Browning SR, Browning BL, Zhou Y, et al. Analysis of human sequence data reveals two pulses of archaic Denisovan admixture. Cell. 2018;173(1):53-61. (Sprime)
-- Skov L, Hui R, Shchur V, et al. Detecting archaic introgression using an unadmixed outgroup. PLoS Genet. 2018;14(9):e1007641. (hmmix)

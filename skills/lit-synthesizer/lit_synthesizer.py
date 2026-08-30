@@ -27,7 +27,7 @@ import xml.etree.ElementTree as ET
 # ── Constants ──────────────────────────────────────────────────────────────────
 PUBMED_SEARCH_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
 PUBMED_FETCH_URL  = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
-BIORXIV_API_URL   = "https://api.biorxiv.org/details/biorxiv"
+EUROPEPMC_SEARCH_URL = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
 TOOL_NAME         = "ClawBio-LitSynthesizer"
 TOOL_EMAIL        = "mc@manuelcorpas.com"
 MAX_RESULTS       = 10
@@ -167,39 +167,39 @@ def fetch_pubmed_details(pmids: list[str]) -> list[dict]:
 # ── bioRxiv helpers ────────────────────────────────────────────────────────────
 
 def search_biorxiv(query: str, max_results: int = 5) -> list[dict]:
-    """Search bioRxiv via their public API."""
-    # bioRxiv API supports date-range + keyword in server/interval/cursor format.
-    # We use the /details endpoint with a keyword search via the publisher's
-    # simple query parameter (supported since 2023).
-    start_date = "2023-01-01"
-    end_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    url = f"{BIORXIV_API_URL}/{start_date}/{end_date}/0/json"
+    """Search bioRxiv preprints, newest first, through the Europe PMC REST search API.
+
+    bioRxiv's own /details endpoint is a date-ordered dump with no query parameter;
+    Europe PMC indexes bioRxiv preprints (SRC:PPR) and accepts keyword queries.
+    """
+    params = urllib.parse.urlencode({
+        "query": f'({query}) AND SRC:PPR AND PUBLISHER:"bioRxiv"',
+        "format": "json",
+        "resultType": "core",          # required for abstractText
+        "pageSize": max(1, min(max_results, 100)),
+        "sort": "P_PDATE_D desc",      # newest first
+    })
     papers = []
     try:
-        with urllib.request.urlopen(url, timeout=10) as resp:
+        with urllib.request.urlopen(f"{EUROPEPMC_SEARCH_URL}?{params}", timeout=10) as resp:
             data = json.loads(resp.read().decode())
-        collection = data.get("collection", [])
-        # Filter by keyword in title/abstract
-        keywords = query.lower().split()
-        for item in collection:
-            text = (item.get("title", "") + " " + item.get("abstract", "")).lower()
-            if all(kw in text for kw in keywords):
-                papers.append({
-                    "source":   "bioRxiv",
-                    "pmid":     None,
-                    "title":    item.get("title", "No title"),
-                    "authors":  item.get("authors", "").split("; "),
-                    "journal":  "bioRxiv (preprint)",
-                    "year":     item.get("date", "")[:4],
-                    "abstract": item.get("abstract", "No abstract available."),
-                    "doi":      item.get("doi", ""),
-                    "url":      f"https://biorxiv.org/content/{item.get('doi', '')}",
-                    "citations": [],
-                })
-            if len(papers) >= max_results:
-                break
-    except Exception as exc:
-        print(f"  [warn] bioRxiv search failed: {exc}", file=sys.stderr)
+        for item in data.get("resultList", {}).get("result", [])[:max_results]:
+            doi = item.get("doi", "")
+            papers.append({
+                "source":   "bioRxiv",
+                "pmid":     None,
+                "title":    item.get("title", "No title"),
+                "authors":  [a.strip() for a in item.get("authorString", "").rstrip(".").split(",") if a.strip()],
+                "journal":  "bioRxiv (preprint)",
+                "year":     str(item.get("pubYear", "")),
+                "abstract": item.get("abstractText", "No abstract available."),
+                "doi":      doi,
+                "url":      f"https://doi.org/{doi}" if doi else f"https://europepmc.org/article/PPR/{item.get('id', '')}",
+                "citations": [],
+            })
+    # OSError covers urllib.error.URLError and the socket timeout; ValueError covers bad JSON
+    except (OSError, ValueError) as exc:
+        print(f"  [warn] bioRxiv search via Europe PMC failed: {exc}", file=sys.stderr)
     return papers
 
 

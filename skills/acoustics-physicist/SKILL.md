@@ -63,7 +63,8 @@ in acoustics research and applied acoustical engineering.
   ray acoustics. Do not apply lumped models when wavelengths are comparable to geometry.
 - **Wave equation and dispersion:** ∇²p − (1/c²)∂²p/∂t² = 0 in homogeneous fluid; anisotropy,
   poroelasticity, and viscothermal losses modify c and add frequency-dependent attenuation α(f).
-- **Nonlinear acoustics:** For finite amplitude, shock formation distance L_D ≈ 1/(β k a₀ M);
+- **Nonlinear acoustics:** For finite amplitude, plane-wave shock formation distance
+  x̄ ≈ 1/(β k M) with M = u₀/c the acoustic Mach number, equivalently ρc³/(β ω p₀);
   distortion, harmonic generation, and cavitation thresholds matter in medical HIFU, sonochemistry,
   and parametric arrays. Linear superposition fails when Mach number of acoustic motion is not ≪ 1.
 - **Transduction:** Piezoelectric (PZT, PMN-PT, Lithium Niobate), capacitive micromachined

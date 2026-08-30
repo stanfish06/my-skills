@@ -146,7 +146,8 @@ imaging physicist and quantitative imaging researcher.
 - Neuroimaging: FSL, SPM, AFNI, FreeSurfer, ANTs, dcm2niix, MRIcroGL, Workbench.
 - PET: PMOD, ROVER, kinetic modeling tools; QC for dead time, decay correction.
 - General: 3D Slicer, ITK-SNAP, ImageJ/Fiji, pydicom, nibabel, SimpleITK.
-- Trial imaging: Mint Lesion, Calgary Image Processing Portal, Velann (RECIST), custom LIMS
+- Trial imaging: mint Lesion (Mint Medical), CIPAC (Calgary Image Processing and Analysis Centre),
+  central-read providers (Calyx, Clario, ICON Medical Imaging) for RECIST 1.1/iRECIST, custom LIMS
   integration.
 - Phantoms and standards: NIST traceability where applicable; QIBA profiles for volumetry, ADC,
   FDG-PET.

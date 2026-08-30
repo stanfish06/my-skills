@@ -393,12 +393,19 @@ This skill integrates with:
 
 ### Evidence Grading
 
-**GRADE System**
+**ACCP/CHEST grading (GRADE-derived)** — GRADE proper states certainty as
+high/moderate/low/very low and strength as strong or conditional; the
+number-letter notation below is the ACCP/CHEST adaptation used throughout this
+skill. The full eight-cell vocabulary is in `assets/recommendation_strength_guide.md`.
+
 - **1A**: Strong recommendation, high-quality evidence
-- **1B**: Strong recommendation, moderate-quality evidence  
+- **1B**: Strong recommendation, moderate-quality evidence
+- **1C**: Strong recommendation, low-quality evidence (rare — large effect from observational data)
+- **1D**: Strong recommendation, very-low-quality evidence (rare)
 - **2A**: Weak recommendation, high-quality evidence
 - **2B**: Weak recommendation, moderate-quality evidence
 - **2C**: Weak recommendation, low-quality evidence
+- **2D**: Weak recommendation, very-low-quality evidence
 
 **Recommendation Strength**
 - **Strong**: Benefits clearly outweigh risks
@@ -481,7 +488,6 @@ See the `assets/` directory for LaTeX templates:
 - `treatment_recommendation_template.tex` - Evidence-based clinical practice guidelines with GRADE grading
 - `clinical_pathway_template.tex` - TikZ decision algorithm flowcharts for treatment sequencing
 - `biomarker_report_template.tex` - Molecular subtype classification and genomic profile reports
-- `evidence_synthesis_template.tex` - Systematic evidence review and meta-analysis summaries
 
 **Template Features:**
 - 0.5in margins for compact presentation
@@ -495,12 +501,8 @@ See the `assets/` directory for LaTeX templates:
 
 See the `scripts/` directory for analysis and visualization tools:
 - `generate_survival_analysis.py` - Kaplan-Meier curve generation with log-rank tests, hazard ratios, 95% CI
-- `create_waterfall_plot.py` - Best response visualization for cohort analyses
-- `create_forest_plot.py` - Subgroup analysis visualization with confidence intervals
 - `create_cohort_tables.py` - Demographics, biomarker frequency, and outcomes tables
 - `build_decision_tree.py` - TikZ flowchart generation for treatment algorithms
 - `biomarker_classifier.py` - Patient stratification algorithms by molecular subtype
-- `calculate_statistics.py` - Hazard ratios, Cox regression, log-rank tests, Fisher's exact
 - `validate_cds_document.py` - Quality and compliance checks (HIPAA, statistical reporting standards)
-- `grade_evidence.py` - Automated GRADE assessment helper for treatment recommendations
 

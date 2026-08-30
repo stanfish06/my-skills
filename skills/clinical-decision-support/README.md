@@ -4,11 +4,14 @@ Professional clinical decision support documents for medical professionals in ph
 
 ## Quick Start
 
-This skill enables generation of three types of clinical documents:
+This skill enables generation of two types of clinical documents:
 
-1. **Individual Patient Treatment Plans** - Personalized protocols for specific patients
-2. **Patient Cohort Analysis** - Biomarker-stratified group analyses with outcomes
-3. **Treatment Recommendation Reports** - Evidence-based clinical guidelines
+1. **Patient Cohort Analysis** - Biomarker-stratified group analyses with outcomes
+2. **Treatment Recommendation Reports** - Evidence-based clinical guidelines
+
+Not for individual patient treatment plans, bedside care documentation, or
+patient-specific protocols — use the `treatment-plans` skill. See the scope
+boundary in `SKILL.md`.
 
 All documents are generated as compact, professional LaTeX/PDF files.
 

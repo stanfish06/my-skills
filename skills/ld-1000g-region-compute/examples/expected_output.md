@@ -11,8 +11,8 @@ Input: `examples/input.json` (computes pairwise r² between `1_109274968_G_T`
 - `panel_version`: `5b_remote_2019_03_12`
 - `super_pop`: `EUR`
 - `plink_version`: `PLINK v1.90b6.27 ...`
-- `n_partners_returned`: 3 (the lead self-match is excluded; one partner may
-  drop out if absent from 1000G)
+- `n_partners_returned`: 3 (the lead self-match is excluded; a partner absent
+  from the panel is named in `notes`, so a shortfall is never unexplained)
 - `pairs`: list of `OnDemandLDPair` (partner_variant_id, r2)
 
 Sample expected output (real values vary):

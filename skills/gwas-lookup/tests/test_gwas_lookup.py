@@ -26,6 +26,93 @@ def load_demo_data() -> dict:
     return json.loads(DEMO_DATA.read_text())
 
 
+# ── Parsers (raw API responses) ───────────────────────────────────────────────
+# These fixtures are the payloads the APIs actually return, not the parsers'
+# output. A projection change or a schema migration shows up here instead of
+# silently producing blank labels under status "ok".
+
+
+def test_gwas_catalog_parser_reads_trait_allele_and_study(monkeypatch):
+    from gwas_lookup_api import gwas_catalog
+
+    raw = load_fixture("gwas_catalog_raw")
+    captured = {}
+
+    def fake_get(self, endpoint, params=None):
+        captured["endpoint"] = endpoint
+        captured["params"] = params
+        return raw
+
+    monkeypatch.setattr(gwas_catalog.BaseClient, "get", fake_get)
+    result = gwas_catalog.get_associations("rs3798220", use_cache=False)
+
+    assert captured["params"]["projection"] == "associationByStudy"
+    assert result["status"] == "ok"
+    for a in result["associations"]:
+        assert a["traits"] and all(a["traits"]), "trait labels must not be blank"
+        assert a["risk_allele"].startswith("rs"), a["risk_allele"]
+        assert a["study_accession"].startswith("GCST"), a["study_accession"]
+        assert a["pvalue"] is not None
+
+
+def test_open_targets_variant_parser(monkeypatch):
+    from gwas_lookup_api import open_targets
+
+    raw = load_fixture("open_targets_variant_raw")
+    monkeypatch.setattr(
+        open_targets.BaseClient, "post",
+        lambda self, endpoint, json_body, params=None: raw,
+    )
+    result = open_targets.get_variant("6", 160540105, "T", "C", use_cache=False)
+
+    assert result["status"] == "ok"
+    assert result["rsid"] == "rs3798220"
+    assert result["consequence"] == "missense_variant"
+    assert result["nearest_gene"]
+    assert result["population_frequencies"]["NFE"] is not None
+
+
+def test_open_targets_credible_set_parser(monkeypatch):
+    from gwas_lookup_api import open_targets
+
+    raw = load_fixture("open_targets_credsets_raw")
+    monkeypatch.setattr(
+        open_targets.BaseClient, "post",
+        lambda self, endpoint, json_body, params=None: raw,
+    )
+    result = open_targets.get_credible_sets("6", 160540105, "T", "C", use_cache=False, max_sets=2)
+
+    assert result["status"] == "ok"
+    assert result["total_credible_sets"] > 0
+    assert result["credible_sets"]
+    for cs in result["credible_sets"]:
+        assert cs["trait"]
+        assert cs["study_id"].startswith("GCST")
+        assert cs["pval"] is not None and cs["pval"] > 0
+
+
+def test_ensembl_parser_populates_grch37_and_populations(monkeypatch):
+    from gwas_lookup_api import ensembl
+
+    raw38 = load_fixture("ensembl_variation_raw")
+    raw37 = load_fixture("ensembl_variation_grch37_raw")
+    seen = []
+
+    def fake_get(self, endpoint, params=None):
+        seen.append((self.base_url, params))
+        return raw37 if self.base_url == ensembl.GRCH37_BASE_URL else raw38
+
+    monkeypatch.setattr(ensembl.BaseClient, "get", fake_get)
+    result = ensembl.get_variant_info("rs3798220", use_cache=False)
+
+    assert result["status"] == "ok"
+    assert seen[0][1]["pops"] == 1, "populations require pops=1"
+    assert result["populations"], "allele-frequency figure needs populations"
+    assert result["pos_grch38"] == 160540105
+    assert result["pos_grch37"] == 160961137
+    assert any(host == ensembl.GRCH37_BASE_URL for host, _ in seen)
+
+
 # ── Normalisation ─────────────────────────────────────────────────────────────
 
 
@@ -138,7 +225,7 @@ def test_resolve_variant_imports_api_modules(monkeypatch):
             "status": "ok",
             "chr": "6",
             "pos_grch38": 160540105,
-            "pos_grch37": 161005610,
+            "pos_grch37": 160961137,
             "ref_allele": "T",
             "alt_alleles": ["C"],
             "allele_string": "T/C",
@@ -167,7 +254,7 @@ def test_resolve_variant_imports_api_modules(monkeypatch):
 
     assert resolved["rsid"] == "rs3798220"
     assert resolved["variant_ids"]["open_targets"] == "6_160540105_T_C"
-    assert resolved["variant_ids"]["bbj"] == "6:161005610-T-C"
+    assert resolved["variant_ids"]["bbj"] == "6:160961137-T-C"
 
 
 # ── Graceful degradation ─────────────────────────────────────────────────────

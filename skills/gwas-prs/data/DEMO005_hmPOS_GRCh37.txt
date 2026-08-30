@@ -1,8 +1,9 @@
-#pgs_id=PGS000057
-#pgs_name=PRS for prostate cancer (Schumacher et al. 2018)
+#pgs_id=DEMO005
+#pgs_name=Synthetic demo score — Prostate cancer
 #trait_reported=Prostate cancer
 #genome_build=GRCh37
 #variants_number=147
+#note=SYNTHETIC. Effect weights and the reference mean/SD in curated_scores.json are illustrative values for offline demos, not a PGS Catalog score. Not suitable for interpretation. Fetch a real score with --pgs-id or --trait.
 rsID	chr_name	chr_position	effect_allele	other_allele	effect_weight	allelefrequency_effect
 rs1447295	8	128554220	A	C	0.18	0.11
 rs6983267	8	128413305	G	T	0.15	0.50

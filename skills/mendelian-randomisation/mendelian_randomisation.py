@@ -96,7 +96,7 @@ class SensitivityResults:
     n_weak_instruments: int = 0
     i_squared_gx: float = 0.0
     steiger_correct_direction: bool = True
-    steiger_pvalue: float = 1.0
+    steiger_pvalue: float | None = None
 
 
 # ---------------------------------------------------------------------------
@@ -210,30 +210,68 @@ def weighted_median(instruments: list[Instrument], n_boot: int = 1000) -> MREsti
     )
 
 
-def weighted_mode(instruments: list[Instrument], bandwidth: float = 0.5) -> MREstimate:
-    """Weighted mode estimator (Hartwig et al., 2017)."""
-    bx = np.array([i.beta_exposure for i in instruments])
-    by = np.array([i.beta_outcome for i in instruments])
-    sy = np.array([i.se_outcome for i in instruments])
+def _mad(x: np.ndarray) -> float:
+    """R's stats::mad — median absolute deviation scaled by 1.4826."""
+    return float(1.4826 * np.median(np.abs(x - np.median(x))))
 
-    ratios = by / bx
-    se_ratios = sy / np.abs(bx)
-    weights = 1.0 / se_ratios
 
-    x_grid = np.linspace(np.min(ratios) - 1, np.max(ratios) + 1, 1000)
+def _mode_point(ratios: np.ndarray, se_ratios: np.ndarray, phi: float) -> float:
+    """Weighted-mode point estimate: peak of the weighted Gaussian KDE.
+
+    Bandwidth is the modified Silverman rule of Bickel (2002) that
+    TwoSampleMR/mr_mode.R uses: 0.9 * min(sd, mad) / n^(1/5), scaled by phi.
+    A fixed bandwidth turns the "mode" into the weighted mean of the ratios.
+    """
+    n = len(ratios)
+    s = 0.9 * min(float(np.std(ratios, ddof=1)), _mad(ratios)) / n ** 0.2
+    h = max(1e-8, s * phi)
+    weights = se_ratios ** -2
+    weights = weights / np.sum(weights)
+    span = np.max(ratios) - np.min(ratios)
+    x_grid = np.linspace(np.min(ratios) - 3 * h - span, np.max(ratios) + 3 * h + span, 4096)
     density = np.zeros_like(x_grid)
     for r, w in zip(ratios, weights):
-        density += w * stats.norm.pdf(x_grid, loc=r, scale=bandwidth)
-    beta_mode = float(x_grid[np.argmax(density)])
+        density += w * stats.norm.pdf(x_grid, loc=r, scale=h)
+    return float(x_grid[np.argmax(density)])
 
-    se_mode = float(1.0 / (np.sum(weights) * 0.5))
-    z = beta_mode / se_mode if se_mode > 0 else 0
-    pval = 2 * stats.norm.sf(abs(z))
+
+def weighted_mode(
+    instruments: list[Instrument], phi: float = 1.0, n_boot: int = 1000
+) -> MREstimate:
+    """Weighted mode estimator (Hartwig et al., 2017 IJE 46:1985-98).
+
+    The mode SE has no closed form: it comes from a parametric bootstrap over
+    the ratio estimates, taken as the MAD of the bootstrap modes, matching
+    MRCIEU/TwoSampleMR `R/mr_mode.R`. P-value is t on k-1 df.
+    """
+    bx = np.array([i.beta_exposure for i in instruments])
+    by = np.array([i.beta_outcome for i in instruments])
+    sx = np.array([i.se_exposure for i in instruments])
+    sy = np.array([i.se_outcome for i in instruments])
+    n = len(instruments)
+
+    ratios = by / bx
+    # SE of the ratio estimate without the NOME assumption (delta method)
+    se_ratios = np.sqrt(sy ** 2 / bx ** 2 + by ** 2 * sx ** 2 / bx ** 4)
+
+    beta_mode = _mode_point(ratios, se_ratios, phi)
+
+    rng = np.random.default_rng(42)
+    boot = np.empty(n_boot)
+    for b in range(n_boot):
+        boot[b] = _mode_point(rng.normal(ratios, se_ratios), se_ratios, phi)
+    se_mode = _mad(boot)
+
+    if se_mode > 0 and n > 1:
+        pval = float(2 * stats.t.sf(abs(beta_mode / se_mode), df=n - 1))
+    else:
+        pval = 1.0
+    half = 1.96 * se_mode
 
     return MREstimate(
-        method="Weighted Mode", estimate=beta_mode, se=se_mode,
-        ci_lower=beta_mode - 1.96 * se_mode, ci_upper=beta_mode + 1.96 * se_mode,
-        pvalue=float(pval), n_snps=len(instruments),
+        method="Weighted Mode", estimate=beta_mode, se=float(se_mode),
+        ci_lower=beta_mode - half, ci_upper=beta_mode + half,
+        pvalue=pval, n_snps=n,
     )
 
 
@@ -253,18 +291,22 @@ def cochran_q(instruments: list[Instrument], ivw_est: MREstimate) -> tuple[float
     return q, p, df
 
 
-def steiger_test(instruments: list[Instrument]) -> tuple[bool, float]:
-    """Steiger directionality test — checks causal direction."""
+def steiger_test(instruments: list[Instrument]) -> tuple[bool, None]:
+    """Steiger direction only — r²_exposure vs r²_outcome, no significance test.
+
+    The p-value is deliberately not returned. The correlated-correlations test
+    (TwoSampleMR `mr_steiger`) requires the exposure and outcome GWAS sample
+    sizes as arguments, and neither the input contract nor the instrument
+    records carry them; on the demo r² values the answer swings from p ≈ 0 at
+    n = 681k to p = 0.21 at n = 500. Report a direction, not a confidence.
+
+    The r² approximation below is the continuous-trait formula. It is not
+    valid for a binary outcome reported as log-odds; treat the direction as
+    indicative only in that case.
+    """
     r2_exp = np.array([2 * i.eaf * (1 - i.eaf) * (i.beta_exposure ** 2) for i in instruments])
     r2_out = np.array([2 * i.eaf * (1 - i.eaf) * (i.beta_outcome ** 2) for i in instruments])
-    total_r2_exp = float(np.sum(r2_exp))
-    total_r2_out = float(np.sum(r2_out))
-    correct = total_r2_exp > total_r2_out
-    diff = total_r2_exp - total_r2_out
-    se_diff = math.sqrt(total_r2_exp + total_r2_out) * 0.01
-    z = diff / se_diff if se_diff > 0 else 0
-    p = 2 * stats.norm.sf(abs(z))
-    return correct, float(p)
+    return bool(float(np.sum(r2_exp)) > float(np.sum(r2_out))), None
 
 
 def compute_i_squared_gx(instruments: list[Instrument]) -> float:
@@ -479,7 +521,7 @@ def _write_sensitivity_table(s, egger_int, egger_p, path):
         w.writerow(["Mean_F_statistic", f"{s.mean_f_statistic:.1f}", "N/A", f"{'WEAK' if s.mean_f_statistic < MIN_F_STAT else 'Strong'} instruments"])
         w.writerow(["Min_F_statistic", f"{s.min_f_statistic:.1f}", "N/A", f"{s.n_weak_instruments} weak instruments (F<{MIN_F_STAT})"])
         w.writerow(["I_squared_GX", f"{s.i_squared_gx:.4f}", "N/A", "SIMEX recommended" if s.i_squared_gx < 0.9 else "No SIMEX needed"])
-        w.writerow(["Steiger_direction", "Correct" if s.steiger_correct_direction else "REVERSED", f"{s.steiger_pvalue:.4f}", "Correct direction" if s.steiger_correct_direction else "WARNING: reversed causal direction"])
+        w.writerow(["Steiger_direction", "Correct" if s.steiger_correct_direction else "REVERSED", "NA", "Direction only; no significance test without GWAS sample sizes"])
 
 
 def _write_instruments_table(instruments, path):
@@ -516,7 +558,7 @@ def _write_report_md(instruments, estimates, sens, egger_int, egger_p, exposure,
         f"| Mean F-statistic | {sens.mean_f_statistic:.1f} | — | {'**WARNING: weak instruments**' if sens.mean_f_statistic < MIN_F_STAT else 'Strong instruments'} |",
         f"| Weak instruments (F<{MIN_F_STAT}) | {sens.n_weak_instruments}/{len(instruments)} | — | {'**WARNING**' if sens.n_weak_instruments > 0 else 'None'} |",
         f"| I²_GX | {sens.i_squared_gx:.4f} | — | {'SIMEX correction recommended' if sens.i_squared_gx < 0.9 else 'Adequate'} |",
-        f"| Steiger direction | {'Correct' if sens.steiger_correct_direction else '**REVERSED**'} | {sens.steiger_pvalue:.4f} | {'Exposure → Outcome confirmed' if sens.steiger_correct_direction else '**WARNING: reverse causation**'} |",
+        f"| Steiger direction | {'Exposure → Outcome' if sens.steiger_correct_direction else '**REVERSED**'} | NA | {'Direction only — no significance test without GWAS sample sizes' if sens.steiger_correct_direction else '**WARNING: reverse causation**'} |",
         "",
     ])
 
@@ -530,8 +572,35 @@ def _write_report_md(instruments, estimates, sens, egger_int, egger_p, exposure,
         "",
     ])
     consistent = all(abs(e.estimate - estimates[0].estimate) < 2 * estimates[0].se for e in estimates[1:])
-    if consistent:
-        lines.append("Sensitivity analyses show consistent estimates across IVW, MR-Egger, weighted median, and weighted mode, supporting a robust causal inference.")
+    # the narrative must read the sensitivity tests, not just the point estimates:
+    # a pleiotropy-inflated IVW SE widens the `consistent` tolerance enough to
+    # absorb a large IVW-vs-Egger gap
+    caveats = []
+    if egger_p < 0.05:
+        caveats.append(
+            f"the MR-Egger intercept is non-zero (P = {egger_p:.4f}), so the IVW "
+            "estimate is biased by directional pleiotropy and the Egger slope "
+            "should be preferred"
+        )
+    if sens.cochran_q_pvalue < 0.05:
+        caveats.append(
+            f"Cochran's Q shows heterogeneity across instruments (P = {sens.cochran_q_pvalue:.4f})"
+        )
+    if sens.n_weak_instruments > 0:
+        caveats.append(
+            f"{sens.n_weak_instruments} of {len(instruments)} instruments are weak "
+            f"(F < {MIN_F_STAT}), which biases the estimate toward the confounded observational association"
+        )
+    if not sens.steiger_correct_direction:
+        caveats.append("the Steiger test puts more variance in the outcome than the exposure, indicating reverse causation")
+
+    if caveats:
+        lines.append("**Caution**: " + "; ".join(caveats) + ".")
+        if not consistent:
+            lines.append("")
+            lines.append("Estimates also differ across methods, compounding the concern.")
+    elif consistent:
+        lines.append("Sensitivity analyses show consistent estimates across IVW, MR-Egger, weighted median, and weighted mode, with no detected pleiotropy, heterogeneity, or weak instruments.")
     else:
         lines.append("**Caution**: Estimates differ across methods, suggesting potential violations of MR assumptions. Interpret with care.")
     lines.extend(["", "---", "", f"*{DISCLAIMER}*", ""])
@@ -554,6 +623,7 @@ def _write_result_json(estimates, sens, egger_int, egger_p, exposure, outcome, o
             "n_weak": sens.n_weak_instruments,
             "i_squared_gx": round(sens.i_squared_gx, 4),
             "steiger_correct": sens.steiger_correct_direction,
+            "steiger_pvalue": None,
         },
         "disclaimer": DISCLAIMER,
     }

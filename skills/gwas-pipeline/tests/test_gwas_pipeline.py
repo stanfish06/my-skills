@@ -47,6 +47,25 @@ class TestRegenieParser:
         assert len(results) == 1000
         assert all(isinstance(r, GWASResult) for r in results)
 
+    def test_parse_hardcall_output_13_columns(self):
+        """--bed input emits no INFO column; positional indices read EXTRA as LOG10P."""
+        hardcall = SKILL_DIR / "example_data" / "test_bin_out_hardcall_Y1.regenie"
+        dosage = SKILL_DIR / "example_data" / "test_bin_out_firth_Y1.regenie"
+        assert len(hardcall.read_text().splitlines()[0].split()) == 13
+        hard = parse_regenie_output(hardcall)
+        dose = parse_regenie_output(dosage)
+        assert len(hard) == len(dose) == 1000
+        for h, d in zip(hard, dose):
+            assert (h.chrom, h.pos, h.beta, h.se, h.chisq, h.log10p, h.n) == (
+                d.chrom, d.pos, d.beta, d.se, d.chisq, d.log10p, d.n
+            )
+
+    def test_missing_required_column_raises(self, tmp_path):
+        bad = tmp_path / "bad.regenie"
+        bad.write_text("CHROM GENPOS ID ALLELE0 ALLELE1 A1FREQ N TEST BETA SE CHISQ EXTRA\n")
+        with pytest.raises(ValueError, match="LOG10P"):
+            parse_regenie_output(bad)
+
     def test_parsed_fields_are_numeric(self):
         ref_file = SKILL_DIR / "example_data" / "test_bin_out_firth_Y1.regenie"
         results = parse_regenie_output(ref_file)

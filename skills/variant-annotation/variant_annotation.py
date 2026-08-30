@@ -42,11 +42,19 @@ SKILL_DIR = Path(__file__).resolve().parent
 DEFAULT_DEMO_INPUT = SKILL_DIR / "example_data" / "synthetic_clinvar_panel.vcf"
 
 VEP_BASE_URL = "https://rest.ensembl.org"
+# GRCh37 is served from a separate host; the REST VEP endpoint has no assembly parameter
+VEP_BASE_URLS = {
+    "GRCh38": VEP_BASE_URL,
+    "GRCh37": "https://grch37.rest.ensembl.org",
+}
 VEP_ENDPOINT = "vep/homo_sapiens/region"
 DEFAULT_ASSEMBLY = "GRCh38"
+SUPPORTED_ASSEMBLIES = tuple(VEP_BASE_URLS)
 DEFAULT_BATCH_SIZE = 200
 DEFAULT_TIMEOUT = 30
 RATE_INTERVAL = 1.0 / 15.0
+# VEP's global gnomAD keys; every other gnomad* key is an ancestry subpopulation
+GNOMAD_GLOBAL_LABELS = frozenset({"gnomad", "gnomade", "gnomadg"})
 DEFAULT_CACHE_TTL = 86400
 DEFAULT_CACHE_DIR = Path.home() / ".clawbio" / "variant_annotation_cache"
 USER_AGENT = f"ClawBio-VariantAnnotation/{SKILL_VERSION}"
@@ -201,6 +209,16 @@ class VEPClient:
         raw = f"POST|{endpoint}|{json.dumps(params, sort_keys=True)}|{json.dumps(payload, sort_keys=True)}"
         return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:20]
 
+    @staticmethod
+    def base_url_for(assembly: str) -> str:
+        try:
+            return VEP_BASE_URLS[assembly]
+        except KeyError:
+            raise ValueError(
+                f"Unsupported assembly {assembly!r}; "
+                f"Ensembl VEP REST serves only {', '.join(SUPPORTED_ASSEMBLIES)}"
+            ) from None
+
     def _get_cached(self, key: str) -> Any | None:
         if not self.use_cache:
             return None
@@ -240,17 +258,16 @@ class VEPClient:
             "af": 1,
             "mane": 1,
         }
-        if assembly:
-            params["assembly"] = assembly
+        base_url = self.base_url_for(assembly or DEFAULT_ASSEMBLY)
 
         payload = {"variants": variant_strings}
-        cache_key = self._cache_key(VEP_ENDPOINT, params, payload)
+        cache_key = self._cache_key(f"{base_url}/{VEP_ENDPOINT}", params, payload)
         cached = self._get_cached(cache_key)
         if cached is not None:
             return cached
 
         self._throttle()
-        url = f"{VEP_BASE_URL}/{VEP_ENDPOINT}"
+        url = f"{base_url}/{VEP_ENDPOINT}"
         response = self.session.post(
             url, params=params, json=payload, timeout=self.timeout
         )
@@ -464,7 +481,7 @@ def extract_clinvar_fields(entry: dict[str, Any]) -> dict[str, str]:
 
 def extract_frequency_fields(entry: dict[str, Any], alt: str) -> dict[str, Any]:
     alt_key = alt.upper()
-    gnomad_values: list[float] = []
+    gnomad_global_values: list[float] = []
     all_values: list[float] = []
     population_freqs: dict[str, float] = {}
 
@@ -477,8 +494,8 @@ def extract_frequency_fields(entry: dict[str, Any], alt: str) -> dict[str, Any]:
                     continue
                 all_values.append(numeric)
                 population_freqs[label] = numeric
-                if "gnomad" in label.lower():
-                    gnomad_values.append(numeric)
+                if label.lower() in GNOMAD_GLOBAL_LABELS:
+                    gnomad_global_values.append(numeric)
 
         for label, value in colocated.items():
             if not isinstance(value, (int, float, str)):
@@ -491,8 +508,8 @@ def extract_frequency_fields(entry: dict[str, Any], alt: str) -> dict[str, Any]:
                 continue
             all_values.append(numeric)
             population_freqs[label] = numeric
-            if "gnomad" in label_lower:
-                gnomad_values.append(numeric)
+            if label_lower in GNOMAD_GLOBAL_LABELS:
+                gnomad_global_values.append(numeric)
 
     highest_population = ""
     min_af = None
@@ -502,11 +519,14 @@ def extract_frequency_fields(entry: dict[str, Any], alt: str) -> dict[str, Any]:
         min_af = min(population_freqs.values())
         spread = max(population_freqs.values()) - min_af
 
+    # highest global gnomAD estimate: never treat the rarest ancestry group as the rarity evidence
+    gnomad_af = max(gnomad_global_values) if gnomad_global_values else None
+
     return {
-        "gnomad_af": min(gnomad_values) if gnomad_values else None,
-        "global_af": population_freqs.get("gnomad")
-        or population_freqs.get("af")
-        or population_freqs.get("gnomad_af"),
+        "gnomad_af": gnomad_af,
+        "global_af": gnomad_af
+        if gnomad_af is not None
+        else population_freqs.get("af"),
         "max_af": max(all_values) if all_values else None,
         "min_af": min_af,
         "highest_frequency_population": highest_population,
@@ -721,6 +741,7 @@ def annotate_variants(
     failures: list[dict[str, Any]] = []
     batch_count = 0
     failed_batches = 0
+    reported_assemblies: list[str] = []
 
     for batch in batch_variants(records, batch_size=batch_size):
         batch_count += 1
@@ -758,10 +779,16 @@ def annotate_variants(
                 )
                 annotations.append(placeholder_annotation(record, "missing", message))
                 continue
-            annotations.append(normalize_annotation(record, response[index]))
+            entry = response[index]
+            if isinstance(entry, dict) and entry.get("assembly_name"):
+                reported_assemblies.append(str(entry["assembly_name"]))
+            annotations.append(normalize_annotation(record, entry))
 
+    # report the assembly VEP echoed back, not the one the caller asked for
+    observed = sorted(set(reported_assemblies))
     metadata = {
-        "assembly": assembly,
+        "assembly": ";".join(observed) if observed else assembly,
+        "assembly_requested": assembly,
         "batch_size": batch_size,
         "batches_sent": batch_count,
         "failed_batches": failed_batches,
@@ -1595,7 +1622,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--assembly",
         default=DEFAULT_ASSEMBLY,
-        help="Genome assembly to use (default: GRCh38)",
+        choices=SUPPORTED_ASSEMBLIES,
+        help="Genome assembly of the input coordinates (default: GRCh38). "
+        "GRCh37 is annotated against grch37.rest.ensembl.org.",
     )
     parser.add_argument(
         "--batch-size",

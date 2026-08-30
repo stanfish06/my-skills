@@ -93,9 +93,9 @@ You are **Variant Annotation**, a specialised ClawBio agent for VCF interpretati
 
 1. **Parse**: Read the VCF with `pysam.VariantFile` and emit one record per ALT allele.
 2. **Batch**: Convert variants into Ensembl VEP region strings and group them into batches of 200.
-3. **Annotate**: POST batches to `https://rest.ensembl.org/vep/homo_sapiens/region` using GRCh38 as the default assembly.
+3. **Annotate**: POST batches to `https://rest.ensembl.org/vep/homo_sapiens/region` (GRCh38, the default) or `https://grch37.rest.ensembl.org/vep/homo_sapiens/region` when `--assembly GRCh37` is given — the REST VEP endpoint has no `assembly` parameter, so the build is selected by host.
 4. **Normalise**: Pick the most severe consequence per variant, then extract ClinVar labels, consequence metadata, and population frequency fields.
-5. **Prioritise**: Flag rare pathogenic variants (`gnomAD AF < 0.001`) and assign a numeric score plus tier for ranked output.
+5. **Prioritise**: Flag rare pathogenic variants (global `gnomAD AF < 0.001`) and assign a numeric score plus tier for ranked output.
 6. **Report**: Write tabular, markdown, and structured JSON outputs alongside a reproducibility command file.
 
 ## CLI Reference
@@ -137,10 +137,10 @@ Expected output: a report for a bundled 20-variant synthetic VCF, an `annotated_
 6. **Output generation**: Produce a flat TSV, markdown summary, `result.json`, and reproducibility metadata.
 
 **Key thresholds / parameters**:
-- Default assembly: `GRCh38`
+- Default assembly: `GRCh38`; `--assembly` accepts only `GRCh38` or `GRCh37` and the report records the `assembly_name` VEP returned
 - Batch size: `200` variants per request
 - Ensembl rate limit: `15 requests/second`
-- Clinically relevant rule: ClinVar pathogenic / likely pathogenic plus `gnomAD AF < 0.001`
+- Clinically relevant rule: ClinVar pathogenic / likely pathogenic plus global `gnomAD AF < 0.001`
 - Priority output: numeric `priority_score` plus human-readable `Tier 1`-`Tier 4`
 
 ## Domain Decisions
@@ -151,6 +151,7 @@ Expected output: a report for a bundled 20-variant synthetic VCF, an `annotated_
 - **Consequence selection**: Collapses multi-transcript annotations to the most severe reported consequence so reports stay interpretable at the variant level.
 - **ClinVar normalization**: Buckets raw ClinVar strings into simpler categories so downstream ranking and summaries stay auditable and consistent across mixed labels.
 - **Population context**: Preserves population frequency spread to warn when a variant looks rare globally but enriched in specific ancestry groups.
+- **Frequency fields**: `gnomad_af` and `global_af` carry the global gnomAD estimate (VEP's `gnomadg`/`gnomade`, highest of the two); ancestry subpopulation keys feed only `max_af`, `min_af`, `highest_frequency_population`, and `population_frequency_spread`. `global_af` falls back to the 1000 Genomes `af` when gnomAD has no entry.
 
 ## Example Queries
 

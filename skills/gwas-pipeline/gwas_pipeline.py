@@ -290,38 +290,66 @@ class GWASResult:
         return 10 ** (-self.log10p)
 
 
+REGENIE_REQUIRED_COLUMNS = (
+    "CHROM", "GENPOS", "ID", "ALLELE0", "ALLELE1", "A1FREQ",
+    "N", "BETA", "SE", "CHISQ", "LOG10P",
+)
+
+
 def parse_regenie_output(result_file: Path) -> list[GWASResult]:
-    """Parse a .regenie results file into a list of GWASResult."""
+    """Parse a .regenie results file into a list of GWASResult.
+
+    Indexed by header name, not position: REGENIE emits INFO only for dosage
+    input (BGEN/PGEN) and four extra columns under --af-cc, so hardcoded
+    positions read EXTRA (the literal "NA") as LOG10P on --bed hardcall input
+    and discard every variant.
+    """
     results: list[GWASResult] = []
+    columns: dict[str, int] | None = None
     with open(result_file) as fh:
         for line in fh:
-            if line.startswith("CHROM") or line.startswith("#"):
+            if line.startswith("#"):
                 continue
             parts = line.strip().split()
-            if len(parts) < 13:
+            if not parts:
+                continue
+            if columns is None:
+                if parts[0] != "CHROM":
+                    raise ValueError(
+                        f"{result_file}: expected a REGENIE header line starting "
+                        f"with CHROM, got {parts[0]!r}"
+                    )
+                columns = {name: i for i, name in enumerate(parts)}
+                missing = [c for c in REGENIE_REQUIRED_COLUMNS if c not in columns]
+                if missing:
+                    raise ValueError(
+                        f"{result_file}: REGENIE output is missing required "
+                        f"column(s) {', '.join(missing)}"
+                    )
+                continue
+            if len(parts) < len(columns):
                 continue
             try:
-                log10p = float(parts[12])
-            except (ValueError, IndexError):
-                continue
-            if log10p <= 0:
-                continue
-            try:
+                log10p = float(parts[columns["LOG10P"]])
+                if log10p <= 0:
+                    continue
                 results.append(GWASResult(
-                    chrom=parts[0],
-                    pos=int(parts[1]),
-                    snp_id=parts[2],
-                    allele0=parts[3],
-                    allele1=parts[4],
-                    a1freq=float(parts[5]),
-                    n=int(parts[7]),
-                    beta=float(parts[9]),
-                    se=float(parts[10]),
-                    chisq=float(parts[11]),
+                    chrom=parts[columns["CHROM"]],
+                    pos=int(parts[columns["GENPOS"]]),
+                    snp_id=parts[columns["ID"]],
+                    allele0=parts[columns["ALLELE0"]],
+                    allele1=parts[columns["ALLELE1"]],
+                    a1freq=float(parts[columns["A1FREQ"]]),
+                    n=int(parts[columns["N"]]),
+                    beta=float(parts[columns["BETA"]]),
+                    se=float(parts[columns["SE"]]),
+                    chisq=float(parts[columns["CHISQ"]]),
                     log10p=log10p,
                 ))
-            except (ValueError, IndexError):
+            except ValueError:
                 continue
+    if columns is None:
+        raise ValueError(f"{result_file}: no REGENIE header line found")
     return results
 
 
@@ -354,6 +382,10 @@ def manhattan_plot(results: list[GWASResult], output_path: Path) -> None:
         import numpy as np
     except ImportError:
         print("  WARNING: matplotlib/numpy not available — skipping Manhattan plot", file=sys.stderr)
+        return
+
+    if not results:
+        print("  WARNING: no variants to plot — skipping Manhattan plot", file=sys.stderr)
         return
 
     chrom_order = [str(c) for c in range(1, 23)] + ["X", "Y"]

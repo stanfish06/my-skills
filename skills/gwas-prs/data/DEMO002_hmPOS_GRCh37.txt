@@ -1,8 +1,9 @@
-#pgs_id=PGS000011
-#pgs_name=PRS for atrial fibrillation (Tada et al. 2014)
+#pgs_id=DEMO002
+#pgs_name=Synthetic demo score — Atrial fibrillation
 #trait_reported=Atrial fibrillation
 #genome_build=GRCh37
 #variants_number=12
+#note=SYNTHETIC. Effect weights and the reference mean/SD in curated_scores.json are illustrative values for offline demos, not a PGS Catalog score. Not suitable for interpretation. Fetch a real score with --pgs-id or --trait.
 rsID	chr_name	chr_position	effect_allele	other_allele	effect_weight	allelefrequency_effect
 rs2200733	4	111710169	T	C	0.26	0.15
 rs10033464	4	111714145	T	C	0.14	0.15

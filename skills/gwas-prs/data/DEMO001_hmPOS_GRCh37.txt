@@ -1,8 +1,9 @@
-#pgs_id=PGS000013
-#pgs_name=PRS for type 2 diabetes (Vassy et al. 2014)
+#pgs_id=DEMO001
+#pgs_name=Synthetic demo score — Type 2 diabetes
 #trait_reported=Type 2 diabetes
 #genome_build=GRCh37
 #variants_number=8
+#note=SYNTHETIC. Effect weights and the reference mean/SD in curated_scores.json are illustrative values for offline demos, not a PGS Catalog score. Not suitable for interpretation. Fetch a real score with --pgs-id or --trait.
 rsID	chr_name	chr_position	effect_allele	other_allele	effect_weight	allelefrequency_effect
 rs7903146	10	114758349	T	C	0.31	0.28
 rs1801282	3	12393125	C	G	0.14	0.88

@@ -10,7 +10,7 @@ _spec.loader.exec_module(_mod)
 
 
 def run(input_path: str, output_dir: str = "/tmp/hla-typing") -> dict:
-    """Run the skill programmatically. Returns result dict."""
+    """Raises NotImplementedError — hla-typing has no HLA calling implementation."""
     data = _mod.validate_input(Path(input_path))
     result = _mod.run_analysis(data)
     _mod.write_report(result, Path(output_dir))

@@ -26,7 +26,7 @@ metadata:
   author: Sooraj (github.com/sooraj-codes)
   demo_data:
   - path: examples/demo_output/report.md
-    description: Pre-generated demo report for 5 clinically relevant variants
+    description: Pre-generated demo report — synthetic illustrative values, not real annotations
   dependencies:
     python: '>=3.11'
     packages: null
@@ -96,8 +96,11 @@ This takes hours and is error-prone.
 ranks variants by impact, and outputs a reproducible report in seconds.
 
 **Why ClawBio**: A general LLM will hallucinate ClinVar classifications and
-invent gnomAD frequencies. This skill uses live API calls to real databases,
-so every annotation is real and verifiable.
+invent gnomAD frequencies. Live runs (`--input`) call Ensembl VEP, ClinVar and
+gnomAD, so every annotation is real and verifiable. `--demo` calls nothing: its
+coordinates, frequencies and pathogenicity calls are synthetic illustrative
+values that match no genome build and no database record, and every demo output
+is stamped `SYNTHETIC — not real annotations`.
 
 ## Core Capabilities
 
@@ -154,8 +157,9 @@ python clawbio.py run vcf-annotator --demo
 python clawbio.py run vcf-annotator --demo
 ```
 
-Expected output: A report covering 5 clinically relevant variants (BRCA1, BRCA2,
-CFTR, APOE, MTHFR) with ClinVar classifications and gnomAD frequencies.
+Expected output: a report over 5 synthetic records in BRCA1, BRCA2, CFTR, APOE
+and MTHFR. The demo makes no API calls — its coordinates, classifications and
+frequencies are invented to exercise the report layout. Do not quote them.
 
 ## Algorithm / Methodology
 
@@ -185,19 +189,19 @@ CFTR, APOE, MTHFR) with ClinVar classifications and gnomAD frequencies.
 ```
 # 🦖 ClawBio VCF Annotator Report
 
-**Input**: demo_variants.vcf
-**Date**: 2026-04-19 10:00 UTC
+**Input**: demo_variants.vcf (synthetic)
+**Data**: SYNTHETIC — not real annotations
 **Total variants**: 5
-**HIGH impact**: 3 | **MODERATE**: 2 | **LOW**: 0
+**HIGH impact**: 2 | **MODERATE**: 3 | **LOW**: 0
 **ClinVar Pathogenic/Likely Pathogenic**: 3
 
 ## Variant Table
 
 | # | Gene  | Variant             | Consequence       | Impact   | ClinVar    | gnomAD AF |
 |---|-------|---------------------|-------------------|----------|------------|-----------|
-| 1 | BRCA1 | 17:43044295 G>A     | missense_variant  | HIGH     | Pathogenic | 0.000008  |
-| 2 | BRCA2 | 13:32316461 C>T     | stop_gained       | HIGH     | Pathogenic | 0.000004  |
-| 3 | CFTR  | 7:117548628 CTTT>C  | frameshift_variant| HIGH     | Pathogenic | 0.021000  |
+| 1 | BRCA2 | 13:32316461 C>T     | stop_gained       | HIGH     | Pathogenic | 0.000004  |
+| 2 | CFTR  | 7:117548628 CTTT>C  | frameshift_variant| HIGH     | Pathogenic | 0.021000  |
+| 3 | BRCA1 | 17:43044295 G>A     | missense_variant  | MODERATE | Pathogenic | 0.000008  |
 ```
 
 ## Output Structure
@@ -233,8 +237,8 @@ output_directory/
   `chr` prefix. The skill strips `chr` automatically from VCF CHROM field.
 
 - **ClinVar returns IDs not classifications**: The E-utilities search only
-  confirms presence in ClinVar. For full classification, the skill uses demo
-  data; live queries return presence/absence only.
+  confirms presence in ClinVar; live queries return presence/absence only. The
+  synthetic `--demo` classifications are not a substitute for a real lookup.
 
 - **Indels in VEP**: HGVS notation for indels differs from SNVs. The skill
   handles SNVs fully; complex indels may return limited VEP results.

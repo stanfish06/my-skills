@@ -45,9 +45,10 @@ Inspired by [Sasha Gusev's GWAS Lookup](https://sashagusev.github.io/gwas_lookup
 
 | Database | Endpoint | Coordinates |
 |----------|----------|-------------|
-| Ensembl | REST /variation + /vep | GRCh38 |
-| GWAS Catalog | EBI REST API | GRCh38 |
-| Open Targets | GraphQL v4 | GRCh38 |
+| Ensembl | REST /variation (`pops=1`) + /vep | GRCh38 |
+| Ensembl GRCh37 | `grch37.rest.ensembl.org` REST /variation | **GRCh37** |
+| GWAS Catalog | EBI REST API, `projection=associationByStudy` | GRCh38 |
+| Open Targets | Platform GraphQL v4 | GRCh38 |
 | UKB-TOPMed PheWeb | PheWeb API | GRCh38 |
 | FinnGen r12 | PheWeb API | GRCh38 |
 | Biobank Japan PheWeb | PheWeb API | **GRCh37** |
@@ -59,7 +60,7 @@ Inspired by [Sasha Gusev's GWAS Lookup](https://sashagusev.github.io/gwas_lookup
 
 When the user asks to look up a variant:
 
-1. **Resolve**: Query Ensembl for variant coordinates, alleles, consequence
+1. **Resolve**: Query Ensembl for variant coordinates, alleles, consequence. `rest.ensembl.org` returns GRCh38 mappings only, so the GRCh37 position — which Biobank Japan needs — comes from a second request to `grch37.rest.ensembl.org`, and `pops=1` is required for the population-frequency block.
 2. **Dispatch**: Query all 8 remaining APIs in parallel (ThreadPoolExecutor)
 3. **Normalise**: Merge results, deduplicate, sort by p-value, flag GWS hits
 4. **Report**: Generate markdown report + CSV tables + figures

@@ -1,0 +1,40 @@
+{
+  "data": {
+    "variant": {
+      "id": "6_160540105_T_C",
+      "credibleSets": {
+        "count": 227,
+        "rows": [
+          {
+            "studyLocusId": "0106dec673f0224ae0483a21e93d49c1",
+            "studyId": "GCST90498998",
+            "studyType": "gwas",
+            "beta": -0.18998,
+            "pValueMantissa": 6.560999870300293,
+            "pValueExponent": -127,
+            "finemappingMethod": "PICS",
+            "confidence": "PICS fine-mapped credible set extracted from summary statistics",
+            "study": {
+              "id": "GCST90498998",
+              "traitFromSource": "Total lipids in medium VLDL"
+            }
+          },
+          {
+            "studyLocusId": "021111e59bbe7d01bf65309cf0073a39",
+            "studyId": "GCST90498421",
+            "studyType": "gwas",
+            "beta": -0.0983395,
+            "pValueMantissa": 3.2799999713897705,
+            "pValueExponent": -35,
+            "finemappingMethod": "PICS",
+            "confidence": "PICS fine-mapped credible set extracted from summary statistics",
+            "study": {
+              "id": "GCST90498421",
+              "traitFromSource": "Concentration of LDL particles"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

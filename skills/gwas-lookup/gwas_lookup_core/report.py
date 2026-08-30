@@ -299,7 +299,9 @@ def generate_figures(output_dir: Path, merged: dict, variant: dict):
     if ens_pops:
         # Group by superpopulation prefix
         pop_freqs = {}
-        minor = variant.get("minor_allele", "")
+        # Ensembl leaves minor_allele null for many variants; fall back to the
+        # resolved alt allele so the figure is still drawn
+        minor = variant.get("minor_allele") or variant.get("alt", "")
         for p in ens_pops:
             if p.get("allele") == minor:
                 pop_name = p.get("population", "")

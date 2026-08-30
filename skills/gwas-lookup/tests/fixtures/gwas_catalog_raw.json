@@ -1,0 +1,344 @@
+{
+  "_embedded": {
+    "associations": [
+      {
+        "study": {
+          "initialSampleSize": "22,233 European ancestry cases, 64,762 European ancestry controls",
+          "gxe": false,
+          "gxg": false,
+          "snpCount": 2300000,
+          "qualifier": "~",
+          "imputed": true,
+          "pooled": false,
+          "studyDesignComment": null,
+          "accessionId": "GCST000998",
+          "fullPvalueSet": true,
+          "userRequested": false,
+          "platforms": [
+            {
+              "manufacturer": "Affymetrix"
+            },
+            {
+              "manufacturer": "Illumina"
+            }
+          ],
+          "ancestries": [
+            {
+              "type": "initial",
+              "numberOfIndividuals": 86995,
+              "ancestralGroups": [
+                {
+                  "ancestralGroup": "European"
+                }
+              ],
+              "countryOfOrigin": [
+                {
+                  "majorArea": "NR",
+                  "region": "NR",
+                  "countryName": "NR"
+                }
+              ],
+              "countryOfRecruitment": [
+                {
+                  "majorArea": "NR",
+                  "region": "NR",
+                  "countryName": "NR"
+                }
+              ]
+            },
+            {
+              "type": "replication",
+              "numberOfIndividuals": 56682,
+              "ancestralGroups": [
+                {
+                  "ancestralGroup": "European"
+                }
+              ],
+              "countryOfOrigin": [
+                {
+                  "majorArea": "NR",
+                  "region": "NR",
+                  "countryName": "NR"
+                }
+              ],
+              "countryOfRecruitment": [
+                {
+                  "majorArea": "NR",
+                  "region": "NR",
+                  "countryName": "NR"
+                }
+              ]
+            }
+          ],
+          "diseaseTrait": {
+            "trait": "Coronary heart disease"
+          },
+          "genotypingTechnologies": [
+            {
+              "genotypingTechnology": "Genome-wide genotyping array"
+            }
+          ],
+          "replicationSampleSize": "56,682 European ancestry cases and controls",
+          "publicationInfo": {
+            "pubmedId": "21378990",
+            "publicationDate": "2011-03-06",
+            "publication": "Nat Genet",
+            "title": "Large-scale association analysis identifies 13 new susceptibility loci for coronary artery disease.",
+            "author": {
+              "fullname": "Schunkert H",
+              "orcid": null
+            }
+          }
+        },
+        "range": "[1.33-1.70]",
+        "loci": [
+          {
+            "haplotypeSnpCount": null,
+            "description": "Single variant",
+            "strongestRiskAlleles": [
+              {
+                "riskAlleleName": "rs3798220-C",
+                "riskFrequency": null,
+                "genomeWide": null,
+                "limitedList": null,
+                "_links": {
+                  "snp": {
+                    "href": "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs3798220{?projection}",
+                    "templated": true
+                  }
+                }
+              }
+            ],
+            "authorReportedGenes": [
+              {
+                "geneName": "LPA",
+                "entrezGeneIds": [
+                  {
+                    "entrezGeneId": "4018"
+                  }
+                ],
+                "ensemblGeneIds": [
+                  {
+                    "ensemblGeneId": "ENSG00000198670"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "riskFrequency": "0.02",
+        "pvalueDescription": null,
+        "orPerCopyNum": 1.51,
+        "snpType": "known",
+        "multiSnpHaplotype": false,
+        "snpInteraction": false,
+        "pvalueMantissa": 3,
+        "pvalueExponent": -11,
+        "standardError": null,
+        "efoTraits": [
+          {
+            "trait": "coronary artery disorder",
+            "uri": "http://purl.obolibrary.org/obo/MONDO_0005010",
+            "shortForm": "MONDO_0005010"
+          }
+        ],
+        "backgroundEfoTraits": [],
+        "pvalue": 3e-11,
+        "betaNum": null,
+        "betaUnit": null,
+        "betaDirection": null,
+        "description": null,
+        "_links": {
+          "self": {
+            "href": "https://www.ebi.ac.uk/gwas/rest/api/associations/17759"
+          },
+          "association": {
+            "href": "https://www.ebi.ac.uk/gwas/rest/api/associations/17759{?projection}",
+            "templated": true
+          },
+          "efoTraits": {
+            "href": "https://www.ebi.ac.uk/gwas/rest/api/associations/17759/efoTraits"
+          },
+          "backgroundEfoTraits": {
+            "href": "https://www.ebi.ac.uk/gwas/rest/api/associations/17759/backgroundEfoTraits"
+          },
+          "snps": {
+            "href": "https://www.ebi.ac.uk/gwas/rest/api/associations/17759/snps"
+          },
+          "study": {
+            "href": "https://www.ebi.ac.uk/gwas/rest/api/associations/17759/study"
+          }
+        }
+      },
+      {
+        "study": {
+          "cohort": "UKB",
+          "initialSampleSize": "340,860 European ancestry individuals, 5,962 African ancestry individuals, 7,275 South Asian ancestry individuals",
+          "gxe": false,
+          "gxg": false,
+          "snpCount": 9000000,
+          "qualifier": null,
+          "imputed": true,
+          "pooled": false,
+          "studyDesignComment": null,
+          "accessionId": "GCST90019496",
+          "fullPvalueSet": true,
+          "userRequested": false,
+          "platforms": [
+            {
+              "manufacturer": "Affymetrix"
+            }
+          ],
+          "ancestries": [
+            {
+              "type": "initial",
+              "numberOfIndividuals": 340860,
+              "ancestralGroups": [
+                {
+                  "ancestralGroup": "European"
+                }
+              ],
+              "countryOfOrigin": [],
+              "countryOfRecruitment": [
+                {
+                  "majorArea": "NR",
+                  "region": "NR",
+                  "countryName": "NR"
+                }
+              ]
+            },
+            {
+              "type": "initial",
+              "numberOfIndividuals": 5962,
+              "ancestralGroups": [
+                {
+                  "ancestralGroup": "African unspecified"
+                }
+              ],
+              "countryOfOrigin": [],
+              "countryOfRecruitment": [
+                {
+                  "majorArea": "NR",
+                  "region": "NR",
+                  "countryName": "NR"
+                }
+              ]
+            },
+            {
+              "type": "initial",
+              "numberOfIndividuals": 7275,
+              "ancestralGroups": [
+                {
+                  "ancestralGroup": "South Asian"
+                }
+              ],
+              "countryOfOrigin": [],
+              "countryOfRecruitment": [
+                {
+                  "majorArea": "NR",
+                  "region": "NR",
+                  "countryName": "NR"
+                }
+              ]
+            }
+          ],
+          "diseaseTrait": {
+            "trait": "Apolipoprotein B levels"
+          },
+          "genotypingTechnologies": [
+            {
+              "genotypingTechnology": "Genome-wide genotyping array"
+            }
+          ],
+          "replicationSampleSize": "NA",
+          "publicationInfo": {
+            "pubmedId": "33462484",
+            "publicationDate": "2021-01-18",
+            "publication": "Nat Genet",
+            "title": "Genetics of 35 blood and urine biomarkers in the UK Biobank.",
+            "author": {
+              "fullname": "Sinnott-Armstrong N",
+              "orcid": "0000-0003-4490-0601"
+            }
+          }
+        },
+        "range": "[0.13-0.17]",
+        "loci": [
+          {
+            "haplotypeSnpCount": null,
+            "description": "Single variant",
+            "strongestRiskAlleles": [
+              {
+                "riskAlleleName": "rs3798220-C",
+                "riskFrequency": "NR",
+                "genomeWide": false,
+                "limitedList": false,
+                "_links": {
+                  "snp": {
+                    "href": "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs3798220{?projection}",
+                    "templated": true
+                  }
+                }
+              }
+            ],
+            "authorReportedGenes": [
+              {
+                "geneName": "NR",
+                "entrezGeneIds": [],
+                "ensemblGeneIds": []
+              }
+            ]
+          }
+        ],
+        "riskFrequency": "NR",
+        "pvalueDescription": null,
+        "orPerCopyNum": null,
+        "snpType": "novel",
+        "multiSnpHaplotype": false,
+        "snpInteraction": false,
+        "pvalueMantissa": 3,
+        "pvalueExponent": -63,
+        "standardError": 0.009,
+        "efoTraits": [
+          {
+            "trait": "apolipoprotein B measurement",
+            "uri": "http://www.ebi.ac.uk/efo/EFO_0004615",
+            "shortForm": "EFO_0004615"
+          }
+        ],
+        "backgroundEfoTraits": [],
+        "pvalue": 3.0000000000000003e-63,
+        "betaNum": 0.1509,
+        "betaUnit": "unit",
+        "betaDirection": "increase",
+        "description": null,
+        "_links": {
+          "self": {
+            "href": "https://www.ebi.ac.uk/gwas/rest/api/associations/87307206"
+          },
+          "association": {
+            "href": "https://www.ebi.ac.uk/gwas/rest/api/associations/87307206{?projection}",
+            "templated": true
+          },
+          "efoTraits": {
+            "href": "https://www.ebi.ac.uk/gwas/rest/api/associations/87307206/efoTraits"
+          },
+          "backgroundEfoTraits": {
+            "href": "https://www.ebi.ac.uk/gwas/rest/api/associations/87307206/backgroundEfoTraits"
+          },
+          "snps": {
+            "href": "https://www.ebi.ac.uk/gwas/rest/api/associations/87307206/snps"
+          },
+          "study": {
+            "href": "https://www.ebi.ac.uk/gwas/rest/api/associations/87307206/study"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "href": "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs3798220/associations?projection=associationByStudy"
+    }
+  }
+}

@@ -29,7 +29,7 @@ result, and `test_generation_scripts.py` fails if this block and the script disa
 # - queries: .
 #   from: trailofbits/<CODEQL_LANG>-queries
 # - queries: .
-#   from: GitHubSecurityLab/CodeQL-Community-Packs-<CODEQL_LANG>
+#   from: githubsecuritylab/codeql-<CODEQL_LANG>-queries
 # Minimal filtering — only select alert-type queries
 - include:
     kind:

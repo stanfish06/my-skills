@@ -52,7 +52,7 @@ rust_semantic_patterns:
   zeroize_on_drop_heap_fields:
     category: PARTIAL_WIPE
     severity: medium
-    detail: "ZeroizeOnDrop on type with Vec/Box heap fields — capacity bytes beyond len may not be zeroed"
+    detail: "ZeroizeOnDrop on type with growable Vec/String fields — an allocation abandoned by a grow is left unwiped"
   clone_on_zeroizing_type:
     category: SECRET_COPY
     severity: medium

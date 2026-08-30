@@ -49,7 +49,7 @@ def merge_gwas(gwas_catalog: dict, open_targets: dict) -> list[dict]:
     merged = []
 
     # GWAS Catalog
-    if gwas_catalog.get("status") == "ok":
+    if gwas_catalog.get("status") in ("ok", "partial"):
         for a in gwas_catalog.get("associations", []):
             traits = a.get("traits", [])
             pval = _compute_pval(a)

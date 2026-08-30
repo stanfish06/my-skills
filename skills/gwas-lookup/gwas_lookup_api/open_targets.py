@@ -16,48 +16,68 @@ from .base_client import BaseClient
 BASE_URL = "https://api.platform.opentargets.org/api/v4"
 RATE_INTERVAL = 0.35
 
+# Open Targets Platform schema, not the retired Genetics Portal one: the
+# Variant type exposes rsIds/referenceAllele/alternateAllele, gnomAD
+# frequencies as alleleFrequencies rows, mostSevereConsequence as a
+# SequenceOntologyTerm object, and credibleSets as a paginated CredibleSets
+# with count/rows.
 VARIANT_QUERY = """
 query VariantQuery($variantId: String!) {
   variant(variantId: $variantId) {
     id
-    rsId
+    rsIds
     chromosome
     position
-    refAllele
-    altAllele
-    nearestGene {
+    referenceAllele
+    alternateAllele
+    mostSevereConsequence {
       id
-      approvedSymbol
+      label
     }
-    nearestGeneDistance
-    mostSevereConsequence
-    gnomadNFE
-    gnomadAFR
-    gnomadEAS
-    gnomadAMR
-    gnomadFIN
+    alleleFrequencies {
+      populationName
+      alleleFrequency
+    }
+    transcriptConsequences {
+      distanceFromFootprint
+      target {
+        id
+        approvedSymbol
+      }
+    }
   }
 }
 """
 
 CREDIBLE_SET_QUERY = """
-query CredibleSetQuery($variantId: String!) {
+query CredibleSetQuery($variantId: String!, $size: Int!) {
   variant(variantId: $variantId) {
     id
-    credibleSets {
-      study {
+    credibleSets(page: { index: 0, size: $size }) {
+      count
+      rows {
+        studyLocusId
         studyId
-        traitReported
+        studyType
+        beta
+        pValueMantissa
+        pValueExponent
+        finemappingMethod
+        confidence
+        study {
+          id
+          traitFromSource
+        }
       }
-      posteriorProbability
-      pval
-      beta
-      is95CredibleSet
-      is99CredibleSet
     }
   }
 }
 """
+
+# gnomAD population keys the Platform returns, mapped to the labels this skill
+# reports. The API suffixes them `_adj`.
+_POPULATION_KEYS = {"NFE": "nfe_adj", "AFR": "afr_adj", "EAS": "eas_adj",
+                    "AMR": "amr_adj", "FIN": "fin_adj"}
 
 
 def _make_client(cache_dir: Optional[Path], use_cache: bool) -> BaseClient:
@@ -67,6 +87,16 @@ def _make_client(cache_dir: Optional[Path], use_cache: bool) -> BaseClient:
         cache_dir=cache_dir,
         use_cache=use_cache,
     )
+
+
+def _pvalue(mantissa, exponent):
+    """Rebuild a p-value from the mantissa/exponent pair the Platform returns."""
+    if mantissa is None or exponent is None:
+        return None
+    try:
+        return float(mantissa) * (10 ** int(exponent))
+    except (TypeError, ValueError, OverflowError):
+        return None
 
 
 def _build_variant_id(chr: str, pos: int, ref: str, alt: str) -> str:
@@ -98,21 +128,34 @@ def get_variant(
     if not variant:
         return {"source": "open_targets", "status": "empty", "message": f"No data for {variant_id}"}
 
-    nearest = variant.get("nearestGene") or {}
+    # nearest gene = the transcript consequence with the smallest footprint distance
+    nearest_gene = ""
+    nearest_distance = None
+    for tc in variant.get("transcriptConsequences") or []:
+        d = tc.get("distanceFromFootprint")
+        if d is None:
+            continue
+        if nearest_distance is None or d < nearest_distance:
+            nearest_distance = d
+            nearest_gene = (tc.get("target") or {}).get("approvedSymbol", "") or ""
+
+    freqs = {
+        row.get("populationName"): row.get("alleleFrequency")
+        for row in (variant.get("alleleFrequencies") or [])
+    }
+    rsids = variant.get("rsIds") or []
+    consequence = (variant.get("mostSevereConsequence") or {}).get("label", "")
+
     return {
         "source": "open_targets",
         "status": "ok",
         "variant_id": variant_id,
-        "rsid": variant.get("rsId", ""),
-        "nearest_gene": nearest.get("approvedSymbol", ""),
-        "nearest_gene_distance": variant.get("nearestGeneDistance"),
-        "consequence": variant.get("mostSevereConsequence", ""),
+        "rsid": rsids[0] if rsids else "",
+        "nearest_gene": nearest_gene,
+        "nearest_gene_distance": nearest_distance,
+        "consequence": consequence,
         "population_frequencies": {
-            "NFE": variant.get("gnomadNFE"),
-            "AFR": variant.get("gnomadAFR"),
-            "EAS": variant.get("gnomadEAS"),
-            "AMR": variant.get("gnomadAMR"),
-            "FIN": variant.get("gnomadFIN"),
+            label: freqs.get(key) for label, key in _POPULATION_KEYS.items()
         },
     }
 
@@ -124,6 +167,7 @@ def get_credible_sets(
     alt: str,
     cache_dir: Optional[Path] = None,
     use_cache: bool = True,
+    max_sets: int = 50,
 ) -> dict:
     """Fetch credible set membership from Open Targets."""
     client = _make_client(cache_dir, use_cache)
@@ -132,7 +176,7 @@ def get_credible_sets(
     try:
         data = client.post("graphql", json_body={
             "query": CREDIBLE_SET_QUERY,
-            "variables": {"variantId": variant_id},
+            "variables": {"variantId": variant_id, "size": max_sets},
         })
     except Exception as e:
         return {"source": "open_targets_credsets", "status": "error", "message": str(e)}
@@ -141,23 +185,32 @@ def get_credible_sets(
     if not variant:
         return {"source": "open_targets_credsets", "status": "empty", "message": f"No data for {variant_id}"}
 
-    raw_sets = variant.get("credibleSets") or []
+    container = variant.get("credibleSets") or {}
+    total = container.get("count")
     credible_sets = []
-    for cs in raw_sets:
+    for cs in container.get("rows") or []:
         study = cs.get("study") or {}
         credible_sets.append({
-            "study_id": study.get("studyId", ""),
-            "trait": study.get("traitReported", ""),
-            "posterior_probability": cs.get("posteriorProbability"),
-            "pval": cs.get("pval"),
+            "study_locus_id": cs.get("studyLocusId", ""),
+            "study_id": cs.get("studyId", "") or study.get("id", ""),
+            "study_type": cs.get("studyType", ""),
+            "trait": study.get("traitFromSource", ""),
+            "pval": _pvalue(cs.get("pValueMantissa"), cs.get("pValueExponent")),
             "beta": cs.get("beta"),
-            "is_95_credible": cs.get("is95CredibleSet", False),
-            "is_99_credible": cs.get("is99CredibleSet", False),
+            "finemapping_method": cs.get("finemappingMethod", ""),
+            "confidence": cs.get("confidence", ""),
         })
 
-    return {
+    result = {
         "source": "open_targets_credsets",
         "status": "ok",
         "variant_id": variant_id,
+        "total_credible_sets": total,
         "credible_sets": credible_sets,
     }
+    if total is not None and total > len(credible_sets):
+        result["message"] = (
+            f"showing {len(credible_sets)} of {total} credible sets "
+            f"(--max-sets {max_sets})"
+        )
+    return result

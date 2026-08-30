@@ -9833,6 +9833,7 @@
 <https://skillquarium.dev/id/gradio> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/gradio> <http://www.w3.org/2000/01/rdf-schema#label> "gradio" <urn:vault:core> .
 <https://skillquarium.dev/id/gradio> <https://skillquarium.dev/ontology/identifier> "gradio" <urn:vault:core> .
+<https://skillquarium.dev/id/gradio> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_ml-ai> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/gradio> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_uncategorized> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/gradio> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cloudflare> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/gradio> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-apps-python> <urn:vault:EXTRACTED> .
@@ -11741,6 +11742,7 @@
 <https://skillquarium.dev/id/langgraph> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/langgraph> <http://www.w3.org/2000/01/rdf-schema#label> "langgraph" <urn:vault:core> .
 <https://skillquarium.dev/id/langgraph> <https://skillquarium.dev/ontology/identifier> "langgraph" <urn:vault:core> .
+<https://skillquarium.dev/id/langgraph> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_ml-ai> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/langgraph> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_uncategorized> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/langgraph> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/building-pydantic-ai-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/langgraph> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/chunk> <urn:vault:EXTRACTED> .
@@ -12260,6 +12262,7 @@
 <https://skillquarium.dev/id/marimo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/marimo> <http://www.w3.org/2000/01/rdf-schema#label> "marimo" <urn:vault:core> .
 <https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/identifier> "marimo" <urn:vault:core> .
+<https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_data-science-compute> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_uncategorized> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/duckdb-docs> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/modern-python> <urn:vault:EXTRACTED> .
@@ -22469,6 +22472,7 @@
 <https://skillquarium.dev/id/sqlalchemy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/sqlalchemy> <http://www.w3.org/2000/01/rdf-schema#label> "sqlalchemy" <urn:vault:core> .
 <https://skillquarium.dev/id/sqlalchemy> <https://skillquarium.dev/ontology/identifier> "sqlalchemy" <urn:vault:core> .
+<https://skillquarium.dev/id/sqlalchemy> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_software-dev> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/sqlalchemy> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_uncategorized> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/sqlalchemy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/fastapi> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/sqlalchemy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/logfire-instrumentation> <urn:vault:EXTRACTED> .
@@ -27315,6 +27319,7 @@
 <https://skillquarium.dev/id/streamlit> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/streamlit> <http://www.w3.org/2000/01/rdf-schema#label> "streamlit" <urn:vault:core> .
 <https://skillquarium.dev/id/streamlit> <https://skillquarium.dev/ontology/identifier> "streamlit" <urn:vault:core> .
+<https://skillquarium.dev/id/streamlit> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_data-science-compute> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/streamlit> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_uncategorized> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/streamlit> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-apps-python> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/streamlit> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-apps> <urn:vault:EXTRACTED> .

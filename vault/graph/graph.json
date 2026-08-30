@@ -4,7 +4,7 @@
   "skills": 2081,
   "expert_profiles": 503,
   "nodes": 2155,
-  "edges": 15218,
+  "edges": 15223,
   "generic_names_blocked": 32,
   "tier1_edges": 4439,
   "tier2_edges": 700,
@@ -20,12 +20,12 @@
   "orphan_count": 133,
   "orphan_rate": 0.0639,
   "by_provenance": {
-   "EXTRACTED": 14432,
+   "EXTRACTED": 14437,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2081,
+   "in_domain": 2086,
    "references": 11826,
    "in_discipline": 599,
    "touches": 525,
@@ -79615,6 +79615,15 @@
   {
    "src": "gradio",
    "rel": "in_domain",
+   "dst": "domain:ml-ai",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "gradio",
+   "rel": "in_domain",
    "dst": "domain:uncategorized",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -88795,6 +88804,15 @@
   {
    "src": "langgraph",
    "rel": "in_domain",
+   "dst": "domain:ml-ai",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "langgraph",
+   "rel": "in_domain",
    "dst": "domain:uncategorized",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -91841,6 +91859,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in manufacturing-engineer/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "marimo",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
    "status": "accepted"
   },
   {
@@ -147574,6 +147601,15 @@
   {
    "src": "sqlalchemy",
    "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "sqlalchemy",
+   "rel": "in_domain",
    "dst": "domain:uncategorized",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -148514,6 +148550,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "sequence-analysis named in stratigrapher/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "streamlit",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
    "status": "accepted"
   },
   {

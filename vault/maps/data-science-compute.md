@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Machine Learning & AI](ml-ai.md) | [Quantum, Physics & Materials](quantum-physics.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [MATLAB Development](matlab-development.md)
 
-## Skills (42)
+## Skills (44)
 
 - [adjusttext](../notes/data-science-compute/adjusttext.md) — Use the Python adjustText package to automatically move matplotlib text labels so they do not overlap each other, points, or other artists
 - [attach-db](../notes/data-science-compute/attach-db.md) — Attach a DuckDB database file for use with /duckdb-skills:query
@@ -32,6 +32,7 @@ created: 2026-06-13
 - [great-expectations](../notes/data-science-compute/great-expectations.md) — Data validation using Great Expectations
 - [install-duckdb](../notes/data-science-compute/install-duckdb.md) — Install or update DuckDB extensions. Each argument is either a plain extension name (installs from core) or name@repo (e.g
 - [lifelines](../notes/data-science-compute/lifelines.md) — Complete survival analysis library in Python
+- [marimo](../notes/data-science-compute/marimo.md) — Reactive Python notebooks stored as pure .py files — cells form a dependency DAG, so changing one cell automatically reruns its dependents (or marks them stale under the lazy runtime)...
 - [matplotlib](../notes/data-science-compute/matplotlib.md) — Low-level plotting library for full customization
 - [networkx](../notes/data-science-compute/networkx.md) — Create, analyze, and visualize complex networks and graphs in Python with NetworkX
 - [numba](../notes/data-science-compute/numba.md) — A Just-In-Time (JIT) compiler for Python that translates a subset of Python and NumPy code into fast machine code
@@ -51,6 +52,7 @@ created: 2026-06-13
 - [simpy](../notes/data-science-compute/simpy.md) — Process-based discrete-event simulation framework in Python
 - [statistical-analysis](../notes/data-science-compute/statistical-analysis.md) — Guided statistical analysis for research data - test selection, assumption checking, effect sizes, power analysis, Bayesian alternatives, and APA-formatted reporting
 - [statsmodels](../notes/data-science-compute/statsmodels.md) — Statistical models library for Python. Use when you need specific model classes (OLS, GLM, mixed models, ARIMA) with detailed diagnostics, residuals, and inference
+- [streamlit](../notes/data-science-compute/streamlit.md) — Building data apps and dashboards in Python with Streamlit — the top-to-bottom rerun model, st.session_state, caching with st.cache_data/st.cache_resource, forms and st.fragment to...
 - [sympy](../notes/data-science-compute/sympy.md) — Use when you need exact symbolic math in Python — algebra, calculus, equation solving, symbolic linear algebra, or code generation via lambdify/LaTeX
 - [ttk-viz](../notes/data-science-compute/ttk-viz.md) — Headless topological data analysis and visualization with the Topology ToolKit (TTK) on top of ParaView
 - [usfiscaldata](../notes/data-science-compute/usfiscaldata.md) — Query the U.S. Treasury Fiscal Data REST API for federal financial data

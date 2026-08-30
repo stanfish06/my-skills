@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [.NET & C# Development](dotnet-development.md) | [MATLAB Development](matlab-development.md)
 
-## Skills (103)
+## Skills (104)
 
 - [agentic-workflows](../notes/software-dev/agentic-workflows.md) — Route gh-aw workflow design/create/debug/upgrade requests to the right prompts
 - [api-and-interface-design](../notes/software-dev/api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
@@ -95,6 +95,7 @@ created: 2026-06-13
 - [spec-driven-development](../notes/software-dev/spec-driven-development.md) — Creates specs before coding. Use when starting a new project, feature, or significant change and no specification exists yet
 - [spec-kit](../notes/software-dev/spec-kit.md) — Runs the Spec-Kit (GitHub SDD) artifact pipeline — constitution, spec, clarify, plan, tasks, analyze, implement — using its templates
 - [spec-to-backlog](../notes/software-dev/spec-to-backlog.md) — Automatically convert Confluence specification documents into structured Jira backlogs with Epics and implementation tickets
+- [sqlalchemy](../notes/software-dev/sqlalchemy.md) — The standard Python SQL toolkit and ORM — 2.x style only
 - [subagent-driven-development](../notes/software-dev/subagent-driven-development.md) — Use when executing implementation plans with independent tasks in the current session
 - [systematic-debugging](../notes/software-dev/systematic-debugging.md) — Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes
 - [tdd](../notes/software-dev/tdd.md) — Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests

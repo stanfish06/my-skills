@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Data Science, Stats & Scientific Computing](data-science-compute.md) | [Drug Discovery, Cheminformatics & Structural Biology](drug-discovery-chem.md) | [Cloud, Infra & MLOps](cloud-devops.md)
 
-## Skills (75)
+## Skills (77)
 
 - [aeon](../notes/ml-ai/aeon.md) — Use for time series machine learning tasks including classification, regression, clustering, forecasting, anomaly detection, segmentation, and similarity search
 - [agents-sdk](../notes/ml-ai/agents-sdk.md) — Build AI agents on Cloudflare Workers using the Agents SDK
@@ -41,6 +41,7 @@ created: 2026-06-13
 - [dspy](../notes/ml-ai/dspy.md) — DSPy declarative framework for automatic prompt optimization treating prompts as code with systematic evaluation and compilers
 - [ecosystem-primer](../notes/ml-ai/ecosystem-primer.md) — INVOKE FIRST for any LangChain / LangGraph / Deep Agents agent building project before consulting other skills or writing any agent code
 - [eval-engineering](../notes/ml-ai/eval-engineering.md) — Inspect an agent repository and optional traces, interview the user, write reviewed Task Specs, build and audit Harbor tasks, and bootstrap reusable project World Knowledge Skills
+- [gradio](../notes/ml-ai/gradio.md) — Building ML demos and web UIs in Python with Gradio 6 — gr.Interface for wrapping a function, gr.Blocks for custom layouts with event listeners, gr.ChatInterface for LLM chat...
 - [hugging-science](../notes/ml-ai/hugging-science.md) — Use when the user is doing AI/ML work in a scientific domain such as biology, chemistry, physics, astronomy, climate, genomics, materials, medicine, ecology, energy, engineering, math...
 - [huggingface-community-evals](../notes/ml-ai/huggingface-community-evals.md) — Run evaluations for Hugging Face Hub models using inspect-ai and lighteval on local hardware
 - [huggingface-datasets](../notes/ml-ai/huggingface-datasets.md) — Use this skill for Hugging Face Dataset Viewer API workflows that fetch subset/split metadata, paginate rows, search text, apply filters, download parquet URLs, and read size or...
@@ -58,6 +59,7 @@ created: 2026-06-13
 - [langchain-python-quickstart](../notes/ml-ai/langchain-python-quickstart.md) — Scaffold a minimal local LangChain agent in Python by following the official quickstart
 - [langchain-rag](../notes/ml-ai/langchain-rag.md) — INVOKE THIS SKILL when building ANY retrieval-augmented generation (RAG) system
 - [langchain-typescript-quickstart](../notes/ml-ai/langchain-typescript-quickstart.md) — Scaffold a minimal local LangChain agent in TypeScript by following the official quickstart
+- [langgraph](../notes/ml-ai/langgraph.md) — LangGraph is a low-level orchestration framework for building stateful LLM agents and workflows as explicit graphs — typed state with reducers, nodes/edges/conditional routing...
 - [langgraph-cli](../notes/ml-ai/langgraph-cli.md) — INVOKE THIS SKILL when using the langgraph CLI to scaffold, develop, build, or deploy LangGraph applications
 - [langgraph-fundamentals](../notes/ml-ai/langgraph-fundamentals.md) — INVOKE THIS SKILL when writing ANY LangGraph code
 - [langgraph-human-in-the-loop](../notes/ml-ai/langgraph-human-in-the-loop.md) — INVOKE THIS SKILL when implementing human-in-the-loop patterns, pausing for approval, or handling errors in LangGraph

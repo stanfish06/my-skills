@@ -83,7 +83,7 @@ When using `MSTest.Sdk`, put the version in `global.json` instead of the project
 ```json
 {
   "msbuild-sdks": {
-    "MSTest.Sdk": "3.8.2"
+    "MSTest.Sdk": "4.3.3"
   }
 }
 ```
@@ -95,7 +95,7 @@ When using `MSTest.Sdk`, put the version in `global.json` instead of the project
     <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="MSTest" Version="3.8.2" />
+    <PackageReference Include="MSTest" Version="4.3.3" />
   </ItemGroup>
 </Project>
 ```
@@ -224,7 +224,7 @@ var typed = Assert.IsInstanceOfType<MyHandler>(result);
 ```csharp
 Assert.IsGreaterThan(lowerBound, actual);
 Assert.IsLessThan(upperBound, actual);
-Assert.IsInRange(actual, low, high);
+Assert.IsInRange(low, high, actual);
 ```
 
 ### Step 4: Use data-driven tests for multiple inputs
@@ -335,7 +335,7 @@ public async Task FetchData_ReturnsWithinTimeout()
 
 ### Step 7: Use advanced features where appropriate
 
-#### Retry flaky tests (MSTest 3.9+)
+#### Retry flaky tests (MSTest 3.8+)
 
 Use only for genuinely flaky external dependencies (network, file system), not to paper over race conditions or shared state issues.
 
@@ -345,13 +345,15 @@ Use only for genuinely flaky external dependencies (network, file system), not t
 public void ExternalService_EventuallyResponds() { }
 ```
 
-#### Conditional execution (MSTest 3.10+)
+#### Conditional execution
 
 ```csharp
+// OSCondition: MSTest 3.8+
 [TestMethod]
 [OSCondition(OperatingSystems.Windows)]
 public void WindowsRegistry_ReadsValue() { }
 
+// CICondition: MSTest 3.10+
 [TestMethod]
 [CICondition(ConditionMode.Exclude)]
 public void LocalOnly_InteractiveTest() { }

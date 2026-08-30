@@ -31,9 +31,7 @@ TTK extends ParaView with topological analysis filters. Always import `from para
 from paraview.simple import *
 
 # Load TTK plugins (required before using any TTK filter)
-LoadPlugin("libTopologyToolKit.so", remote=False, ns=globals())
-# On some installations the plugin name differs:
-# LoadPlugin("TopologyToolKit", remote=False, ns=globals())
+LoadPlugin("TopologyToolKit", remote=False, ns=globals())
 
 # ============= Load Data =============
 reader = XMLImageDataReader(FileName=['/path/to/data.vti'])
@@ -115,7 +113,7 @@ center = [(bounds[0]+bounds[1])/2, (bounds[2]+bounds[3])/2, (bounds[4]+bounds[5]
 pd_filter = TTKPersistenceDiagram(Input=rename)
 pd_filter.ScalarField = ['POINTS', 'Scalars_']
 pd_filter.InputOffsetField = ['POINTS', 'Scalars_']
-pd_filter.Backend = 'FTM (IEEE TPSD 2019)'
+pd_filter.Backend = 'FTM (IEEE TPDS 2019)'
 pd_filter.UpdatePipeline()
 
 # Get persistence pairs range
@@ -218,7 +216,9 @@ ColorBy(cpDisplay, ('POINTS', 'CriticalType'))
 # Filter to specific type (e.g., only minima = type 0)
 thresh = Threshold(Input=cp)
 thresh.Scalars = ['POINTS', 'CriticalType']
-thresh.ThresholdRange = [0, 0]   # 0=minima only
+thresh.ThresholdMethod = 'Between'
+thresh.LowerThreshold = 0        # 0=minima only
+thresh.UpperThreshold = 0
 minSpheres = TTKIcospheresFromPoints(Input=thresh)
 minSpheres.Radius = 0.3
 Show(minSpheres, renderView)
@@ -228,10 +228,11 @@ Show(minSpheres, renderView)
 
 ```python
 # Remove topological noise below a persistence threshold
-# epsilon is expressed in the same units as the scalar field range
+# PersistenceThreshold is a fraction of the function range (0-1) unless
+# ThresholdIsAbsolute = 1, which switches it to scalar-field units
 simplified = TTKTopologicalSimplificationByPersistence(Input=rename)
 simplified.InputArray = ['POINTS', 'Scalars_']
-simplified.PersistenceThreshold = 0.1   # 10% of scalar range, e.g.
+simplified.PersistenceThreshold = 0.1   # 10% of scalar range
 simplified.UpdatePipeline()
 
 # 'simplified' outputs the same grid with a simplified Scalars_ field
@@ -361,7 +362,7 @@ Show(tube, renderView)
 
 ```python
 from paraview.simple import *
-LoadPlugin("libTopologyToolKit.so", remote=False, ns=globals())
+LoadPlugin("TopologyToolKit", remote=False, ns=globals())
 
 reader = XMLImageDataReader(FileName=['/path/to/field.vti'])
 reader.PointArrayStatus = ['density']
@@ -405,7 +406,7 @@ SaveScreenshot('/path/to/pd.png', renderView, ImageResolution=[1920, 1080])
 
 ```python
 from paraview.simple import *
-LoadPlugin("libTopologyToolKit.so", remote=False, ns=globals())
+LoadPlugin("TopologyToolKit", remote=False, ns=globals())
 
 reader = XMLImageDataReader(FileName=['/path/to/field.vti'])
 reader.PointArrayStatus = ['pressure']
@@ -414,12 +415,12 @@ rename.PointArrays = ['pressure', 'Scalars_']
 rename.UpdatePipeline()
 
 min_val, max_val = rename.PointData.GetArray('Scalars_').GetRange()
-data_range = max_val - min_val
+data_range = max_val - min_val   # used below for glyph radii, not for the threshold
 
 # Remove noise below 5% persistence
 simplified = TTKTopologicalSimplificationByPersistence(Input=rename)
 simplified.InputArray = ['POINTS', 'Scalars_']
-simplified.PersistenceThreshold = 0.05 * data_range
+simplified.PersistenceThreshold = 0.05
 
 ct = TTKContourTree(Input=simplified)
 ct.ScalarField = ['POINTS', 'Scalars_']
@@ -470,7 +471,7 @@ SaveScreenshot('/path/to/ct.png', renderView, ImageResolution=[1920, 1080])
 
 ```python
 from paraview.simple import *
-LoadPlugin("libTopologyToolKit.so", remote=False, ns=globals())
+LoadPlugin("TopologyToolKit", remote=False, ns=globals())
 
 reader = XMLImageDataReader(FileName=['/path/to/field.vti'])
 reader.PointArrayStatus = ['temperature']
@@ -523,7 +524,7 @@ SaveScreenshot('/path/to/cp.png', renderView, ImageResolution=[1920, 1080])
 
 ```python
 from paraview.simple import *
-LoadPlugin("libTopologyToolKit.so", remote=False, ns=globals())
+LoadPlugin("TopologyToolKit", remote=False, ns=globals())
 
 reader = XMLImageDataReader(FileName=['/path/to/field.vti'])
 reader.PointArrayStatus = ['elevation']
@@ -575,7 +576,7 @@ SaveData('/path/to/pd.vtk', proxy=pd_filter)
 
 | Problem | Solution |
 |---------|----------|
-| `TTKPersistenceDiagram` not found | Call `LoadPlugin("libTopologyToolKit.so", ...)` before any TTK filter |
+| `TTKPersistenceDiagram` not found | Call `LoadPlugin("TopologyToolKit", ...)` before any TTK filter — a bare filename is matched against registered plugin *names* and never resolves |
 | TTK filter returns empty output | Check `UpdatePipeline()` was called; verify `ScalarField` array name is `Scalars_` |
 | Array not found in filter | Use `RenameArrays` to rename input array to `Scalars_` before passing to TTK |
 | Empty spheres / no geometry | `TTKIcospheresFromPoints` needs non-empty point input — check upstream filter output |

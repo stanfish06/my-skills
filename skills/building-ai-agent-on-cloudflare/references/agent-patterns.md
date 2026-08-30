@@ -423,30 +423,38 @@ Agents can connect to MCP servers as clients:
 
 ```typescript
 export class MCPClientAgent extends Agent<Env, State> {
+  // addMcpServer returns a generated id; removeMcpServer takes that id, not the name
+  serverIds: Record<string, string> = {};
+
   async onStart() {
-    // Connect to external MCP server
-    await this.addMcpServer(
+    // Auth headers go under transport, not at the top level
+    const github = await this.addMcpServer(
       "github",
       "https://github-mcp.example.com/sse",
-      { headers: { Authorization: `Bearer ${this.env.GITHUB_TOKEN}` } }
+      { transport: { headers: { Authorization: `Bearer ${this.env.GITHUB_TOKEN}` } } }
     );
+    this.serverIds.github = github.id;
 
-    await this.addMcpServer(
+    const database = await this.addMcpServer(
       "database",
       "https://db-mcp.example.com/sse"
     );
+    this.serverIds.database = database.id;
   }
 
   async onMessage(connection: Connection, message: string) {
     const data = JSON.parse(message);
 
     if (data.type === "use_tool") {
-      // Call tool on connected MCP server
-      const servers = await this.getMcpServers();
-      const server = servers.find((s) => s.name === data.server);
-
-      if (server) {
-        const result = await server.callTool(data.tool, data.params);
+      // getMcpServers() is synchronous and returns { servers, tools, prompts, resources }
+      // with servers keyed by id — MCPServer is a data record, tools are called via this.mcp
+      const serverId = this.serverIds[data.server];
+      if (serverId && this.getMcpServers().servers[serverId]) {
+        const result = await this.mcp.callTool({
+          name: data.tool,
+          arguments: data.params,
+          serverId,
+        });
         connection.send(JSON.stringify({ type: "tool_result", result }));
       }
     }
@@ -454,8 +462,9 @@ export class MCPClientAgent extends Agent<Env, State> {
 
   async onClose() {
     // Cleanup MCP connections
-    await this.removeMcpServer("github");
-    await this.removeMcpServer("database");
+    for (const id of Object.values(this.serverIds)) {
+      await this.removeMcpServer(id);
+    }
   }
 }
 ```

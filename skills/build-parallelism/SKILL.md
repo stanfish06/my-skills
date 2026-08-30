@@ -85,7 +85,7 @@ Use the **binlog MCP server** (`Microsoft.AITools.BinlogMcp`, exposed under the 
 
 Step-by-step:
 
-1. Replay the binlog: `dotnet msbuild build.binlog -noconlog -fl -flp:v=diag;logfile=full.log;performancesummary`
+1. Replay the binlog: `dotnet msbuild build.binlog -noconlog -fl "-flp:v=diag;logfile=full.log;performancesummary"`
 2. Check Project Performance Summary at the end of `full.log`
 3. Ideal: build time should be much less than sum of project times (parallelism)
 4. If build time ≈ sum of project times: too many serial dependencies, or one slow project blocking others

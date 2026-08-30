@@ -30,12 +30,14 @@ def get_alphafold_prediction(uniprot_id):
     return r.json()
 
 # 2. Download structure file
-def download_structure(uniprot_id, output_dir="/workspace/group", fmt="pdb", version="v4"):
-    filename = f"AF-{uniprot_id}-F1-model_{version}.{fmt}"
-    url = f"https://alphafold.ebi.ac.uk/files/{filename}"
+# take the URL from the API: AlphaFold DB serves only the latest version per entry,
+# so a filename built from a pinned version number 404s after every release
+def download_structure(uniprot_id, output_dir="/workspace/group", fmt="pdb"):
+    entry = get_alphafold_prediction(uniprot_id)[0]
+    url = entry[{"pdb": "pdbUrl", "cif": "cifUrl", "bcif": "bcifUrl"}[fmt]]
     r = requests.get(url)
     r.raise_for_status()
-    filepath = f"{output_dir}/{filename}"
+    filepath = f"{output_dir}/{url.rsplit('/', 1)[-1]}"
     with open(filepath, 'wb') as f:
         f.write(r.content)
     return filepath
@@ -47,27 +49,19 @@ def get_plddt(uniprot_id):
     data = r.json()
     if isinstance(data, list) and data:
         entry = data[0]
-        # AlphaFold EBI API sunset the old camelCase fields on 2026-06-25;
-        # prefer the new snake_case fields, fall back to the old names in
-        # case a cached/mirrored endpoint still serves the pre-sunset schema.
-        cif_url = entry.get("cif_url") or entry.get("cifUrl", "")
-        pae_url = entry.get("pae_url") or entry.get("paeDocUrl", "")
-        return {"cif_url": cif_url, "pae_url": pae_url, "data": entry}
+        return {"cif_url": entry.get("cifUrl", ""), "pae_url": entry.get("paeDocUrl", ""), "data": entry}
     return data
 
 # Example
 data = get_alphafold_prediction("P04637")  # TP53
 if isinstance(data, list) and data:
     entry = data[0]
-    print(f"UniProt: {entry.get('uniprot_accession') or entry.get('uniprotAccession')}")
+    print(f"UniProt: {entry.get('uniprotAccession')}")
     print(f"Gene: {entry.get('gene', 'N/A')}")
-    print(f"Organism: {entry.get('organism_scientific_name') or entry.get('organismScientificName', 'N/A')}")
-    mean_plddt = entry.get('mean_plddt')
-    if mean_plddt is None:
-        mean_plddt = entry.get('globalMetricValue', 'N/A')
-    print(f"Model confidence (mean pLDDT): {mean_plddt}")
-    print(f"PDB URL: {entry.get('pdb_url') or entry.get('pdbUrl', 'N/A')}")
-    print(f"CIF URL: {entry.get('cif_url') or entry.get('cifUrl', 'N/A')}")
+    print(f"Organism: {entry.get('organismScientificName', 'N/A')}")
+    print(f"Model confidence (mean pLDDT): {entry.get('globalMetricValue', 'N/A')}")
+    print(f"PDB URL: {entry.get('pdbUrl', 'N/A')}")
+    print(f"CIF URL: {entry.get('cifUrl', 'N/A')}")
 ```
 
 ## Endpoints
@@ -76,13 +70,13 @@ if isinstance(data, list) and data:
 |----------|-----|-----|
 | Prediction | `/api/prediction/{uniprot_id}` | Get model info & download URLs |
 | Summary | `/api/uniprot/summary/{uniprot_id}.json` | Brief summary |
-| Annotations | `/api/annotations/{uniprot_id}` | Per-residue annotations |
+| Annotations | `/api/annotations/{uniprot_id}.json?type=MUTAGEN` | Per-residue AlphaMissense annotations. Both the `.json` suffix and `type` are required; `MUTAGEN` is the only value the schema accepts |
 
 ## Download Formats
 
-- PDB: `AF-{UNIPROT_ID}-F1-model_v4.pdb`
-- CIF: `AF-{UNIPROT_ID}-F1-model_v4.cif`
-- PAE image: Available from prediction endpoint
+Read `pdbUrl`, `cifUrl`, or `bcifUrl` off the prediction response rather than building a filename. AlphaFold DB serves only the latest version per entry -- `AF-{UNIPROT_ID}-F1-model_v6.*` today, with v4 and v5 both 404 -- so any pinned version breaks at the next release.
+
+- PAE image: `paeImageUrl`; PAE matrix JSON: `paeDocUrl`
 
 ## Follow-up Suggestions
 

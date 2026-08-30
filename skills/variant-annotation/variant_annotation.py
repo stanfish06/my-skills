@@ -47,6 +47,8 @@ DEFAULT_ASSEMBLY = "GRCh38"
 DEFAULT_BATCH_SIZE = 200
 DEFAULT_TIMEOUT = 30
 RATE_INTERVAL = 1.0 / 15.0
+# VEP's global gnomAD keys; every other gnomad* key is an ancestry subpopulation
+GNOMAD_GLOBAL_LABELS = frozenset({"gnomad", "gnomade", "gnomadg"})
 DEFAULT_CACHE_TTL = 86400
 DEFAULT_CACHE_DIR = Path.home() / ".clawbio" / "variant_annotation_cache"
 USER_AGENT = f"ClawBio-VariantAnnotation/{SKILL_VERSION}"
@@ -464,7 +466,7 @@ def extract_clinvar_fields(entry: dict[str, Any]) -> dict[str, str]:
 
 def extract_frequency_fields(entry: dict[str, Any], alt: str) -> dict[str, Any]:
     alt_key = alt.upper()
-    gnomad_values: list[float] = []
+    gnomad_global_values: list[float] = []
     all_values: list[float] = []
     population_freqs: dict[str, float] = {}
 
@@ -477,8 +479,8 @@ def extract_frequency_fields(entry: dict[str, Any], alt: str) -> dict[str, Any]:
                     continue
                 all_values.append(numeric)
                 population_freqs[label] = numeric
-                if "gnomad" in label.lower():
-                    gnomad_values.append(numeric)
+                if label.lower() in GNOMAD_GLOBAL_LABELS:
+                    gnomad_global_values.append(numeric)
 
         for label, value in colocated.items():
             if not isinstance(value, (int, float, str)):
@@ -491,8 +493,8 @@ def extract_frequency_fields(entry: dict[str, Any], alt: str) -> dict[str, Any]:
                 continue
             all_values.append(numeric)
             population_freqs[label] = numeric
-            if "gnomad" in label_lower:
-                gnomad_values.append(numeric)
+            if label_lower in GNOMAD_GLOBAL_LABELS:
+                gnomad_global_values.append(numeric)
 
     highest_population = ""
     min_af = None
@@ -502,11 +504,14 @@ def extract_frequency_fields(entry: dict[str, Any], alt: str) -> dict[str, Any]:
         min_af = min(population_freqs.values())
         spread = max(population_freqs.values()) - min_af
 
+    # highest global gnomAD estimate: never treat the rarest ancestry group as the rarity evidence
+    gnomad_af = max(gnomad_global_values) if gnomad_global_values else None
+
     return {
-        "gnomad_af": min(gnomad_values) if gnomad_values else None,
-        "global_af": population_freqs.get("gnomad")
-        or population_freqs.get("af")
-        or population_freqs.get("gnomad_af"),
+        "gnomad_af": gnomad_af,
+        "global_af": gnomad_af
+        if gnomad_af is not None
+        else population_freqs.get("af"),
         "max_af": max(all_values) if all_values else None,
         "min_af": min_af,
         "highest_frequency_population": highest_population,

@@ -34,7 +34,7 @@ Paper2Poster automatically generates professional academic posters from research
 ```bash
 python pipeline_all.py \
   --input-dir "path/to/papers" \
-  --output-dir "path/to/output" \
+  --output_dir "path/to/output" \
   --model-choice 1 \
   --generate-poster
 ```
@@ -44,7 +44,7 @@ python pipeline_all.py \
 ```bash
 python pipeline_all.py \
   --input-dir "path/to/papers" \
-  --output-dir "path/to/output" \
+  --output_dir "path/to/output" \
   --model-choice 2 \
   --generate-poster \
   --poster-width-inches 60 \
@@ -55,7 +55,7 @@ python pipeline_all.py \
 
 **Basic Configuration:**
 - `--input-dir`: Directory containing paper files
-- `--output-dir`: Directory for generated posters
+- `--output_dir`: Directory for generated posters
 - `--model-choice`: LLM model selection (1=GPT-4, 2=GPT-4.1)
 - `--generate-poster`: Enable poster generation
 

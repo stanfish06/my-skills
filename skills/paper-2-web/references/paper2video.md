@@ -58,7 +58,7 @@ python pipeline_light.py \
 ```bash
 python pipeline_all.py \
   --input-dir "path/to/papers" \
-  --output-dir "path/to/output" \
+  --output_dir "path/to/output" \
   --model-choice 1 \
   --enable-talking-head
 ```
@@ -72,7 +72,7 @@ python pipeline_all.py \
 
 **Input/Output:**
 - `--paper_latex_root`: Root directory of LaTeX paper source
-- `--result_dir` or `--output-dir`: Output directory for generated videos
+- `--output_dir`: Output directory for generated videos
 - `--input-dir`: Directory containing multiple papers to process
 
 **Video Options:**

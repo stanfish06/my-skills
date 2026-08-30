@@ -184,7 +184,7 @@ Agent fixes → pushes → CI runs again
 **Key patterns:**
 
 ```
-Lint failure → Agent runs `npm run lint --fix` and commits
+Lint failure → Agent runs `npm run lint -- --fix` and commits
 Type error  → Agent reads the error location and fixes the type
 Test failure → Agent follows debugging-and-error-recovery skill
 Build error → Agent checks config and dependencies
@@ -254,18 +254,25 @@ name: Rollback
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: 'Version to rollback to'
+      deployment:
+        description: 'Deployment ID or URL to roll back to'
         required: true
+
+permissions:
+  contents: read
 
 jobs:
   rollback:
     runs-on: ubuntu-latest
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      # pass workflow inputs through env, never interpolate ${{ }} into the script
+      DEPLOYMENT: ${{ inputs.deployment }}
     steps:
       - name: Rollback deployment
-        run: |
-          # Deploy the specified previous version
-          npx vercel rollback ${{ inputs.version }}
+        run: npx vercel rollback "$DEPLOYMENT"
 ```
 
 ## Environment Management

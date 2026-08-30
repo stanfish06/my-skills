@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import os
 import subprocess
+import sys
 import time
 from dataclasses import dataclass
 from pathlib import Path
@@ -24,19 +25,35 @@ class Dispatcher:
 
 
 class ClaudeCLIDispatcher(Dispatcher):
-    def __init__(self, default_model: str = "sonnet", binary: str = "claude"):
+    def __init__(
+        self,
+        default_model: str = "sonnet",
+        binary: str = "claude",
+        bypass_permissions: bool = False,
+    ):
         self.default_model = default_model
         self.binary = binary
+        self.bypass_permissions = bypass_permissions
+        if bypass_permissions:
+            print(
+                "WARNING: subagents run with --permission-mode bypassPermissions. "
+                "The executor holds Bash and follows model-written instructions, so "
+                "shell commands run with no approval prompt.",
+                file=sys.stderr,
+            )
 
     def dispatch(self, req: DispatchRequest) -> str:
         cmd = [
             self.binary, "-p",
             "--model", req.model or self.default_model,
             "--output-format", "text",
-            "--permission-mode", "bypassPermissions",
+            "--permission-mode",
+            "bypassPermissions" if self.bypass_permissions else "acceptEdits",
             "--no-session-persistence",
         ]
-        if req.allowed_tools:
+        # empty list means "no tools"; only omit the flag when unset, otherwise the
+        # role silently inherits the CLI's full default tool set
+        if req.allowed_tools is not None:
             cmd += ["--allowed-tools", ",".join(req.allowed_tools)]
         debug_dir = Path(os.environ.get("CLAWPATHY_DEBUG_DIR", "/tmp/clawpathy_debug"))
         debug_dir.mkdir(parents=True, exist_ok=True)

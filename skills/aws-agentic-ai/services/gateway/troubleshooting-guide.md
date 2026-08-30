@@ -77,13 +77,21 @@ cat > /tmp/gateway-policy.json <<EOF
       "Sid": "GetResourceApiKey",
       "Effect": "Allow",
       "Action": ["bedrock-agentcore:GetResourceApiKey"],
-      "Resource": "*"
+      "Resource": [
+        "arn:aws:bedrock-agentcore:us-west-2:<ACCOUNT_ID>:token-vault/<TOKEN_VAULT_ID>",
+        "arn:aws:bedrock-agentcore:us-west-2:<ACCOUNT_ID>:token-vault/<TOKEN_VAULT_ID>/apikeycredentialprovider/<PROVIDER_NAME>",
+        "arn:aws:bedrock-agentcore:us-west-2:<ACCOUNT_ID>:workload-identity-directory/default",
+        "arn:aws:bedrock-agentcore:us-west-2:<ACCOUNT_ID>:workload-identity-directory/default/workload-identity/<WORKLOAD_IDENTITY_NAME>"
+      ]
     },
     {
       "Sid": "GetWorkloadAccessToken",
       "Effect": "Allow",
       "Action": ["bedrock-agentcore:GetWorkloadAccessToken"],
-      "Resource": "*"
+      "Resource": [
+        "arn:aws:bedrock-agentcore:us-west-2:<ACCOUNT_ID>:workload-identity-directory/default",
+        "arn:aws:bedrock-agentcore:us-west-2:<ACCOUNT_ID>:workload-identity-directory/default/workload-identity/<WORKLOAD_IDENTITY_NAME>"
+      ]
     },
     {
       "Sid": "GetCredentials",
@@ -95,20 +103,23 @@ cat > /tmp/gateway-policy.json <<EOF
 }
 EOF
 
-# Get policy ARN from role
-POLICY_ARN=$(aws iam list-attached-role-policies \
-  --role-name $ROLE_NAME \
-  --query 'AttachedPolicies[0].PolicyArn' \
-  --output text \
-  --profile default --region us-west-2)
-
-# Create new policy version
-aws iam create-policy-version \
-  --policy-arn $POLICY_ARN \
+# Attach as a dedicated inline policy on the role
+aws iam put-role-policy \
+  --role-name "$ROLE_NAME" \
+  --policy-name AgentCoreGatewayCredentialAccess \
   --policy-document file:///tmp/gateway-policy.json \
-  --set-as-default \
   --profile default --region us-west-2
 ```
+
+Do not patch an existing attached policy with `create-policy-version --set-as-default`:
+a policy version is the whole document, so that replaces every permission in it for every
+principal it is attached to, with no merge and no confirmation. An inline policy cannot
+clobber unrelated permissions.
+
+`GetResourceApiKey` and `GetWorkloadAccessToken` both support resource-level permissions,
+so `"Resource": "*"` would hand the role every credential provider's API key in the
+account. Take `<TOKEN_VAULT_ID>` and `<PROVIDER_NAME>` from the `credentialProviderArn`
+returned by `CreateApiKeyCredentialProvider` rather than hand-constructing them.
 
 ---
 

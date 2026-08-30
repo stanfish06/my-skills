@@ -250,9 +250,18 @@ kubectl run test-connectivity --image=nicolaka/netshoot:latest -it --rm -n produ
 curl -v http://web-app:80
 nc -zv web-app 80
 
-# Temporarily allow all traffic (testing only)
-kubectl delete networkpolicy --all -n production
+# Bisect one suspect policy (testing only) — back up first, nothing recreates a
+# deleted NetworkPolicy and the namespace falls back to allow-all while it is gone
+kubectl get networkpolicy -n production -o yaml > netpol-backup.yaml
+kubectl delete networkpolicy <suspect-policy> -n production
+
+# Restore as soon as the test is done
+kubectl apply -f netpol-backup.yaml
 ```
+
+Never use `kubectl delete networkpolicy --all`: it removes the `default-deny-all`
+baseline along with everything else. Confirm with the user before deleting any policy
+in a live namespace.
 
 ### Issue 7: High Resource Usage
 

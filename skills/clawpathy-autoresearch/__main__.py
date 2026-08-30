@@ -20,9 +20,14 @@ def main() -> None:
     p.add_argument("--judge-model", default="opus")
     p.add_argument("--parallel", type=int, default=0, metavar="K",
                    help="Run K proposals in parallel per iteration (0 = serial loop)")
+    p.add_argument("--yolo", action="store_true",
+                   help="Run subagents with --permission-mode bypassPermissions. The "
+                        "executor gets Bash and follows model-written instructions, so "
+                        "shell commands run unattended with no approval prompt. "
+                        "Unattended runs only; get the user's explicit consent first.")
     args = p.parse_args()
 
-    dispatcher = ClaudeCLIDispatcher()
+    dispatcher = ClaudeCLIDispatcher(bypass_permissions=args.yolo)
     common = dict(
         workspace_root=args.workspace,
         dispatcher=dispatcher,

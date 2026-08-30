@@ -97,13 +97,18 @@ Which option?
 #### Option 1: Merge Locally
 
 ```bash
+set -euo pipefail
+
 # Get main repo root for CWD safety
 MAIN_ROOT=$(git -C "$(git rev-parse --git-common-dir)/.." rev-parse --show-toplevel)
 cd "$MAIN_ROOT"
 
-# Merge first — verify success before removing anything
+# Merge first — verify success before removing anything. A failed checkout must stop
+# the block: unchained, `git merge` would land the work on whatever branch the main
+# worktree was already sitting on.
 git checkout <base-branch>
-git pull
+git rev-parse --abbrev-ref HEAD | grep -qx '<base-branch>' || { echo "not on base branch; aborting"; exit 1; }
+git pull --ff-only
 git merge <feature-branch>
 
 # Verify tests on merged result
@@ -111,6 +116,11 @@ git merge <feature-branch>
 
 # Only after merge succeeds: cleanup worktree (Step 6), then delete branch
 ```
+
+Run this as one block with `set -euo pipefail`, or check each command's exit status.
+`git checkout` fails when the main worktree has uncommitted changes that conflict with
+the base branch, and every later step then does the wrong thing silently — including
+`git branch -d`, which succeeds because the branch is merged into the current HEAD.
 
 Then: Cleanup worktree (Step 6), then delete branch:
 
@@ -238,6 +248,8 @@ git worktree prune  # Self-healing: clean up any stale registrations
 - Delete work without confirmation
 - Force-push without explicit request
 - Remove a worktree before confirming merge success
+- Run the merge block unchained — a failed `git checkout` must abort it
+- `git checkout <base-branch>` with a dirty main worktree — confirm it is clean first
 - Clean up worktrees you didn't create (provenance check)
 - Run `git worktree remove` from inside the worktree
 

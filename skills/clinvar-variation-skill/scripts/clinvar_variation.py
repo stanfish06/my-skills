@@ -17,7 +17,8 @@ else:
     REQUESTS_IMPORT_ERROR = None
 
 CLINICAL_TABLES_URL = "https://clinicaltables.nlm.nih.gov/api/variants/v4/search"
-VARIATION_BASE = "https://api.ncbi.nlm.nih.gov/variation/v0/beta"
+VARIATION_BASE = "https://api.ncbi.nlm.nih.gov/variation/v0"
+EUTILS_BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
 
 def error(code: str, message: str, warnings: list[str] | None = None) -> dict[str, Any]:
@@ -37,13 +38,9 @@ def _compact(value: Any, max_items: int, max_depth: int) -> Any:
             out.append(f"... (+{len(value) - max_items} more)")
         return out
     if isinstance(value, dict):
-        out: dict[str, Any] = {}
-        items = list(value.items())
-        for key, item in items[:max_items]:
-            out[str(key)] = _compact(item, max_items, max_depth - 1)
-        if len(items) > max_items:
-            out["_truncated_keys"] = len(items) - max_items
-        return out
+        # `max_items` caps list length only; dropping object keys would silently
+        # discard fields the caller asked for.
+        return {str(key): _compact(item, max_items, max_depth - 1) for key, item in value.items()}
     return value
 
 
@@ -145,27 +142,40 @@ def execute(payload: Any) -> dict[str, Any]:
         identifier = config[id_key]
         if not isinstance(identifier, (str, int)) or not str(identifier).strip():
             raise ValueError(f"`{id_key}` is required for `{config['action']}`.")
-        if config["action"] == "vcv":
-            digits = str(identifier).strip().lstrip("VCV")
-            path = f"{VARIATION_BASE}/clinvar/variation/{digits}"
-        elif config["action"] == "rcv":
-            path = f"{VARIATION_BASE}/clinvar/rcv/{str(identifier).strip()}"
-        elif config["action"] == "scv":
-            path = f"{VARIATION_BASE}/clinvar/scv/{str(identifier).strip()}"
+        if config["action"] in {"vcv", "rcv", "scv"}:
+            accession = str(identifier).strip()
+            search = requests.get(
+                f"{EUTILS_BASE}/esearch.fcgi",
+                params={"db": "clinvar", "term": accession, "retmode": "json"},
+                timeout=config["timeout_sec"],
+            )
+            search.raise_for_status()
+            uids = search.json().get("esearchresult", {}).get("idlist") or []
+            if not uids:
+                return error("not_found", f"ClinVar returned no record for {accession}.")
+            response = requests.get(
+                f"{EUTILS_BASE}/esummary.fcgi",
+                params={"db": "clinvar", "id": uids[0], "retmode": "json"},
+                timeout=config["timeout_sec"],
+            )
+            response.raise_for_status()
+            data = response.json().get("result", {}).get(uids[0])
+            if data is None:
+                return error("invalid_response", f"esummary returned no result for uid {uids[0]}.")
         else:
             digits = str(identifier).strip().lstrip("rs").lstrip("RS")
-            path = f"{VARIATION_BASE}/refsnp/{digits}"
-
-        response = requests.get(path, timeout=config["timeout_sec"])
-        response.raise_for_status()
-        data = response.json()
+            response = requests.get(
+                f"{VARIATION_BASE}/refsnp/{digits}", timeout=config["timeout_sec"]
+            )
+            response.raise_for_status()
+            data = response.json()
         raw_output = json.dumps(data, indent=2)
         raw_output_path = (
             _save(raw_output, config["raw_output_path"]) if config["save_raw"] else None
         )
         return {
             "ok": True,
-            "source": "clinvar-variation",
+            "source": "clinvar-eutils" if config["action"] != "refsnp" else "ncbi-variation",
             "action": config["action"],
             "summary": _compact(data, config["max_items"], config["max_depth"]),
             "top_keys": list(data)[: config["max_items"]] if isinstance(data, dict) else None,

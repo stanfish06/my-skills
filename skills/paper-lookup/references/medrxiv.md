@@ -29,10 +29,10 @@ GET /details/medrxiv/{interval}/{cursor}/{format}
 | `interval` | `YYYY-MM-DD/YYYY-MM-DD` | Date range (inclusive) |
 | | `N` (integer) | N most recent preprints |
 | | `Nd` (integer + "d") | Last N days |
-| `cursor` | Integer (default `0`) | Pagination offset (100 per page) |
+| `cursor` | Integer (default `0`) | Record offset. `/details/` returns 30 records per request |
 | `format` | `json` (default), `xml` | Response format |
 
-Optional: `?category=cardiovascular%20medicine` (use URL-encoding for spaces)
+Optional: `?category=cardiovascular_medicine` (underscores or URL-encoded spaces; an unrecognized name is silently ignored)
 
 **Examples:**
 ```
@@ -69,7 +69,7 @@ Same as bioRxiv:
 {
   "messages": [{
     "status": "ok",
-    "count": 100,
+    "count": 30,
     "total": "502",
     "cursor": 0
   }],
@@ -93,7 +93,7 @@ Same as bioRxiv:
 
 ## Pagination
 
-100 results per page. Use `cursor` parameter to paginate.
+`cursor` is a record offset. `/details/` returns 30 records per request and `/pubs/` returns 100, so advance `cursor` by the `count` reported in `messages` rather than by an assumed page size.
 
 ## Rate Limits
 
@@ -101,4 +101,6 @@ No documented rate limits. No authentication required.
 
 ## Categories
 
-`addiction-medicine`, `allergy-and-immunology`, `anesthesia`, `cardiovascular-medicine`, `dentistry-and-oral-medicine`, `dermatology`, `emergency-medicine`, `endocrinology`, `epidemiology`, `forensic-medicine`, `gastroenterology`, `genetic-and-genomic-medicine`, `geriatric-medicine`, `health-economics`, `health-informatics`, `health-policy`, `health-systems-and-quality-improvement`, `hematology`, `hiv-aids`, `infectious-diseases`, `intensive-care-and-critical-care-medicine`, `medical-education`, `medical-ethics`, `nephrology`, `neurology`, `nursing`, `nutrition`, `obstetrics-and-gynecology`, `occupational-and-environmental-health`, `oncology`, `ophthalmology`, `orthopedics`, `otolaryngology`, `pain-medicine`, `palliative-medicine`, `pathology`, `pediatrics`, `pharmacology-and-therapeutics`, `primary-care-research`, `psychiatry-and-clinical-psychology`, `public-and-global-health`, `radiology-and-imaging`, `rehabilitation-medicine-and-physical-therapy`, `respiratory-medicine`, `rheumatology`, `sexual-and-reproductive-health`, `sports-medicine`, `surgery`, `toxicology`, `transplantation`, `urology`
+Underscores for spaces. Hyphenated names are **not** recognized -- the API accepts them, ignores the filter, and returns the unfiltered set. Confirm the `category` echoed back in `messages` matches what you asked for.
+
+`addiction_medicine`, `allergy_and_immunology`, `anesthesia`, `cardiovascular_medicine`, `dentistry_and_oral_medicine`, `dermatology`, `emergency_medicine`, `endocrinology`, `epidemiology`, `forensic_medicine`, `gastroenterology`, `genetic_and_genomic_medicine`, `geriatric_medicine`, `health_economics`, `health_informatics`, `health_policy`, `health_systems_and_quality_improvement`, `hematology`, `hiv_aids`, `infectious_diseases`, `intensive_care_and_critical_care_medicine`, `medical_education`, `medical_ethics`, `nephrology`, `neurology`, `nursing`, `nutrition`, `obstetrics_and_gynecology`, `occupational_and_environmental_health`, `oncology`, `ophthalmology`, `orthopedics`, `otolaryngology`, `pain_medicine`, `palliative_medicine`, `pathology`, `pediatrics`, `pharmacology_and_therapeutics`, `primary_care_research`, `psychiatry_and_clinical_psychology`, `public_and_global_health`, `radiology_and_imaging`, `rehabilitation_medicine_and_physical_therapy`, `respiratory_medicine`, `rheumatology`, `sexual_and_reproductive_health`, `sports_medicine`, `surgery`, `toxicology`, `transplantation`, `urology`

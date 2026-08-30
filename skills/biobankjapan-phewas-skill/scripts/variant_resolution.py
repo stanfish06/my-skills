@@ -279,6 +279,11 @@ def resolve_variant(input_type: str, input_value: str) -> dict[str, Any]:
         ref = resolved.get("ref")
         alts = resolved.get("alts") or []
         alt = alts[0] if alts else None
+        if len(alts) > 1:
+            warnings.append(
+                f"{rsid} is multi-allelic (alts {alts}); querying {alt} first and falling back "
+                "to the remaining alternates."
+            )
 
         g37 = None
         if resolved.get("grch37", {}).get("chr") and resolved.get("grch37", {}).get("pos"):
@@ -303,6 +308,7 @@ def resolve_variant(input_type: str, input_value: str) -> dict[str, Any]:
             "rsid": rsid,
             "grch37": g37,
             "grch38": g38,
+            "alts": alts,
             "warnings": warnings,
         }
 
@@ -355,6 +361,7 @@ def resolve_variant(input_type: str, input_value: str) -> dict[str, Any]:
         "rsid": rsid,
         "grch37": g37,
         "grch38": g38,
+        "alts": alts,
         "warnings": warnings,
     }
 
@@ -375,6 +382,7 @@ def resolve_query_variant(
             "rsid": None,
             "grch37": target_variant if target_key == "grch37" else None,
             "grch38": target_variant if target_key == "grch38" else None,
+            "alts": [alt] if alt else [],
             "warnings": [],
         }
 
@@ -393,5 +401,6 @@ def resolve_query_variant(
         "rsid": resolved.get("rsid"),
         "grch37": resolved.get("grch37"),
         "grch38": resolved.get("grch38"),
+        "alts": list(resolved.get("alts") or []),
         "warnings": list(resolved.get("warnings") or []),
     }

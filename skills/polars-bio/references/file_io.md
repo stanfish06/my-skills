@@ -44,7 +44,11 @@ Not all functions support all parameters. SAM functions lack cloud parameters. F
 
 ### read_bed / scan_bed
 
-Read BED files. Columns are auto-detected (BED3 through BED12). BED files use 0-based half-open coordinates; polars-bio attaches coordinate metadata automatically.
+Read BED files. The schema is fixed at four columns regardless of input width, and a 4th column is **required** -- a BED3 file returns zero rows, logging `ERROR:datafusion_bio_format_bed.storage:Error reading record from BED file` without raising. BED6/BED12 extra fields are dropped. In a mixed-width file only the 3-column rows disappear.
+
+Use `pb.read_table(path, schema="bed3")` for BED3 and for any file whose extra columns matter: the named schemas run `bed3` through `bed12`, keep every field, and keep the file's own 0-based starts.
+
+`read_bed` converts to 1-based inclusive starts (input `100` comes back as `101`) and attaches `coordinate_system_zero_based: False`. Pass `use_zero_based=True` to keep 0-based coordinates.
 
 ```python
 import polars_bio as pb
@@ -56,15 +60,14 @@ df = pb.read_bed("regions.bed")
 lf = pb.scan_bed("regions.bed")
 ```
 
-### Column Schema (BED3)
+### Column Schema (fixed)
 
 | Column | Type | Description |
 |--------|------|-------------|
 | `chrom` | String | Chromosome name |
-| `start` | Int64 | Start position |
-| `end` | Int64 | End position |
-
-Extended BED fields (auto-detected) add: `name`, `score`, `strand`, `thickStart`, `thickEnd`, `itemRgb`, `blockCount`, `blockSizes`, `blockStarts`.
+| `start` | UInt32 | Start position, 1-based |
+| `end` | UInt32 | End position |
+| `name` | String | Feature name, required in the input |
 
 ## VCF Format
 
@@ -394,13 +397,13 @@ lf = pb.scan_pairs("contacts.pairs")
 
 ### read_table / scan_table
 
-Read tab-delimited files with custom schema. Useful for non-standard formats or bioframe-compatible tables.
+Read tab-delimited files with a named schema. `schema` takes one of `bed3`, `bed4`, `bed5`, `bed6`, `bed7`, `bed8`, `bed9`, `bed12` -- a dict raises `TypeError: unhashable type: 'dict'`.
 
 ```python
 import polars_bio as pb
 
-df = pb.read_table("custom.tsv", schema={"chrom": str, "start": int, "end": int, "name": str})
-lf = pb.scan_table("custom.tsv", schema={"chrom": str, "start": int, "end": int})
+df = pb.read_table("custom.tsv", schema="bed4")
+lf = pb.scan_table("custom.tsv", schema="bed3")
 ```
 
 ## Cloud Storage

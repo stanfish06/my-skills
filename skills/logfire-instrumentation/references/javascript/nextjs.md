@@ -87,7 +87,22 @@ export default function proxy(request: NextRequest) {
       return new NextResponse('Logfire token is not configured', { status: 500 })
     }
 
-    const requestHeaders = new Headers(request.headers)
+    // the relay signs requests with a write token, so gate it the way the rest of
+    // the app is gated: same-origin POST, authenticated caller, rate limited
+    if (request.method !== 'POST' || request.headers.get('origin') !== process.env.APP_ORIGIN) {
+      return new NextResponse('Forbidden', { status: 403 })
+    }
+    if (!isAuthenticated(request) || !withinRateLimit(request)) {
+      return new NextResponse('Forbidden', { status: 403 })
+    }
+
+    // copy only the OTLP body headers; forwarding every inbound header sends the
+    // visitor's Cookie upstream
+    const requestHeaders = new Headers()
+    for (const name of ['content-type', 'content-encoding', 'content-length']) {
+      const value = request.headers.get(name)
+      if (value) requestHeaders.set(name, value)
+    }
     requestHeaders.set('Authorization', token)
 
     return NextResponse.rewrite(new URL('https://logfire-api.pydantic.dev/v1/traces'), {
@@ -105,7 +120,7 @@ export const config = {
 }
 ```
 
-Set `LOGFIRE_TOKEN` server-side to a Logfire write token. It can be the same write token value used in `OTEL_EXPORTER_OTLP_HEADERS`, but it must not use a `NEXT_PUBLIC_` prefix.
+Set `LOGFIRE_TOKEN` server-side to a Logfire write token. It can be the same write token value used in `OTEL_EXPORTER_OTLP_HEADERS`, but it must not use a `NEXT_PUBLIC_` prefix. Set `APP_ORIGIN` to the frontend origin, and wire `isAuthenticated` and `withinRateLimit` to the app's own session and rate-limit code. Without those checks the path is an open write relay: any anonymous client can POST OTLP payloads that Logfire ingests under the project's write token.
 
 Create a client-only component:
 

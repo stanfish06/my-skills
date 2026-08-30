@@ -1,0 +1,59 @@
+# Starter screenpipe deny-list for autoskill users.
+#
+# The screenpipe CLI reads `~/.screenpipe/config.toml` with a TOML parser
+# (crates/screenpipe-config/src/persistence.rs). Copy the keys below into that
+# file, or pass the same values as repeated `--ignored-windows` flags when
+# starting the daemon. The desktop app persists its own store instead
+# (tauri-plugin-store), so change its settings there, not here.
+#
+# Reference: https://github.com/screenpipe/screenpipe
+#
+# Matching is case-insensitive SUBSTRING, not glob. A bare entry matches when
+# the focused app name OR the window title contains it. `App::Title` narrows to
+# one window of one app. Wildcards (`*`) are matched literally and never match
+# anything — do not add them.
+# Matcher: crates/screenpipe-core/src/window_pattern.rs
+#
+# Verify before you trust it: start the daemon, focus one of these apps, and
+# confirm no OCR rows appear for it. Until you have checked, treat this as
+# best-effort filtering, not a guarantee.
+
+ignoredWindows = [
+  # Password managers
+  "1Password",
+  "Bitwarden",
+  "Dashlane",
+  "Keeper",
+  "LastPass",
+  "KeePassXC",
+
+  # Private messaging
+  "Signal",
+  "Telegram",
+  "WhatsApp",
+  "iMessage",
+  "Messages",
+
+  # Mail composition (inbound reading is fine; composition often contains
+  # secrets). Remove if you explicitly want mail workflows analyzed.
+  "Mail",
+  "Outlook",
+
+  # Sensitive titles in browsers that are otherwise fine to observe
+  "login",
+  "Sign in",
+  "Private Browsing",
+  "Incognito",
+  "online banking",
+  "account settings",
+
+  # Banking / finance apps (add yours)
+  # "Bank of America",
+  # "Chase",
+]
+
+# Skip private-browsing windows without listing every title.
+ignoreIncognitoWindows = true
+
+# Drop audio capture and transcription entirely.
+# disableAudio = true

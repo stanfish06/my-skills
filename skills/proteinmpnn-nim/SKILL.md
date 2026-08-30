@@ -100,7 +100,8 @@ Common controls:
 
 Save the returned `mfasta` and pair scores only with designed (non-native/WT)
 rows, using the snippet in [`references/examples.md`](references/examples.md)
-under **Save Multi-FASTA**. Validate promising designs by predicting structures
+under **Save Multi-FASTA**. Scores are mean negative log-likelihoods, so rank
+candidates lowest-first. Validate promising designs by predicting structures
 with Boltz2 or OpenFold3 and comparing them to the target backbone. For
 FASTA/score sanity checks, read `references/validation.md`.
 

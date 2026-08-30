@@ -5,12 +5,12 @@ This guide walks through a complete workflow: creating a registry, registering r
 ## Prerequisites
 
 - AWS CLI v2 configured with appropriate permissions
-- An AWS account in a [supported region](README.md#regional-availability)
+- An AWS account in a region where AWS Agent Registry is available
 - Python 3.10+ and boto3 (for SDK examples)
 
 ### Minimum IAM Policy (Administrator)
 
-> **Important**: ALL IAM actions use the `bedrock-agentcore:` prefix — both control and data plane.
+> **Important**: registry IAM actions use the `agent-registry:` prefix. Workload identity actions stay on `bedrock-agentcore:`, and `CreateRegistry` needs `iam:CreateServiceLinkedRole`.
 
 ```json
 {
@@ -20,29 +20,42 @@ This guide walks through a complete workflow: creating a registry, registering r
       "Sid": "RegistryAndRecordManagement",
       "Effect": "Allow",
       "Action": [
-        "bedrock-agentcore:CreateRegistry",
-        "bedrock-agentcore:GetRegistry",
-        "bedrock-agentcore:UpdateRegistry",
-        "bedrock-agentcore:DeleteRegistry",
-        "bedrock-agentcore:ListRegistries",
-        "bedrock-agentcore:CreateRegistryRecord",
-        "bedrock-agentcore:GetRegistryRecord",
-        "bedrock-agentcore:UpdateRegistryRecord",
-        "bedrock-agentcore:DeleteRegistryRecord",
-        "bedrock-agentcore:ListRegistryRecords",
-        "bedrock-agentcore:SubmitRegistryRecordForApproval",
-        "bedrock-agentcore:UpdateRegistryRecordStatus"
+        "agent-registry:CreateRegistry",
+        "agent-registry:GetRegistry",
+        "agent-registry:UpdateRegistry",
+        "agent-registry:DeleteRegistry",
+        "agent-registry:ListRegistries",
+        "agent-registry:CreateRegistryRecord",
+        "agent-registry:GetRegistryRecord",
+        "agent-registry:UpdateRegistryRecord",
+        "agent-registry:DeleteRegistryRecord",
+        "agent-registry:ListRegistryRecords",
+        "agent-registry:SubmitRegistryRecordForApproval",
+        "agent-registry:UpdateRegistryRecordStatus"
       ],
-      "Resource": "arn:aws:bedrock-agentcore:*:<account>:*"
+      "Resource": "arn:aws:agent-registry:*:<account>:*"
     },
     {
       "Sid": "SearchAndMcp",
       "Effect": "Allow",
       "Action": [
-        "bedrock-agentcore:SearchRegistryRecords",
-        "bedrock-agentcore:InvokeRegistryMcp"
+        "agent-registry:SearchDiscoverableRegistryRecords",
+        "agent-registry:ListDiscoverableRegistryRecords",
+        "agent-registry:GetDiscoverableRegistryRecord",
+        "agent-registry:InvokeRegistryMcp"
       ],
-      "Resource": "arn:aws:bedrock-agentcore:*:<account>:registry/*"
+      "Resource": "arn:aws:agent-registry:*:<account>:registry/*"
+    },
+    {
+      "Sid": "RegistryLifecycleServiceCalls",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock-agentcore:CreateWorkloadIdentity",
+        "bedrock-agentcore:GetWorkloadIdentity",
+        "bedrock-agentcore:DeleteWorkloadIdentity",
+        "iam:CreateServiceLinkedRole"
+      ],
+      "Resource": "*"
     }
   ]
 }
@@ -53,7 +66,7 @@ For per-persona IAM policies (Publisher, Curator, Consumer), see [Registry Prere
 ## Step 1: Create a Registry
 
 ```bash
-aws bedrock-agentcore-control create-registry \
+aws agent-registry-control create-registry \
   --name "my-org-registry" \
   --description "Central catalog for AI agents and MCP servers" \
   --region us-east-1
@@ -71,7 +84,7 @@ aws bedrock-agentcore-control create-registry \
 Wait for the registry to become `READY`:
 
 ```bash
-aws bedrock-agentcore-control get-registry \
+aws agent-registry-control get-registry \
   --registry-id reg-abc123def456 \
   --region us-east-1 \
   --query "status"
@@ -86,20 +99,21 @@ aws bedrock-agentcore-control get-registry \
 MCP descriptors separate **server** metadata and **tools** definition, each with their own schema/protocol version:
 
 ```bash
-aws bedrock-agentcore-control create-registry-record \
+aws agent-registry-control create-registry-record \
   --registry-id reg-abc123def456 \
   --name "weather-mcp-server" \
+  --display-name "Weather MCP Server" \
   --description "Provides real-time weather data and forecasts for global locations" \
-  --descriptor-type MCP \
+  --record-type MCP \
   --descriptors '{
-    "mcp": {
-      "server": {
-        "schemaVersion": "2025-12-11",
-        "inlineContent": "{\"name\": \"io.example/weather-server\", \"description\": \"Weather data and forecasts via OpenWeatherMap API\", \"version\": \"1.0.0\"}"
-      },
-      "tools": {
-        "protocolVersion": "2024-11-05",
-        "inlineContent": "{\"tools\": [{\"name\": \"get_forecast\", \"description\": \"Get 7-day weather forecast for a city\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\", \"description\": \"City name\"}, \"units\": {\"type\": \"string\", \"enum\": [\"celsius\", \"fahrenheit\"]}}, \"required\": [\"city\"]}}]}"
+    "mcpServer": {
+      "dataSchemaVersion": "2025-12-11",
+      "data": "{\"name\": \"io.example/weather-server\", \"description\": \"Weather data and forecasts via OpenWeatherMap API\", \"version\": \"1.0.0\"}",
+      "additionalData": {
+        "tools": {
+          "dataSchemaVersion": "2024-11-05",
+          "data": "{\"tools\": [{\"name\": \"get_forecast\", \"description\": \"Get 7-day weather forecast for a city\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"city\": {\"type\": \"string\", \"description\": \"City name\"}, \"units\": {\"type\": \"string\", \"enum\": [\"celsius\", \"fahrenheit\"]}}, \"required\": [\"city\"]}}]}"
+        }
       }
     }
   }' \
@@ -107,25 +121,24 @@ aws bedrock-agentcore-control create-registry-record \
   --region us-east-1
 ```
 
-**Supported server schemaVersions**: `2025-12-11`, `2025-10-17`, `2025-10-11`, `2025-09-29`, `2025-09-16`, `2025-07-09`
-**Supported tools protocolVersions**: `2025-11-25`, `2025-06-18`, `2025-03-26`, `2024-11-05`
+**Supported server `dataSchemaVersion`**: `2025-12-11`, `2025-10-17`, `2025-10-11`, `2025-09-29`, `2025-09-16`, `2025-07-09`
+**Supported tools `dataSchemaVersion`**: `2025-11-25`, `2025-06-18`, `2025-03-26`, `2024-11-05`
 
 ### Option B: Register an Agent (A2A)
 
-Agent cards follow the A2A protocol specification. Use schema version `0.3` (not `0.3.0`):
+Agent cards follow the A2A protocol specification. Use `dataSchemaVersion` `0.3` (not `0.3.0`). The record type is `AGENT`; the descriptor key is `a2aAgentCard`:
 
 ```bash
-aws bedrock-agentcore-control create-registry-record \
+aws agent-registry-control create-registry-record \
   --registry-id reg-abc123def456 \
   --name "customer-support-agent" \
+  --display-name "Customer Support Agent" \
   --description "Handles customer inquiries, order status, and refund requests" \
-  --descriptor-type A2A \
+  --record-type AGENT \
   --descriptors '{
-    "a2a": {
-      "agentCard": {
-        "schemaVersion": "0.3",
-        "inlineContent": "{\"name\": \"customer-support\", \"description\": \"Handles customer inquiries\", \"version\": \"1.0.0\", \"protocolVersion\": \"0.3.0\", \"url\": \"https://api.example.com/a2a\", \"capabilities\": {}, \"defaultInputModes\": [\"text/plain\"], \"defaultOutputModes\": [\"text/plain\"], \"skills\": [{\"id\": \"order-lookup\", \"name\": \"Order Lookup\", \"description\": \"Look up order status\", \"tags\": [\"orders\"]}]}"
-      }
+    "a2aAgentCard": {
+        "dataSchemaVersion": "0.3",
+        "data": "{\"name\": \"customer-support\", \"description\": \"Handles customer inquiries\", \"version\": \"1.0.0\", \"protocolVersion\": \"0.3.0\", \"url\": \"https://api.example.com/a2a\", \"capabilities\": {}, \"defaultInputModes\": [\"text/plain\"], \"defaultOutputModes\": [\"text/plain\"], \"skills\": [{\"id\": \"order-lookup\", \"name\": \"Order Lookup\", \"description\": \"Look up order status\", \"tags\": [\"orders\"]}]}"
     }
   }' \
   --record-version "1.0.0" \
@@ -137,19 +150,20 @@ aws bedrock-agentcore-control create-registry-record \
 Skill records support optional markdown documentation and a structured definition:
 
 ```bash
-aws bedrock-agentcore-control create-registry-record \
+aws agent-registry-control create-registry-record \
   --registry-id reg-abc123def456 \
   --name "data-analysis-skill" \
+  --display-name "Data Analysis Skill" \
   --description "Reusable skill for analyzing CSV/Parquet datasets with statistical summaries" \
-  --descriptor-type SKILL \
+  --record-type SKILL \
   --descriptors '{
-    "agentSkills": {
-      "skillMarkdown": {
-        "inlineContent": "---\nname: data-analysis\ndescription: Analyzes tabular data files and produces statistical summaries.\n---\n# Data Analysis Skill\n\n## Inputs\n- File path (CSV or Parquet)\n- Analysis type: descriptive, correlation, or regression\n\n## Outputs\n- Summary statistics\n- Visualizations (PNG)\n- Markdown report"
-      },
-      "skillDefinition": {
-        "schemaVersion": "0.1.0",
-        "inlineContent": "{\"websiteUrl\": \"https://example.com/data-analysis\", \"repository\": {\"url\": \"https://github.com/example/data-analysis-skill\", \"source\": \"github\"}}"
+    "agentSkillsDefinition": {
+      "dataSchemaVersion": "0.1.0",
+      "data": "{\"websiteUrl\": \"https://example.com/data-analysis\", \"repository\": {\"url\": \"https://github.com/example/data-analysis-skill\", \"source\": \"github\"}}",
+      "additionalData": {
+        "skillMd": {
+          "data": "---\nname: data-analysis\ndescription: Analyzes tabular data files and produces statistical summaries.\n---\n# Data Analysis Skill\n\n## Inputs\n- File path (CSV or Parquet)\n- Analysis type: descriptive, correlation, or regression\n\n## Outputs\n- Summary statistics\n- Visualizations (PNG)\n- Markdown report"
+        }
       }
     }
   }' \
@@ -162,16 +176,15 @@ aws bedrock-agentcore-control create-registry-record \
 Custom records accept any valid JSON with no schema validation:
 
 ```bash
-aws bedrock-agentcore-control create-registry-record \
+aws agent-registry-control create-registry-record \
   --registry-id reg-abc123def456 \
   --name "product-knowledge-base" \
+  --display-name "Product Knowledge Base" \
   --description "Bedrock Knowledge Base with product catalog and documentation" \
-  --descriptor-type CUSTOM \
+  --record-type CUSTOM \
   --descriptors '{
     "custom": {
-      "metadata": {
-        "inlineContent": "{\"type\": \"knowledge-base\", \"knowledgeBaseId\": \"KB12345\", \"dataSourceCount\": 3, \"documentCount\": 15000, \"lastSyncedAt\": \"2026-04-01T00:00:00Z\"}"
-      }
+      "data": "{\"type\": \"knowledge-base\", \"knowledgeBaseId\": \"KB12345\", \"dataSourceCount\": 3, \"documentCount\": 15000, \"lastSyncedAt\": \"2026-04-01T00:00:00Z\"}"
     }
   }' \
   --record-version "1.0.0" \
@@ -183,7 +196,7 @@ aws bedrock-agentcore-control create-registry-record \
 Records start in **Draft** status. Submit to make them discoverable:
 
 ```bash
-aws bedrock-agentcore-control submit-registry-record-for-approval \
+aws agent-registry-control submit-registry-record-for-approval \
   --registry-id reg-abc123def456 \
   --record-id rec-xyz789 \
   --region us-east-1
@@ -197,7 +210,7 @@ If the registry uses manual approval, a curator must review and approve:
 
 ```bash
 # Approve
-aws bedrock-agentcore-control update-registry-record-status \
+aws agent-registry-control update-registry-record-status \
   --registry-id reg-abc123def456 \
   --record-id rec-xyz789 \
   --status APPROVED \
@@ -207,7 +220,7 @@ aws bedrock-agentcore-control update-registry-record-status \
 
 ```bash
 # Or reject with reason
-aws bedrock-agentcore-control update-registry-record-status \
+aws agent-registry-control update-registry-record-status \
   --registry-id reg-abc123def456 \
   --record-id rec-xyz789 \
   --status REJECTED \
@@ -224,9 +237,9 @@ Once approved, records are searchable. **Eventual consistency**: approved record
 ### Semantic Search (Natural Language)
 
 ```bash
-aws bedrock-agentcore search-registry-records \
+aws agent-registry search-discoverable-registry-records \
   --search-query "I need a tool that can tell me the weather" \
-  --registry-ids "arn:aws:bedrock-agentcore:us-east-1:<account-id>:registry/reg-abc123def456" \
+  --registry-ids "arn:aws:agent-registry:us-east-1:<account-id>:registry/reg-abc123def456" \
   --region us-east-1
 ```
 
@@ -234,19 +247,19 @@ aws bedrock-agentcore search-registry-records \
 
 ```bash
 # Find only MCP servers
-aws bedrock-agentcore search-registry-records \
+aws agent-registry search-discoverable-registry-records \
   --search-query "data processing" \
-  --registry-ids "arn:aws:bedrock-agentcore:us-east-1:<account-id>:registry/reg-abc123def456" \
-  --filter '{"descriptorType": {"$eq": "MCP"}}' \
+  --registry-ids "arn:aws:agent-registry:us-east-1:<account-id>:registry/reg-abc123def456" \
+  --filters '{"recordType": {"$eq": "MCP"}}' \
   --region us-east-1
 ```
 
 ```bash
-# Find A2A agents at version 1.0
-aws bedrock-agentcore search-registry-records \
+# Find A2A agents at version 1.0.0
+aws agent-registry search-discoverable-registry-records \
   --search-query "customer" \
-  --registry-ids "arn:aws:bedrock-agentcore:us-east-1:<account-id>:registry/reg-abc123def456" \
-  --filter '{"$and": [{"descriptorType": {"$eq": "A2A"}}, {"version": {"$eq": "1.0.0"}}]}' \
+  --registry-ids "arn:aws:agent-registry:us-east-1:<account-id>:registry/reg-abc123def456" \
+  --filters '{"$and": [{"recordType": {"$eq": "AGENT"}}, {"recordVersion": {"$eq": "1.0.0"}}]}' \
   --region us-east-1
 ```
 
@@ -261,15 +274,19 @@ REGION="us-east-1"
 REGISTRY_ID="reg-abc123def456"
 
 # 1. Team publishes their MCP server
-RECORD=$(aws bedrock-agentcore-control create-registry-record \
+RECORD=$(aws agent-registry-control create-registry-record \
   --registry-id $REGISTRY_ID \
   --name "payments-mcp-server" \
+  --display-name "Payments MCP Server" \
   --description "Payment processing tools: charge, refund, status lookup" \
-  --descriptor-type MCP \
+  --record-type MCP \
   --descriptors '{
-    "mcp": {
-      "server": {"schemaVersion": "2025-12-11", "inlineContent": "{\"name\": \"payments\", \"description\": \"Payment processing\", \"version\": \"2.1.0\"}"},
-      "tools": {"protocolVersion": "2024-11-05", "inlineContent": "{\"tools\": [{\"name\": \"charge\", \"description\": \"Process a payment\"}, {\"name\": \"refund\", \"description\": \"Issue a refund\"}, {\"name\": \"get_status\", \"description\": \"Check payment status\"}]}"}
+    "mcpServer": {
+      "dataSchemaVersion": "2025-12-11",
+      "data": "{\"name\": \"payments\", \"description\": \"Payment processing\", \"version\": \"2.1.0\"}",
+      "additionalData": {
+        "tools": {"dataSchemaVersion": "2024-11-05", "data": "{\"tools\": [{\"name\": \"charge\", \"description\": \"Process a payment\"}, {\"name\": \"refund\", \"description\": \"Issue a refund\"}, {\"name\": \"get_status\", \"description\": \"Check payment status\"}]}"}
+      }
     }
   }' \
   --record-version "2.1.0" \
@@ -279,13 +296,13 @@ RECORD=$(aws bedrock-agentcore-control create-registry-record \
 echo "Created record: $RECORD"
 
 # 2. Submit for review
-aws bedrock-agentcore-control submit-registry-record-for-approval \
+aws agent-registry-control submit-registry-record-for-approval \
   --registry-id $REGISTRY_ID \
   --record-id $RECORD \
   --region $REGION
 
 # 3. Curator approves
-aws bedrock-agentcore-control update-registry-record-status \
+aws agent-registry-control update-registry-record-status \
   --registry-id $REGISTRY_ID \
   --record-id $RECORD \
   --status APPROVED \
@@ -293,9 +310,9 @@ aws bedrock-agentcore-control update-registry-record-status \
   --region $REGION
 
 # 4. Other teams can now discover it
-aws bedrock-agentcore search-registry-records \
+aws agent-registry search-discoverable-registry-records \
   --search-query "payment processing" \
-  --registry-ids "arn:aws:bedrock-agentcore:${REGION}:$(aws sts get-caller-identity --query Account --output text):registry/${REGISTRY_ID}" \
+  --registry-ids "arn:aws:agent-registry:${REGION}:$(aws sts get-caller-identity --query Account --output text):registry/${REGISTRY_ID}" \
   --region $REGION
 ```
 

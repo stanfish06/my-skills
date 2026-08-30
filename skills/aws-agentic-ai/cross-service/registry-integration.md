@@ -32,17 +32,17 @@ REGISTRY_ID="reg-abc123"
 GATEWAY_ID="gw-xyz789"
 
 # 1. Search registry for a useful MCP server
-RESULT=$(aws bedrock-agentcore search-registry-records \
+RESULT=$(aws agent-registry search-discoverable-registry-records \
   --search-query "payment processing" \
-  --registry-ids "arn:aws:bedrock-agentcore:${REGION}:$(aws sts get-caller-identity --query Account --output text):registry/${REGISTRY_ID}" \
-  --filter '{"descriptorType": {"$eq": "MCP"}}' \
+  --registry-ids "arn:aws:agent-registry:${REGION}:$(aws sts get-caller-identity --query Account --output text):registry/${REGISTRY_ID}" \
+  --filters '{"recordType": {"$eq": "MCP"}}' \
   --region $REGION)
 
 echo "$RESULT"
 # Extract the MCP server schema from the search results
 
 # 2. Save the discovered schema to S3
-echo "$RESULT" | jq -r '.records[0].descriptors.mcp.server.inlineContent' > /tmp/discovered-schema.json
+echo "$RESULT" | jq -r '.registryRecords[0].descriptors.mcpServer.data' > /tmp/discovered-schema.json
 aws s3 cp /tmp/discovered-schema.json s3://my-schemas-bucket/discovered/payments-mcp.json
 
 # 3. Deploy as a Gateway target
@@ -63,24 +63,27 @@ Register your Gateway targets back into the registry so other teams can discover
 
 ```bash
 # Sync a Gateway target into the registry
-aws bedrock-agentcore-control create-registry-record \
+aws agent-registry-control create-registry-record \
   --registry-id $REGISTRY_ID \
   --name "platform/payments-gateway" \
   --description "Payment tools exposed via Gateway (team: platform)" \
-  --descriptor-type MCP \
-  --synchronization-type URL \
-  --synchronization-configuration "{
-    \"fromUrl\": {
-      \"url\": \"https://bedrock-agentcore.${REGION}.amazonaws.com/gateway/${GATEWAY_ID}/target/tgt-payments/mcp\",
-      \"credentialProviderConfigurations\": [{
-        \"credentialProviderType\": \"IAM\",
-        \"credentialProvider\": {
-          \"iamCredentialProvider\": {
-            \"roleArn\": \"arn:aws:iam::$(aws sts get-caller-identity --query Account --output text):role/RegistrySyncRole\",
-            \"service\": \"bedrock-agentcore\"
-          }
+  --record-type MCP \
+  --descriptors "{
+    \"mcpServer\": {
+      \"source\": {
+        \"fromUrl\": {
+          \"url\": \"https://bedrock-agentcore.${REGION}.amazonaws.com/gateway/${GATEWAY_ID}/target/tgt-payments/mcp\",
+          \"credentialProviderConfigurations\": [{
+            \"credentialProviderType\": \"IAM\",
+            \"credentialProvider\": {
+              \"iamCredentialProvider\": {
+                \"roleArn\": \"arn:aws:iam::$(aws sts get-caller-identity --query Account --output text):role/RegistrySyncRole\",
+                \"service\": \"bedrock-agentcore\"
+              }
+            }
+          }]
         }
-      }]
+      }
     }
   }" \
   --region $REGION
@@ -115,23 +118,26 @@ aws bedrock-agentcore-control create-oauth-credential-provider \
   --region us-east-1
 
 # 2. Create synced record using the credential
-aws bedrock-agentcore-control create-registry-record \
+aws agent-registry-control create-registry-record \
   --registry-id <REGISTRY_ID> \
   --name "partner/logistics-server" \
-  --descriptor-type MCP \
-  --synchronization-type URL \
-  --synchronization-configuration '{
-    "fromUrl": {
-      "url": "https://api.partner.com/mcp",
-      "credentialProviderConfigurations": [{
-        "credentialProviderType": "OAUTH",
-        "credentialProvider": {
-          "oauthCredentialProvider": {
-            "providerArn": "arn:aws:bedrock-agentcore:us-east-1:<account-id>:oauth-credential-provider/partner-api-oauth",
-            "grantType": "CLIENT_CREDENTIALS"
-          }
+  --record-type MCP \
+  --descriptors '{
+    "mcpServer": {
+      "source": {
+        "fromUrl": {
+          "url": "https://api.partner.com/mcp",
+          "credentialProviderConfigurations": [{
+            "credentialProviderType": "OAUTH",
+            "credentialProvider": {
+              "oauthCredentialProvider": {
+                "providerArn": "arn:aws:bedrock-agentcore:us-east-1:<account-id>:oauth-credential-provider/partner-api-oauth",
+                "grantType": "CLIENT_CREDENTIALS"
+              }
+            }
+          }]
         }
-      }]
+      }
     }
   }' \
   --region us-east-1
@@ -162,35 +168,35 @@ Agents running in Runtime can query the registry to dynamically discover and inv
 import boto3
 import json
 
-agentcore_client = boto3.client("bedrock-agentcore")
-agentcore_control = boto3.client("bedrock-agentcore-control")
+agentcore_client = boto3.client("agent-registry")
+agentcore_control = boto3.client("agent-registry-control")
 
-REGISTRY_ARN = "arn:aws:bedrock-agentcore:us-east-1:<account-id>:registry/reg-abc123"
+REGISTRY_ARN = "arn:aws:agent-registry:us-east-1:<account-id>:registry/reg-abc123"
 
 def discover_and_delegate(user_query: str) -> dict:
     """Orchestrator agent discovers relevant agents/tools at runtime."""
 
     # 1. Search registry for relevant capabilities
-    results = agentcore_client.search_registry_records(
+    results = agentcore_client.search_discoverable_registry_records(
         searchQuery=user_query,
         registryIds=[REGISTRY_ARN],
         maxResults=5
     )
 
     # 2. Filter for agents or MCP servers
-    for record in results.get("records", []):
-        if record["descriptorType"] == "A2A":
+    for record in results.get("registryRecords", []):
+        if record["recordType"] == "AGENT":
             # Parse A2A agent card
             agent_card = json.loads(
-                record["descriptors"]["a2a"]["agentCard"]["inlineContent"]
+                record["descriptors"]["a2aAgentCard"]["data"]
             )
             # Invoke the discovered agent via its endpoint
             return invoke_a2a_agent(agent_card["url"], user_query)
 
-        elif record["descriptorType"] == "MCP":
+        elif record["recordType"] == "MCP":
             # Parse MCP server definition
             mcp_def = json.loads(
-                record["descriptors"]["mcp"]["server"]["inlineContent"]
+                record["descriptors"]["mcpServer"]["data"]
             )
             # Use the discovered tools
             return invoke_mcp_tools(mcp_def, user_query)
@@ -223,7 +229,7 @@ Use multiple registries for different purposes, environments, or access levels.
 
 ```bash
 # 1. Read record from dev registry
-RECORD=$(aws bedrock-agentcore-control get-registry-record \
+RECORD=$(aws agent-registry-control get-registry-record \
   --registry-id $DEV_REGISTRY_ID \
   --record-id $RECORD_ID \
   --region us-east-1)
@@ -231,20 +237,22 @@ RECORD=$(aws bedrock-agentcore-control get-registry-record \
 # 2. Extract descriptor and create in prod registry
 DESCRIPTORS=$(echo "$RECORD" | jq '.descriptors')
 NAME=$(echo "$RECORD" | jq -r '.name')
+DISPLAY_NAME=$(echo "$RECORD" | jq -r '.displayName')
 DESC=$(echo "$RECORD" | jq -r '.description')
-TYPE=$(echo "$RECORD" | jq -r '.descriptorType')
+TYPE=$(echo "$RECORD" | jq -r '.recordType')
 
-aws bedrock-agentcore-control create-registry-record \
+aws agent-registry-control create-registry-record \
   --registry-id $PROD_REGISTRY_ID \
   --name "$NAME" \
+  --display-name "$DISPLAY_NAME" \
   --description "$DESC" \
-  --descriptor-type "$TYPE" \
+  --record-type "$TYPE" \
   --descriptors "$DESCRIPTORS" \
   --record-version "1.0.0" \
   --region us-east-1
 
 # 3. Submit for prod approval
-aws bedrock-agentcore-control submit-registry-record-for-approval \
+aws agent-registry-control submit-registry-record-for-approval \
   --registry-id $PROD_REGISTRY_ID \
   --record-id $NEW_RECORD_ID \
   --region us-east-1
@@ -264,26 +272,26 @@ A role that can discover resources and deploy them to Gateway:
       "Sid": "RegistrySearch",
       "Effect": "Allow",
       "Action": [
-        "bedrock-agentcore:SearchRegistryRecords",
-        "bedrock-agentcore:InvokeRegistryMcp"
+        "agent-registry:SearchDiscoverableRegistryRecords",
+        "agent-registry:InvokeRegistryMcp"
       ],
-      "Resource": "arn:aws:bedrock-agentcore:*:*:registry/*"
+      "Resource": "arn:aws:agent-registry:*:*:registry/*"
     },
     {
       "Sid": "RegistryRead",
       "Effect": "Allow",
       "Action": [
-        "bedrock-agentcore:GetRegistryRecord",
-        "bedrock-agentcore:ListRegistryRecords"
+        "agent-registry:GetRegistryRecord",
+        "agent-registry:ListRegistryRecords"
       ],
-      "Resource": "arn:aws:bedrock-agentcore:*:*:registry/*"
+      "Resource": "arn:aws:agent-registry:*:*:registry/*"
     },
     {
       "Sid": "GatewayDeploy",
       "Effect": "Allow",
       "Action": [
-        "bedrock-agentcore:CreateGatewayTarget",
-        "bedrock-agentcore:GetGatewayTarget"
+        "agent-registry:CreateGatewayTarget",
+        "agent-registry:GetGatewayTarget"
       ],
       "Resource": "arn:aws:bedrock-agentcore:*:*:gateway/*"
     }
@@ -295,7 +303,7 @@ A role that can discover resources and deploy them to Gateway:
 
 | Persona | Registry Permissions | Cross-Service Permissions |
 |---------|---------------------|--------------------------|
-| **Consumer** | `SearchRegistryRecords`, `InvokeRegistryMcp` | None required |
+| **Consumer** | `SearchDiscoverableRegistryRecords`, `InvokeRegistryMcp` | None required |
 | **Publisher** | + `CreateRegistryRecord`, `SubmitRegistryRecordForApproval` | None required |
 | **Curator** | + `UpdateRegistryRecordStatus` | None required |
 | **Platform Engineer** | + All Registry operations | Gateway, Runtime, Identity operations |

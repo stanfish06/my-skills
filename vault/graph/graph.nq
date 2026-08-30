@@ -150,7 +150,6 @@
 <https://skillquarium.dev/id/adjusttext> <http://www.w3.org/2000/01/rdf-schema#label> "adjusttext" <urn:vault:core> .
 <https://skillquarium.dev/id/adjusttext> <https://skillquarium.dev/ontology/identifier> "adjusttext" <urn:vault:core> .
 <https://skillquarium.dev/id/adjusttext> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_data-science-compute> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/adjusttext> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/claw-ancestry-pca> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/adjusttext> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cns-plot> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/adjusttext> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/database-lookup> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/adjusttext> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/diagram-generator> <urn:vault:EXTRACTED> .
@@ -252,7 +251,6 @@
 <https://skillquarium.dev/id/aflpp> <https://skillquarium.dev/ontology/identifier> "aflpp" <urn:vault:core> .
 <https://skillquarium.dev/id/aflpp> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_security-auditing> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/aflpp> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/docker> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/aflpp> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/firmware-pentest> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/aflpp> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/harness-writing> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/aflpp> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/libfuzzer> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/aflpp> <https://skillquarium.dev/ontology/source> "skills/aflpp/SKILL.md" <urn:vault:core> .
@@ -435,9 +433,11 @@
 <https://skillquarium.dev/id/ai-sdk> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/ai-generation-persistence> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ai-sdk> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/chat-sdk> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ai-sdk> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-model-serving> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/ai-sdk> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/esm> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ai-sdk> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/json-render> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ai-sdk> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/netlify-ai-gateway> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ai-sdk> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/next-forge> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/ai-sdk> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/telemetry> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ai-sdk> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/v0-dev> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ai-sdk> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/vercel-api> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ai-sdk> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/vercel-functions> <urn:vault:EXTRACTED> .
@@ -1955,7 +1955,6 @@
 <https://skillquarium.dev/id/bio-orchestrator> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/gi-splice> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/bio-orchestrator> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/gwas-lookup> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/bio-orchestrator> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/gwas-pipeline> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/bio-orchestrator> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/gwas-prs> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/bio-orchestrator> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hla-typing> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/bio-orchestrator> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/illumina-bridge> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/bio-orchestrator> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/labstep> <urn:vault:EXTRACTED> .
@@ -3367,6 +3366,7 @@
 <https://skillquarium.dev/id/chebi-skill> <http://www.w3.org/2000/01/rdf-schema#label> "chebi-skill" <urn:vault:core> .
 <https://skillquarium.dev/id/chebi-skill> <https://skillquarium.dev/ontology/identifier> "chebi-skill" <urn:vault:core> .
 <https://skillquarium.dev/id/chebi-skill> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_drug-discovery-chem> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/chebi-skill> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hmdb-skill> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/chebi-skill> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/research-router-skill> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/chebi-skill> <https://skillquarium.dev/ontology/source> "skills/chebi-skill/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/check-bin-obj-clash> <http://purl.org/dc/terms/description> "Detects MSBuild projects with conflicting OutputPath or IntermediateOutputPath. USE FOR: builds failing with 'Cannot create a file when that file already exists', 'The process cannot access the file because it is being used by another process', intermittent build failures that succeed on retry, or missing/overwritten outputs in multi-project or multi-targeting builds where bin/obj (or project.assets.json) collide. Common causes: shared OutputPath, missing AppendTargetFrameworkToOutputPath, extra global properties (e.g. PublishReadyToRun), or SetTargetFramework on a ProjectReference to a single-targeting project. DO NOT USE FOR: file access errors unrelated to MSBuild (OS-level locking), single-project single-TFM builds, non-MSBuild build systems." <urn:vault:core> .
@@ -3404,6 +3404,7 @@
 <https://skillquarium.dev/id/chembl-skill> <http://www.w3.org/2000/01/rdf-schema#label> "chembl-skill" <urn:vault:core> .
 <https://skillquarium.dev/id/chembl-skill> <https://skillquarium.dev/ontology/identifier> "chembl-skill" <urn:vault:core> .
 <https://skillquarium.dev/id/chembl-skill> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_drug-discovery-chem> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/chembl-skill> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hmdb-skill> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/chembl-skill> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/research-router-skill> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/chembl-skill> <https://skillquarium.dev/ontology/source> "skills/chembl-skill/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/chemical-biologist> <http://purl.org/dc/terms/description> "> Expert-thinking profile for Chemical Biologist (wet-lab / chemoproteomics / probe discovery & target validation): Reasons from chemical genetics, ABPP/TPP/CETSA chemoproteomics, and SGC/Portal probe criteria; deconvolves phenotypic hits with PAINS/aggregator triage, inactive analogs, and genetic epistasis while treating colloidal aggregation, probe promiscuity, and degrader DC50/Dmax tag artifacts as first-class failure modes." <urn:vault:core> .
@@ -3705,12 +3706,10 @@
 <https://skillquarium.dev/id/claw-ancestry-pca> <http://www.w3.org/2000/01/rdf-schema#label> "claw-ancestry-pca" <urn:vault:core> .
 <https://skillquarium.dev/id/claw-ancestry-pca> <https://skillquarium.dev/ontology/identifier> "claw-ancestry-pca" <urn:vault:core> .
 <https://skillquarium.dev/id/claw-ancestry-pca> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_genomics-variants> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/claw-ancestry-pca> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/adjusttext> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/claw-ancestry-pca> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/archaic-introgression> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/claw-ancestry-pca> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/fastreer> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/claw-ancestry-pca> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/genome-compare> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/claw-ancestry-pca> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/gwas-pipeline> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/claw-ancestry-pca> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/molecular-ecologist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/claw-ancestry-pca> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/ngs-cli-toolkit> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/claw-ancestry-pca> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scikit-learn> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/claw-ancestry-pca> <https://skillquarium.dev/ontology/source> "skills/claw-ancestry-pca/SKILL.md" <urn:vault:core> .
@@ -4062,6 +4061,7 @@
 <https://skillquarium.dev/id/cloudflare> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/fluid-dynamicist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cloudflare> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/geotechnical-scientist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cloudflare> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/gradio> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/cloudflare> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hmdb-skill> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cloudflare> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/horticulturist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cloudflare> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/jax-best-practices> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/cloudflare> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/lamindb> <urn:vault:EXTRACTED> .
@@ -4877,6 +4877,7 @@
 <https://skillquarium.dev/id/constant-time-analysis> <https://skillquarium.dev/ontology/identifier> "constant-time-analysis" <urn:vault:core> .
 <https://skillquarium.dev/id/constant-time-analysis> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_security-auditing> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/constant-time-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/constant-time-testing> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/constant-time-analysis> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/marketplace> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/constant-time-analysis> <https://skillquarium.dev/ontology/source> "skills/constant-time-analysis/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/constant-time-testing> <http://purl.org/dc/terms/description> "Measures timing side channels in cryptographic implementations by running them, using dudect for statistical analysis and Timecop over Valgrind for dynamic tracing. Covers the formal, symbolic, dynamic, and statistical tool categories and how to read a result. Use when testing whether a running implementation is constant-time, measuring timing variance on a compiled binary, or investigating a suspected timing attack. Not for statically inspecting compiler output — the constant-time-analysis plugin covers that." <urn:vault:core> .
 <https://skillquarium.dev/id/constant-time-testing> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
@@ -5326,6 +5327,7 @@
 <https://skillquarium.dev/id/dask> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/polars> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/dask> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/prototype> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/dask> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scanpy> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/dask> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/spatialdata-squidpy> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/dask> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/vacuum-science-technology-engineer> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/dask> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/vaex> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/dask> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/xarray-pandera-duckdb> <urn:vault:EXTRACTED> .
@@ -6579,6 +6581,7 @@
 <https://skillquarium.dev/id/docker-expert> <https://skillquarium.dev/ontology/identifier> "docker-expert" <urn:vault:core> .
 <https://skillquarium.dev/id/docker-expert> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_cloud-devops> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/docker-expert> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/github-actions-ci> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/docker-expert> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/kubernetes-specialist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/docker-expert> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/nextjs> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/docker-expert> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/performance-optimization> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/docker-expert> <https://skillquarium.dev/ontology/source> "skills/docker-expert/SKILL.md" <urn:vault:core> .
@@ -6875,12 +6878,6 @@
 <https://skillquarium.dev/id/domain_software-dev> <http://www.w3.org/2004/02/skos/core#inScheme> <https://skillquarium.dev/id/domain-scheme> <urn:vault:core> .
 <https://skillquarium.dev/id/domain_software-dev> <http://www.w3.org/2004/02/skos/core#prefLabel> "software-dev" <urn:vault:core> .
 <https://skillquarium.dev/id/domain_software-dev> <https://skillquarium.dev/ontology/identifier> "domain:software-dev" <urn:vault:core> .
-<https://skillquarium.dev/id/domain_uncategorized> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> <urn:vault:core> .
-<https://skillquarium.dev/id/domain_uncategorized> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Domain> <urn:vault:core> .
-<https://skillquarium.dev/id/domain_uncategorized> <http://www.w3.org/2000/01/rdf-schema#label> "uncategorized" <urn:vault:core> .
-<https://skillquarium.dev/id/domain_uncategorized> <http://www.w3.org/2004/02/skos/core#inScheme> <https://skillquarium.dev/id/domain-scheme> <urn:vault:core> .
-<https://skillquarium.dev/id/domain_uncategorized> <http://www.w3.org/2004/02/skos/core#prefLabel> "uncategorized" <urn:vault:core> .
-<https://skillquarium.dev/id/domain_uncategorized> <https://skillquarium.dev/ontology/identifier> "domain:uncategorized" <urn:vault:core> .
 <https://skillquarium.dev/id/domain_vault-meta> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> <urn:vault:core> .
 <https://skillquarium.dev/id/domain_vault-meta> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Domain> <urn:vault:core> .
 <https://skillquarium.dev/id/domain_vault-meta> <http://www.w3.org/2000/01/rdf-schema#label> "vault-meta" <urn:vault:core> .
@@ -7673,6 +7670,7 @@
 <https://skillquarium.dev/id/esm> <http://www.w3.org/2000/01/rdf-schema#label> "esm" <urn:vault:core> .
 <https://skillquarium.dev/id/esm> <https://skillquarium.dev/ontology/identifier> "esm" <urn:vault:core> .
 <https://skillquarium.dev/id/esm> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_drug-discovery-chem> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/esm> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/ai-sdk> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/esm> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/code-testing-agent> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/esm> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/complexa-design> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/esm> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/complexa-evaluate-pdbs> <urn:vault:EXTRACTED> .
@@ -8487,7 +8485,6 @@
 <https://skillquarium.dev/id/firmware-pentest> <http://www.w3.org/2000/01/rdf-schema#label> "firmware-pentest" <urn:vault:core> .
 <https://skillquarium.dev/id/firmware-pentest> <https://skillquarium.dev/ontology/identifier> "firmware-pentest" <urn:vault:core> .
 <https://skillquarium.dev/id/firmware-pentest> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_security-auditing> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/firmware-pentest> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/aflpp> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/firmware-pentest> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/apk-reverse> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/firmware-pentest> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/attack-chain> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/firmware-pentest> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/binary-diff> <urn:vault:EXTRACTED> .
@@ -9834,7 +9831,6 @@
 <https://skillquarium.dev/id/gradio> <http://www.w3.org/2000/01/rdf-schema#label> "gradio" <urn:vault:core> .
 <https://skillquarium.dev/id/gradio> <https://skillquarium.dev/ontology/identifier> "gradio" <urn:vault:core> .
 <https://skillquarium.dev/id/gradio> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_ml-ai> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/gradio> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_uncategorized> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/gradio> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cloudflare> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/gradio> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-apps-python> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/gradio> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-apps> <urn:vault:EXTRACTED> .
@@ -10153,7 +10149,6 @@
 <https://skillquarium.dev/id/gwas-prs> <https://skillquarium.dev/ontology/co_occurs_with> <https://skillquarium.dev/id/gwas-pipeline> <urn:vault:INFERRED> .
 <https://skillquarium.dev/id/gwas-prs> <https://skillquarium.dev/ontology/identifier> "gwas-prs" <urn:vault:core> .
 <https://skillquarium.dev/id/gwas-prs> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_genomics-variants> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/gwas-prs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/bio-orchestrator> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/gwas-prs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/gwas-lookup> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/gwas-prs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/gwas-pipeline> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/gwas-prs> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/matplotlib> <urn:vault:EXTRACTED> .
@@ -10318,12 +10313,12 @@
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/geospatial-and-cartographic-visualization> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/huggingface-papers> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hyperframes> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/ida-reverse> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/json-canvas> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/logfire-query> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/matlab-theming> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/matplotlib> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/modern-typescript> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/open-notebook> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/paper-lookup> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/protocol-reverse> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hex> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/quantum-computing-scientist> <urn:vault:EXTRACTED> .
@@ -10457,7 +10452,10 @@
 <https://skillquarium.dev/id/hmdb-skill> <http://www.w3.org/2000/01/rdf-schema#label> "hmdb-skill" <urn:vault:core> .
 <https://skillquarium.dev/id/hmdb-skill> <https://skillquarium.dev/ontology/identifier> "hmdb-skill" <urn:vault:core> .
 <https://skillquarium.dev/id/hmdb-skill> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_drug-discovery-chem> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/hmdb-skill> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/query> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/hmdb-skill> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/chebi-skill> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/hmdb-skill> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/chembl-skill> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/hmdb-skill> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cloudflare> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/hmdb-skill> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/pubchem-pug-skill> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hmdb-skill> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/research-router-skill> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/hmdb-skill> <https://skillquarium.dev/ontology/source> "skills/hmdb-skill/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/horticulturist> <http://purl.org/dc/terms/description> "> Expert-thinking profile for Horticulturist (orchard/CEA trials / postharvest physiology / rootstock-scion & crop load / IPM (degree-day, MRL/PHI)): Reasons from plant-environment-cultural coupling, source-sink carbon partitioning, and chilling/photoperiod thresholds through rootstock-scion matching, DLI/VPD and substrate EC/pH targets, Dynamic/Utah chill models, and CA/MA postharvest setpoints while treating blossom-end rot, bitter pit, tipburn, storage scald..." <urn:vault:core> .
@@ -10565,7 +10563,10 @@
 <https://skillquarium.dev/id/huggingface-paper-publisher> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_ml-ai> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/huggingface-paper-publisher> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/citation-management> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/huggingface-paper-publisher> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hf-cli> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/huggingface-paper-publisher> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/nature-academic-search> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/huggingface-paper-publisher> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/transformers> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/huggingface-paper-publisher> <https://skillquarium.dev/ontology/source> "skills/huggingface-paper-publisher/SKILL.md" <urn:vault:core> .
+<https://skillquarium.dev/id/huggingface-paper-publisher> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_bibliography> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/huggingface-papers> <http://purl.org/dc/terms/description> "Look up and read Hugging Face paper pages in markdown, and use the papers API for structured metadata such as authors, linked models/datasets/spaces, Github repo and project page. Use when the user shares a Hugging Face paper page URL, an arXiv URL or ID, or asks to summarize, explain, or analyze an AI research paper." <urn:vault:core> .
 <https://skillquarium.dev/id/huggingface-papers> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/huggingface-papers> <http://www.w3.org/2000/01/rdf-schema#label> "huggingface-papers" <urn:vault:core> .
@@ -10759,7 +10760,6 @@
 <https://skillquarium.dev/id/ida-reverse> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/firmware-pentest> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ida-reverse> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/ghidra-reverse> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ida-reverse> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/go-rust-reverse> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/ida-reverse> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hex> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ida-reverse> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/js-reverse> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ida-reverse> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/patch-diff-exploit> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/ida-reverse> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/pentest-tools> <urn:vault:EXTRACTED> .
@@ -11572,6 +11572,7 @@
 <https://skillquarium.dev/id/kubernetes-specialist> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_cloud-devops> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/kubernetes-specialist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/chaos-engineering> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/kubernetes-specialist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/datasources-provisioning> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/kubernetes-specialist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/docker-expert> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/kubernetes-specialist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/performance-optimization> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/kubernetes-specialist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/terraform> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/kubernetes-specialist> <https://skillquarium.dev/ontology/source> "skills/kubernetes-specialist/SKILL.md" <urn:vault:core> .
@@ -11743,7 +11744,6 @@
 <https://skillquarium.dev/id/langgraph> <http://www.w3.org/2000/01/rdf-schema#label> "langgraph" <urn:vault:core> .
 <https://skillquarium.dev/id/langgraph> <https://skillquarium.dev/ontology/identifier> "langgraph" <urn:vault:core> .
 <https://skillquarium.dev/id/langgraph> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_ml-ai> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/langgraph> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_uncategorized> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/langgraph> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/building-pydantic-ai-agents> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/langgraph> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/chunk> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/langgraph> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/crewai> <urn:vault:EXTRACTED> .
@@ -12263,13 +12263,11 @@
 <https://skillquarium.dev/id/marimo> <http://www.w3.org/2000/01/rdf-schema#label> "marimo" <urn:vault:core> .
 <https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/identifier> "marimo" <urn:vault:core> .
 <https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_data-science-compute> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_uncategorized> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/duckdb-docs> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/modern-python> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/ngs-bulk-rnaseq-differential-expression> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/ngs-shotgun-metagenomics> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/polars> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scrna-seq-qc> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/xarray-pandera-duckdb> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marimo> <https://skillquarium.dev/ontology/source> "skills/marimo/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/marine-biologist> <http://purl.org/dc/terms/description> "> Expert-thinking profile for Marine Biologist (field / shipboard / biological oceanography / eDNA & observing systems): Reasons from water-mass stratification, CTD–Niskin and CalCOFI-style net tows, BRUV, and MiFish/COI eDNA through OBIS/WoRMS/GBIF and ARGO/BGC-Argo; treats mesopelagic DVM, hypoxia/Ω_aragonite constraints, fluorometer quenching, BRUV MaxN bias, and transect pseudoreplication as first-class failure modes." <urn:vault:core> .
@@ -12349,6 +12347,7 @@
 <https://skillquarium.dev/id/marketplace> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cms> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marketplace> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/comp-sheet> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marketplace> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/comps> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/marketplace> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/constant-time-analysis> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marketplace> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/dcf> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marketplace> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/devcontainer-setup> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/marketplace> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/earnings-review> <urn:vault:EXTRACTED> .
@@ -12382,7 +12381,6 @@
 <https://skillquarium.dev/id/markitdown> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/docx> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/markitdown> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/liteparse> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/markitdown> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/pptx> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/markitdown> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scientific-schematics> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/markitdown> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/xlsx> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/markitdown> <https://skillquarium.dev/ontology/source> "skills/markitdown/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/mass-spectrometrist> <http://purl.org/dc/terms/description> "> Expert-thinking profile for Mass Spectrometrist (clinical / research): Reasons from ion formation, m/z resolution and mass accuracy, fragmentation, and calibrated ion statistics through ESI/APCI/MALDI tuning, CID/HCD/ETD MS/MS, isotope-pattern formula assignment, and spectral libraries (NIST, mzCloud, GNPS) under FDA/ICH M10/MSI tiers, while treating matrix suppression..." <urn:vault:core> .
@@ -13709,7 +13707,6 @@
 <https://skillquarium.dev/id/molecular-ecologist> <https://skillquarium.dev/ontology/in_discipline> <https://skillquarium.dev/id/discipline_biology-life-sciences> <urn:vault:ASSERTED> .
 <https://skillquarium.dev/id/molecular-ecologist> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_scientific-expert-profiles> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/molecular-ecologist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/archaic-introgression> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/molecular-ecologist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/claw-ancestry-pca> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/molecular-ecologist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/ecologist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/molecular-ecologist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/evolutionary-biologist> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/molecular-ecologist> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/fastreer> <urn:vault:EXTRACTED> .
@@ -14116,6 +14113,7 @@
 <https://skillquarium.dev/id/nature-academic-search> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/citation-management> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/nature-academic-search> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/distributed-systems-researcher> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/nature-academic-search> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/firecrawl-research-index> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/nature-academic-search> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/huggingface-paper-publisher> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/nature-academic-search> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/nature-citation> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/nature-academic-search> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/nature-data> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/nature-academic-search> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/nature-figure> <urn:vault:EXTRACTED> .
@@ -16107,6 +16105,7 @@
 <https://skillquarium.dev/id/open-notebook> <http://www.w3.org/2000/01/rdf-schema#label> "open-notebook" <urn:vault:core> .
 <https://skillquarium.dev/id/open-notebook> <https://skillquarium.dev/ontology/identifier> "open-notebook" <urn:vault:core> .
 <https://skillquarium.dev/id/open-notebook> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_literature-discovery> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/open-notebook> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hex> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/open-notebook> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/literature-review> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/open-notebook> <https://skillquarium.dev/ontology/source> "skills/open-notebook/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/openai-ads-conversions-setup> <http://purl.org/dc/terms/description> "Guide Codex through instrumenting or extending repositories with OpenAI Ads Measurement Pixel and optional Conversions API (CAPI). Use when adding Ads conversion tracking, browser pixel events, server-side conversion events, event_id deduplication, CAPI secret placeholders, incremental conversion coverage, or validating Ads conversion setup. Applies to local repositories and PR review contexts; prioritize safe, reviewable diffs and never place API keys or secrets in source code or client bundles." <urn:vault:core> .
@@ -16675,7 +16674,6 @@
 <https://skillquarium.dev/id/paper-2-web> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/firecrawl-research-index> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/paper-2-web> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scientific-schematics> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/paper-2-web> <https://skillquarium.dev/ontology/source> "skills/paper-2-web/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/paper-2-web> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_bibliography> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/paper-lookup> <http://purl.org/dc/terms/description> "Search 10 academic literature APIs for papers, preprints, citations, and open-access full text, and return results with reproducible provenance. Covers PubMed, PMC (full text), bioRxiv, medRxiv, arXiv, OpenAlex, Crossref, Semantic Scholar, CORE, Unpaywall. Use when searching for papers, citations, DOI/PMID/arXiv lookups, abstracts, full text, open-access PDFs, preprints, citation graphs, author publications, or any scholarly literature query. Triggers on mentions of any supported database or requests like \"find papers on X\", \"look up this DOI\", \"who cites this paper\", or \"get me the PDF\"." <urn:vault:core> .
 <https://skillquarium.dev/id/paper-lookup> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
 <https://skillquarium.dev/id/paper-lookup> <http://www.w3.org/2000/01/rdf-schema#label> "paper-lookup" <urn:vault:core> .
@@ -16838,7 +16836,6 @@
 <https://skillquarium.dev/id/pathway-enricher> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/pathway-enrichment> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/pathway-enricher> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/rnaseq-de> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/pathway-enricher> <https://skillquarium.dev/ontology/source> "skills/pathway-enricher/SKILL.md" <urn:vault:core> .
-<https://skillquarium.dev/id/pathway-enricher> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_genotypes> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/pathway-enricher> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_ranked-genes> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/pathway-enrichment> <http://purl.org/dc/terms/description> "Run pathway and gene-set enrichment analysis on gene lists or ranked gene data, then interpret the results. Use whenever the user has a set of genes (differentially expressed genes from PyDESeq2/Scanpy, CRISPR-screen hits, cluster marker genes, proteomics hits) and wants to know which biological pathways, GO terms, or gene sets are over-represented or enriched. Covers over-representation analysis (ORA / Enrichr / Fisher / hypergeometric), ranked Gene Set Enrichment Analysis (GSEA / preranked), single-sample scoring (ssGSEA/GSVA), and functional profiling via gseapy, g:Profiler, Enrichr libraries, MSigDB, GO, KEGG, Reactome, and WikiPathways — plus gene-ID mapping, choosing the right background universe, multiple-testing correction, redundancy reduction, dotplots/enrichment maps, and publication-ready tables. Use this for \"pathway analysis\", \"enrichment analysis\", \"GO enrichment\", \"KEGG/Reactome pathways\", \"GSEA\", \"over-representation\", \"functional annotation\", or \"what pathways are my genes in\"." <urn:vault:core> .
 <https://skillquarium.dev/id/pathway-enrichment> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://skillquarium.dev/ontology/Skill> <urn:vault:core> .
@@ -18435,6 +18432,7 @@
 <https://skillquarium.dev/id/pubchem-pug-skill> <http://www.w3.org/2000/01/rdf-schema#label> "pubchem-pug-skill" <urn:vault:core> .
 <https://skillquarium.dev/id/pubchem-pug-skill> <https://skillquarium.dev/ontology/identifier> "pubchem-pug-skill" <urn:vault:core> .
 <https://skillquarium.dev/id/pubchem-pug-skill> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_drug-discovery-chem> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/pubchem-pug-skill> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hmdb-skill> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/pubchem-pug-skill> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/ncbi-datasets> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/pubchem-pug-skill> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/research-router-skill> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/pubchem-pug-skill> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/synthetic-biologist> <urn:vault:EXTRACTED> .
@@ -19080,7 +19078,6 @@
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/fastapi> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/figma-design-to-code> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/gnomad-graphql-skill> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hmdb-skill> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/install-duckdb> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/langfuse> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/query> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/logfire-query> <urn:vault:EXTRACTED> .
@@ -21049,7 +21046,6 @@
 <https://skillquarium.dev/id/scientific-schematics> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/latex-posters> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/scientific-schematics> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/literature-review> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/scientific-schematics> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/market-research-reports> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/scientific-schematics> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/markitdown> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/scientific-schematics> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/paper-2-web> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/scientific-schematics> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/pdf> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/scientific-schematics> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/peer-review> <urn:vault:EXTRACTED> .
@@ -21296,7 +21292,6 @@
 <https://skillquarium.dev/id/scrna-seq-qc> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_single-cell-rnaseq> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/scrna-seq-qc> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/anndata> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/scrna-seq-qc> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/article-data-fetcher> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/scrna-seq-qc> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/marimo> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/scrna-seq-qc> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/ngs-analysis-router> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/scrna-seq-qc> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/ngs-scrna-seq> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/scrna-seq-qc> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scanpy> <urn:vault:EXTRACTED> .
@@ -22380,12 +22375,12 @@
 <https://skillquarium.dev/id/spatialdata-squidpy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/bio-analysis-system> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/spatialdata-squidpy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cell-communication> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/spatialdata-squidpy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/cellxgene-census> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/spatialdata-squidpy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/dask> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/spatialdata-squidpy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/lamindb> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/spatialdata-squidpy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/napari-viz> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/spatialdata-squidpy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/proteomics> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/spatialdata-squidpy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scanpy> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/spatialdata-squidpy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/single-cell-biologist> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/spatialdata-squidpy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/umap-learn> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/spatialdata-squidpy> <https://skillquarium.dev/ontology/source> "skills/spatialdata-squidpy/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/spatialdata-squidpy> <https://skillquarium.dev/ontology/touches> <https://skillquarium.dev/id/artifact_h5ad> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/spec-driven-development> <http://purl.org/dc/terms/description> "Creates specs before coding. Use when starting a new project, feature, or significant change and no specification exists yet. Use when requirements are unclear, ambiguous, or only exist as a vague idea." <urn:vault:core> .
@@ -22473,7 +22468,6 @@
 <https://skillquarium.dev/id/sqlalchemy> <http://www.w3.org/2000/01/rdf-schema#label> "sqlalchemy" <urn:vault:core> .
 <https://skillquarium.dev/id/sqlalchemy> <https://skillquarium.dev/ontology/identifier> "sqlalchemy" <urn:vault:core> .
 <https://skillquarium.dev/id/sqlalchemy> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_software-dev> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/sqlalchemy> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_uncategorized> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/sqlalchemy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/fastapi> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/sqlalchemy> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/logfire-instrumentation> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/sqlalchemy> <https://skillquarium.dev/ontology/source> "skills/sqlalchemy/SKILL.md" <urn:vault:core> .
@@ -27320,7 +27314,6 @@
 <https://skillquarium.dev/id/streamlit> <http://www.w3.org/2000/01/rdf-schema#label> "streamlit" <urn:vault:core> .
 <https://skillquarium.dev/id/streamlit> <https://skillquarium.dev/ontology/identifier> "streamlit" <urn:vault:core> .
 <https://skillquarium.dev/id/streamlit> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_data-science-compute> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/streamlit> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_uncategorized> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/streamlit> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-apps-python> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/streamlit> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/databricks-apps> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/streamlit> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/deepnote-links> <urn:vault:EXTRACTED> .
@@ -28005,6 +27998,7 @@
 <https://skillquarium.dev/id/telemetry> <https://skillquarium.dev/ontology/in_domain> <https://skillquarium.dev/id/domain_hosting-edge-platforms> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/telemetry> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/aerospace-engineer> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/telemetry> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/agentic-workflows> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/telemetry> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/ai-sdk> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/telemetry> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/alloy> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/telemetry> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/apollo-router> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/telemetry> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/astronautical-engineer> <urn:vault:EXTRACTED> .
@@ -28601,6 +28595,7 @@
 <https://skillquarium.dev/id/transformers> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hf-cli> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/transformers> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/hugging-science> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/transformers> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/huggingface-community-evals> <urn:vault:EXTRACTED> .
+<https://skillquarium.dev/id/transformers> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/huggingface-paper-publisher> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/transformers> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/huggingface-vision-trainer> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/transformers> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/modal> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/transformers> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/molfeat> <urn:vault:EXTRACTED> .
@@ -29640,7 +29635,6 @@
 <https://skillquarium.dev/id/umap-learn> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/scvi-tools> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/umap-learn> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/seurat> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/umap-learn> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/single-cell-biologist> <urn:vault:EXTRACTED> .
-<https://skillquarium.dev/id/umap-learn> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/spatialdata-squidpy> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/umap-learn> <https://skillquarium.dev/ontology/references> <https://skillquarium.dev/id/vacuum-science-technology-engineer> <urn:vault:EXTRACTED> .
 <https://skillquarium.dev/id/umap-learn> <https://skillquarium.dev/ontology/source> "skills/umap-learn/SKILL.md" <urn:vault:core> .
 <https://skillquarium.dev/id/uml-and-software-architecture-visualization> <http://purl.org/dc/terms/description> "Design, critique, read, write, render, and implement UML and UML-like software diagrams. Use when the user mentions UML, sequence diagrams, class diagrams, activity diagrams, state machines, use case diagrams, component diagrams, deployment diagrams, object diagrams, package diagrams, profile diagrams, timing diagrams, communication diagrams, interaction overview diagrams, composite structure diagrams, ERDs, database schema diagrams, C4, BPMN, swimlanes, flowcharts, network diagrams, application architecture diagrams, software architecture diagrams, diagram-as-code, model-as-code, XMI, UMLDI, PlantUML, Mermaid, Graphviz DOT, D2, Structurizr, DBML, diagrams.net/draw.io, Kroki, or interactive diagram editors and explorers." <urn:vault:core> .

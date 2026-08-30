@@ -3,19 +3,19 @@
  "metrics": {
   "skills": 2081,
   "expert_profiles": 503,
-  "nodes": 2155,
+  "nodes": 2154,
   "edges": 15223,
   "generic_names_blocked": 32,
-  "tier1_edges": 4439,
-  "tier2_edges": 700,
-  "alias_edges": 4232,
+  "tier1_edges": 4475,
+  "tier2_edges": 699,
+  "alias_edges": 4263,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
-  "artifact_edges": 525,
+  "artifact_edges": 524,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.71,
+  "mean_skill_degree": 5.72,
   "median_skill_degree": 4,
   "orphan_count": 133,
   "orphan_rate": 0.0639,
@@ -25,10 +25,10 @@
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2086,
-   "references": 11826,
+   "in_domain": 2081,
+   "references": 11832,
    "in_discipline": 599,
-   "touches": 525,
+   "touches": 524,
    "has_step": 69,
    "co_occurs_with": 96,
    "chains_to": 22
@@ -8373,11 +8373,6 @@
    "id": "domain:software-dev",
    "type": "Domain",
    "label": "software-dev"
-  },
-  {
-   "id": "domain:uncategorized",
-   "type": "Domain",
-   "label": "uncategorized"
   },
   {
    "id": "domain:vault-meta",
@@ -32347,15 +32342,6 @@
   {
    "src": "adjusttext",
    "rel": "references",
-   "dst": "claw-ancestry-pca",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "adjusttext named in claw-ancestry-pca/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "adjusttext",
-   "rel": "references",
    "dst": "cns-plot",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -32864,15 +32850,6 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "docker referenced in code/link context in aflpp/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "aflpp",
-   "rel": "references",
-   "dst": "firmware-pentest",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "aflpp named in firmware-pentest/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -33796,6 +33773,15 @@
   {
    "src": "ai-sdk",
    "rel": "references",
+   "dst": "esm",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "esm named in ai-sdk/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ai-sdk",
+   "rel": "references",
    "dst": "json-render",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -33818,6 +33804,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "ai-sdk named in next-forge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ai-sdk",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in ai-sdk/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -35950,7 +35945,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "api-security named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in api-security/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -36058,7 +36053,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "apk-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in apk-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -38848,7 +38843,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "attack-chain named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in attack-chain/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -40441,7 +40436,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "binary-diff named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in binary-diff/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -41189,15 +41184,6 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "bio-orchestrator named in gwas-pipeline/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "bio-orchestrator",
-   "rel": "references",
-   "dst": "gwas-prs",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "bio-orchestrator named in gwas-prs/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -44635,7 +44621,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "browser-automation named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in browser-automation/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -44698,7 +44684,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "browser-extension-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in browser-extension-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -46633,7 +46619,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "case-review named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in case-review/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -48286,6 +48272,15 @@
   {
    "src": "chebi-skill",
    "rel": "references",
+   "dst": "hmdb-skill",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "chebi-skill named in hmdb-skill/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "chebi-skill",
+   "rel": "references",
    "dst": "research-router-skill",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -48434,6 +48429,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "chembl-skill",
+   "rel": "references",
+   "dst": "hmdb-skill",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "chembl-skill named in hmdb-skill/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -50005,15 +50009,6 @@
   {
    "src": "claw-ancestry-pca",
    "rel": "references",
-   "dst": "adjusttext",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "adjusttext named in claw-ancestry-pca/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "claw-ancestry-pca",
-   "rel": "references",
    "dst": "archaic-introgression",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -50045,15 +50040,6 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "curated alias of gwas-pipeline appears in claw-ancestry-pca/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "claw-ancestry-pca",
-   "rel": "references",
-   "dst": "molecular-ecologist",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of molecular-ecologist appears in claw-ancestry-pca/SKILL.md",
    "status": "accepted"
   },
   {
@@ -51565,7 +51551,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "cloud-k8s named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in cloud-k8s/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -51773,6 +51759,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "curated alias of cloudflare appears in gradio/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "cloudflare",
+   "rel": "references",
+   "dst": "hmdb-skill",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "cloudflare named in hmdb-skill/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -52393,7 +52388,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "code-audit named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in code-audit/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -56258,6 +56253,15 @@
    "status": "accepted"
   },
   {
+   "src": "constant-time-analysis",
+   "rel": "references",
+   "dst": "marketplace",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "marketplace named in constant-time-analysis/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "constant-time-testing",
    "rel": "in_domain",
    "dst": "domain:security-auditing",
@@ -58271,6 +58275,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "dask named in scanpy/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "dask",
+   "rel": "references",
+   "dst": "spatialdata-squidpy",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "dask named in spatialdata-squidpy/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -63301,7 +63314,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "diagram-generator named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in diagram-generator/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -64219,7 +64232,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "digital-forensics named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in digital-forensics/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -64765,6 +64778,15 @@
   {
    "src": "docker-expert",
    "rel": "references",
+   "dst": "kubernetes-specialist",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "kubernetes-specialist named in docker-expert/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-expert",
+   "rel": "references",
    "dst": "nextjs",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -64876,7 +64898,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "docs-generator named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in docs-generator/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -66901,7 +66923,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "edr-bypass-re named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in edr-bypass-re/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -68909,6 +68931,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "esm",
+   "rel": "references",
+   "dst": "ai-sdk",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "esm named in ai-sdk/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -72964,15 +72995,6 @@
   {
    "src": "firmware-pentest",
    "rel": "references",
-   "dst": "aflpp",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "aflpp named in firmware-pentest/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "firmware-pentest",
-   "rel": "references",
    "dst": "apk-reverse",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -73084,7 +73106,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "firmware-pentest named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in firmware-pentest/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -77944,7 +77966,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "ghidra-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in ghidra-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -79015,7 +79037,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "go-rust-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in go-rust-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -79616,15 +79638,6 @@
    "src": "gradio",
    "rel": "in_domain",
    "dst": "domain:ml-ai",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "gradio",
-   "rel": "in_domain",
-   "dst": "domain:uncategorized",
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
@@ -81433,15 +81446,6 @@
   {
    "src": "gwas-prs",
    "rel": "references",
-   "dst": "bio-orchestrator",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "bio-orchestrator named in gwas-prs/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "gwas-prs",
-   "rel": "references",
    "dst": "gwas-lookup",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -82315,15 +82319,6 @@
   {
    "src": "hex",
    "rel": "references",
-   "dst": "ida-reverse",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "hex named in ida-reverse/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "hex",
-   "rel": "references",
    "dst": "json-canvas",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -82364,6 +82359,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "hex named in modern-typescript/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "hex",
+   "rel": "references",
+   "dst": "open-notebook",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "hex named in open-notebook/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -83089,10 +83093,37 @@
   {
    "src": "hmdb-skill",
    "rel": "references",
-   "dst": "query",
+   "dst": "chebi-skill",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "query referenced in code/link context in hmdb-skill/SKILL.md",
+   "justification": "chebi-skill named in hmdb-skill/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "hmdb-skill",
+   "rel": "references",
+   "dst": "chembl-skill",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "chembl-skill named in hmdb-skill/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "hmdb-skill",
+   "rel": "references",
+   "dst": "cloudflare",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "cloudflare named in hmdb-skill/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "hmdb-skill",
+   "rel": "references",
+   "dst": "pubchem-pug-skill",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "pubchem-pug-skill named in hmdb-skill/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -83507,6 +83538,33 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "curated alias of hf-cli appears in huggingface-paper-publisher/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "huggingface-paper-publisher",
+   "rel": "references",
+   "dst": "nature-academic-search",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of nature-academic-search appears in huggingface-paper-publisher/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "huggingface-paper-publisher",
+   "rel": "references",
+   "dst": "transformers",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "transformers named in huggingface-paper-publisher/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "huggingface-paper-publisher",
+   "rel": "touches",
+   "dst": "artifact:bibliography",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "Bibliography named in huggingface-paper-publisher/SKILL.md",
    "status": "accepted"
   },
   {
@@ -84394,15 +84452,6 @@
   {
    "src": "ida-reverse",
    "rel": "references",
-   "dst": "hex",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "hex named in ida-reverse/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "ida-reverse",
-   "rel": "references",
    "dst": "js-reverse",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -84469,7 +84518,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "ida-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in ida-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -87061,7 +87110,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "js-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in js-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -88309,6 +88358,15 @@
   {
    "src": "kubernetes-specialist",
    "rel": "references",
+   "dst": "docker-expert",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "kubernetes-specialist named in docker-expert/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "kubernetes-specialist",
+   "rel": "references",
    "dst": "performance-optimization",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -88805,15 +88863,6 @@
    "src": "langgraph",
    "rel": "in_domain",
    "dst": "domain:ml-ai",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "langgraph",
-   "rel": "in_domain",
-   "dst": "domain:uncategorized",
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
@@ -90616,7 +90665,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "llm-security named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in llm-security/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -91498,7 +91547,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "macos-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in macos-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -91624,7 +91673,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "malware-analysis named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in malware-analysis/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -91872,15 +91921,6 @@
   },
   {
    "src": "marimo",
-   "rel": "in_domain",
-   "dst": "domain:uncategorized",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "marimo",
    "rel": "references",
    "dst": "duckdb-docs",
    "weight": 1.0,
@@ -91922,15 +91962,6 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "polars named in marimo/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "marimo",
-   "rel": "references",
-   "dst": "scrna-seq-qc",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "marimo named in scrna-seq-qc/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -92305,6 +92336,15 @@
   {
    "src": "marketplace",
    "rel": "references",
+   "dst": "constant-time-analysis",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "marketplace named in constant-time-analysis/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "marketplace",
+   "rel": "references",
    "dst": "dcf",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -92552,15 +92592,6 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "pptx named in markitdown/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "markitdown",
-   "rel": "references",
-   "dst": "scientific-schematics",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "scientific-schematics named in markitdown/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -98383,7 +98414,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "mobile-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in mobile-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -98942,15 +98973,6 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "curated alias of molecular-ecologist appears in archaic-introgression/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "molecular-ecologist",
-   "rel": "references",
-   "dst": "claw-ancestry-pca",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of molecular-ecologist appears in claw-ancestry-pca/SKILL.md",
    "status": "accepted"
   },
   {
@@ -100886,6 +100908,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "curated alias of firecrawl-research-index appears in nature-academic-search/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "nature-academic-search",
+   "rel": "references",
+   "dst": "huggingface-paper-publisher",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of nature-academic-search appears in huggingface-paper-publisher/SKILL.md",
    "status": "accepted"
   },
   {
@@ -111979,6 +112010,15 @@
   {
    "src": "open-notebook",
    "rel": "references",
+   "dst": "hex",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "hex named in open-notebook/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "open-notebook",
+   "rel": "references",
    "dst": "literature-review",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -113755,7 +113795,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "ot-ics named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in ot-ics/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -114821,15 +114861,6 @@
    "status": "accepted"
   },
   {
-   "src": "paper-2-web",
-   "rel": "touches",
-   "dst": "artifact:bibliography",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "Bibliography named in paper-2-web/SKILL.md",
-   "status": "accepted"
-  },
-  {
    "src": "paper-lookup",
    "rel": "in_domain",
    "dst": "domain:literature-discovery",
@@ -115492,7 +115523,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "patch-diff-exploit named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in patch-diff-exploit/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -115763,15 +115794,6 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "rnaseq-de named in pathway-enricher/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "pathway-enricher",
-   "rel": "touches",
-   "dst": "artifact:genotypes",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "Genotype calls named in pathway-enricher/SKILL.md",
    "status": "accepted"
   },
   {
@@ -116752,7 +116774,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "pentest-tools named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in pentest-tools/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -123817,7 +123839,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "protocol-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in protocol-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -124322,6 +124344,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "pubchem-pug-skill",
+   "rel": "references",
+   "dst": "hmdb-skill",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "pubchem-pug-skill named in hmdb-skill/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -125068,7 +125099,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "pwn-chain named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in pwn-chain/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -127234,15 +127265,6 @@
   {
    "src": "query",
    "rel": "references",
-   "dst": "hmdb-skill",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "query referenced in code/link context in hmdb-skill/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "query",
-   "rel": "references",
    "dst": "install-duckdb",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -127993,7 +128015,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "radare2 named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in radare2/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133231,7 +133253,7 @@
    "dst": "reverse-skill-router",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "reverse-engineering named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in reverse-engineering/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133258,7 +133280,7 @@
    "dst": "api-security",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "api-security named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in api-security/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133267,7 +133289,7 @@
    "dst": "apk-reverse",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "apk-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in apk-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133276,7 +133298,7 @@
    "dst": "attack-chain",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "attack-chain named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in attack-chain/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133285,7 +133307,7 @@
    "dst": "binary-diff",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "binary-diff named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in binary-diff/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133294,7 +133316,7 @@
    "dst": "browser-automation",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "browser-automation named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in browser-automation/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133303,7 +133325,7 @@
    "dst": "browser-extension-reverse",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "browser-extension-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in browser-extension-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133312,7 +133334,7 @@
    "dst": "case-review",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "case-review named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in case-review/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133321,7 +133343,7 @@
    "dst": "cloud-k8s",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "cloud-k8s named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in cloud-k8s/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133330,7 +133352,7 @@
    "dst": "code-audit",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "code-audit named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in code-audit/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133357,7 +133379,7 @@
    "dst": "diagram-generator",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "diagram-generator named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in diagram-generator/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133366,7 +133388,7 @@
    "dst": "digital-forensics",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "digital-forensics named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in digital-forensics/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133375,7 +133397,7 @@
    "dst": "docs-generator",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "docs-generator named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in docs-generator/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133393,7 +133415,7 @@
    "dst": "edr-bypass-re",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "edr-bypass-re named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in edr-bypass-re/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133411,7 +133433,7 @@
    "dst": "firmware-pentest",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "firmware-pentest named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in firmware-pentest/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133420,7 +133442,7 @@
    "dst": "ghidra-reverse",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "ghidra-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in ghidra-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133429,7 +133451,7 @@
    "dst": "go-rust-reverse",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "go-rust-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in go-rust-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133447,7 +133469,7 @@
    "dst": "ida-reverse",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "ida-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in ida-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133465,7 +133487,7 @@
    "dst": "js-reverse",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "js-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in js-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133474,7 +133496,7 @@
    "dst": "llm-security",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "llm-security named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in llm-security/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133483,7 +133505,7 @@
    "dst": "macos-reverse",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "macos-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in macos-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133492,7 +133514,7 @@
    "dst": "malware-analysis",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "malware-analysis named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in malware-analysis/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133501,7 +133523,7 @@
    "dst": "mobile-reverse",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "mobile-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in mobile-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133510,7 +133532,7 @@
    "dst": "ot-ics",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "ot-ics named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in ot-ics/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133519,7 +133541,7 @@
    "dst": "patch-diff-exploit",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "patch-diff-exploit named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in patch-diff-exploit/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133528,7 +133550,7 @@
    "dst": "pentest-tools",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "pentest-tools named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in pentest-tools/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133537,7 +133559,7 @@
    "dst": "protocol-reverse",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "protocol-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in protocol-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133546,7 +133568,7 @@
    "dst": "pwn-chain",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "pwn-chain named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in pwn-chain/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133555,7 +133577,7 @@
    "dst": "radare2",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "radare2 named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in radare2/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -133573,7 +133595,7 @@
    "dst": "reverse-engineering",
    "weight": 1.0,
    "provenance": "EXTRACTED",
-   "justification": "reverse-engineering named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in reverse-engineering/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -140050,15 +140072,6 @@
   {
    "src": "scientific-schematics",
    "rel": "references",
-   "dst": "markitdown",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "scientific-schematics named in markitdown/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "scientific-schematics",
-   "rel": "references",
    "dst": "paper-2-web",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -141638,15 +141651,6 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "curated alias of article-data-fetcher appears in scrna-seq-qc/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "scrna-seq-qc",
-   "rel": "references",
-   "dst": "marimo",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "marimo named in scrna-seq-qc/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -147205,6 +147209,15 @@
   {
    "src": "spatialdata-squidpy",
    "rel": "references",
+   "dst": "dask",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "dask named in spatialdata-squidpy/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "spatialdata-squidpy",
+   "rel": "references",
    "dst": "lamindb",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -147245,15 +147258,6 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "curated alias of spatialdata-squidpy appears in single-cell-biologist/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "spatialdata-squidpy",
-   "rel": "references",
-   "dst": "umap-learn",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of umap-learn appears in spatialdata-squidpy/SKILL.md",
    "status": "accepted"
   },
   {
@@ -147602,15 +147606,6 @@
    "src": "sqlalchemy",
    "rel": "in_domain",
    "dst": "domain:software-dev",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "sqlalchemy",
-   "rel": "in_domain",
-   "dst": "domain:uncategorized",
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
@@ -148556,15 +148551,6 @@
    "src": "streamlit",
    "rel": "in_domain",
    "dst": "domain:data-science-compute",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "streamlit",
-   "rel": "in_domain",
-   "dst": "domain:uncategorized",
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
@@ -152047,6 +152033,15 @@
   {
    "src": "telemetry",
    "rel": "references",
+   "dst": "ai-sdk",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in ai-sdk/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
    "dst": "alloy",
    "weight": 1.0,
    "provenance": "EXTRACTED",
@@ -155228,6 +155223,15 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "transformers named in huggingface-community-evals/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "transformers",
+   "rel": "references",
+   "dst": "huggingface-paper-publisher",
+   "weight": 1.0,
+   "provenance": "EXTRACTED",
+   "justification": "transformers named in huggingface-paper-publisher/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -161096,15 +161100,6 @@
    "weight": 1.0,
    "provenance": "EXTRACTED",
    "justification": "curated alias of umap-learn appears in single-cell-biologist/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "umap-learn",
-   "rel": "references",
-   "dst": "spatialdata-squidpy",
-   "weight": 1.0,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of umap-learn appears in spatialdata-squidpy/SKILL.md",
    "status": "accepted"
   },
   {

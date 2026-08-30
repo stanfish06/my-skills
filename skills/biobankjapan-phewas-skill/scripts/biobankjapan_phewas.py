@@ -21,6 +21,7 @@ from typing import Any
 import requests
 from variant_resolution import (
     VariantResolutionError,
+    build_variant_record,
     extract_variant_input,
     resolve_query_variant,
 )
@@ -89,6 +90,19 @@ def fetch_bbj_variant(
     return response.json(), response.status_code
 
 
+def candidate_variants(parsed: dict[str, Any], alts: list[str]) -> list[dict[str, Any]]:
+    """The resolved alt first, then the site's other alternates."""
+    ordered = [parsed.get("alt")] + [a for a in alts if a != parsed.get("alt")]
+    out = []
+    for alt in ordered:
+        if not alt:
+            continue
+        record = build_variant_record(parsed["chr"], parsed["pos"], parsed.get("ref"), alt)
+        if record.get("canonical"):
+            out.append(record)
+    return out or [parsed]
+
+
 def extract_associations(data: Any) -> list[Any]:
     if data is None:
         return []
@@ -145,14 +159,26 @@ def main() -> int:
         return 1
 
     session = requests.Session()
+    candidates = candidate_variants(parsed, list(resolution.get("alts") or []))
+    attempted: list[str] = []
+    data = None
     try:
-        data, status_code = fetch_bbj_variant(session, parsed["canonical"], timeout_sec)
+        for candidate in candidates:
+            attempted.append(candidate["canonical"])
+            data, _status = fetch_bbj_variant(session, candidate["canonical"], timeout_sec)
+            if data is not None:
+                parsed = candidate
+                break
     except requests.RequestException as exc:
         sys.stdout.write(json.dumps(error("network_error", f"BBJ request failed: {exc}")))
         return 1
     except ValueError as exc:
         sys.stdout.write(json.dumps(error("invalid_response", f"BBJ returned non-JSON: {exc}")))
         return 1
+    if data is not None and len(attempted) > 1:
+        warnings.append(
+            f"Tried {attempted[:-1]} with no BioBank Japan record; answered from {parsed['canonical']}."
+        )
 
     variant_url = f"{BBJ_BASE}/variant/{parsed['canonical']}"
     saved_raw_output_path: str | None = None
@@ -165,8 +191,12 @@ def main() -> int:
             return 1
         saved_raw_output_path = str(raw_path)
 
-    if status_code == 404:
-        warnings.append("Variant not found in BioBank Japan PheWAS API (HTTP 404).")
+    if data is None:
+        warnings.append(
+            "Variant not found in BioBank Japan PheWAS API; tried "
+            + ", ".join(attempted)
+            + ". BBJ answers an absent variant with HTTP 200 and a body of `null`."
+        )
         output = {
             "ok": True,
             "source": "biobank-japan",

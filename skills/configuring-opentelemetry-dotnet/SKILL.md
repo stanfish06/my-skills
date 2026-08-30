@@ -53,8 +53,9 @@ Install only the packages that match the libraries your application uses:
 
 ```bash
 dotnet add package OpenTelemetry.Instrumentation.SqlClient           # SQL Server queries
-dotnet add package OpenTelemetry.Instrumentation.EntityFrameworkCore  # EF Core
-dotnet add package OpenTelemetry.Instrumentation.GrpcNetClient       # gRPC calls
+# Beta-only packages — no stable version has shipped, so --prerelease is required
+dotnet add package OpenTelemetry.Instrumentation.EntityFrameworkCore --prerelease  # EF Core
+dotnet add package OpenTelemetry.Instrumentation.GrpcNetClient --prerelease       # gRPC calls
 dotnet add package OpenTelemetry.Instrumentation.Runtime             # GC, thread pool metrics
 ```
 
@@ -85,7 +86,6 @@ builder.Services.AddOpenTelemetry()
         // Optional: add SQL instrumentation if using SqlClient directly
         // .AddSqlClientInstrumentation(options =>
         // {
-        //     options.SetDbStatementForText = true;
         //     options.RecordException = true;
         // })
         // Custom activity sources (must match ActivitySource names in your code)
@@ -99,10 +99,12 @@ builder.Services.AddOpenTelemetry()
         //   (requires OpenTelemetry.Instrumentation.Runtime package)
         // Custom meters (must match Meter names in your code)
         .AddMeter("MyApp.Metrics"))
-    .WithLogging(logging =>
+    // IncludeScopes lives on OpenTelemetryLoggerOptions, which is the second
+    // parameter — a single-lambda WithLogging binds to LoggerProviderBuilder instead
+    .WithLogging(configureBuilder: null, configureOptions: options =>
     {
-        logging.IncludeScopes = true;
-        // logging.IncludeFormattedMessage = true;  // Enable if you need the formatted message string in log exports
+        options.IncludeScopes = true;
+        // options.IncludeFormattedMessage = true;  // Enable if you need the formatted message string in log exports
     })
     // Single OTLP exporter for all signals — reads OTEL_EXPORTER_OTLP_ENDPOINT
     // env var (defaults to http://localhost:4317). Override via environment variable

@@ -152,7 +152,7 @@ For running on real hardware, use runtime primitives:
 from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2 as Sampler
 
 service = QiskitRuntimeService()
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 
 qc = QuantumCircuit(2)
 qc.h(0)
@@ -173,7 +173,7 @@ from qiskit_ibm_runtime import QiskitRuntimeService, EstimatorV2 as Estimator
 from qiskit.quantum_info import SparsePauliOp
 
 service = QiskitRuntimeService()
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 
 qc = QuantumCircuit(2)
 qc.h(0)
@@ -196,10 +196,10 @@ Sessions group multiple jobs to reduce queue wait times:
 from qiskit_ibm_runtime import Session
 
 service = QiskitRuntimeService()
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 
 with Session(backend=backend) as session:
-    sampler = Sampler(session=session)
+    sampler = Sampler(mode=session)
 
     # Run multiple jobs in session
     job1 = sampler.run([qc1], shots=1024)
@@ -217,10 +217,10 @@ Batch mode runs independent jobs in parallel:
 from qiskit_ibm_runtime import Batch
 
 service = QiskitRuntimeService()
-backend = service.backend("ibm_brisbane")
+backend = service.least_busy(operational=True, simulator=False)
 
 with Batch(backend=backend) as batch:
-    sampler = Sampler(session=batch)
+    sampler = Sampler(mode=batch)
 
     # Submit multiple independent jobs
     job1 = sampler.run([qc1], shots=1024)

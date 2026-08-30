@@ -112,7 +112,7 @@ See [comparison-checklist.md](comparison-checklist.md). Document in `ACCELERATIO
 
 | Framework | CPU run (toggle off) | GPU run (toggle on) |
 |-----------|----------------------|---------------------|
-| Nextflow | `nextflow run .` | `nextflow run . -params-file accelerated.config` |
+| Nextflow | `nextflow run .` | `nextflow run . -c accelerated.config` |
 | Snakemake | `snakemake` | `snakemake --configfile config.accelerated.yaml` |
 | WDL | `cromwell run pipeline.wdl -i inputs-cpu.json` | `cromwell run pipeline.wdl -i inputs-gpu.json` |
 | Python | `python pipeline.py` | `python pipeline.py --use-parabricks` |

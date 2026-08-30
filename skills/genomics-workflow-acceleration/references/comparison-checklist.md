@@ -14,7 +14,7 @@ Example commands (same entrypoint, different toggle):
 
 | Framework | Toggle off (CPU) | Toggle on (GPU) |
 |-----------|------------------|-----------------|
-| Nextflow | `nextflow run . -params-file cpu.config` | `nextflow run . -params-file accelerated.config` |
+| Nextflow | `nextflow run . -c cpu.config` | `nextflow run . -c accelerated.config` |
 | Snakemake | `snakemake` | `snakemake --config use_parabricks=true` |
 | WDL | `cromwell run pipeline.wdl -i inputs-cpu.json` | `cromwell run pipeline.wdl -i inputs-gpu.json` |
 | Python | `python pipeline.py` | `python pipeline.py --use-parabricks` |

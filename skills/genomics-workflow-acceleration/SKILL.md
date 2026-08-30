@@ -184,7 +184,7 @@ Document toggle name, default, and example run commands in `ACCELERATION.md`.
 
 | Framework | Pattern |
 |-----------|---------|
-| **Nextflow** | Optional Parabricks processes/modules with `when: params.use_parabricks` on GPU path and `when: !params.use_parabricks` on CPU path. Profile or `-params-file accelerated.config` sets toggle on. GPU labels only on accelerated processes. |
+| **Nextflow** | Optional Parabricks processes/modules with `when: params.use_parabricks` on GPU path and `when: !params.use_parabricks` on CPU path. Profile or `-c accelerated.config` sets toggle on. GPU labels only on accelerated processes. |
 | **Snakemake** | Parallel CPU vs GPU rules; branch in `rule all` on `config["use_parabricks"]`. `--configfile config.accelerated.yaml` or `--config use_parabricks=true`. |
 | **WDL** | `if (use_parabricks) { call Parabricks_fq2bam } else { call BwaMem ... }`. GPU `runtime` only on Parabricks tasks. |
 | **Python** | `--use-parabricks` flag; branch subprocess to `docker run ... pbrun` vs existing CPU commands. |
@@ -232,7 +232,7 @@ version. Record results in the **A/B comparison** section of `ACCELERATION.md`.
 <framework-run-command>                         # toggle off
 
 # GPU path
-<framework-run-command-with-toggle-on>          # e.g. -params-file accelerated.config
+<framework-run-command-with-toggle-on>          # e.g. -c accelerated.config
 ```
 
 ### 9. Optional: benchmark and comparison artifacts

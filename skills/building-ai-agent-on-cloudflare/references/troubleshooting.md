@@ -238,11 +238,11 @@ Check `wrangler.toml`:
 
 ```toml
 [durable_objects]
-bindings = [{ name = "AGENT", class_name = "MyAgent" }]
+bindings = [{ name = "MyAgent", class_name = "MyAgent" }]
 
 [[migrations]]
 tag = "v1"
-new_classes = ["MyAgent"]
+new_sqlite_classes = ["MyAgent"]
 ```
 
 ### "Migration required"
@@ -252,7 +252,7 @@ When adding new Durable Object classes:
 ```toml
 [[migrations]]
 tag = "v2"  # Increment from previous
-new_classes = ["NewAgentClass"]
+new_sqlite_classes = ["NewAgentClass"]
 
 # Or for renames
 # renamed_classes = [{ from = "OldName", to = "NewName" }]

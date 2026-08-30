@@ -1,0 +1,16 @@
+{
+  "name": "skillquarium-eval",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "eval": "bun run src/cli.ts"
+  },
+  "dependencies": {
+    "ai": "^6.0.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "@types/bun": "latest"
+  }
+}

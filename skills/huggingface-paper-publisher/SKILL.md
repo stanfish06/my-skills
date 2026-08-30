@@ -23,13 +23,12 @@ manual environment setup.
 - huggingface_hub>=0.26.0
 - pyyaml>=6.0.3
 - requests>=2.32.5
-- markdown>=3.5.0
 - python-dotenv>=1.2.1
 
 # Core Capabilities
 
 ## 1. Paper Page Management
-- **Index Papers**: Add papers to Hugging Face from arXiv
+- **Index Papers**: Check indexing status and print the URL that triggers indexing
 - **Claim Authorship**: Verify and claim authorship on published papers
 - **Manage Visibility**: Control which papers appear on your profile
 - **Paper Discovery**: Find and explore papers in the HF ecosystem
@@ -134,44 +133,19 @@ When you add an arXiv paper link to a model or dataset README:
 
 ### Method 3: Claim Authorship
 
-Verify your authorship on papers published on Hugging Face.
+Verify your authorship on papers published on Hugging Face. This is a browser-only
+flow; `paper_manager.py` has no subcommand for it.
 
-**Start Claim Process:**
-```bash
-uv run scripts/paper_manager.py claim \
-  --arxiv-id "2301.12345" \
-  --email "your.email@institution.edu"
-```
-
-**Manual Process:**
 1. Navigate to your paper's page: `https://huggingface.co/papers/{arxiv-id}`
 2. Find your name in the author list
 3. Click your name and select "Claim authorship"
 4. Wait for admin team verification
 
-**Check Authorship Status:**
-```bash
-uv run scripts/paper_manager.py check-authorship \
-  --arxiv-id "2301.12345"
-```
-
 ### Method 4: Manage Paper Visibility
 
-Control which verified papers appear on your public profile.
+Control which verified papers appear on your public profile. Browser-only;
+`paper_manager.py` has no subcommand for it.
 
-**List Your Papers:**
-```bash
-uv run scripts/paper_manager.py list-my-papers
-```
-
-**Toggle Visibility:**
-```bash
-uv run scripts/paper_manager.py toggle-visibility \
-  --arxiv-id "2301.12345" \
-  --show true
-```
-
-**Manage in Settings:**
 Navigate to your account settings → Papers section to toggle "Show on profile" for each paper.
 
 ### Method 5: Create Research Article
@@ -200,14 +174,6 @@ uv run scripts/paper_manager.py create \
   --authors "Jane Doe, John Smith" \
   --abstract "$(cat abstract.txt)" \
   --output "paper.md"
-```
-
-**Convert to HTML:**
-```bash
-uv run scripts/paper_manager.py convert \
-  --input "paper.md" \
-  --output "paper.html" \
-  --style "modern"
 ```
 
 ### Paper Template Structure
@@ -276,20 +242,6 @@ uv run scripts/paper_manager.py link \
   [--create-pr]
 ```
 
-**Claim Authorship:**
-```bash
-uv run scripts/paper_manager.py claim \
-  --arxiv-id "2301.12345" \
-  --email "your.email@edu"
-```
-
-**Manage Visibility:**
-```bash
-uv run scripts/paper_manager.py toggle-visibility \
-  --arxiv-id "2301.12345" \
-  --show true|false
-```
-
 **Create Research Article:**
 ```bash
 uv run scripts/paper_manager.py create \
@@ -300,25 +252,12 @@ uv run scripts/paper_manager.py create \
   [--output "filename.md"]
 ```
 
-**Convert Markdown to HTML:**
-```bash
-uv run scripts/paper_manager.py convert \
-  --input "paper.md" \
-  --output "paper.html" \
-  [--style "modern|classic"]
-```
-
 **Check Paper Status:**
 ```bash
 uv run scripts/paper_manager.py check --arxiv-id "2301.12345"
 ```
 
-**List Your Papers:**
-```bash
-uv run scripts/paper_manager.py list-my-papers
-```
-
-**Search Papers:**
+**Search Papers:** (not implemented — prints the Hub search URL)
 ```bash
 uv run scripts/paper_manager.py search --query "transformer attention"
 ```
@@ -402,10 +341,7 @@ uv run scripts/paper_manager.py link \
   --repo-type "model" \
   --arxiv-id "2301.12345"
 
-# 6. Claim authorship
-uv run scripts/paper_manager.py claim \
-  --arxiv-id "2301.12345" \
-  --email "your.email@edu"
+# 6. Claim authorship at https://huggingface.co/papers/2301.12345 (browser only)
 ```
 
 **Workflow 2: Link Existing Paper**
@@ -508,14 +444,6 @@ uv run scripts/paper_manager.py citation \
   --format "bibtex"
 ```
 
-**Validate Links:**
-```bash
-# Check all paper links in a repository
-uv run scripts/paper_manager.py validate \
-  --repo-id "username/model-name" \
-  --repo-type "model"
-```
-
 ### Error Handling
 
 - **Paper Not Found**: arXiv ID doesn't exist or isn't indexed yet
@@ -574,18 +502,10 @@ uv run scripts/paper_manager.py link --repo-id "user/model" --arxiv-id "2301.123
 
 **Pattern 2: Existing Paper Discovery**
 ```bash
-# Search → Check → Link
+# Search (prints the Hub URL) → Check → Link
 uv run scripts/paper_manager.py search --query "transformers"
 uv run scripts/paper_manager.py check --arxiv-id "2301.12345"
 uv run scripts/paper_manager.py link --repo-id "user/model" --arxiv-id "2301.12345"
-```
-
-**Pattern 3: Author Portfolio Management**
-```bash
-# Claim → Verify → Organize
-uv run scripts/paper_manager.py claim --arxiv-id "2301.12345"
-uv run scripts/paper_manager.py list-my-papers
-uv run scripts/paper_manager.py toggle-visibility --arxiv-id "2301.12345" --show true
 ```
 
 ### API Integration
@@ -600,7 +520,7 @@ pm = PaperManager(hf_token="your_token")
 pm.index_paper("2301.12345")
 
 # Link to model
-pm.link_paper(
+pm.link_paper_to_repo(
     repo_id="username/model",
     repo_type="model",
     arxiv_id="2301.12345",

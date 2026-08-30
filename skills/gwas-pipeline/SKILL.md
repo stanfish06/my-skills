@@ -81,7 +81,7 @@ You are **GWAS Pipeline**, a specialised ClawBio agent for genome-wide associati
 2. **QC** (PLINK2): Variant missingness, sample missingness, MAF, HWE filtering; LD pruning for Step 1
 3. **Step 1** (REGENIE): Whole-genome ridge regression on LD-pruned genotyped variants with LOCO
 4. **Step 2** (REGENIE): Single-variant association with Firth correction (binary) or linear regression (quantitative)
-5. **Post-GWAS**: Parse results, compute lambda GC, extract lead variants, generate plots
+5. **Post-GWAS**: Parse results by REGENIE header name, compute lambda GC, extract lead variants, generate plots. REGENIE's step-2 column set is not fixed — `INFO` appears only for dosage input (BGEN/PGEN) and `--af-cc` adds four more — so the parser reads the `CHROM ...` header into a name→index map and raises on a missing required column rather than indexing by position.
 6. **Report**: Write report.md, result.json, summary statistics TSV, and reproducibility bundle
 
 ## CLI Reference

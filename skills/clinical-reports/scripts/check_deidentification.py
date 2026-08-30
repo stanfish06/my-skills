@@ -119,8 +119,8 @@ HIPAA_IDENTIFIERS = {
     "14_url": {
         "description": "Web URLs",
         "patterns": [
-            r"https?://[^\s]+",
-            r"www\.[^\s]+",
+            r"(?i)https?://[^\s]+",
+            r"(?i)www\.[^\s]+",
         ],
         "severity": "MEDIUM"
     },
@@ -142,7 +142,7 @@ HIPAA_IDENTIFIERS = {
         "description": "Full-face photographs",
         "patterns": [
             r"(?i)(photograph|photo|image).*face",
-            r"\.(jpg|jpeg|png|gif)\b",
+            r"(?i)\.(jpg|jpeg|png|gif)\b",
         ],
         "severity": "HIGH"
     },
@@ -164,7 +164,11 @@ def check_identifiers(text: str) -> Dict:
     for identifier_id, config in HIPAA_IDENTIFIERS.items():
         matches = []
         for pattern in config["patterns"]:
-            found = re.findall(pattern, text, re.IGNORECASE)
+            # case sensitivity is per-pattern via inline (?i): the name and
+            # address patterns are capitalisation-anchored and a blanket
+            # IGNORECASE reduces "Last, First" to "any word, comma, any word".
+            # group(0) so examples are the whole identifier, not a capture group.
+            found = [m.group(0) for m in re.finditer(pattern, text)]
             matches.extend(found)
         
         if matches:
@@ -185,11 +189,26 @@ def check_identifiers(text: str) -> Dict:
     }
 
 
+# 45 CFR 164.514(b)(2)(i)(C): all ages over 89 must be removed, or aggregated
+# into a single "90 or older" category. Alternation covers the hyphenated form
+# the shipped templates emit ("[age]-year-old") plus "92 y/o" and "aged 92 years".
+AGE_PATTERN = re.compile(
+    r"\b(?:(\d{2,3})[\s-]*(?:year|yr)s?[\s-]*old"
+    r"|(\d{2,3})\s*y[\s/.]?o\b"
+    r"|aged?\s+(\d{2,3})(?:[\s-]*years?)?)",
+    re.IGNORECASE,
+)
+
+
 def check_age_compliance(text: str) -> Dict:
     """Check if ages >89 are properly aggregated."""
-    age_pattern = r"\b(\d{2,3})\s*(?:year|yr)s?[\s-]?old\b"
-    ages = [int(age) for age in re.findall(age_pattern, text, re.IGNORECASE)]
-    
+    ages = [
+        int(group)
+        for match in AGE_PATTERN.finditer(text)
+        for group in match.groups()
+        if group
+    ]
+
     violations = [age for age in ages if age > 89]
     
     return {
@@ -222,12 +241,15 @@ def generate_report(filename: str) -> Dict:
         if v["severity"] == "HIGH"
     )
     
+    # a clean pass means no pattern matched, which is not an affirmative
+    # de-identification finding — Safe Harbor also requires actual knowledge
+    # review and covers identifiers no regex enumerates.
     if critical_violations > 0 or high_violations >= 3:
         status = "NON_COMPLIANT"
     elif high_violations > 0 or not age_check["compliant"]:
         status = "NEEDS_REVIEW"
     else:
-        status = "COMPLIANT"
+        status = "NO_PATTERNS_MATCHED"
     
     report = {
         "filename": str(filename),
@@ -242,8 +264,11 @@ def generate_report(filename: str) -> Dict:
 
 def get_recommendation(status: str, identifiers: Dict, ages: Dict) -> str:
     """Generate recommendation based on findings."""
-    if status == "COMPLIANT":
-        return "Document appears compliant. Perform final manual review before publication."
+    if status == "NO_PATTERNS_MATCHED":
+        return (
+            "No identifier patterns matched. This is not a compliance determination — "
+            "manual review against all 18 HIPAA identifiers is still required before publication."
+        )
     
     recommendations = []
     
@@ -272,7 +297,7 @@ def print_report(report: Dict):
     print()
     
     if report["identifier_violations"]["total_violations"] == 0:
-        print("✓ No HIPAA identifiers detected")
+        print("No HIPAA identifier patterns matched (pattern scan only)")
     else:
         print(f"⚠  Found {report['identifier_violations']['total_violations']} types of violations")
         print(f"   Total instances: {report['identifier_violations']['total_instances']}")
@@ -295,7 +320,7 @@ def print_report(report: Dict):
     
     age_check = report["age_compliance"]
     if age_check["compliant"]:
-        print("✓ Age reporting compliant (no ages >89 or properly aggregated)")
+        print("No ages >89 detected in the recognised age phrasings")
     else:
         print(f"⚠  Age compliance issue: {age_check['ages_over_89']} age(s) >89 detected")
         print(f"   Ages must be aggregated to '90 or older' or '>89 years'")
@@ -332,7 +357,7 @@ def main():
             print(f"\nJSON report saved to: {args.output}")
         
         # Exit with non-zero if violations found
-        exit_code = 0 if report["status"] == "COMPLIANT" else 1
+        exit_code = 0 if report["status"] == "NO_PATTERNS_MATCHED" else 1
         return exit_code
         
     except Exception as e:

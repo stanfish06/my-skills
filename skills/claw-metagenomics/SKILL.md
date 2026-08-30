@@ -126,8 +126,8 @@ If you ask a general AI to "analyse a metagenome," it will:
 This skill encodes the correct methodological decisions:
 - Kraken2 confidence threshold of 0.2 (reduces false positives in environmental samples)
 - Bracken re-estimation at species level with minimum 10 reads
-- RGI MAIN with "Perfect" and "Strict" hit criteria only (no "Loose" hits)
-- WHO Critical Priority Pathogen list mapped to detected ARG families
+- RGI `bwt` read mapping against CARD with `--include_wildcard` (Perfect/Strict cut-offs belong to `rgi main` and do not apply to read mapping)
+- WHO Bacterial Priority Pathogens List 2024 mapped to detected ARG families and drug classes
 - HUMAnN3 with MetaCyc stratification for pathway-level functional context
 - Thread count auto-detected from available CPUs
 - Full reproducibility bundle for every run
@@ -141,22 +141,32 @@ The skill works with any shotgun metagenome but has been validated on:
 
 ## WHO-Critical ARG Detection
 
-A key feature is the classification of detected resistance genes by WHO priority tier:
+Detected resistance genes are classified by WHO priority tier. The list edition
+lives in one place — `WHO_BPPL_EDITION` in `metagenomics_profiler.py` — and the
+report Methods section reads it from there. Current edition: **WHO Bacterial
+Priority Pathogens List 2024** (published 17 May 2024).
 
 | Priority | Pathogen | Resistance |
 |----------|----------|------------|
 | Critical | *Acinetobacter baumannii* | Carbapenem-resistant |
-| Critical | *Pseudomonas aeruginosa* | Carbapenem-resistant |
-| Critical | *Enterobacteriaceae* | Carbapenem-resistant, 3rd-gen cephalosporin-resistant |
+| Critical | Enterobacterales | 3rd-gen cephalosporin-resistant |
+| Critical | Enterobacterales | Carbapenem-resistant |
+| Critical | *Mycobacterium tuberculosis* | Rifampicin-resistant |
+| High | *Salmonella* Typhi | Fluoroquinolone-resistant |
+| High | *Shigella* spp. | Fluoroquinolone-resistant |
 | High | *Enterococcus faecium* | Vancomycin-resistant |
-| High | *Staphylococcus aureus* | Methicillin-resistant, vancomycin-resistant |
-| High | *Helicobacter pylori* | Clarithromycin-resistant |
-| High | *Campylobacter* | Fluoroquinolone-resistant |
-| High | *Salmonella* spp. | Fluoroquinolone-resistant |
-| High | *Neisseria gonorrhoeae* | 3rd-gen cephalosporin-resistant, fluoroquinolone-resistant |
-| Medium | *Streptococcus pneumoniae* | Penicillin-non-susceptible |
+| High | *Pseudomonas aeruginosa* | Carbapenem-resistant |
+| High | Non-typhoidal *Salmonella* | Fluoroquinolone-resistant |
+| High | *Neisseria gonorrhoeae* | 3rd-gen cephalosporin- and/or fluoroquinolone-resistant |
+| High | *Staphylococcus aureus* | Methicillin-resistant |
+| Medium | Group A streptococci | Macrolide-resistant |
+| Medium | *Streptococcus pneumoniae* | Macrolide-resistant |
 | Medium | *Haemophilus influenzae* | Ampicillin-resistant |
-| Medium | *Shigella* spp. | Fluoroquinolone-resistant |
+| Medium | Group B streptococci | Penicillin-resistant |
+
+Classification matches on ARG family and drug class, not on pathogen, so a
+carbapenemase is tagged Critical even though 2024 places carbapenem-resistant
+*P. aeruginosa* in High.
 
 ## Usage
 
@@ -198,42 +208,39 @@ The demo uses pre-computed results from the Peru sewage metagenomics study (6 sa
 
 ## Example Output
 
+Verbatim from `--demo`:
+
 ```
-Metagenomics Profiler — ClawBio
-================================
+Metagenomics Profiler -- ClawBio
+========================================
 Mode: demo (pre-computed Peru sewage data)
 Samples: 6 (3 sites: Lima, Cusco, Iquitos)
 
-Taxonomy (Kraken2 + Bracken):
+Generating taxonomy data...
   Total classified: 94.2%
-  Top species: Escherichia coli (12.3%), Klebsiella pneumoniae (8.7%),
-               Pseudomonas aeruginosa (5.1%), Acinetobacter baumannii (3.9%)
+  Top species: Escherichia coli (Lima: 12.3%, Cusco: 8.1%, Iquitos: 15.6%)
+Generating resistome data...
+  Total ARG hits: 24 (Perfect: 8, Strict: 16)
+  Drug classes: 12
+  WHO-Critical ARGs detected: 7
+    - NDM-1, OXA-48, KPC-3, CTX-M-15, CTX-M-27, TEM-1, SHV-12
+Generating pathway data...
+  Total pathways: 10
+  Top: PWY-7219: adenosine ribonucleotides de novo biosynthesis
 
-Alpha Diversity:
-  Shannon index: 2.847
-  Simpson index: 0.912
-  Pielou evenness: 0.734
-  Species richness: 48
+Generating figures...
+  Saved: taxonomy_barplot.png
+  Saved: resistome_heatmap.png
+  Saved: who_critical_args.png
 
-Resistome (RGI/CARD):
-  Total ARG hits: 247 (Perfect: 89, Strict: 158)
-  Drug classes: 14
-  WHO-Critical ARGs detected: 23
-    - Carbapenem resistance: NDM-1, OXA-48, KPC-3
-    - 3rd-gen cephalosporin resistance: CTX-M-15, CTX-M-27
-
-Functional Pathways (HUMAnN3):
-  Total pathways: 312
-  Top: PWY-7219 (adenosine ribonucleotides de novo biosynthesis)
-
-Figures saved to: demo_report/figures/
-  taxonomy_barplot.png (300 dpi)
-  resistome_heatmap.png (300 dpi)
-  who_critical_args.png (300 dpi)
-
-Reproducibility:
-  commands.sh | environment.yml | checksums.sha256
+Generating report...
+  Saved: report.md
+  Saved: reproducibility/ (commands.sh, environment.yml, checksums.sha256)
 ```
+
+The Perfect/Strict counts above come from the demo table's own synthetic
+`criteria` column. A real run uses `rgi bwt`, whose output has no `Cut_Off`
+column, and prints `ARG hits: N (WHO-Critical: M)` instead.
 
 ## Pipeline Architecture
 
@@ -247,7 +254,7 @@ FASTQ R1 + R2
 [Bracken] --> bracken_species.tsv   --> Figure 1: Taxonomy bar chart
      |
      v
-[RGI MAIN] --> rgi_results.txt      --> Figure 2: Resistome heatmap
+[RGI bwt]  --> *.allele_mapping_data.txt --> Figure 2: Resistome heatmap
      |                                --> Figure 3: WHO-critical ARG summary
      v
 [HUMAnN3] --> pathabundance.tsv     (optional, --skip-functional to omit)

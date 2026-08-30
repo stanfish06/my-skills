@@ -36,6 +36,17 @@ BRACKEN_THRESHOLD = 10       # minimum reads for Bracken re-estimation
 BRACKEN_LEVEL = "S"          # species
 DEFAULT_READ_LENGTH = 150
 RGI_CRITERIA = ("Perfect", "Strict")
+# Read-abundance columns, in preference order: the first two are what `rgi bwt`
+# writes into allele_mapping_data.txt / gene_mapping_data.txt.
+_ABUNDANCE_COLUMNS = ("All Mapped Reads", "Depth", "RPKM", "Reads")
+
+
+def _first_column(df, candidates):
+    """Return the first candidate column present in df, else the last candidate."""
+    for name in candidates:
+        if name in df.columns:
+            return name
+    return candidates[-1]
 
 SAFETY_DISCLAIMER = (
     "ClawBio is a research and educational tool. It is not a medical device "
@@ -44,35 +55,38 @@ SAFETY_DISCLAIMER = (
     "must be confirmed by culture-based susceptibility testing."
 )
 
-# WHO Critical Priority Pathogens and their associated ARG families / drug classes
+# Edition string used by both the report Methods section and SKILL.md.
+WHO_BPPL_EDITION = "WHO Bacterial Priority Pathogens List 2024 (published 17 May 2024)"
+
+# WHO BPPL 2024 tiers with their associated ARG families / drug classes.
+# Classification matches on ARG family and drug class, not on pathogen, so a
+# carbapenemase is tagged Critical even though 2024 places carbapenem-resistant
+# P. aeruginosa in High.
 WHO_PRIORITY_ARGS: Dict[str, Dict[str, Any]] = {
     "Critical": {
         "pathogens": [
-            "Acinetobacter baumannii",
-            "Pseudomonas aeruginosa",
-            "Enterobacteriaceae",
-            "Escherichia coli",
-            "Klebsiella pneumoniae",
+            "Acinetobacter baumannii (carbapenem-resistant)",
+            "Enterobacterales (third-generation cephalosporin-resistant)",
+            "Enterobacterales (carbapenem-resistant)",
+            "Mycobacterium tuberculosis (rifampicin-resistant)",
         ],
-        "drug_classes": ["carbapenem", "cephalosporin"],
+        "drug_classes": ["carbapenem", "cephalosporin", "rifamycin", "rifampicin"],
         "arg_families": [
             "NDM", "OXA-48", "KPC", "VIM", "IMP",
-            "CTX-M", "SHV", "TEM",
+            "CTX-M", "SHV", "TEM", "rpoB",
         ],
     },
     "High": {
         "pathogens": [
-            "Enterococcus faecium",
-            "Staphylococcus aureus",
-            "Helicobacter pylori",
-            "Campylobacter",
-            "Salmonella",
-            "Neisseria gonorrhoeae",
+            "Salmonella Typhi (fluoroquinolone-resistant)",
+            "Shigella spp. (fluoroquinolone-resistant)",
+            "Enterococcus faecium (vancomycin-resistant)",
+            "Pseudomonas aeruginosa (carbapenem-resistant)",
+            "Non-typhoidal Salmonella (fluoroquinolone-resistant)",
+            "Neisseria gonorrhoeae (third-generation cephalosporin- and/or fluoroquinolone-resistant)",
+            "Staphylococcus aureus (methicillin-resistant)",
         ],
-        "drug_classes": [
-            "vancomycin", "methicillin", "clarithromycin",
-            "fluoroquinolone",
-        ],
+        "drug_classes": ["vancomycin", "methicillin", "fluoroquinolone"],
         "arg_families": [
             "VanA", "VanB", "mecA", "mecC",
             "QnrA", "QnrB", "QnrS", "GyrA", "ParC",
@@ -80,12 +94,17 @@ WHO_PRIORITY_ARGS: Dict[str, Dict[str, Any]] = {
     },
     "Medium": {
         "pathogens": [
-            "Streptococcus pneumoniae",
-            "Haemophilus influenzae",
-            "Shigella",
+            "Group A streptococci (macrolide-resistant)",
+            "Streptococcus pneumoniae (macrolide-resistant)",
+            "Haemophilus influenzae (ampicillin-resistant)",
+            "Group B streptococci (penicillin-resistant)",
         ],
-        "drug_classes": ["penicillin", "ampicillin"],
-        "arg_families": ["PBP", "TEM", "ROB"],
+        "drug_classes": ["macrolide", "penicillin", "ampicillin"],
+        "arg_families": [
+            "ErmA", "ErmB", "ErmC", "ErmF", "ErmX", "erm(",
+            "MefA", "MefE", "mef(", "MphA", "MphB", "MphC", "mph(",
+            "MsrA", "MsrD", "PBP", "ROB",
+        ],
     },
 }
 
@@ -416,7 +435,8 @@ def parse_rgi_output(rgi_path: Path) -> pd.DataFrame:
         return df
 
     df = pd.read_csv(rgi_path, sep="\t")
-    # Filter to Perfect and Strict hits only
+    # Cut_Off is an `rgi main` column; `rgi bwt` output has none, so this filter
+    # only applies when an rgi main table is supplied instead.
     if "Cut_Off" in df.columns:
         df = df[df["Cut_Off"].isin(RGI_CRITERIA)]
     return df
@@ -428,8 +448,8 @@ def classify_who_priority(resistome_df: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame(columns=["gene", "drug_class", "who_priority"])
 
     results = []
-    gene_col = "Best_Hit_ARO" if "Best_Hit_ARO" in resistome_df.columns else "gene"
-    drug_col = "Drug Class" if "Drug Class" in resistome_df.columns else "drug_class"
+    gene_col = _first_column(resistome_df, ("ARO Term", "Best_Hit_ARO", "gene"))
+    drug_col = _first_column(resistome_df, ("Drug Class", "drug_class"))
 
     for _, row in resistome_df.iterrows():
         gene_name = str(row.get(gene_col, ""))
@@ -599,11 +619,11 @@ def plot_resistome_heatmap(
         genes = resistome_df["gene"].tolist()
         data = resistome_df[site_columns].values
         heat_df = pd.DataFrame(data, index=genes, columns=site_columns)
-    elif "RPKM" in resistome_df.columns or "Reads" in resistome_df.columns:
+    elif any(c in resistome_df.columns for c in _ABUNDANCE_COLUMNS):
         # Single sample: pivot by drug class vs gene
-        val_col = "RPKM" if "RPKM" in resistome_df.columns else "Reads"
-        gene_col = "Best_Hit_ARO" if "Best_Hit_ARO" in resistome_df.columns else "gene"
-        drug_col = "Drug Class" if "Drug Class" in resistome_df.columns else "drug_class"
+        val_col = _first_column(resistome_df, _ABUNDANCE_COLUMNS)
+        gene_col = _first_column(resistome_df, ("ARO Term", "Best_Hit_ARO", "gene"))
+        drug_col = _first_column(resistome_df, ("Drug Class", "drug_class"))
         heat_df = resistome_df.pivot_table(
             values=val_col, index=gene_col, columns=drug_col,
             aggfunc="sum", fill_value=0,
@@ -853,9 +873,9 @@ Top pathway: {pw_name}
 ## Methods
 
 - **Taxonomic classification**: Kraken2 (confidence threshold {KRAKEN2_CONFIDENCE}) with Bracken species-level re-estimation (minimum {BRACKEN_THRESHOLD} reads)
-- **Resistome profiling**: RGI against the CARD database (Perfect + Strict criteria only)
+- **Resistome profiling**: RGI `bwt` read mapping against the CARD database (with `--include_wildcard`; Perfect/Strict cut-offs are an `rgi main` concept and are not applied on this path)
 - **Functional profiling**: HUMAnN3 with MetaCyc pathway stratification
-- **WHO Priority mapping**: ARGs classified against the 2024 WHO Bacterial Priority Pathogens List
+- **WHO Priority mapping**: ARGs classified against the {WHO_BPPL_EDITION}
 - **Figures**: 300 dpi, publication-quality
 
 ## Input Checksums
@@ -1261,15 +1281,22 @@ def run_pipeline(args: argparse.Namespace) -> None:
         plot_taxonomy_barchart(tax_df, tax_fig_path)
         figures["taxonomy"] = tax_fig_path
 
+        # plot_resistome_heatmap returns without writing when no abundance
+        # column is present, so register the figure only if the file exists
         if not rgi_failed and not res_df.empty:
             res_fig_path = figures_dir / "resistome_heatmap.png"
             plot_resistome_heatmap(res_df, res_fig_path)
-            figures["resistome"] = res_fig_path
+            if res_fig_path.exists():
+                figures["resistome"] = res_fig_path
+            else:
+                print("  WARNING: resistome heatmap skipped — no read-abundance "
+                      "column in the RGI table.", file=sys.stderr)
 
         if not rgi_failed and not who_df.empty:
             who_fig_path = figures_dir / "who_critical_args.png"
             plot_who_critical_args(who_df, who_fig_path)
-            figures["who_critical"] = who_fig_path
+            if who_fig_path.exists():
+                figures["who_critical"] = who_fig_path
     except ImportError as e:
         print(f"  WARNING: {e}. Some figures skipped.", file=sys.stderr)
 

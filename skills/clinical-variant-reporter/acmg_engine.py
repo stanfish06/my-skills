@@ -134,6 +134,10 @@ class VariantEvidence:
     is_synonymous: bool = False
     is_inframe_indel: bool = False
 
+    # True when annotation never returned for this variant: absent evidence is
+    # then "not retrieved", not "confirmed absent".
+    annotation_failed: bool = False
+
 
 @dataclass
 class ClassifiedVariant:
@@ -193,22 +197,36 @@ def _eval_bs1(ev: VariantEvidence) -> EvidenceCriterion:
 
 
 def _eval_pm2(ev: VariantEvidence) -> EvidenceCriterion:
-    """PM2: Absent or extremely rare in gnomAD."""
+    """PM2: Absent or extremely rare in gnomAD, at Supporting strength.
+
+    ClinGen SVI Recommendation for PM2 v1.0 (approved 2020-09-04) downgrades PM2
+    from Moderate to Supporting (PM2_Supporting).
+    """
     threshold = THRESHOLD_PM2_AF_DEFAULT
+    if ev.annotation_failed:
+        # matches the BA1/BS1 handling: never retrieved is not evidence either way
+        return EvidenceCriterion(
+            code="PM2",
+            triggered=False,
+            strength="supporting",
+            direction="pathogenic",
+            source="gnomAD AF=unavailable",
+            detail="gnomAD AF unavailable (annotation failed) — PM2 not assessed",
+        )
     if ev.gnomad_af is None:
         return EvidenceCriterion(
             code="PM2",
             triggered=True,
-            strength="moderate",
+            strength="supporting",
             direction="pathogenic",
             source="gnomAD AF=absent",
-            detail="Variant absent from gnomAD — qualifies as PM2 (applied conservatively as supporting)",
+            detail="Variant absent from gnomAD — PM2_Supporting (ClinGen SVI, Sept 2020)",
         )
     triggered = ev.gnomad_af < threshold
     return EvidenceCriterion(
         code="PM2",
         triggered=triggered,
-        strength="moderate",
+        strength="supporting",
         direction="pathogenic",
         source=f"gnomAD AF={ev.gnomad_af:.6f}",
         detail=f"Allele frequency {'<' if triggered else '>='} {threshold} in gnomAD",
@@ -442,6 +460,9 @@ def classify(criteria: list[EvidenceCriterion]) -> AcmgClass:
     # Likely Pathogenic
     if any([
         pvs >= 1 and pm >= 1,
+        # ClinGen SVI PM2 v1.0: one Very Strong + one Supporting reaches Likely
+        # Pathogenic (Post_P 0.988), so PVS1 + PM2_Supporting still classifies.
+        pvs >= 1 and pp >= 1,
         ps >= 1 and pm >= 1,
         ps >= 1 and pp >= 2,
         pm >= 3,

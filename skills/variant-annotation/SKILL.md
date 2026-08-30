@@ -93,7 +93,7 @@ You are **Variant Annotation**, a specialised ClawBio agent for VCF interpretati
 
 1. **Parse**: Read the VCF with `pysam.VariantFile` and emit one record per ALT allele.
 2. **Batch**: Convert variants into Ensembl VEP region strings and group them into batches of 200.
-3. **Annotate**: POST batches to `https://rest.ensembl.org/vep/homo_sapiens/region` using GRCh38 as the default assembly.
+3. **Annotate**: POST batches to `https://rest.ensembl.org/vep/homo_sapiens/region` (GRCh38, the default) or `https://grch37.rest.ensembl.org/vep/homo_sapiens/region` when `--assembly GRCh37` is given — the REST VEP endpoint has no `assembly` parameter, so the build is selected by host.
 4. **Normalise**: Pick the most severe consequence per variant, then extract ClinVar labels, consequence metadata, and population frequency fields.
 5. **Prioritise**: Flag rare pathogenic variants (global `gnomAD AF < 0.001`) and assign a numeric score plus tier for ranked output.
 6. **Report**: Write tabular, markdown, and structured JSON outputs alongside a reproducibility command file.
@@ -137,7 +137,7 @@ Expected output: a report for a bundled 20-variant synthetic VCF, an `annotated_
 6. **Output generation**: Produce a flat TSV, markdown summary, `result.json`, and reproducibility metadata.
 
 **Key thresholds / parameters**:
-- Default assembly: `GRCh38`
+- Default assembly: `GRCh38`; `--assembly` accepts only `GRCh38` or `GRCh37` and the report records the `assembly_name` VEP returned
 - Batch size: `200` variants per request
 - Ensembl rate limit: `15 requests/second`
 - Clinically relevant rule: ClinVar pathogenic / likely pathogenic plus global `gnomAD AF < 0.001`

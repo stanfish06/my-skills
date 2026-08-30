@@ -1700,6 +1700,13 @@ EXTRA_ASSIGNMENTS = {
     "reconciler-logic": "web-automation-frontend",
     "remote-browser": "web-automation-frontend",
     "rover": "web-automation-frontend",
+    # Python app / data / agent tooling added 2026-08-12, missed by the
+    # 2026-08-09 sweep above.
+    "gradio": "ml-ai",
+    "langgraph": "ml-ai",
+    "marimo": "data-science-compute",
+    "sqlalchemy": "software-dev",
+    "streamlit": "data-science-compute",
 }
 
 

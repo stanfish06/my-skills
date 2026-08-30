@@ -40,6 +40,8 @@ Read the guide for the target language before interpreting any findings; each on
 
 ## Running the Analyzer
 
+> Prerequisite: the analyzer (`ct_analyzer/analyzer.py`, plus the `pyproject.toml`/`uv.lock` that `uv run` needs) is not vendored in this flat vault — it lives at the plugin root upstream. Install the `constant-time-analysis` plugin from the `trailofbits/skills` marketplace, then run its `ct_analyzer/analyzer.py`. `{baseDir}` is a Trail of Bits authoring token for that plugin dir, not a shell variable. Without the plugin these commands fail; the per-language triage guidance in `references/` still applies.
+
 The analyzer takes one file and detects the language from its extension. **Always pass `--warnings`:**
 
 ```bash

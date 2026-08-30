@@ -70,7 +70,15 @@ jobs:
 
           # Pinned for reproducibility; bump deliberately. `update -g` only
           # touches github-sourced global skills; `-y` makes it non-interactive.
-          npx -y skills@1.5.10 update -g -y
+          npx -y skills@1.5.23 update -g -y
+
+      - name: Re-apply local fixes to upstream-managed skills
+        # `skills update` reinstalls any skill whose upstream folder changed,
+        # which silently reverts merged in-vault fixes (#665). Every such fix is
+        # recorded in .skill-vault/local-overrides.json; this puts it back.
+        # Exits non-zero when an override no longer matches, so a fix that
+        # upstream has rewritten gets re-derived instead of vanishing.
+        run: python3 .skill-vault/apply-local-overrides.py
 
       - name: Soften coercive skill descriptions
         # Upstream SKILL.md files ship MUST / ALWAYS catalog copy that hijacks
@@ -112,3 +120,14 @@ jobs:
             # Re-sync before pushing in case master advanced since checkout.
             git push || { git pull --rebase origin master && git push; }
           fi
+
+      - name: Report upstream drift
+        # This job exits 0 whether or not the CLI pulled anything, which is how
+        # four sources sat frozen for months (#786). Compares every lock entry
+        # against its upstream folder sha and writes the table to the job
+        # summary. Runs after the commit so a red report never blocks the sync;
+        # continue-on-error keeps the job green while flagging the step.
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 .skill-vault/check-upstream-drift.py --fail-on-drift

@@ -23,6 +23,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+SKILLS_DIR = ROOT / "skills"
 SOURCE_REPO = "K-Dense-AI/scientific-agents"
 SOURCE_URL = "https://github.com/K-Dense-AI/scientific-agents"
 PATCHES_PATH = Path(__file__).resolve().parent / "scientific-agent-patches.json"
@@ -267,7 +268,8 @@ def load_agents(source: Path) -> list[dict]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("source", type=Path, help="Local checkout of K-Dense-AI/scientific-agents")
-    parser.add_argument("--dest", type=Path, default=ROOT, help="Skills vault root")
+    parser.add_argument("--dest", type=Path, default=SKILLS_DIR,
+                        help="Flat skills directory the CLI reads (default: <repo>/skills)")
     args = parser.parse_args()
 
     source = args.source.resolve()

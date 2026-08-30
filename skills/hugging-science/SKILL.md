@@ -112,7 +112,7 @@ If you're creating a new project, also add `.env` to `.gitignore` if it isn't al
 
 **The entries are pointers.** Don't try to "use Hugging Science" as if it were an API. There is no Hugging Science inference endpoint. Every actionable resource lives on HF Hub or as a HF Space, and you use it via the standard HF tooling.
 
-**Many scientific models require `trust_remote_code=True`.** Custom architectures (Evo-2, many genomics/materials models) ship custom modeling code. This is normal in this ecosystem. Pass the flag and inform the user.
+**Many scientific models require `trust_remote_code=True`.** Custom architectures (Evo-2, many genomics/materials models) ship custom modeling code. This is normal in this ecosystem, but the flag executes arbitrary Python from the model repo on the user's machine — so ask the user before you set it, naming the repo, and wait for an answer. Appearing in the catalog is not a vetting signal: entries are pointers fetched over the network, not code review. The same applies to sending files or tokens to a Space via `gradio_client`.
 
 **Scientific datasets are often large and weirdly-shaped.** Genomics corpora can be billions of tokens; cosmology images can be hundreds of GB; materials datasets contain non-standard objects (crystal structures, graphs). Use streaming (`streaming=True` on `load_dataset`) by default for anything claimed to be over a few GB, and inspect schema before assuming columns.
 

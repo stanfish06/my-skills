@@ -8,7 +8,7 @@ description: Use when users want to run any workload on Hugging Face Jobs infras
 
 ## Overview
 
-Run any workload on fully managed Hugging Face infrastructure. No local setup required—jobs run on cloud CPUs, GPUs, or TPUs and can persist results to the Hugging Face Hub.
+Run any workload on fully managed Hugging Face infrastructure. No local setup required—jobs run on cloud CPUs or GPUs and can persist results to the Hugging Face Hub.
 
 **Common use cases:**
 - **Data Processing** - Transform, filter, or analyze large datasets
@@ -25,11 +25,11 @@ Run any workload on fully managed Hugging Face infrastructure. No local setup re
 
 Use this skill when users want to:
 - Run Python workloads on cloud infrastructure
-- Execute jobs without local GPU/TPU setup
+- Execute jobs without local GPU setup
 - Process data at scale
 - Run batch inference or experiments
 - Schedule recurring tasks
-- Use GPUs/TPUs for any workload
+- Use GPUs for any workload
 - Persist results to the Hugging Face Hub
 
 ## Key Directives
@@ -364,7 +364,7 @@ hf_jobs("uv", {"script": "./scripts/foo.py"})
 ```python
 # ✅ Inline: read the local script file and pass its *contents*
 from pathlib import Path
-script = Path("jobs/scripts/foo.py").read_text()
+script = Path("scripts/foo.py").read_text()
 hf_jobs("uv", {"script": script})
 
 # ✅ URL: host the script somewhere reachable
@@ -468,7 +468,7 @@ hub_repo_details(["uv-scripts/classification"], repo_type="dataset", include_rea
 
 ## Hardware Selection
 
-> **Reference:** [HF Jobs Hardware Docs](https://huggingface.co/docs/hub/en/spaces-config-reference) (updated 07/2025)
+> **Reference:** `hf jobs hardware` — the authoritative live list. Prices below are USD/hour derived from `unitCostUSD` (per minute) × 60, as of 2026-08.
 
 | Workload Type | Recommended Hardware | Use Case |
 |---------------|---------------------|----------|
@@ -479,18 +479,17 @@ hub_repo_details(["uv-scripts/classification"], repo_type="dataset", include_rea
 | Very large models | `a100-large` | 13B+ models |
 | Batch inference | `a10g-large`, `a100-large` | High-throughput |
 | Multi-GPU workloads | `l4x4`, `a10g-largex2`, `a10g-largex4` | Parallel/large models |
-| TPU workloads | `v5e-1x1`, `v5e-2x2`, `v5e-2x4` | JAX/Flax, TPU-optimized |
 
 **All Available Flavors:**
-- **CPU:** `cpu-basic`, `cpu-upgrade`
-- **GPU:** `t4-small`, `t4-medium`, `l4x1`, `l4x4`, `a10g-small`, `a10g-large`, `a10g-largex2`, `a10g-largex4`, `a100-large`
-- **TPU:** `v5e-1x1`, `v5e-2x2`, `v5e-2x4`
+- **CPU:** `cpu-basic`, `cpu-upgrade`, `cpu-performance`, `cpu-xl`
+- **GPU:** `t4-small`, `t4-medium`, `l4x1`, `l4x4`, `l40sx1`, `l40sx4`, `l40sx8`, `a10g-small`, `a10g-large`, `a10g-largex2`, `a10g-largex4`, `a100-large`, `a100x4`, `a100x8`, `h200`, `h200x2`, `h200x4`, `h200x8`, `rtx-pro-6000`, `rtx-pro-6000x2`, `rtx-pro-6000x4`, `rtx-pro-6000x8`
+
+There are no TPU flavors. Run `hf jobs hardware` (or `list_jobs_hardware()`) for the live list with specs and per-minute cost.
 
 **Guidelines:**
 - Start with smaller hardware for testing
 - Scale up based on actual needs
 - Use multi-GPU for parallel workloads or large models
-- Use TPUs for JAX/Flax workloads
 - See `references/hardware_guide.md` for detailed specifications
 
 ## Critical: Saving Results
@@ -622,20 +621,22 @@ Total Cost = (Hours of runtime) × (Cost per hour)
 
 **Example calculations:**
 
+Per-hour rates change; read them from `hf jobs hardware` rather than hard-coding. Figures below are as of 2026-08.
+
 **Quick test:**
-- Hardware: cpu-basic ($0.10/hour)
+- Hardware: cpu-basic ($0.01/hour)
 - Time: 15 minutes (0.25 hours)
-- Cost: $0.03
+- Cost: $0.003
 
 **Data processing:**
-- Hardware: l4x1 ($2.50/hour)
+- Hardware: l4x1 ($0.80/hour)
 - Time: 2 hours
-- Cost: $5.00
+- Cost: $1.60
 
 **Batch inference:**
-- Hardware: a10g-large ($5/hour)
+- Hardware: a10g-large ($1.50/hour)
 - Time: 4 hours
-- Cost: $20.00
+- Cost: $6.00
 
 **Cost optimization tips:**
 1. Start small - Test on cpu-basic or t4-small
@@ -856,7 +857,7 @@ See [Webhooks Documentation](https://huggingface.co/docs/huggingface_hub/guides/
 
 ## Common Workload Patterns
 
-This repository ships ready-to-run UV scripts in `jobs/scripts/`. Prefer using them instead of inventing new templates.
+This skill ships ready-to-run UV scripts in its own `scripts/` directory. Prefer using them instead of inventing new templates. Paths below are relative to the skill directory.
 
 ### Pattern 1: Dataset → Model Responses (vLLM) — `scripts/generate-responses.py`
 
@@ -867,7 +868,7 @@ This repository ships ready-to-run UV scripts in `jobs/scripts/`. Prefer using t
 ```python
 from pathlib import Path
 
-script = Path("jobs/scripts/generate-responses.py").read_text()
+script = Path("scripts/generate-responses.py").read_text()
 hf_jobs("uv", {
     "script": script,
     "script_args": [
@@ -894,7 +895,7 @@ hf_jobs("uv", {
 ```python
 from pathlib import Path
 
-script = Path("jobs/scripts/cot-self-instruct.py").read_text()
+script = Path("scripts/cot-self-instruct.py").read_text()
 hf_jobs("uv", {
     "script": script,
     "script_args": [
@@ -919,7 +920,7 @@ hf_jobs("uv", {
 ```python
 from pathlib import Path
 
-script = Path("jobs/scripts/finepdfs-stats.py").read_text()
+script = Path("scripts/finepdfs-stats.py").read_text()
 hf_jobs("uv", {
     "script": script,
     "script_args": [

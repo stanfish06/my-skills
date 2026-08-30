@@ -2,15 +2,17 @@
 
 Choosing the right hardware (flavor) is critical for cost-effective workloads.
 
-> **Reference:** [HF Jobs Hardware Documentation](https://huggingface.co/docs/hub/en/spaces-config-reference) (updated 07/2025)
+> **Reference:** `hf jobs hardware` (Python: `list_jobs_hardware()`) returns the live flavor list with specs and `unitCostUSD` per minute. Tables below are a snapshot as of 2026-08 — read the live list before quoting a price.
 
 ## Available Hardware
 
 ### CPU Flavors
 | Flavor | Description | Use Case |
 |--------|-------------|----------|
-| `cpu-basic` | Basic CPU instance | Testing, lightweight scripts |
-| `cpu-upgrade` | Enhanced CPU instance | Data processing, parallel workloads |
+| `cpu-basic` | 2 vCPU / 16 GB RAM | Testing, lightweight scripts |
+| `cpu-upgrade` | 8 vCPU / 32 GB RAM | Data processing, parallel workloads |
+| `cpu-xl` | 16 vCPU / 124 GB RAM | Large in-memory data processing |
+| `cpu-performance` | 32 vCPU / 256 GB RAM | Heaviest CPU-only workloads |
 
 **Use cases:** Data processing, testing scripts, lightweight workloads
 **Not recommended for:** Model training, GPU-accelerated workloads
@@ -27,20 +29,22 @@ Choosing the right hardware (flavor) is critical for cost-effective workloads.
 | `a10g-large` | NVIDIA A10G | 24GB | 7-13B models, batch inference |
 | `a10g-largex2` | 2x NVIDIA A10G | 48GB | Multi-GPU, large models |
 | `a10g-largex4` | 4x NVIDIA A10G | 96GB | Multi-GPU, very large models |
-| `a100-large` | NVIDIA A100 | 40GB | 13B+ models, fastest GPU option |
+| `l40sx1` | NVIDIA L40S | 48GB | 7-13B models |
+| `l40sx4` | 4x NVIDIA L40S | 192GB | Multi-GPU, large models |
+| `l40sx8` | 8x NVIDIA L40S | 384GB | Multi-GPU, very large models |
+| `a100-large` | NVIDIA A100 | 80GB | 13B+ models |
+| `a100x4` | 4x NVIDIA A100 | 320GB | Multi-GPU, 70B-class models |
+| `a100x8` | 8x NVIDIA A100 | 640GB | Multi-GPU, 70B-class models |
+| `rtx-pro-6000` | NVIDIA RTX PRO 6000 | 96GB | 13B+ models |
+| `rtx-pro-6000x2` | 2x RTX PRO 6000 | 192GB | Multi-GPU |
+| `rtx-pro-6000x4` | 4x RTX PRO 6000 | 384GB | Multi-GPU |
+| `rtx-pro-6000x8` | 8x RTX PRO 6000 | 768GB | Multi-GPU |
+| `h200` | NVIDIA H200 | 141GB | Largest models, fastest GPU option |
+| `h200x2` | 2x NVIDIA H200 | 282GB | Multi-GPU |
+| `h200x4` | 4x NVIDIA H200 | 564GB | Multi-GPU |
+| `h200x8` | 8x NVIDIA H200 | 1128GB | Multi-GPU |
 
-### TPU Flavors
-
-| Flavor | Configuration | Use Case |
-|--------|---------------|----------|
-| `v5e-1x1` | TPU v5e (1x1) | Small TPU workloads |
-| `v5e-2x2` | TPU v5e (2x2) | Medium TPU workloads |
-| `v5e-2x4` | TPU v5e (2x4) | Large TPU workloads |
-
-**TPU Use Cases:**
-- JAX/Flax model training
-- Large-scale inference
-- TPU-optimized workloads
+HF Jobs offers no TPU flavors. For JAX/Flax, run on GPU.
 
 ## Selection Guidelines
 
@@ -142,7 +146,7 @@ Memory (GB) ≈ (Model params in billions) × 20 (full) or × 4 (LoRA)
 **Examples:**
 - Qwen2.5-0.5B inference: ~1-2GB ✅ fits t4-small
 - Qwen2.5-7B inference: ~14-28GB ✅ fits a10g-large
-- Qwen2.5-7B training: ~140GB ❌ not feasible without LoRA
+- Qwen2.5-7B training: ~140GB ❌ not feasible on one GPU without LoRA (fits `a100x4` / `h200x2`)
 
 ### Memory Optimization
 
@@ -176,20 +180,23 @@ Total Cost = (Hours of runtime) × (Cost per hour)
 
 ### Example Calculations
 
+Rates change. Read `unitCostUSD` (per minute) from `hf jobs hardware` and multiply by 60 instead of
+hard-coding. Figures below are as of 2026-08.
+
 **Data processing:**
-- Hardware: cpu-upgrade ($0.50/hour)
+- Hardware: cpu-upgrade ($0.03/hour)
 - Time: 1 hour
-- Cost: $0.50
+- Cost: $0.03
 
 **Batch inference:**
-- Hardware: a10g-large ($5/hour)
+- Hardware: a10g-large ($1.50/hour)
 - Time: 2 hours
-- Cost: $10.00
+- Cost: $3.00
 
 **Experiments:**
-- Hardware: a10g-small ($3.50/hour)
+- Hardware: a10g-small ($1.00/hour)
 - Time: 4 hours
-- Cost: $14.00
+- Cost: $4.00
 
 ### Cost Optimization Tips
 
@@ -283,6 +290,8 @@ FLAVORS = {
     # CPU
     "cpu-basic",      # Testing, lightweight
     "cpu-upgrade",    # Data processing
+    "cpu-xl",         # 16 vCPU / 124 GB RAM
+    "cpu-performance",# 32 vCPU / 256 GB RAM
     
     # GPU - Single
     "t4-small",       # 16GB - <1B models
@@ -290,17 +299,19 @@ FLAVORS = {
     "l4x1",           # 24GB - 3-7B models
     "a10g-small",     # 24GB - 3-7B production
     "a10g-large",     # 24GB - 7-13B models
-    "a100-large",     # 40GB - 13B+ models
+    "l40sx1",         # 48GB - 7-13B models
+    "rtx-pro-6000",   # 96GB - 13B+ models
+    "a100-large",     # 80GB - 13B+ models
+    "h200",           # 141GB - largest models
     
     # GPU - Multi
     "l4x4",           # 4x L4 (96GB total)
     "a10g-largex2",   # 2x A10G (48GB total)
     "a10g-largex4",   # 4x A10G (96GB total)
-    
-    # TPU
-    "v5e-1x1",        # TPU v5e 1x1
-    "v5e-2x2",        # TPU v5e 2x2
-    "v5e-2x4",        # TPU v5e 2x4
+    "l40sx4", "l40sx8",
+    "rtx-pro-6000x2", "rtx-pro-6000x4", "rtx-pro-6000x8",
+    "a100x4", "a100x8",
+    "h200x2", "h200x4", "h200x8",
 }
 ```
 
@@ -313,7 +324,6 @@ HARDWARE_MAP = {
     "batch_inference_medium": "a10g-large",
     "batch_inference_large": "a100-large",
     "experiments": "a10g-small",
-    "tpu_workloads": "v5e-1x1",
     "training": "see model-trainer skill"
 }
 ```
@@ -327,8 +337,8 @@ hf jobs run python:3.12 python script.py
 # GPU job
 hf jobs run --flavor a10g-large pytorch/pytorch:2.6.0-cuda12.4-cudnn9-devel python script.py
 
-# TPU job
-hf jobs run --flavor v5e-1x1 your-tpu-image python script.py
+# List the live flavors, specs and per-minute cost
+hf jobs hardware
 
 # UV script with GPU
 hf jobs uv run --flavor a10g-small my_script.py

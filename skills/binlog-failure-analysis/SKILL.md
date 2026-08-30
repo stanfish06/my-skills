@@ -39,13 +39,14 @@ SDK or in an offline environment without access to the `dotnet-tools` NuGet feed
 
 ```bash
 dotnet msbuild build.binlog -noconlog \
-  -fl  -flp:v=diag;logfile=full.log;performancesummary \
-  -fl1 -flp1:errorsonly;logfile=errors.log \
-  -fl2 -flp2:warningsonly;logfile=warnings.log
+  -fl  "-flp:v=diag;logfile=full.log;performancesummary" \
+  -fl1 "-flp1:errorsonly;logfile=errors.log" \
+  -fl2 "-flp2:warningsonly;logfile=warnings.log"
 ```
 
-> **PowerShell note:** Use `-flp:"v=diag;logfile=full.log;performancesummary"`
-> (quoted semicolons).
+> **Quoting:** the semicolons must be quoted in every shell — bash, zsh and PowerShell
+> all treat a bare `;` as a command separator, so an unquoted value is truncated to
+> `-flp:v=diag` and the log is written to `msbuild.log` instead.
 
 ### Search the text logs
 

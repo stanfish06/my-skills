@@ -195,6 +195,21 @@ update them. Record each one here and refresh it manually.
 | Bundle | Upstream | Vendored at | What we took |
 |--------|----------|-------------|--------------|
 | MATLAB Agentic Toolkit | [matlab/matlab-agentic-toolkit](https://github.com/matlab/matlab-agentic-toolkit) @ `9556aee` | 2026-07-26 | The 6 base-MATLAB skill groups (30 skills), flattened from `skills-catalog/<group>/<skill>/` to `<skill>/` at the vault root |
+| Scientific expert profiles | [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) @ `896ed6ed` | 2026-06 | 503 profiles plus the `scientific-agents` dispatcher, converted to `SKILL.md` folders by `import-scientific-agents.py`. Provenance is `metadata.source-repo` / `source-commit` frontmatter, not a lock entry. |
+
+Refresh the profiles with
+
+```sh
+git clone https://github.com/K-Dense-AI/scientific-agents /tmp/scientific-agents
+python3 .skill-vault/import-scientific-agents.py /tmp/scientific-agents
+```
+
+The importer is not on a schedule, and running it unattended would revert local
+work: re-running it against the pinned commit reproduces 481 of the 504 profiles
+byte for byte and rewrites the other 23, which carry in-vault corrections
+(`pathologist`, `geochemist`, `structural-biologist`, …). Record each of those
+in `scientific-agent-patches.json` first — the importer reapplies that file on
+every run — then the refresh is safe to automate.
 
 Upstream ships 151 skills across 23 groups. We deliberately take only the groups
 that need no toolbox licence beyond base MATLAB — `matlab-core`,

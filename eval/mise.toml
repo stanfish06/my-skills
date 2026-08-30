@@ -1,0 +1,37 @@
+# Toolchain + task runner for the skill eval suite.
+# Everything the suite needs is pinned here so a run is reproducible.
+
+[tools]
+bun = "1.4.0"   # harness runtime + package manager
+go  = "1.27.0"  # Go task gate (build/vet) + go-modern-guidelines CLI
+
+[env]
+# Secrets come from eval/.env, created by `mise run setup` from ../vercel-api.txt.
+_.file = { path = ".env", redact = true }
+EVAL_ROOT = "{{config_root}}"
+
+[tasks.setup]
+description = "Install deps and materialize .env from ../vercel-api.txt"
+run = "bash scripts/setup.sh"
+
+[tasks.smoke]
+description = "End-to-end smoke run (1 model, 2 tasks, 3 skills, k=3)"
+depends = ["setup"]
+run = "bun run src/cli.ts run --config smoke"
+
+[tasks.full]
+description = "Full run (all configured models)"
+depends = ["setup"]
+run = "bun run src/cli.ts run --config full"
+
+[tasks.replay]
+description = "Re-score a saved run offline (no API calls). Usage: mise run replay -- <runId>"
+run = "bun run src/cli.ts replay"
+
+[tasks.report]
+description = "Print the report for a saved run. Usage: mise run report -- <runId>"
+run = "bun run src/cli.ts report"
+
+[tasks.runs]
+description = "List saved runs"
+run = "bun run src/cli.ts runs"

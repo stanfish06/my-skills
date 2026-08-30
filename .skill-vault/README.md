@@ -33,6 +33,8 @@ This directory holds the machinery that keeps the human layer in sync.
 |------|---------|
 | `build.py` | Regenerates the human layer from the `SKILL.md` files. Idempotent; preserves hand edits. Run: `python3 .skill-vault/build.py` |
 | `build-graphify.py` | Rebuilds the optional local Graphify graph in `graphify-out/`. Manual only; can run LLM-backed extraction, so it is deliberately separate from CI's lightweight `build.py`. Run: `python3 .skill-vault/build-graphify.py` |
+| `apply-local-overrides.py` | Re-applies the fixes in `local-overrides.json` after each upstream pull. Run: `python3 .skill-vault/apply-local-overrides.py [--check]` |
+| `local-overrides.json` | The in-vault fixes to upstream-managed skills, as `find`/`replace` pairs keyed by skill name. |
 | `skill_toggle.py` | Safe metadata backend for `./skill-toggle`: catalog JSON, product-specific changes, snapshots, reload, and metadata-only Git reset. |
 | `tui/` | OpenTUI 0.5.1 application with mouse/keyboard navigation, fuzzy search, status/category filters, and separate Claude Code/Codex controls. |
 | *(none)* | The CLI's provenance lock is the tracked `.skill-lock.json` at the repo root, not a copy in here. It records where each skill came from so CI can update them. |
@@ -113,6 +115,36 @@ npx skills add <owner/repo> -s <skill> -g -y   # re-tracks it as a github source
 ```
 
 `GITHUB_TOKEN` is only used to raise the API rate limit; all current sources are public.
+
+### Fixing a skill that has a lock entry
+
+`skills update` reinstalls a github-sourced skill whenever its upstream folder
+hash changes, so an in-vault fix to one of those skills is overwritten on the
+next sync — silently, with no failure and no conflict. That is how PR #302's
+`docker-expert` fix was reverted a week after it merged (#665).
+
+Record the fix in `.skill-vault/local-overrides.json` as well as editing the
+`SKILL.md`, keyed by skill name:
+
+```json
+{
+  "docker-expert": [
+    { "id": "compose-v2-cli", "issue": 298,
+      "source": "sickn33/antigravity-awesome-skills",
+      "find": "docker-compose config", "replace": "docker compose config" }
+  ]
+}
+```
+
+`update-skills.yml` runs `apply-local-overrides.py` right after the pull and
+before `soften_skill_description.sh`, so the fix goes back on every time. An
+override whose `find` *and* `replace` are both gone means upstream rewrote that
+region: the run fails and the fix has to be re-derived rather than disappearing.
+`test_local_overrides.py` asserts the committed tree already satisfies every
+recorded override, so a revert that slips through shows up as a red test.
+
+Use `--check` to verify without writing. Skills with no lock entry are locally
+authored — fix those in place, no override needed.
 
 ## Keeping the lock fresh
 

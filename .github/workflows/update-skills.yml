@@ -72,6 +72,14 @@ jobs:
           # touches github-sourced global skills; `-y` makes it non-interactive.
           npx -y skills@1.5.10 update -g -y
 
+      - name: Re-apply local fixes to upstream-managed skills
+        # `skills update` reinstalls any skill whose upstream folder changed,
+        # which silently reverts merged in-vault fixes (#665). Every such fix is
+        # recorded in .skill-vault/local-overrides.json; this puts it back.
+        # Exits non-zero when an override no longer matches, so a fix that
+        # upstream has rewritten gets re-derived instead of vanishing.
+        run: python3 .skill-vault/apply-local-overrides.py
+
       - name: Soften coercive skill descriptions
         # Upstream SKILL.md files ship MUST / ALWAYS catalog copy that hijacks
         # matching. Re-apply after each pull; the next rebuild picks it up.

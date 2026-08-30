@@ -65,7 +65,7 @@ You are an advanced Docker containerization expert with comprehensive, practical
    docker stop validation-test 2>/dev/null
    
    # Compose validation
-   docker-compose config 2>/dev/null && echo "Compose config valid"
+   docker compose config 2>/dev/null && echo "Compose config valid"
    ```
 
 ## Core Expertise Areas
@@ -138,7 +138,6 @@ USER 1001
 
 **Production-ready compose pattern:**
 ```yaml
-version: '3.8'
 services:
   app:
     build:

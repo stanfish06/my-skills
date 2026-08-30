@@ -4,9 +4,10 @@ Generate and edit images using OpenRouter API with various image generation mode
 
 Supports models like:
 - google/gemini-3-pro-image-preview (generation and editing)
-- black-forest-labs/flux.2-pro (generation and editing)
-- black-forest-labs/flux.2-flex (generation)
-- And more image generation models available on OpenRouter
+- google/gemini-3.1-flash-image (generation and editing, cheaper)
+- openai/gpt-5-image-mini (generation and editing, cheapest)
+- Any model at https://openrouter.ai/api/v1/models with "image" in
+  architecture.output_modalities
 
 For image editing, provide an input image along with an editing prompt.
 """
@@ -216,7 +217,7 @@ Examples:
   python generate_image.py "A beautiful sunset over mountains"
 
   # Use a specific model
-  python generate_image.py "A cat in space" --model "black-forest-labs/flux.2-pro"
+  python generate_image.py "A cat in space" --model "google/gemini-3.1-flash-image"
 
   # Specify output path
   python generate_image.py "Abstract art" --output my_image.png
@@ -225,12 +226,13 @@ Examples:
   python generate_image.py "Make the sky purple" --input photo.jpg --output edited.png
 
   # Edit with a specific model
-  python generate_image.py "Add a hat to the person" --input portrait.png -m "black-forest-labs/flux.2-pro"
+  python generate_image.py "Add a hat to the person" --input portrait.png -m "google/gemini-3.1-flash-image"
 
 Popular image models:
   - google/gemini-3-pro-image-preview (default, high quality, generation + editing)
-  - black-forest-labs/flux.2-pro (fast, high quality, generation + editing)
-  - black-forest-labs/flux.2-flex (development version)
+  - google/gemini-3-pro-image (same model, non-preview id)
+  - google/gemini-3.1-flash-image (cheaper, generation + editing)
+  - openai/gpt-5-image-mini (cheapest, generation + editing)
         """
     )
 

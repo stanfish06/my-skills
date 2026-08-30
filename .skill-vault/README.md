@@ -34,6 +34,7 @@ This directory holds the machinery that keeps the human layer in sync.
 | `build.py` | Regenerates the human layer from the `SKILL.md` files. Idempotent; preserves hand edits. Run: `python3 .skill-vault/build.py` |
 | `build-graphify.py` | Rebuilds the optional local Graphify graph in `graphify-out/`. Manual only; can run LLM-backed extraction, so it is deliberately separate from CI's lightweight `build.py`. Run: `python3 .skill-vault/build-graphify.py` |
 | `apply-local-overrides.py` | Re-applies the fixes in `local-overrides.json` after each upstream pull. Run: `python3 .skill-vault/apply-local-overrides.py [--check]` |
+| `check-upstream-drift.py` | Compares recorded provenance against the upstream repos and reports what the sync failed to pull. Run: `python3 .skill-vault/check-upstream-drift.py [--fail-on-drift]` |
 | `local-overrides.json` | The in-vault fixes to upstream-managed skills, as `find`/`replace` pairs keyed by skill name. |
 | `skill_toggle.py` | Safe metadata backend for `./skill-toggle`: catalog JSON, product-specific changes, snapshots, reload, and metadata-only Git reset. |
 | `tui/` | OpenTUI 0.5.1 application with mouse/keyboard navigation, fuzzy search, status/category filters, and separate Claude Code/Codex controls. |
@@ -94,7 +95,7 @@ CLI's home at the checkout:
 ```sh
 rm -rf "$HOME/.agents"
 ln -sfn "$GITHUB_WORKSPACE" "$HOME/.agents"   # CLI home -> checkout
-npx -y skills@1.5.10 update -g -y             # updates the repo in place (pinned)
+npx -y skills@1.5.23 update -g -y             # updates the repo in place (pinned)
 ```
 
 No snapshot copy in either direction: `$HOME/.agents/skills` resolves to the
@@ -115,6 +116,34 @@ npx skills add <owner/repo> -s <skill> -g -y   # re-tracks it as a github source
 ```
 
 `GITHUB_TOKEN` is only used to raise the API rate limit; all current sources are public.
+
+### When the sync pulls nothing
+
+`skills update` decides what changed by fetching the source repo's git tree and
+comparing each entry's folder sha to `skillFolderHash`. A locked skill whose
+`skillPath` is not among the SKILL.md paths the CLI enumerates in that tree is
+reported as *"appears to have been deleted upstream"*, skipped, and never
+updated again — the run still exits 0. Two things put a skill in that state:
+
+- The upstream folder moved. `K-Dense-AI/scientific-agent-skills` renamed
+  `scientific-skills/` to `skills/`, which froze all 138 of its entries at their
+  install date until the paths were repointed. Fix: rewrite `skillPath` in the
+  lock, leave `skillFolderHash` alone so the next run pulls the change.
+- The upstream layout is one the CLI does not enumerate. It walks a fixed list
+  of prefixes (`""`, `skills/`, `.agents/skills/`, `.claude/skills/`, …) and
+  returns the first non-empty bucket, so a repo that has even one SKILL.md under
+  a recognised prefix hides everything it keeps under
+  `plugins/<plugin>/skills/<skill>/`. That is why `openai/plugins` and
+  `dotnet/skills` stall. Fixing it needs a change in
+  [vercel-labs/skills](https://github.com/vercel-labs/skills); nothing in this
+  repo works around it.
+
+`check-upstream-drift.py` makes both visible. It reports **behind** (the folder
+exists upstream and its sha differs from the lock — the sync should have pulled
+it) and **unreachable** (the recorded path is gone upstream, so it never will),
+plus the imported profiles pinned by frontmatter rather than by the lock.
+`update-skills.yml` runs it after the commit step, so the report never blocks
+the sync.
 
 ### Fixing a skill that has a lock entry
 

@@ -23,7 +23,7 @@ Tool landscape (2026):
   (AnnData/MuData), also handles spatial and multi-condition data.
 - **CellPhoneDB** (v5, Python) - permutation-test statistical method; also DEG-based
   and receptor-activity (CellSign) modes. LIANA reimplements its core scoring.
-- **CellChat** (v2, **R only** - Bioconductor/GitHub) - pathway-level signaling
+- **CellChat** (v2, **R only** - GitHub) - pathway-level signaling
   probabilities plus strong built-in visualization (chord, hierarchy, river plots).
   Use from R/Seurat; not a Python package.
 - **squidpy `sq.gr.ligrec`** (Python) - CellPhoneDB-style permutation test inside the
@@ -41,7 +41,7 @@ uv pip install "liana[extras]"  # tensor-cell2cell / MOFA+ multi-condition tools
 
 CellChat is R-based (install in R):
 ```r
-# install.packages("BiocManager"); BiocManager::install("CellChat")  # or devtools::install_github("jinworks/CellChat")
+devtools::install_github("jinworks/CellChat")
 ```
 
 ## Core workflow (LIANA on an h5ad)

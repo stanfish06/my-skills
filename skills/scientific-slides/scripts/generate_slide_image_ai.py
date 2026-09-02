@@ -10,7 +10,7 @@ Supports attaching reference images for context (e.g., "create a slide about thi
 
 Uses smart iterative refinement:
 1. Generate initial image with Nano Banana Pro
-2. Quality review using Gemini 3 Pro
+2. Quality review using Gemini 3.1 Pro
 3. Only regenerate if quality is below threshold
 4. Repeat until quality meets standards (max iterations)
 
@@ -82,6 +82,12 @@ def _load_env_file():
             break
             
     return False
+
+
+# Sentinel score returned when the quality review could not be performed.
+# It is deliberately below every quality threshold so that a review which
+# never ran can never be reported as a passing quality verdict.
+REVIEW_FAILED_SCORE = -1.0
 
 
 class SlideImageGenerator:
@@ -195,8 +201,8 @@ STYLE:
         self.base_url = "https://openrouter.ai/api/v1"
         # Nano Banana Pro for image generation
         self.image_model = "google/gemini-3-pro-image-preview"
-        # Gemini 3 Pro for quality review
-        self.review_model = "google/gemini-3-pro"
+        # Gemini 3.1 Pro for quality review
+        self.review_model = "google/gemini-3.1-pro-preview"
         
     def _log(self, message: str):
         """Log message if verbose mode is enabled."""
@@ -404,7 +410,7 @@ STYLE:
     def review_image(self, image_path: str, original_prompt: str, 
                     iteration: int, visual_only: bool = False,
                     max_iterations: int = 2) -> Tuple[str, float, bool]:
-        """Review generated image using Gemini 3 Pro."""
+        """Review generated image using Gemini 3.1 Pro."""
         image_data_url = self._image_to_base64(image_path)
         threshold = self.QUALITY_THRESHOLD
         
@@ -512,8 +518,20 @@ If score < {threshold}, mark as NEEDS_IMPROVEMENT with specific suggestions."""
             
             return (content if content else "Image generated successfully", score, needs_improvement)
         except Exception as e:
-            self._log(f"Review skipped: {str(e)}")
-            return "Image generated successfully (review skipped)", 7.0, False
+            # A failed review is not a passing grade. Surface the failure
+            # unconditionally (not only under --verbose) and report it as
+            # needing improvement, so a review that never ran can never be
+            # printed as a measured quality verdict.
+            print(
+                f"⚠ Quality review FAILED "
+                f"({type(e).__name__}: {e}) - quality was NOT verified.",
+                file=sys.stderr,
+            )
+            return (
+                f"Quality review did not run: {e}",
+                REVIEW_FAILED_SCORE,
+                True,
+            )
     
     def improve_prompt(self, original_prompt: str, critique: str, 
                       iteration: int, visual_only: bool = False) -> str:
@@ -564,6 +582,7 @@ Generate an improved version that addresses all the critique points."""
             "iterations": [],
             "final_image": None,
             "final_score": 0.0,
+            "review_failed": False,
             "success": False,
             "early_stop": False
         }
@@ -620,36 +639,46 @@ Generate a high-quality {'visual/figure' if visual_only else 'presentation slide
                 f.write(image_data)
             print(f"✓ Generated image (iteration {i})")
             
-            print(f"Reviewing image with Gemini 3 Pro...")
+            print(f"Reviewing image with Gemini 3.1 Pro...")
             critique, score, needs_improvement = self.review_image(
                 str(temp_path), user_prompt, i, visual_only, iterations
             )
-            print(f"✓ Score: {score}/10 (threshold: {self.QUALITY_THRESHOLD}/10)")
+            review_ok = score != REVIEW_FAILED_SCORE
+            if review_ok:
+                print(f"✓ Score: {score}/10 (threshold: {self.QUALITY_THRESHOLD}/10)")
             
             results["iterations"].append({
                 "iteration": i,
                 "critique": critique,
                 "score": score,
                 "needs_improvement": needs_improvement,
+                "review_failed": not review_ok,
                 "success": True
             })
             
-            if not needs_improvement:
+            if review_ok and score >= self.QUALITY_THRESHOLD and not needs_improvement:
                 print(f"\n✓ Quality meets threshold ({score} >= {self.QUALITY_THRESHOLD})")
                 final_image_data = image_data
                 results["final_score"] = score
+                results["review_failed"] = not review_ok
                 results["success"] = True
                 results["early_stop"] = True
                 break
             
             if i == iterations:
                 print(f"\n⚠ Maximum iterations reached")
+                if not review_ok:
+                    print("⚠ Quality was NOT verified; the review never ran.")
                 final_image_data = image_data
                 results["final_score"] = score
+                results["review_failed"] = not review_ok
                 results["success"] = True
                 break
             
-            print(f"\n⚠ Quality below threshold ({score} < {self.QUALITY_THRESHOLD})")
+            if review_ok:
+                print(f"\n⚠ Quality below threshold ({score} < {self.QUALITY_THRESHOLD})")
+            else:
+                print("\n⚠ Quality could not be verified; regenerating.")
             print(f"Improving prompt...")
             current_prompt = self.improve_prompt(user_prompt, critique, i + 1, visual_only)
         

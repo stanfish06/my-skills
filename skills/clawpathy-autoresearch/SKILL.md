@@ -96,16 +96,19 @@ scope. It writes:
 
 Validate:
 ```python
-from skills.clawpathy_autoresearch import validate_workspace
+from importlib import import_module
+from pathlib import Path
+
+validate_workspace = import_module("skills.clawpathy-autoresearch").validate_workspace
 print(validate_workspace(Path("WORKSPACE")))  # [] means valid
 ```
 
 ### Phase 4 — Loop
 
 ```bash
-python -m skills.clawpathy_autoresearch WORKSPACE_DIR
+python -m skills.clawpathy-autoresearch WORKSPACE_DIR
 # or with custom models:
-python -m skills.clawpathy_autoresearch WORKSPACE_DIR \
+python -m skills.clawpathy-autoresearch WORKSPACE_DIR \
   --proposer-model sonnet --executor-model sonnet --judge-model opus
 ```
 

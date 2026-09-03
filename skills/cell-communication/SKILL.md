@@ -41,7 +41,8 @@ uv pip install "liana[extras]"  # tensor-cell2cell / MOFA+ multi-condition tools
 
 CellChat is R-based (install in R):
 ```r
-devtools::install_github("jinworks/CellChat")
+if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
+devtools::install_github("jinworks/CellChat")  # not on CRAN or Bioconductor
 ```
 
 ## Core workflow (LIANA on an h5ad)

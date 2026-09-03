@@ -4,7 +4,7 @@ AI-powered scientific schematic generation using Nano Banana Pro.
 
 This script uses a smart iterative refinement approach:
 1. Generate initial image with Nano Banana Pro
-2. AI quality review using Gemini 3 Pro for scientific critique
+2. AI quality review using Gemini 3.1 Pro for scientific critique
 3. Only regenerate if quality is below threshold for document type
 4. Repeat until quality meets standards (max iterations)
 
@@ -76,10 +76,16 @@ def _load_env_file():
     return False
 
 
+# Sentinel score returned when the quality review could not be performed.
+# It is deliberately below every quality threshold so that a review which
+# never ran can never be reported as a passing quality verdict.
+REVIEW_FAILED_SCORE = -1.0
+
+
 class ScientificSchematicGenerator:
     """Generate scientific schematics using AI with smart iterative refinement.
     
-    Uses Gemini 3 Pro for quality review to determine if regeneration is needed.
+    Uses Gemini 3.1 Pro for quality review to determine if regeneration is needed.
     Multiple passes only occur if the generated schematic doesn't meet the
     quality threshold for the target document type.
     """
@@ -174,8 +180,8 @@ IMPORTANT - NO FIGURE NUMBERS:
         # Nano Banana Pro - Google's advanced image generation model
         # https://openrouter.ai/google/gemini-3-pro-image-preview
         self.image_model = "google/gemini-3-pro-image-preview"
-        # Gemini 3 Pro for quality review - excellent vision and reasoning
-        self.review_model = "google/gemini-3-pro"
+        # Gemini 3.1 Pro for quality review - excellent vision and reasoning
+        self.review_model = "google/gemini-3.1-pro-preview"
         
     def _log(self, message: str):
         """Log message if verbose mode is enabled."""
@@ -427,9 +433,9 @@ IMPORTANT - NO FIGURE NUMBERS:
                     iteration: int, doc_type: str = "default",
                     max_iterations: int = 2) -> Tuple[str, float, bool]:
         """
-        Review generated image using Gemini 3 Pro for quality analysis.
+        Review generated image using Gemini 3.1 Pro for quality analysis.
         
-        Uses Gemini 3 Pro's superior vision and reasoning capabilities to
+        Uses Gemini 3.1 Pro's superior vision and reasoning capabilities to
         evaluate the schematic quality and determine if regeneration is needed.
         
         Args:
@@ -442,7 +448,7 @@ IMPORTANT - NO FIGURE NUMBERS:
         Returns:
             Tuple of (critique text, quality score 0-10, needs_improvement bool)
         """
-        # Use Gemini 3 Pro for review - excellent vision and analysis
+        # Use Gemini 3.1 Pro for review - excellent vision and analysis
         image_data_url = self._image_to_base64(image_path)
         
         # Get quality threshold for this document type
@@ -518,7 +524,7 @@ If score < {threshold}, mark as NEEDS_IMPROVEMENT with specific suggestions."""
         ]
         
         try:
-            # Use Gemini 3 Pro for high-quality review
+            # Use Gemini 3.1 Pro for high-quality review
             response = self._make_request(
                 model=self.review_model,
                 messages=messages
@@ -527,7 +533,8 @@ If score < {threshold}, mark as NEEDS_IMPROVEMENT with specific suggestions."""
             # Extract text response
             choices = response.get("choices", [])
             if not choices:
-                return "Image generated successfully", 8.0
+                # An empty response is a review that never ran, not a pass.
+                raise ValueError("review response contained no choices")
             
             message = choices[0].get("message", {})
             content = message.get("content", "")
@@ -573,9 +580,20 @@ If score < {threshold}, mark as NEEDS_IMPROVEMENT with specific suggestions."""
                     score, 
                     needs_improvement)
         except Exception as e:
-            self._log(f"Review skipped: {str(e)}")
-            # Don't fail the whole process if review fails - assume acceptable
-            return "Image generated successfully (review skipped)", 7.5, False
+            # A failed review is not a passing grade. Surface the failure
+            # unconditionally (not only under --verbose) and report it as
+            # needing improvement, so a review that never ran can never be
+            # printed as a measured quality verdict.
+            print(
+                f"⚠ Quality review FAILED "
+                f"({type(e).__name__}: {e}) - quality was NOT verified.",
+                file=sys.stderr,
+            )
+            return (
+                f"Quality review did not run: {e}",
+                REVIEW_FAILED_SCORE,
+                True,
+            )
     
     def improve_prompt(self, original_prompt: str, critique: str, 
                       iteration: int) -> str:
@@ -638,6 +656,7 @@ Generate an improved version that addresses all the critique points while mainta
             "iterations": [],
             "final_image": None,
             "final_score": 0.0,
+            "review_failed": False,
             "success": False,
             "early_stop": False,
             "early_stop_reason": None
@@ -683,12 +702,14 @@ Generate a publication-quality scientific diagram that meets all the guidelines 
                 f.write(image_data)
             print(f"✓ Saved: {iter_path}")
             
-            # Review image using Gemini 3 Pro
-            print(f"Reviewing image with Gemini 3 Pro...")
+            # Review image using Gemini 3.1 Pro
+            print(f"Reviewing image with Gemini 3.1 Pro...")
             critique, score, needs_improvement = self.review_image(
                 str(iter_path), user_prompt, i, doc_type, iterations
             )
-            print(f"✓ Score: {score}/10 (threshold: {threshold}/10)")
+            review_ok = score != REVIEW_FAILED_SCORE
+            if review_ok:
+                print(f"✓ Score: {score}/10 (threshold: {threshold}/10)")
             
             # Save iteration results
             iteration_result = {
@@ -698,16 +719,18 @@ Generate a publication-quality scientific diagram that meets all the guidelines 
                 "critique": critique,
                 "score": score,
                 "needs_improvement": needs_improvement,
+                "review_failed": not review_ok,
                 "success": True
             }
             results["iterations"].append(iteration_result)
             
             # Check if quality is acceptable - STOP EARLY if so
-            if not needs_improvement:
+            if review_ok and score >= threshold and not needs_improvement:
                 print(f"\n✓ Quality meets {doc_type} threshold ({score} >= {threshold})")
                 print(f"  No further iterations needed!")
                 results["final_image"] = str(iter_path)
                 results["final_score"] = score
+                results["review_failed"] = not review_ok
                 results["success"] = True
                 results["early_stop"] = True
                 results["early_stop_reason"] = f"Quality score {score} meets threshold {threshold} for {doc_type}"
@@ -716,13 +739,19 @@ Generate a publication-quality scientific diagram that meets all the guidelines 
             # If this is the last iteration, we're done regardless
             if i == iterations:
                 print(f"\n⚠ Maximum iterations reached")
+                if not review_ok:
+                    print("⚠ Quality was NOT verified; the review never ran.")
                 results["final_image"] = str(iter_path)
                 results["final_score"] = score
+                results["review_failed"] = not review_ok
                 results["success"] = True
                 break
             
             # Quality below threshold - improve prompt for next iteration
-            print(f"\n⚠ Quality below threshold ({score} < {threshold})")
+            if review_ok:
+                print(f"\n⚠ Quality below threshold ({score} < {threshold})")
+            else:
+                print("\n⚠ Quality could not be verified; regenerating.")
             print(f"Improving prompt based on feedback...")
             current_prompt = self.improve_prompt(user_prompt, critique, i + 1)
         

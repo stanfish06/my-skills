@@ -5,5 +5,12 @@
       "find": "ITER uses **beryllium** first wall and **tungsten** divertor",
       "replace": "ITER's 2024 baseline specifies **tungsten** armour for the first wall and divertor"
     }
+  ],
+  "clinical-microbiologist": [
+    {
+      "id": "colistin-no-gradient-diffusion",
+      "find": "- **VITEK/Phoenix carbapenem or colistin errors**: known VME organisms — confirm with\n  broth MIC, Etest, or reference laboratory; apply EUCAST screening documents for CRE.",
+      "replace": "- **VITEK/Phoenix carbapenem errors**: known VME organisms — confirm with an\n  organism- and drug-appropriate reference or manual method; apply EUCAST screening\n  documents for CRE.\n- **VITEK/Phoenix colistin errors**: confirm with broth microdilution under EUCAST,\n  or another MIC method explicitly permitted by the laboratory's current CLSI\n  framework; never use gradient diffusion/Etest. Send to a reference laboratory\n  when an accepted method is unavailable locally."
+    }
   ]
 }

@@ -53,15 +53,15 @@ def load_skill_module(skill, script):
     return module
 
 
-def make_generator(module, class_name):
-    """Build a generator with a dummy key and a review call that always fails."""
+def make_generator(module, class_name, response=None):
+    """Build a generator whose review call fails, or returns ``response``."""
     generator = getattr(module, class_name)(api_key="test-key-never-used")
 
     def boom(*args, **kwargs):
         raise RuntimeError("simulated OpenRouter outage")
 
     # Fail at the API boundary; skip real image I/O.
-    generator._make_request = boom
+    generator._make_request = boom if response is None else (lambda *a, **k: response)
     generator._image_to_base64 = lambda *a, **k: "data:image/png;base64,AAAA"
     return generator
 
@@ -123,6 +123,25 @@ class FailedReviewIsNotAPassTests(unittest.TestCase):
                     score,
                     module.REVIEW_FAILED_SCORE,
                     f"{skill} invented a score for a review that never ran",
+                )
+                self.assertTrue(
+                    needs_improvement,
+                    f"{skill} marked an unreviewed image as acceptable",
+                )
+
+    def test_empty_choices_is_not_a_pass(self):
+        """A 200 response carrying no choices is also a review that never ran."""
+        for skill, script, cls in TARGETS:
+            with self.subTest(skill=skill):
+                module = load_skill_module(skill, script)
+                generator = make_generator(module, cls, response={"choices": []})
+
+                _critique, score, needs_improvement = call_review(generator)
+
+                self.assertEqual(
+                    score,
+                    module.REVIEW_FAILED_SCORE,
+                    f"{skill} invented a score from an empty review response",
                 )
                 self.assertTrue(
                     needs_improvement,

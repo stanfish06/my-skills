@@ -894,7 +894,8 @@ If score < {threshold}, mark as NEEDS_IMPROVEMENT with specific suggestions."""
             
             choices = response.get("choices", [])
             if not choices:
-                return "Image generated successfully", 7.5, False
+                # An empty response is a review that never ran, not a pass.
+                raise ValueError("review response contained no choices")
             
             message = choices[0].get("message", {})
             content = message.get("content", "")

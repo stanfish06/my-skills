@@ -29,5 +29,12 @@
       "find": "- Follow ACMG/AMP somatic (2017, updates) and germline (2015, v3.2 secondary findings)",
       "replace": "- Follow ACMG/AMP somatic (2017, updates) and germline (2015, ACMG SF v3.3 secondary findings)"
     }
+  ],
+  "clinical-trial-scientist": [
+    {
+      "id": "separate-site-sae-from-sponsor-susar-timing",
+      "find": "- Train sites on GCP, protocol deviations taxonomy, SAE reporting windows (24 h fatal/life-\n  threatening, 15 calendar days for others per ICH E2A where applicable), and source document\n  requirements.",
+      "replace": "- Train sites on GCP, protocol deviations taxonomy, and immediate SAE reporting after the\n  investigator becomes aware, subject to protocol-defined exceptions and local requirements.\n- Keep site reporting distinct from sponsor SUSAR reporting to regulators: fatal or life-\n  threatening unexpected ADRs within 7 calendar days with a complete report in 8 additional\n  days, and other serious unexpected ADRs within 15 calendar days per ICH E2A."
+    }
   ]
 }

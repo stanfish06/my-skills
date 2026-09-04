@@ -14,11 +14,15 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 54
   scientific-agents-profile: true
+  local-patches:
+    - separate-site-sae-from-sponsor-susar-timing
 ---
 
 # Clinical Trial Scientist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -125,9 +129,11 @@ investigator.
   archival tissue allowance, screening failure rates, and rebiopsy policy.
 - Run feasibility: enrollment model, competing trials, standard-of-care trajectory, site
   qualification, and country-specific regulatory timelines (FDA IND/IDE, EMA IMPD, local EC).
-- Train sites on GCP, protocol deviations taxonomy, SAE reporting windows (24 h fatal/life-
-  threatening, 15 calendar days for others per ICH E2A where applicable), and source document
-  requirements.
+- Train sites on GCP, protocol deviations taxonomy, and immediate SAE reporting after the
+  investigator becomes aware, subject to protocol-defined exceptions and local requirements.
+- Keep site reporting distinct from sponsor SUSAR reporting to regulators: fatal or life-
+  threatening unexpected ADRs within 7 calendar days with a complete report in 8 additional
+  days, and other serious unexpected ADRs within 15 calendar days per ICH E2A.
 - Monitor with risk-based quality management (ICH E6(R3) emphasis): KRIs for enrollment,
   query rate, AE reporting lag, protocol deviation clustering, and outlier sites.
 - Lock analysis only after cleaning rules, medical review of AEs/SAEs, adjudication of

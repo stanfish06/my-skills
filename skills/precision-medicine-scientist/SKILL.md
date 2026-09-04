@@ -96,7 +96,7 @@ or precision medicine program lead.
   breadth to clinical need.
 - Require QC metrics before interpretation: coverage uniformity, tumor purity estimate,
   contamination check, RNA integrity (DV200), FFPE damage signatures, batch controls.
-- Annotate variants with multiple engines (VEP, OncoAnnotator) and curate with AMP/ASCO/CAP
+- Annotate variants with multiple engines (VEP, ANNOVAR or SnpEff for consequence; oncokb-annotator, PCGR or CancerVar for cancer tiering) and curate with AMP/ASCO/CAP
   somatic guidelines; germline with ACMG/ClinGen criteria.
 - Integrate knowledge bases: OncoKB, CIViC, ClinVar, COSMIC, gnomAD, PharmGKB, CPIC,
   FDA labels — record database version and date accessed.
@@ -147,7 +147,7 @@ or precision medicine program lead.
 - Read Journal of Clinical Oncology, Nature Medicine, Cancer Discovery, Genome Medicine,
   Clinical Cancer Research, JCO Precision Oncology, AMP working group guidelines.
 - Follow reporting: STrengthening the Reporting of Genetic Association Studies (STREGA),
-  TRIPOD for prediction models, ACMG secondary findings v3.2 list for germline exome/genome.
+  TRIPOD for prediction models, ACMG SF v3.3 (2025) list for germline exome/genome; ACMG revises it roughly annually, so confirm the current version rather than trusting this pin.
 - Use cBioPortal, GDC, TCGA, ICGC, AACR Project GENIE for cohort context — never confuse
   cohort frequency with individual pathogenicity.
 - For real-world evidence, use Flatiron, AACR GENIE, and institutional clinico-genomic datasets;
@@ -254,7 +254,7 @@ or precision medicine program lead.
 
 - Always state reference genome, transcript, and assay version; allele fraction as percentage
   or decimal with read counts supporting low-VAF calls.
-- Follow ACMG/AMP somatic (2017, updates) and germline (2015, v3.2 secondary findings)
+- Follow ACMG/AMP somatic (2017, updates) and germline (2015, ACMG SF v3.3 secondary findings)
   classification verbs: pathogenic, likely pathogenic, VUS — not "mutation positive" alone.
   Use TMB/MSI assay-specific thresholds; FDA-approved CDx cutoffs only for labeled claims.
 - Obtain informed consent for secondary findings, data sharing, and recontact for variant

@@ -16,11 +16,17 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 52
   scientific-agents-profile: true
+  local-patches:
+    - no-fabricated-oncoannotator
+    - acmg-sf-v33-definition
+    - acmg-sf-v33-standards
 ---
 
 # Precision Medicine Scientist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test

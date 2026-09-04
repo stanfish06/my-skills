@@ -4,7 +4,7 @@
 
 ```alloy
 database_observability.postgres "mydb" {
-  data_source_name = "postgresql://grafana_monitoring:secret@localhost:5432/mydb?sslmode=disable"
+  data_source_name = "postgresql://grafana_monitoring:" + sys.env("DB_MONITORING_PASSWORD") + "@localhost:5432/mydb?sslmode=require"
 
   enable_collectors = ["pg_stat_statements", "query_samples", "schema_details"]
 
@@ -37,7 +37,7 @@ loki.write "cloud" {
 
 ```alloy
 database_observability.mysql "mydb" {
-  data_source_name = "grafana_monitoring:secret@tcp(localhost:3306)/mydb"
+  data_source_name = "grafana_monitoring:" + sys.env("DB_MONITORING_PASSWORD") + "@tcp(localhost:3306)/mydb?tls=true"
 
   enable_collectors = ["query_samples", "explain_plans", "schema_details"]
 

@@ -127,5 +127,14 @@
       "find": "    # Normalize if not all dimensions were scored\n    if total_weight > 0:\n        return total_score / total_weight * (sum(weights.values()) / total_weight)\n    return 0.0",
       "replace": "    # Divide by the weight actually scored; the extra sum(weights)/total_weight factor\n    # inflated any partial evaluation instead of normalizing it\n    if total_weight > 0:\n        return total_score / total_weight\n    return 0.0"
     }
+  ],
+  "huggingface-llm-trainer": [
+    {
+      "id": "unsloth-in-description",
+      "issue": 548,
+      "source": "openai/plugins",
+      "find": "Use for tasks involving cloud GPU training, GGUF conversion, or when users mention training on Hugging Face Jobs without local GPU setup.",
+      "replace": "Also covers Unsloth for SFT and vision-language training at roughly 2x speed and 60% less VRAM than standard TRL. Use for tasks involving cloud GPU training, GGUF conversion, Unsloth or FastVisionModel, or when users mention training on Hugging Face Jobs without local GPU setup."
+    }
   ]
 }

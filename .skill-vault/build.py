@@ -1707,6 +1707,8 @@ EXTRA_ASSIGNMENTS = {
     "marimo": "data-science-compute",
     "sqlalchemy": "software-dev",
     "streamlit": "data-science-compute",
+    # Frontend build tooling, alongside turbopack and turborepo.
+    "vite": "web-automation-frontend",
 }
 
 

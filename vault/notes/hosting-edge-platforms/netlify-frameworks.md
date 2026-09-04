@@ -21,6 +21,7 @@ created: 2026-08-07
 ## Related skills
 
 - [start](../../notes/vault-meta/start.md) — Use when starting Zoom work
+- [vite](../../notes/web-automation-frontend/vite.md) — Vite build tool configuration, plugin API, SSR, and Vite 8 Rolldown migration
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

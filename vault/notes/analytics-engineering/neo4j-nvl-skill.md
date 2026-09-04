@@ -24,6 +24,7 @@ created: 2026-08-23
 - [neo4j-cypher-skill](../../notes/analytics-engineering/neo4j-cypher-skill.md) — Generates, optimizes, and validates Cypher 25 queries for Neo4j 2025.x and 2026.x
 - [neo4j-driver-javascript-skill](../../notes/analytics-engineering/neo4j-driver-javascript-skill.md) — Neo4j JavaScript/TypeScript Driver v6 — driver lifecycle, executeQuery, managed transactions (executeRead/executeWrite), session.run, Integer handling, JSON serialization, record...
 - [setup](../../notes/vault-meta/setup.md) — Verify Daloopa MCP connection and show available skills
+- [vite](../../notes/web-automation-frontend/vite.md) — Vite build tool configuration, plugin API, SSR, and Vite 8 Rolldown migration
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

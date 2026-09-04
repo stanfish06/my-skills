@@ -20,7 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [vite](../../notes/web-automation-frontend/vite.md) — Vite build tool configuration, plugin API, SSR, and Vite 8 Rolldown migration
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

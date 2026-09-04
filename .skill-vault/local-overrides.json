@@ -14,5 +14,118 @@
       "find": "```yaml\nversion: '3.8'\nservices:\n",
       "replace": "```yaml\nservices:\n"
     }
+  ],
+  "alphagenome-single-variant-analysis": [
+    {
+      "id": "filter-protein-coding-real-name",
+      "issue": 815,
+      "source": "google-deepmind/science-skills",
+      "file": "scripts/lookup_gene_info.py",
+      "find": "filtered = gene_annotation.filter_to_protein_coding_transcript(filtered)",
+      "replace": "filtered = gene_annotation.filter_protein_coding(filtered)"
+    },
+    {
+      "id": "tidy-scores-gene-name-column",
+      "issue": 815,
+      "source": "google-deepmind/science-skills",
+      "file": "docs/alphagenome-api.md",
+      "find": "print(df[['gene_symbol', 'raw_score', 'quantile_score']])",
+      "replace": "# tidy_scores emits `gene_name`, not `gene_symbol` — inspect df.columns before filtering\nprint(df[['gene_name', 'raw_score', 'quantile_score']])"
+    }
+  ],
+  "atheris": [
+    {
+      "id": "ld-preload-atheris-path",
+      "issue": 831,
+      "source": "trailofbits/skills",
+      "find": "export LD_PRELOAD=\"$(python -c 'import atheris; import os; print(os.path.join(os.path.dirname(atheris.__file__), \"asan_with_fuzzer.so\"))')\"",
+      "replace": "export LD_PRELOAD=\"$(python -c 'import atheris; print(atheris.path())')/asan_with_fuzzer.so\""
+    },
+    {
+      "id": "ld-preload-no-hardcoded-python",
+      "issue": 831,
+      "source": "trailofbits/skills",
+      "find": "ENV LD_PRELOAD \"$VIRTUAL_ENV/lib/python3.11/site-packages/asan_with_fuzzer.so\"",
+      "replace": "# ENV cannot shell out, so resolve the path at build time and link it to a fixed one\nRUN ln -s \"$(python -c 'import atheris; print(atheris.path())')/asan_with_fuzzer.so\" \\\n    /usr/local/lib/asan_with_fuzzer.so\nENV LD_PRELOAD \"/usr/local/lib/asan_with_fuzzer.so\""
+    }
+  ],
+  "catalyst-by-zoho": [
+    {
+      "id": "zcatalyst-real-podspec-repo",
+      "issue": 812,
+      "source": "openai/plugins",
+      "file": "references/sdk-mobile.md",
+      "find": "pod 'ZCatalyst', :git => 'https://github.com/nicetomeetyou/ZCatalyst.git', :tag => '2.2.2'",
+      "replace": "pod 'ZCatalyst', :git => 'https://github.com/catalystbyzoho/Catalyst-iOS-SDK.git', :tag => '3.0.1'"
+    }
+  ],
+  "cellxgene-census": [
+    {
+      "id": "presence-matrix-no-var-filter-skill",
+      "issue": 819,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "presence = cellxgene_census.get_presence_matrix(\n    census,\n    \"homo_sapiens\",\n    var_value_filter=\"feature_name in ['CD4', 'CD8A']\"\n)",
+      "replace": "# get_presence_matrix takes no gene filter; its columns are indexed by feature\n# soma_joinid, so resolve the genes first and slice the matrix by those IDs.\ngenes = cellxgene_census.get_var(\n    census,\n    \"homo_sapiens\",\n    value_filter=\"feature_name in ['CD4', 'CD8A']\",\n    column_names=[\"soma_joinid\", \"feature_name\"],\n)\npresence = cellxgene_census.get_presence_matrix(census, \"homo_sapiens\")\npresence = presence[:, genes[\"soma_joinid\"].to_numpy()]"
+    },
+    {
+      "id": "presence-matrix-no-var-filter-patterns",
+      "issue": 819,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "presence = cellxgene_census.get_presence_matrix(\n    census,\n    \"homo_sapiens\",\n    var_value_filter=\"feature_name in ['CD4', 'CD8A']\"\n)",
+      "replace": "# get_presence_matrix takes no gene filter; its columns are indexed by feature\n# soma_joinid, so resolve the genes first and slice the matrix by those IDs.\ngenes = cellxgene_census.get_var(\n    census,\n    \"homo_sapiens\",\n    value_filter=\"feature_name in ['CD4', 'CD8A']\",\n    column_names=[\"soma_joinid\", \"feature_name\"],\n)\npresence = cellxgene_census.get_presence_matrix(census, \"homo_sapiens\")\npresence = presence[:, genes[\"soma_joinid\"].to_numpy()]",
+      "file": "references/common_patterns.md"
+    }
+  ],
+  "database-observability": [
+    {
+      "id": "pg-no-literal-password",
+      "issue": 813,
+      "source": "grafana/skills",
+      "find": "-- 2. Create a least-privilege monitoring user\nCREATE USER grafana_monitoring WITH PASSWORD 'secret';",
+      "replace": "-- 2. Create a least-privilege monitoring user.\n--    Generate the password (`openssl rand -base64 24`) and put it in the secret\n--    store Alloy reads; do not commit a literal.\nCREATE USER grafana_monitoring WITH PASSWORD '<generated>';"
+    },
+    {
+      "id": "mysql-no-instance-wide-select",
+      "issue": 813,
+      "source": "grafana/skills",
+      "find": "-- 1. Create least-privilege monitoring user\nCREATE USER 'grafana_monitoring'@'%' IDENTIFIED BY 'secret';\nGRANT SELECT, PROCESS, REPLICATION CLIENT ON *.* TO 'grafana_monitoring'@'%';",
+      "replace": "-- 1. Create least-privilege monitoring user.\n--    Generate the password (`openssl rand -base64 24`); do not commit a literal.\n--    Narrow '%' to the Alloy host wherever the network allows it.\nCREATE USER 'grafana_monitoring'@'%' IDENTIFIED BY '<generated>';\n-- PROCESS and REPLICATION CLIENT are instance-wide by definition; SELECT is not,\n-- and the next line already grants the only SELECT the collectors need.\nGRANT PROCESS, REPLICATION CLIENT ON *.* TO 'grafana_monitoring'@'%';"
+    },
+    {
+      "id": "pg-require-tls",
+      "issue": 813,
+      "source": "grafana/skills",
+      "file": "references/alloy-config.md",
+      "find": "data_source_name = \"postgresql://grafana_monitoring:secret@localhost:5432/mydb?sslmode=disable\"",
+      "replace": "data_source_name = \"postgresql://grafana_monitoring:\" + sys.env(\"DB_MONITORING_PASSWORD\") + \"@localhost:5432/mydb?sslmode=require\""
+    },
+    {
+      "id": "mysql-require-tls",
+      "issue": 813,
+      "source": "grafana/skills",
+      "file": "references/alloy-config.md",
+      "find": "data_source_name = \"grafana_monitoring:secret@tcp(localhost:3306)/mydb\"",
+      "replace": "data_source_name = \"grafana_monitoring:\" + sys.env(\"DB_MONITORING_PASSWORD\") + \"@tcp(localhost:3306)/mydb?tls=true\""
+    }
+  ],
+  "databricks-dabs": [
+    {
+      "id": "deploy-requires-consent",
+      "issue": 814,
+      "source": "databricks/databricks-agent-skills",
+      "file": "references/deploy-and-run.md",
+      "find": "For dev targets you can deploy without user consent. This allows you to run resources on the workspace too!",
+      "replace": "Deploying writes to a real workspace. Confirm the target with the user first, pass `-t dev` explicitly instead of relying on the default target, and check `bundle summary` to see what the target resolves to. `--auto-approve` and `--force` skip the CLI's own prompts; they do not stand in for that confirmation."
+    }
+  ],
+  "scholar-evaluation": [
+    {
+      "id": "weighted-average-normalization",
+      "issue": 828,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/calculate_scores.py",
+      "find": "    # Normalize if not all dimensions were scored\n    if total_weight > 0:\n        return total_score / total_weight * (sum(weights.values()) / total_weight)\n    return 0.0",
+      "replace": "    # Divide by the weight actually scored; the extra sum(weights)/total_weight factor\n    # inflated any partial evaluation instead of normalizing it\n    if total_weight > 0:\n        return total_score / total_weight\n    return 0.0"
+    }
   ]
 }

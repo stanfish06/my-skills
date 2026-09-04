@@ -1709,6 +1709,8 @@ EXTRA_ASSIGNMENTS = {
     "streamlit": "data-science-compute",
     # Frontend build tooling, alongside turbopack and turborepo.
     "vite": "web-automation-frontend",
+    # Schema/interface definition, alongside api-and-interface-design.
+    "protobuf": "software-dev",
 }
 
 

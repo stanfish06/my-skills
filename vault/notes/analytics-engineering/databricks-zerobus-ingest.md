@@ -20,7 +20,7 @@ created: 2026-08-23
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [protobuf](../../notes/software-dev/protobuf.md) — Use when working with Protocol Buffer (.proto) files, buf.yaml, buf.gen.yaml, or buf.lock
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

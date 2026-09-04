@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [.NET & C# Development](dotnet-development.md) | [MATLAB Development](matlab-development.md)
 
-## Skills (104)
+## Skills (105)
 
 - [agentic-workflows](../notes/software-dev/agentic-workflows.md) — Route gh-aw workflow design/create/debug/upgrade requests to the right prompts
 - [api-and-interface-design](../notes/software-dev/api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
@@ -80,6 +80,7 @@ created: 2026-06-13
 - [prisma-postgres](../notes/software-dev/prisma-postgres.md) — Prisma Postgres setup and operations guidance across Console, create-db CLI, Management API, and Management API SDK
 - [prisma-postgres-setup](../notes/software-dev/prisma-postgres-setup.md) — Set up a new Prisma Postgres database and connect it to a local project using the Management API
 - [prisma-upgrade-v7](../notes/software-dev/prisma-upgrade-v7.md) — Complete migration guide from Prisma ORM v6 to v7 covering all breaking changes
+- [protobuf](../notes/software-dev/protobuf.md) — Use when working with Protocol Buffer (.proto) files, buf.yaml, buf.gen.yaml, or buf.lock
 - [prototype](../notes/software-dev/prototype.md) — Build a throwaway prototype to answer a design question
 - [pytest](../notes/software-dev/pytest.md) — Testing Python code with pytest — fixtures, parametrization, markers, mocking, coverage, and configuration
 - [qa](../notes/software-dev/qa.md) — Interactive QA session where user reports bugs or issues conversationally, and the agent files GitHub issues

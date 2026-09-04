@@ -244,7 +244,29 @@ def query(params: dict[str, str | int | bool | None]) -> str:
     return urllib.parse.urlencode(clean)
 
 
-def restart_zotero(wait_for_api: bool = True) -> bool:
+ZOTERO_PROC = "zotero|zotero-bin"
+
+
+def zotero_running() -> bool:
+    if platform.system() == "Windows":
+        probe = subprocess.run(
+            ["tasklist", "/FI", "IMAGENAME eq zotero.exe", "/NH"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        return "zotero.exe" in probe.stdout.lower()
+    probe = subprocess.run(
+        ["pgrep", "-x", ZOTERO_PROC],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    return probe.returncode == 0
+
+
+def quit_zotero(timeout: float = 10.0) -> bool:
+    """Ask Zotero to exit and wait for it. True once no Zotero process remains."""
     system = platform.system()
     try:
         if system == "Darwin":
@@ -255,25 +277,42 @@ def restart_zotero(wait_for_api: bool = True) -> bool:
                 timeout=5,
                 check=False,
             )
-            time.sleep(1)
+        elif system == "Windows":
+            # No /F: a force-kill gives the database no chance to close cleanly.
+            subprocess.run(
+                ["taskkill", "/IM", "zotero.exe"],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                check=False,
+            )
+        else:
+            # -x matches the process name exactly. `pkill -f zotero` matched this
+            # script's own argv and, on Linux, its caller chain along with it.
+            subprocess.run(
+                ["pkill", "-x", ZOTERO_PROC],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                check=False,
+            )
+    except Exception:
+        return False
+
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        if not zotero_running():
+            return True
+        time.sleep(0.5)
+    return not zotero_running()
+
+
+def launch_zotero(wait_for_api: bool = True) -> bool:
+    system = platform.system()
+    try:
+        if system == "Darwin":
             subprocess.run(["open", "-a", "Zotero"], check=False)
         elif system == "Windows":
-            subprocess.run(
-                ["taskkill", "/IM", "zotero.exe", "/F"],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                check=False,
-            )
-            time.sleep(1)
             subprocess.Popen(["zotero.exe"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         else:
-            subprocess.run(
-                ["pkill", "-f", "zotero"],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                check=False,
-            )
-            time.sleep(1)
             subprocess.Popen(["zotero"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         return False
@@ -285,6 +324,11 @@ def restart_zotero(wait_for_api: bool = True) -> bool:
             return True
         time.sleep(0.5)
     return False
+
+
+def restart_zotero(wait_for_api: bool = True) -> bool:
+    quit_zotero()
+    return launch_zotero(wait_for_api=wait_for_api)
 
 
 def creators_from_item(data: dict[str, Any]) -> list[str]:
@@ -498,8 +542,12 @@ def cmd_status(args: argparse.Namespace) -> None:
 
 
 def cmd_set_pref(args: argparse.Namespace, enabled: bool) -> None:
+    # Zotero keeps preferences in memory and rewrites prefs.js in full on shutdown,
+    # so a write made while it runs is discarded. Quit first, then write, then launch.
+    if args.restart and zotero_running() and not quit_zotero():
+        exit_with("Zotero did not exit; quit it manually, then re-run.")
     backup = set_local_api_pref(enabled)
-    restarted = restart_zotero(wait_for_api=enabled) if args.restart else False
+    restarted = launch_zotero(wait_for_api=enabled) if args.restart else False
     dump_json(
         {
             "enabled": enabled,

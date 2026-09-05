@@ -176,7 +176,7 @@ Order: Alias → `enforce: 'pre'` → Core → User (no enforce) → Build → `
 // Function form:
 {
   apply(config, { command }) {
-    return command === 'build' && !config.build.ssr
+    return command === 'build' && !config.build?.ssr
   }
 }
 ```

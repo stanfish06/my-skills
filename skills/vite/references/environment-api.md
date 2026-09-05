@@ -66,7 +66,7 @@ import { customEnvironment } from 'vite-environment-provider'
 export default defineConfig({
   environments: {
     ssr: customEnvironment({
-      build: { outDir: '/dist/ssr' },
+      build: { outDir: 'dist/ssr' },
     }),
   },
 })

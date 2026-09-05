@@ -218,7 +218,7 @@ bucket.deleteObject("path/to/file.txt", object : ZCatalystCallback<Void> {
 **CocoaPods (Podfile):**
 
 ```ruby
-pod 'ZCatalyst', :git => 'https://github.com/nicetomeetyou/ZCatalyst.git', :tag => '2.2.2'
+pod 'ZCatalyst', :git => 'https://github.com/catalystbyzoho/Catalyst-iOS-SDK.git', :tag => '3.0.1'
 ```
 
 Run `pod install` after adding.

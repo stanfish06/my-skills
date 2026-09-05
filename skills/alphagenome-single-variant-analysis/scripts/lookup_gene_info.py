@@ -218,7 +218,7 @@ def run_transcript_lookup(
 
   if protein_coding:
     print('Filtering to protein coding transcripts...')
-    filtered = gene_annotation.filter_to_protein_coding_transcript(filtered)
+    filtered = gene_annotation.filter_protein_coding(filtered)
 
   if transcript_support_level:
     print(

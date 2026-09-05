@@ -140,7 +140,8 @@ scores = variant_scores_list[0]
 
 # Tidy scores to DataFrame
 df = variant_scorers.tidy_scores([scores], match_gene_strand=True)
-print(df[['gene_symbol', 'raw_score', 'quantile_score']])
+# tidy_scores emits `gene_name`, not `gene_symbol` — inspect df.columns before filtering
+print(df[['gene_name', 'raw_score', 'quantile_score']])
 ```
 
 **Available recommended scorers:** `ATAC`, `CAGE`, `DNASE`, `PROCAP`, `RNA_SEQ`,

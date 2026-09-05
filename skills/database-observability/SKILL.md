@@ -19,8 +19,10 @@ Query-level insights (RED metrics, query samples, explain plans) for MySQL and P
 --    In postgresql.conf:  shared_preload_libraries = 'pg_stat_statements'
 --    Then restart PostgreSQL.
 
--- 2. Create a least-privilege monitoring user
-CREATE USER grafana_monitoring WITH PASSWORD 'secret';
+-- 2. Create a least-privilege monitoring user.
+--    Generate the password (`openssl rand -base64 24`) and put it in the secret
+--    store Alloy reads; do not commit a literal.
+CREATE USER grafana_monitoring WITH PASSWORD '<generated>';
 GRANT pg_monitor TO grafana_monitoring;
 GRANT CONNECT ON DATABASE mydb TO grafana_monitoring;
 
@@ -39,9 +41,13 @@ SELECT count(*) FROM pg_stat_statements;
 ### MySQL setup
 
 ```sql
--- 1. Create least-privilege monitoring user
-CREATE USER 'grafana_monitoring'@'%' IDENTIFIED BY 'secret';
-GRANT SELECT, PROCESS, REPLICATION CLIENT ON *.* TO 'grafana_monitoring'@'%';
+-- 1. Create least-privilege monitoring user.
+--    Generate the password (`openssl rand -base64 24`); do not commit a literal.
+--    Narrow '%' to the Alloy host wherever the network allows it.
+CREATE USER 'grafana_monitoring'@'%' IDENTIFIED BY '<generated>';
+-- PROCESS and REPLICATION CLIENT are instance-wide by definition; SELECT is not,
+-- and the next line already grants the only SELECT the collectors need.
+GRANT PROCESS, REPLICATION CLIENT ON *.* TO 'grafana_monitoring'@'%';
 GRANT SELECT ON performance_schema.* TO 'grafana_monitoring'@'%';
 FLUSH PRIVILEGES;
 

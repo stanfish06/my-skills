@@ -16,11 +16,15 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 42
   scientific-agents-profile: true
+  local-patches:
+    - colistin-no-gradient-diffusion
 ---
 
 # Clinical Microbiologist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -249,8 +253,13 @@ microbiologist or laboratory director does in an acute-care setting.
 - **RAST small zones or haze**: heavy inoculum from broth, wrong incubation atmosphere,
   disk potency — compare to reference AST; do not report S on borderline RAST without
   local validation data.
-- **VITEK/Phoenix carbapenem or colistin errors**: known VME organisms — confirm with
-  broth MIC, Etest, or reference laboratory; apply EUCAST screening documents for CRE.
+- **VITEK/Phoenix carbapenem errors**: known VME organisms — confirm with an
+  organism- and drug-appropriate reference or manual method; apply EUCAST screening
+  documents for CRE.
+- **VITEK/Phoenix colistin errors**: confirm with broth microdilution under EUCAST,
+  or another MIC method explicitly permitted by the laboratory's current CLSI
+  framework; never use gradient diffusion/Etest. Send to a reference laboratory
+  when an accepted method is unavailable locally.
 - **FilmArray detection without growth**: non-viable DNA, prior antibiotics, organism
   outside culture panel — correlate; do not close case on molecular alone if culture
   is clinically expected.

@@ -5,5 +5,36 @@
       "find": "ITER uses **beryllium** first wall and **tungsten** divertor",
       "replace": "ITER's 2024 baseline specifies **tungsten** armour for the first wall and divertor"
     }
+  ],
+  "clinical-microbiologist": [
+    {
+      "id": "colistin-no-gradient-diffusion",
+      "find": "- **VITEK/Phoenix carbapenem or colistin errors**: known VME organisms — confirm with\n  broth MIC, Etest, or reference laboratory; apply EUCAST screening documents for CRE.",
+      "replace": "- **VITEK/Phoenix carbapenem errors**: known VME organisms — confirm with an\n  organism- and drug-appropriate reference or manual method; apply EUCAST screening\n  documents for CRE.\n- **VITEK/Phoenix colistin errors**: confirm with broth microdilution under EUCAST,\n  or another MIC method explicitly permitted by the laboratory's current CLSI\n  framework; never use gradient diffusion/Etest. Send to a reference laboratory\n  when an accepted method is unavailable locally."
+    }
+  ],
+  "precision-medicine-scientist": [
+    {
+      "id": "no-fabricated-oncoannotator",
+      "find": "- Annotate variants with multiple engines (VEP, OncoAnnotator) and curate with AMP/ASCO/CAP",
+      "replace": "- Annotate variants with multiple engines (VEP, ANNOVAR or SnpEff for consequence; oncokb-annotator, PCGR or CancerVar for cancer tiering) and curate with AMP/ASCO/CAP"
+    },
+    {
+      "id": "acmg-sf-v33-definition",
+      "find": "ACMG secondary findings v3.2 list for germline exome/genome.",
+      "replace": "ACMG SF v3.3 (2025) list for germline exome/genome; ACMG revises it roughly annually, so confirm the current version rather than trusting this pin."
+    },
+    {
+      "id": "acmg-sf-v33-standards",
+      "find": "- Follow ACMG/AMP somatic (2017, updates) and germline (2015, v3.2 secondary findings)",
+      "replace": "- Follow ACMG/AMP somatic (2017, updates) and germline (2015, ACMG SF v3.3 secondary findings)"
+    }
+  ],
+  "clinical-trial-scientist": [
+    {
+      "id": "separate-site-sae-from-sponsor-susar-timing",
+      "find": "- Train sites on GCP, protocol deviations taxonomy, SAE reporting windows (24 h fatal/life-\n  threatening, 15 calendar days for others per ICH E2A where applicable), and source document\n  requirements.",
+      "replace": "- Train sites on GCP, protocol deviations taxonomy, and immediate SAE reporting after the\n  investigator becomes aware, subject to protocol-defined exceptions and local requirements.\n- Keep site reporting distinct from sponsor SUSAR reporting to regulators: fatal or life-\n  threatening unexpected ADRs within 7 calendar days with a complete report in 8 additional\n  days, and other serious unexpected ADRs within 15 calendar days per ICH E2A."
+    }
   ]
 }

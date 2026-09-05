@@ -1,4 +1,4 @@
-"""CLI: python -m clawpathy_autoresearch <workspace> [--resume]"""
+"""CLI: python -m skills.clawpathy-autoresearch <workspace> [--fresh]"""
 from __future__ import annotations
 
 import argparse

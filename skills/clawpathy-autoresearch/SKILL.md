@@ -96,16 +96,23 @@ scope. It writes:
 
 Validate:
 ```python
-from skills.clawpathy_autoresearch import validate_workspace
+import sys
+from importlib import import_module
+from pathlib import Path
+
+# `skills` resolves only from the vault root; the hyphen blocks a plain import.
+sys.path.insert(0, str(Path.home() / ".agents"))
+validate_workspace = import_module("skills.clawpathy-autoresearch").validate_workspace
 print(validate_workspace(Path("WORKSPACE")))  # [] means valid
 ```
 
 ### Phase 4 — Loop
 
 ```bash
-python -m skills.clawpathy_autoresearch WORKSPACE_DIR
+cd ~/.agents   # run from the vault root, else `No module named 'skills'`
+python -m skills.clawpathy-autoresearch WORKSPACE_DIR
 # or with custom models:
-python -m skills.clawpathy_autoresearch WORKSPACE_DIR \
+python -m skills.clawpathy-autoresearch WORKSPACE_DIR \
   --proposer-model sonnet --executor-model sonnet --judge-model opus
 ```
 

@@ -53,6 +53,7 @@ jobs:
           python-version: "3.12"
 
       - name: Update all global skills from upstream
+        id: update
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -70,7 +71,17 @@ jobs:
 
           # Pinned for reproducibility; bump deliberately. `update -g` only
           # touches github-sourced global skills; `-y` makes it non-interactive.
+          #
+          # The CLI exits 1 if any single skill fails, after having updated all the
+          # others. Under `set -e` that aborted the job and discarded 265 good
+          # updates for one bad lock entry, freezing the sync from 2026-08-30 (#827).
+          # Record the code and carry on; "Fail on partial upstream update" below
+          # turns the job red once the sync it did manage has been committed.
+          set +e
           npx -y skills@1.5.23 update -g -y
+          update_exit=$?
+          set -e
+          echo "exit_code=$update_exit" >> "$GITHUB_OUTPUT"
 
       - name: Re-apply local fixes to upstream-managed skills
         # `skills update` reinstalls any skill whose upstream folder changed,
@@ -131,3 +142,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 .skill-vault/check-upstream-drift.py --fail-on-drift
+
+      - name: Fail on partial upstream update
+        # Last, so a partially failed update never blocks the part that succeeded.
+        # A lock entry whose local name differs from the upstream `name:` frontmatter
+        # can never match the CLI's --skill selector; 66 such entries have never
+        # updated once (#827). This keeps that visible instead of silent.
+        if: steps.update.outputs.exit_code != '0'
+        run: |
+          echo "::error::skills update exited ${{ steps.update.outputs.exit_code }}: at least one skill did not update. Everything that did update was committed."
+          exit 1

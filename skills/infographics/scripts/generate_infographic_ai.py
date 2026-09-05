@@ -5,7 +5,7 @@ AI-powered infographic generation using Nano Banana Pro.
 This script uses a smart iterative refinement approach:
 1. (Optional) Research phase - gather facts and data using Perplexity Sonar
 2. Generate initial infographic with Nano Banana Pro
-3. AI quality review using Gemini 3 Pro for infographic critique
+3. AI quality review using Gemini 3.1 Pro for infographic critique
 4. Only regenerate if quality is below threshold for document type
 5. Repeat until quality meets standards (max iterations)
 
@@ -269,10 +269,16 @@ PALETTE_PRESETS = {
 }
 
 
+# Sentinel score returned when the quality review could not be performed.
+# It is deliberately below every quality threshold so that a review which
+# never ran can never be reported as a passing quality verdict.
+REVIEW_FAILED_SCORE = -1.0
+
+
 class InfographicGenerator:
     """Generate infographics using AI with smart iterative refinement.
     
-    Uses Gemini 3 Pro for quality review to determine if regeneration is needed.
+    Uses Gemini 3.1 Pro for quality review to determine if regeneration is needed.
     Multiple passes only occur if the generated infographic doesn't meet the
     quality threshold for the target document type.
     """
@@ -358,8 +364,8 @@ IMPORTANT - NO META CONTENT:
         self.base_url = "https://openrouter.ai/api/v1"
         # Nano Banana Pro for image generation
         self.image_model = "google/gemini-3-pro-image-preview"
-        # Gemini 3 Pro for quality review
-        self.review_model = "google/gemini-3-pro"
+        # Gemini 3.1 Pro for quality review
+        self.review_model = "google/gemini-3.1-pro-preview"
         
     def _log(self, message: str):
         """Log message if verbose mode is enabled."""
@@ -788,7 +794,7 @@ Incorporate specific numbers, percentages, and dates from the research."""
                     iteration: int, doc_type: str = "default",
                     max_iterations: int = 3) -> Tuple[str, float, bool]:
         """
-        Review generated infographic using Gemini 3 Pro for quality analysis.
+        Review generated infographic using Gemini 3.1 Pro for quality analysis.
         
         Evaluates the infographic on multiple criteria specific to good
         infographic design and determines if regeneration is needed.
@@ -888,7 +894,8 @@ If score < {threshold}, mark as NEEDS_IMPROVEMENT with specific suggestions."""
             
             choices = response.get("choices", [])
             if not choices:
-                return "Image generated successfully", 7.5, False
+                # An empty response is a review that never ran, not a pass.
+                raise ValueError("review response contained no choices")
             
             message = choices[0].get("message", {})
             content = message.get("content", "")
@@ -930,8 +937,20 @@ If score < {threshold}, mark as NEEDS_IMPROVEMENT with specific suggestions."""
                     score, 
                     needs_improvement)
         except Exception as e:
-            self._log(f"Review skipped: {str(e)}")
-            return "Image generated successfully (review skipped)", 7.5, False
+            # A failed review is not a passing grade. Surface the failure
+            # unconditionally (not only under --verbose) and report it as
+            # needing improvement, so a review that never ran can never be
+            # printed as a measured quality verdict.
+            print(
+                f"⚠ Quality review FAILED "
+                f"({type(e).__name__}: {e}) - quality was NOT verified.",
+                file=sys.stderr,
+            )
+            return (
+                f"Quality review did not run: {e}",
+                REVIEW_FAILED_SCORE,
+                True,
+            )
     
     def improve_prompt(self, original_prompt: str, critique: str, 
                       infographic_type: Optional[str],
@@ -1029,6 +1048,7 @@ Generate an improved version that:
             "iterations": [],
             "final_image": None,
             "final_score": 0.0,
+            "review_failed": False,
             "success": False,
             "early_stop": False,
             "early_stop_reason": None
@@ -1100,12 +1120,14 @@ Generate an improved version that:
                 f.write(image_data)
             print(f"✓ Saved: {iter_path}")
             
-            # Review image using Gemini 3 Pro
-            print(f"Reviewing with Gemini 3 Pro...")
+            # Review image using Gemini 3.1 Pro
+            print(f"Reviewing with Gemini 3.1 Pro...")
             critique, score, needs_improvement = self.review_image(
                 str(iter_path), user_prompt, infographic_type, i, doc_type, iterations
             )
-            print(f"✓ Score: {score}/10 (threshold: {threshold}/10)")
+            review_ok = score != REVIEW_FAILED_SCORE
+            if review_ok:
+                print(f"✓ Score: {score}/10 (threshold: {threshold}/10)")
             
             # Save iteration results
             iteration_result = {
@@ -1115,16 +1137,18 @@ Generate an improved version that:
                 "critique": critique,
                 "score": score,
                 "needs_improvement": needs_improvement,
+                "review_failed": not review_ok,
                 "success": True
             }
             results["iterations"].append(iteration_result)
             
             # Check if quality is acceptable
-            if not needs_improvement:
+            if review_ok and score >= threshold and not needs_improvement:
                 print(f"\n✓ Quality meets threshold ({score} >= {threshold})")
                 print(f"  No further iterations needed!")
                 results["final_image"] = str(iter_path)
                 results["final_score"] = score
+                results["review_failed"] = not review_ok
                 results["success"] = True
                 results["early_stop"] = True
                 results["early_stop_reason"] = f"Quality score {score} meets threshold {threshold}"
@@ -1133,13 +1157,19 @@ Generate an improved version that:
             # If this is the last iteration, we're done
             if i == iterations:
                 print(f"\n⚠ Maximum iterations reached")
+                if not review_ok:
+                    print("⚠ Quality was NOT verified; the review never ran.")
                 results["final_image"] = str(iter_path)
                 results["final_score"] = score
+                results["review_failed"] = not review_ok
                 results["success"] = True
                 break
             
             # Quality below threshold - improve prompt
-            print(f"\n⚠ Quality below threshold ({score} < {threshold})")
+            if review_ok:
+                print(f"\n⚠ Quality below threshold ({score} < {threshold})")
+            else:
+                print("\n⚠ Quality could not be verified; regenerating.")
             print(f"Improving prompt based on feedback...")
             current_prompt = self.improve_prompt(
                 user_prompt, critique, infographic_type, style, palette, background, i + 1

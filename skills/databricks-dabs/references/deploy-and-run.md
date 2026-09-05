@@ -52,7 +52,7 @@ Deploy:
 - `bundle deploy --auto-approve`
 - `bundle deploy --force`
 
-For dev targets you can deploy without user consent. This allows you to run resources on the workspace too!
+Deploying writes to a real workspace. Confirm the target with the user first, pass `-t dev` explicitly instead of relying on the default target, and check `bundle summary` to see what the target resolves to. `--auto-approve` and `--force` skip the CLI's own prompts; they do not stand in for that confirmation.
 
 **Skip validation before deployment for dev targets.** Deployment itself will surface any issues, so a separate validation step is unnecessary.
 

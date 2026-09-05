@@ -20,7 +20,7 @@ description: Submit compact ChEBI 2.0 API requests for chemical search, compound
 - Required fields: `base_url`, `path`
 - Optional fields: `method`, `params`, `headers`, `json_body`, `form_body`, `record_path`, `response_format`, `max_items`, `max_depth`, `timeout_sec`, `save_raw`, `raw_output_path`
 - Common ChEBI patterns:
-  - `{"base_url":"https://www.ebi.ac.uk","path":"chebi/backend/api/public/es_search/","params":{"query":"caffeine","size":10},"record_path":"results","max_items":10}`
+  - `{"base_url":"https://www.ebi.ac.uk","path":"chebi/backend/api/public/es_search/","params":{"term":"caffeine","size":10},"record_path":"results","max_items":10}`
   - `{"base_url":"https://www.ebi.ac.uk","path":"chebi/backend/api/public/compound/CHEBI:27732/"}`
   - `{"base_url":"https://www.ebi.ac.uk","path":"chebi/backend/api/public/ontology/children/CHEBI:27732/"}`
 
@@ -31,7 +31,7 @@ description: Submit compact ChEBI 2.0 API requests for chemical search, compound
 
 ## Execution
 ```bash
-echo '{"base_url":"https://www.ebi.ac.uk","path":"chebi/backend/api/public/es_search/","params":{"query":"caffeine","size":10},"record_path":"results","max_items":10}' | python scripts/rest_request.py
+echo '{"base_url":"https://www.ebi.ac.uk","path":"chebi/backend/api/public/es_search/","params":{"term":"caffeine","size":10},"record_path":"results","max_items":10}' | python scripts/rest_request.py
 ```
 
 ## References

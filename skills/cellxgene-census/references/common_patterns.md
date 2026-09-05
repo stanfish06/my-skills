@@ -283,11 +283,16 @@ obs_column_names=["cell_type", "tissue_general", "disease"]  # Not all columns
 ### 5. Check Dataset Presence for Gene Queries
 When analyzing specific genes, check which datasets measured them:
 ```python
-presence = cellxgene_census.get_presence_matrix(
+# get_presence_matrix takes no gene filter; its columns are indexed by feature
+# soma_joinid, so resolve the genes first and slice the matrix by those IDs.
+genes = cellxgene_census.get_var(
     census,
     "homo_sapiens",
-    var_value_filter="feature_name in ['CD4', 'CD8A']"
+    value_filter="feature_name in ['CD4', 'CD8A']",
+    column_names=["soma_joinid", "feature_name"],
 )
+presence = cellxgene_census.get_presence_matrix(census, "homo_sapiens")
+presence = presence[:, genes["soma_joinid"].to_numpy()]
 ```
 
 ### 6. Use tissue_general for Broader Queries

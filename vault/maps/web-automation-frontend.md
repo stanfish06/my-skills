@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Documents, Office & Media](documents-office.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (113)
+## Skills (114)
 
 - [accessibility-and-inclusive-visualization](../notes/web-automation-frontend/accessibility-and-inclusive-visualization.md) — Make data visualizations accessible and inclusive
 - [admission-control](../notes/web-automation-frontend/admission-control.md) — Use when the user asks to "write a validator", "add validation", "implement admission control", "write a mutating webhook", "add a mutation handler", "validate incoming resources"...
@@ -125,6 +125,7 @@ created: 2026-06-13
 - [vercel-react-best-practices](../notes/web-automation-frontend/vercel-react-best-practices.md) — React and Next.js performance optimization guidelines from Vercel Engineering
 - [vercel-react-view-transitions](../notes/web-automation-frontend/vercel-react-view-transitions.md) — Guide for implementing smooth, native-feeling animations using React's View Transition API (`<ViewTransition>` component, `addTransitionType`, and CSS view transition pseudo-elements)
 - [vercel-sandbox](../notes/web-automation-frontend/vercel-sandbox.md) — Vercel Sandbox guidance — ephemeral Firecracker microVMs for running untrusted code safely
+- [vite](../notes/web-automation-frontend/vite.md) — Vite build tool configuration, plugin API, SSR, and Vite 8 Rolldown migration
 - [web-artifacts-builder](../notes/web-automation-frontend/web-artifacts-builder.md) — Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui)
 - [web-design-guidelines](../notes/web-automation-frontend/web-design-guidelines.md) — Review UI code for Web Interface Guidelines compliance
 - [web-perf](../notes/web-automation-frontend/web-perf.md) — Analyzes web performance using Chrome DevTools MCP

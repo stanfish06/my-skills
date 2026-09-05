@@ -120,7 +120,10 @@ RUN LIBFUZZER_LIB=$($CC -print-file-name=libclang_rt.fuzzer_no_main-$(uname -m).
     python -m pip install --no-binary atheris atheris
 
 # https://github.com/google/atheris/blob/master/native_extension_fuzzing.md#option-a-sanitizerlibfuzzer-preloads
-ENV LD_PRELOAD "$VIRTUAL_ENV/lib/python3.11/site-packages/asan_with_fuzzer.so"
+# ENV cannot shell out, so resolve the path at build time and link it to a fixed one
+RUN ln -s "$(python -c 'import atheris; print(atheris.path())')/asan_with_fuzzer.so" \
+    /usr/local/lib/asan_with_fuzzer.so
+ENV LD_PRELOAD "/usr/local/lib/asan_with_fuzzer.so"
 
 # 1. Skip memory allocation failures for now, they are common, and low impact (DoS)
 # 2. https://github.com/google/atheris/blob/master/native_extension_fuzzing.md#leak-detection
@@ -368,7 +371,7 @@ export ASAN_OPTIONS="allocator_may_return_null=1,detect_leaks=0"
 
 For native extension fuzzing:
 ```bash
-export LD_PRELOAD="$(python -c 'import atheris; import os; print(os.path.join(os.path.dirname(atheris.__file__), "asan_with_fuzzer.so"))')"
+export LD_PRELOAD="$(python -c 'import atheris; print(atheris.path())')/asan_with_fuzzer.so"
 ```
 
 > **See Also:** For detailed sanitizer configuration, common issues, and advanced flags,

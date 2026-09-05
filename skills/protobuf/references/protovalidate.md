@@ -483,7 +483,7 @@ import protovalidate "github.com/bufbuild/protovalidate-go"
 
 validator, err := protovalidate.New()
 if err != nil {
-    // Handle construction error
+    return fmt.Errorf("init protovalidate: %w", err)
 }
 if err := validator.Validate(msg); err != nil {
     // Handle validation error

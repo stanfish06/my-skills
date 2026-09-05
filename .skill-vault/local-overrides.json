@@ -177,7 +177,7 @@
       "source": "bufbuild/claude-plugins",
       "file": "references/protovalidate.md",
       "find": "validator, err := protovalidate.New()\nif err := validator.Validate(msg); err != nil {\n    // Handle validation error\n}",
-      "replace": "validator, err := protovalidate.New()\nif err != nil {\n    // Handle construction error\n}\nif err := validator.Validate(msg); err != nil {\n    // Handle validation error\n}"
+      "replace": "validator, err := protovalidate.New()\nif err != nil {\n    return fmt.Errorf(\"init protovalidate: %w\", err)\n}\nif err := validator.Validate(msg); err != nil {\n    // Handle validation error\n}"
     },
     {
       "id": "protoc-include-comments-off-continuations",

@@ -78,6 +78,10 @@ protoc \
 
 ### Plugin Options
 
+`proto/**/*.proto` below needs recursive globbing. Bash has `globstar` off by
+default, so run `shopt -s globstar` first or substitute
+`$(find proto -name '*.proto')`; otherwise protoc receives the literal pattern.
+
 ```bash
 protoc \
   --proto_path=proto \
@@ -93,10 +97,13 @@ protoc \
 Protoc resolves imports relative to include paths (`-I` / `--proto_path`).
 
 ```bash
+# -I proto              your protos
+# -I third_party         vendored dependencies
+# -I /usr/local/include  system-installed WKTs
 protoc \
-  -I proto \                          # Your protos
-  -I third_party \                    # Vendored dependencies
-  -I /usr/local/include \             # System-installed WKTs
+  -I proto \
+  -I third_party \
+  -I /usr/local/include \
   --go_out=gen/go \
   proto/acme/user/v1/user.proto
 ```

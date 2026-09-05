@@ -154,5 +154,46 @@
       "find": "    return command === 'build' && !config.build.ssr",
       "replace": "    return command === 'build' && !config.build?.ssr"
     }
+  ],
+  "protobuf": [
+    {
+      "id": "buf-yaml-above-proto-dir",
+      "issue": 847,
+      "source": "bufbuild/claude-plugins",
+      "find": "   proto/\n   ├── buf.yaml\n   ├── buf.gen.yaml\n   └── company/\n       └── domain/\n           └── v1/\n               └── service.proto\n   ```",
+      "replace": "   ├── buf.yaml\n   ├── buf.gen.yaml\n   └── proto/\n       └── company/\n           └── domain/\n               └── v1/\n                   └── service.proto\n   ```\n\n   `buf.yaml` sits above `proto/`: `modules[].path` resolves relative to the\n   config's own directory, so a `buf.yaml` inside `proto/` makes Buf look for\n   `proto/proto`."
+    },
+    {
+      "id": "ignore-if-zero-value",
+      "issue": 847,
+      "source": "bufbuild/claude-plugins",
+      "file": "references/troubleshooting.md",
+      "find": "  (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE",
+      "replace": "  (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE"
+    },
+    {
+      "id": "go-validator-construction-error",
+      "issue": 847,
+      "source": "bufbuild/claude-plugins",
+      "file": "references/protovalidate.md",
+      "find": "validator, err := protovalidate.New()\nif err := validator.Validate(msg); err != nil {\n    // Handle validation error\n}",
+      "replace": "validator, err := protovalidate.New()\nif err != nil {\n    // Handle construction error\n}\nif err := validator.Validate(msg); err != nil {\n    // Handle validation error\n}"
+    },
+    {
+      "id": "protoc-include-comments-off-continuations",
+      "issue": 847,
+      "source": "bufbuild/claude-plugins",
+      "file": "references/protoc_toolchain.md",
+      "find": "protoc \\\n  -I proto \\                          # Your protos\n  -I third_party \\                    # Vendored dependencies\n  -I /usr/local/include \\             # System-installed WKTs\n  --go_out=gen/go \\",
+      "replace": "# -I proto              your protos\n# -I third_party         vendored dependencies\n# -I /usr/local/include  system-installed WKTs\nprotoc \\\n  -I proto \\\n  -I third_party \\\n  -I /usr/local/include \\\n  --go_out=gen/go \\"
+    },
+    {
+      "id": "globstar-note",
+      "issue": 847,
+      "source": "bufbuild/claude-plugins",
+      "file": "references/protoc_toolchain.md",
+      "find": "### Plugin Options\n\n```bash\nprotoc \\\n  --proto_path=proto \\",
+      "replace": "### Plugin Options\n\n`proto/**/*.proto` below needs recursive globbing. Bash has `globstar` off by\ndefault, so run `shopt -s globstar` first or substitute\n`$(find proto -name '*.proto')`; otherwise protoc receives the literal pattern.\n\n```bash\nprotoc \\\n  --proto_path=proto \\"
+    }
   ]
 }

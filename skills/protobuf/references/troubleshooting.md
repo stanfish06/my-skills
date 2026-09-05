@@ -399,7 +399,7 @@ For optional fields that shouldn't fail validation when empty:
 ```protobuf
 string url = 3 [
   (buf.validate.field).string.uri = true,
-  (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
+  (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE
 ];
 ```
 

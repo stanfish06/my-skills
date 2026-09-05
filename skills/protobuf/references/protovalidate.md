@@ -482,6 +482,9 @@ Add validation calls at your service boundaries—typically in RPC handlers or m
 import protovalidate "github.com/bufbuild/protovalidate-go"
 
 validator, err := protovalidate.New()
+if err != nil {
+    // Handle construction error
+}
 if err := validator.Validate(msg); err != nil {
     // Handle validation error
 }

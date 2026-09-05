@@ -68,14 +68,18 @@ Fix all errors before considering the change complete.
 
 1. Create directory structure:
    ```
-   proto/
    ├── buf.yaml
    ├── buf.gen.yaml
-   └── company/
-       └── domain/
-           └── v1/
-               └── service.proto
+   └── proto/
+       └── company/
+           └── domain/
+               └── v1/
+                   └── service.proto
    ```
+
+   `buf.yaml` sits above `proto/`: `modules[].path` resolves relative to the
+   config's own directory, so a `buf.yaml` inside `proto/` makes Buf look for
+   `proto/proto`.
 
 2. Use `assets/buf.yaml` as starting point
 3. Add `buf.build/bufbuild/protovalidate` as a dependency in `buf.yaml` and run `buf dep update`

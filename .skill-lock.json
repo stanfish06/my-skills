@@ -11503,6 +11503,15 @@
       "skillFolderHash": "cb24c48dc82ced19c1061453decc4bc0e5328c15",
       "installedAt": "2026-08-29T11:22:31.692Z",
       "updatedAt": "2026-08-29T11:22:31.692Z"
+    },
+    "vite": {
+      "source": "antfu/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/antfu/skills.git",
+      "skillPath": "skills/vite/SKILL.md",
+      "skillFolderHash": "3c0dc60ce4ffc34fca02aaa7eb21130ae48c8dff",
+      "installedAt": "2026-09-04T21:10:13.169Z",
+      "updatedAt": "2026-09-04T21:10:13.169Z"
     }
   },
   "dismissed": {

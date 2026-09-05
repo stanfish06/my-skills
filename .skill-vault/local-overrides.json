@@ -136,5 +136,23 @@
       "find": "Use for tasks involving cloud GPU training, GGUF conversion, or when users mention training on Hugging Face Jobs without local GPU setup.",
       "replace": "Also covers Unsloth for SFT and vision-language training at roughly 2x speed and 60% less VRAM than standard TRL. Use for tasks involving cloud GPU training, GGUF conversion, Unsloth or FastVisionModel, or when users mention training on Hugging Face Jobs without local GPU setup."
     }
+  ],
+  "vite": [
+    {
+      "id": "ssr-outdir-project-relative",
+      "issue": 848,
+      "source": "antfu/skills",
+      "file": "references/environment-api.md",
+      "find": "      build: { outDir: '/dist/ssr' },",
+      "replace": "      build: { outDir: 'dist/ssr' },"
+    },
+    {
+      "id": "apply-optional-build-config",
+      "issue": 848,
+      "source": "antfu/skills",
+      "file": "references/core-plugin-api.md",
+      "find": "    return command === 'build' && !config.build.ssr",
+      "replace": "    return command === 'build' && !config.build?.ssr"
+    }
   ]
 }

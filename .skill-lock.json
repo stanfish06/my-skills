@@ -11512,6 +11512,15 @@
       "skillFolderHash": "3c0dc60ce4ffc34fca02aaa7eb21130ae48c8dff",
       "installedAt": "2026-09-04T21:10:13.169Z",
       "updatedAt": "2026-09-04T21:10:13.169Z"
+    },
+    "protobuf": {
+      "source": "bufbuild/claude-plugins",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/bufbuild/claude-plugins.git",
+      "skillPath": "plugins/protobuf/skills/protobuf/SKILL.md",
+      "skillFolderHash": "12456627c0bea4b59a00e01e5d19355e9bdbf997",
+      "installedAt": "2026-09-04T21:07:38.481Z",
+      "updatedAt": "2026-09-04T21:07:38.481Z"
     }
   },
   "dismissed": {

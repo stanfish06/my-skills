@@ -11521,6 +11521,51 @@
       "skillFolderHash": "12456627c0bea4b59a00e01e5d19355e9bdbf997",
       "installedAt": "2026-09-04T21:07:38.481Z",
       "updatedAt": "2026-09-04T21:07:38.481Z"
+    },
+    "improve-claude-md": {
+      "source": "humanlayer/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/humanlayer/skills.git",
+      "skillPath": "plugins/improve-claude-md/skills/improve-claude-md/SKILL.md",
+      "skillFolderHash": "742389d936458a62c303c5625232038788a9588f",
+      "installedAt": "2026-09-06T05:14:30.420Z",
+      "updatedAt": "2026-09-06T05:14:30.420Z"
+    },
+    "narrow-react-prop-types": {
+      "source": "humanlayer/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/humanlayer/skills.git",
+      "skillPath": "plugins/narrow-react-prop-types/skills/narrow-react-prop-types/SKILL.md",
+      "skillFolderHash": "172dfb205f5f1419354b431cbb903e1afd55ad87",
+      "installedAt": "2026-09-06T05:14:31.907Z",
+      "updatedAt": "2026-09-06T05:14:31.907Z"
+    },
+    "build-iterated-agentic-loop": {
+      "source": "humanlayer/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/humanlayer/skills.git",
+      "skillPath": "plugins/build-iterated-agentic-loop/skills/build-iterated-agentic-loop/SKILL.md",
+      "skillFolderHash": "fa04a5cc4842e561e7182b3a074b91c18ffbc1df",
+      "installedAt": "2026-09-06T05:14:33.441Z",
+      "updatedAt": "2026-09-06T05:14:33.441Z"
+    },
+    "design-control-loop": {
+      "source": "humanlayer/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/humanlayer/skills.git",
+      "skillPath": "plugins/design-control-loop/skills/design-control-loop/SKILL.md",
+      "skillFolderHash": "a8a023f8f62a384a76297b31d9f844c5ad3adf95",
+      "installedAt": "2026-09-06T05:14:35.120Z",
+      "updatedAt": "2026-09-06T05:14:35.120Z"
+    },
+    "show-me": {
+      "source": "humanlayer/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/humanlayer/skills.git",
+      "skillPath": "plugins/show-me/skills/show-me/SKILL.md",
+      "skillFolderHash": "0bdb821a21e793a4f6f82a7078c052154447e5cc",
+      "installedAt": "2026-09-06T05:14:37.476Z",
+      "updatedAt": "2026-09-06T05:14:37.476Z"
     }
   },
   "dismissed": {

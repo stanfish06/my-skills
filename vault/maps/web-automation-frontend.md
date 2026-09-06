@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Documents, Office & Media](documents-office.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (114)
+## Skills (115)
 
 - [accessibility-and-inclusive-visualization](../notes/web-automation-frontend/accessibility-and-inclusive-visualization.md) — Make data visualizations accessible and inclusive
 - [admission-control](../notes/web-automation-frontend/admission-control.md) — Use when the user asks to "write a validator", "add validation", "implement admission control", "write a mutating webhook", "add a mutation handler", "validate incoming resources"...
@@ -93,6 +93,7 @@ created: 2026-06-13
 - [industrial-brutalist-ui](../notes/web-automation-frontend/industrial-brutalist-ui.md) — Raw mechanical interfaces fusing Swiss typographic print with military terminal aesthetics
 - [micro](../notes/web-automation-frontend/micro.md) — Expert guidance for micro — asynchronous HTTP microservices framework by Vercel
 - [minimalist-ui](../notes/web-automation-frontend/minimalist-ui.md) — Clean editorial-style interfaces. Warm monochrome palette, typographic contrast, flat bento grids, muted pastels
+- [narrow-react-prop-types](../notes/web-automation-frontend/narrow-react-prop-types.md) — narrow React component prop types to match live code paths
 - [next-cache-components-adoption](../notes/web-automation-frontend/next-cache-components-adoption.md) — Turn on Cache Components in a Next.js app and resolve the blocking routes it surfaces
 - [next-cache-components-optimizer](../notes/web-automation-frontend/next-cache-components-optimizer.md) — Drive a Next.js route to instant navigation by setting up an agentic loop, under Cache Components / PPR, on initial load (hard navigation) and client-side navigation (soft navigation)
 - [next-dev-loop](../notes/web-automation-frontend/next-dev-loop.md) — Verify Next.js runtime behavior after editing app code

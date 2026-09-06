@@ -1711,6 +1711,13 @@ EXTRA_ASSIGNMENTS = {
     "vite": "web-automation-frontend",
     # Schema/interface definition, alongside api-and-interface-design.
     "protobuf": "software-dev",
+    # humanlayer/skills, added 2026-09-06. Agent-authoring ones sit with
+    # writing-great-skills and writing-for-agents in vault-meta.
+    "improve-claude-md": "vault-meta",
+    "build-iterated-agentic-loop": "vault-meta",
+    "design-control-loop": "vault-meta",
+    "show-me": "vault-meta",
+    "narrow-react-prop-types": "web-automation-frontend",
 }
 
 

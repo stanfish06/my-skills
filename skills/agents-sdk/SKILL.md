@@ -13,19 +13,19 @@ Fetch current docs from `https://github.com/cloudflare/agents/tree/main/docs` be
 
 | Topic | Doc | Use for |
 |-------|-----|---------|
-| Getting started | `docs/getting-started.md` | First agent, project setup |
-| State | `docs/state.md` | `setState`, `validateStateChange`, persistence |
-| Routing | `docs/routing.md` | URL patterns, `routeAgentRequest`, `basePath` |
-| Callable methods | `docs/callable-methods.md` | `@callable`, RPC, streaming, timeouts |
-| Scheduling | `docs/scheduling.md` | `schedule()`, `scheduleEvery()`, cron |
-| Workflows | `docs/workflows.md` | `AgentWorkflow`, durable multi-step tasks |
-| HTTP/WebSockets | `docs/http-websockets.md` | Lifecycle hooks, hibernation |
-| Email | `docs/email.md` | Email routing, secure reply resolver |
-| MCP client | `docs/mcp-client.md` | Connecting to MCP servers |
-| MCP server | `docs/mcp-servers.md` | Building MCP servers with `McpAgent` |
-| Client SDK | `docs/client-sdk.md` | `useAgent`, `useAgentChat`, React hooks |
-| Human-in-the-loop | `docs/human-in-the-loop.md` | Approval flows, pausing workflows |
-| Resumable streaming | `docs/resumable-streaming.md` | Stream recovery on disconnect |
+| Getting started | `docs/agents/getting-started.md` | First agent, project setup |
+| State | `docs/agents/state.md` | `setState`, `validateStateChange`, persistence |
+| Routing | `docs/agents/routing.md` | URL patterns, `routeAgentRequest`, `basePath` |
+| Callable methods | `docs/agents/callable-methods.md` | `@callable`, RPC, streaming, timeouts |
+| Scheduling | `docs/agents/scheduling.md` | `schedule()`, `scheduleEvery()`, cron |
+| Workflows | `docs/agents/workflows.md` | `AgentWorkflow`, durable multi-step tasks |
+| HTTP/WebSockets | `docs/agents/http-websockets.md` | Lifecycle hooks, hibernation |
+| Email | `docs/agents/email.md` | Email routing, secure reply resolver |
+| MCP client | `docs/agents/mcp-client.md` | Connecting to MCP servers |
+| MCP server | `docs/agents/mcp-servers.md` | Building MCP servers with `McpAgent` |
+| Client SDK | `docs/agents/client-sdk.md` | `useAgent`, `useAgentChat`, React hooks |
+| Human-in-the-loop | `docs/agents/human-in-the-loop.md` | Approval flows, pausing workflows |
+| Resumable streaming | `docs/agents/resumable-streaming.md` | Stream recovery on disconnect |
 
 Cloudflare docs: https://developers.cloudflare.com/agents/
 

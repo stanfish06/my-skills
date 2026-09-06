@@ -259,7 +259,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if git diff --quiet origin/main...HEAD; then
+          DEFAULT_BRANCH=$(gh repo view "$GITHUB_REPOSITORY" --json defaultBranchRef --jq .defaultBranchRef.name)
+          if git diff --quiet "origin/$DEFAULT_BRANCH...HEAD"; then
             echo "No commits were created by the agent; skipping PR creation."
             exit 0
           fi

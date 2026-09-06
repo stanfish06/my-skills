@@ -234,7 +234,8 @@ jobs:
           AGENT_LABEL: agent-<task-slug>
           WORKFLOW_ID: agent-<task-slug>
         run: |
-          if git diff --quiet origin/main...HEAD; then
+          DEFAULT_BRANCH=$(gh repo view "$GITHUB_REPOSITORY" --json defaultBranchRef --jq .defaultBranchRef.name)
+          if git diff --quiet "origin/$DEFAULT_BRANCH...HEAD"; then
             echo "No commits were created by the agent; skipping PR creation."
             exit 0
           fi
